@@ -1,0 +1,19 @@
+{
+    "version": 4, 
+    "configurations": [
+        {
+            "intelliSenseMode": "windows_gcc_x64", 
+            "name": "App", 
+            "cppStandard": "gnu++14", 
+            "compilerArgs": [], 
+            "cStandard": "gnu17", 
+            "compilerPath": "C://MinGW64/usr/bin/gcc", 
+            "browse": {
+                "databaseFilename": "", 
+                "limitSymbolsToIncludedHeaders": true
+            }, 
+            "includePath": [], 
+            "defines": []
+        }
+    ]
+}
