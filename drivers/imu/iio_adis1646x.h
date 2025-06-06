@@ -45,11 +45,46 @@
 /************************ Functions Declarations ******************************/
 /******************************************************************************/
 
-/*! Initialize adis1646x iio device. */
+/***************************************************************************//**
+ * @brief This function initializes an ADIS1646x IIO device and prepares it for
+ * use. It must be called before any operations are performed on the
+ * device. The function allocates memory for the device descriptor and
+ * initializes the device using the provided initialization parameters.
+ * If the initialization is successful, the function returns a pointer to
+ * the initialized device descriptor. If the function fails, it returns
+ * an error code and ensures that no resources are leaked. This function
+ * should be called once for each device that needs to be initialized.
+ *
+ * @param iio_dev A pointer to a pointer where the initialized device descriptor
+ * will be stored. Must not be null. The caller takes ownership
+ * of the allocated descriptor upon successful initialization.
+ * @param init_param A pointer to a structure containing initialization
+ * parameters for the device. Must not be null. The structure
+ * should be properly populated with valid device-specific
+ * parameters before calling this function.
+ * @return Returns 0 on successful initialization. On failure, returns a
+ * negative error code indicating the type of error, such as memory
+ * allocation failure or device initialization failure.
+ ******************************************************************************/
 int adis1646x_iio_init(struct adis_iio_dev **iio_dev,
 		       struct adis_init_param *init_param);
 
-/*! Remove adis1646x iio device. */
+/***************************************************************************//**
+ * @brief Use this function to properly release resources associated with an
+ * ADIS1646x IIO device when it is no longer needed. It should be called
+ * to clean up after the device has been initialized and used, ensuring
+ * that all allocated memory and device-specific resources are freed.
+ * This function must be called with a valid device descriptor that was
+ * previously initialized. If the descriptor is null, the function will
+ * safely return without performing any operations.
+ *
+ * @param desc A pointer to the adis_iio_dev structure representing the device
+ * to be removed. Must not be null if the device is to be removed;
+ * otherwise, the function will return immediately without
+ * performing any action. The caller retains ownership of the
+ * pointer.
+ * @return None
+ ******************************************************************************/
 void adis1646x_iio_remove(struct adis_iio_dev *desc);
 
 #endif

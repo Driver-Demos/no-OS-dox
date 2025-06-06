@@ -21,63 +21,100 @@
 extern "C" {
 #endif // __cplusplus
 
-/**
- * \brief Write a field within a register (read, modify, write)
+/***************************************************************************//**
+ * @brief This function is used to modify a specific field within a hardware
+ * register by performing a read-modify-write operation. It is useful
+ * when only a subset of bits in a register needs to be updated without
+ * affecting the other bits. The function requires a valid device context
+ * and the address of the register. The caller must specify the value to
+ * write, the bitmask defining the field, and the starting bit position
+ * of the field. It returns zero on success and a non-zero error code on
+ * failure.
  *
- * Example:
- * Say we have a register at address 0xBEEF with a FIELD in [d2:d1]:
- *   | d7 | d6 | d5 | d4 | d3 |  FIELD  | d0 |
- *
- * To write to the FIELD a value of 2, call
- * \code
- * adi_bf_hal_Field_Write(device, 0xBEEF, 0x2, 0x6, 0x1);
- * \endcode
- *
- * Bits [d7:d3] and d0 should not be modified, generally requiring a read, modify, and write
- *
- * \param[in] device    Context variable
- * \param[in] address   The address of the register
- * \param[in] value     The value to be written
- * \param[in] mask      The mask of the field within the register
- * \param[in] startBit  The starting (lsb) bit position of the field
- *
- * \returns Zero (0) to indicate success; error otherwise
- */
+ * @param device A pointer to the device context. Must not be null. The caller
+ * retains ownership.
+ * @param address The address of the register to be accessed. Must be a valid
+ * register address.
+ * @param value The value to be written to the specified field. It should fit
+ * within the field defined by the mask and startBit.
+ * @param mask A bitmask that defines the field within the register. It
+ * determines which bits are affected by the write operation.
+ * @param startBit The starting bit position (least significant bit) of the
+ * field within the register. Must be within the valid range of
+ * the register's bit positions.
+ * @return Returns zero (0) on success; otherwise, returns a non-zero error code
+ * indicating failure.
+ ******************************************************************************/
 int32_t adi_bf_hal_Field_Write(void *device, uint16_t address, uint8_t value, uint8_t mask, uint8_t startBit);
 
-/**
- * \brief Read a field within a register
+/***************************************************************************//**
+ * @brief This function reads a specific field from a hardware register,
+ * allowing for precise data retrieval from a device. It is typically
+ * used when only a subset of bits within a register is of interest, as
+ * defined by the mask and start bit parameters. The function requires a
+ * valid device context and register address, and it outputs the read
+ * value through a pointer. It returns zero on success and a non-zero
+ * error code on failure, which can occur if the device context is
+ * invalid or if there are communication issues.
  *
- * \param[in]  device   Context variable
- * \param[in]  address  The address of the register
- * \param[out] value    The value to be written
- * \param[in]  mask     The mask of the field within the register
- * \param[in]  startBit The starting (lsb) bit position of the field
- *
- * \returns Zero (0) to indicate success; error otherwise
- */
+ * @param device A pointer to the device context. Must not be null. The caller
+ * retains ownership.
+ * @param address The address of the register from which the field is to be
+ * read. Must be a valid register address.
+ * @param value A pointer to a uint8_t where the read field value will be
+ * stored. Must not be null.
+ * @param mask A bitmask indicating which bits in the register are part of the
+ * field to be read. Must be a valid mask for the register.
+ * @param startBit The starting bit position (least significant bit) of the
+ * field within the register. Must be within the valid range for
+ * the register size.
+ * @return Returns zero on success, indicating the field was read successfully,
+ * or a non-zero error code on failure.
+ ******************************************************************************/
 int32_t adi_bf_hal_Field_Read(void *device, uint16_t address, uint8_t *value, uint8_t mask, uint8_t startBit);
 
-/**
- * \brief Write to a register
+/***************************************************************************//**
+ * @brief This function writes a given value to a specific register address on
+ * the device. It is typically used when direct register access is
+ * required, bypassing any field-specific operations. The function should
+ * be called with a valid device context and a valid register address. It
+ * returns an integer indicating success or failure of the operation,
+ * where zero signifies success. Ensure that the device is properly
+ * initialized before calling this function to avoid undefined behavior.
  *
- * \param[in] device    Context variable
- * \param[in] address   The address of the register
- * \param[in] value     The value to be written
- *
- * \returns Zero (0) to indicate success; error otherwise
- */
+ * @param device A pointer to the device context. Must not be null. The caller
+ * retains ownership and is responsible for ensuring the device is
+ * initialized.
+ * @param address The 16-bit address of the register to which the value will be
+ * written. Must be a valid register address for the device.
+ * @param value The 8-bit value to be written to the specified register address.
+ * @return Returns an int32_t where zero indicates success and any other value
+ * indicates an error.
+ ******************************************************************************/
 int32_t adi_bf_hal_Register_Write(void *device, uint16_t address, uint8_t value);
 
-/**
- * \brief Read from a register
+/***************************************************************************//**
+ * @brief This function reads a byte from a register at the specified address on
+ * the given device and stores the result in the provided output
+ * parameter. It is typically used when you need to retrieve the current
+ * value of a register for further processing or decision-making. Ensure
+ * that the device context is properly initialized before calling this
+ * function. The function will return an error code if the read operation
+ * fails, so it is important to check the return value to confirm
+ * successful execution.
  *
- * \param[in]  device   Context variable
- * \param[in]  address  The address of the register
- * \param[out] value    The value to be written
- *
- * \returns Zero (0) to indicate success; error otherwise
- */
+ * @param device A pointer to the device context. Must not be null. The caller
+ * retains ownership and is responsible for ensuring the device is
+ * properly initialized.
+ * @param address The address of the register to read from. It is a 16-bit
+ * unsigned integer representing the register's location.
+ * @param value A pointer to an 8-bit unsigned integer where the read value will
+ * be stored. Must not be null. The caller provides the memory for
+ * this output parameter.
+ * @return Returns zero (0) on success, indicating that the value was
+ * successfully read and stored in the provided output parameter.
+ * Returns a non-zero error code if the operation fails.
+ ******************************************************************************/
 int32_t adi_bf_hal_Register_Read(void *device, uint16_t address, uint8_t *value);
 
 #ifdef __cplusplus

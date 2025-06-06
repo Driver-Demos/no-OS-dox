@@ -15,9 +15,16 @@
 
 
 
-/**
- * Top Analog Spare
- */
+/***************************************************************************//**
+ * @brief Sets the value of the Analog Spare 0 register in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare0_Set(void *device,
     uint8_t value)
 {
@@ -28,9 +35,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare0_Set(void *device,
     return status;
 }
 
-/**
- * Top Analog Spare
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure from which the register value
+ * will be read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare0_Get(void *device,
     uint8_t *value)
 {
@@ -44,9 +59,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare0_Get(void *device,
     return status;
 }
 
-/**
- * Top Analog Spare
- */
+/***************************************************************************//**
+ * @brief Sets the value of the Analog Spare 1 register in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare1_Set(void *device,
     uint8_t value)
 {
@@ -57,9 +79,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare1_Set(void *device,
     return status;
 }
 
-/**
- * Top Analog Spare
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare1_Get(void *device,
     uint8_t *value)
 {
@@ -73,9 +103,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare1_Get(void *device,
     return status;
 }
 
-/**
- * Top Analog Spare
- */
+/***************************************************************************//**
+ * @brief Sets the value of the Analog Spare 10 register in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns the status of the register write operation, indicating
+ * success or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare10_Set(void *device,
     uint8_t value)
 {
@@ -86,9 +123,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare10_Set(void *device,
     return status;
 }
 
-/**
- * Top Analog Spare
- */
+/***************************************************************************//**
+ * @brief Retrieves the value from a specific register and stores it in the
+ * provided pointer.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare10_Get(void *device,
     uint8_t *value)
 {
@@ -102,9 +146,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare10_Get(void *device,
     return status;
 }
 
-/**
- * Top Analog Spare
- */
+/***************************************************************************//**
+ * @brief Sets the value of the Analog Spare 11 register in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare11_Set(void *device,
     uint8_t value)
 {
@@ -115,9 +166,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare11_Set(void *device,
     return status;
 }
 
-/**
- * Top Analog Spare
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare11_Get(void *device,
     uint8_t *value)
 {
@@ -131,9 +190,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare11_Get(void *device,
     return status;
 }
 
-/**
- * Top Analog Spare
- */
+/***************************************************************************//**
+ * @brief Sets the value of the Analog Spare 12 register in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare12_Set(void *device,
     uint8_t value)
 {
@@ -144,9 +210,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare12_Set(void *device,
     return status;
 }
 
-/**
- * Top Analog Spare
- */
+/***************************************************************************//**
+ * @brief Retrieves the value from a specific register and stores it in the
+ * provided variable.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare12_Get(void *device,
     uint8_t *value)
 {
@@ -160,9 +233,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare12_Get(void *device,
     return status;
 }
 
-/**
- * Top Analog Spare
- */
+/***************************************************************************//**
+ * @brief Sets the value of the `AnalogSpare13` register in the `adrv9001`
+ * device.
+ *
+ * @param device A pointer to the device structure representing the `adrv9001`
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the `AnalogSpare13` register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare13_Set(void *device,
     uint8_t value)
 {
@@ -173,9 +254,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare13_Set(void *device,
     return status;
 }
 
-/**
- * Top Analog Spare
- */
+/***************************************************************************//**
+ * @brief Retrieves the value from a specific register and stores it in the
+ * provided variable.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare13_Get(void *device,
     uint8_t *value)
 {
@@ -189,9 +278,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare13_Get(void *device,
     return status;
 }
 
-/**
- * Top Analog Spare
- */
+/***************************************************************************//**
+ * @brief Sets the value of the Analog Spare 14 register in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare14_Set(void *device,
     uint8_t value)
 {
@@ -202,9 +298,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare14_Set(void *device,
     return status;
 }
 
-/**
- * Top Analog Spare
- */
+/***************************************************************************//**
+ * @brief Retrieves the value from a specific register and stores it in the
+ * provided variable.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare14_Get(void *device,
     uint8_t *value)
 {
@@ -218,9 +321,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare14_Get(void *device,
     return status;
 }
 
-/**
- * Top Analog Spare
- */
+/***************************************************************************//**
+ * @brief Sets the value of the Analog Spare 2 register in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare2_Set(void *device,
     uint8_t value)
 {
@@ -231,9 +341,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare2_Set(void *device,
     return status;
 }
 
-/**
- * Top Analog Spare
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure from which the register value
+ * will be read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare2_Get(void *device,
     uint8_t *value)
 {
@@ -247,9 +365,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare2_Get(void *device,
     return status;
 }
 
-/**
- * Top Analog Spare
- */
+/***************************************************************************//**
+ * @brief Sets the value of the Analog Spare 3 register in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare3_Set(void *device,
     uint8_t value)
 {
@@ -260,9 +385,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare3_Set(void *device,
     return status;
 }
 
-/**
- * Top Analog Spare
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare3_Get(void *device,
     uint8_t *value)
 {
@@ -276,9 +409,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare3_Get(void *device,
     return status;
 }
 
-/**
- * Top Analog Spare
- */
+/***************************************************************************//**
+ * @brief Sets the value of the Analog Spare 4 register in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare4_Set(void *device,
     uint8_t value)
 {
@@ -289,9 +429,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare4_Set(void *device,
     return status;
 }
 
-/**
- * Top Analog Spare
- */
+/***************************************************************************//**
+ * @brief Retrieves the value from a specific register and stores it in the
+ * provided variable.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare4_Get(void *device,
     uint8_t *value)
 {
@@ -305,9 +452,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare4_Get(void *device,
     return status;
 }
 
-/**
- * Top Analog Spare
- */
+/***************************************************************************//**
+ * @brief Sets the value of the Analog Spare 5 register in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare5_Set(void *device,
     uint8_t value)
 {
@@ -318,9 +472,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare5_Set(void *device,
     return status;
 }
 
-/**
- * Top Analog Spare
- */
+/***************************************************************************//**
+ * @brief Retrieves the value from a specific register and stores it in the
+ * provided variable.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare5_Get(void *device,
     uint8_t *value)
 {
@@ -334,9 +495,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare5_Get(void *device,
     return status;
 }
 
-/**
- * Top Analog Spare: bit0=I_en_clkgen_mcs, bit1=I_en_dig_center_rst, bit2=I_en_clean_resample_clk_n, bit3=I_en_clean_resample_clk_p
- */
+/***************************************************************************//**
+ * @brief Sets the value of the Analog Spare 6 register in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare6_Set(void *device,
     uint8_t value)
 {
@@ -347,9 +515,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare6_Set(void *device,
     return status;
 }
 
-/**
- * Top Analog Spare: bit0=I_en_clkgen_mcs, bit1=I_en_dig_center_rst, bit2=I_en_clean_resample_clk_n, bit3=I_en_clean_resample_clk_p
- */
+/***************************************************************************//**
+ * @brief Retrieves the value from a specific register and stores it in the
+ * provided variable.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare6_Get(void *device,
     uint8_t *value)
 {
@@ -363,9 +538,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare6_Get(void *device,
     return status;
 }
 
-/**
- * Top Analog Spare
- */
+/***************************************************************************//**
+ * @brief Sets the value of the Analog Spare 8 register in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the Analog Spare 8 register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare8_Set(void *device,
     uint8_t value)
 {
@@ -376,9 +558,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare8_Set(void *device,
     return status;
 }
 
-/**
- * Top Analog Spare
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare8_Get(void *device,
     uint8_t *value)
 {
@@ -392,9 +582,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare8_Get(void *device,
     return status;
 }
 
-/**
- * Top Analog Spare
- */
+/***************************************************************************//**
+ * @brief Sets the value of the `AnalogSpare9` register in the `adrv9001`
+ * device.
+ *
+ * @param device A pointer to the device structure representing the `adrv9001`
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the `AnalogSpare9` register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare9_Set(void *device,
     uint8_t value)
 {
@@ -405,9 +603,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare9_Set(void *device,
     return status;
 }
 
-/**
- * Top Analog Spare
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register from the device and stores
+ * it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare9_Get(void *device,
     uint8_t *value)
 {
@@ -422,9 +628,18 @@ static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpare9_Get(void *device,
 }
 
 
-/**
- * Top Analog Spare
- */
+/***************************************************************************//**
+ * @brief The `adrv9001_NvsRegmapCore1_AnalogSpareReadback0_Get` function reads
+ * a specific register value from a device and stores it in the provided
+ * value pointer.
+ *
+ * @param device A pointer to the device structure from which the register value
+ * will be read.
+ * @param value A pointer to a `uint8_t` variable where the read register value
+ * will be stored.
+ * @return The function returns an integer status code indicating the success or
+ * failure of the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpareReadback0_Get(void *device,
     uint8_t *value)
 {
@@ -439,9 +654,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpareReadback0_Get(void *dev
 }
 
 
-/**
- * Top Analog Spare
- */
+/***************************************************************************//**
+ * @brief Reads a specific register value from the device and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure from which the register value
+ * will be read.
+ * @param value A pointer to a uint8_t variable where the read register value
+ * will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpareReadback1_Get(void *device,
     uint8_t *value)
 {
@@ -455,9 +678,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_AnalogSpareReadback1_Get(void *dev
     return status;
 }
 
-/**
- * (B0 New) Arm clock is automatically realign on Reference counter when arm_clk_div_value change
- */
+/***************************************************************************//**
+ * @brief Sets the ARM clock auto-align configuration in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to set for the
+ * ARM clock auto-align.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ArmClkAutoAlign_Set(void *device,
     uint8_t value)
 {
@@ -468,9 +698,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ArmClkAutoAlign_Set(void *device,
     return status;
 }
 
-/**
- * (B0 New) Arm clock is automatically realign on Reference counter when arm_clk_div_value change
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register and stores it in the
+ * provided pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ArmClkAutoAlign_Get(void *device,
     uint8_t *value)
 {
@@ -484,6 +722,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_ArmClkAutoAlign_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the ARM clock divider value in the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the clock divider value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ArmClkDivValue_Set(void *device,
     uint8_t value)
 {
@@ -494,6 +742,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_ArmClkDivValue_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the ARM clock divider value from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * divider value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ArmClkDivValue_Get(void *device,
     uint8_t *value)
 {
@@ -507,9 +765,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_ArmClkDivValue_Get(void *device,
     return status;
 }
 
-/**
- * (B0 New) Bypass the load process of ARM clock div value
- */
+/***************************************************************************//**
+ * @brief Sets the ARM clock load bypass configuration in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to set for the
+ * ARM clock load bypass.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ArmClkLoadBypass_Set(void *device,
     uint8_t value)
 {
@@ -520,9 +785,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_ArmClkLoadBypass_Set(void *device,
     return status;
 }
 
-/**
- * (B0 New) Bypass the load process of ARM clock div value
- */
+/***************************************************************************//**
+ * @brief Retrieves the ARM clock load bypass value from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved clock load
+ * bypass value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ArmClkLoadBypass_Get(void *device,
     uint8_t *value)
 {
@@ -536,9 +808,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_ArmClkLoadBypass_Get(void *device,
     return status;
 }
 
-/**
- * (B0 New) Enable IRQ extend block
- */
+/***************************************************************************//**
+ * @brief Sets the ARM IRQ extended enable register for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A uint8_t value that specifies the enable state for the ARM IRQ
+ * extended functionality.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ArmIrqExtendEnable_Set(void *device,
     uint8_t value)
 {
@@ -549,9 +828,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ArmIrqExtendEnable_Set(void *devic
     return status;
 }
 
-/**
- * (B0 New) Enable IRQ extend block
- */
+/***************************************************************************//**
+ * @brief Retrieves the extended IRQ enable status from a specific register of
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a `uint8_t` variable where the retrieved IRQ enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ArmIrqExtendEnable_Get(void *device,
     uint8_t *value)
 {
@@ -565,9 +852,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ArmIrqExtendEnable_Get(void *devic
     return status;
 }
 
-/**
- * (B0 New) 0: Manual mode, 1: Automatic Mode
- */
+/***************************************************************************//**
+ * @brief Sets the IRQ extend mode for the ADRV9001 device by writing a
+ * specified value to a specific register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the IRQ extend mode register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ArmIrqExtendMode_Set(void *device,
     uint8_t value)
 {
@@ -578,9 +873,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ArmIrqExtendMode_Set(void *device,
     return status;
 }
 
-/**
- * (B0 New) 0: Manual mode, 1: Automatic Mode
- */
+/***************************************************************************//**
+ * @brief Retrieves the extended mode value from a specific register of the
+ * device.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ArmIrqExtendMode_Get(void *device,
     uint8_t *value)
 {
@@ -594,9 +897,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ArmIrqExtendMode_Get(void *device,
     return status;
 }
 
-/**
- * (B0 New) ARM IRQ Extend Ratio
- */
+/***************************************************************************//**
+ * @brief Sets the IRQ extend ratio for the ADRV9001 device by writing a
+ * specified value to a specific register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the IRQ extend ratio to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ArmIrqExtendRatio_Set(void *device,
     uint8_t value)
 {
@@ -607,9 +918,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ArmIrqExtendRatio_Set(void *device
     return status;
 }
 
-/**
- * (B0 New) ARM IRQ Extend Ratio
- */
+/***************************************************************************//**
+ * @brief Retrieves the extended ratio value from a specific register of the
+ * device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ArmIrqExtendRatio_Get(void *device,
     uint8_t *value)
 {
@@ -623,9 +942,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ArmIrqExtendRatio_Get(void *device
     return status;
 }
 
-/**
- * (B0 New) 0: Arm_clk selected, 1: Ref_clk selected
- */
+/***************************************************************************//**
+ * @brief Sets the ARM clock to reference clock switch enable state in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 8-bit unsigned integer representing the value to set for the
+ * ARM clock reference clock switch.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Armclk2RefClkSwitchEnable_Set(void *device,
     uint8_t value)
 {
@@ -636,9 +963,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Armclk2RefClkSwitchEnable_Set(void
     return status;
 }
 
-/**
- * (B0 New) 0: Arm_clk selected, 1: Ref_clk selected
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register and stores it in the
+ * provided pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Armclk2RefClkSwitchEnable_Get(void *device,
     uint8_t *value)
 {
@@ -652,6 +987,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Armclk2RefClkSwitchEnable_Get(void
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the low line termination value for the auxiliary channel in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the low line termination
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Aux1LoLineRTerm_Set(void *device,
     uint8_t value)
 {
@@ -662,6 +1008,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Aux1LoLineRTerm_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the low line termination value from a specific register of
+ * the device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved low line
+ * termination value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Aux1LoLineRTerm_Get(void *device,
     uint8_t *value)
 {
@@ -675,6 +1032,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Aux1LoLineRTerm_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the auxiliary low line receive buffer power down state for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the power down state to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Aux1LoLineRcvBufPd_Set(void *device,
     uint8_t value)
 {
@@ -685,6 +1053,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Aux1LoLineRcvBufPd_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific value from a hardware register and stores it in
+ * the provided pointer.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Aux1LoLineRcvBufPd_Get(void *device,
     uint8_t *value)
 {
@@ -698,6 +1077,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Aux1LoLineRcvBufPd_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the bias power down for the auxiliary low line termination in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the bias power down value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Aux1LoLineTermBiasPd_Set(void *device,
     uint8_t value)
 {
@@ -708,6 +1098,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Aux1LoLineTermBiasPd_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the bias power-down status of the auxiliary line termination
+ * from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved bias
+ * power-down status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Aux1LoLineTermBiasPd_Get(void *device,
     uint8_t *value)
 {
@@ -721,6 +1122,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Aux1LoLineTermBiasPd_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the auxiliary low line termination enable state for the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A uint8_t value representing the termination enable state to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Aux1LoLineTermEnable_Set(void *device,
     uint8_t value)
 {
@@ -731,6 +1143,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Aux1LoLineTermEnable_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the low line termination enable status from a specific
+ * register of the device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Aux1LoLineTermEnable_Get(void *device,
     uint8_t *value)
 {
@@ -744,6 +1167,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Aux1LoLineTermEnable_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the auxiliary low line termination value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the low line termination.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Aux2LoLineRTerm_Set(void *device,
     uint8_t value)
 {
@@ -754,6 +1187,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Aux2LoLineRTerm_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Aux2LoLineRTerm_Get(void *device,
     uint8_t *value)
 {
@@ -767,6 +1211,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Aux2LoLineRTerm_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the auxiliary low line receive buffer power down state for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the power down state to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Aux2LoLineRcvBufPd_Set(void *device,
     uint8_t value)
 {
@@ -777,6 +1232,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Aux2LoLineRcvBufPd_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific value from a hardware register and stores it in
+ * the provided pointer.
+ *
+ * @param device A pointer to the device structure used for hardware
+ * communication.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Aux2LoLineRcvBufPd_Get(void *device,
     uint8_t *value)
 {
@@ -790,6 +1256,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Aux2LoLineRcvBufPd_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the bias power down for the auxiliary low line termination in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the bias power down value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Aux2LoLineTermBiasPd_Set(void *device,
     uint8_t value)
 {
@@ -800,6 +1277,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Aux2LoLineTermBiasPd_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the bias power-down status of the auxiliary low line
+ * termination from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved bias power-
+ * down status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Aux2LoLineTermBiasPd_Get(void *device,
     uint8_t *value)
 {
@@ -813,6 +1301,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Aux2LoLineTermBiasPd_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the auxiliary 2 low line termination enable configuration for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Aux2LoLineTermEnable_Set(void *device,
     uint8_t value)
 {
@@ -823,6 +1322,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Aux2LoLineTermEnable_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the auxiliary line termination enable status from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved line
+ * termination enable status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Aux2LoLineTermEnable_Get(void *device,
     uint8_t *value)
 {
@@ -836,6 +1346,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Aux2LoLineTermEnable_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the auxiliary ADC0 clock enable state in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A uint8_t value representing the desired state of the auxiliary
+ * ADC0 clock enable (0 or 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AuxAdc0ClockEnable_Set(void *device,
     uint8_t value)
 {
@@ -846,6 +1366,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_AuxAdc0ClockEnable_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status of the auxiliary ADC0 from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved clock
+ * enable status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AuxAdc0ClockEnable_Get(void *device,
     uint8_t *value)
 {
@@ -859,10 +1390,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_AuxAdc0ClockEnable_Get(void *devic
     return status;
 }
 
-/**
- * This bit must be cleared before changing the AuxADC clock divider. Setting this bit after changing the divider word enables the AuxADC clock.
- *  Aux Adc Clock Enable
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable state for the auxiliary ADC1 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 8-bit unsigned integer representing the clock enable state to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the clock enable operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AuxAdc1ClockEnable_Set(void *device,
     uint8_t value)
 {
@@ -873,10 +1411,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_AuxAdc1ClockEnable_Set(void *devic
     return status;
 }
 
-/**
- * This bit must be cleared before changing the AuxADC clock divider. Setting this bit after changing the divider word enables the AuxADC clock.
- *  Aux Adc Clock Enable
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status of the auxiliary ADC1 from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved clock
+ * enable status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AuxAdc1ClockEnable_Get(void *device,
     uint8_t *value)
 {
@@ -890,6 +1435,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_AuxAdc1ClockEnable_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the clock enable state for the auxiliary ADC2 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 8-bit unsigned integer representing the clock enable state to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the clock enable operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AuxAdc2ClockEnable_Set(void *device,
     uint8_t value)
 {
@@ -900,6 +1456,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_AuxAdc2ClockEnable_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status of the auxiliary ADC2 from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved clock
+ * enable status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AuxAdc2ClockEnable_Get(void *device,
     uint8_t *value)
 {
@@ -913,6 +1480,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_AuxAdc2ClockEnable_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the clock enable state for the auxiliary ADC3 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the clock enable state to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the clock enable operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AuxAdc3ClockEnable_Set(void *device,
     uint8_t value)
 {
@@ -923,6 +1501,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_AuxAdc3ClockEnable_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status of the auxiliary ADC3 from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved clock
+ * enable status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AuxAdc3ClockEnable_Get(void *device,
     uint8_t *value)
 {
@@ -936,6 +1525,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_AuxAdc3ClockEnable_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the auxiliary ADC clock arm selection in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the clock arm selection
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AuxAdcClkArmSel_Set(void *device,
     uint8_t value)
 {
@@ -946,6 +1545,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_AuxAdcClkArmSel_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the auxiliary ADC clock arm selection value from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved clock arm
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AuxAdcClkArmSel_Get(void *device,
     uint8_t *value)
 {
@@ -959,10 +1569,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_AuxAdcClkArmSel_Get(void *device,
     return status;
 }
 
-/**
- * The AuxADC clock results from dividing down HSDIGCLK/2 (800MHz max) as described in the following equation:
- *  Aux Adc Clk Div
- */
+/***************************************************************************//**
+ * @brief Sets the auxiliary ADC clock divider value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the clock divider value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AuxAdcClkDiv_Set(void *device,
     uint8_t value)
 {
@@ -973,10 +1589,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_AuxAdcClkDiv_Set(void *device,
     return status;
 }
 
-/**
- * The AuxADC clock results from dividing down HSDIGCLK/2 (800MHz max) as described in the following equation:
- *  Aux Adc Clk Div
- */
+/***************************************************************************//**
+ * @brief Retrieves the auxiliary ADC clock divider value from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved clock
+ * divider value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AuxAdcClkDiv_Get(void *device,
     uint8_t *value)
 {
@@ -991,6 +1614,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_AuxAdcClkDiv_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the calibration output value from the auxiliary PLL of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved calibration
+ * output value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AuxPllCpCalOut_Get(void *device,
     uint8_t *value)
 {
@@ -1005,6 +1639,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_AuxPllCpCalOut_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the high range value of the auxiliary PLL charge pump from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AuxPllCpOverRangeHigh_Get(void *device,
     uint8_t *value)
 {
@@ -1019,6 +1664,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_AuxPllCpOverRangeHigh_Get(void *de
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the low range value of the auxiliary PLL charge pump from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AuxPllCpOverRangeLow_Get(void *device,
     uint8_t *value)
 {
@@ -1033,6 +1689,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_AuxPllCpOverRangeLow_Get(void *dev
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the lock status of the auxiliary PLL from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved PLL lock
+ * status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AuxPllLock_Get(void *device,
     uint8_t *value)
 {
@@ -1047,6 +1714,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_AuxPllLock_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO ALC word output from the auxiliary PLL register of
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved VCO
+ * ALC word output will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AuxPllVcoAlcWordOut_Get(void *device,
     uint16_t *value)
 {
@@ -1065,6 +1743,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_AuxPllVcoAlcWordOut_Get(void *devi
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO calibration status from a specific register of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the calibration status
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AuxPllVcoCalInProgress_Get(void *device,
     uint8_t *value)
 {
@@ -1079,6 +1768,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_AuxPllVcoCalInProgress_Get(void *d
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO comparator output value from a specific register of
+ * the device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved VCO
+ * comparator output will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AuxPllVcoCompOut_Get(void *device,
     uint8_t *value)
 {
@@ -1093,6 +1793,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_AuxPllVcoCompOut_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the coarse band output frequency value from the auxiliary
+ * PLL VCO register of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * frequency value will be stored.
+ * @return Returns the status of the read operations, where a value of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AuxPllVcoFreqCoarseBandOut_Get(void *device,
     uint16_t *value)
 {
@@ -1111,6 +1822,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_AuxPllVcoFreqCoarseBandOut_Get(voi
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the fine band output frequency value from the auxiliary PLL
+ * VCO register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved frequency
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AuxPllVcoFreqFineBandOut_Get(void *device,
     uint8_t *value)
 {
@@ -1125,6 +1847,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_AuxPllVcoFreqFineBandOut_Get(void 
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO DAC output value from the auxiliary PLL register of
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved VCO
+ * DAC output value will be stored.
+ * @return Returns the status of the read operations, where a status of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_AuxPllVcoTcDacOut_Get(void *device,
     uint16_t *value)
 {
@@ -1142,9 +1875,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_AuxPllVcoTcDacOut_Get(void *device
     return status;
 }
 
-/**
- * Puts the  CLK_PLL output test signal driver into "HiZ".
- */
+/***************************************************************************//**
+ * @brief Sets the clock test driver mode by writing a specified value to a
+ * hardware register.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_CkTestDriMode_Set(void *device,
     uint8_t value)
 {
@@ -1155,9 +1896,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_CkTestDriMode_Set(void *device,
     return status;
 }
 
-/**
- * Puts the  CLK_PLL output test signal driver into "HiZ".
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from a device and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure from which the register value
+ * will be read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_CkTestDriMode_Get(void *device,
     uint8_t *value)
 {
@@ -1171,9 +1920,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_CkTestDriMode_Get(void *device,
     return status;
 }
 
-/**
- * Enables the CLK_PLL output test signal.
- */
+/***************************************************************************//**
+ * @brief Sets the power-down state of the clock test register in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the clock test power-down register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_CkTestPd_Set(void *device,
     uint8_t value)
 {
@@ -1184,9 +1941,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_CkTestPd_Set(void *device,
     return status;
 }
 
-/**
- * Enables the CLK_PLL output test signal.
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific bit field from a hardware register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_CkTestPd_Get(void *device,
     uint8_t *value)
 {
@@ -1201,6 +1966,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_CkTestPd_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the calibration output value from a specific register of the
+ * device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration output value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ClkPllCpCalOut_Get(void *device,
     uint8_t *value)
 {
@@ -1215,6 +1991,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ClkPllCpCalOut_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the high over-range value from the Clock Phase-Locked Loop
+ * (PLL) control register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved high over-
+ * range value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ClkPllCpOverRangeHigh_Get(void *device,
     uint8_t *value)
 {
@@ -1229,6 +2016,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ClkPllCpOverRangeHigh_Get(void *de
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the low range value of the Clock Phase-Locked Loop (PLL)
+ * Charge Pump from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ClkPllCpOverRangeLow_Get(void *device,
     uint8_t *value)
 {
@@ -1243,6 +2041,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ClkPllCpOverRangeLow_Get(void *dev
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the PLL lock status from a specific register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the PLL lock status will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ClkPllLock_Get(void *device,
     uint8_t *value)
 {
@@ -1257,6 +2066,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ClkPllLock_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the calibration output value from a specific register of the
+ * device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration output value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ClkPllLpCpCalOut_Get(void *device,
     uint8_t *value)
 {
@@ -1271,6 +2091,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ClkPllLpCpCalOut_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the high over-range value from the PLL configuration
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved high over-
+ * range value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ClkPllLpCpOverRangeHigh_Get(void *device,
     uint8_t *value)
 {
@@ -1285,6 +2116,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ClkPllLpCpOverRangeHigh_Get(void *
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the low over-range value from the PLL configuration
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved low over-
+ * range value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ClkPllLpCpOverRangeLow_Get(void *device,
     uint8_t *value)
 {
@@ -1299,6 +2141,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ClkPllLpCpOverRangeLow_Get(void *d
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the lock status of the low-power phase-locked loop (PLL)
+ * from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved lock
+ * status will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ClkPllLpLock_Get(void *device,
     uint8_t *value)
 {
@@ -1313,6 +2166,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ClkPllLpLock_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a 16-bit value from two specific registers of a device by
+ * reading their contents.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ClkPllLpVcoAlcWordOut_Get(void *device,
     uint16_t *value)
 {
@@ -1331,6 +2195,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ClkPllLpVcoAlcWordOut_Get(void *de
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO calibration status from a specific register in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the calibration status
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ClkPllLpVcoCalInProgress_Get(void *device,
     uint8_t *value)
 {
@@ -1345,6 +2220,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ClkPllLpVcoCalInProgress_Get(void 
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO compensation output value from a specific register
+ * of the device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved VCO
+ * compensation output value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ClkPllLpVcoCompOut_Get(void *device,
     uint8_t *value)
 {
@@ -1359,6 +2245,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ClkPllLpVcoCompOut_Get(void *devic
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the coarse band output frequency from the PLL VCO register
+ * of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * frequency value will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ClkPllLpVcoFreqCoarseBandOut_Get(void *device,
     uint16_t *value)
 {
@@ -1377,6 +2274,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ClkPllLpVcoFreqCoarseBandOut_Get(v
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the fine band output frequency value from the PLL VCO
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved frequency
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ClkPllLpVcoFreqFineBandOut_Get(void *device,
     uint8_t *value)
 {
@@ -1391,6 +2299,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_ClkPllLpVcoFreqFineBandOut_Get(voi
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the output value of the DAC from the PLL VCO register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved DAC
+ * output value will be stored.
+ * @return Returns the status of the last read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ClkPllLpVcoTcDacOut_Get(void *device,
     uint16_t *value)
 {
@@ -1409,6 +2327,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_ClkPllLpVcoTcDacOut_Get(void *devi
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO ALC word output from the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved VCO
+ * ALC word output will be stored.
+ * @return Returns the status of the read operations, where a value of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ClkPllVcoAlcWordOut_Get(void *device,
     uint16_t *value)
 {
@@ -1427,6 +2355,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ClkPllVcoAlcWordOut_Get(void *devi
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO calibration status from a specific register of the
+ * device.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a uint8_t variable where the calibration status
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ClkPllVcoCalInProgress_Get(void *device,
     uint8_t *value)
 {
@@ -1441,6 +2380,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ClkPllVcoCalInProgress_Get(void *d
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO comparator output value from a specific register in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved VCO
+ * comparator output value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ClkPllVcoCompOut_Get(void *device,
     uint8_t *value)
 {
@@ -1455,6 +2405,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ClkPllVcoCompOut_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the coarse band output frequency value from the PLL VCO
+ * register of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * frequency value will be stored.
+ * @return Returns the status of the read operations, with `*value` containing
+ * the combined frequency value from the two registers.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ClkPllVcoFreqCoarseBandOut_Get(void *device,
     uint16_t *value)
 {
@@ -1473,6 +2434,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ClkPllVcoFreqCoarseBandOut_Get(voi
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the fine band output frequency value from the VCO PLL
+ * register of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved frequency
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ClkPllVcoFreqFineBandOut_Get(void *device,
     uint8_t *value)
 {
@@ -1487,6 +2459,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ClkPllVcoFreqFineBandOut_Get(void 
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO DAC output value from the ADRV9001 device's
+ * register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved VCO
+ * DAC output value will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the read operations failed.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ClkPllVcoTcDacOut_Get(void *device,
     uint16_t *value)
 {
@@ -1504,9 +2487,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_ClkPllVcoTcDacOut_Get(void *device
     return status;
 }
 
-/**
- * This register selects which set of bits will be monitored by the control output bits when they are assigned to GPIO pins. See the document for Control output pins for more information on the signals.
- */
+/***************************************************************************//**
+ * @brief Sets the output multiplexer selection for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the multiplexer selection
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ControlOutMuxSel_Set(void *device,
     uint8_t value)
 {
@@ -1517,9 +2507,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_ControlOutMuxSel_Set(void *device,
     return status;
 }
 
-/**
- * This register selects which set of bits will be monitored by the control output bits when they are assigned to GPIO pins. See the document for Control output pins for more information on the signals.
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register and stores it in the
+ * provided output variable.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ControlOutMuxSel_Get(void *device,
     uint8_t *value)
 {
@@ -1533,6 +2530,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_ControlOutMuxSel_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the LDO bypass configuration for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to set for the
+ * LDO bypass configuration.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ConverterLdoBypass_Set(void *device,
     uint8_t value)
 {
@@ -1543,6 +2550,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ConverterLdoBypass_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the LDO bypass setting from a specific register of the
+ * device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved LDO bypass
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ConverterLdoBypass_Get(void *device,
     uint8_t *value)
 {
@@ -1556,6 +2574,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ConverterLdoBypass_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the thermal shutdown configuration for the LDO converter in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A uint8_t value representing the thermal shutdown setting to be
+ * applied.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ConverterLdoDisThermalShutdown_Set(void *device,
     uint8_t value)
 {
@@ -1566,6 +2595,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ConverterLdoDisThermalShutdown_Set
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the thermal shutdown status of the LDO converter from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved thermal
+ * shutdown status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ConverterLdoDisThermalShutdown_Get(void *device,
     uint8_t *value)
 {
@@ -1579,6 +2619,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ConverterLdoDisThermalShutdown_Get
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the filter bypass configuration for the LDO converter in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the filter bypass setting
+ * to be applied.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ConverterLdoFilterBypass_Set(void *device,
     uint8_t value)
 {
@@ -1589,6 +2640,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ConverterLdoFilterBypass_Set(void 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the filter bypass status from a specific register of the
+ * device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved filter
+ * bypass status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ConverterLdoFilterBypass_Get(void *device,
     uint8_t *value)
 {
@@ -1602,6 +2664,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_ConverterLdoFilterBypass_Get(void 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the LDO current limit increment value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the new current limit
+ * increment value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ConverterLdoIlimitInc_Set(void *device,
     uint8_t value)
 {
@@ -1612,6 +2684,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ConverterLdoIlimitInc_Set(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the LDO current limit increment value from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved increment
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ConverterLdoIlimitInc_Get(void *device,
     uint8_t *value)
 {
@@ -1626,6 +2709,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ConverterLdoIlimitInc_Get(void *de
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the LDO status from a specific register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved LDO status
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ConverterLdoStatus_Get(void *device,
     uint8_t *value)
 {
@@ -1639,6 +2733,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ConverterLdoStatus_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the thermal shutdown configuration for the LDO converter in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 8-bit unsigned integer representing the thermal shutdown
+ * configuration value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ConverterLdoThermalShutdown0c_Set(void *device,
     uint8_t value)
 {
@@ -1649,6 +2754,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ConverterLdoThermalShutdown0c_Set(
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the thermal shutdown status of the LDO converter from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved thermal
+ * shutdown status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ConverterLdoThermalShutdown0c_Get(void *device,
     uint8_t *value)
 {
@@ -1662,6 +2778,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ConverterLdoThermalShutdown0c_Get(
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the output voltage selection for the LDO converter in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the desired output
+ * voltage selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ConverterLdoVoutSel_Set(void *device,
     uint8_t value)
 {
@@ -1672,6 +2799,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ConverterLdoVoutSel_Set(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the output voltage selection from the LDO converter by
+ * reading a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved voltage
+ * selection value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ConverterLdoVoutSel_Get(void *device,
     uint8_t *value)
 {
@@ -1685,6 +2823,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ConverterLdoVoutSel_Get(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the output voltage trim value for the LDO converter in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the trim value to be set
+ * for the LDO output voltage.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ConverterLdoVoutTrim_Set(void *device,
     uint8_t value)
 {
@@ -1695,6 +2844,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_ConverterLdoVoutTrim_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the LDO output voltage trim value from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved trim value
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ConverterLdoVoutTrim_Get(void *device,
     uint8_t *value)
 {
@@ -1708,6 +2867,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_ConverterLdoVoutTrim_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the debug core control output value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the debug core control output.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_DebugCoreControlOut_Set(void *device,
     uint8_t value)
 {
@@ -1718,6 +2887,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_DebugCoreControlOut_Set(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided output variable.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_DebugCoreControlOut_Get(void *device,
     uint8_t *value)
 {
@@ -1731,9 +2911,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_DebugCoreControlOut_Get(void *devi
     return status;
 }
 
-/**
- * There are two words that control the division ratio for the REF_CLK going from the analog to the digital: "devclk_divide_ratio_diff_rcv[2:0] and "dig_devclk_divide_ratio_osc_rcv[2:0]".  Which word is used it determined by the MODE pin ADC, but this bit can control which word is used when "force_dig_dev_clk_div_source_sel_from_spi" is HIGH.
- */
+/***************************************************************************//**
+ * @brief Sets the digital device clock divider source selection in the ADRV9001
+ * device using SPI.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the clock divider source
+ * selection value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_DigDevClkDivSourceSelFromSpi_Set(void *device,
     uint8_t value)
 {
@@ -1744,9 +2932,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_DigDevClkDivSourceSelFromSpi_Set(v
     return status;
 }
 
-/**
- * There are two words that control the division ratio for the REF_CLK going from the analog to the digital: "devclk_divide_ratio_diff_rcv[2:0] and "dig_devclk_divide_ratio_osc_rcv[2:0]".  Which word is used it determined by the MODE pin ADC, but this bit can control which word is used when "force_dig_dev_clk_div_source_sel_from_spi" is HIGH.
- */
+/***************************************************************************//**
+ * @brief Retrieves the digital device clock divider source selection from a
+ * specific register via SPI.
+ *
+ * @param device A pointer to the device structure used for SPI communication.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * divider source selection will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_DigDevClkDivSourceSelFromSpi_Get(void *device,
     uint8_t *value)
 {
@@ -1760,15 +2955,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_DigDevClkDivSourceSelFromSpi_Get(v
     return status;
 }
 
-/**
- * The divide ratio in the analog for the REF_CLK being sent to the main digital when the REF_CLK block is in differential receiver mode.  The default is div 16 such that if the input differential clock is the maximum allowed of 1000 MHz, the REF_CLK beig sent to the digital is no greater than 80 MHz (the maximum allowed for the REF_CLK to the digital).   0 => bypass
- * 1 => div 2
- * 2 => div 4
- * 3 => div 8
- * 4 => div 16
- * 5 => div 32
- * 6 => div 64
- */
+/***************************************************************************//**
+ * @brief Sets the digital device clock divide ratio difference receiver value
+ * in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the divide ratio
+ * difference receiver value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_DigDevclkDivideRatioDiffRcv_Set(void *device,
     uint8_t value)
 {
@@ -1779,15 +2976,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_DigDevclkDivideRatioDiffRcv_Set(vo
     return status;
 }
 
-/**
- * The divide ratio in the analog for the REF_CLK being sent to the main digital when the REF_CLK block is in differential receiver mode.  The default is div 16 such that if the input differential clock is the maximum allowed of 1000 MHz, the REF_CLK beig sent to the digital is no greater than 80 MHz (the maximum allowed for the REF_CLK to the digital).   0 => bypass
- * 1 => div 2
- * 2 => div 4
- * 3 => div 8
- * 4 => div 16
- * 5 => div 32
- * 6 => div 64
- */
+/***************************************************************************//**
+ * @brief Retrieves the digital device clock divide ratio difference from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_DigDevclkDivideRatioDiffRcv_Get(void *device,
     uint8_t *value)
 {
@@ -1801,15 +3000,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_DigDevclkDivideRatioDiffRcv_Get(vo
     return status;
 }
 
-/**
- * The divide ratio in the analog for the REF_CLK being sent to the main digital when the REF_CLK block is in differential CMOS single-ended or oscillator mode. 0 => bypass
- * 1 => div 2
- * 2 => div 4
- * 3 => div 8
- * 4 => div 16
- * 5 => div 32
- * 6 => div 64
- */
+/***************************************************************************//**
+ * @brief Sets the divide ratio for the digital device clock oscillator receiver
+ * in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the divide ratio to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_DigDevclkDivideRatioOscRcv_Set(void *device,
     uint8_t value)
 {
@@ -1820,15 +3021,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_DigDevclkDivideRatioOscRcv_Set(voi
     return status;
 }
 
-/**
- * The divide ratio in the analog for the REF_CLK being sent to the main digital when the REF_CLK block is in differential CMOS single-ended or oscillator mode. 0 => bypass
- * 1 => div 2
- * 2 => div 4
- * 3 => div 8
- * 4 => div 16
- * 5 => div 32
- * 6 => div 64
- */
+/***************************************************************************//**
+ * @brief Retrieves the digital device clock divide ratio from a specific
+ * register and stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved clock divide
+ * ratio will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_DigDevclkDivideRatioOscRcv_Get(void *device,
     uint8_t *value)
 {
@@ -1842,9 +3045,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_DigDevclkDivideRatioOscRcv_Get(voi
     return status;
 }
 
-/**
- * RESETB signal for the MCS assocaited with the REF_CLK being sent to the digital.
- */
+/***************************************************************************//**
+ * @brief Sets the MCS reset bit for the digital device clock divider in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the MCS reset bit.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_DigDevclkDividerMcsResetb_Set(void *device,
     uint8_t value)
 {
@@ -1855,9 +3066,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_DigDevclkDividerMcsResetb_Set(void
     return status;
 }
 
-/**
- * RESETB signal for the MCS assocaited with the REF_CLK being sent to the digital.
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register and stores it in the
+ * provided pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_DigDevclkDividerMcsResetb_Get(void *device,
     uint8_t *value)
 {
@@ -1871,9 +3090,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_DigDevclkDividerMcsResetb_Get(void
     return status;
 }
 
-/**
- * Unused
- */
+/***************************************************************************//**
+ * @brief Sets the clock divide ratio for the digital device in the ADRV9001
+ * register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the desired clock divide
+ * ratio.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_DigDeviceClkDivideRatio_Set(void *device,
     uint8_t value)
 {
@@ -1884,9 +3111,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_DigDeviceClkDivideRatio_Set(void *
     return status;
 }
 
-/**
- * Unused
- */
+/***************************************************************************//**
+ * @brief Retrieves the digital device clock divide ratio from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved clock
+ * divide ratio will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_DigDeviceClkDivideRatio_Get(void *device,
     uint8_t *value)
 {
@@ -1901,9 +3136,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_DigDeviceClkDivideRatio_Get(void *
 }
 
 
-/**
- * The efuse_product_id
- */
+/***************************************************************************//**
+ * @brief Retrieves 12 bytes of efuse feature data from a device by reading
+ * specific registers.
+ *
+ * @param device A pointer to the device structure from which the efuse data is
+ * to be read.
+ * @param value A pointer to an array of 12 bytes where the retrieved efuse
+ * feature data will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_EfuseFeatureData_Get(void *device,
     uint8_t (*value)[12])
 {
@@ -1960,9 +3203,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_EfuseFeatureData_Get(void *device,
     return status;
 }
 
-/**
- * This bit initiates loading the hardware differentiation fuses into the latches ... identical to the POR read that occurs.
- */
+/***************************************************************************//**
+ * @brief Sets the efuse force read value in the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the efuse force read register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_EfuseForceRead_Set(void *device,
     uint8_t value)
 {
@@ -1973,9 +3223,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_EfuseForceRead_Set(void *device,
     return status;
 }
 
-/**
- * This bit initiates loading the hardware differentiation fuses into the latches ... identical to the POR read that occurs.
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_EfuseForceRead_Get(void *device,
     uint8_t *value)
 {
@@ -1989,10 +3247,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_EfuseForceRead_Get(void *device,
     return status;
 }
 
-/**
- * When set, this bit allows the SPI bits in 0xC20 '- 0xC22 to affect the chip configuration. When clear, the contents 0f 0xC20 '- 0xC22 are not used.
- *  Efuse Over Ride Enable
- */
+/***************************************************************************//**
+ * @brief Sets the eFuse override enable value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to set for the
+ * eFuse override.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_EfuseOverrideEnable_Set(void *device,
     uint8_t value)
 {
@@ -2003,10 +3267,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_EfuseOverrideEnable_Set(void *devi
     return status;
 }
 
-/**
- * When set, this bit allows the SPI bits in 0xC20 '- 0xC22 to affect the chip configuration. When clear, the contents 0f 0xC20 '- 0xC22 are not used.
- *  Efuse Over Ride Enable
- */
+/***************************************************************************//**
+ * @brief Retrieves the eFuse override enable status from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved eFuse
+ * override enable status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_EfuseOverrideEnable_Get(void *device,
     uint8_t *value)
 {
@@ -2020,10 +3290,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_EfuseOverrideEnable_Get(void *devi
     return status;
 }
 
-/**
- * When set, this bit allows the SPI bits in 0xC20 '- 0xC22 to affect the chip configuration. When clear, the contents 0f 0xC20 '- 0xC22 are not used.
- *  eFuse override bits.
- */
+/***************************************************************************//**
+ * @brief Sets eFuse override values in the ADRV9001 device by writing to
+ * specific registers.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to an array of 12 bytes containing the eFuse override
+ * values to be written.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_EfuseOverrides_Set(void *device,
     uint8_t (*value)[12])
 {
@@ -2067,10 +3344,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_EfuseOverrides_Set(void *device,
     return status;
 }
 
-/**
- * When set, this bit allows the SPI bits in 0xC20 '- 0xC22 to affect the chip configuration. When clear, the contents 0f 0xC20 '- 0xC22 are not used.
- *  eFuse override bits.
- */
+/***************************************************************************//**
+ * @brief Retrieves eFuse override values from a device's register map and
+ * stores them in a provided array.
+ *
+ * @param device A pointer to the device structure from which the eFuse values
+ * are read.
+ * @param value A pointer to a 2D array where the retrieved eFuse values will be
+ * stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_EfuseOverrides_Get(void *device,
     uint8_t (*value)[12])
 {
@@ -2127,6 +3411,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_EfuseOverrides_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the programming address for the eFuse in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 16-bit unsigned integer representing the programming address
+ * to be set.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if any of the write operations fail.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_EfuseProgAddress_Set(void *device,
     uint16_t value)
 {
@@ -2140,6 +3434,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_EfuseProgAddress_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the programming address from the eFuse register of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * programming address will be stored.
+ * @return Returns the status of the read operations, where a status of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_EfuseProgAddress_Get(void *device,
     uint16_t *value)
 {
@@ -2157,6 +3462,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_EfuseProgAddress_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the eFuse programming strobe value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the eFuse programming strobe.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_EfuseProgStrobe_Set(void *device,
     uint8_t value)
 {
@@ -2167,6 +3482,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_EfuseProgStrobe_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the programming strobe value from the efuse register of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved programming
+ * strobe value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_EfuseProgStrobe_Get(void *device,
     uint8_t *value)
 {
@@ -2180,6 +3506,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_EfuseProgStrobe_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO programming value for the efuse in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the efuse GPIO.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_EfuseProgUseGpio_Set(void *device,
     uint8_t value)
 {
@@ -2190,6 +3526,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_EfuseProgUseGpio_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from a device and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure from which the register value
+ * will be read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_EfuseProgUseGpio_Get(void *device,
     uint8_t *value)
 {
@@ -2203,9 +3550,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_EfuseProgUseGpio_Get(void *device,
     return status;
 }
 
-/**
- * writing this bit true sets the Efuse IP into a state in which it can be programmed.  The Efuse can only be programmed in a specific hardware mode and that gating is not completed in the yoda db
- */
+/***************************************************************************//**
+ * @brief Sets the eFuse programming start value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the eFuse.
+ * @return Returns an integer status code indicating the success or failure of
+ * the eFuse programming start operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_EfuseProgramStart_Set(void *device,
     uint8_t value)
 {
@@ -2216,9 +3570,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_EfuseProgramStart_Set(void *device
     return status;
 }
 
-/**
- * writing this bit true sets the Efuse IP into a state in which it can be programmed.  The Efuse can only be programmed in a specific hardware mode and that gating is not completed in the yoda db
- */
+/***************************************************************************//**
+ * @brief Retrieves the eFuse programming status from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved eFuse
+ * programming status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_EfuseProgramStart_Get(void *device,
     uint8_t *value)
 {
@@ -2232,9 +3593,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_EfuseProgramStart_Get(void *device
     return status;
 }
 
-/**
- * These bits are the Efuse segment address, The segment written to these bits will be presented to the efuse_read_data BF bits after an efuse_read_startis properly invoked
- */
+/***************************************************************************//**
+ * @brief Sets the eFuse read address in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the eFuse read address.
+ * @return Returns an integer status code indicating the success or failure of
+ * the eFuse read address write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_EfuseReadAddress_Set(void *device,
     uint8_t value)
 {
@@ -2245,9 +3613,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_EfuseReadAddress_Set(void *device,
     return status;
 }
 
-/**
- * These bits are the Efuse segment address, The segment written to these bits will be presented to the efuse_read_data BF bits after an efuse_read_startis properly invoked
- */
+/***************************************************************************//**
+ * @brief Reads the efuse address from a specific register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the read efuse address
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_EfuseReadAddress_Get(void *device,
     uint8_t *value)
 {
@@ -2262,6 +3638,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_EfuseReadAddress_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Reads eFuse data from a device and stores it in a provided value.
+ *
+ * @param device A pointer to the device structure from which the eFuse data
+ * will be read.
+ * @param value A pointer to a 32-bit unsigned integer where the read eFuse data
+ * will be stored.
+ * @return Returns the status of the last read operation, where a value of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_EfuseReadData_Get(void *device,
     uint32_t *value)
 {
@@ -2287,9 +3673,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_EfuseReadData_Get(void *device,
     return status;
 }
 
-/**
- * a self-clearing bit which initiates loading of fuse bit cells such that they can be read via the SPI port efuse_read_data bit field (4-bytes).  This bit is automatically cleared upon completion of the Efuse operation.
- */
+/***************************************************************************//**
+ * @brief Sets the eFuse read start value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the eFuse read start register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the eFuse read start value write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_EfuseReadStart_Set(void *device,
     uint8_t value)
 {
@@ -2300,9 +3693,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_EfuseReadStart_Set(void *device,
     return status;
 }
 
-/**
- * a self-clearing bit which initiates loading of fuse bit cells such that they can be read via the SPI port efuse_read_data bit field (4-bytes).  This bit is automatically cleared upon completion of the Efuse operation.
- */
+/***************************************************************************//**
+ * @brief Reads the eFuse register value and stores it in the provided value
+ * pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the read eFuse value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_EfuseReadStart_Get(void *device,
     uint8_t *value)
 {
@@ -2317,6 +3718,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_EfuseReadStart_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the eFuse state from a specific register and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved eFuse state
+ * will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_EfuseState_Get(void *device,
     uint8_t *value)
 {
@@ -2330,6 +3742,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_EfuseState_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the double redundancy configuration for the eFuse in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the eFuse double redundancy configuration.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_EfuseUseDoubleRedundancy_Set(void *device,
     uint8_t value)
 {
@@ -2340,6 +3763,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_EfuseUseDoubleRedundancy_Set(void 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the double redundancy eFuse setting from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved eFuse value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_EfuseUseDoubleRedundancy_Get(void *device,
     uint8_t *value)
 {
@@ -2353,6 +3787,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_EfuseUseDoubleRedundancy_Get(void 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the redundancy oring value for the efuse in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the redundancy oring
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_EfuseUseRedundancyOring_Set(void *device,
     uint8_t value)
 {
@@ -2363,6 +3807,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_EfuseUseRedundancyOring_Set(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the redundancy oring value from the efuse register of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved redundancy
+ * oring value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_EfuseUseRedundancyOring_Get(void *device,
     uint8_t *value)
 {
@@ -2376,9 +3831,15 @@ static inline int32_t adrv9001_NvsRegmapCore1_EfuseUseRedundancyOring_Get(void *
     return status;
 }
 
-/**
- * (B0 New) Enable Flex stream Proc 0 clock
- */
+/***************************************************************************//**
+ * @brief Sets the FlexSp0 clock enable register for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A uint8_t value that specifies the clock enable state to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_FlexSp0ClkEn_Set(void *device,
     uint8_t value)
 {
@@ -2389,9 +3850,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_FlexSp0ClkEn_Set(void *device,
     return status;
 }
 
-/**
- * (B0 New) Enable Flex stream Proc 0 clock
- */
+/***************************************************************************//**
+ * @brief Retrieves the FlexSp0 clock enable status from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_FlexSp0ClkEn_Get(void *device,
     uint8_t *value)
 {
@@ -2405,9 +3873,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_FlexSp0ClkEn_Get(void *device,
     return status;
 }
 
-/**
- * (B0 New) Enable Flex stream Proc 1 clock
- */
+/***************************************************************************//**
+ * @brief Sets the FlexSp1 clock enable register for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 8-bit unsigned integer representing the value to be written to
+ * the FlexSp1 clock enable register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_FlexSp1ClkEn_Set(void *device,
     uint8_t value)
 {
@@ -2418,9 +3893,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_FlexSp1ClkEn_Set(void *device,
     return status;
 }
 
-/**
- * (B0 New) Enable Flex stream Proc 1 clock
- */
+/***************************************************************************//**
+ * @brief Retrieves the FlexSp1 clock enable status from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_FlexSp1ClkEn_Get(void *device,
     uint8_t *value)
 {
@@ -2434,9 +3916,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_FlexSp1ClkEn_Get(void *device,
     return status;
 }
 
-/**
- * (B0 New) Enable Flex stream Proc 2 clock
- */
+/***************************************************************************//**
+ * @brief Sets the FlexSp2 clock enable register for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the FlexSp2 clock enable register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_FlexSp2ClkEn_Set(void *device,
     uint8_t value)
 {
@@ -2447,9 +3936,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_FlexSp2ClkEn_Set(void *device,
     return status;
 }
 
-/**
- * (B0 New) Enable Flex stream Proc 2 clock
- */
+/***************************************************************************//**
+ * @brief Retrieves the FlexSp2 clock enable status from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved clock
+ * enable status will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_FlexSp2ClkEn_Get(void *device,
     uint8_t *value)
 {
@@ -2463,9 +3959,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_FlexSp2ClkEn_Get(void *device,
     return status;
 }
 
-/**
- * (B0 New) Enable Flex stream Proc 3 clock
- */
+/***************************************************************************//**
+ * @brief Sets the FlexSp3 clock enable register for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 8-bit unsigned integer representing the value to be written to
+ * the FlexSp3 clock enable register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_FlexSp3ClkEn_Set(void *device,
     uint8_t value)
 {
@@ -2476,9 +3979,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_FlexSp3ClkEn_Set(void *device,
     return status;
 }
 
-/**
- * (B0 New) Enable Flex stream Proc 3 clock
- */
+/***************************************************************************//**
+ * @brief Retrieves the FlexSp3 clock enable status from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_FlexSp3ClkEn_Get(void *device,
     uint8_t *value)
 {
@@ -2492,6 +4002,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_FlexSp3ClkEn_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the ARM clock force value in the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to set for the
+ * ARM clock.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ForceArmClk_Set(void *device,
     uint8_t value)
 {
@@ -2502,6 +4022,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ForceArmClk_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the ARM clock status from a specific register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved ARM clock
+ * status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ForceArmClk_Get(void *device,
     uint8_t *value)
 {
@@ -2515,10 +4046,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ForceArmClk_Get(void *device,
     return status;
 }
 
-/**
- * Forces the division word selection for the REF_CLK being sent to the digital to be determined by the SPI as opposed to the mode pin.  See the description for the "dig_dev_clk_div_source_sel_from_spi" bit. "0" => Use division word selection determined by MODE pin ADC.
- * "1" => Force division word selection to be controlled by SPI.
- */
+/***************************************************************************//**
+ * @brief Sets the digital device clock divider source selection in the ADRV9001
+ * device via SPI.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the clock divider source
+ * selection value.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ForceDigDevClkDivSourceSelFromSpi_Set(void *device,
     uint8_t value)
 {
@@ -2529,10 +4067,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_ForceDigDevClkDivSourceSelFromSpi_
     return status;
 }
 
-/**
- * Forces the division word selection for the REF_CLK being sent to the digital to be determined by the SPI as opposed to the mode pin.  See the description for the "dig_dev_clk_div_source_sel_from_spi" bit. "0" => Use division word selection determined by MODE pin ADC.
- * "1" => Force division word selection to be controlled by SPI.
- */
+/***************************************************************************//**
+ * @brief Retrieves the digital device clock divider source selection from a
+ * specific register via SPI.
+ *
+ * @param device A pointer to the device structure used for communication.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ForceDigDevClkDivSourceSelFromSpi_Get(void *device,
     uint8_t *value)
 {
@@ -2546,6 +4090,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_ForceDigDevClkDivSourceSelFromSpi_
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the reference clock configuration for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the reference clock register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ForceRefClk_Set(void *device,
     uint8_t value)
 {
@@ -2556,6 +4110,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ForceRefClk_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the reference clock value from a specific register in the
+ * device.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a uint8_t variable where the retrieved reference
+ * clock value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ForceRefClk_Get(void *device,
     uint8_t *value)
 {
@@ -2569,9 +4134,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ForceRefClk_Get(void *device,
     return status;
 }
 
-/**
- * Forces the Gm selection of the REF_CLK oscillaor for come from the SPI, as opposed to being controlled by the mode pin.
- */
+/***************************************************************************//**
+ * @brief Sets the reference clock configuration in the ADRV9001 device's
+ * register map using a value from SPI.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the reference clock configuration register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ForceRefclkClcnfgFromSpi_Set(void *device,
     uint8_t value)
 {
@@ -2582,9 +4155,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ForceRefclkClcnfgFromSpi_Set(void 
     return status;
 }
 
-/**
- * Forces the Gm selection of the REF_CLK oscillaor for come from the SPI, as opposed to being controlled by the mode pin.
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific configuration value from a device's register and
+ * stores it in the provided variable.
+ *
+ * @param device A pointer to the device structure from which the register value
+ * will be read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ForceRefclkClcnfgFromSpi_Get(void *device,
     uint8_t *value)
 {
@@ -2598,9 +4179,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_ForceRefclkClcnfgFromSpi_Get(void 
     return status;
 }
 
-/**
- * 0: Do not abort, 1: DMA Abort
- */
+/***************************************************************************//**
+ * @brief Sets the DMA0 abort register for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer that specifies the value to be written
+ * to the DMA0 abort register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0Abort_Set(void *device,
     uint8_t value)
 {
@@ -2611,9 +4199,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0Abort_Set(void *device,
     return status;
 }
 
-/**
- * 0: Do not abort, 1: DMA Abort
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register related to DMA abort status
+ * from the device.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0Abort_Get(void *device,
     uint8_t *value)
 {
@@ -2628,9 +4224,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0Abort_Get(void *device,
 }
 
 
-/**
- * DMA Abort Flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA0 abort flag from a specific register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved abort flag
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0AbortFlag_Get(void *device,
     uint8_t *value)
 {
@@ -2645,9 +4249,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0AbortFlag_Get(void *dev
 }
 
 
-/**
- * DMA AHB Error flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the AHB error status from a specific register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved AHB error
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0AhbError_Get(void *device,
     uint8_t *value)
 {
@@ -2661,9 +4273,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0AhbError_Get(void *devi
     return status;
 }
 
-/**
- * Block Base Offset Address
- */
+/***************************************************************************//**
+ * @brief Sets the DMA0 block base offset address in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 16-bit unsigned integer representing the base offset address
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0BlockBaseOffsetAddr_Set(void *device,
     uint16_t value)
 {
@@ -2677,9 +4296,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0BlockBaseOffsetAddr_Set
     return status;
 }
 
-/**
- * Block Base Offset Address
- */
+/***************************************************************************//**
+ * @brief Retrieves the base offset address for DMA0 block from the device's
+ * register map.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved base
+ * offset address will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the read operations failed.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0BlockBaseOffsetAddr_Get(void *device,
     uint16_t *value)
 {
@@ -2697,9 +4324,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0BlockBaseOffsetAddr_Get
     return status;
 }
 
-/**
- * 0: Block Transfer Mode, 1:Index Mode
- */
+/***************************************************************************//**
+ * @brief Sets the DMA0 configuration index mode for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the DMA0 configuration index mode.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0ConfigIndexMode_Set(void *device,
     uint8_t value)
 {
@@ -2710,9 +4344,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0ConfigIndexMode_Set(voi
     return status;
 }
 
-/**
- * 0: Block Transfer Mode, 1:Index Mode
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA0 configuration index mode from a specific register
+ * and stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0ConfigIndexMode_Get(void *device,
     uint8_t *value)
 {
@@ -2726,9 +4368,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0ConfigIndexMode_Get(voi
     return status;
 }
 
-/**
- * 0: OneTime Event Based Index Mode, 1: Continuous Index Mode. This bit is ignored if spi_dma_config_index_mode=0.
- */
+/***************************************************************************//**
+ * @brief Sets the continuous index mode for DMA0 in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0ContinuousIndexMode_Set(void *device,
     uint8_t value)
 {
@@ -2739,9 +4388,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0ContinuousIndexMode_Set
     return status;
 }
 
-/**
- * 0: OneTime Event Based Index Mode, 1: Continuous Index Mode. This bit is ignored if spi_dma_config_index_mode=0.
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register related to DMA continuous
+ * index mode from the device.
+ *
+ * @param device A pointer to the device structure used to access the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0ContinuousIndexMode_Get(void *device,
     uint8_t *value)
 {
@@ -2756,9 +4412,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0ContinuousIndexMode_Get
 }
 
 
-/**
- * This is a debug signal. It indicates the current address being driven by DMA on the AHB Bus.
- */
+/***************************************************************************//**
+ * @brief Retrieves the current index of DMA0 from the ADRV9001 device by
+ * reading multiple registers.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved DMA0
+ * current index will be stored.
+ * @return Returns the status of the last read operation, where a value of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0CurrIndex_Get(void *device,
     uint32_t *value)
 {
@@ -2785,9 +4449,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0CurrIndex_Get(void *dev
 }
 
 
-/**
- * Current Block Address
- */
+/***************************************************************************//**
+ * @brief Retrieves the current block address from the DMA register by reading
+ * multiple consecutive registers.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved block
+ * address will be stored.
+ * @return Returns the status of the last read operation, with a value of 0
+ * indicating success.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0CurrentBlockAddr_Get(void *device,
     uint32_t *value)
 {
@@ -2814,9 +4486,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0CurrentBlockAddr_Get(vo
 }
 
 
-/**
- * Current Index Table Address
- */
+/***************************************************************************//**
+ * @brief Retrieves the current index address of DMA0 from the ADRV9001 device
+ * by reading multiple registers.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint32_t variable where the retrieved index
+ * address will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0CurrentIndexAddr_Get(void *device,
     uint32_t *value)
 {
@@ -2843,9 +4523,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0CurrentIndexAddr_Get(vo
 }
 
 
-/**
- * Current Profile Address
- */
+/***************************************************************************//**
+ * @brief Retrieves the current profile address from the DMA register by reading
+ * multiple consecutive registers.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * profile address will be stored.
+ * @return Returns the status of the last read operation, with the output value
+ * containing the combined profile address from the four registers.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0CurrentProfileAddr_Get(void *device,
     uint32_t *value)
 {
@@ -2871,9 +4559,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0CurrentProfileAddr_Get(
     return status;
 }
 
-/**
- * 0: DMA is disabled. All internal states and flags are cleared. 1: DMA is enabled.
- */
+/***************************************************************************//**
+ * @brief Sets the DMA0 enable state in the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A `uint8_t` value representing the desired state to enable or
+ * disable DMA0.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0Enable_Set(void *device,
     uint8_t value)
 {
@@ -2884,9 +4579,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0Enable_Set(void *device
     return status;
 }
 
-/**
- * 0: DMA is disabled. All internal states and flags are cleared. 1: DMA is enabled.
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA0 enable status from a specific register of the
+ * device.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a `uint8_t` variable where the retrieved DMA0
+ * enable status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0Enable_Get(void *device,
     uint8_t *value)
 {
@@ -2901,9 +4604,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0Enable_Get(void *device
 }
 
 
-/**
- * DMA End Of Transfer Flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the end-of-transfer flag from a specific DMA register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved end-of-
+ * transfer flag will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0EndOfTransferFlag_Get(void *device,
     uint8_t *value)
 {
@@ -2918,9 +4628,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0EndOfTransferFlag_Get(v
 }
 
 
-/**
- * DMA Error Flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA0 error flag from a specific register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved error flag
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0ErrorFlag_Get(void *device,
     uint8_t *value)
 {
@@ -2935,9 +4653,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0ErrorFlag_Get(void *dev
 }
 
 
-/**
- * Field Type Error flags: Bit 0: Profile Pointer fetched either in Index Table or in Block, Bit 1: Index Pointer fetched in Block-Transfer-Mode, or in Profile-Pointer-Table or in Block, Bit 2: Register entry fetched in Index Table, Bit 3: Both - END field and SKIP field flags are set. Bit4: Read-Modify-Write Instruction fetched in Index Table.
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA0 field type error value from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved field type
+ * error value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0FieldTypeError_Get(void *device,
     uint8_t *value)
 {
@@ -2952,9 +4677,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0FieldTypeError_Get(void
 }
 
 
-/**
- * DMA GENBUS Error flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the General DMA0 Genbus error status from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved error status
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0GenbusError_Get(void *device,
     uint8_t *value)
 {
@@ -2968,9 +4701,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0GenbusError_Get(void *d
     return status;
 }
 
-/**
- * 0: Do not ignore NextTx/NextRx Match, 1: Ignore NextTx/NextRx Match
- */
+/***************************************************************************//**
+ * @brief Sets the DMA0 ignore Tx/Rx match configuration for the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0IgnoreTxrxMatch_Set(void *device,
     uint8_t value)
 {
@@ -2981,9 +4722,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0IgnoreTxrxMatch_Set(voi
     return status;
 }
 
-/**
- * 0: Do not ignore NextTx/NextRx Match, 1: Ignore NextTx/NextRx Match
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register and stores it in the
+ * provided pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0IgnoreTxrxMatch_Get(void *device,
     uint8_t *value)
 {
@@ -2997,9 +4746,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0IgnoreTxrxMatch_Get(voi
     return status;
 }
 
-/**
- * Maximum Number of Words allowed per DMA transfer. (Reset value is 0xFF)
- */
+/***************************************************************************//**
+ * @brief Sets the maximum number of words for DMA0 in the ADRV9001 device's
+ * register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the maximum number of
+ * words to set for DMA0.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0MaxNumberOfWord_Set(void *device,
     uint8_t value)
 {
@@ -3010,9 +4767,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0MaxNumberOfWord_Set(voi
     return status;
 }
 
-/**
- * Maximum Number of Words allowed per DMA transfer. (Reset value is 0xFF)
- */
+/***************************************************************************//**
+ * @brief Retrieves the maximum number of words for DMA0 from a specific
+ * register and stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved maximum
+ * number of words will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0MaxNumberOfWord_Get(void *device,
     uint8_t *value)
 {
@@ -3027,9 +4792,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0MaxNumberOfWord_Get(voi
 }
 
 
-/**
- * DMA Max Word Count Error flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the maximum word count error from the DMA register and
+ * stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved maximum word
+ * count error will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0MaxWordCountError_Get(void *device,
     uint8_t *value)
 {
@@ -3043,9 +4816,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0MaxWordCountError_Get(v
     return status;
 }
 
-/**
- * 1: Next Rx Profile Transfer (used only during Index Mode)
- */
+/***************************************************************************//**
+ * @brief Sets the next receive value for DMA0 in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the next receive operation.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0NextRx_Set(void *device,
     uint8_t value)
 {
@@ -3056,9 +4836,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0NextRx_Set(void *device
     return status;
 }
 
-/**
- * 1: Next Rx Profile Transfer (used only during Index Mode)
- */
+/***************************************************************************//**
+ * @brief Retrieves the next receive value from the DMA register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0NextRx_Get(void *device,
     uint8_t *value)
 {
@@ -3073,9 +4861,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0NextRx_Get(void *device
 }
 
 
-/**
- * DMA NextRx Mismatch Error flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the next RX mismatch error value from a specific register in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a `uint8_t` variable where the retrieved mismatch
+ * error value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0NextRxMismatchError_Get(void *device,
     uint8_t *value)
 {
@@ -3089,9 +4885,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0NextRxMismatchError_Get
     return status;
 }
 
-/**
- * 1: Skip Next Profile Transfer (used only during Index Mode)
- */
+/***************************************************************************//**
+ * @brief Sets the next skip value for the DMA0 in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the next skip value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0NextSkip_Set(void *device,
     uint8_t value)
 {
@@ -3102,9 +4905,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0NextSkip_Set(void *devi
     return status;
 }
 
-/**
- * 1: Skip Next Profile Transfer (used only during Index Mode)
- */
+/***************************************************************************//**
+ * @brief Retrieves the next skip value from the DMA register for the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a `uint8_t` variable where the retrieved skip value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0NextSkip_Get(void *device,
     uint8_t *value)
 {
@@ -3118,9 +4929,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0NextSkip_Get(void *devi
     return status;
 }
 
-/**
- * 1: Next Tx Profile Transfer (used only during Index Mode)
- */
+/***************************************************************************//**
+ * @brief Sets the next transmission value for the DMA in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the next transmission.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0NextTx_Set(void *device,
     uint8_t value)
 {
@@ -3131,9 +4949,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0NextTx_Set(void *device
     return status;
 }
 
-/**
- * 1: Next Tx Profile Transfer (used only during Index Mode)
- */
+/***************************************************************************//**
+ * @brief Retrieves the next transmission value from the DMA register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved transmission
+ * value will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0NextTx_Get(void *device,
     uint8_t *value)
 {
@@ -3148,9 +4974,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0NextTx_Get(void *device
 }
 
 
-/**
- * DMA NextTx Mismatch Error flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the next transmission mismatch error value from a specific
+ * register in the device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param value A pointer to a `uint8_t` variable where the retrieved mismatch
+ * error value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0NextTxMismatchError_Get(void *device,
     uint8_t *value)
 {
@@ -3164,9 +4998,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0NextTxMismatchError_Get
     return status;
 }
 
-/**
- * REGMAP Offset for the register used in DMA Read-Modify-Write Instruction.
- */
+/***************************************************************************//**
+ * @brief Sets the DMA0 register map offset address for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0RegmapOffsetAddr_Set(void *device,
     uint8_t value)
 {
@@ -3177,9 +5018,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0RegmapOffsetAddr_Set(vo
     return status;
 }
 
-/**
- * REGMAP Offset for the register used in DMA Read-Modify-Write Instruction.
- */
+/***************************************************************************//**
+ * @brief Retrieves the offset address from a specific DMA register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0RegmapOffsetAddr_Get(void *device,
     uint8_t *value)
 {
@@ -3193,9 +5041,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0RegmapOffsetAddr_Get(vo
     return status;
 }
 
-/**
- * Start Table Address
- */
+/***************************************************************************//**
+ * @brief Sets the DMA0 start table address in the ADRV9001 device by writing to
+ * specific registers.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 32-bit unsigned integer representing the start table address
+ * to be set.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0StartTableAddr_Set(void *device,
     uint32_t value)
 {
@@ -3215,9 +5071,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0StartTableAddr_Set(void
     return status;
 }
 
-/**
- * Start Table Address
- */
+/***************************************************************************//**
+ * @brief Retrieves the start table address for DMA0 by reading multiple
+ * registers and combining their values.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param value A pointer to a 32-bit unsigned integer where the combined
+ * register values will be stored.
+ * @return Returns the status of the last register read operation, with a value
+ * of 0 indicating success.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0StartTableAddr_Get(void *device,
     uint32_t *value)
 {
@@ -3244,9 +5107,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0StartTableAddr_Get(void
 }
 
 
-/**
- * This is a debug signal. This is the internal state-register of the DMA finite-state-machine.
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA0 state from a specific register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved DMA0 state
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0State_Get(void *device,
     uint8_t *value)
 {
@@ -3261,9 +5132,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0State_Get(void *device,
 }
 
 
-/**
- * 3-bit Encoded Status of DMA. 000: Idle, 100: Done (without Error), 101: Done With Error, 110: Active, 111: Wait for Next
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA0 status from a specific register and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved DMA0 status
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0Status_Get(void *device,
     uint8_t *value)
 {
@@ -3277,9 +5156,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0Status_Get(void *device
     return status;
 }
 
-/**
- * 0: Do not Stop, 1: DMA Stop
- */
+/***************************************************************************//**
+ * @brief Sets the DMA0 stop configuration in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the DMA0 stop register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0Stop_Set(void *device,
     uint8_t value)
 {
@@ -3290,9 +5176,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0Stop_Set(void *device,
     return status;
 }
 
-/**
- * 0: Do not Stop, 1: DMA Stop
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA0 stop status from a specific register and stores it
+ * in the provided value.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved DMA0 stop
+ * status will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0Stop_Get(void *device,
     uint8_t *value)
 {
@@ -3307,9 +5201,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0Stop_Get(void *device,
 }
 
 
-/**
- * DMA Stop Flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA0 stop flag from a specific register and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved DMA0 stop
+ * flag will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0StopFlag_Get(void *device,
     uint8_t *value)
 {
@@ -3323,9 +5225,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0StopFlag_Get(void *devi
     return status;
 }
 
-/**
- * Profile Table Base Offset Address
- */
+/***************************************************************************//**
+ * @brief Sets the base offset address for DMA0 table in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 16-bit unsigned integer representing the base offset address
+ * to be set.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0TableBaseOffsetAddr_Set(void *device,
     uint16_t value)
 {
@@ -3339,9 +5248,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0TableBaseOffsetAddr_Set
     return status;
 }
 
-/**
- * Profile Table Base Offset Address
- */
+/***************************************************************************//**
+ * @brief Retrieves the base offset address for DMA0 table from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved base
+ * offset address will be stored.
+ * @return Returns the status of the read operations, where a status of zero
+ * indicates success.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0TableBaseOffsetAddr_Get(void *device,
     uint16_t *value)
 {
@@ -3360,9 +5277,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0TableBaseOffsetAddr_Get
 }
 
 
-/**
- * DMA Unexpected NextRx Error flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the unexpected next RX error status from a specific register
+ * in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved error status
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0UnexpectedNextRxError_Get(void *device,
     uint8_t *value)
 {
@@ -3377,9 +5302,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0UnexpectedNextRxError_G
 }
 
 
-/**
- * DMA Unexpected NextSkip Error flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the unexpected next skip error value from a specific
+ * register in the device.
+ *
+ * @param device A pointer to the device structure used to access the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved error
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0UnexpectedNextSkipError_Get(void *device,
     uint8_t *value)
 {
@@ -3394,9 +5326,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0UnexpectedNextSkipError
 }
 
 
-/**
- * DMA Unexpected NextTx Error flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the unexpected next transmission error status from a
+ * specific register of the device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param value A pointer to a `uint8_t` variable where the retrieved error
+ * status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0UnexpectedNextTxError_Get(void *device,
     uint8_t *value)
 {
@@ -3410,9 +5350,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma0UnexpectedNextTxError_G
     return status;
 }
 
-/**
- * 0: Do not abort, 1: DMA Abort
- */
+/***************************************************************************//**
+ * @brief Sets the DMA1 abort register for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 8-bit unsigned integer that specifies the value to be written
+ * to the DMA1 abort register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1Abort_Set(void *device,
     uint8_t value)
 {
@@ -3423,9 +5370,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1Abort_Set(void *device,
     return status;
 }
 
-/**
- * 0: Do not abort, 1: DMA Abort
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA1 abort status from a specific register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1Abort_Get(void *device,
     uint8_t *value)
 {
@@ -3440,9 +5395,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1Abort_Get(void *device,
 }
 
 
-/**
- * DMA Abort Flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA1 abort flag from a specific register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved abort flag
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1AbortFlag_Get(void *device,
     uint8_t *value)
 {
@@ -3457,9 +5420,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1AbortFlag_Get(void *dev
 }
 
 
-/**
- * DMA AHB Error flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the AHB error status from a specific register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1AhbError_Get(void *device,
     uint8_t *value)
 {
@@ -3473,9 +5444,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1AhbError_Get(void *devi
     return status;
 }
 
-/**
- * Block Base Offset Address
- */
+/***************************************************************************//**
+ * @brief Sets the base offset address for DMA1 block in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 16-bit unsigned integer representing the base offset address
+ * to be set.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1BlockBaseOffsetAddr_Set(void *device,
     uint16_t value)
 {
@@ -3489,9 +5467,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1BlockBaseOffsetAddr_Set
     return status;
 }
 
-/**
- * Block Base Offset Address
- */
+/***************************************************************************//**
+ * @brief Retrieves the base offset address for DMA1 block from the ADRV9001
+ * device's register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved base
+ * offset address will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1BlockBaseOffsetAddr_Get(void *device,
     uint16_t *value)
 {
@@ -3509,9 +5495,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1BlockBaseOffsetAddr_Get
     return status;
 }
 
-/**
- * 0: Block Transfer Mode, 1:Index Mode
- */
+/***************************************************************************//**
+ * @brief Sets the DMA1 configuration index mode for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the DMA1 configuration index mode.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1ConfigIndexMode_Set(void *device,
     uint8_t value)
 {
@@ -3522,9 +5515,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1ConfigIndexMode_Set(voi
     return status;
 }
 
-/**
- * 0: Block Transfer Mode, 1:Index Mode
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA configuration index mode from a specific register
+ * and stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1ConfigIndexMode_Get(void *device,
     uint8_t *value)
 {
@@ -3538,9 +5539,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1ConfigIndexMode_Get(voi
     return status;
 }
 
-/**
- * 0: OneTime Event Based Index Mode, 1: Continuous Index Mode. This bit is ignored if spi_dma_config_index_mode=0.
- */
+/***************************************************************************//**
+ * @brief Sets the continuous index mode for DMA1 in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1ContinuousIndexMode_Set(void *device,
     uint8_t value)
 {
@@ -3551,9 +5559,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1ContinuousIndexMode_Set
     return status;
 }
 
-/**
- * 0: OneTime Event Based Index Mode, 1: Continuous Index Mode. This bit is ignored if spi_dma_config_index_mode=0.
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register and stores it in the
+ * provided variable.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1ContinuousIndexMode_Get(void *device,
     uint8_t *value)
 {
@@ -3568,9 +5584,18 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1ContinuousIndexMode_Get
 }
 
 
-/**
- * This is a debug signal. It indicates the current address being driven by DMA on the AHB Bus.
- */
+/***************************************************************************//**
+ * @brief Retrieves the current index of the DMA1 from the ADRV9001 device by
+ * reading multiple registers.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved DMA1
+ * current index will be stored.
+ * @return Returns the status of the last register read operation, where a
+ * status of 0 indicates success and a non-zero value indicates an
+ * error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1CurrIndex_Get(void *device,
     uint32_t *value)
 {
@@ -3597,9 +5622,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1CurrIndex_Get(void *dev
 }
 
 
-/**
- * Current Block Address
- */
+/***************************************************************************//**
+ * @brief Retrieves the current block address from the DMA register by reading
+ * multiple consecutive registers.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved block
+ * address will be stored.
+ * @return Returns the status of the last register read operation, with the
+ * retrieved block address stored in the variable pointed to by value.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1CurrentBlockAddr_Get(void *device,
     uint32_t *value)
 {
@@ -3626,9 +5658,18 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1CurrentBlockAddr_Get(vo
 }
 
 
-/**
- * Current Index Table Address
- */
+/***************************************************************************//**
+ * @brief Retrieves the current index address of DMA1 from the ADRV9001 device
+ * by reading multiple registers.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved DMA1
+ * current index address will be stored.
+ * @return Returns the status of the last register read operation, where a
+ * status of 0 indicates success and a non-zero value indicates an
+ * error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1CurrentIndexAddr_Get(void *device,
     uint32_t *value)
 {
@@ -3655,9 +5696,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1CurrentIndexAddr_Get(vo
 }
 
 
-/**
- * Current Profile Address
- */
+/***************************************************************************//**
+ * @brief Retrieves the current DMA profile address from a device by reading
+ * multiple registers.
+ *
+ * @param device A pointer to the device structure from which the DMA profile
+ * address is to be read.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved DMA
+ * profile address will be stored.
+ * @return Returns the status of the last read operation, where a status of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1CurrentProfileAddr_Get(void *device,
     uint32_t *value)
 {
@@ -3683,9 +5732,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1CurrentProfileAddr_Get(
     return status;
 }
 
-/**
- * 0: DMA is disabled. All internal states and flags are cleared. 1: DMA is enabled.
- */
+/***************************************************************************//**
+ * @brief Sets the DMA1 enable register for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A uint8_t value that indicates whether to enable (1) or disable
+ * (0) DMA1.
+ * @return Returns the status of the write operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1Enable_Set(void *device,
     uint8_t value)
 {
@@ -3696,9 +5752,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1Enable_Set(void *device
     return status;
 }
 
-/**
- * 0: DMA is disabled. All internal states and flags are cleared. 1: DMA is enabled.
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA1 enable status from a specific register of the
+ * device.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a `uint8_t` variable where the retrieved DMA1
+ * enable status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1Enable_Get(void *device,
     uint8_t *value)
 {
@@ -3713,9 +5777,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1Enable_Get(void *device
 }
 
 
-/**
- * DMA End Of Transfer Flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the end-of-transfer flag from a specific DMA register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved end-of-
+ * transfer flag will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1EndOfTransferFlag_Get(void *device,
     uint8_t *value)
 {
@@ -3730,9 +5801,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1EndOfTransferFlag_Get(v
 }
 
 
-/**
- * DMA Error Flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA1 error flag from a specific register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved error flag
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1ErrorFlag_Get(void *device,
     uint8_t *value)
 {
@@ -3747,9 +5826,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1ErrorFlag_Get(void *dev
 }
 
 
-/**
- * Field Type Error flags: Bit 0: Profile Pointer fetched either in Index Table or in Block, Bit 1: Index Pointer fetched in Block-Transfer-Mode, or in Profile-Pointer-Table or in Block, Bit 2: Register entry fetched in Index Table, Bit 3: Both - END field and SKIP field flags are set. Bit4: Read-Modify-Write Instruction fetched in Index Table.
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA1 field type error value from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved field type
+ * error value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1FieldTypeError_Get(void *device,
     uint8_t *value)
 {
@@ -3764,9 +5850,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1FieldTypeError_Get(void
 }
 
 
-/**
- * DMA GENBUS Error flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the General DMA1 General Bus Error status from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved error status
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1GenbusError_Get(void *device,
     uint8_t *value)
 {
@@ -3780,9 +5874,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1GenbusError_Get(void *d
     return status;
 }
 
-/**
- * 0: Do not ignore NextTx/NextRx Match, 1: Ignore NextTx/NextRx Match
- */
+/***************************************************************************//**
+ * @brief Sets the DMA ignore TX/RX match configuration for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the DMA ignore TX/RX match register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1IgnoreTxrxMatch_Set(void *device,
     uint8_t value)
 {
@@ -3793,9 +5894,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1IgnoreTxrxMatch_Set(voi
     return status;
 }
 
-/**
- * 0: Do not ignore NextTx/NextRx Match, 1: Ignore NextTx/NextRx Match
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA ignore TX/RX match status from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1IgnoreTxrxMatch_Get(void *device,
     uint8_t *value)
 {
@@ -3809,9 +5917,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1IgnoreTxrxMatch_Get(voi
     return status;
 }
 
-/**
- * Maximum Number of Words allowed per DMA transfer. (Reset value is 0xFF)
- */
+/***************************************************************************//**
+ * @brief Sets the maximum number of words for DMA1 in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the maximum number of
+ * words to set for DMA1.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1MaxNumberOfWord_Set(void *device,
     uint8_t value)
 {
@@ -3822,9 +5937,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1MaxNumberOfWord_Set(voi
     return status;
 }
 
-/**
- * Maximum Number of Words allowed per DMA transfer. (Reset value is 0xFF)
- */
+/***************************************************************************//**
+ * @brief Retrieves the maximum number of words for DMA1 from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved maximum
+ * number of words will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1MaxNumberOfWord_Get(void *device,
     uint8_t *value)
 {
@@ -3839,9 +5962,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1MaxNumberOfWord_Get(voi
 }
 
 
-/**
- * DMA Max Word Count Error flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the maximum word count error from the DMA register and
+ * stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used to access the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved maximum word
+ * count error will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1MaxWordCountError_Get(void *device,
     uint8_t *value)
 {
@@ -3855,9 +5985,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1MaxWordCountError_Get(v
     return status;
 }
 
-/**
- * 1: Next Rx Profile Transfer (used only during Index Mode)
- */
+/***************************************************************************//**
+ * @brief Sets the next receive value for the DMA in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the next receive operation.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1NextRx_Set(void *device,
     uint8_t value)
 {
@@ -3868,9 +6005,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1NextRx_Set(void *device
     return status;
 }
 
-/**
- * 1: Next Rx Profile Transfer (used only during Index Mode)
- */
+/***************************************************************************//**
+ * @brief Retrieves the next receive value from the DMA register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1NextRx_Get(void *device,
     uint8_t *value)
 {
@@ -3885,9 +6030,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1NextRx_Get(void *device
 }
 
 
-/**
- * DMA NextRx Mismatch Error flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the next RX mismatch error value from a specific register in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved mismatch
+ * error value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1NextRxMismatchError_Get(void *device,
     uint8_t *value)
 {
@@ -3901,9 +6054,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1NextRxMismatchError_Get
     return status;
 }
 
-/**
- * 1: Skip Next Profile Transfer (used only during Index Mode)
- */
+/***************************************************************************//**
+ * @brief Sets the next skip value for the DMA in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the next skip value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1NextSkip_Set(void *device,
     uint8_t value)
 {
@@ -3914,9 +6074,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1NextSkip_Set(void *devi
     return status;
 }
 
-/**
- * 1: Skip Next Profile Transfer (used only during Index Mode)
- */
+/***************************************************************************//**
+ * @brief Retrieves the next skip value from a specific DMA register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved skip value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1NextSkip_Get(void *device,
     uint8_t *value)
 {
@@ -3930,9 +6098,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1NextSkip_Get(void *devi
     return status;
 }
 
-/**
- * 1: Next Tx Profile Transfer (used only during Index Mode)
- */
+/***************************************************************************//**
+ * @brief Sets the next transmission value for the DMA in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the next transmission.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1NextTx_Set(void *device,
     uint8_t value)
 {
@@ -3943,9 +6118,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1NextTx_Set(void *device
     return status;
 }
 
-/**
- * 1: Next Tx Profile Transfer (used only during Index Mode)
- */
+/***************************************************************************//**
+ * @brief Retrieves the next transmission value from the DMA register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved transmission
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1NextTx_Get(void *device,
     uint8_t *value)
 {
@@ -3960,9 +6143,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1NextTx_Get(void *device
 }
 
 
-/**
- * DMA NextTx Mismatch Error flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the next transmission mismatch error value from a specific
+ * register in the device.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a `uint8_t` variable where the retrieved mismatch
+ * error value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1NextTxMismatchError_Get(void *device,
     uint8_t *value)
 {
@@ -3976,9 +6167,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1NextTxMismatchError_Get
     return status;
 }
 
-/**
- * REGMAP Offset for the register used in DMA Read-Modify-Write Instruction.
- */
+/***************************************************************************//**
+ * @brief Sets the DMA1 register map offset address for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1RegmapOffsetAddr_Set(void *device,
     uint8_t value)
 {
@@ -3989,9 +6187,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1RegmapOffsetAddr_Set(vo
     return status;
 }
 
-/**
- * REGMAP Offset for the register used in DMA Read-Modify-Write Instruction.
- */
+/***************************************************************************//**
+ * @brief Retrieves the offset address from a specific DMA register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1RegmapOffsetAddr_Get(void *device,
     uint8_t *value)
 {
@@ -4005,9 +6210,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1RegmapOffsetAddr_Get(vo
     return status;
 }
 
-/**
- * Start Table Address
- */
+/***************************************************************************//**
+ * @brief Sets the DMA start table address in the ADRV9001 device by writing to
+ * specific registers.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 32-bit unsigned integer representing the DMA start table
+ * address to be set.
+ * @return Returns the status of the last register write operation, indicating
+ * success (0) or an error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1StartTableAddr_Set(void *device,
     uint32_t value)
 {
@@ -4027,9 +6240,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1StartTableAddr_Set(void
     return status;
 }
 
-/**
- * Start Table Address
- */
+/***************************************************************************//**
+ * @brief Retrieves the start table address for DMA1 by reading multiple
+ * registers and combining their values.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param value A pointer to a 32-bit unsigned integer where the combined
+ * register values will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if any read operation fails.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1StartTableAddr_Get(void *device,
     uint32_t *value)
 {
@@ -4056,9 +6276,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1StartTableAddr_Get(void
 }
 
 
-/**
- * This is a debug signal. This is the internal state-register of the DMA finite-state-machine.
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA1 state from a specific register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved DMA1 state
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1State_Get(void *device,
     uint8_t *value)
 {
@@ -4073,9 +6301,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1State_Get(void *device,
 }
 
 
-/**
- * 3-bit Encoded Status of DMA. 000: Idle, 100: Done (without Error), 101: Done With Error, 110: Active, 111: Wait for Next
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA1 status from a specific register and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved DMA1 status
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1Status_Get(void *device,
     uint8_t *value)
 {
@@ -4089,9 +6325,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1Status_Get(void *device
     return status;
 }
 
-/**
- * 0: Do not Stop, 1: DMA Stop
- */
+/***************************************************************************//**
+ * @brief Sets the DMA1 stop register for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer that specifies the value to be written
+ * to the DMA1 stop register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1Stop_Set(void *device,
     uint8_t value)
 {
@@ -4102,9 +6345,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1Stop_Set(void *device,
     return status;
 }
 
-/**
- * 0: Do not Stop, 1: DMA Stop
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA stop status from a specific register and stores it
+ * in the provided value.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved DMA stop
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1Stop_Get(void *device,
     uint8_t *value)
 {
@@ -4119,9 +6370,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1Stop_Get(void *device,
 }
 
 
-/**
- * DMA Stop Flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA1 stop flag from a specific register and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved DMA1 stop
+ * flag will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1StopFlag_Get(void *device,
     uint8_t *value)
 {
@@ -4135,9 +6394,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1StopFlag_Get(void *devi
     return status;
 }
 
-/**
- * Profile Table Base Offset Address
- */
+/***************************************************************************//**
+ * @brief Sets the base offset address for DMA1 table in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 16-bit unsigned integer representing the base offset address
+ * to be set.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1TableBaseOffsetAddr_Set(void *device,
     uint16_t value)
 {
@@ -4151,9 +6417,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1TableBaseOffsetAddr_Set
     return status;
 }
 
-/**
- * Profile Table Base Offset Address
- */
+/***************************************************************************//**
+ * @brief Retrieves the base offset address for DMA1 table from the device's
+ * register.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param value A pointer to a `uint16_t` variable where the retrieved base
+ * offset address will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1TableBaseOffsetAddr_Get(void *device,
     uint16_t *value)
 {
@@ -4172,9 +6446,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1TableBaseOffsetAddr_Get
 }
 
 
-/**
- * DMA Unexpected NextRx Error flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the unexpected next RX error status from a specific register
+ * in the device.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a `uint8_t` variable where the retrieved error
+ * status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1UnexpectedNextRxError_Get(void *device,
     uint8_t *value)
 {
@@ -4189,9 +6471,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1UnexpectedNextRxError_G
 }
 
 
-/**
- * DMA Unexpected NextSkip Error flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the unexpected next skip error value from a specific
+ * register in the device.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a `uint8_t` variable where the retrieved error
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1UnexpectedNextSkipError_Get(void *device,
     uint8_t *value)
 {
@@ -4206,9 +6496,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1UnexpectedNextSkipError
 }
 
 
-/**
- * DMA Unexpected NextTx Error flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the unexpected next transmission error status from a
+ * specific register in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved error status
+ * will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1UnexpectedNextTxError_Get(void *device,
     uint8_t *value)
 {
@@ -4222,9 +6520,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma1UnexpectedNextTxError_G
     return status;
 }
 
-/**
- * 0: Do not abort, 1: DMA Abort
- */
+/***************************************************************************//**
+ * @brief Sets the DMA2 abort register for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the DMA2 abort register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2Abort_Set(void *device,
     uint8_t value)
 {
@@ -4235,9 +6540,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2Abort_Set(void *device,
     return status;
 }
 
-/**
- * 0: Do not abort, 1: DMA Abort
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA2 abort status from a specific register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2Abort_Get(void *device,
     uint8_t *value)
 {
@@ -4252,9 +6565,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2Abort_Get(void *device,
 }
 
 
-/**
- * DMA Abort Flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA2 abort flag from a specific register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved abort flag
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2AbortFlag_Get(void *device,
     uint8_t *value)
 {
@@ -4269,9 +6590,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2AbortFlag_Get(void *dev
 }
 
 
-/**
- * DMA AHB Error flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA to AHB error status from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved error status
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2AhbError_Get(void *device,
     uint8_t *value)
 {
@@ -4285,9 +6613,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2AhbError_Get(void *devi
     return status;
 }
 
-/**
- * Block Base Offset Address
- */
+/***************************************************************************//**
+ * @brief Sets the DMA2 block base offset address in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 16-bit unsigned integer representing the base offset address
+ * to be set.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2BlockBaseOffsetAddr_Set(void *device,
     uint16_t value)
 {
@@ -4301,9 +6636,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2BlockBaseOffsetAddr_Set
     return status;
 }
 
-/**
- * Block Base Offset Address
- */
+/***************************************************************************//**
+ * @brief Retrieves the base offset address for DMA2 block from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved base
+ * offset address will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2BlockBaseOffsetAddr_Get(void *device,
     uint16_t *value)
 {
@@ -4321,9 +6664,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2BlockBaseOffsetAddr_Get
     return status;
 }
 
-/**
- * 0: Block Transfer Mode, 1:Index Mode
- */
+/***************************************************************************//**
+ * @brief Sets the DMA2 configuration index mode for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the DMA2 configuration index mode.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2ConfigIndexMode_Set(void *device,
     uint8_t value)
 {
@@ -4334,9 +6684,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2ConfigIndexMode_Set(voi
     return status;
 }
 
-/**
- * 0: Block Transfer Mode, 1:Index Mode
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA2 configuration index mode from a specific register
+ * and stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2ConfigIndexMode_Get(void *device,
     uint8_t *value)
 {
@@ -4350,9 +6708,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2ConfigIndexMode_Get(voi
     return status;
 }
 
-/**
- * 0: OneTime Event Based Index Mode, 1: Continuous Index Mode. This bit is ignored if spi_dma_config_index_mode=0.
- */
+/***************************************************************************//**
+ * @brief Sets the continuous index mode for DMA2 in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the DMA2 continuous index mode register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2ContinuousIndexMode_Set(void *device,
     uint8_t value)
 {
@@ -4363,9 +6728,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2ContinuousIndexMode_Set
     return status;
 }
 
-/**
- * 0: OneTime Event Based Index Mode, 1: Continuous Index Mode. This bit is ignored if spi_dma_config_index_mode=0.
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA2 continuous index mode value from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2ContinuousIndexMode_Get(void *device,
     uint8_t *value)
 {
@@ -4380,9 +6753,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2ContinuousIndexMode_Get
 }
 
 
-/**
- * This is a debug signal. It indicates the current address being driven by DMA on the AHB Bus.
- */
+/***************************************************************************//**
+ * @brief Retrieves the current index of the DMA2 register by reading multiple
+ * consecutive registers and combining their values.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a 32-bit unsigned integer where the combined
+ * register values will be stored.
+ * @return Returns the status of the last read operation, where a status of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2CurrIndex_Get(void *device,
     uint32_t *value)
 {
@@ -4409,9 +6790,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2CurrIndex_Get(void *dev
 }
 
 
-/**
- * Current Block Address
- */
+/***************************************************************************//**
+ * @brief Retrieves the current block address from the DMA register by reading
+ * multiple consecutive registers.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved block
+ * address will be stored.
+ * @return Returns the status of the last read operation, indicating success (0)
+ * or failure (non-zero).
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2CurrentBlockAddr_Get(void *device,
     uint32_t *value)
 {
@@ -4438,9 +6827,18 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2CurrentBlockAddr_Get(vo
 }
 
 
-/**
- * Current Index Table Address
- */
+/***************************************************************************//**
+ * @brief Retrieves the current index address from the DMA2 register by reading
+ * multiple consecutive registers.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved index
+ * address will be stored.
+ * @return Returns the status of the last read operation, indicating success (0)
+ * or failure (non-zero). The retrieved index address is stored in the
+ * variable pointed to by 'value'.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2CurrentIndexAddr_Get(void *device,
     uint32_t *value)
 {
@@ -4467,9 +6865,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2CurrentIndexAddr_Get(vo
 }
 
 
-/**
- * Current Profile Address
- */
+/***************************************************************************//**
+ * @brief Retrieves the current DMA2 profile address from a device by reading
+ * multiple registers.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * profile address will be stored.
+ * @return Returns the status of the last read operation, with the combined
+ * profile address stored in the variable pointed to by 'value'.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2CurrentProfileAddr_Get(void *device,
     uint32_t *value)
 {
@@ -4495,9 +6901,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2CurrentProfileAddr_Get(
     return status;
 }
 
-/**
- * 0: DMA is disabled. All internal states and flags are cleared. 1: DMA is enabled.
- */
+/***************************************************************************//**
+ * @brief Sets the DMA2 enable register for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A uint8_t value that indicates the desired state to set for the
+ * DMA2 enable register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2Enable_Set(void *device,
     uint8_t value)
 {
@@ -4508,9 +6921,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2Enable_Set(void *device
     return status;
 }
 
-/**
- * 0: DMA is disabled. All internal states and flags are cleared. 1: DMA is enabled.
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA2 enable status from a specific register of the
+ * device.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a `uint8_t` variable where the retrieved DMA2
+ * enable status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2Enable_Get(void *device,
     uint8_t *value)
 {
@@ -4525,9 +6946,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2Enable_Get(void *device
 }
 
 
-/**
- * DMA End Of Transfer Flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA2 end-of-transfer flag from a specific register and
+ * stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2EndOfTransferFlag_Get(void *device,
     uint8_t *value)
 {
@@ -4542,9 +6971,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2EndOfTransferFlag_Get(v
 }
 
 
-/**
- * DMA Error Flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA2 error flag from a specific register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved error flag
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2ErrorFlag_Get(void *device,
     uint8_t *value)
 {
@@ -4559,9 +6996,15 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2ErrorFlag_Get(void *dev
 }
 
 
-/**
- * Field Type Error flags: Bit 0: Profile Pointer fetched either in Index Table or in Block, Bit 1: Index Pointer fetched in Block-Transfer-Mode, or in Profile-Pointer-Table or in Block, Bit 2: Register entry fetched in Index Table, Bit 3: Both - END field and SKIP field flags are set.  Bit4: Read-Modify-Write Instruction fetched in Index Table.
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA2 field type error value from a specific register.
+ *
+ * @param device A pointer to the device structure used to access the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved field type
+ * error value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2FieldTypeError_Get(void *device,
     uint8_t *value)
 {
@@ -4576,9 +7019,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2FieldTypeError_Get(void
 }
 
 
-/**
- * DMA GENBUS Error flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the General DMA2 General Bus Error status from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved error status
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2GenbusError_Get(void *device,
     uint8_t *value)
 {
@@ -4592,9 +7043,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2GenbusError_Get(void *d
     return status;
 }
 
-/**
- * 0: Do not ignore NextTx/NextRx Match, 1: Ignore NextTx/NextRx Match
- */
+/***************************************************************************//**
+ * @brief Sets the DMA ignore transmit/receive match configuration for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 8-bit unsigned integer representing the value to be written to
+ * the DMA configuration.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2IgnoreTxrxMatch_Set(void *device,
     uint8_t value)
 {
@@ -4605,9 +7064,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2IgnoreTxrxMatch_Set(voi
     return status;
 }
 
-/**
- * 0: Do not ignore NextTx/NextRx Match, 1: Ignore NextTx/NextRx Match
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA2 ignore TX/RX match value from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2IgnoreTxrxMatch_Get(void *device,
     uint8_t *value)
 {
@@ -4621,9 +7087,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2IgnoreTxrxMatch_Get(voi
     return status;
 }
 
-/**
- * Maximum Number of Words allowed per DMA transfer. (Reset value is 0xFF)
- */
+/***************************************************************************//**
+ * @brief Sets the maximum number of words for DMA2 in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the maximum number of
+ * words to set for DMA2.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2MaxNumberOfWord_Set(void *device,
     uint8_t value)
 {
@@ -4634,9 +7107,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2MaxNumberOfWord_Set(voi
     return status;
 }
 
-/**
- * Maximum Number of Words allowed per DMA transfer. (Reset value is 0xFF)
- */
+/***************************************************************************//**
+ * @brief Retrieves the maximum number of words for DMA2 from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved maximum
+ * number of words will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2MaxNumberOfWord_Get(void *device,
     uint8_t *value)
 {
@@ -4651,9 +7132,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2MaxNumberOfWord_Get(voi
 }
 
 
-/**
- * DMA Max Word Count Error flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA2 maximum word count error status from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved error
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2MaxWordCountError_Get(void *device,
     uint8_t *value)
 {
@@ -4667,9 +7156,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2MaxWordCountError_Get(v
     return status;
 }
 
-/**
- * 1: Next Rx Profile Transfer (used only during Index Mode)
- */
+/***************************************************************************//**
+ * @brief Sets the next receive value for the DMA in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the next receive operation.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2NextRx_Set(void *device,
     uint8_t value)
 {
@@ -4680,9 +7176,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2NextRx_Set(void *device
     return status;
 }
 
-/**
- * 1: Next Rx Profile Transfer (used only during Index Mode)
- */
+/***************************************************************************//**
+ * @brief Retrieves the next receive value from the DMA register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2NextRx_Get(void *device,
     uint8_t *value)
 {
@@ -4697,9 +7201,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2NextRx_Get(void *device
 }
 
 
-/**
- * DMA NextRx Mismatch Error flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the next RX mismatch error value from a specific register in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved mismatch
+ * error value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2NextRxMismatchError_Get(void *device,
     uint8_t *value)
 {
@@ -4713,9 +7225,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2NextRxMismatchError_Get
     return status;
 }
 
-/**
- * 1: Skip Next Profile Transfer (used only during Index Mode)
- */
+/***************************************************************************//**
+ * @brief Sets the next skip value for the DMA2 in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the next skip value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2NextSkip_Set(void *device,
     uint8_t value)
 {
@@ -4726,9 +7245,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2NextSkip_Set(void *devi
     return status;
 }
 
-/**
- * 1: Skip Next Profile Transfer (used only during Index Mode)
- */
+/***************************************************************************//**
+ * @brief Retrieves the next skip value from the DMA register for the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved skip value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2NextSkip_Get(void *device,
     uint8_t *value)
 {
@@ -4742,9 +7269,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2NextSkip_Get(void *devi
     return status;
 }
 
-/**
- * 1: Next Tx Profile Transfer (used only during Index Mode)
- */
+/***************************************************************************//**
+ * @brief Sets the next transmission value for the DMA in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the next transmission.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2NextTx_Set(void *device,
     uint8_t value)
 {
@@ -4755,9 +7289,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2NextTx_Set(void *device
     return status;
 }
 
-/**
- * 1: Next Tx Profile Transfer (used only during Index Mode)
- */
+/***************************************************************************//**
+ * @brief Retrieves the next transmission value from the DMA register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved transmission
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2NextTx_Get(void *device,
     uint8_t *value)
 {
@@ -4772,9 +7314,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2NextTx_Get(void *device
 }
 
 
-/**
- * DMA NextTx Mismatch Error flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA2 next transmission mismatch error status from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved mismatch
+ * error value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2NextTxMismatchError_Get(void *device,
     uint8_t *value)
 {
@@ -4788,9 +7338,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2NextTxMismatchError_Get
     return status;
 }
 
-/**
- * REGMAP Offset for the register used in DMA Read-Modify-Write Instruction.
- */
+/***************************************************************************//**
+ * @brief Sets the DMA2 register map offset address for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2RegmapOffsetAddr_Set(void *device,
     uint8_t value)
 {
@@ -4801,9 +7358,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2RegmapOffsetAddr_Set(vo
     return status;
 }
 
-/**
- * REGMAP Offset for the register used in DMA Read-Modify-Write Instruction.
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA2 register offset address from the device and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2RegmapOffsetAddr_Get(void *device,
     uint8_t *value)
 {
@@ -4817,9 +7382,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2RegmapOffsetAddr_Get(vo
     return status;
 }
 
-/**
- * Start Table Address
- */
+/***************************************************************************//**
+ * @brief Sets the DMA2 start table address in the ADRV9001 device by writing to
+ * specific registers.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 32-bit unsigned integer representing the start table address
+ * to be set.
+ * @return Returns 0 on success or a negative error code if any of the register
+ * write operations fail.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2StartTableAddr_Set(void *device,
     uint32_t value)
 {
@@ -4839,9 +7412,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2StartTableAddr_Set(void
     return status;
 }
 
-/**
- * Start Table Address
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA2 start table address from a device by reading
+ * multiple registers.
+ *
+ * @param device A pointer to the device structure from which the DMA2 start
+ * table address is to be read.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * address will be stored.
+ * @return Returns the status of the last read operation, with the DMA2 start
+ * table address stored in the variable pointed to by value.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2StartTableAddr_Get(void *device,
     uint32_t *value)
 {
@@ -4868,9 +7449,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2StartTableAddr_Get(void
 }
 
 
-/**
- * This is a debug signal. This is the internal state-register of the DMA finite-state-machine.
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA2 state from a specific register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved DMA2 state
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2State_Get(void *device,
     uint8_t *value)
 {
@@ -4885,9 +7474,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2State_Get(void *device,
 }
 
 
-/**
- * 3-bit Encoded Status of DMA. 000: Idle, 100: Done (without Error), 101: Done With Error, 110: Active, 111: Wait for Next
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA2 status from a specific register and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved DMA2 status
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2Status_Get(void *device,
     uint8_t *value)
 {
@@ -4901,9 +7498,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2Status_Get(void *device
     return status;
 }
 
-/**
- * 0: Do not Stop, 1: DMA Stop
- */
+/***************************************************************************//**
+ * @brief Sets the DMA2 stop register for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer that specifies the value to be written
+ * to the DMA2 stop register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2Stop_Set(void *device,
     uint8_t value)
 {
@@ -4914,9 +7518,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2Stop_Set(void *device,
     return status;
 }
 
-/**
- * 0: Do not Stop, 1: DMA Stop
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA2 stop status from a specific register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2Stop_Get(void *device,
     uint8_t *value)
 {
@@ -4931,9 +7543,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2Stop_Get(void *device,
 }
 
 
-/**
- * DMA Stop Flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA2 stop flag from a specific register and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved DMA2 stop
+ * flag will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2StopFlag_Get(void *device,
     uint8_t *value)
 {
@@ -4947,9 +7567,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2StopFlag_Get(void *devi
     return status;
 }
 
-/**
- * Profile Table Base Offset Address
- */
+/***************************************************************************//**
+ * @brief Sets the base offset address for DMA2 table in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 16-bit unsigned integer representing the value to be set as
+ * the base offset address.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2TableBaseOffsetAddr_Set(void *device,
     uint16_t value)
 {
@@ -4963,9 +7590,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2TableBaseOffsetAddr_Set
     return status;
 }
 
-/**
- * Profile Table Base Offset Address
- */
+/***************************************************************************//**
+ * @brief Retrieves the base offset address for the DMA2 table from the device's
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved base
+ * offset address will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2TableBaseOffsetAddr_Get(void *device,
     uint16_t *value)
 {
@@ -4984,9 +7619,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2TableBaseOffsetAddr_Get
 }
 
 
-/**
- * DMA Unexpected NextRx Error flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the unexpected next RX error status from a specific register
+ * in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2UnexpectedNextRxError_Get(void *device,
     uint8_t *value)
 {
@@ -5001,9 +7644,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2UnexpectedNextRxError_G
 }
 
 
-/**
- * DMA Unexpected NextSkip Error flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA2 unexpected next skip error status from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved error status
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2UnexpectedNextSkipError_Get(void *device,
     uint8_t *value)
 {
@@ -5018,9 +7669,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2UnexpectedNextSkipError
 }
 
 
-/**
- * DMA Unexpected NextTx Error flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the unexpected next transmission error status from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved error
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2UnexpectedNextTxError_Get(void *device,
     uint8_t *value)
 {
@@ -5034,9 +7693,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma2UnexpectedNextTxError_G
     return status;
 }
 
-/**
- * 0: Do not abort, 1: DMA Abort
- */
+/***************************************************************************//**
+ * @brief Sets the DMA3 abort register for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer that specifies the value to be written
+ * to the DMA3 abort register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3Abort_Set(void *device,
     uint8_t value)
 {
@@ -5047,9 +7713,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3Abort_Set(void *device,
     return status;
 }
 
-/**
- * 0: Do not abort, 1: DMA Abort
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA3 abort status from a specific register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3Abort_Get(void *device,
     uint8_t *value)
 {
@@ -5064,9 +7738,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3Abort_Get(void *device,
 }
 
 
-/**
- * DMA Abort Flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA3 abort flag from a specific register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a uint8_t variable where the retrieved abort flag
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3AbortFlag_Get(void *device,
     uint8_t *value)
 {
@@ -5081,9 +7763,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3AbortFlag_Get(void *dev
 }
 
 
-/**
- * DMA AHB Error flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the AHB error status from a specific register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3AhbError_Get(void *device,
     uint8_t *value)
 {
@@ -5097,9 +7787,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3AhbError_Get(void *devi
     return status;
 }
 
-/**
- * Block Base Offset Address
- */
+/***************************************************************************//**
+ * @brief Sets the DMA3 block base offset address in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 16-bit unsigned integer representing the base offset address
+ * to be set.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3BlockBaseOffsetAddr_Set(void *device,
     uint16_t value)
 {
@@ -5113,9 +7810,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3BlockBaseOffsetAddr_Set
     return status;
 }
 
-/**
- * Block Base Offset Address
- */
+/***************************************************************************//**
+ * @brief Retrieves the base offset address for DMA3 block from the device's
+ * register map.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved base
+ * offset address will be stored.
+ * @return Returns the status of the read operations, with `*value` containing
+ * the combined base offset address if successful.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3BlockBaseOffsetAddr_Get(void *device,
     uint16_t *value)
 {
@@ -5133,9 +7838,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3BlockBaseOffsetAddr_Get
     return status;
 }
 
-/**
- * 0: Block Transfer Mode, 1:Index Mode
- */
+/***************************************************************************//**
+ * @brief Sets the DMA3 configuration index mode for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the DMA3 configuration index mode.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3ConfigIndexMode_Set(void *device,
     uint8_t value)
 {
@@ -5146,9 +7858,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3ConfigIndexMode_Set(voi
     return status;
 }
 
-/**
- * 0: Block Transfer Mode, 1:Index Mode
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA3 configuration index mode from a specific register
+ * and stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3ConfigIndexMode_Get(void *device,
     uint8_t *value)
 {
@@ -5162,9 +7882,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3ConfigIndexMode_Get(voi
     return status;
 }
 
-/**
- * 0: OneTime Event Based Index Mode, 1: Continuous Index Mode. This bit is ignored if spi_dma_config_index_mode=0.
- */
+/***************************************************************************//**
+ * @brief Sets the continuous index mode for DMA3 in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the DMA3 continuous index mode.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3ContinuousIndexMode_Set(void *device,
     uint8_t value)
 {
@@ -5175,9 +7902,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3ContinuousIndexMode_Set
     return status;
 }
 
-/**
- * 0: OneTime Event Based Index Mode, 1: Continuous Index Mode. This bit is ignored if spi_dma_config_index_mode=0.
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register related to DMA3 continuous
+ * index mode from the device.
+ *
+ * @param device A pointer to the device structure used to access the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3ContinuousIndexMode_Get(void *device,
     uint8_t *value)
 {
@@ -5192,9 +7926,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3ContinuousIndexMode_Get
 }
 
 
-/**
- * This is a debug signal. It indicates the current address being driven by DMA on the AHB Bus.
- */
+/***************************************************************************//**
+ * @brief Retrieves the current index of DMA3 from the ADRV9001 device by
+ * reading multiple registers.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved DMA3
+ * current index will be stored.
+ * @return Returns the status of the last register read operation, with the DMA3
+ * current index stored in the variable pointed to by 'value'.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3CurrIndex_Get(void *device,
     uint32_t *value)
 {
@@ -5221,9 +7963,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3CurrIndex_Get(void *dev
 }
 
 
-/**
- * Current Block Address
- */
+/***************************************************************************//**
+ * @brief Retrieves the current block address from the DMA3 register by reading
+ * multiple consecutive registers.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved block
+ * address will be stored.
+ * @return Returns the status of the last register read operation, with the
+ * output value containing the combined block address from the four
+ * registers.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3CurrentBlockAddr_Get(void *device,
     uint32_t *value)
 {
@@ -5250,9 +8000,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3CurrentBlockAddr_Get(vo
 }
 
 
-/**
- * Current Index Table Address
- */
+/***************************************************************************//**
+ * @brief Retrieves the current index address from the DMA3 register by reading
+ * multiple bytes from a device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved index
+ * address will be stored.
+ * @return Returns the status of the last read operation, where a status of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3CurrentIndexAddr_Get(void *device,
     uint32_t *value)
 {
@@ -5279,9 +8037,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3CurrentIndexAddr_Get(vo
 }
 
 
-/**
- * Current Profile Address
- */
+/***************************************************************************//**
+ * @brief Retrieves the current DMA3 profile address from a device by reading
+ * multiple registers.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * profile address will be stored.
+ * @return Returns the status of the last register read operation, with a value
+ * of 0 indicating success.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3CurrentProfileAddr_Get(void *device,
     uint32_t *value)
 {
@@ -5307,9 +8073,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3CurrentProfileAddr_Get(
     return status;
 }
 
-/**
- * 0: DMA is disabled. All internal states and flags are cleared. 1: DMA is enabled.
- */
+/***************************************************************************//**
+ * @brief Sets the DMA3 enable register for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A uint8_t value indicating the enable state for DMA3, where a
+ * non-zero value typically enables it.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3Enable_Set(void *device,
     uint8_t value)
 {
@@ -5320,9 +8093,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3Enable_Set(void *device
     return status;
 }
 
-/**
- * 0: DMA is disabled. All internal states and flags are cleared. 1: DMA is enabled.
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA3 enable status from a specific register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved DMA3 enable
+ * status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3Enable_Get(void *device,
     uint8_t *value)
 {
@@ -5337,9 +8118,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3Enable_Get(void *device
 }
 
 
-/**
- * DMA End Of Transfer Flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA3 end-of-transfer flag from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved end-of-
+ * transfer flag will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3EndOfTransferFlag_Get(void *device,
     uint8_t *value)
 {
@@ -5354,9 +8142,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3EndOfTransferFlag_Get(v
 }
 
 
-/**
- * DMA Error Flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA3 error flag from a specific register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved error flag
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3ErrorFlag_Get(void *device,
     uint8_t *value)
 {
@@ -5371,9 +8167,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3ErrorFlag_Get(void *dev
 }
 
 
-/**
- * Field Type Error flags: Bit 0: Profile Pointer fetched either in Index Table or in Block, Bit 1: Index Pointer fetched in Block-Transfer-Mode, or in Profile-Pointer-Table or in Block, Bit 2: Register entry fetched in Index Table, Bit 3: Both - END field and SKIP field flags are set.  Bit4: Read-Modify-Write Instruction fetched in Index Table.
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA3 field type error value from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved field type
+ * error value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3FieldTypeError_Get(void *device,
     uint8_t *value)
 {
@@ -5388,9 +8191,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3FieldTypeError_Get(void
 }
 
 
-/**
- * DMA GENBUS Error flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA3 General Bus Error status from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3GenbusError_Get(void *device,
     uint8_t *value)
 {
@@ -5404,9 +8214,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3GenbusError_Get(void *d
     return status;
 }
 
-/**
- * 0: Do not ignore NextTx/NextRx Match, 1: Ignore NextTx/NextRx Match
- */
+/***************************************************************************//**
+ * @brief Sets the DMA3 ignore TX/RX match configuration in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3IgnoreTxrxMatch_Set(void *device,
     uint8_t value)
 {
@@ -5417,9 +8234,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3IgnoreTxrxMatch_Set(voi
     return status;
 }
 
-/**
- * 0: Do not ignore NextTx/NextRx Match, 1: Ignore NextTx/NextRx Match
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA3 ignore TX/RX match value from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3IgnoreTxrxMatch_Get(void *device,
     uint8_t *value)
 {
@@ -5433,9 +8257,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3IgnoreTxrxMatch_Get(voi
     return status;
 }
 
-/**
- * Maximum Number of Words allowed per DMA transfer. (Reset value is 0xFF)
- */
+/***************************************************************************//**
+ * @brief Sets the maximum number of words for DMA3 in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the maximum number of
+ * words to set for DMA3.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3MaxNumberOfWord_Set(void *device,
     uint8_t value)
 {
@@ -5446,9 +8277,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3MaxNumberOfWord_Set(voi
     return status;
 }
 
-/**
- * Maximum Number of Words allowed per DMA transfer. (Reset value is 0xFF)
- */
+/***************************************************************************//**
+ * @brief Retrieves the maximum number of words for DMA3 from a specific
+ * register and stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved maximum
+ * number of words will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3MaxNumberOfWord_Get(void *device,
     uint8_t *value)
 {
@@ -5463,9 +8302,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3MaxNumberOfWord_Get(voi
 }
 
 
-/**
- * DMA Max Word Count Error flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA3 maximum word count error status from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved error
+ * status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3MaxWordCountError_Get(void *device,
     uint8_t *value)
 {
@@ -5479,9 +8326,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3MaxWordCountError_Get(v
     return status;
 }
 
-/**
- * 1: Next Rx Profile Transfer (used only during Index Mode)
- */
+/***************************************************************************//**
+ * @brief Sets the next receive value for DMA3 in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the next receive operation.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3NextRx_Set(void *device,
     uint8_t value)
 {
@@ -5492,9 +8346,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3NextRx_Set(void *device
     return status;
 }
 
-/**
- * 1: Next Rx Profile Transfer (used only during Index Mode)
- */
+/***************************************************************************//**
+ * @brief Retrieves the next receive value from the DMA register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for accessing hardware
+ * registers.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3NextRx_Get(void *device,
     uint8_t *value)
 {
@@ -5509,9 +8371,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3NextRx_Get(void *device
 }
 
 
-/**
- * DMA NextRx Mismatch Error flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the next RX mismatch error value from a specific register in
+ * the device.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a `uint8_t` variable where the retrieved mismatch
+ * error value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3NextRxMismatchError_Get(void *device,
     uint8_t *value)
 {
@@ -5525,9 +8395,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3NextRxMismatchError_Get
     return status;
 }
 
-/**
- * 1: Skip Next Profile Transfer (used only during Index Mode)
- */
+/***************************************************************************//**
+ * @brief Sets the next skip value for DMA3 in the ADRV9001 device's register
+ * map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the next skip value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3NextSkip_Set(void *device,
     uint8_t value)
 {
@@ -5538,9 +8416,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3NextSkip_Set(void *devi
     return status;
 }
 
-/**
- * 1: Skip Next Profile Transfer (used only during Index Mode)
- */
+/***************************************************************************//**
+ * @brief Retrieves the next skip value from the DMA3 register and stores it in
+ * the provided variable.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved skip value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3NextSkip_Get(void *device,
     uint8_t *value)
 {
@@ -5554,9 +8440,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3NextSkip_Get(void *devi
     return status;
 }
 
-/**
- * 1: Next Tx Profile Transfer (used only during Index Mode)
- */
+/***************************************************************************//**
+ * @brief Sets the next transmission value for DMA3 in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the next transmission.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3NextTx_Set(void *device,
     uint8_t value)
 {
@@ -5567,9 +8460,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3NextTx_Set(void *device
     return status;
 }
 
-/**
- * 1: Next Tx Profile Transfer (used only during Index Mode)
- */
+/***************************************************************************//**
+ * @brief Retrieves the next transmission value from the DMA register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved transmission
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3NextTx_Get(void *device,
     uint8_t *value)
 {
@@ -5584,9 +8485,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3NextTx_Get(void *device
 }
 
 
-/**
- * DMA NextTx Mismatch Error flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA3 next transmission mismatch error status from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved mismatch
+ * error value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3NextTxMismatchError_Get(void *device,
     uint8_t *value)
 {
@@ -5600,9 +8509,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3NextTxMismatchError_Get
     return status;
 }
 
-/**
- * REGMAP Offset for the register used in DMA Read-Modify-Write Instruction.
- */
+/***************************************************************************//**
+ * @brief Sets the DMA3 register map offset address for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the DMA3 register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3RegmapOffsetAddr_Set(void *device,
     uint8_t value)
 {
@@ -5613,9 +8529,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3RegmapOffsetAddr_Set(vo
     return status;
 }
 
-/**
- * REGMAP Offset for the register used in DMA Read-Modify-Write Instruction.
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA3 register offset address from the device and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3RegmapOffsetAddr_Get(void *device,
     uint8_t *value)
 {
@@ -5629,9 +8553,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3RegmapOffsetAddr_Get(vo
     return status;
 }
 
-/**
- * Start Table Address
- */
+/***************************************************************************//**
+ * @brief Sets the DMA3 start table address in the ADRV9001 device by writing to
+ * specific registers.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 32-bit unsigned integer representing the start table address
+ * to be set.
+ * @return Returns the status of the last register write operation, where a non-
+ * zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3StartTableAddr_Set(void *device,
     uint32_t value)
 {
@@ -5651,9 +8583,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3StartTableAddr_Set(void
     return status;
 }
 
-/**
- * Start Table Address
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA3 start table address from a device by reading
+ * multiple registers.
+ *
+ * @param device A pointer to the device structure from which the DMA3 start
+ * table address is to be read.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * address will be stored.
+ * @return Returns the status of the last read operation, with the output value
+ * containing the combined address from the four registers.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3StartTableAddr_Get(void *device,
     uint32_t *value)
 {
@@ -5680,9 +8620,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3StartTableAddr_Get(void
 }
 
 
-/**
- * This is a debug signal. This is the internal state-register of the DMA finite-state-machine.
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA3 state from a specific register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved DMA3 state
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3State_Get(void *device,
     uint8_t *value)
 {
@@ -5697,9 +8645,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3State_Get(void *device,
 }
 
 
-/**
- * 3-bit Encoded Status of DMA. 000: Idle, 100: Done (without Error), 101: Done With Error, 110: Active, 111: Wait for Next
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA3 status from a specific register and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved DMA3 status
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3Status_Get(void *device,
     uint8_t *value)
 {
@@ -5713,9 +8669,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3Status_Get(void *device
     return status;
 }
 
-/**
- * 0: Do not Stop, 1: DMA Stop
- */
+/***************************************************************************//**
+ * @brief Sets the DMA3 stop register for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer that specifies the value to be written
+ * to the DMA3 stop register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3Stop_Set(void *device,
     uint8_t value)
 {
@@ -5726,9 +8689,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3Stop_Set(void *device,
     return status;
 }
 
-/**
- * 0: Do not Stop, 1: DMA Stop
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA3 stop status from a specific register and stores it
+ * in the provided value.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved DMA3 stop
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3Stop_Get(void *device,
     uint8_t *value)
 {
@@ -5743,9 +8714,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3Stop_Get(void *device,
 }
 
 
-/**
- * DMA Stop Flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA3 stop flag from a specific register and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved DMA3 stop
+ * flag value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3StopFlag_Get(void *device,
     uint8_t *value)
 {
@@ -5759,9 +8738,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3StopFlag_Get(void *devi
     return status;
 }
 
-/**
- * Profile Table Base Offset Address
- */
+/***************************************************************************//**
+ * @brief Sets the base offset address for DMA3 table in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 16-bit unsigned integer representing the value to be set as
+ * the base offset address.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3TableBaseOffsetAddr_Set(void *device,
     uint16_t value)
 {
@@ -5775,9 +8761,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3TableBaseOffsetAddr_Set
     return status;
 }
 
-/**
- * Profile Table Base Offset Address
- */
+/***************************************************************************//**
+ * @brief Retrieves the base offset address for DMA3 from the ADRV9001 device's
+ * register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved base
+ * offset address will be stored.
+ * @return Returns the status of the read operations, with `*value` containing
+ * the combined base offset address from two registers.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3TableBaseOffsetAddr_Get(void *device,
     uint16_t *value)
 {
@@ -5796,9 +8790,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3TableBaseOffsetAddr_Get
 }
 
 
-/**
- * DMA Unexpected NextRx Error flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the unexpected next RX error status from a specific register
+ * in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3UnexpectedNextRxError_Get(void *device,
     uint8_t *value)
 {
@@ -5813,9 +8815,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3UnexpectedNextRxError_G
 }
 
 
-/**
- * DMA Unexpected NextSkip Error flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA3 unexpected next skip error status from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3UnexpectedNextSkipError_Get(void *device,
     uint8_t *value)
 {
@@ -5830,9 +8840,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3UnexpectedNextSkipError
 }
 
 
-/**
- * DMA Unexpected NextTx Error flag
- */
+/***************************************************************************//**
+ * @brief Retrieves the unexpected next transmission error status from a
+ * specific register in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved error status
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3UnexpectedNextTxError_Get(void *device,
     uint8_t *value)
 {
@@ -5846,9 +8864,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GeneralDma3UnexpectedNextTxError_G
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the golden counter division factor in the ADRV9001 device's
+ * register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the division factor to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GoldenCounterDivFactor_Set(void *device,
     uint8_t value)
 {
@@ -5859,9 +8885,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GoldenCounterDivFactor_Set(void *d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the golden counter division factor from a specific register
+ * and stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved golden
+ * counter division factor will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GoldenCounterDivFactor_Get(void *device,
     uint8_t *value)
 {
@@ -5875,9 +8909,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GoldenCounterDivFactor_Get(void *d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the golden counter enable value in the ADRV9001 device's
+ * register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the golden counter enable register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GoldenCounterEn_Set(void *device,
     uint8_t value)
 {
@@ -5888,9 +8930,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GoldenCounterEn_Set(void *device,
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the golden counter enable register from the
+ * device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GoldenCounterEn_Get(void *device,
     uint8_t *value)
 {
@@ -5904,9 +8954,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GoldenCounterEn_Get(void *device,
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the golden counter out-of-sync status in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the golden counter out-of-sync register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GoldenCounterOutOfSync_Set(void *device,
     uint8_t value)
 {
@@ -5917,9 +8974,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GoldenCounterOutOfSync_Set(void *d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the golden counter out-of-sync status from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GoldenCounterOutOfSync_Get(void *device,
     uint8_t *value)
 {
@@ -5934,6 +8999,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GoldenCounterOutOfSync_Get(void *d
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the calibration error status from a specific register of the
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved calibration
+ * error status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpIntArmCalibrationErrorStatus_Get(void *device,
     uint8_t *value)
 {
@@ -5948,6 +9024,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpIntArmCalibrationErrorStatus_Get
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the ARM error status from a specific register and stores it
+ * in the provided value.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved error status
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpIntArmErrorStatus_Get(void *device,
     uint8_t *value)
 {
@@ -5962,6 +9049,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpIntArmErrorStatus_Get(void *devi
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the interrupt status from a specific register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved interrupt
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpIntArmMonitorInterruptStatus_Get(void *device,
     uint8_t *value)
 {
@@ -5976,6 +9074,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpIntArmMonitorInterruptStatus_Get
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the system error status from a specific register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved system error
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpIntArmSystemErrorStatus_Get(void *device,
     uint8_t *value)
 {
@@ -5990,6 +9099,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpIntArmSystemErrorStatus_Get(void
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the lock status of the auxiliary PLL from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved PLL lock
+ * status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpIntAuxPllLockStatus_Get(void *device,
     uint8_t *value)
 {
@@ -6004,6 +9124,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpIntAuxPllLockStatus_Get(void *de
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the PLL lock status from a specific register and stores it
+ * in the provided value.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the PLL lock status will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpIntClkPllLockStatus_Get(void *device,
     uint8_t *value)
 {
@@ -6018,6 +9149,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpIntClkPllLockStatus_Get(void *de
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the lock status of the low-power phase-locked loop (PLL)
+ * from a specific register.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a uint8_t variable where the retrieved PLL lock
+ * status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpIntClkPllLpLockStatus_Get(void *device,
     uint8_t *value)
 {
@@ -6032,6 +9174,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpIntClkPllLpLockStatus_Get(void *
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the status of the Flex Stream Processing Error 0 from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved status
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpIntFlexStreamProcError0Status_Get(void *device,
     uint8_t *value)
 {
@@ -6046,6 +9199,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpIntFlexStreamProcError0Status_Ge
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the status of the Flex Stream Processing Error 1 from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved status
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpIntFlexStreamProcError1Status_Get(void *device,
     uint8_t *value)
 {
@@ -6060,6 +9224,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpIntFlexStreamProcError1Status_Ge
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the status of the Flex Stream Processing Error from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved status
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpIntFlexStreamProcError2Status_Get(void *device,
     uint8_t *value)
 {
@@ -6074,6 +9249,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpIntFlexStreamProcError2Status_Ge
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the status of the Flex Stream Processing Error 3 from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved status will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpIntFlexStreamProcError3Status_Get(void *device,
     uint8_t *value)
 {
@@ -6088,6 +9274,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpIntFlexStreamProcError3Status_Ge
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the interrupt status from a specific register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved interrupt
+ * status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpIntForceGpInterruptStatus_Get(void *device,
     uint8_t *value)
 {
@@ -6102,6 +9299,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpIntForceGpInterruptStatus_Get(vo
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the MCS status from a specific register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved MCS status
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpIntMcsLssiRx1McsStatus_Get(void *device,
     uint8_t *value)
 {
@@ -6116,6 +9324,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpIntMcsLssiRx1McsStatus_Get(void 
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the LSSI RX2 MCS status from a specific register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved status will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpIntMcsLssiRx2McsStatus_Get(void *device,
     uint8_t *value)
 {
@@ -6130,6 +9349,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpIntMcsLssiRx2McsStatus_Get(void 
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the second status from the MCS register of the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved status value
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpIntMcsSecondStatus_Get(void *device,
     uint8_t *value)
 {
@@ -6144,6 +9374,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpIntMcsSecondStatus_Get(void *dev
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the MCS status from a specific register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved MCS status
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpIntMcsStatus_Get(void *device,
     uint8_t *value)
 {
@@ -6158,6 +9399,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpIntMcsStatus_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the PLL lock status from a specific register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a uint8_t variable where the PLL lock status will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpIntRf1PllLockStatus_Get(void *device,
     uint8_t *value)
 {
@@ -6172,6 +9424,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpIntRf1PllLockStatus_Get(void *de
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the PLL lock status from a specific register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a uint8_t variable where the PLL lock status will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpIntRf2PllLockStatus_Get(void *device,
     uint8_t *value)
 {
@@ -6186,6 +9449,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpIntRf2PllLockStatus_Get(void *de
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the BBIC status from a specific register and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved BBIC status
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpIntRxdpIntfErrorToBbicStatus_Get(void *device,
     uint8_t *value)
 {
@@ -6200,6 +9474,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpIntRxdpIntfErrorToBbicStatus_Get
 }
 
 
+/***************************************************************************//**
+ * @brief This function reads a specific register value from a device and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure from which the register value
+ * will be read.
+ * @param value A pointer to a uint8_t variable where the read register value
+ * will be stored.
+ * @return The function returns an integer status code indicating the success or
+ * failure of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpIntRxdpIntfReadRequestToBbicStatus_Get(void *device,
     uint8_t *value)
 {
@@ -6214,6 +9499,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpIntRxdpIntfReadRequestToBbicStat
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the error status from a specific register in the device and
+ * stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a uint8_t variable where the retrieved error status
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpIntStreamProcErrorStatus_Get(void *device,
     uint8_t *value)
 {
@@ -6228,6 +9524,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpIntStreamProcErrorStatus_Get(voi
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the PA protection error status from a specific register in
+ * the device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved PA
+ * protection error status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpIntTx1PaProtectionErrorStatus_Get(void *device,
     uint8_t *value)
 {
@@ -6242,6 +9549,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpIntTx1PaProtectionErrorStatus_Ge
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the PA protection error status from a specific register of
+ * the device.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a uint8_t variable where the retrieved error status
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpIntTx2PaProtectionErrorStatus_Get(void *device,
     uint8_t *value)
 {
@@ -6256,6 +9574,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpIntTx2PaProtectionErrorStatus_Ge
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the BBIC status from a specific register and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved BBIC status
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpIntTxdpIntfErrorToBbicStatus_Get(void *device,
     uint8_t *value)
 {
@@ -6270,6 +9599,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpIntTxdpIntfErrorToBbicStatus_Get
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the BBIC status from a specific register and stores it in
+ * the provided value.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved status will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpIntTxdpIntfWriteRequestToBbicStatus_Get(void *device,
     uint8_t *value)
 {
@@ -6283,6 +9623,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpIntTxdpIntfWriteRequestToBbicSta
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the bypass device clock interrupt for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer that specifies the value to be written
+ * to the device register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpInterruptBypassDevClk_Set(void *device,
     uint8_t value)
 {
@@ -6293,6 +9643,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpInterruptBypassDevClk_Set(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the device clock bypass interrupt status from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved clock
+ * bypass interrupt status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpInterruptBypassDevClk_Get(void *device,
     uint8_t *value)
 {
@@ -6306,9 +9667,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpInterruptBypassDevClk_Get(void *
     return status;
 }
 
-/**
- * default value extend Interrupt generated by 184MHz clock to get 2 cycles of dev clock (@19.2MHz)
- */
+/***************************************************************************//**
+ * @brief Sets the device clock extend configuration for the ADRV9001 by writing
+ * a specified value to a specific register.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the device's register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpInterruptDevClkExtend_Set(void *device,
     uint8_t value)
 {
@@ -6319,9 +9688,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpInterruptDevClkExtend_Set(void *
     return status;
 }
 
-/**
- * default value extend Interrupt generated by 184MHz clock to get 2 cycles of dev clock (@19.2MHz)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from a device and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure from which the register value
+ * will be read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpInterruptDevClkExtend_Get(void *device,
     uint8_t *value)
 {
@@ -6336,6 +9713,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpInterruptDevClkExtend_Get(void *
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the level-sensitive flag from a specific register of the
+ * device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved flag value
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpInterruptLevelSensitiveFlag_Get(void *device,
     uint8_t *value)
 {
@@ -6349,9 +9737,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpInterruptLevelSensitiveFlag_Get(
     return status;
 }
 
-/**
- * 0: edge sensitive, 1: level sensitive
- */
+/***************************************************************************//**
+ * @brief Sets the sensitive mode for the GP interrupt in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to set for the
+ * GP interrupt sensitive mode.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpInterruptSensitiveMode_Set(void *device,
     uint8_t value)
 {
@@ -6362,9 +9757,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpInterruptSensitiveMode_Set(void 
     return status;
 }
 
-/**
- * 0: edge sensitive, 1: level sensitive
- */
+/***************************************************************************//**
+ * @brief Retrieves the interrupt sensitive mode value from a specific register
+ * of the device.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpInterruptSensitiveMode_Get(void *device,
     uint8_t *value)
 {
@@ -6378,6 +9781,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpInterruptSensitiveMode_Get(void 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the thermal shutdown configuration for the GP LDO in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A uint8_t value representing the thermal shutdown setting to be
+ * applied.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpLdoDisThermalShutdown1_Set(void *device,
     uint8_t value)
 {
@@ -6388,6 +9802,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpLdoDisThermalShutdown1_Set(void 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the thermal shutdown status of the GP LDO from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved thermal
+ * shutdown status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpLdoDisThermalShutdown1_Get(void *device,
     uint8_t *value)
 {
@@ -6401,6 +9826,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpLdoDisThermalShutdown1_Get(void 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the thermal shutdown configuration for the GP LDO in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the thermal shutdown register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpLdoDisThermalShutdown2_Set(void *device,
     uint8_t value)
 {
@@ -6411,6 +9847,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpLdoDisThermalShutdown2_Set(void 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the thermal shutdown status of the GP LDO from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved thermal
+ * shutdown status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpLdoDisThermalShutdown2_Get(void *device,
     uint8_t *value)
 {
@@ -6424,6 +9871,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpLdoDisThermalShutdown2_Get(void 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GP LDO current limit increment value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the new current limit
+ * increment value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpLdoIlimitInc1_Set(void *device,
     uint8_t value)
 {
@@ -6434,6 +9891,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpLdoIlimitInc1_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the GP LDO current limit increment value from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved increment
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpLdoIlimitInc1_Get(void *device,
     uint8_t *value)
 {
@@ -6447,6 +9915,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpLdoIlimitInc1_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GP LDO current limit increment value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the new current limit
+ * increment value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpLdoIlimitInc2_Set(void *device,
     uint8_t value)
 {
@@ -6457,6 +9935,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpLdoIlimitInc2_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided variable.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device from which the register value is read.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpLdoIlimitInc2_Get(void *device,
     uint8_t *value)
 {
@@ -6470,6 +9959,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpLdoIlimitInc2_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the thermal shutdown configuration for the GP LDO in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 8-bit unsigned integer representing the thermal shutdown
+ * configuration value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpLdoThermalShutdown0c1_Set(void *device,
     uint8_t value)
 {
@@ -6480,6 +9980,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpLdoThermalShutdown0c1_Set(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the thermal shutdown status of the GP LDO from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved thermal
+ * shutdown status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpLdoThermalShutdown0c1_Get(void *device,
     uint8_t *value)
 {
@@ -6493,6 +10004,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpLdoThermalShutdown0c1_Get(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the thermal shutdown configuration for the GP LDO in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 8-bit unsigned integer representing the thermal shutdown
+ * configuration value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpLdoThermalShutdown0c2_Set(void *device,
     uint8_t value)
 {
@@ -6503,6 +10025,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpLdoThermalShutdown0c2_Set(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the thermal shutdown status of the GP LDO from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved thermal
+ * shutdown status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpLdoThermalShutdown0c2_Get(void *device,
     uint8_t *value)
 {
@@ -6516,10 +10049,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpLdoThermalShutdown0c2_Get(void *
     return status;
 }
 
-/**
- * When this bit is set, it will prevent the RX synthesizer lock
- * signal from asserting the GP interrupt
- */
+/***************************************************************************//**
+ * @brief Sets the calibration error mask in the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the calibration error
+ * mask value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskArmCalibrationError_Set(void *device,
     uint8_t value)
 {
@@ -6530,10 +10069,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskArmCalibrationError_Set(void
     return status;
 }
 
-/**
- * When this bit is set, it will prevent the RX synthesizer lock
- * signal from asserting the GP interrupt
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration error mask from a specific register of the
+ * device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved calibration
+ * error mask will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskArmCalibrationError_Get(void *device,
     uint8_t *value)
 {
@@ -6547,6 +10093,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskArmCalibrationError_Get(void
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the ARM force interrupt mask in the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the interrupt mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskArmForceInterrupt_Set(void *device,
     uint8_t value)
 {
@@ -6557,6 +10113,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskArmForceInterrupt_Set(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `GpMaskArmForceInterrupt` register from the
+ * device.
+ *
+ * @param device A pointer to the device structure used to access the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskArmForceInterrupt_Get(void *device,
     uint8_t *value)
 {
@@ -6570,6 +10136,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskArmForceInterrupt_Get(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the ARM monitor interrupt mask in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to set for the
+ * interrupt mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskArmMonitorInterrupt_Set(void *device,
     uint8_t value)
 {
@@ -6580,6 +10156,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskArmMonitorInterrupt_Set(void
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the masked interrupt value from a specific register of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved masked
+ * interrupt value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskArmMonitorInterrupt_Get(void *device,
     uint8_t *value)
 {
@@ -6593,10 +10180,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskArmMonitorInterrupt_Get(void
     return status;
 }
 
-/**
- * When this bit is set, it will prevent the RX synthesizer lock
- * signal from asserting the GP interrupt
- */
+/***************************************************************************//**
+ * @brief Sets the ARM system error mask in the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the ARM system error mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskArmSystemError_Set(void *device,
     uint8_t value)
 {
@@ -6607,10 +10200,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskArmSystemError_Set(void *dev
     return status;
 }
 
-/**
- * When this bit is set, it will prevent the RX synthesizer lock
- * signal from asserting the GP interrupt
- */
+/***************************************************************************//**
+ * @brief Retrieves the masked system error value from a specific register of
+ * the device.
+ *
+ * @param device A pointer to the device structure used to access the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved masked
+ * system error value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskArmSystemError_Get(void *device,
     uint8_t *value)
 {
@@ -6624,10 +10223,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskArmSystemError_Get(void *dev
     return status;
 }
 
-/**
- * When this bit is set, it will prevent the AUX synthesizer lock
- * signal from asserting the GP interrupt
- */
+/***************************************************************************//**
+ * @brief Sets the auxiliary synthesizer lock mask in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the lock mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskAuxSynthLock_Set(void *device,
     uint8_t value)
 {
@@ -6638,10 +10243,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskAuxSynthLock_Set(void *devic
     return status;
 }
 
-/**
- * When this bit is set, it will prevent the AUX synthesizer lock
- * signal from asserting the GP interrupt
- */
+/***************************************************************************//**
+ * @brief Retrieves the auxiliary synthesizer lock status from a specific
+ * register and stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved synthesizer
+ * lock status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskAuxSynthLock_Get(void *device,
     uint8_t *value)
 {
@@ -6655,10 +10267,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskAuxSynthLock_Get(void *devic
     return status;
 }
 
-/**
- * When this bit is set, it will prevent the CLK synthesizer lock
- * signal from asserting the GP interrupt
- */
+/***************************************************************************//**
+ * @brief Sets the clock synthesizer lock mask in the ADRV9001 device's
+ * register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the clock synthesizer lock mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskClkSynthLock_Set(void *device,
     uint8_t value)
 {
@@ -6669,10 +10288,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskClkSynthLock_Set(void *devic
     return status;
 }
 
-/**
- * When this bit is set, it will prevent the CLK synthesizer lock
- * signal from asserting the GP interrupt
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock synthesizer lock status from a specific register
+ * and stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * synthesizer lock status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskClkSynthLock_Get(void *device,
     uint8_t *value)
 {
@@ -6686,10 +10312,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskClkSynthLock_Get(void *devic
     return status;
 }
 
-/**
- * When this bit is set, it will prevent the CLK synthesizer lock
- * signal from asserting the GP interrupt
- */
+/***************************************************************************//**
+ * @brief Sets the low-power lock state of the clock synthesizer in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskClkSynthLpLock_Set(void *device,
     uint8_t value)
 {
@@ -6700,10 +10333,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskClkSynthLpLock_Set(void *dev
     return status;
 }
 
-/**
- * When this bit is set, it will prevent the CLK synthesizer lock
- * signal from asserting the GP interrupt
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided variable.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device from which the register value is read.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskClkSynthLpLock_Get(void *device,
     uint8_t *value)
 {
@@ -6717,6 +10357,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskClkSynthLpLock_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the mask for Flex Stream 0 error in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the error mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskFlexStream0Error_Set(void *device,
     uint8_t value)
 {
@@ -6727,6 +10377,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskFlexStream0Error_Set(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the error status from the Flex Stream 0 register of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved error status
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskFlexStream0Error_Get(void *device,
     uint8_t *value)
 {
@@ -6740,6 +10401,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskFlexStream0Error_Get(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the mask for Flex Stream 1 error in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskFlexStream1Error_Set(void *device,
     uint8_t value)
 {
@@ -6750,6 +10421,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskFlexStream1Error_Set(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register related to Flex Stream 1
+ * error and stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskFlexStream1Error_Get(void *device,
     uint8_t *value)
 {
@@ -6763,6 +10445,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskFlexStream1Error_Get(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the mask for Flex Stream 2 error in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskFlexStream2Error_Set(void *device,
     uint8_t value)
 {
@@ -6773,6 +10465,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskFlexStream2Error_Set(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskFlexStream2Error_Get(void *device,
     uint8_t *value)
 {
@@ -6786,6 +10489,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskFlexStream2Error_Get(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the mask for Flex Stream 3 error in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the error mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskFlexStream3Error_Set(void *device,
     uint8_t value)
 {
@@ -6796,6 +10509,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskFlexStream3Error_Set(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the error status from the Flex Stream 3 register of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved error status
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskFlexStream3Error_Get(void *device,
     uint8_t *value)
 {
@@ -6809,6 +10533,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskFlexStream3Error_Get(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GP Mask MCS register value for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the GP Mask MCS register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskMcs_Set(void *device,
     uint8_t value)
 {
@@ -6819,6 +10553,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskMcs_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a masked value from a specific register in the device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved masked
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskMcs_Get(void *device,
     uint8_t *value)
 {
@@ -6832,6 +10576,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskMcs_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the mask for the LSSI RX1 MCS in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskMcsLssiRx1Mcs_Set(void *device,
     uint8_t value)
 {
@@ -6842,6 +10596,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskMcsLssiRx1Mcs_Set(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific masked value from a hardware register and stores
+ * it in the provided pointer.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param value A pointer to a `uint8_t` variable where the retrieved masked
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskMcsLssiRx1Mcs_Get(void *device,
     uint8_t *value)
 {
@@ -6855,6 +10620,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskMcsLssiRx1Mcs_Get(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the mask for the MCS LSSI RX2 configuration in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskMcsLssiRx2Mcs_Set(void *device,
     uint8_t value)
 {
@@ -6865,6 +10641,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskMcsLssiRx2Mcs_Set(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific masked value from a hardware register and stores
+ * it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for hardware
+ * communication.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskMcsLssiRx2Mcs_Get(void *device,
     uint8_t *value)
 {
@@ -6878,6 +10665,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskMcsLssiRx2Mcs_Get(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the second mask for the MCS in the ADRV9001 device's register
+ * map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskMcsSecond_Set(void *device,
     uint8_t value)
 {
@@ -6888,6 +10686,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskMcsSecond_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific masked value from a hardware register and stores
+ * it in the provided variable.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device from which the register value is read.
+ * @param value A pointer to a `uint8_t` variable where the retrieved masked
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskMcsSecond_Get(void *device,
     uint8_t *value)
 {
@@ -6901,9 +10710,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskMcsSecond_Get(void *device,
     return status;
 }
 
-/**
- * When this bit is set, it will prevent the channel 1 PA protection error signal from asserting the GP interrupt
- */
+/***************************************************************************//**
+ * @brief Sets the PA protection channel 1 error mask in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the PA protection channel 1 error mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskPaProtectionCh1Error_Set(void *device,
     uint8_t value)
 {
@@ -6914,9 +10730,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskPaProtectionCh1Error_Set(voi
     return status;
 }
 
-/**
- * When this bit is set, it will prevent the channel 1 PA protection error signal from asserting the GP interrupt
- */
+/***************************************************************************//**
+ * @brief Retrieves the PA protection error status for channel 1 from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved error status
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskPaProtectionCh1Error_Get(void *device,
     uint8_t *value)
 {
@@ -6930,9 +10754,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskPaProtectionCh1Error_Get(voi
     return status;
 }
 
-/**
- * When this bit is set, it will prevent the channel 2 PA protection error signal  from asserting the GP interrupt
- */
+/***************************************************************************//**
+ * @brief Sets the PA protection channel 2 error mask in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the PA protection channel 2 error mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskPaProtectionCh2Error_Set(void *device,
     uint8_t value)
 {
@@ -6943,9 +10774,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskPaProtectionCh2Error_Set(voi
     return status;
 }
 
-/**
- * When this bit is set, it will prevent the channel 2 PA protection error signal  from asserting the GP interrupt
- */
+/***************************************************************************//**
+ * @brief Retrieves the PA protection channel 2 error mask value from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved error mask
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskPaProtectionCh2Error_Get(void *device,
     uint8_t *value)
 {
@@ -6959,10 +10798,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskPaProtectionCh2Error_Get(voi
     return status;
 }
 
-/**
- * When this bit is set, it will prevent the RX synthesizer lock
- * signal from asserting the GP interrupt
- */
+/***************************************************************************//**
+ * @brief Sets the RF2 synthesizer lock mask in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the RF2 synthesizer lock mask.
+ * @return Returns the status of the write operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskRf2SynthLock_Set(void *device,
     uint8_t value)
 {
@@ -6973,10 +10818,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskRf2SynthLock_Set(void *devic
     return status;
 }
 
-/**
- * When this bit is set, it will prevent the RX synthesizer lock
- * signal from asserting the GP interrupt
- */
+/***************************************************************************//**
+ * @brief Retrieves the synthesizer lock status from a specific register and
+ * stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the synthesizer lock
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskRf2SynthLock_Get(void *device,
     uint8_t *value)
 {
@@ -6990,10 +10842,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskRf2SynthLock_Get(void *devic
     return status;
 }
 
-/**
- * When this bit is set, it will prevent the RX synthesizer lock
- * signal from asserting the GP interrupt
- */
+/***************************************************************************//**
+ * @brief Sets the RF synthesizer lock mask in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the RF synthesizer lock mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskRfSynthLock_Set(void *device,
     uint8_t value)
 {
@@ -7004,10 +10862,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskRfSynthLock_Set(void *device
     return status;
 }
 
-/**
- * When this bit is set, it will prevent the RX synthesizer lock
- * signal from asserting the GP interrupt
- */
+/***************************************************************************//**
+ * @brief Retrieves the RF Synth Lock status from a specific register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved RF Synth
+ * Lock status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskRfSynthLock_Get(void *device,
     uint8_t *value)
 {
@@ -7021,6 +10886,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskRfSynthLock_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the BBIC mask for RXDP interface errors in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the BBIC mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskRxdpIntfErrorToBbic_Set(void *device,
     uint8_t value)
 {
@@ -7031,6 +10906,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskRxdpIntfErrorToBbic_Set(void
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskRxdpIntfErrorToBbic_Get(void *device,
     uint8_t *value)
 {
@@ -7044,6 +10930,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskRxdpIntfErrorToBbic_Get(void
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the BBIC read request mask for the RXDP interface in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskRxdpIntfReadRequestToBbic_Set(void *device,
     uint8_t value)
 {
@@ -7054,6 +10951,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskRxdpIntfReadRequestToBbic_Se
     return status;
 }
 
+/***************************************************************************//**
+ * @brief This function reads a specific register value from a device and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure from which the register value
+ * will be read.
+ * @param value A pointer to a uint8_t variable where the read register value
+ * will be stored.
+ * @return The function returns an integer status code indicating the success or
+ * failure of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskRxdpIntfReadRequestToBbic_Get(void *device,
     uint8_t *value)
 {
@@ -7067,6 +10975,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskRxdpIntfReadRequestToBbic_Ge
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the stream error mask in the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the stream error mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskStreamError_Set(void *device,
     uint8_t value)
 {
@@ -7077,6 +10995,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskStreamError_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the stream error mask value from a specific register of the
+ * device.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a `uint8_t` variable where the retrieved stream
+ * error mask value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskStreamError_Get(void *device,
     uint8_t *value)
 {
@@ -7090,6 +11019,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskStreamError_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the BBIC mask for TXDP interface errors in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskTxdpIntfErrorToBbic_Set(void *device,
     uint8_t value)
 {
@@ -7100,6 +11039,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskTxdpIntfErrorToBbic_Set(void
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific error value from a hardware register and stores
+ * it in the provided variable.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param value A pointer to a uint8_t variable where the retrieved error value
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskTxdpIntfErrorToBbic_Get(void *device,
     uint8_t *value)
 {
@@ -7113,6 +11062,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskTxdpIntfErrorToBbic_Get(void
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets a specific bit in the BBIC register by writing a value to the
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskTxdpIntfWriteRequestToBbic_Set(void *device,
     uint8_t value)
 {
@@ -7123,6 +11083,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskTxdpIntfWriteRequestToBbic_S
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskTxdpIntfWriteRequestToBbic_Get(void *device,
     uint8_t *value)
 {
@@ -7136,6 +11107,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskTxdpIntfWriteRequestToBbic_G
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the watchdog timeout value in the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the timeout value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskWatchdogTimeout_Set(void *device,
     uint8_t value)
 {
@@ -7146,6 +11127,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskWatchdogTimeout_Set(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the watchdog timeout value from a specific register and
+ * stores it in the provided variable.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved watchdog
+ * timeout value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_GpMaskWatchdogTimeout_Get(void *device,
     uint8_t *value)
 {
@@ -7159,6 +11151,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_GpMaskWatchdogTimeout_Get(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the LO1 Enable Mux Termination value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the LO1 Enable Mux Termination.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Lo1EnMuxTerm_Set(void *device,
     uint8_t value)
 {
@@ -7169,6 +11171,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Lo1EnMuxTerm_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Lo1EnMuxTerm_Get(void *device,
     uint8_t *value)
 {
@@ -7182,6 +11195,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Lo1EnMuxTerm_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the LO1 Mux R Term value in the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the LO1 Mux R Term.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Lo1MuxRTerm_Set(void *device,
     uint8_t value)
 {
@@ -7192,6 +11215,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Lo1MuxRTerm_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device from which the register value is read.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Lo1MuxRTerm_Get(void *device,
     uint8_t *value)
 {
@@ -7205,6 +11239,15 @@ static inline int32_t adrv9001_NvsRegmapCore1_Lo1MuxRTerm_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the bias for the LO1 PD mux term in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the bias value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Lo1PdMuxTermBias_Set(void *device,
     uint8_t value)
 {
@@ -7215,6 +11258,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Lo1PdMuxTermBias_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the bias value from a specific register for the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved bias value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Lo1PdMuxTermBias_Get(void *device,
     uint8_t *value)
 {
@@ -7228,6 +11282,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Lo1PdMuxTermBias_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the LO2 enable mux termination value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the LO2 enable mux termination.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Lo2EnMuxTerm_Set(void *device,
     uint8_t value)
 {
@@ -7238,6 +11302,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Lo2EnMuxTerm_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided variable.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Lo2EnMuxTerm_Get(void *device,
     uint8_t *value)
 {
@@ -7251,6 +11326,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Lo2EnMuxTerm_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the LO2 Mux R Term value in the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Lo2MuxRTerm_Set(void *device,
     uint8_t value)
 {
@@ -7261,6 +11346,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Lo2MuxRTerm_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided variable.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device from which the register value is read.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Lo2MuxRTerm_Get(void *device,
     uint8_t *value)
 {
@@ -7274,6 +11370,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Lo2MuxRTerm_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the bias for the LO2 power down multiplexer in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the bias value to be set
+ * for the LO2 power down multiplexer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Lo2PdMuxTermBias_Set(void *device,
     uint8_t value)
 {
@@ -7284,6 +11391,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Lo2PdMuxTermBias_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the bias value from a specific register for the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved bias value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Lo2PdMuxTermBias_Get(void *device,
     uint8_t *value)
 {
@@ -7297,6 +11415,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Lo2PdMuxTermBias_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the CMOS mode enable value in the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the CMOS mode enable register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_McsCmosModeEnable_Set(void *device,
     uint8_t value)
 {
@@ -7307,6 +11435,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_McsCmosModeEnable_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the CMOS mode enable status from a specific register of the
+ * device.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a `uint8_t` variable where the retrieved CMOS mode
+ * enable status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_McsCmosModeEnable_Get(void *device,
     uint8_t *value)
 {
@@ -7320,6 +11459,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_McsCmosModeEnable_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the CMOS smitt trigger value in the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_McsCmosSmittTrig_Set(void *device,
     uint8_t value)
 {
@@ -7330,6 +11479,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_McsCmosSmittTrig_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used to access the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_McsCmosSmittTrig_Get(void *device,
     uint8_t *value)
 {
@@ -7343,6 +11502,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_McsCmosSmittTrig_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the LVDS delay value in the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the LVDS delay value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_McsLvdsDelay_Set(void *device,
     uint8_t value)
 {
@@ -7353,6 +11522,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_McsLvdsDelay_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the LVDS delay value from a specific register of the device.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a `uint8_t` variable where the retrieved LVDS delay
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_McsLvdsDelay_Get(void *device,
     uint8_t *value)
 {
@@ -7366,6 +11545,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_McsLvdsDelay_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the LVDS polarity inversion configuration for the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the polarity inversion
+ * setting to be applied.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_McsLvdsPnInv_Set(void *device,
     uint8_t value)
 {
@@ -7376,6 +11566,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_McsLvdsPnInv_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the LVDS polarity inversion setting from a specific register
+ * of the device.
+ *
+ * @param device A pointer to the device structure used to access the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved polarity
+ * inversion value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_McsLvdsPnInv_Get(void *device,
     uint8_t *value)
 {
@@ -7389,6 +11589,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_McsLvdsPnInv_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the on-chip termination for the LVDS receiver in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the termination value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_McsLvdsRxOnchipTerm_Set(void *device,
     uint8_t value)
 {
@@ -7399,6 +11610,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_McsLvdsRxOnchipTerm_Set(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the on-chip termination value for the LVDS receiver from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved termination
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_McsLvdsRxOnchipTerm_Get(void *device,
     uint8_t *value)
 {
@@ -7412,9 +11634,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_McsLvdsRxOnchipTerm_Get(void *devi
     return status;
 }
 
-/**
- * Powers down the mode pin ADC that determines what REF_CLK mode the chip will boot in.
- */
+/***************************************************************************//**
+ * @brief Sets the ADC power-down mode in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the desired ADC power-
+ * down state.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ModeAdcPd_Set(void *device,
     uint8_t value)
 {
@@ -7425,9 +11654,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_ModeAdcPd_Set(void *device,
     return status;
 }
 
-/**
- * Powers down the mode pin ADC that determines what REF_CLK mode the chip will boot in.
- */
+/***************************************************************************//**
+ * @brief Retrieves the ADC power-down mode status from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved ADC power-
+ * down mode status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ModeAdcPd_Get(void *device,
     uint8_t *value)
 {
@@ -7442,9 +11678,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ModeAdcPd_Get(void *device,
 }
 
 
-/**
- * Read back from MODE pin ADC.
- */
+/***************************************************************************//**
+ * @brief Retrieves the ADC thermal mode value from a specific register of the
+ * device.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a uint8_t variable where the retrieved ADC thermal
+ * mode value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_ModeAdcTherm_Get(void *device,
     uint8_t *value)
 {
@@ -7458,9 +11702,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_ModeAdcTherm_Get(void *device,
     return status;
 }
 
-/**
- * Each bit of this field is used to configure each corresponding GPIO_3p3 pin as an input. If the bit is set, the pin is configured as an output, and if it is clear the pin is configured as an input.The gpio_3p3v_direction_control_oe 11:0  bits are used to configure each corresponding 3.3v GPIO pin as an input or an output. If the bit is set, the pin is configured as an output.  The gpio_3p3v_direction_control_ie 11:0  bits correspond directly to the 3.3v GPIO[11:0] pins.
- */
+/***************************************************************************//**
+ * @brief Sets the GPIO analog direction control register for the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 16-bit unsigned integer representing the value to be written
+ * to the GPIO analog direction control register.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_NvsGpioAnalogDirectionControlIe_Set(void *device,
     uint16_t value)
 {
@@ -7474,9 +11726,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_NvsGpioAnalogDirectionControlIe_Se
     return status;
 }
 
-/**
- * Each bit of this field is used to configure each corresponding GPIO_3p3 pin as an input. If the bit is set, the pin is configured as an output, and if it is clear the pin is configured as an input.The gpio_3p3v_direction_control_oe 11:0  bits are used to configure each corresponding 3.3v GPIO pin as an input or an output. If the bit is set, the pin is configured as an output.  The gpio_3p3v_direction_control_ie 11:0  bits correspond directly to the 3.3v GPIO[11:0] pins.
- */
+/***************************************************************************//**
+ * @brief Retrieves the GPIO analog direction control value from the device's
+ * register.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the read operations, where a status of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_NvsGpioAnalogDirectionControlIe_Get(void *device,
     uint16_t *value)
 {
@@ -7494,9 +11754,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_NvsGpioAnalogDirectionControlIe_Ge
     return status;
 }
 
-/**
- * Each bit of this field is used to configure each corresponding GPIO_3p3 pin as an output. If the bit is set, the pin is configured as an output.The gpio_3p3v_direction_control_oe 11:0  bits are used to configure each corresponding 3.3v GPIO pin as an input or an output. If the bit is set, the pin is configured as an output, and if it is clear the pin is configured as an input.  The gpio_3p3v_direction_control_oe 11:0  bits correspond directly to the 3.3v GPIO[11:0] pins.
- */
+/***************************************************************************//**
+ * @brief Sets the GPIO analog direction control output enable by writing to
+ * specific hardware registers.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param value A 16-bit unsigned integer that specifies the value to be written
+ * to the GPIO control registers.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_NvsGpioAnalogDirectionControlOe_Set(void *device,
     uint16_t value)
 {
@@ -7510,9 +11778,18 @@ static inline int32_t adrv9001_NvsRegmapCore1_NvsGpioAnalogDirectionControlOe_Se
     return status;
 }
 
-/**
- * Each bit of this field is used to configure each corresponding GPIO_3p3 pin as an output. If the bit is set, the pin is configured as an output.The gpio_3p3v_direction_control_oe 11:0  bits are used to configure each corresponding 3.3v GPIO pin as an input or an output. If the bit is set, the pin is configured as an output, and if it is clear the pin is configured as an input.  The gpio_3p3v_direction_control_oe 11:0  bits correspond directly to the 3.3v GPIO[11:0] pins.
- */
+/***************************************************************************//**
+ * @brief Retrieves the GPIO analog direction control output value from the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint16_t variable where the retrieved GPIO analog
+ * direction control output value will be stored.
+ * @return Returns the status of the read operations, with *value containing the
+ * combined GPIO analog direction control output value from two
+ * registers.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_NvsGpioAnalogDirectionControlOe_Get(void *device,
     uint16_t *value)
 {
@@ -7531,9 +11808,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_NvsGpioAnalogDirectionControlOe_Ge
 }
 
 
-/**
- * This field shows the input value of the corresponding GPIO_3p3 pins when they are set as inputs (through gpio_3p3v_direction_control_oe).The gpio_3p3v_spi_read 11:0  bits allow the user to read the current state of the corresponding 3.3v GPIO[11:0] pins via the SPI port. The 3.3v GPIO signals are asynhronous to the SPI CLK so care must be taken to maintain the logic state of the 3.3v GPIO during the SPI read operation.
- */
+/***************************************************************************//**
+ * @brief Reads a 16-bit value from two specific registers using SPI
+ * communication.
+ *
+ * @param device A pointer to the device structure used for communication.
+ * @param value A pointer to a 16-bit unsigned integer where the read value will
+ * be stored.
+ * @return Returns the status of the read operations, where a zero indicates
+ * success and a non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_NvsGpioAnalogSpiRead_Get(void *device,
     uint16_t *value)
 {
@@ -7551,9 +11835,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_NvsGpioAnalogSpiRead_Get(void *dev
     return status;
 }
 
-/**
- * These bits are used to set the output value of the corresponding GPIO_3p3 pins when SPI memory is selected as the data source for output pins (through gpio_3p3v_lower_byte_lower_nibble_source_control, gpio_3p3v_lower_byte_upper_nibble_source_control, and gpio_3p3v_upper_byte_lower_nibble_source_control)
- */
+/***************************************************************************//**
+ * @brief Sets the GPIO analog SPI source configuration for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 16-bit unsigned integer representing the value to be written
+ * to the GPIO analog SPI source.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_NvsGpioAnalogSpiSource_Set(void *device,
     uint16_t value)
 {
@@ -7567,9 +11858,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_NvsGpioAnalogSpiSource_Set(void *d
     return status;
 }
 
-/**
- * These bits are used to set the output value of the corresponding GPIO_3p3 pins when SPI memory is selected as the data source for output pins (through gpio_3p3v_lower_byte_lower_nibble_source_control, gpio_3p3v_lower_byte_upper_nibble_source_control, and gpio_3p3v_upper_byte_lower_nibble_source_control)
- */
+/***************************************************************************//**
+ * @brief Retrieves a 16-bit value from two consecutive registers of a device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the last read operation, which indicates
+ * success or failure of the register reads.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_NvsGpioAnalogSpiSource_Get(void *device,
     uint16_t *value)
 {
@@ -7587,6 +11885,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_NvsGpioAnalogSpiSource_Get(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the LDO (Low Drop-Out) converter value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the LDO converter.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PdConverterLdo_Set(void *device,
     uint8_t value)
 {
@@ -7597,6 +11905,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_PdConverterLdo_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the LDO converter value from a specific register in the
+ * device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved LDO
+ * converter value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PdConverterLdo_Get(void *device,
     uint8_t *value)
 {
@@ -7610,11 +11929,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_PdConverterLdo_Get(void *device,
     return status;
 }
 
-/**
- * Disables active shield for REF_CLK going to main digital from REF_CLK receivers. 
- * "0" = > Enable active shield
- * "1" => Disable active shield
- */
+/***************************************************************************//**
+ * @brief Sets the active shield state for the digital reference clock in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A uint8_t value representing the state to set for the active
+ * shield (0 or 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PdDigRefclkActiveShield_Set(void *device,
     uint8_t value)
 {
@@ -7625,11 +11950,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_PdDigRefclkActiveShield_Set(void *
     return status;
 }
 
-/**
- * Disables active shield for REF_CLK going to main digital from REF_CLK receivers. 
- * "0" = > Enable active shield
- * "1" => Disable active shield
- */
+/***************************************************************************//**
+ * @brief Retrieves the digital reference clock active shield status from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PdDigRefclkActiveShield_Get(void *device,
     uint8_t *value)
 {
@@ -7643,10 +11974,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_PdDigRefclkActiveShield_Get(void *
     return status;
 }
 
-/**
- * Powers down last REF_CLK driver going from the analog to the digital.  Will also power down the MCS associated with the digital REF_CLK. "0" => Enable REF_CLK to digital and associated MCS pulse.
- * "1" => Disable REF_CLK to digital and assocaited MCS pulse.
- */
+/***************************************************************************//**
+ * @brief Sets the digital clock power down state for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A uint8_t value representing the desired power down state for
+ * the digital clock.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PdDigclk_Set(void *device,
     uint8_t value)
 {
@@ -7657,10 +11994,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_PdDigclk_Set(void *device,
     return status;
 }
 
-/**
- * Powers down last REF_CLK driver going from the analog to the digital.  Will also power down the MCS associated with the digital REF_CLK. "0" => Enable REF_CLK to digital and associated MCS pulse.
- * "1" => Disable REF_CLK to digital and assocaited MCS pulse.
- */
+/***************************************************************************//**
+ * @brief Retrieves the digital clock power-down status from a specific register
+ * of the device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PdDigclk_Get(void *device,
     uint8_t *value)
 {
@@ -7674,9 +12018,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_PdDigclk_Get(void *device,
     return status;
 }
 
-/**
- * (B0 New) Control the AHB hready signal coming from RX2 or TX2 channels
- */
+/***************************************************************************//**
+ * @brief Sets the Hready field in the AHB register for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the Hready field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgChannel2AhbHready_Set(void *device,
     uint8_t value)
 {
@@ -7687,9 +12038,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgChannel2AhbHready_Set(void *devi
     return status;
 }
 
-/**
- * (B0 New) Control the AHB hready signal coming from RX2 or TX2 channels
- */
+/***************************************************************************//**
+ * @brief Retrieves the HREADY status from a specific register and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved HREADY
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgChannel2AhbHready_Get(void *device,
     uint8_t *value)
 {
@@ -7703,9 +12062,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgChannel2AhbHready_Get(void *devi
     return status;
 }
 
-/**
- * (B0 New) Control the AHB hresp signal coming from RX2 or TX2 channels
- */
+/***************************************************************************//**
+ * @brief Sets the HRESP field in the AHB register for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the HRESP field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgChannel2AhbHresp_Set(void *device,
     uint8_t value)
 {
@@ -7716,9 +12082,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgChannel2AhbHresp_Set(void *devic
     return status;
 }
 
-/**
- * (B0 New) Control the AHB hresp signal coming from RX2 or TX2 channels
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgChannel2AhbHresp_Get(void *device,
     uint8_t *value)
 {
@@ -7732,9 +12106,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgChannel2AhbHresp_Get(void *devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the power enable state for channel 2 in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 8-bit unsigned integer representing the power enable state to
+ * be set for channel 2.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgChannel2PowerEn_Set(void *device,
     uint8_t value)
 {
@@ -7745,9 +12126,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgChannel2PowerEn_Set(void *device
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the power enable status of channel 2 from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved power enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgChannel2PowerEn_Get(void *device,
     uint8_t *value)
 {
@@ -7761,9 +12150,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgChannel2PowerEn_Get(void *device
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the power gating selection for channel 2 in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the power gating
+ * selection value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgChannel2PowerGatingSel_Set(void *device,
     uint8_t value)
 {
@@ -7774,9 +12170,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgChannel2PowerGatingSel_Set(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the power gating selection value for channel 2 from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved power
+ * gating selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgChannel2PowerGatingSel_Get(void *device,
     uint8_t *value)
 {
@@ -7790,9 +12194,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgChannel2PowerGatingSel_Get(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the power isolation disable state for channel 2 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 8-bit unsigned integer representing the power isolation
+ * disable state to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgChannel2PowerIsoDis_Set(void *device,
     uint8_t value)
 {
@@ -7803,9 +12215,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgChannel2PowerIsoDis_Set(void *de
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the power isolation disable status for channel 2 from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved status
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgChannel2PowerIsoDis_Get(void *device,
     uint8_t *value)
 {
@@ -7819,9 +12239,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgChannel2PowerIsoDis_Get(void *de
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the power reset state for channel 2 in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the power reset state to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgChannel2PowerResetb_Set(void *device,
     uint8_t value)
 {
@@ -7832,9 +12259,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgChannel2PowerResetb_Set(void *de
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the power reset status of channel 2 from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved power reset
+ * status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgChannel2PowerResetb_Get(void *device,
     uint8_t *value)
 {
@@ -7848,9 +12283,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgChannel2PowerResetb_Get(void *de
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the power scan latch enable state for channel 2 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A `uint8_t` value representing the state to set for the power
+ * scan latch (0 or 1).
+ * @return Returns an `int32_t` status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgChannel2PowerScanLatchEn_Set(void *device,
     uint8_t value)
 {
@@ -7861,9 +12304,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgChannel2PowerScanLatchEn_Set(voi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the power scan latch enable status from a specific register
+ * for a given device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device from which the register value will be read.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgChannel2PowerScanLatchEn_Get(void *device,
     uint8_t *value)
 {
@@ -7877,9 +12328,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgChannel2PowerScanLatchEn_Get(voi
     return status;
 }
 
-/**
- * (B0 New) Wait time at powerup for ARM to boot
- */
+/***************************************************************************//**
+ * @brief Sets the boot wait timer value in the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 16-bit unsigned integer representing the timer value to be
+ * set.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgMonArmBootWaitTimerValue_Set(void *device,
     uint16_t value)
 {
@@ -7893,9 +12351,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgMonArmBootWaitTimerValue_Set(voi
     return status;
 }
 
-/**
- * (B0 New) Wait time at powerup for ARM to boot
- */
+/***************************************************************************//**
+ * @brief Retrieves the boot wait timer value from the ADRV9001 device's
+ * register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved timer
+ * value will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the register read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgMonArmBootWaitTimerValue_Get(void *device,
     uint16_t *value)
 {
@@ -7913,9 +12379,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgMonArmBootWaitTimerValue_Get(voi
     return status;
 }
 
-/**
- * (B0 New) Monitor wait time at powerUp.
- */
+/***************************************************************************//**
+ * @brief Sets the power-up wait timer value in the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 16-bit unsigned integer representing the power-up wait timer
+ * value to be set.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgMonPowerupWaitTimerValue_Set(void *device,
     uint16_t value)
 {
@@ -7929,9 +12402,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgMonPowerupWaitTimerValue_Set(voi
     return status;
 }
 
-/**
- * (B0 New) Monitor wait time at powerUp.
- */
+/***************************************************************************//**
+ * @brief Retrieves the power-up wait timer value from the ADRV9001 device's
+ * register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved timer
+ * value will be stored.
+ * @return Returns the status of the register read operations, where a value of
+ * 0 indicates success.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgMonPowerupWaitTimerValue_Get(void *device,
     uint16_t *value)
 {
@@ -7949,9 +12430,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgMonPowerupWaitTimerValue_Get(voi
     return status;
 }
 
-/**
- * (B0 New) Give control of the AHB_spi_bridge to the Monitor at Power Up. (0: Disable monitor control, 1: Enable monitor control)
- */
+/***************************************************************************//**
+ * @brief Sets the power-up enable state for the AHB bridge in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 8-bit unsigned integer representing the power-up enable state
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgMonTimerPowerupAhbBridgeEnEnable_Set(void *device,
     uint8_t value)
 {
@@ -7962,9 +12451,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgMonTimerPowerupAhbBridgeEnEnable
     return status;
 }
 
-/**
- * (B0 New) Give control of the AHB_spi_bridge to the Monitor at Power Up. (0: Disable monitor control, 1: Enable monitor control)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided variable.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgMonTimerPowerupAhbBridgeEnEnable_Get(void *device,
     uint8_t *value)
 {
@@ -7978,9 +12475,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgMonTimerPowerupAhbBridgeEnEnable
     return status;
 }
 
-/**
- * (B0 New) Give control of the ARM_run to the monitor at Power Up. (0: Disable monitor control, 1: Enable monitor control)
- */
+/***************************************************************************//**
+ * @brief Sets the power-up arm run enable state in the ADRV9001 device's
+ * register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 8-bit unsigned integer representing the value to be written to
+ * the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgMonTimerPowerupArmRunEnable_Set(void *device,
     uint8_t value)
 {
@@ -7991,9 +12496,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgMonTimerPowerupArmRunEnable_Set(
     return status;
 }
 
-/**
- * (B0 New) Give control of the ARM_run to the monitor at Power Up. (0: Disable monitor control, 1: Enable monitor control)
- */
+/***************************************************************************//**
+ * @brief Retrieves the power-up arm run enable status from a specific register
+ * of the device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgMonTimerPowerupArmRunEnable_Get(void *device,
     uint8_t *value)
 {
@@ -8007,9 +12520,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgMonTimerPowerupArmRunEnable_Get(
     return status;
 }
 
-/**
- * (B0 New) 0: Generate reset at powerup after releasing the ISO, 1: generate reset at powerup before releasing the ISO
- */
+/***************************************************************************//**
+ * @brief Sets the early reset enable value for the power-up timer in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to set for the
+ * early reset enable.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgMonTimerPowerupEarlyResetbEnable_Set(void *device,
     uint8_t value)
 {
@@ -8020,9 +12541,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgMonTimerPowerupEarlyResetbEnable
     return status;
 }
 
-/**
- * (B0 New) 0: Generate reset at powerup after releasing the ISO, 1: generate reset at powerup before releasing the ISO
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the `PgMonTimerPowerupEarlyResetbEnable` field
+ * from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgMonTimerPowerupEarlyResetbEnable_Get(void *device,
     uint8_t *value)
 {
@@ -8036,9 +12565,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgMonTimerPowerupEarlyResetbEnable
     return status;
 }
 
-/**
- * (B0 New) Give control of the Power switch to the Monitor. (0: Enable monitor control, 1: Disable monitor control)
- */
+/***************************************************************************//**
+ * @brief Sets the power-up enable/disable state of the page monitor timer in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the power-up
+ * enable/disable state to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgMonTimerPowerupEnDisable_Set(void *device,
     uint8_t value)
 {
@@ -8049,9 +12586,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgMonTimerPowerupEnDisable_Set(voi
     return status;
 }
 
-/**
- * (B0 New) Give control of the Power switch to the Monitor. (0: Enable monitor control, 1: Disable monitor control)
- */
+/***************************************************************************//**
+ * @brief Retrieves the power-up enable/disable status from a specific register
+ * of the device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgMonTimerPowerupEnDisable_Get(void *device,
     uint8_t *value)
 {
@@ -8065,9 +12610,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgMonTimerPowerupEnDisable_Get(voi
     return status;
 }
 
-/**
- * (B0 New) Give control of the ISO cells to the Monitor. (0: Disable monitor control, 1: Enable monitor control)
- */
+/***************************************************************************//**
+ * @brief Sets the power-up isolation disable value for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgMonTimerPowerupIsoDisEnable_Set(void *device,
     uint8_t value)
 {
@@ -8078,9 +12630,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgMonTimerPowerupIsoDisEnable_Set(
     return status;
 }
 
-/**
- * (B0 New) Give control of the ISO cells to the Monitor. (0: Disable monitor control, 1: Enable monitor control)
- */
+/***************************************************************************//**
+ * @brief Retrieves the power-up isolation disable status from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgMonTimerPowerupIsoDisEnable_Get(void *device,
     uint8_t *value)
 {
@@ -8094,9 +12654,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgMonTimerPowerupIsoDisEnable_Get(
     return status;
 }
 
-/**
- * (B0 New) Conrtol the ref_clk clock gating cell for ARM clock Mux
- */
+/***************************************************************************//**
+ * @brief Sets the reference clock enable value in the ADRV9001 device's
+ * register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgMonTimerPowerupRefClkEnable_Set(void *device,
     uint8_t value)
 {
@@ -8107,9 +12675,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgMonTimerPowerupRefClkEnable_Set(
     return status;
 }
 
-/**
- * (B0 New) Conrtol the ref_clk clock gating cell for ARM clock Mux
- */
+/***************************************************************************//**
+ * @brief Retrieves the reference clock enable status from a specific register
+ * of the device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved reference
+ * clock enable status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgMonTimerPowerupRefClkEnable_Get(void *device,
     uint8_t *value)
 {
@@ -8123,9 +12699,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgMonTimerPowerupRefClkEnable_Get(
     return status;
 }
 
-/**
- * (B0 New) Select the control of REF_CLK clock gating cell for ARM clock Mux: 0=selection from SPI bit, 1=selection from Monitor State machine
- */
+/***************************************************************************//**
+ * @brief Sets the reference clock enable selection for the power-up timer in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the reference clock enable selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgMonTimerPowerupRefClkEnableSel_Set(void *device,
     uint8_t value)
 {
@@ -8136,9 +12720,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgMonTimerPowerupRefClkEnableSel_S
     return status;
 }
 
-/**
- * (B0 New) Select the control of REF_CLK clock gating cell for ARM clock Mux: 0=selection from SPI bit, 1=selection from Monitor State machine
- */
+/***************************************************************************//**
+ * @brief Retrieves the reference clock enable selection value from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgMonTimerPowerupRefClkEnableSel_Get(void *device,
     uint8_t *value)
 {
@@ -8152,9 +12744,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgMonTimerPowerupRefClkEnableSel_G
     return status;
 }
 
-/**
- * (B0 New) Give control of the Reset to the monitor at power Up. (0: Enable monitor control, 1: Disable monitor control)
- */
+/***************************************************************************//**
+ * @brief Sets the power-up reset disable state for the page monitor timer in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 8-bit unsigned integer representing the value to set for the
+ * power-up reset disable state.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgMonTimerPowerupResetbDisable_Set(void *device,
     uint8_t value)
 {
@@ -8165,9 +12765,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgMonTimerPowerupResetbDisable_Set
     return status;
 }
 
-/**
- * (B0 New) Give control of the Reset to the monitor at power Up. (0: Enable monitor control, 1: Disable monitor control)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register and stores it in the
+ * provided pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgMonTimerPowerupResetbDisable_Get(void *device,
     uint8_t *value)
 {
@@ -8181,9 +12789,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgMonTimerPowerupResetbDisable_Get
     return status;
 }
 
-/**
- * (B0 New) Set this bit to 1 at the end of the boot sequence to continue the monitor wakeup sequence
- */
+/***************************************************************************//**
+ * @brief Sets the boot ready status in the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgMonitorArmBootReady_Set(void *device,
     uint8_t value)
 {
@@ -8194,9 +12809,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgMonitorArmBootReady_Set(void *de
     return status;
 }
 
-/**
- * (B0 New) Set this bit to 1 at the end of the boot sequence to continue the monitor wakeup sequence
- */
+/***************************************************************************//**
+ * @brief Retrieves the boot readiness status from a specific register of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved boot
+ * readiness status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgMonitorArmBootReady_Get(void *device,
     uint8_t *value)
 {
@@ -8210,9 +12833,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgMonitorArmBootReady_Get(void *de
     return status;
 }
 
-/**
- * (B0 New) Select the arm ready source signal mode: 0=from SPI (pg_monitor_arm_boot_ready), 1= from timer (pg_monitor_arm_boot_wait_time_value)
- */
+/***************************************************************************//**
+ * @brief Sets the boot ready selection value in the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgMonitorArmBootReadySel_Set(void *device,
     uint8_t value)
 {
@@ -8223,9 +12853,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgMonitorArmBootReadySel_Set(void 
     return status;
 }
 
-/**
- * (B0 New) Select the arm ready source signal mode: 0=from SPI (pg_monitor_arm_boot_ready), 1= from timer (pg_monitor_arm_boot_wait_time_value)
- */
+/***************************************************************************//**
+ * @brief Retrieves the boot ready selection value from a specific register and
+ * stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgMonitorArmBootReadySel_Get(void *device,
     uint8_t *value)
 {
@@ -8239,9 +12877,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgMonitorArmBootReadySel_Get(void 
     return status;
 }
 
-/**
- * (B0 New) Clear AHB SPI bridge after power up
- */
+/***************************************************************************//**
+ * @brief Sets the power clear state of the AHB SPI bridge in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgMonitorPowerClearAhbSpiBridge_Set(void *device,
     uint8_t value)
 {
@@ -8252,9 +12898,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgMonitorPowerClearAhbSpiBridge_Se
     return status;
 }
 
-/**
- * (B0 New) Clear AHB SPI bridge after power up
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the ADRV9001 device and
+ * stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgMonitorPowerClearAhbSpiBridge_Get(void *device,
     uint8_t *value)
 {
@@ -8268,9 +12922,15 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgMonitorPowerClearAhbSpiBridge_Ge
     return status;
 }
 
-/**
- * (B0 New) Enable the latch at powerup for monitor_sleep_enable bit
- */
+/***************************************************************************//**
+ * @brief Sets the sleep latch power enable state in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A uint8_t value representing the power enable state to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgMonitorPowerEnableSleepLatch_Set(void *device,
     uint8_t value)
 {
@@ -8281,9 +12941,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgMonitorPowerEnableSleepLatch_Set
     return status;
 }
 
-/**
- * (B0 New) Enable the latch at powerup for monitor_sleep_enable bit
- */
+/***************************************************************************//**
+ * @brief Retrieves the power enable sleep latch value from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgMonitorPowerEnableSleepLatch_Get(void *device,
     uint8_t *value)
 {
@@ -8297,9 +12964,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgMonitorPowerEnableSleepLatch_Get
     return status;
 }
 
-/**
- * (B0 New) Enable low power mode.
- */
+/***************************************************************************//**
+ * @brief Sets the power mode enable state for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A uint8_t value representing the power mode enable state to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgMonitorPowerModeEnable_Set(void *device,
     uint8_t value)
 {
@@ -8310,9 +12984,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgMonitorPowerModeEnable_Set(void 
     return status;
 }
 
-/**
- * (B0 New) Enable low power mode.
- */
+/***************************************************************************//**
+ * @brief Retrieves the power mode enable status from a specific register of the
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param value A pointer to a `uint8_t` variable where the retrieved power mode
+ * enable status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgMonitorPowerModeEnable_Get(void *device,
     uint8_t *value)
 {
@@ -8327,9 +13009,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgMonitorPowerModeEnable_Get(void 
 }
 
 
-/**
- * (B0 New) Status of the monitor Power state machine
- */
+/***************************************************************************//**
+ * @brief Retrieves the power state from a specific register and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved power state
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgMonitorPowerState_Get(void *device,
     uint8_t *value)
 {
@@ -8344,9 +13034,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgMonitorPowerState_Get(void *devi
 }
 
 
-/**
- * (B0 New) 0: First Powerup, 1: powerup from previous powerdown
- */
+/***************************************************************************//**
+ * @brief Retrieves the power status from a specific register and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved power status
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_PgMonitorPowerStatus_Get(void *device,
     uint8_t *value)
 {
@@ -8360,9 +13058,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_PgMonitorPowerStatus_Get(void *dev
     return status;
 }
 
-/**
- * (B0 New) Clear the Realign Clock Divider counter value
- */
+/***************************************************************************//**
+ * @brief Sets the realignment clock counter clear value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the realignment clock counter clear register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RealignClkCounterClear_Set(void *device,
     uint8_t value)
 {
@@ -8373,9 +13078,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_RealignClkCounterClear_Set(void *d
     return status;
 }
 
-/**
- * (B0 New) Clear the Realign Clock Divider counter value
- */
+/***************************************************************************//**
+ * @brief Retrieves the realigned clock counter clear value from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RealignClkCounterClear_Get(void *device,
     uint8_t *value)
 {
@@ -8389,9 +13102,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_RealignClkCounterClear_Get(void *d
     return status;
 }
 
-/**
- * (B0 New) 0: Disable Realign Counter, 1: Enable Realign Counter
- */
+/***************************************************************************//**
+ * @brief Sets the realignment clock counter enable status in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 8-bit unsigned integer representing the value to set for the
+ * realignment clock counter enable.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RealignClkCounterEn_Set(void *device,
     uint8_t value)
 {
@@ -8402,9 +13123,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_RealignClkCounterEn_Set(void *devi
     return status;
 }
 
-/**
- * (B0 New) 0: Disable Realign Counter, 1: Enable Realign Counter
- */
+/***************************************************************************//**
+ * @brief Retrieves the realignment clock counter enable status from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RealignClkCounterEn_Get(void *device,
     uint8_t *value)
 {
@@ -8418,9 +13147,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_RealignClkCounterEn_Get(void *devi
     return status;
 }
 
-/**
- * (B0 New) Realign Clock Divider Value
- */
+/***************************************************************************//**
+ * @brief Sets the clock divider value in the ADRV9001 device's register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 32-bit unsigned integer representing the clock divider value
+ * to be set.
+ * @return Returns the status of the last write operation, where a value of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RealignClkDivValue_Set(void *device,
     uint32_t value)
 {
@@ -8440,9 +13176,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_RealignClkDivValue_Set(void *devic
     return status;
 }
 
-/**
- * (B0 New) Realign Clock Divider Value
- */
+/***************************************************************************//**
+ * @brief Retrieves and combines clock division values from multiple registers
+ * into a single 32-bit value.
+ *
+ * @param device A pointer to the device context used for register access.
+ * @param value A pointer to a 32-bit integer where the combined clock division
+ * value will be stored.
+ * @return Returns the status of the last register read operation, indicating
+ * success (0) or failure (non-zero).
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RealignClkDivValue_Get(void *device,
     uint32_t *value)
 {
@@ -8468,9 +13211,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_RealignClkDivValue_Get(void *devic
     return status;
 }
 
-/**
- * (B0 New) Clear the Realign Clock Divider counter value
- */
+/***************************************************************************//**
+ * @brief Sets the LSSI clock counter clear value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the LSSI clock counter clear register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RealignRx1AnaLssiClkCounterClear_Set(void *device,
     uint8_t value)
 {
@@ -8481,9 +13231,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_RealignRx1AnaLssiClkCounterClear_S
     return status;
 }
 
-/**
- * (B0 New) Clear the Realign Clock Divider counter value
- */
+/***************************************************************************//**
+ * @brief Retrieves the LSSI clock counter clear value from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * counter clear value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RealignRx1AnaLssiClkCounterClear_Get(void *device,
     uint8_t *value)
 {
@@ -8497,9 +13254,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_RealignRx1AnaLssiClkCounterClear_G
     return status;
 }
 
-/**
- * (B0 New) 0: Disable Realign Counter, 1: Enable Realign Counter
- */
+/***************************************************************************//**
+ * @brief Sets the LSSI clock counter enable state for the RX1 analog section of
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 8-bit unsigned integer representing the enable state for the
+ * LSSI clock counter.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RealignRx1AnaLssiClkCounterEn_Set(void *device,
     uint8_t value)
 {
@@ -8510,9 +13275,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_RealignRx1AnaLssiClkCounterEn_Set(
     return status;
 }
 
-/**
- * (B0 New) 0: Disable Realign Counter, 1: Enable Realign Counter
- */
+/***************************************************************************//**
+ * @brief Retrieves the LSSI clock counter enable status from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * counter enable status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RealignRx1AnaLssiClkCounterEn_Get(void *device,
     uint8_t *value)
 {
@@ -8526,9 +13299,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_RealignRx1AnaLssiClkCounterEn_Get(
     return status;
 }
 
-/**
- * (B0 New) Realign RX1 Analog Clock Divider Value
- */
+/***************************************************************************//**
+ * @brief Sets the LSSI clock divider value for the RX1 analog subsystem in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 16-bit unsigned integer representing the clock divider value
+ * to be set.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RealignRx1AnaLssiClkDivValue_Set(void *device,
     uint16_t value)
 {
@@ -8542,9 +13323,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_RealignRx1AnaLssiClkDivValue_Set(v
     return status;
 }
 
-/**
- * (B0 New) Realign RX1 Analog Clock Divider Value
- */
+/***************************************************************************//**
+ * @brief Retrieves the LSSI clock divider value for the RX1 analog subsystem by
+ * reading two registers.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved clock
+ * divider value will be stored.
+ * @return Returns the status of the last register read operation, indicating
+ * success or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RealignRx1AnaLssiClkDivValue_Get(void *device,
     uint16_t *value)
 {
@@ -8562,9 +13350,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_RealignRx1AnaLssiClkDivValue_Get(v
     return status;
 }
 
-/**
- * (B0 New) Clear the Realign Clock Divider counter value
- */
+/***************************************************************************//**
+ * @brief Sets the LSSI clock counter clear value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the LSSI clock counter clear register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RealignRx2AnaLssiClkCounterClear_Set(void *device,
     uint8_t value)
 {
@@ -8575,9 +13370,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_RealignRx2AnaLssiClkCounterClear_S
     return status;
 }
 
-/**
- * (B0 New) Clear the Realign Clock Divider counter value
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register and stores it in the
+ * provided pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RealignRx2AnaLssiClkCounterClear_Get(void *device,
     uint8_t *value)
 {
@@ -8591,9 +13394,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_RealignRx2AnaLssiClkCounterClear_G
     return status;
 }
 
-/**
- * (B0 New) 0: Disable Realign Counter, 1: Enable Realign Counter
- */
+/***************************************************************************//**
+ * @brief Sets the LSSI clock counter enable state in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A uint8_t value representing the enable state for the LSSI clock
+ * counter.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RealignRx2AnaLssiClkCounterEn_Set(void *device,
     uint8_t value)
 {
@@ -8604,9 +13414,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_RealignRx2AnaLssiClkCounterEn_Set(
     return status;
 }
 
-/**
- * (B0 New) 0: Disable Realign Counter, 1: Enable Realign Counter
- */
+/***************************************************************************//**
+ * @brief Retrieves the LSSI clock counter enable status from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * counter enable status will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RealignRx2AnaLssiClkCounterEn_Get(void *device,
     uint8_t *value)
 {
@@ -8620,9 +13438,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_RealignRx2AnaLssiClkCounterEn_Get(
     return status;
 }
 
-/**
- * (B0 New) Realign RX2 Analog Clock Divider Value
- */
+/***************************************************************************//**
+ * @brief Sets the LSSI clock divider value for the RX2 analog subsystem in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 16-bit unsigned integer representing the clock divider value
+ * to be set.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the register write operations fail.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RealignRx2AnaLssiClkDivValue_Set(void *device,
     uint16_t value)
 {
@@ -8636,9 +13462,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_RealignRx2AnaLssiClkDivValue_Set(v
     return status;
 }
 
-/**
- * (B0 New) Realign RX2 Analog Clock Divider Value
- */
+/***************************************************************************//**
+ * @brief Retrieves the LSSI clock divider value for the RX2 analog subsystem
+ * from the device's register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved clock
+ * divider value will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the register read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RealignRx2AnaLssiClkDivValue_Get(void *device,
     uint16_t *value)
 {
@@ -8656,6 +13490,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_RealignRx2AnaLssiClkDivValue_Get(v
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the reference clock configuration in the ADRV9001 device's
+ * register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the reference clock configuration register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RefclkClcnfg_Set(void *device,
     uint8_t value)
 {
@@ -8666,6 +13511,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_RefclkClcnfg_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the reference clock configuration value from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved reference
+ * clock configuration value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RefclkClcnfg_Get(void *device,
     uint8_t *value)
 {
@@ -8679,6 +13535,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_RefclkClcnfg_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the forced value for the reference clock receiver enable in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the reference clock receiver enable.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RefclkClkRxEnValueForced_Set(void *device,
     uint8_t value)
 {
@@ -8689,6 +13556,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_RefclkClkRxEnValueForced_Set(void 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the forced value of the RX enable clock from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RefclkClkRxEnValueForced_Get(void *device,
     uint8_t *value)
 {
@@ -8702,9 +13580,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_RefclkClkRxEnValueForced_Get(void 
     return status;
 }
 
-/**
- * (B0 New) Internal REF Clock divider by N+1 (0:div1, 1:div2, 2:div3, 3:div4, ...)
- */
+/***************************************************************************//**
+ * @brief Sets the internal divider value for the reference clock in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the divider value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RefclkInternalDivValue_Set(void *device,
     uint8_t value)
 {
@@ -8715,9 +13601,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_RefclkInternalDivValue_Set(void *d
     return status;
 }
 
-/**
- * (B0 New) Internal REF Clock divider by N+1 (0:div1, 1:div2, 2:div3, 3:div4, ...)
- */
+/***************************************************************************//**
+ * @brief Retrieves the internal divider value for the reference clock from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved divider
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RefclkInternalDivValue_Get(void *device,
     uint8_t *value)
 {
@@ -8731,9 +13625,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_RefclkInternalDivValue_Get(void *d
     return status;
 }
 
-/**
- * (B0 New) Enable ref_clk from monitor to core clock
- */
+/***************************************************************************//**
+ * @brief Sets the internal reference clock enable state for the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A uint8_t value representing the enable state of the internal
+ * reference clock (0 or 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RefclkInternalEn_Set(void *device,
     uint8_t value)
 {
@@ -8744,9 +13646,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_RefclkInternalEn_Set(void *device,
     return status;
 }
 
-/**
- * (B0 New) Enable ref_clk from monitor to core clock
- */
+/***************************************************************************//**
+ * @brief Retrieves the internal reference clock enable status from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved reference
+ * clock status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RefclkInternalEn_Get(void *device,
     uint8_t *value)
 {
@@ -8760,6 +13670,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_RefclkInternalEn_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the forced value for the reference clock multiplexer in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the reference clock multiplexer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RefclkMuxValueForced_Set(void *device,
     uint8_t value)
 {
@@ -8770,6 +13691,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_RefclkMuxValueForced_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the forced reference clock multiplexer value from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * multiplexer value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RefclkMuxValueForced_Get(void *device,
     uint8_t *value)
 {
@@ -8783,9 +13715,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_RefclkMuxValueForced_Get(void *dev
     return status;
 }
 
-/**
- * (B0 New) Enable muxed clock between ref_clk and fixed 184MHz clock
- */
+/***************************************************************************//**
+ * @brief Sets the reference clock or clock 184 enable bit in the ADRV9001
+ * device register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 8-bit unsigned integer representing the value to be written to
+ * the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RefclkOrClk184ClkEn_Set(void *device,
     uint8_t value)
 {
@@ -8796,9 +13736,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_RefclkOrClk184ClkEn_Set(void *devi
     return status;
 }
 
-/**
- * (B0 New) Enable muxed clock between ref_clk and fixed 184MHz clock
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RefclkOrClk184ClkEn_Get(void *device,
     uint8_t *value)
 {
@@ -8812,6 +13760,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_RefclkOrClk184ClkEn_Get(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the forced value for the reference clock oscillator amplifier
+ * enable in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the oscillator amplifier enable.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RefclkOscAmpEnValueForced_Set(void *device,
     uint8_t value)
 {
@@ -8822,6 +13781,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_RefclkOscAmpEnValueForced_Set(void
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the forced value of the reference clock oscillator amplifier
+ * enable setting from a specific register.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RefclkOscAmpEnValueForced_Get(void *device,
     uint8_t *value)
 {
@@ -8835,9 +13805,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_RefclkOscAmpEnValueForced_Get(void
     return status;
 }
 
-/**
- * (B0 New) External REF Clock divider by N+1 (0:div1, 1:div2, 2:div3, 3:div4, ...)
- */
+/***************************************************************************//**
+ * @brief Sets the reference clock pad divider value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the divider value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RefclkPadDivValue_Set(void *device,
     uint8_t value)
 {
@@ -8848,9 +13825,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_RefclkPadDivValue_Set(void *device
     return status;
 }
 
-/**
- * (B0 New) External REF Clock divider by N+1 (0:div1, 1:div2, 2:div3, 3:div4, ...)
- */
+/***************************************************************************//**
+ * @brief Retrieves the reference clock pad divider value from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved divider
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RefclkPadDivValue_Get(void *device,
     uint8_t *value)
 {
@@ -8864,9 +13849,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_RefclkPadDivValue_Get(void *device
     return status;
 }
 
-/**
- * (B0 New) 0: refclk pad in output mode, 1 : refclk pad tristated
- */
+/***************************************************************************//**
+ * @brief Sets the output enable state of the reference clock pad in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A uint8_t value representing the desired output enable state for
+ * the reference clock pad.
+ * @return Returns the status of the write operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RefclkPadOe_Set(void *device,
     uint8_t value)
 {
@@ -8877,9 +13870,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_RefclkPadOe_Set(void *device,
     return status;
 }
 
-/**
- * (B0 New) 0: refclk pad in output mode, 1 : refclk pad tristated
- */
+/***************************************************************************//**
+ * @brief Retrieves the reference clock pad output enable status from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RefclkPadOe_Get(void *device,
     uint8_t *value)
 {
@@ -8893,6 +13894,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_RefclkPadOe_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the reference clock RF configuration in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the reference clock RF register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RefclkRf_Set(void *device,
     uint8_t value)
 {
@@ -8903,6 +13914,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_RefclkRf_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the reference clock RF value from a specific register and
+ * stores it in the provided variable.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved reference
+ * clock RF value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RefclkRf_Get(void *device,
     uint8_t *value)
 {
@@ -8916,6 +13938,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_RefclkRf_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the reference clock configuration for the ADRV9001 device using
+ * SPI.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A uint8_t value that specifies the configuration to be set for
+ * the reference clock.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RefclkUseSpiForClkRxEn_Set(void *device,
     uint8_t value)
 {
@@ -8926,6 +13959,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_RefclkUseSpiForClkRxEn_Set(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the reference clock configuration from a specific register
+ * and stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RefclkUseSpiForClkRxEn_Get(void *device,
     uint8_t *value)
 {
@@ -8939,6 +13983,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_RefclkUseSpiForClkRxEn_Get(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the oscillator amplifier enable state in the ADRV9001 device
+ * using SPI.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 8-bit unsigned integer representing the enable state to be set
+ * for the oscillator amplifier.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RefclkUseSpiForOscAmpEn_Set(void *device,
     uint8_t value)
 {
@@ -8949,6 +14004,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_RefclkUseSpiForOscAmpEn_Set(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the oscillator amplifier enable status from a specific
+ * register using SPI.
+ *
+ * @param device A pointer to the device structure used for communication.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RefclkUseSpiForOscAmpEn_Get(void *device,
     uint8_t *value)
 {
@@ -8962,6 +14027,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_RefclkUseSpiForOscAmpEn_Get(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the reference clock multiplexer configuration using SPI for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the reference clock multiplexer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RefclkUseSpiForRefclkMux_Set(void *device,
     uint8_t value)
 {
@@ -8972,6 +14048,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_RefclkUseSpiForRefclkMux_Set(void 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the reference clock multiplexer value from a specific
+ * register using SPI.
+ *
+ * @param device A pointer to the device structure used for communication.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RefclkUseSpiForRefclkMux_Get(void *device,
     uint8_t *value)
 {
@@ -8985,6 +14071,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_RefclkUseSpiForRefclkMux_Get(void 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the fine enable value for RF1 in the ADRV9001 device's register
+ * map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1EnFineM_Set(void *device,
     uint8_t value)
 {
@@ -8995,6 +14092,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1EnFineM_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the fine enable status of RF1 from a specific register and
+ * stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1EnFineM_Get(void *device,
     uint8_t *value)
 {
@@ -9008,6 +14116,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1EnFineM_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the fine enable value for RF1 in the ADRV9001 device's register
+ * map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1EnFineP_Set(void *device,
     uint8_t value)
 {
@@ -9018,6 +14137,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1EnFineP_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from a device and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure from which the register value
+ * will be read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1EnFineP_Get(void *device,
     uint8_t *value)
 {
@@ -9031,6 +14161,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1EnFineP_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF1 external low divider reset value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the RF1 external low divider reset register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloDivReset_Set(void *device,
     uint8_t value)
 {
@@ -9041,6 +14181,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloDivReset_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register and stores it in the
+ * provided variable.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloDivReset_Get(void *device,
     uint8_t *value)
 {
@@ -9054,6 +14205,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloDivReset_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the DC bias for the RF1 external low-frequency input by writing
+ * to a specific register.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloEnInputDcBias_Set(void *device,
     uint8_t value)
 {
@@ -9064,6 +14226,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloEnInputDcBias_Set(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the DC bias value from a specific register for the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved DC bias
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloEnInputDcBias_Get(void *device,
     uint8_t *value)
 {
@@ -9077,6 +14250,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloEnInputDcBias_Get(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF1 external low input stage enable value in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloEnInputStageM_Set(void *device,
     uint8_t value)
 {
@@ -9087,6 +14271,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloEnInputStageM_Set(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the external low-frequency enable status from a specific
+ * register of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloEnInputStageM_Get(void *device,
     uint8_t *value)
 {
@@ -9100,6 +14295,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloEnInputStageM_Get(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF1 external low-frequency input stage configuration in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the configuration value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloEnInputStageMFbres_Set(void *device,
     uint8_t value)
 {
@@ -9110,6 +14316,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloEnInputStageMFbres_Set(voi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided variable.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloEnInputStageMFbres_Get(void *device,
     uint8_t *value)
 {
@@ -9123,6 +14340,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloEnInputStageMFbres_Get(voi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF1 external low input stage enable value in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloEnInputStageP_Set(void *device,
     uint8_t value)
 {
@@ -9133,6 +14361,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloEnInputStageP_Set(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device from which the register value is read.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloEnInputStageP_Get(void *device,
     uint8_t *value)
 {
@@ -9146,6 +14385,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloEnInputStageP_Get(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF1 external low enable input stage PF BRES configuration in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloEnInputStagePFbres_Set(void *device,
     uint8_t value)
 {
@@ -9156,6 +14406,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloEnInputStagePFbres_Set(voi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided variable.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloEnInputStagePFbres_Get(void *device,
     uint8_t *value)
 {
@@ -9169,6 +14430,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloEnInputStagePFbres_Get(voi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the external low termination resistance for RF1 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the termination resistance register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloEnTermRes_Set(void *device,
     uint8_t value)
 {
@@ -9179,6 +14451,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloEnTermRes_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the external low termination resistance setting from a
+ * specific register of the device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloEnTermRes_Get(void *device,
     uint8_t *value)
 {
@@ -9192,6 +14475,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloEnTermRes_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the bias for the external low-frequency amplifier in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the bias value to be set
+ * for the external low-frequency amplifier.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloInAmpBias_Set(void *device,
     uint8_t value)
 {
@@ -9202,6 +14496,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloInAmpBias_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the bias value for the external low-frequency amplifier from
+ * a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved bias value
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloInAmpBias_Get(void *device,
     uint8_t *value)
 {
@@ -9215,6 +14520,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloInAmpBias_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the external LO input division ratio for RF1 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 16-bit unsigned integer representing the division ratio to be
+ * set.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if any operation fails.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloInDivRatio_Set(void *device,
     uint16_t value)
 {
@@ -9228,6 +14544,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloInDivRatio_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the external local oscillator input division ratio from the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * division ratio will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the read operations failed.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloInDivRatio_Get(void *device,
     uint16_t *value)
 {
@@ -9245,6 +14572,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloInDivRatio_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the divide mode for the RF1 external LO in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the divide mode register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloInDivideMode_Set(void *device,
     uint8_t value)
 {
@@ -9255,6 +14592,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloInDivideMode_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the external low frequency oscillator divide mode setting
+ * from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved divide
+ * mode value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloInDivideMode_Get(void *device,
     uint8_t *value)
 {
@@ -9268,6 +14616,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloInDivideMode_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF1 external LO input driver mode in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloInDriverMode_Set(void *device,
     uint8_t value)
 {
@@ -9278,6 +14636,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloInDriverMode_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RF1 external LO input value in driver mode from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloInDriverMode_Get(void *device,
     uint8_t *value)
 {
@@ -9291,6 +14660,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloInDriverMode_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF1 external low-pass filter bypass configuration in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the bypass configuration
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloInFiltByp_Set(void *device,
     uint8_t value)
 {
@@ -9301,6 +14681,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloInFiltByp_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the external low-pass filter bypass status from a specific
+ * register of the device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved filter
+ * bypass status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloInFiltByp_Get(void *device,
     uint8_t *value)
 {
@@ -9314,6 +14705,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloInFiltByp_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF1 external low input power down state in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 8-bit unsigned integer representing the power down state to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloInPd_Set(void *device,
     uint8_t value)
 {
@@ -9324,6 +14726,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloInPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RF1 external low input power down status from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved status will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloInPd_Get(void *device,
     uint8_t *value)
 {
@@ -9337,6 +14750,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloInPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF1 external low input swap configuration in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloInSwapInputPn_Set(void *device,
     uint8_t value)
 {
@@ -9347,6 +14771,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloInSwapInputPn_Set(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided output variable.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device from which the register value is read.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloInSwapInputPn_Get(void *device,
     uint8_t *value)
 {
@@ -9360,6 +14795,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloInSwapInputPn_Get(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF1 external low interrupt high register value for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloIntLoHiR_Set(void *device,
     uint8_t value)
 {
@@ -9370,6 +14816,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloIntLoHiR_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloIntLoHiR_Get(void *device,
     uint8_t *value)
 {
@@ -9383,6 +14840,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloIntLoHiR_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the external low output division ratio for RF1 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 16-bit unsigned integer representing the division ratio to be
+ * set.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloOutDivRatio_Set(void *device,
     uint16_t value)
 {
@@ -9396,6 +14864,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloOutDivRatio_Set(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the external local oscillator output division ratio from the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a 16-bit unsigned integer where the output division
+ * ratio will be stored.
+ * @return Returns the status of the read operations, where a value of 0
+ * indicates success.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloOutDivRatio_Get(void *device,
     uint16_t *value)
 {
@@ -9413,6 +14892,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloOutDivRatio_Get(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the reset value for the external LO output divider in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the reset value to be set
+ * for the external LO output divider.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloOutDivReset_Set(void *device,
     uint8_t value)
 {
@@ -9423,6 +14913,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloOutDivReset_Set(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the external local oscillator output divider reset status
+ * from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved status
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloOutDivReset_Get(void *device,
     uint8_t *value)
 {
@@ -9436,6 +14937,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloOutDivReset_Get(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power-down state of the external low output buffer in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 8-bit unsigned integer representing the desired power-down
+ * state (0 or 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloOutInbufPd_Set(void *device,
     uint8_t value)
 {
@@ -9446,6 +14958,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloOutInbufPd_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided variable.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device from which the register value is read.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloOutInbufPd_Get(void *device,
     uint8_t *value)
 {
@@ -9459,6 +14982,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloOutInbufPd_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF1 external low output power down state in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the desired power down
+ * state.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloOutPd_Set(void *device,
     uint8_t value)
 {
@@ -9469,6 +15003,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloOutPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the external low output power down status from a specific
+ * register of the device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved status will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloOutPd_Get(void *device,
     uint8_t *value)
 {
@@ -9482,6 +15027,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1ExtloOutPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the low buffer power down state for RF1 in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the power down state to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1LoBufPd_Set(void *device,
     uint8_t value)
 {
@@ -9492,6 +15047,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1LoBufPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the low buffer power down status from a specific register of
+ * the device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved low buffer
+ * power down status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1LoBufPd_Get(void *device,
     uint8_t *value)
 {
@@ -9505,6 +15071,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1LoBufPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF1 LOGEN divider ratio in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 16-bit unsigned integer representing the divider ratio to be
+ * set.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if any of the write operations fail.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1LogenDivRatio_Set(void *device,
     uint16_t value)
 {
@@ -9518,6 +15094,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1LogenDivRatio_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the logarithmic divider ratio from the RF1 register of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * divider ratio will be stored.
+ * @return Returns the status of the read operations, with *value containing the
+ * combined logarithmic divider ratio from two registers.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1LogenDivRatio_Get(void *device,
     uint16_t *value)
 {
@@ -9535,6 +15122,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1LogenDivRatio_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the divide mode for the RF1 log amplifier in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the divide mode to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1LogenDivideMode_Set(void *device,
     uint8_t value)
 {
@@ -9545,6 +15142,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1LogenDivideMode_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the log enable divide mode value from a specific register of
+ * the device.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a `uint8_t` variable where the retrieved log enable
+ * divide mode value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1LogenDivideMode_Get(void *device,
     uint8_t *value)
 {
@@ -9558,6 +15166,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1LogenDivideMode_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power-down state of the RF1 log amplifier input buffer in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A uint8_t value indicating the desired power-down state (0 or 1)
+ * for the RF1 log amplifier input buffer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1LogenInbufPd_Set(void *device,
     uint8_t value)
 {
@@ -9568,6 +15187,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1LogenInbufPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register and stores it in the
+ * provided pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1LogenInbufPd_Get(void *device,
     uint8_t *value)
 {
@@ -9581,6 +15211,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1LogenInbufPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF1 Log Enable Power Down state in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the power down state to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1LogenPd_Set(void *device,
     uint8_t value)
 {
@@ -9591,6 +15231,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1LogenPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RF1 Log Enable Power Down status from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved status
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1LogenPd_Get(void *device,
     uint8_t *value)
 {
@@ -9604,6 +15255,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1LogenPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power-down state of the RF1 Logarithmic Amplifier Quad
+ * Divider in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the power-down state to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1LogenQuadDivPd_Set(void *device,
     uint8_t value)
 {
@@ -9614,6 +15276,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1LogenQuadDivPd_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register and stores it in the
+ * provided variable.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1LogenQuadDivPd_Get(void *device,
     uint8_t *value)
 {
@@ -9627,6 +15300,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1LogenQuadDivPd_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF1 Log Enable Reset register in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the RF1 Log Enable Reset register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1LogenReset_Set(void *device,
     uint8_t value)
 {
@@ -9637,6 +15320,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1LogenReset_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RF1 LOGEN reset status from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1LogenReset_Get(void *device,
     uint8_t *value)
 {
@@ -9650,6 +15343,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1LogenReset_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the high range voltage for the VCO buffer in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the VCO buffer high range register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1LogenVcoBufHighR_Set(void *device,
     uint8_t value)
 {
@@ -9660,6 +15363,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1LogenVcoBufHighR_Set(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the high register value of the VCO buffer from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1LogenVcoBufHighR_Get(void *device,
     uint8_t *value)
 {
@@ -9673,6 +15387,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1LogenVcoBufHighR_Get(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF1 power down external low input value in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the RF1 power down external low input.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1PdExtloIn_Set(void *device,
     uint8_t value)
 {
@@ -9683,6 +15408,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1PdExtloIn_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided variable.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1PdExtloIn_Get(void *device,
     uint8_t *value)
 {
@@ -9697,6 +15433,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1PdExtloIn_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the PLL charge pump calibration output value from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved calibration
+ * output value will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1PllCpCalOut_Get(void *device,
     uint8_t *value)
 {
@@ -9711,6 +15458,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1PllCpCalOut_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the high range value of the RF PLL charge pump from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1PllCpOverRangeHigh_Get(void *device,
     uint8_t *value)
 {
@@ -9725,6 +15483,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1PllCpOverRangeHigh_Get(void *de
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the low range value of the RF PLL charge pump from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1PllCpOverRangeLow_Get(void *device,
     uint8_t *value)
 {
@@ -9739,6 +15508,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1PllCpOverRangeLow_Get(void *dev
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the PLL lock status from a specific register of the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the PLL lock status will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1PllLock_Get(void *device,
     uint8_t *value)
 {
@@ -9753,6 +15533,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1PllLock_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO ALC word output from the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved VCO
+ * ALC word output will be stored.
+ * @return Returns the status of the read operations, where a value of 0
+ * indicates success.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1PllVcoAlcWordOut_Get(void *device,
     uint16_t *value)
 {
@@ -9771,6 +15561,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1PllVcoAlcWordOut_Get(void *devi
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO calibration status from a specific register of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the calibration status
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1PllVcoCalInProgress_Get(void *device,
     uint8_t *value)
 {
@@ -9785,6 +15586,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1PllVcoCalInProgress_Get(void *d
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO compensation output value from a specific register
+ * of the device.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a `uint8_t` variable where the retrieved VCO
+ * compensation output value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1PllVcoCompOut_Get(void *device,
     uint8_t *value)
 {
@@ -9799,6 +15611,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1PllVcoCompOut_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the coarse band output frequency value from the RF PLL VCO
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * frequency value will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1PllVcoFreqCoarseBandOut_Get(void *device,
     uint16_t *value)
 {
@@ -9817,6 +15640,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1PllVcoFreqCoarseBandOut_Get(voi
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the fine band output frequency value from the RF PLL VCO
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved frequency
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1PllVcoFreqFineBandOut_Get(void *device,
     uint8_t *value)
 {
@@ -9831,6 +15665,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1PllVcoFreqFineBandOut_Get(void 
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO DAC output value from the ADRV9001 device's
+ * register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved VCO
+ * DAC output value will be stored.
+ * @return Returns the status of the read operations, where a value of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1PllVcoTcDacOut_Get(void *device,
     uint16_t *value)
 {
@@ -9848,6 +15693,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1PllVcoTcDacOut_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF1 selection clock inversion bit in the ADRV9001 device's
+ * register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the RF1 selection clock inversion bit.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1SelCkmInvB_Set(void *device,
     uint8_t value)
 {
@@ -9858,6 +15714,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1SelCkmInvB_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1SelCkmInvB_Get(void *device,
     uint8_t *value)
 {
@@ -9871,6 +15738,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1SelCkmInvB_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF1 selection clock inversion bit in the ADRV9001 device's
+ * register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1SelCkpInvB_Set(void *device,
     uint8_t value)
 {
@@ -9881,6 +15759,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1SelCkpInvB_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific bit field from a hardware register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device from which the register value is read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1SelCkpInvB_Get(void *device,
     uint8_t *value)
 {
@@ -9894,6 +15783,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1SelCkpInvB_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the coarse RF selection value in the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the coarse RF selection
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1SelCoarseM_Set(void *device,
     uint8_t value)
 {
@@ -9904,6 +15803,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1SelCoarseM_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the coarse RF selection value from a specific register and
+ * stores it in the provided variable.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1SelCoarseM_Get(void *device,
     uint8_t *value)
 {
@@ -9917,6 +15827,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1SelCoarseM_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the coarse selection value for RF1 in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the coarse selection
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1SelCoarseP_Set(void *device,
     uint8_t value)
 {
@@ -9927,6 +15847,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1SelCoarseP_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the coarse selection value for RF1 from a specific register
+ * in the device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved coarse
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1SelCoarseP_Get(void *device,
     uint8_t *value)
 {
@@ -9940,6 +15871,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1SelCoarseP_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF1 selection for the external LO input in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the RF1 selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1SelExtloIn_Set(void *device,
     uint8_t value)
 {
@@ -9950,6 +15892,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1SelExtloIn_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RF1 selection external low input value from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1SelExtloIn_Get(void *device,
     uint8_t *value)
 {
@@ -9963,6 +15916,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1SelExtloIn_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the fine selection value for RF1 in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the fine selection value
+ * to be set.
+ * @return Returns the status of the write operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1SelFineM_Set(void *device,
     uint8_t value)
 {
@@ -9973,6 +15936,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1SelFineM_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the fine selection value for RF1 from the ADRV9001 device's
+ * register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved fine
+ * selection value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1SelFineM_Get(void *device,
     uint8_t *value)
 {
@@ -9986,6 +15960,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1SelFineM_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the fine selection value for RF1 in the ADRV9001 device's
+ * register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the fine selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1SelFineMB_Set(void *device,
     uint8_t value)
 {
@@ -9996,6 +15981,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1SelFineMB_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided variable.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1SelFineMB_Get(void *device,
     uint8_t *value)
 {
@@ -10009,6 +16005,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1SelFineMB_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the fine selection value for RF1 in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the fine selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1SelFineP_Set(void *device,
     uint8_t value)
 {
@@ -10019,6 +16025,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1SelFineP_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the fine selection value from a specific register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1SelFineP_Get(void *device,
     uint8_t *value)
 {
@@ -10032,6 +16049,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1SelFineP_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the fine selection for RF1 in the ADRV9001 device's register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the fine selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1SelFinePB_Set(void *device,
     uint8_t value)
 {
@@ -10042,6 +16069,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1SelFinePB_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided variable.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf1SelFinePB_Get(void *device,
     uint8_t *value)
 {
@@ -10055,6 +16093,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf1SelFinePB_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the fine enable value for RF2 in the ADRV9001 device's register
+ * map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the RF2 enable register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2EnFineM_Set(void *device,
     uint8_t value)
 {
@@ -10065,6 +16114,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2EnFineM_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from a device and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure from which the register value
+ * will be read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2EnFineM_Get(void *device,
     uint8_t *value)
 {
@@ -10078,6 +16138,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2EnFineM_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the fine power enable register for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2EnFineP_Set(void *device,
     uint8_t value)
 {
@@ -10088,6 +16158,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2EnFineP_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2EnFineP_Get(void *device,
     uint8_t *value)
 {
@@ -10101,6 +16182,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2EnFineP_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF2 external low divider reset value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the RF2 external low divider reset register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloDivReset_Set(void *device,
     uint8_t value)
 {
@@ -10111,6 +16202,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloDivReset_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register and stores it in the
+ * provided pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloDivReset_Get(void *device,
     uint8_t *value)
 {
@@ -10124,6 +16226,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloDivReset_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the DC bias for the RF2 external low input by writing a specified
+ * value to a hardware register.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloEnInputDcBias_Set(void *device,
     uint8_t value)
 {
@@ -10134,6 +16247,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloEnInputDcBias_Set(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the DC bias value from a specific register of the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved DC bias
+ * value will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloEnInputDcBias_Get(void *device,
     uint8_t *value)
 {
@@ -10147,6 +16271,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloEnInputDcBias_Get(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF2 external low input stage enable value in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloEnInputStageM_Set(void *device,
     uint8_t value)
 {
@@ -10157,6 +16292,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloEnInputStageM_Set(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register and stores it in the
+ * provided output variable.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloEnInputStageM_Get(void *device,
     uint8_t *value)
 {
@@ -10170,6 +16316,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloEnInputStageM_Get(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF2 external low enable input stage for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns the status of the write operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloEnInputStageMFbres_Set(void *device,
     uint8_t value)
 {
@@ -10180,6 +16336,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloEnInputStageMFbres_Set(voi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloEnInputStageMFbres_Get(void *device,
     uint8_t *value)
 {
@@ -10193,6 +16360,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloEnInputStageMFbres_Get(voi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF2 external low input stage enable value in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloEnInputStageP_Set(void *device,
     uint8_t value)
 {
@@ -10203,6 +16381,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloEnInputStageP_Set(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register and stores it in the
+ * provided output variable.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloEnInputStageP_Get(void *device,
     uint8_t *value)
 {
@@ -10216,6 +16405,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloEnInputStageP_Get(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF2 external low enable input stage PF bias value in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the RF2 external low enable input stage PF bias.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloEnInputStagePFbres_Set(void *device,
     uint8_t value)
 {
@@ -10226,6 +16426,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloEnInputStagePFbres_Set(voi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided variable.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device from which the register value is read.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloEnInputStagePFbres_Get(void *device,
     uint8_t *value)
 {
@@ -10239,6 +16450,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloEnInputStagePFbres_Get(voi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF2 external low enable termination resistance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the termination resistance.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloEnTermRes_Set(void *device,
     uint8_t value)
 {
@@ -10249,6 +16471,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloEnTermRes_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloEnTermRes_Get(void *device,
     uint8_t *value)
 {
@@ -10262,6 +16495,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloEnTermRes_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the bias for the external low input amplifier of the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the bias value to be set
+ * for the amplifier.
+ * @return Returns the status of the write operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloInAmpBias_Set(void *device,
     uint8_t value)
 {
@@ -10272,6 +16516,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloInAmpBias_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the bias value for the external low input amplifier from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved bias value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloInAmpBias_Get(void *device,
     uint8_t *value)
 {
@@ -10285,6 +16540,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloInAmpBias_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF2 external LO input divider ratio in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 16-bit unsigned integer representing the divider ratio to be
+ * set.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the operations performed.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloInDivRatio_Set(void *device,
     uint16_t value)
 {
@@ -10298,6 +16563,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloInDivRatio_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the external LO input division ratio from the ADRV9001
+ * device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * division ratio will be stored.
+ * @return Returns the status of the read operations, where a value of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloInDivRatio_Get(void *device,
     uint16_t *value)
 {
@@ -10315,6 +16591,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloInDivRatio_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF2 external low input divide mode in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloInDivideMode_Set(void *device,
     uint8_t value)
 {
@@ -10325,6 +16611,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloInDivideMode_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RF2 external low input divide mode value from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloInDivideMode_Get(void *device,
     uint8_t *value)
 {
@@ -10338,6 +16635,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloInDivideMode_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF2 external low input driver mode configuration for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the RF2 external low input driver mode.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloInDriverMode_Set(void *device,
     uint8_t value)
 {
@@ -10348,6 +16656,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloInDriverMode_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloInDriverMode_Get(void *device,
     uint8_t *value)
 {
@@ -10361,6 +16680,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloInDriverMode_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF2 external low-pass filter bypass configuration for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the bypass configuration
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloInFiltByp_Set(void *device,
     uint8_t value)
 {
@@ -10371,6 +16701,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloInFiltByp_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided variable.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device from which the register value is read.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloInFiltByp_Get(void *device,
     uint8_t *value)
 {
@@ -10384,6 +16725,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloInFiltByp_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF2 external low input power down state in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the power down state to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloInPd_Set(void *device,
     uint8_t value)
 {
@@ -10394,6 +16746,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloInPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RF2 external low input power down status from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved status will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloInPd_Get(void *device,
     uint8_t *value)
 {
@@ -10407,6 +16770,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloInPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF2 external low input swap configuration in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloInSwapInputPn_Set(void *device,
     uint8_t value)
 {
@@ -10417,6 +16791,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloInSwapInputPn_Set(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided output variable.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloInSwapInputPn_Get(void *device,
     uint8_t *value)
 {
@@ -10430,6 +16814,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloInSwapInputPn_Get(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF2 external low interrupt high register value for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloIntLoHiR_Set(void *device,
     uint8_t value)
 {
@@ -10440,6 +16835,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloIntLoHiR_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloIntLoHiR_Get(void *device,
     uint8_t *value)
 {
@@ -10453,6 +16859,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloIntLoHiR_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the external low output divider ratio for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 16-bit unsigned integer representing the divider ratio to be
+ * set.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloOutDivRatio_Set(void *device,
     uint16_t value)
 {
@@ -10466,6 +16882,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloOutDivRatio_Set(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the external low output division ratio from the ADRV9001
+ * device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * division ratio will be stored.
+ * @return Returns the status of the read operations, with the output value
+ * being stored in the provided pointer.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloOutDivRatio_Get(void *device,
     uint16_t *value)
 {
@@ -10483,6 +16910,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloOutDivRatio_Get(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the reset value for the RF2 external low output divider in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the reset register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloOutDivReset_Set(void *device,
     uint8_t value)
 {
@@ -10493,6 +16931,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloOutDivReset_Set(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register and stores it in the
+ * provided output variable.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloOutDivReset_Get(void *device,
     uint8_t *value)
 {
@@ -10506,6 +16955,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloOutDivReset_Get(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power-down state of the external low output buffer in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 8-bit unsigned integer representing the power-down state to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloOutInbufPd_Set(void *device,
     uint8_t value)
 {
@@ -10516,6 +16976,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloOutInbufPd_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided variable.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloOutInbufPd_Get(void *device,
     uint8_t *value)
 {
@@ -10529,6 +17000,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloOutInbufPd_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power-down state of the RF2 external low output in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 8-bit unsigned integer representing the power-down state to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloOutPd_Set(void *device,
     uint8_t value)
 {
@@ -10539,6 +17021,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloOutPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided variable.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device from which the register value is read.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloOutPd_Get(void *device,
     uint8_t *value)
 {
@@ -10552,6 +17045,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2ExtloOutPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF2 low buffer power down state in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the power down state to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2LoBufPd_Set(void *device,
     uint8_t value)
 {
@@ -10562,6 +17065,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2LoBufPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RF2 low buffer power down status from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2LoBufPd_Get(void *device,
     uint8_t *value)
 {
@@ -10575,6 +17089,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2LoBufPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF2 LOGEN division ratio in the ADRV9001 device's register
+ * map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 16-bit unsigned integer representing the division ratio to be
+ * set.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2LogenDivRatio_Set(void *device,
     uint16_t value)
 {
@@ -10588,6 +17113,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2LogenDivRatio_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RF2 LOGEN divider ratio from the device's register map.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * divider ratio will be stored.
+ * @return Returns the status of the read operations, with *value containing the
+ * combined RF2 LOGEN divider ratio from two registers.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2LogenDivRatio_Get(void *device,
     uint16_t *value)
 {
@@ -10605,6 +17140,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2LogenDivRatio_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the divide mode for the RF2 LOGEN in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the divide mode to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2LogenDivideMode_Set(void *device,
     uint8_t value)
 {
@@ -10615,6 +17160,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2LogenDivideMode_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RF2 LOGEN divide mode value from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved divide
+ * mode value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2LogenDivideMode_Get(void *device,
     uint8_t *value)
 {
@@ -10628,6 +17183,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2LogenDivideMode_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF2 Logen input buffer power down state in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 8-bit unsigned integer representing the power down state to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2LogenInbufPd_Set(void *device,
     uint8_t value)
 {
@@ -10638,6 +17204,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2LogenInbufPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register and stores it in the
+ * provided pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2LogenInbufPd_Get(void *device,
     uint8_t *value)
 {
@@ -10651,6 +17228,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2LogenInbufPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF2 Log Enable Power Down state in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 8-bit unsigned integer representing the power down state to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2LogenPd_Set(void *device,
     uint8_t value)
 {
@@ -10661,6 +17248,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2LogenPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RF2 Log Enable Power Down status from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2LogenPd_Get(void *device,
     uint8_t *value)
 {
@@ -10674,6 +17272,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2LogenPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power-down state of the RF2 Logen Quad Divider in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the power-down state to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2LogenQuadDivPd_Set(void *device,
     uint8_t value)
 {
@@ -10684,6 +17293,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2LogenQuadDivPd_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register and stores it in the
+ * provided variable.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2LogenQuadDivPd_Get(void *device,
     uint8_t *value)
 {
@@ -10697,6 +17317,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2LogenQuadDivPd_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF2 LOGEN reset value in the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the RF2 LOGEN reset register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2LogenReset_Set(void *device,
     uint8_t value)
 {
@@ -10707,6 +17337,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2LogenReset_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RF2 Log Enable Reset value from a specific register in
+ * the device.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2LogenReset_Get(void *device,
     uint8_t *value)
 {
@@ -10720,6 +17361,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2LogenReset_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the high range buffer value for the VCO in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the VCO buffer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2LogenVcoBufHighR_Set(void *device,
     uint8_t value)
 {
@@ -10730,6 +17381,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2LogenVcoBufHighR_Set(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the high register value of the VCO buffer from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2LogenVcoBufHighR_Get(void *device,
     uint8_t *value)
 {
@@ -10743,6 +17405,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2LogenVcoBufHighR_Get(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF2 power-down external low input value in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the RF2 power-down external low input.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2PdExtloIn_Set(void *device,
     uint8_t value)
 {
@@ -10753,6 +17426,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2PdExtloIn_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided variable.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2PdExtloIn_Get(void *device,
     uint8_t *value)
 {
@@ -10767,6 +17450,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2PdExtloIn_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the calibration output value from a specific register of the
+ * device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration output value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2PllCpCalOut_Get(void *device,
     uint8_t *value)
 {
@@ -10781,6 +17475,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2PllCpCalOut_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the high range value of the RF PLL charge pump from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2PllCpOverRangeHigh_Get(void *device,
     uint8_t *value)
 {
@@ -10795,6 +17500,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2PllCpOverRangeHigh_Get(void *de
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the low range value of the RF PLL charge pump from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2PllCpOverRangeLow_Get(void *device,
     uint8_t *value)
 {
@@ -10809,6 +17525,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2PllCpOverRangeLow_Get(void *dev
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the PLL lock status from a specific register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the PLL lock status will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2PllLock_Get(void *device,
     uint8_t *value)
 {
@@ -10823,6 +17550,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2PllLock_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO ALC word output from the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved VCO
+ * ALC word output will be stored.
+ * @return Returns the status of the read operations, where a status of 0
+ * indicates success and a non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2PllVcoAlcWordOut_Get(void *device,
     uint16_t *value)
 {
@@ -10841,6 +17578,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2PllVcoAlcWordOut_Get(void *devi
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO calibration status from a specific register of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the calibration status
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2PllVcoCalInProgress_Get(void *device,
     uint8_t *value)
 {
@@ -10855,6 +17603,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2PllVcoCalInProgress_Get(void *d
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO compensation output value from a specific register
+ * of the device.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a uint8_t variable where the retrieved VCO
+ * compensation output value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2PllVcoCompOut_Get(void *device,
     uint8_t *value)
 {
@@ -10869,6 +17628,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2PllVcoCompOut_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the coarse band output frequency value from the RF PLL VCO
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * frequency value will be stored.
+ * @return Returns the status of the read operations, where a status of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2PllVcoFreqCoarseBandOut_Get(void *device,
     uint16_t *value)
 {
@@ -10887,6 +17657,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2PllVcoFreqCoarseBandOut_Get(voi
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the fine band output frequency value from the VCO register
+ * of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved frequency
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2PllVcoFreqFineBandOut_Get(void *device,
     uint8_t *value)
 {
@@ -10901,6 +17682,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2PllVcoFreqFineBandOut_Get(void 
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO DAC output value from the ADRV9001 device's
+ * register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved VCO
+ * DAC output value will be stored.
+ * @return Returns the status of the read operations, where a status of 0
+ * indicates success.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2PllVcoTcDacOut_Get(void *device,
     uint16_t *value)
 {
@@ -10918,6 +17710,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2PllVcoTcDacOut_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF2 selection for the CKM inversion in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the RF2 selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2SelCkmInvB_Set(void *device,
     uint8_t value)
 {
@@ -10928,6 +17730,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2SelCkmInvB_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from a device and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure from which the register value
+ * will be read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2SelCkmInvB_Get(void *device,
     uint8_t *value)
 {
@@ -10941,6 +17754,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2SelCkmInvB_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF2 selection clock inversion bit in the ADRV9001 device's
+ * register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the RF2 selection clock inversion bit.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2SelCkpInvB_Set(void *device,
     uint8_t value)
 {
@@ -10951,6 +17775,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2SelCkpInvB_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific bit field from a hardware register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device from which the register value is read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2SelCkpInvB_Get(void *device,
     uint8_t *value)
 {
@@ -10964,6 +17799,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2SelCkpInvB_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the coarse RF2 selection value in the ADRV9001 device's register
+ * map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the coarse RF2 selection
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2SelCoarseM_Set(void *device,
     uint8_t value)
 {
@@ -10974,6 +17820,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2SelCoarseM_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the coarse RF selection value from a specific register and
+ * stores it in the provided variable.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2SelCoarseM_Get(void *device,
     uint8_t *value)
 {
@@ -10987,6 +17844,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2SelCoarseM_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the coarse RF2 selection value in the ADRV9001 device's register
+ * map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the coarse RF2 selection
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2SelCoarseP_Set(void *device,
     uint8_t value)
 {
@@ -10997,6 +17865,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2SelCoarseP_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the coarse RF selection value from a specific register and
+ * stores it in the provided variable.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved coarse RF
+ * selection value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2SelCoarseP_Get(void *device,
     uint8_t *value)
 {
@@ -11010,6 +17889,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2SelCoarseP_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF2 selection for the external LO input in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the RF2 selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2SelExtloIn_Set(void *device,
     uint8_t value)
 {
@@ -11020,6 +17910,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2SelExtloIn_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the external low input selection value from a specific
+ * register of the device.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2SelExtloIn_Get(void *device,
     uint8_t *value)
 {
@@ -11033,6 +17934,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2SelExtloIn_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the fine selection value for RF2 in the ADRV9001 device's
+ * register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the fine selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2SelFineM_Set(void *device,
     uint8_t value)
 {
@@ -11043,6 +17955,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2SelFineM_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the fine selection value from a specific register of the
+ * device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2SelFineM_Get(void *device,
     uint8_t *value)
 {
@@ -11056,6 +17979,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2SelFineM_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the fine selection value for the RF2 in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the fine selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2SelFineMB_Set(void *device,
     uint8_t value)
 {
@@ -11066,6 +17999,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2SelFineMB_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided variable.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2SelFineMB_Get(void *device,
     uint8_t *value)
 {
@@ -11079,6 +18023,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2SelFineMB_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the fine selection value for the RF2 channel in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the fine selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2SelFineP_Set(void *device,
     uint8_t value)
 {
@@ -11089,6 +18044,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2SelFineP_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the fine selection value from a specific register of the
+ * device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2SelFineP_Get(void *device,
     uint8_t *value)
 {
@@ -11102,6 +18068,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2SelFineP_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the fine selection value for the RF2 in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the fine selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2SelFinePB_Set(void *device,
     uint8_t value)
 {
@@ -11112,6 +18088,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2SelFinePB_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided variable.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rf2SelFinePB_Get(void *device,
     uint8_t *value)
 {
@@ -11125,6 +18112,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rf2SelFinePB_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO mask for the AGC gain change pulse in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the GPIO mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the GPIO mask setting operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx1AgcGainchangePulseGpioMask_Set(void *device,
     uint8_t value)
 {
@@ -11135,6 +18133,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx1AgcGainchangePulseGpioMask_Set(
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the AGC gain change pulse GPIO mask from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved GPIO mask
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx1AgcGainchangePulseGpioMask_Get(void *device,
     uint8_t *value)
 {
@@ -11148,6 +18157,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx1AgcGainchangePulseGpioMask_Get(
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the AGC gain change pulse GPIO selection for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the AGC gain change pulse GPIO selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx1AgcGainchangePulseGpioSelect_Set(void *device,
     uint8_t value)
 {
@@ -11158,6 +18177,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx1AgcGainchangePulseGpioSelect_Se
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the AGC gain change pulse GPIO selection value from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved GPIO
+ * selection value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx1AgcGainchangePulseGpioSelect_Get(void *device,
     uint8_t *value)
 {
@@ -11171,6 +18201,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx1AgcGainchangePulseGpioSelect_Ge
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO mask for manual gain lock in the ADRV9001 RX1 AGC.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the GPIO mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the GPIO mask setting operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx1AgcManaulGainLockGpioMask_Set(void *device,
     uint8_t value)
 {
@@ -11181,6 +18221,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx1AgcManaulGainLockGpioMask_Set(v
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the manual gain lock GPIO mask value from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved GPIO mask
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx1AgcManaulGainLockGpioMask_Get(void *device,
     uint8_t *value)
 {
@@ -11194,6 +18244,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx1AgcManaulGainLockGpioMask_Get(v
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO selection for manual gain lock in the ADRV9001 RX1 AGC
+ * register.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the GPIO selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the GPIO selection write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx1AgcManaulGainLockGpioSelect_Set(void *device,
     uint8_t value)
 {
@@ -11204,6 +18265,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx1AgcManaulGainLockGpioSelect_Set
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the manual gain lock GPIO selection value from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved GPIO
+ * selection value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx1AgcManaulGainLockGpioSelect_Get(void *device,
     uint8_t *value)
 {
@@ -11217,6 +18289,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx1AgcManaulGainLockGpioSelect_Get
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO mask for the AGC slow loop freeze in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the GPIO mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx1AgcSlowloopFreezeGpioMask_Set(void *device,
     uint8_t value)
 {
@@ -11227,6 +18310,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx1AgcSlowloopFreezeGpioMask_Set(v
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the GPIO mask for the AGC slow loop freeze setting from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved GPIO mask
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx1AgcSlowloopFreezeGpioMask_Get(void *device,
     uint8_t *value)
 {
@@ -11240,6 +18334,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx1AgcSlowloopFreezeGpioMask_Get(v
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO selection for the AGC slow loop freeze in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the GPIO selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx1AgcSlowloopFreezeGpioSelect_Set(void *device,
     uint8_t value)
 {
@@ -11250,6 +18355,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx1AgcSlowloopFreezeGpioSelect_Set
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the GPIO selection value for the AGC slow loop freeze from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved GPIO
+ * selection value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx1AgcSlowloopFreezeGpioSelect_Get(void *device,
     uint8_t *value)
 {
@@ -11263,6 +18379,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx1AgcSlowloopFreezeGpioSelect_Get
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO mask for the RX1 decgain in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the GPIO mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the GPIO mask setting operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx1DecgainGpioMask_Set(void *device,
     uint8_t value)
 {
@@ -11273,6 +18399,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx1DecgainGpioMask_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the GPIO mask for the Rx1 decgain from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved GPIO mask
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx1DecgainGpioMask_Get(void *device,
     uint8_t *value)
 {
@@ -11286,6 +18422,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx1DecgainGpioMask_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO select for the Rx1 decgain in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the GPIO select.
+ * @return Returns an integer status code indicating the success or failure of
+ * the GPIO select write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx1DecgainGpioSelect_Set(void *device,
     uint8_t value)
 {
@@ -11296,6 +18442,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx1DecgainGpioSelect_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the decibel gain GPIO selection value from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved GPIO
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx1DecgainGpioSelect_Get(void *device,
     uint8_t *value)
 {
@@ -11309,6 +18466,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx1DecgainGpioSelect_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO mask for the Rx1 increment gain in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the GPIO mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the GPIO mask setting operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx1IncgainGpioMask_Set(void *device,
     uint8_t value)
 {
@@ -11319,6 +18486,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx1IncgainGpioMask_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the increment gain GPIO mask value from a specific register
+ * for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved GPIO mask
+ * value will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx1IncgainGpioMask_Get(void *device,
     uint8_t *value)
 {
@@ -11332,6 +18510,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx1IncgainGpioMask_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO select for the Rx1 incremental gain in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the GPIO select.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx1IncgainGpioSelect_Set(void *device,
     uint8_t value)
 {
@@ -11342,6 +18531,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx1IncgainGpioSelect_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the increment gain GPIO selection value from a specific
+ * register for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved GPIO
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx1IncgainGpioSelect_Get(void *device,
     uint8_t *value)
 {
@@ -11355,6 +18555,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx1IncgainGpioSelect_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power-down state of the RX1 LO1 input buffer in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 8-bit unsigned integer representing the desired power-down
+ * state (0 or 1) for the input buffer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx1Lo1InbufPd_Set(void *device,
     uint8_t value)
 {
@@ -11365,6 +18576,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx1Lo1InbufPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register and stores it in the
+ * provided variable.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx1Lo1InbufPd_Get(void *device,
     uint8_t *value)
 {
@@ -11378,6 +18600,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx1Lo1InbufPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power-down state of the Rx1 low 2 input buffer in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 8-bit unsigned integer representing the power-down state to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx1Lo2InbufPd_Set(void *device,
     uint8_t value)
 {
@@ -11388,6 +18621,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx1Lo2InbufPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register and stores it in the
+ * provided variable.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx1Lo2InbufPd_Get(void *device,
     uint8_t *value)
 {
@@ -11401,6 +18645,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx1Lo2InbufPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power-down state of the Rx1 LOMUX in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the power-down state to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx1LomuxPd_Set(void *device,
     uint8_t value)
 {
@@ -11411,6 +18665,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx1LomuxPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the RX1 LO multiplex power-down register from
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx1LomuxPd_Get(void *device,
     uint8_t *value)
 {
@@ -11424,9 +18689,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx1LomuxPd_Get(void *device,
     return status;
 }
 
-/**
- * (B0 New) 1’b1:  configure RX1 mag comp 13 taps PFIR coeff
- */
+/***************************************************************************//**
+ * @brief Sets the coefficient selection for the Rx1 magnitude 13-tap filter in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the coefficient selection
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx1Mag13tapsCoeffSel_Set(void *device,
     uint8_t value)
 {
@@ -11437,9 +18710,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx1Mag13tapsCoeffSel_Set(void *dev
     return status;
 }
 
-/**
- * (B0 New) 1’b1:  configure RX1 mag comp 13 taps PFIR coeff
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific coefficient selection value from a hardware
+ * register.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved coefficient
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx1Mag13tapsCoeffSel_Get(void *device,
     uint8_t *value)
 {
@@ -11453,6 +18734,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx1Mag13tapsCoeffSel_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the low selection value for the Rx1 channel in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the Rx1 selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx1SelLo2_Set(void *device,
     uint8_t value)
 {
@@ -11463,6 +18755,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx1SelLo2_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx1SelLo2_Get(void *device,
     uint8_t *value)
 {
@@ -11476,6 +18779,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx1SelLo2_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO mask for the AGC gain change pulse in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the GPIO mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx2AgcGainchangePulseGpioMask_Set(void *device,
     uint8_t value)
 {
@@ -11486,6 +18800,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx2AgcGainchangePulseGpioMask_Set(
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the AGC gain change pulse GPIO mask from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved GPIO mask
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx2AgcGainchangePulseGpioMask_Get(void *device,
     uint8_t *value)
 {
@@ -11499,6 +18824,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx2AgcGainchangePulseGpioMask_Get(
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO selection for the AGC gain change pulse in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the GPIO selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the GPIO selection write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx2AgcGainchangePulseGpioSelect_Set(void *device,
     uint8_t value)
 {
@@ -11509,6 +18845,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx2AgcGainchangePulseGpioSelect_Se
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the AGC gain change pulse GPIO selection value from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved GPIO
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx2AgcGainchangePulseGpioSelect_Get(void *device,
     uint8_t *value)
 {
@@ -11522,6 +18869,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx2AgcGainchangePulseGpioSelect_Ge
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO mask for manual gain lock in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the GPIO mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the GPIO mask setting operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx2AgcManaulGainLockGpioMask_Set(void *device,
     uint8_t value)
 {
@@ -11532,6 +18889,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx2AgcManaulGainLockGpioMask_Set(v
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the GPIO mask for the manual gain lock of the Rx2 AGC from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved GPIO mask
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx2AgcManaulGainLockGpioMask_Get(void *device,
     uint8_t *value)
 {
@@ -11545,6 +18913,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx2AgcManaulGainLockGpioMask_Get(v
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO select for manual gain lock in the ADRV9001 RX2 AGC.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the GPIO select register.
+ * @return Returns the status of the write operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx2AgcManaulGainLockGpioSelect_Set(void *device,
     uint8_t value)
 {
@@ -11555,6 +18933,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx2AgcManaulGainLockGpioSelect_Set
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the manual gain lock GPIO selection value from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved GPIO
+ * selection value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx2AgcManaulGainLockGpioSelect_Get(void *device,
     uint8_t *value)
 {
@@ -11568,6 +18957,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx2AgcManaulGainLockGpioSelect_Get
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO mask for the slow loop freeze of the RX2 AGC in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the GPIO mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx2AgcSlowloopFreezeGpioMask_Set(void *device,
     uint8_t value)
 {
@@ -11578,6 +18978,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx2AgcSlowloopFreezeGpioMask_Set(v
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the GPIO mask for the AGC slow loop freeze setting from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved GPIO mask
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx2AgcSlowloopFreezeGpioMask_Get(void *device,
     uint8_t *value)
 {
@@ -11591,6 +19002,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx2AgcSlowloopFreezeGpioMask_Get(v
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO selection for the slow loop freeze of the AGC in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the GPIO selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the GPIO selection write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx2AgcSlowloopFreezeGpioSelect_Set(void *device,
     uint8_t value)
 {
@@ -11601,6 +19023,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx2AgcSlowloopFreezeGpioSelect_Set
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the GPIO selection value for the Rx2 AGC slow loop freeze
+ * from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved GPIO
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx2AgcSlowloopFreezeGpioSelect_Get(void *device,
     uint8_t *value)
 {
@@ -11614,6 +19047,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx2AgcSlowloopFreezeGpioSelect_Get
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO mask for the RX2 decimation gain in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the GPIO mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx2DecgainGpioMask_Set(void *device,
     uint8_t value)
 {
@@ -11624,6 +19067,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx2DecgainGpioMask_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the GPIO mask for the RX2 decgain from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved GPIO mask
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx2DecgainGpioMask_Get(void *device,
     uint8_t *value)
 {
@@ -11637,6 +19090,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx2DecgainGpioMask_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO select for the Rx2 decgain in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the GPIO select.
+ * @return Returns an integer status code indicating the result of the write
+ * operation, where 0 typically indicates success.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx2DecgainGpioSelect_Set(void *device,
     uint8_t value)
 {
@@ -11647,6 +19110,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx2DecgainGpioSelect_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the GPIO select value for the Rx2 decgain from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved GPIO select
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx2DecgainGpioSelect_Get(void *device,
     uint8_t *value)
 {
@@ -11660,6 +19134,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx2DecgainGpioSelect_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO mask for the Rx2 increment gain in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the GPIO mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the GPIO mask setting operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx2IncgainGpioMask_Set(void *device,
     uint8_t value)
 {
@@ -11670,6 +19154,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx2IncgainGpioMask_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the increment gain GPIO mask value from a specific register
+ * for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved GPIO mask
+ * value will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx2IncgainGpioMask_Get(void *device,
     uint8_t *value)
 {
@@ -11683,6 +19178,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx2IncgainGpioMask_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO select for the Rx2 incremental gain in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the GPIO select.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx2IncgainGpioSelect_Set(void *device,
     uint8_t value)
 {
@@ -11693,6 +19199,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx2IncgainGpioSelect_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the increment gain GPIO selection value from a specific
+ * register for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a `uint8_t` variable where the retrieved GPIO
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation from the register.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx2IncgainGpioSelect_Get(void *device,
     uint8_t *value)
 {
@@ -11706,6 +19223,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx2IncgainGpioSelect_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state of the Rx2 Lo1 input buffer in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A uint8_t value indicating the desired power down state (0 or
+ * 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx2Lo1InbufPd_Set(void *device,
     uint8_t value)
 {
@@ -11716,6 +19244,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx2Lo1InbufPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register and stores it in the
+ * provided pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx2Lo1InbufPd_Get(void *device,
     uint8_t *value)
 {
@@ -11729,6 +19268,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx2Lo1InbufPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power-down state of the Rx2 low-frequency input buffer in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 8-bit unsigned integer representing the power-down state to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx2Lo2InbufPd_Set(void *device,
     uint8_t value)
 {
@@ -11739,6 +19289,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx2Lo2InbufPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register and stores it in the
+ * provided variable.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx2Lo2InbufPd_Get(void *device,
     uint8_t *value)
 {
@@ -11752,6 +19313,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx2Lo2InbufPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power-down state of the Rx2 Lomux in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 8-bit unsigned integer representing the power-down state to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx2LomuxPd_Set(void *device,
     uint8_t value)
 {
@@ -11762,6 +19333,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx2LomuxPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the power-down status of the Rx2 Lomux from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved power-down
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx2LomuxPd_Get(void *device,
     uint8_t *value)
 {
@@ -11775,9 +19357,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx2LomuxPd_Get(void *device,
     return status;
 }
 
-/**
- * (B0 New) 1’b1:  configure RX2 mag comp 13 taps PFIR coeff
- */
+/***************************************************************************//**
+ * @brief Sets the coefficient selection for the Rx2 magnitude 13 taps in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the coefficient selection
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx2Mag13tapsCoeffSel_Set(void *device,
     uint8_t value)
 {
@@ -11788,9 +19378,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx2Mag13tapsCoeffSel_Set(void *dev
     return status;
 }
 
-/**
- * (B0 New) 1’b1:  configure RX2 mag comp 13 taps PFIR coeff
- */
+/***************************************************************************//**
+ * @brief Retrieves the 13-tap coefficient selection value from a specific
+ * register for the Rx2 channel.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved coefficient
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx2Mag13tapsCoeffSel_Get(void *device,
     uint8_t *value)
 {
@@ -11804,6 +19402,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx2Mag13tapsCoeffSel_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx2SelLo2_Set(void *device,
     uint8_t value)
 {
@@ -11814,6 +19423,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx2SelLo2_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the lower 8 bits of the Rx2 selection register from the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Rx2SelLo2_Get(void *device,
     uint8_t *value)
 {
@@ -11827,9 +19447,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Rx2SelLo2_Get(void *device,
     return status;
 }
 
-/**
- * Rxadc Cap Const Delay.  This is a fixed number of clock cycles that gets subtracted form the N1 N2 values in the digital.  This is for accounting for delays in the loop.
- */
+/***************************************************************************//**
+ * @brief Sets the constant delay value for the RXADC capacitor in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the constant delay value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RxadcCapConstDelay_Set(void *device,
     uint8_t value)
 {
@@ -11840,9 +19468,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_RxadcCapConstDelay_Set(void *devic
     return status;
 }
 
-/**
- * Rxadc Cap Const Delay.  This is a fixed number of clock cycles that gets subtracted form the N1 N2 values in the digital.  This is for accounting for delays in the loop.
- */
+/***************************************************************************//**
+ * @brief Retrieves the RXADC capacitor constant delay value from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved capacitor
+ * constant delay value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RxadcCapConstDelay_Get(void *device,
     uint8_t *value)
 {
@@ -11856,9 +19492,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_RxadcCapConstDelay_Get(void *devic
     return status;
 }
 
-/**
- * start ccal.  Self clearing.
- */
+/***************************************************************************//**
+ * @brief Sets the RXADC calibration start value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 8-bit unsigned integer representing the calibration start
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RxadcCcalStart_Set(void *device,
     uint8_t value)
 {
@@ -11869,9 +19512,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_RxadcCcalStart_Set(void *device,
     return status;
 }
 
-/**
- * start ccal.  Self clearing.
- */
+/***************************************************************************//**
+ * @brief Retrieves the RXADC calibration start value from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved calibration
+ * start value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RxadcCcalStart_Get(void *device,
     uint8_t *value)
 {
@@ -11886,9 +19536,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_RxadcCcalStart_Get(void *device,
 }
 
 
-/**
- * Rxadc G Measured
- */
+/***************************************************************************//**
+ * @brief Retrieves the measured value from the RXADC G register of the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a 16-bit unsigned integer where the measured value
+ * will be stored.
+ * @return Returns the status of the read operations, where a status of 0
+ * indicates success.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RxadcGMeasured_Get(void *device,
     uint16_t *value)
 {
@@ -11907,9 +19565,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_RxadcGMeasured_Get(void *device,
 }
 
 
-/**
- * Rxadc N1 Count value
- */
+/***************************************************************************//**
+ * @brief Retrieves the ADC N1 count from the device's register map.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved ADC
+ * N1 count will be stored.
+ * @return Returns the status of the read operations, with `*value` containing
+ * the combined ADC N1 count from two registers.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RxadcN1Count_Get(void *device,
     uint16_t *value)
 {
@@ -11928,9 +19593,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_RxadcN1Count_Get(void *device,
 }
 
 
-/**
- * Rxadc N2 Count value
- */
+/***************************************************************************//**
+ * @brief Retrieves the ADC N2 count from the device's register map.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved ADC
+ * N2 count will be stored.
+ * @return Returns the status of the read operations, where a status of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RxadcN2Count_Get(void *device,
     uint16_t *value)
 {
@@ -11948,9 +19620,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_RxadcN2Count_Get(void *device,
     return status;
 }
 
-/**
- * Rxadc Pd
- */
+/***************************************************************************//**
+ * @brief Sets the power-down state of the RXADC in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 8-bit unsigned integer representing the power-down state to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RxadcPd_Set(void *device,
     uint8_t value)
 {
@@ -11961,9 +19640,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_RxadcPd_Set(void *device,
     return status;
 }
 
-/**
- * Rxadc Pd
- */
+/***************************************************************************//**
+ * @brief Retrieves the power-down status of the RXADC from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved RXADC
+ * power-down status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RxadcPd_Get(void *device,
     uint8_t *value)
 {
@@ -11977,9 +19663,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_RxadcPd_Get(void *device,
     return status;
 }
 
-/**
- * start rcal.  Self clearing
- */
+/***************************************************************************//**
+ * @brief Sets the RXADC calibration start value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 8-bit unsigned integer representing the calibration start
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RxadcRcalStart_Set(void *device,
     uint8_t value)
 {
@@ -11990,9 +19683,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_RxadcRcalStart_Set(void *device,
     return status;
 }
 
-/**
- * start rcal.  Self clearing
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration value from the RXADC register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved calibration
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RxadcRcalStart_Get(void *device,
     uint8_t *value)
 {
@@ -12006,6 +19707,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_RxadcRcalStart_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RXTIA shift selection in the ADRV9001 device's register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the shift selection value
+ * to be written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RxtiaShiftSel_Set(void *device,
     uint8_t value)
 {
@@ -12016,6 +19727,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_RxtiaShiftSel_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RXTIA shift selection value from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved RXTIA shift
+ * selection value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_RxtiaShiftSel_Get(void *device,
     uint8_t *value)
 {
@@ -12029,9 +19750,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_RxtiaShiftSel_Get(void *device,
     return status;
 }
 
-/**
- * Parity error flag (write to clear)
- */
+/***************************************************************************//**
+ * @brief Sets the BBIC stream error configuration in the SPI register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 32-bit unsigned integer representing the error configuration
+ * value to be set.
+ * @return Returns the status of the last write operation, which indicates
+ * success (0) or an error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp0BbicStreamErrorToSpi_Set(void *device,
     uint32_t value)
 {
@@ -12048,9 +19777,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp0BbicStreamErrorToSpi_Set(void *
     return status;
 }
 
-/**
- * Parity error flag (write to clear)
- */
+/***************************************************************************//**
+ * @brief Retrieves a 24-bit error value from the ADRV9001 device's register
+ * map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved error
+ * value will be stored.
+ * @return Returns the status of the last read operation, which indicates
+ * success (0) or an error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp0BbicStreamErrorToSpi_Get(void *device,
     uint32_t *value)
 {
@@ -12073,9 +19810,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp0BbicStreamErrorToSpi_Get(void *
 }
 
 
-/**
- * Parity error flag (write to clear)
- */
+/***************************************************************************//**
+ * @brief Retrieves the BBIC stream status from the ADRV9001 device by reading
+ * multiple registers.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * stream status will be stored.
+ * @return Returns the status of the last read operation, where a value of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp0BbicStreamStatus_Get(void *device,
     uint32_t *value)
 {
@@ -12098,10 +19843,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp0BbicStreamStatus_Get(void *devi
 }
 
 
-/**
- * This field displays the number of the last stream that completed execution (even if it failed and errored out). Each time a stream completes, this register field will get
- * reset with the new stream number value that just completed.
- */
+/***************************************************************************//**
+ * @brief Retrieves the completed stream number from a specific register and
+ * stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the completed stream
+ * number will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp0CompletedStreamNum_Get(void *device,
     uint8_t *value)
 {
@@ -12115,9 +19867,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp0CompletedStreamNum_Get(void *de
     return status;
 }
 
-/**
- * Parity error flag (write to clear)
- */
+/***************************************************************************//**
+ * @brief Sets the ECC data parity error status in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the parity error status
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp0EccDataParityError_Set(void *device,
     uint8_t value)
 {
@@ -12128,9 +19887,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp0EccDataParityError_Set(void *de
     return status;
 }
 
-/**
- * Parity error flag (write to clear)
- */
+/***************************************************************************//**
+ * @brief Retrieves the ECC data parity error status from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved parity error
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp0EccDataParityError_Get(void *device,
     uint8_t *value)
 {
@@ -12144,9 +19910,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp0EccDataParityError_Get(void *de
     return status;
 }
 
-/**
- * Do not correct parity errors
- */
+/***************************************************************************//**
+ * @brief Sets the ECC disable register for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A uint8_t value that indicates whether ECC should be disabled
+ * (1) or enabled (0).
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp0EccDisable_Set(void *device,
     uint8_t value)
 {
@@ -12157,9 +19930,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp0EccDisable_Set(void *device,
     return status;
 }
 
-/**
- * Do not correct parity errors
- */
+/***************************************************************************//**
+ * @brief Retrieves the ECC disable status from a specific register of the
+ * device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved ECC disable
+ * status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp0EccDisable_Get(void *device,
     uint8_t *value)
 {
@@ -12173,9 +19954,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp0EccDisable_Get(void *device,
     return status;
 }
 
-/**
- * Set to interrupt on all parity errors (even correctable ones). Clear to interrupt only for uncorrectable (double bit) errors.
- */
+/***************************************************************************//**
+ * @brief Sets the IRQ sensitivity for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the IRQ sensitivity value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp0IrqSensitivity_Set(void *device,
     uint8_t value)
 {
@@ -12186,9 +19974,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp0IrqSensitivity_Set(void *device
     return status;
 }
 
-/**
- * Set to interrupt on all parity errors (even correctable ones). Clear to interrupt only for uncorrectable (double bit) errors.
- */
+/***************************************************************************//**
+ * @brief Retrieves the IRQ sensitivity setting from a specific register of the
+ * device.
+ *
+ * @param device A pointer to the device structure that contains the necessary
+ * context for the operation.
+ * @param value A pointer to a `uint8_t` variable where the retrieved IRQ
+ * sensitivity value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp0IrqSensitivity_Get(void *device,
     uint8_t *value)
 {
@@ -12202,10 +19998,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp0IrqSensitivity_Get(void *device
     return status;
 }
 
-/**
- * this 8 bit register indicates the last valid stream number. eg: if we have 50 streams in the stream memory, this register should be programmed to a number greater than 50.
- * If a stream execution is requested, for a stream greater than the setting in last_stream_num, the stream error will immediately error out.
- */
+/***************************************************************************//**
+ * @brief Sets the last stream number in the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the last stream number to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp0LastStreamNum_Set(void *device,
     uint8_t value)
 {
@@ -12216,10 +20018,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp0LastStreamNum_Set(void *device,
     return status;
 }
 
-/**
- * this 8 bit register indicates the last valid stream number. eg: if we have 50 streams in the stream memory, this register should be programmed to a number greater than 50.
- * If a stream execution is requested, for a stream greater than the setting in last_stream_num, the stream error will immediately error out.
- */
+/***************************************************************************//**
+ * @brief Retrieves the last stream number from a specific register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the last stream number
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp0LastStreamNum_Get(void *device,
     uint8_t *value)
 {
@@ -12233,9 +20042,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp0LastStreamNum_Get(void *device,
     return status;
 }
 
-/**
- * Setting this bit will mask all bus errors from the memory to the ARM '- this includes parity errors, key mismatch errors etc. (Thus a parity error will not generate a hard fault in the ARM). It is recommended to have the error mask setting on while loading program code into the instruction memories. Mem Hresp Mask
- */
+/***************************************************************************//**
+ * @brief Sets the memory response mask for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the memory response mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp0MemHrespMask_Set(void *device,
     uint8_t value)
 {
@@ -12246,9 +20062,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp0MemHrespMask_Set(void *device,
     return status;
 }
 
-/**
- * Setting this bit will mask all bus errors from the memory to the ARM '- this includes parity errors, key mismatch errors etc. (Thus a parity error will not generate a hard fault in the ARM). It is recommended to have the error mask setting on while loading program code into the instruction memories. Mem Hresp Mask
- */
+/***************************************************************************//**
+ * @brief Retrieves the memory response mask value from a specific register and
+ * stores it in the provided variable.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp0MemHrespMask_Get(void *device,
     uint8_t *value)
 {
@@ -12262,9 +20086,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp0MemHrespMask_Get(void *device,
     return status;
 }
 
-/**
- * 1: Access Flex_SP0 from SPI_TO_AHB
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the ADRV9001 device register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp0Select_Set(void *device,
     uint8_t value)
 {
@@ -12275,9 +20106,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp0Select_Set(void *device,
     return status;
 }
 
-/**
- * 1: Access Flex_SP0 from SPI_TO_AHB
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp0Select_Get(void *device,
     uint8_t *value)
 {
@@ -12291,10 +20130,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp0Select_Get(void *device,
     return status;
 }
 
-/**
- * this data memory address points to the beginning of the stream memory. eg : if stream_base is 0x6000, then stream memory sits at data memory address 0x20006000. 
- * the stream memory can only sit in the data memory (cannot reside in the program memory)
- */
+/***************************************************************************//**
+ * @brief Sets the stream base value in the ADRV9001 device's register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 16-bit unsigned integer representing the stream base value to
+ * be set.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp0StreamBase_Set(void *device,
     uint16_t value)
 {
@@ -12308,10 +20153,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp0StreamBase_Set(void *device,
     return status;
 }
 
-/**
- * this data memory address points to the beginning of the stream memory. eg : if stream_base is 0x6000, then stream memory sits at data memory address 0x20006000. 
- * the stream memory can only sit in the data memory (cannot reside in the program memory)
- */
+/***************************************************************************//**
+ * @brief Retrieves a 16-bit value from two consecutive hardware registers.
+ *
+ * @param device A pointer to the device structure used for hardware
+ * communication.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp0StreamBase_Get(void *device,
     uint16_t *value)
 {
@@ -12329,9 +20180,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp0StreamBase_Get(void *device,
     return status;
 }
 
-/**
- * This error bit is set if any stream triggered by the ARM, command mailbox, radio event etc. or one triggered after an external timer completes, errors out. It can be cleared by writing 1 to it. The cause of the error, the stream number etc. can be accessed through AHB registers. Writing to this bit , also clears all the error related AHB registers.
- */
+/***************************************************************************//**
+ * @brief Sets the stream error status in the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the stream error status
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp0StreamError_Set(void *device,
     uint8_t value)
 {
@@ -12342,9 +20200,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp0StreamError_Set(void *device,
     return status;
 }
 
-/**
- * This error bit is set if any stream triggered by the ARM, command mailbox, radio event etc. or one triggered after an external timer completes, errors out. It can be cleared by writing 1 to it. The cause of the error, the stream number etc. can be accessed through AHB registers. Writing to this bit , also clears all the error related AHB registers.
- */
+/***************************************************************************//**
+ * @brief Retrieves the stream error status from a specific register of the
+ * device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved stream
+ * error value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp0StreamError_Get(void *device,
     uint8_t *value)
 {
@@ -12358,27 +20224,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp0StreamError_Get(void *device,
     return status;
 }
 
-/**
- * This field provides the address for a stream processor readback interface. The architectural registers within the stream processor , as well as an error register can be read out. The addresses of the registers is specified below. 
- * r0_addr         4'h0 		16 bit register data.
- * r1_addr         4'h1 		16 bit register data.
- * r2_addr         4'h2 		16 bit register data.
- * r3_addr         4'h3 		16 bit register data.
- * r4_addr      	4'h4 		16 bit register data.
- * r5_addr      	4'h5 		16 bit register data.
- * r6_addr      	4'h6 		16 bit register data.
- * r7_addr      	4'h7 		16 bit register data.
- * error_reg_addr  4'h8 		7 bits output :
- * 				error_data[0] invalid spi address access
- * 				error_data[1] CHECK_INSTR error
- * 				error_data[2] TIMEOUT error
- * 				error_data[3] stack overflow error
- * 				error_data[4] invalid stream number
- * 				error_data[5] invalid ahb address access error
- * 				error_data[6] invalid stream proc instruction OR external timers error (ran out of external timers) 
- * 				
- * In order to read back the value of the register, stream_proc_rden should be set in the register stream_proc_readback_addr.
- */
+/***************************************************************************//**
+ * @brief Sets the stream processing address in the ADRV9001 device's register
+ * map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp0StreamProcAddr_Set(void *device,
     uint8_t value)
 {
@@ -12389,27 +20245,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp0StreamProcAddr_Set(void *device
     return status;
 }
 
-/**
- * This field provides the address for a stream processor readback interface. The architectural registers within the stream processor , as well as an error register can be read out. The addresses of the registers is specified below. 
- * r0_addr         4'h0 		16 bit register data.
- * r1_addr         4'h1 		16 bit register data.
- * r2_addr         4'h2 		16 bit register data.
- * r3_addr         4'h3 		16 bit register data.
- * r4_addr      	4'h4 		16 bit register data.
- * r5_addr      	4'h5 		16 bit register data.
- * r6_addr      	4'h6 		16 bit register data.
- * r7_addr      	4'h7 		16 bit register data.
- * error_reg_addr  4'h8 		7 bits output :
- * 				error_data[0] invalid spi address access
- * 				error_data[1] CHECK_INSTR error
- * 				error_data[2] TIMEOUT error
- * 				error_data[3] stack overflow error
- * 				error_data[4] invalid stream number
- * 				error_data[5] invalid ahb address access error
- * 				error_data[6] invalid stream proc instruction OR external timers error (ran out of external timers) 
- * 				
- * In order to read back the value of the register, stream_proc_rden should be set in the register stream_proc_readback_addr.
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from a device and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure from which the register value
+ * will be read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp0StreamProcAddr_Get(void *device,
     uint8_t *value)
 {
@@ -12424,9 +20270,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp0StreamProcAddr_Get(void *device
 }
 
 
-/**
- * This field gets populated with the contents of the register specified by the address in the field stream_proc_addr, when stream_proc_rden is 1'b1.
- */
+/***************************************************************************//**
+ * @brief Retrieves data from two specific registers and combines them into a
+ * single 16-bit value.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param value A pointer to a 16-bit unsigned integer where the combined
+ * register values will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the register read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp0StreamProcData_Get(void *device,
     uint16_t *value)
 {
@@ -12444,9 +20297,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp0StreamProcData_Get(void *device
     return status;
 }
 
-/**
- * If this bit is set to 1'b1, then the field stream_proc_data gets populated with the contents of the register specified in the address field stream_proc_addr. This readback feature is meant for debug purposes.
- */
+/***************************************************************************//**
+ * @brief Sets the read enable value for the ADRV9001 device's stream processing
+ * register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp0StreamProcRden_Set(void *device,
     uint8_t value)
 {
@@ -12457,9 +20318,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp0StreamProcRden_Set(void *device
     return status;
 }
 
-/**
- * If this bit is set to 1'b1, then the field stream_proc_data gets populated with the contents of the register specified in the address field stream_proc_addr. This readback feature is meant for debug purposes.
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp0StreamProcRden_Get(void *device,
     uint8_t *value)
 {
@@ -12473,9 +20342,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp0StreamProcRden_Get(void *device
     return status;
 }
 
-/**
- * This bit resets the stream processor , set stream_reset to 1'b1 to reset.
- */
+/***************************************************************************//**
+ * @brief Sets the stream reset value in the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to set for the
+ * stream reset.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp0StreamReset_Set(void *device,
     uint8_t value)
 {
@@ -12486,9 +20362,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp0StreamReset_Set(void *device,
     return status;
 }
 
-/**
- * This bit resets the stream processor , set stream_reset to 1'b1 to reset.
- */
+/***************************************************************************//**
+ * @brief Retrieves the stream reset status from a specific register of the
+ * device.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp0StreamReset_Get(void *device,
     uint8_t *value)
 {
@@ -12502,9 +20386,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp0StreamReset_Get(void *device,
     return status;
 }
 
-/**
- * 64 bit stream processor debug data. Any debug data can be written to this fields by the ARM/stream processor.
- */
+/***************************************************************************//**
+ * @brief Sets debug data for the stream processor by writing parts of a 64-bit
+ * value to specific registers.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param value A 64-bit unsigned integer that contains the debug data to be
+ * written to the registers.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp0StreamprocDebugData_Set(void *device,
     uint64_t value)
 {
@@ -12536,9 +20428,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp0StreamprocDebugData_Set(void *d
     return status;
 }
 
-/**
- * 64 bit stream processor debug data. Any debug data can be written to this fields by the ARM/stream processor.
- */
+/***************************************************************************//**
+ * @brief Retrieves debug data from a series of registers and combines them into
+ * a single 64-bit value.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param value A pointer to a 64-bit integer where the combined register values
+ * will be stored.
+ * @return Returns the status of the last register read operation, with a value
+ * of 0 indicating success.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp0StreamprocDebugData_Get(void *device,
     uint64_t *value)
 {
@@ -12580,9 +20479,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp0StreamprocDebugData_Get(void *d
     return status;
 }
 
-/**
- * Parity error flag (write to clear)
- */
+/***************************************************************************//**
+ * @brief Sets the BBIC stream error value in the SPI register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 32-bit unsigned integer representing the error value to be set
+ * in the SPI registers.
+ * @return Returns the status of the last write operation, indicating success
+ * (0) or failure (non-zero error code).
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp1BbicStreamErrorToSpi_Set(void *device,
     uint32_t value)
 {
@@ -12599,9 +20506,18 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp1BbicStreamErrorToSpi_Set(void *
     return status;
 }
 
-/**
- * Parity error flag (write to clear)
- */
+/***************************************************************************//**
+ * @brief Retrieves a stream error value from the ADRV9001 device's register
+ * map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * stream error value will be stored.
+ * @return Returns the status of the last read operation, indicating success (0)
+ * or failure (non-zero). The `value` pointer contains the combined
+ * stream error value from the three registers.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp1BbicStreamErrorToSpi_Get(void *device,
     uint32_t *value)
 {
@@ -12624,9 +20540,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp1BbicStreamErrorToSpi_Get(void *
 }
 
 
-/**
- * Parity error flag (write to clear)
- */
+/***************************************************************************//**
+ * @brief Retrieves the BBIC stream status from the ADRV9001 device by reading
+ * specific registers.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * stream status will be stored.
+ * @return Returns the status of the read operations, where a status of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp1BbicStreamStatus_Get(void *device,
     uint32_t *value)
 {
@@ -12649,10 +20573,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp1BbicStreamStatus_Get(void *devi
 }
 
 
-/**
- * This field displays the number of the last stream that completed execution (even if it failed and errored out). Each time a stream completes, this register field will get
- * reset with the new stream number value that just completed.
- */
+/***************************************************************************//**
+ * @brief Retrieves the completed stream number from a specific register and
+ * stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the completed stream
+ * number will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp1CompletedStreamNum_Get(void *device,
     uint8_t *value)
 {
@@ -12666,9 +20597,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp1CompletedStreamNum_Get(void *de
     return status;
 }
 
-/**
- * Parity error flag (write to clear)
- */
+/***************************************************************************//**
+ * @brief Sets the ECC data parity error status in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the parity error status
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp1EccDataParityError_Set(void *device,
     uint8_t value)
 {
@@ -12679,9 +20617,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp1EccDataParityError_Set(void *de
     return status;
 }
 
-/**
- * Parity error flag (write to clear)
- */
+/***************************************************************************//**
+ * @brief Retrieves the ECC data parity error status from a specific register of
+ * the device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved parity
+ * error value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp1EccDataParityError_Get(void *device,
     uint8_t *value)
 {
@@ -12695,9 +20641,15 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp1EccDataParityError_Get(void *de
     return status;
 }
 
-/**
- * Do not correct parity errors
- */
+/***************************************************************************//**
+ * @brief Sets the ECC disable register for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A uint8_t value indicating the ECC disable state to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp1EccDisable_Set(void *device,
     uint8_t value)
 {
@@ -12708,9 +20660,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp1EccDisable_Set(void *device,
     return status;
 }
 
-/**
- * Do not correct parity errors
- */
+/***************************************************************************//**
+ * @brief Retrieves the ECC disable status from a specific register of the
+ * device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved ECC
+ * disable status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp1EccDisable_Get(void *device,
     uint8_t *value)
 {
@@ -12724,9 +20684,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp1EccDisable_Get(void *device,
     return status;
 }
 
-/**
- * Set to interrupt on all parity errors (even correctable ones). Clear to interrupt only for uncorrectable (double bit) errors.
- */
+/***************************************************************************//**
+ * @brief Sets the IRQ sensitivity for the SP1 register in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the IRQ sensitivity value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp1IrqSensitivity_Set(void *device,
     uint8_t value)
 {
@@ -12737,9 +20704,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp1IrqSensitivity_Set(void *device
     return status;
 }
 
-/**
- * Set to interrupt on all parity errors (even correctable ones). Clear to interrupt only for uncorrectable (double bit) errors.
- */
+/***************************************************************************//**
+ * @brief Retrieves the IRQ sensitivity value from a specific register of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved IRQ
+ * sensitivity value will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp1IrqSensitivity_Get(void *device,
     uint8_t *value)
 {
@@ -12753,10 +20728,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp1IrqSensitivity_Get(void *device
     return status;
 }
 
-/**
- * this 8 bit register indicates the last valid stream number. eg: if we have 50 streams in the stream memory, this register should be programmed to a number greater than 50.
- * If a stream execution is requested, for a stream greater than the setting in last_stream_num, the stream error will immediately error out.
- */
+/***************************************************************************//**
+ * @brief Sets the last stream number in the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the last stream number to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp1LastStreamNum_Set(void *device,
     uint8_t value)
 {
@@ -12767,10 +20748,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp1LastStreamNum_Set(void *device,
     return status;
 }
 
-/**
- * this 8 bit register indicates the last valid stream number. eg: if we have 50 streams in the stream memory, this register should be programmed to a number greater than 50.
- * If a stream execution is requested, for a stream greater than the setting in last_stream_num, the stream error will immediately error out.
- */
+/***************************************************************************//**
+ * @brief Retrieves the last stream number from a specific register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device context used for reading the register.
+ * @param value A pointer to a uint8_t variable where the last stream number
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp1LastStreamNum_Get(void *device,
     uint8_t *value)
 {
@@ -12784,9 +20771,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp1LastStreamNum_Get(void *device,
     return status;
 }
 
-/**
- * Setting this bit will mask all bus errors from the memory to the ARM '- this includes parity errors, key mismatch errors etc. (Thus a parity error will not generate a hard fault in the ARM). It is recommended to have the error mask setting on while loading program code into the instruction memories. Mem Hresp Mask
- */
+/***************************************************************************//**
+ * @brief Sets the HRESP mask for the SP1 memory in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the HRESP mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp1MemHrespMask_Set(void *device,
     uint8_t value)
 {
@@ -12797,9 +20791,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp1MemHrespMask_Set(void *device,
     return status;
 }
 
-/**
- * Setting this bit will mask all bus errors from the memory to the ARM '- this includes parity errors, key mismatch errors etc. (Thus a parity error will not generate a hard fault in the ARM). It is recommended to have the error mask setting on while loading program code into the instruction memories. Mem Hresp Mask
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific masked response value from a hardware register.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp1MemHrespMask_Get(void *device,
     uint8_t *value)
 {
@@ -12813,9 +20814,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp1MemHrespMask_Get(void *device,
     return status;
 }
 
-/**
- * 1: Access Flex_SP1 from SPI_TO_AHB
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the ADRV9001 device's register
+ * map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns the status of the write operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp1Select_Set(void *device,
     uint8_t value)
 {
@@ -12826,9 +20835,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp1Select_Set(void *device,
     return status;
 }
 
-/**
- * 1: Access Flex_SP1 from SPI_TO_AHB
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp1Select_Get(void *device,
     uint8_t *value)
 {
@@ -12842,10 +20859,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp1Select_Get(void *device,
     return status;
 }
 
-/**
- * this data memory address points to the beginning of the stream memory. eg : if stream_base is 0x6000, then stream memory sits at data memory address 0x20006000. 
- * the stream memory can only sit in the data memory (cannot reside in the program memory)
- */
+/***************************************************************************//**
+ * @brief Sets the base stream value for the ADRV9001 device by writing to
+ * specific registers.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 16-bit unsigned integer representing the value to be set in
+ * the stream base.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp1StreamBase_Set(void *device,
     uint16_t value)
 {
@@ -12859,10 +20883,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp1StreamBase_Set(void *device,
     return status;
 }
 
-/**
- * this data memory address points to the beginning of the stream memory. eg : if stream_base is 0x6000, then stream memory sits at data memory address 0x20006000. 
- * the stream memory can only sit in the data memory (cannot reside in the program memory)
- */
+/***************************************************************************//**
+ * @brief Retrieves a 16-bit value from two consecutive hardware registers.
+ *
+ * @param device A pointer to the device context used for hardware register
+ * access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the read operations, where a value of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp1StreamBase_Get(void *device,
     uint16_t *value)
 {
@@ -12880,9 +20910,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp1StreamBase_Get(void *device,
     return status;
 }
 
-/**
- * This error bit is set if any stream triggered by the ARM, command mailbox, radio event etc. or one triggered after an external timer completes, errors out. It can be cleared by writing 1 to it. The cause of the error, the stream number etc. can be accessed through AHB registers. Writing to this bit , also clears all the error related AHB registers.
- */
+/***************************************************************************//**
+ * @brief Sets the stream error status in the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the stream error status
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp1StreamError_Set(void *device,
     uint8_t value)
 {
@@ -12893,9 +20930,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp1StreamError_Set(void *device,
     return status;
 }
 
-/**
- * This error bit is set if any stream triggered by the ARM, command mailbox, radio event etc. or one triggered after an external timer completes, errors out. It can be cleared by writing 1 to it. The cause of the error, the stream number etc. can be accessed through AHB registers. Writing to this bit , also clears all the error related AHB registers.
- */
+/***************************************************************************//**
+ * @brief Retrieves the stream error status from a specific register of the
+ * device.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a `uint8_t` variable where the retrieved stream
+ * error value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp1StreamError_Get(void *device,
     uint8_t *value)
 {
@@ -12909,27 +20954,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp1StreamError_Get(void *device,
     return status;
 }
 
-/**
- * This field provides the address for a stream processor readback interface. The architectural registers within the stream processor , as well as an error register can be read out. The addresses of the registers is specified below. 
- * r0_addr         4'h0 		16 bit register data.
- * r1_addr         4'h1 		16 bit register data.
- * r2_addr         4'h2 		16 bit register data.
- * r3_addr         4'h3 		16 bit register data.
- * r4_addr      	4'h4 		16 bit register data.
- * r5_addr      	4'h5 		16 bit register data.
- * r6_addr      	4'h6 		16 bit register data.
- * r7_addr      	4'h7 		16 bit register data.
- * error_reg_addr  4'h8 		7 bits output :
- * 				error_data[0] invalid spi address access
- * 				error_data[1] CHECK_INSTR error
- * 				error_data[2] TIMEOUT error
- * 				error_data[3] stack overflow error
- * 				error_data[4] invalid stream number
- * 				error_data[5] invalid ahb address access error
- * 				error_data[6] invalid stream proc instruction OR external timers error (ran out of external timers) 
- * 				
- * In order to read back the value of the register, stream_proc_rden should be set in the register stream_proc_readback_addr.
- */
+/***************************************************************************//**
+ * @brief Sets the stream processing address in the ADRV9001 device's register
+ * map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp1StreamProcAddr_Set(void *device,
     uint8_t value)
 {
@@ -12940,27 +20975,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp1StreamProcAddr_Set(void *device
     return status;
 }
 
-/**
- * This field provides the address for a stream processor readback interface. The architectural registers within the stream processor , as well as an error register can be read out. The addresses of the registers is specified below. 
- * r0_addr         4'h0 		16 bit register data.
- * r1_addr         4'h1 		16 bit register data.
- * r2_addr         4'h2 		16 bit register data.
- * r3_addr         4'h3 		16 bit register data.
- * r4_addr      	4'h4 		16 bit register data.
- * r5_addr      	4'h5 		16 bit register data.
- * r6_addr      	4'h6 		16 bit register data.
- * r7_addr      	4'h7 		16 bit register data.
- * error_reg_addr  4'h8 		7 bits output :
- * 				error_data[0] invalid spi address access
- * 				error_data[1] CHECK_INSTR error
- * 				error_data[2] TIMEOUT error
- * 				error_data[3] stack overflow error
- * 				error_data[4] invalid stream number
- * 				error_data[5] invalid ahb address access error
- * 				error_data[6] invalid stream proc instruction OR external timers error (ran out of external timers) 
- * 				
- * In order to read back the value of the register, stream_proc_rden should be set in the register stream_proc_readback_addr.
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from a device and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure from which the register value
+ * will be read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp1StreamProcAddr_Get(void *device,
     uint8_t *value)
 {
@@ -12975,9 +21000,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp1StreamProcAddr_Get(void *device
 }
 
 
-/**
- * This field gets populated with the contents of the register specified by the address in the field stream_proc_addr, when stream_proc_rden is 1'b1.
- */
+/***************************************************************************//**
+ * @brief Retrieves data from two specific registers and combines them into a
+ * single 16-bit value.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param value A pointer to a 16-bit unsigned integer where the combined
+ * register values will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if any read operation fails.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp1StreamProcData_Get(void *device,
     uint16_t *value)
 {
@@ -12995,9 +21027,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp1StreamProcData_Get(void *device
     return status;
 }
 
-/**
- * If this bit is set to 1'b1, then the field stream_proc_data gets populated with the contents of the register specified in the address field stream_proc_addr. This readback feature is meant for debug purposes.
- */
+/***************************************************************************//**
+ * @brief Sets the read enable value for the SP1 stream processing in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the read enable.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp1StreamProcRden_Set(void *device,
     uint8_t value)
 {
@@ -13008,9 +21048,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp1StreamProcRden_Set(void *device
     return status;
 }
 
-/**
- * If this bit is set to 1'b1, then the field stream_proc_data gets populated with the contents of the register specified in the address field stream_proc_addr. This readback feature is meant for debug purposes.
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from a device and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure from which the register value
+ * will be read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp1StreamProcRden_Get(void *device,
     uint8_t *value)
 {
@@ -13024,9 +21072,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp1StreamProcRden_Get(void *device
     return status;
 }
 
-/**
- * This bit resets the stream processor , set stream_reset to 1'b1 to reset.
- */
+/***************************************************************************//**
+ * @brief Sets the stream reset value in the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the stream reset register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp1StreamReset_Set(void *device,
     uint8_t value)
 {
@@ -13037,9 +21092,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp1StreamReset_Set(void *device,
     return status;
 }
 
-/**
- * This bit resets the stream processor , set stream_reset to 1'b1 to reset.
- */
+/***************************************************************************//**
+ * @brief Retrieves the stream reset status from a specific register of the
+ * device.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp1StreamReset_Get(void *device,
     uint8_t *value)
 {
@@ -13053,9 +21116,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp1StreamReset_Get(void *device,
     return status;
 }
 
-/**
- * 64 bit stream processor debug data. Any debug data can be written to this fields by the ARM/stream processor.
- */
+/***************************************************************************//**
+ * @brief Sets debug data for the `Sp1Streamproc` by writing parts of a 64-bit
+ * value to specific registers.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param value A 64-bit unsigned integer that contains the debug data to be
+ * written to the registers.
+ * @return Returns the status of the last register write operation, where a non-
+ * zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp1StreamprocDebugData_Set(void *device,
     uint64_t value)
 {
@@ -13087,9 +21158,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp1StreamprocDebugData_Set(void *d
     return status;
 }
 
-/**
- * 64 bit stream processor debug data. Any debug data can be written to this fields by the ARM/stream processor.
- */
+/***************************************************************************//**
+ * @brief Retrieves debug data from a series of registers and combines them into
+ * a single 64-bit value.
+ *
+ * @param device A pointer to the device context used for register access.
+ * @param value A pointer to a 64-bit integer where the combined register values
+ * will be stored.
+ * @return Returns the status of the last register read operation, with a value
+ * of 0 indicating success.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp1StreamprocDebugData_Get(void *device,
     uint64_t *value)
 {
@@ -13131,9 +21209,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp1StreamprocDebugData_Get(void *d
     return status;
 }
 
-/**
- * Parity error flag (write to clear)
- */
+/***************************************************************************//**
+ * @brief Sets the BBIC stream error configuration in the SPI register of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 32-bit unsigned integer representing the value to be written
+ * to the SPI registers.
+ * @return Returns the status of the last write operation, where a value of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp2BbicStreamErrorToSpi_Set(void *device,
     uint32_t value)
 {
@@ -13150,9 +21236,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp2BbicStreamErrorToSpi_Set(void *
     return status;
 }
 
-/**
- * Parity error flag (write to clear)
- */
+/***************************************************************************//**
+ * @brief Retrieves a 24-bit error status from the ADRV9001 device's SPI
+ * registers.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved error
+ * status will be stored.
+ * @return Returns the status of the last read operation, which indicates
+ * success (0) or an error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp2BbicStreamErrorToSpi_Get(void *device,
     uint32_t *value)
 {
@@ -13175,9 +21269,18 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp2BbicStreamErrorToSpi_Get(void *
 }
 
 
-/**
- * Parity error flag (write to clear)
- */
+/***************************************************************************//**
+ * @brief Retrieves the BBIC stream status from the ADRV9001 device by reading
+ * multiple registers.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * stream status will be stored.
+ * @return Returns the status of the last operation (0 for success, non-zero for
+ * failure) and updates the `value` pointer with the combined 24-bit
+ * stream status.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp2BbicStreamStatus_Get(void *device,
     uint32_t *value)
 {
@@ -13200,10 +21303,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp2BbicStreamStatus_Get(void *devi
 }
 
 
-/**
- * This field displays the number of the last stream that completed execution (even if it failed and errored out). Each time a stream completes, this register field will get
- * reset with the new stream number value that just completed.
- */
+/***************************************************************************//**
+ * @brief Retrieves the completed stream number from a specific register and
+ * stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device context used for reading the register.
+ * @param value A pointer to a uint8_t variable where the completed stream
+ * number will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp2CompletedStreamNum_Get(void *device,
     uint8_t *value)
 {
@@ -13217,9 +21326,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp2CompletedStreamNum_Get(void *de
     return status;
 }
 
-/**
- * Parity error flag (write to clear)
- */
+/***************************************************************************//**
+ * @brief Sets the ECC data parity error status in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the parity error register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp2EccDataParityError_Set(void *device,
     uint8_t value)
 {
@@ -13230,9 +21346,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp2EccDataParityError_Set(void *de
     return status;
 }
 
-/**
- * Parity error flag (write to clear)
- */
+/***************************************************************************//**
+ * @brief Retrieves the ECC data parity error status from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved parity
+ * error value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp2EccDataParityError_Get(void *device,
     uint8_t *value)
 {
@@ -13246,9 +21369,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp2EccDataParityError_Get(void *de
     return status;
 }
 
-/**
- * Do not correct parity errors
- */
+/***************************************************************************//**
+ * @brief Sets the ECC disable configuration for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A uint8_t value that indicates the ECC disable setting to be
+ * applied.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp2EccDisable_Set(void *device,
     uint8_t value)
 {
@@ -13259,9 +21389,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp2EccDisable_Set(void *device,
     return status;
 }
 
-/**
- * Do not correct parity errors
- */
+/***************************************************************************//**
+ * @brief Retrieves the ECC disable status from a specific register of the
+ * device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved ECC
+ * disable status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp2EccDisable_Get(void *device,
     uint8_t *value)
 {
@@ -13275,9 +21413,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp2EccDisable_Get(void *device,
     return status;
 }
 
-/**
- * Set to interrupt on all parity errors (even correctable ones). Clear to interrupt only for uncorrectable (double bit) errors.
- */
+/***************************************************************************//**
+ * @brief Sets the IRQ sensitivity for the SP2 register in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the IRQ sensitivity value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp2IrqSensitivity_Set(void *device,
     uint8_t value)
 {
@@ -13288,9 +21433,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp2IrqSensitivity_Set(void *device
     return status;
 }
 
-/**
- * Set to interrupt on all parity errors (even correctable ones). Clear to interrupt only for uncorrectable (double bit) errors.
- */
+/***************************************************************************//**
+ * @brief Retrieves the IRQ sensitivity setting from a specific register of the
+ * device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved IRQ
+ * sensitivity value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp2IrqSensitivity_Get(void *device,
     uint8_t *value)
 {
@@ -13304,10 +21457,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp2IrqSensitivity_Get(void *device
     return status;
 }
 
-/**
- * this 8 bit register indicates the last valid stream number. eg: if we have 50 streams in the stream memory, this register should be programmed to a number greater than 50.
- * If a stream execution is requested, for a stream greater than the setting in last_stream_num, the stream error will immediately error out.
- */
+/***************************************************************************//**
+ * @brief Sets the last stream number in the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the last stream number to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp2LastStreamNum_Set(void *device,
     uint8_t value)
 {
@@ -13318,10 +21477,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp2LastStreamNum_Set(void *device,
     return status;
 }
 
-/**
- * this 8 bit register indicates the last valid stream number. eg: if we have 50 streams in the stream memory, this register should be programmed to a number greater than 50.
- * If a stream execution is requested, for a stream greater than the setting in last_stream_num, the stream error will immediately error out.
- */
+/***************************************************************************//**
+ * @brief Retrieves the last stream number from a specific register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the last stream number
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp2LastStreamNum_Get(void *device,
     uint8_t *value)
 {
@@ -13335,9 +21501,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp2LastStreamNum_Get(void *device,
     return status;
 }
 
-/**
- * Setting this bit will mask all bus errors from the memory to the ARM '- this includes parity errors, key mismatch errors etc. (Thus a parity error will not generate a hard fault in the ARM). It is recommended to have the error mask setting on while loading program code into the instruction memories. Mem Hresp Mask
- */
+/***************************************************************************//**
+ * @brief Sets the memory response mask for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the memory response mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp2MemHrespMask_Set(void *device,
     uint8_t value)
 {
@@ -13348,9 +21521,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp2MemHrespMask_Set(void *device,
     return status;
 }
 
-/**
- * Setting this bit will mask all bus errors from the memory to the ARM '- this includes parity errors, key mismatch errors etc. (Thus a parity error will not generate a hard fault in the ARM). It is recommended to have the error mask setting on while loading program code into the instruction memories. Mem Hresp Mask
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp2MemHrespMask_Get(void *device,
     uint8_t *value)
 {
@@ -13364,9 +21544,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp2MemHrespMask_Get(void *device,
     return status;
 }
 
-/**
- * 1: Access Flex_SP2 from SPI_TO_AHB
- */
+/***************************************************************************//**
+ * @brief Sets the SP2 selection value in the ADRV9001 device's register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the SP2 selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp2Select_Set(void *device,
     uint8_t value)
 {
@@ -13377,9 +21564,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp2Select_Set(void *device,
     return status;
 }
 
-/**
- * 1: Access Flex_SP2 from SPI_TO_AHB
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific value from a hardware register and stores it in
+ * the provided pointer.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp2Select_Get(void *device,
     uint8_t *value)
 {
@@ -13393,10 +21588,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp2Select_Get(void *device,
     return status;
 }
 
-/**
- * this data memory address points to the beginning of the stream memory. eg : if stream_base is 0x6000, then stream memory sits at data memory address 0x20006000. 
- * the stream memory can only sit in the data memory (cannot reside in the program memory)
- */
+/***************************************************************************//**
+ * @brief Sets the SP2 stream base register values for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 16-bit unsigned integer representing the value to be written
+ * to the SP2 stream base registers.
+ * @return Returns the status of the last write operation, indicating success
+ * (0) or an error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp2StreamBase_Set(void *device,
     uint16_t value)
 {
@@ -13410,10 +21611,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp2StreamBase_Set(void *device,
     return status;
 }
 
-/**
- * this data memory address points to the beginning of the stream memory. eg : if stream_base is 0x6000, then stream memory sits at data memory address 0x20006000. 
- * the stream memory can only sit in the data memory (cannot reside in the program memory)
- */
+/***************************************************************************//**
+ * @brief Retrieves a 16-bit value from two consecutive hardware registers.
+ *
+ * @param device A pointer to the device structure used for hardware
+ * communication.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the register read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp2StreamBase_Get(void *device,
     uint16_t *value)
 {
@@ -13431,9 +21638,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp2StreamBase_Get(void *device,
     return status;
 }
 
-/**
- * This error bit is set if any stream triggered by the ARM, command mailbox, radio event etc. or one triggered after an external timer completes, errors out. It can be cleared by writing 1 to it. The cause of the error, the stream number etc. can be accessed through AHB registers. Writing to this bit , also clears all the error related AHB registers.
- */
+/***************************************************************************//**
+ * @brief Sets the stream error status in the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the stream error status
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp2StreamError_Set(void *device,
     uint8_t value)
 {
@@ -13444,9 +21658,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp2StreamError_Set(void *device,
     return status;
 }
 
-/**
- * This error bit is set if any stream triggered by the ARM, command mailbox, radio event etc. or one triggered after an external timer completes, errors out. It can be cleared by writing 1 to it. The cause of the error, the stream number etc. can be accessed through AHB registers. Writing to this bit , also clears all the error related AHB registers.
- */
+/***************************************************************************//**
+ * @brief Retrieves the stream error status from a specific register of the
+ * device.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a `uint8_t` variable where the retrieved stream
+ * error value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp2StreamError_Get(void *device,
     uint8_t *value)
 {
@@ -13460,27 +21682,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp2StreamError_Get(void *device,
     return status;
 }
 
-/**
- * This field provides the address for a stream processor readback interface. The architectural registers within the stream processor , as well as an error register can be read out. The addresses of the registers is specified below. 
- * r0_addr         4'h0 		16 bit register data.
- * r1_addr         4'h1 		16 bit register data.
- * r2_addr         4'h2 		16 bit register data.
- * r3_addr         4'h3 		16 bit register data.
- * r4_addr      	4'h4 		16 bit register data.
- * r5_addr      	4'h5 		16 bit register data.
- * r6_addr      	4'h6 		16 bit register data.
- * r7_addr      	4'h7 		16 bit register data.
- * error_reg_addr  4'h8 		7 bits output :
- * 				error_data[0] invalid spi address access
- * 				error_data[1] CHECK_INSTR error
- * 				error_data[2] TIMEOUT error
- * 				error_data[3] stack overflow error
- * 				error_data[4] invalid stream number
- * 				error_data[5] invalid ahb address access error
- * 				error_data[6] invalid stream proc instruction OR external timers error (ran out of external timers) 
- * 				
- * In order to read back the value of the register, stream_proc_rden should be set in the register stream_proc_readback_addr.
- */
+/***************************************************************************//**
+ * @brief Sets the SP2 stream processing address in the ADRV9001 device's
+ * register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp2StreamProcAddr_Set(void *device,
     uint8_t value)
 {
@@ -13491,27 +21703,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp2StreamProcAddr_Set(void *device
     return status;
 }
 
-/**
- * This field provides the address for a stream processor readback interface. The architectural registers within the stream processor , as well as an error register can be read out. The addresses of the registers is specified below. 
- * r0_addr         4'h0 		16 bit register data.
- * r1_addr         4'h1 		16 bit register data.
- * r2_addr         4'h2 		16 bit register data.
- * r3_addr         4'h3 		16 bit register data.
- * r4_addr      	4'h4 		16 bit register data.
- * r5_addr      	4'h5 		16 bit register data.
- * r6_addr      	4'h6 		16 bit register data.
- * r7_addr      	4'h7 		16 bit register data.
- * error_reg_addr  4'h8 		7 bits output :
- * 				error_data[0] invalid spi address access
- * 				error_data[1] CHECK_INSTR error
- * 				error_data[2] TIMEOUT error
- * 				error_data[3] stack overflow error
- * 				error_data[4] invalid stream number
- * 				error_data[5] invalid ahb address access error
- * 				error_data[6] invalid stream proc instruction OR external timers error (ran out of external timers) 
- * 				
- * In order to read back the value of the register, stream_proc_rden should be set in the register stream_proc_readback_addr.
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from a device and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure from which the register value
+ * will be read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp2StreamProcAddr_Get(void *device,
     uint8_t *value)
 {
@@ -13526,9 +21728,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp2StreamProcAddr_Get(void *device
 }
 
 
-/**
- * This field gets populated with the contents of the register specified by the address in the field stream_proc_addr, when stream_proc_rden is 1'b1.
- */
+/***************************************************************************//**
+ * @brief Retrieves data from two specific registers and combines their values
+ * into a single output.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param value A pointer to a 16-bit unsigned integer where the combined
+ * register values will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if any read operation fails.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp2StreamProcData_Get(void *device,
     uint16_t *value)
 {
@@ -13546,9 +21755,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp2StreamProcData_Get(void *device
     return status;
 }
 
-/**
- * If this bit is set to 1'b1, then the field stream_proc_data gets populated with the contents of the register specified in the address field stream_proc_addr. This readback feature is meant for debug purposes.
- */
+/***************************************************************************//**
+ * @brief Sets the read enable value for the SP2 stream processing in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the read enable.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp2StreamProcRden_Set(void *device,
     uint8_t value)
 {
@@ -13559,9 +21776,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp2StreamProcRden_Set(void *device
     return status;
 }
 
-/**
- * If this bit is set to 1'b1, then the field stream_proc_data gets populated with the contents of the register specified in the address field stream_proc_addr. This readback feature is meant for debug purposes.
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from a device and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure from which the register value
+ * will be read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp2StreamProcRden_Get(void *device,
     uint8_t *value)
 {
@@ -13575,9 +21800,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp2StreamProcRden_Get(void *device
     return status;
 }
 
-/**
- * This bit resets the stream processor , set stream_reset to 1'b1 to reset.
- */
+/***************************************************************************//**
+ * @brief Sets the SP2 stream reset value in the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the SP2 stream reset register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp2StreamReset_Set(void *device,
     uint8_t value)
 {
@@ -13588,9 +21820,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp2StreamReset_Set(void *device,
     return status;
 }
 
-/**
- * This bit resets the stream processor , set stream_reset to 1'b1 to reset.
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register related to the SP2 stream
+ * reset from the device.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp2StreamReset_Get(void *device,
     uint8_t *value)
 {
@@ -13604,9 +21844,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp2StreamReset_Get(void *device,
     return status;
 }
 
-/**
- * 64 bit stream processor debug data. Any debug data can be written to this fields by the ARM/stream processor.
- */
+/***************************************************************************//**
+ * @brief Sets debug data for the SP2 stream processor by writing parts of a
+ * 64-bit value to specific registers.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param value A 64-bit unsigned integer value that will be split and written
+ * to multiple registers.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp2StreamprocDebugData_Set(void *device,
     uint64_t value)
 {
@@ -13638,9 +21886,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp2StreamprocDebugData_Set(void *d
     return status;
 }
 
-/**
- * 64 bit stream processor debug data. Any debug data can be written to this fields by the ARM/stream processor.
- */
+/***************************************************************************//**
+ * @brief Retrieves debug data from a series of registers and combines them into
+ * a single 64-bit value.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param value A pointer to a 64-bit integer where the combined register values
+ * will be stored.
+ * @return Returns the status of the last register read operation, with a value
+ * of 0 indicating success.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp2StreamprocDebugData_Get(void *device,
     uint64_t *value)
 {
@@ -13682,9 +21937,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp2StreamprocDebugData_Get(void *d
     return status;
 }
 
-/**
- * Parity error flag (write to clear)
- */
+/***************************************************************************//**
+ * @brief Sets the SPI register values for the BBIC stream error in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 32-bit unsigned integer containing the value to be written to
+ * the SPI registers.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp3BbicStreamErrorToSpi_Set(void *device,
     uint32_t value)
 {
@@ -13701,9 +21964,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp3BbicStreamErrorToSpi_Set(void *
     return status;
 }
 
-/**
- * Parity error flag (write to clear)
- */
+/***************************************************************************//**
+ * @brief Retrieves a 24-bit error value from specific registers of a device and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved error
+ * value will be stored.
+ * @return Returns the status of the last read operation, which indicates
+ * success (0) or an error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp3BbicStreamErrorToSpi_Get(void *device,
     uint32_t *value)
 {
@@ -13726,9 +21997,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp3BbicStreamErrorToSpi_Get(void *
 }
 
 
-/**
- * Parity error flag (write to clear)
- */
+/***************************************************************************//**
+ * @brief Retrieves the stream status from the ADRV9001 device by reading
+ * specific registers.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * stream status will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp3BbicStreamStatus_Get(void *device,
     uint32_t *value)
 {
@@ -13751,10 +22030,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp3BbicStreamStatus_Get(void *devi
 }
 
 
-/**
- * This field displays the number of the last stream that completed execution (even if it failed and errored out). Each time a stream completes, this register field will get
- * reset with the new stream number value that just completed.
- */
+/***************************************************************************//**
+ * @brief Retrieves the completed stream number from a specific register of the
+ * device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the completed stream
+ * number will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp3CompletedStreamNum_Get(void *device,
     uint8_t *value)
 {
@@ -13768,9 +22054,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp3CompletedStreamNum_Get(void *de
     return status;
 }
 
-/**
- * Parity error flag (write to clear)
- */
+/***************************************************************************//**
+ * @brief Sets the ECC data parity error status in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the parity error status
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp3EccDataParityError_Set(void *device,
     uint8_t value)
 {
@@ -13781,9 +22074,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp3EccDataParityError_Set(void *de
     return status;
 }
 
-/**
- * Parity error flag (write to clear)
- */
+/***************************************************************************//**
+ * @brief Retrieves the ECC data parity error status from a specific register of
+ * the device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved parity
+ * error value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp3EccDataParityError_Get(void *device,
     uint8_t *value)
 {
@@ -13797,9 +22098,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp3EccDataParityError_Get(void *de
     return status;
 }
 
-/**
- * Do not correct parity errors
- */
+/***************************************************************************//**
+ * @brief Sets the ECC disable configuration for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A uint8_t value indicating the ECC disable setting to be
+ * applied.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp3EccDisable_Set(void *device,
     uint8_t value)
 {
@@ -13810,9 +22118,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp3EccDisable_Set(void *device,
     return status;
 }
 
-/**
- * Do not correct parity errors
- */
+/***************************************************************************//**
+ * @brief Retrieves the ECC disable status from a specific register of the
+ * device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved ECC disable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp3EccDisable_Get(void *device,
     uint8_t *value)
 {
@@ -13826,9 +22142,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp3EccDisable_Get(void *device,
     return status;
 }
 
-/**
- * Set to interrupt on all parity errors (even correctable ones). Clear to interrupt only for uncorrectable (double bit) errors.
- */
+/***************************************************************************//**
+ * @brief Sets the IRQ sensitivity for the ADRV9001 device by writing a
+ * specified value to a specific register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the IRQ sensitivity value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp3IrqSensitivity_Set(void *device,
     uint8_t value)
 {
@@ -13839,9 +22163,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp3IrqSensitivity_Set(void *device
     return status;
 }
 
-/**
- * Set to interrupt on all parity errors (even correctable ones). Clear to interrupt only for uncorrectable (double bit) errors.
- */
+/***************************************************************************//**
+ * @brief Retrieves the IRQ sensitivity setting from a specific register of the
+ * device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved IRQ
+ * sensitivity value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp3IrqSensitivity_Get(void *device,
     uint8_t *value)
 {
@@ -13855,10 +22187,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp3IrqSensitivity_Get(void *device
     return status;
 }
 
-/**
- * this 8 bit register indicates the last valid stream number. eg: if we have 50 streams in the stream memory, this register should be programmed to a number greater than 50.
- * If a stream execution is requested, for a stream greater than the setting in last_stream_num, the stream error will immediately error out.
- */
+/***************************************************************************//**
+ * @brief Sets the last stream number in the ADRV9001 NVS register.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the last stream number to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp3LastStreamNum_Set(void *device,
     uint8_t value)
 {
@@ -13869,10 +22207,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp3LastStreamNum_Set(void *device,
     return status;
 }
 
-/**
- * this 8 bit register indicates the last valid stream number. eg: if we have 50 streams in the stream memory, this register should be programmed to a number greater than 50.
- * If a stream execution is requested, for a stream greater than the setting in last_stream_num, the stream error will immediately error out.
- */
+/***************************************************************************//**
+ * @brief Retrieves the last stream number from a specific register in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved stream
+ * number will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp3LastStreamNum_Get(void *device,
     uint8_t *value)
 {
@@ -13886,9 +22231,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp3LastStreamNum_Get(void *device,
     return status;
 }
 
-/**
- * Setting this bit will mask all bus errors from the memory to the ARM '- this includes parity errors, key mismatch errors etc. (Thus a parity error will not generate a hard fault in the ARM). It is recommended to have the error mask setting on while loading program code into the instruction memories. Mem Hresp Mask
- */
+/***************************************************************************//**
+ * @brief Sets the HRESP mask for the SP3 memory in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * as the HRESP mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp3MemHrespMask_Set(void *device,
     uint8_t value)
 {
@@ -13899,9 +22251,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp3MemHrespMask_Set(void *device,
     return status;
 }
 
-/**
- * Setting this bit will mask all bus errors from the memory to the ARM '- this includes parity errors, key mismatch errors etc. (Thus a parity error will not generate a hard fault in the ARM). It is recommended to have the error mask setting on while loading program code into the instruction memories. Mem Hresp Mask
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device from which the register value is read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp3MemHrespMask_Get(void *device,
     uint8_t *value)
 {
@@ -13915,9 +22275,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp3MemHrespMask_Get(void *device,
     return status;
 }
 
-/**
- * 1: Access Flex_SP3 from SPI_TO_AHB
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the ADRV9001 device's register
+ * map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp3Select_Set(void *device,
     uint8_t value)
 {
@@ -13928,9 +22296,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp3Select_Set(void *device,
     return status;
 }
 
-/**
- * 1: Access Flex_SP3 from SPI_TO_AHB
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware
+ * communication.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp3Select_Get(void *device,
     uint8_t *value)
 {
@@ -13944,10 +22320,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp3Select_Get(void *device,
     return status;
 }
 
-/**
- * this data memory address points to the beginning of the stream memory. eg : if stream_base is 0x6000, then stream memory sits at data memory address 0x20006000. 
- * the stream memory can only sit in the data memory (cannot reside in the program memory)
- */
+/***************************************************************************//**
+ * @brief Sets the SP3 stream base register values for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 16-bit unsigned integer representing the value to be written
+ * to the SP3 stream base registers.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp3StreamBase_Set(void *device,
     uint16_t value)
 {
@@ -13961,10 +22343,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp3StreamBase_Set(void *device,
     return status;
 }
 
-/**
- * this data memory address points to the beginning of the stream memory. eg : if stream_base is 0x6000, then stream memory sits at data memory address 0x20006000. 
- * the stream memory can only sit in the data memory (cannot reside in the program memory)
- */
+/***************************************************************************//**
+ * @brief Retrieves a 16-bit value from two consecutive registers in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the last register read operation, which
+ * indicates success (0) or failure (non-zero).
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp3StreamBase_Get(void *device,
     uint16_t *value)
 {
@@ -13982,9 +22371,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp3StreamBase_Get(void *device,
     return status;
 }
 
-/**
- * This error bit is set if any stream triggered by the ARM, command mailbox, radio event etc. or one triggered after an external timer completes, errors out. It can be cleared by writing 1 to it. The cause of the error, the stream number etc. can be accessed through AHB registers. Writing to this bit , also clears all the error related AHB registers.
- */
+/***************************************************************************//**
+ * @brief Sets the SP3 stream error status in the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the stream error register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp3StreamError_Set(void *device,
     uint8_t value)
 {
@@ -13995,9 +22391,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp3StreamError_Set(void *device,
     return status;
 }
 
-/**
- * This error bit is set if any stream triggered by the ARM, command mailbox, radio event etc. or one triggered after an external timer completes, errors out. It can be cleared by writing 1 to it. The cause of the error, the stream number etc. can be accessed through AHB registers. Writing to this bit , also clears all the error related AHB registers.
- */
+/***************************************************************************//**
+ * @brief Retrieves the stream error status from a specific register of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved stream error
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp3StreamError_Get(void *device,
     uint8_t *value)
 {
@@ -14011,27 +22415,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp3StreamError_Get(void *device,
     return status;
 }
 
-/**
- * This field provides the address for a stream processor readback interface. The architectural registers within the stream processor , as well as an error register can be read out. The addresses of the registers is specified below. 
- * r0_addr         4'h0 		16 bit register data.
- * r1_addr         4'h1 		16 bit register data.
- * r2_addr         4'h2 		16 bit register data.
- * r3_addr         4'h3 		16 bit register data.
- * r4_addr      	4'h4 		16 bit register data.
- * r5_addr      	4'h5 		16 bit register data.
- * r6_addr      	4'h6 		16 bit register data.
- * r7_addr      	4'h7 		16 bit register data.
- * error_reg_addr  4'h8 		7 bits output :
- * 				error_data[0] invalid spi address access
- * 				error_data[1] CHECK_INSTR error
- * 				error_data[2] TIMEOUT error
- * 				error_data[3] stack overflow error
- * 				error_data[4] invalid stream number
- * 				error_data[5] invalid ahb address access error
- * 				error_data[6] invalid stream proc instruction OR external timers error (ran out of external timers) 
- * 				
- * In order to read back the value of the register, stream_proc_rden should be set in the register stream_proc_readback_addr.
- */
+/***************************************************************************//**
+ * @brief Sets the SP3 stream processing address in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the SP3 stream processing address.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp3StreamProcAddr_Set(void *device,
     uint8_t value)
 {
@@ -14042,27 +22435,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp3StreamProcAddr_Set(void *device
     return status;
 }
 
-/**
- * This field provides the address for a stream processor readback interface. The architectural registers within the stream processor , as well as an error register can be read out. The addresses of the registers is specified below. 
- * r0_addr         4'h0 		16 bit register data.
- * r1_addr         4'h1 		16 bit register data.
- * r2_addr         4'h2 		16 bit register data.
- * r3_addr         4'h3 		16 bit register data.
- * r4_addr      	4'h4 		16 bit register data.
- * r5_addr      	4'h5 		16 bit register data.
- * r6_addr      	4'h6 		16 bit register data.
- * r7_addr      	4'h7 		16 bit register data.
- * error_reg_addr  4'h8 		7 bits output :
- * 				error_data[0] invalid spi address access
- * 				error_data[1] CHECK_INSTR error
- * 				error_data[2] TIMEOUT error
- * 				error_data[3] stack overflow error
- * 				error_data[4] invalid stream number
- * 				error_data[5] invalid ahb address access error
- * 				error_data[6] invalid stream proc instruction OR external timers error (ran out of external timers) 
- * 				
- * In order to read back the value of the register, stream_proc_rden should be set in the register stream_proc_readback_addr.
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from a device and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure from which the register value
+ * will be read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp3StreamProcAddr_Get(void *device,
     uint8_t *value)
 {
@@ -14077,9 +22460,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp3StreamProcAddr_Get(void *device
 }
 
 
-/**
- * This field gets populated with the contents of the register specified by the address in the field stream_proc_addr, when stream_proc_rden is 1'b1.
- */
+/***************************************************************************//**
+ * @brief Retrieves data from two specific registers and combines their values
+ * into a single output.
+ *
+ * @param device A pointer to the device context used for register access.
+ * @param value A pointer to a 16-bit unsigned integer where the combined
+ * register values will be stored.
+ * @return Returns the status of the last register read operation, which
+ * indicates success (0) or failure (non-zero).
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp3StreamProcData_Get(void *device,
     uint16_t *value)
 {
@@ -14097,9 +22487,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp3StreamProcData_Get(void *device
     return status;
 }
 
-/**
- * If this bit is set to 1'b1, then the field stream_proc_data gets populated with the contents of the register specified in the address field stream_proc_addr. This readback feature is meant for debug purposes.
- */
+/***************************************************************************//**
+ * @brief Sets the read enable value for the SP3 stream processing in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the read enable.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp3StreamProcRden_Set(void *device,
     uint8_t value)
 {
@@ -14110,9 +22508,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp3StreamProcRden_Set(void *device
     return status;
 }
 
-/**
- * If this bit is set to 1'b1, then the field stream_proc_data gets populated with the contents of the register specified in the address field stream_proc_addr. This readback feature is meant for debug purposes.
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from a device and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure from which the register value
+ * will be read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp3StreamProcRden_Get(void *device,
     uint8_t *value)
 {
@@ -14126,9 +22532,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp3StreamProcRden_Get(void *device
     return status;
 }
 
-/**
- * This bit resets the stream processor , set stream_reset to 1'b1 to reset.
- */
+/***************************************************************************//**
+ * @brief Sets the stream reset value in the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the stream reset register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp3StreamReset_Set(void *device,
     uint8_t value)
 {
@@ -14139,9 +22552,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp3StreamReset_Set(void *device,
     return status;
 }
 
-/**
- * This bit resets the stream processor , set stream_reset to 1'b1 to reset.
- */
+/***************************************************************************//**
+ * @brief Retrieves the stream reset status from a specific register of the
+ * device.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp3StreamReset_Get(void *device,
     uint8_t *value)
 {
@@ -14155,9 +22576,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp3StreamReset_Get(void *device,
     return status;
 }
 
-/**
- * 64 bit stream processor debug data. Any debug data can be written to this fields by the ARM/stream processor.
- */
+/***************************************************************************//**
+ * @brief Sets debug data for the SP3 stream processor by writing parts of a
+ * 64-bit value to specific registers.
+ *
+ * @param device A pointer to the device context used for register access.
+ * @param value A 64-bit integer value to be split and written to multiple
+ * registers.
+ * @return Returns the status of the last register write operation, where a non-
+ * zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp3StreamprocDebugData_Set(void *device,
     uint64_t value)
 {
@@ -14189,9 +22617,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp3StreamprocDebugData_Set(void *d
     return status;
 }
 
-/**
- * 64 bit stream processor debug data. Any debug data can be written to this fields by the ARM/stream processor.
- */
+/***************************************************************************//**
+ * @brief Retrieves a 64-bit debug data value from a series of hardware
+ * registers.
+ *
+ * @param device A pointer to the device context from which the debug data is to
+ * be read.
+ * @param value A pointer to a 64-bit integer where the retrieved debug data
+ * will be stored.
+ * @return Returns 0 on success or a non-zero error code if any register read
+ * operation fails.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Sp3StreamprocDebugData_Get(void *device,
     uint64_t *value)
 {
@@ -14233,9 +22669,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Sp3StreamprocDebugData_Get(void *d
     return status;
 }
 
-/**
- * Auto increment for bus address. Incremented by the size specified in bus_size on every transaction (read or write).
- */
+/***************************************************************************//**
+ * @brief Sets the automatic increment value in the ADRV9001 register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * automatic increment.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SpAutoIncr_Set(void *device,
     uint8_t value)
 {
@@ -14246,9 +22689,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SpAutoIncr_Set(void *device,
     return status;
 }
 
-/**
- * Auto increment for bus address. Incremented by the size specified in bus_size on every transaction (read or write).
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from a device and stores it in a
+ * provided variable.
+ *
+ * @param device A pointer to the device structure from which the register value
+ * will be read.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SpAutoIncr_Get(void *device,
     uint8_t *value)
 {
@@ -14262,9 +22713,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_SpAutoIncr_Get(void *device,
     return status;
 }
 
-/**
- * Address input for DMA. Only bits [16:2] are used in legacy mode. On writing this bitfield, a read will be performed for the specified bus_size. Data can then be read back any time.
- */
+/***************************************************************************//**
+ * @brief Sets the SPI bus address in the ADRV9001 device's register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 32-bit unsigned integer representing the SPI bus address to be
+ * set.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if any of the write operations fail.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SpBusAddr_Set(void *device,
     uint32_t value)
 {
@@ -14287,9 +22745,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SpBusAddr_Set(void *device,
     return status;
 }
 
-/**
- * Address input for DMA. Only bits [16:2] are used in legacy mode. On writing this bitfield, a read will be performed for the specified bus_size. Data can then be read back any time.
- */
+/***************************************************************************//**
+ * @brief Retrieves a 40-bit address from a series of registers and fields in
+ * the device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * address will be stored.
+ * @return Returns the status of the last read operation, with a value of 0
+ * indicating success.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SpBusAddr_Get(void *device,
     uint32_t *value)
 {
@@ -14319,9 +22785,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_SpBusAddr_Get(void *device,
     return status;
 }
 
-/**
- * Flag indicating bus error response. Write to clear.
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the device's register map with a given value.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SpBusResponse_Set(void *device,
     uint8_t value)
 {
@@ -14332,9 +22805,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SpBusResponse_Set(void *device,
     return status;
 }
 
-/**
- * Flag indicating bus error response. Write to clear.
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from a device and stores it in the
+ * provided pointer.
+ *
+ * @param device A pointer to the device structure from which the register value
+ * will be read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SpBusResponse_Get(void *device,
     uint8_t *value)
 {
@@ -14348,9 +22829,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_SpBusResponse_Get(void *device,
     return status;
 }
 
-/**
- * Size of read/write. 0 = byte, 1 = half-word, 2 = full-word, 3 = invalid. Legacy mode overrides this to full-word reads and byte writes.
- */
+/***************************************************************************//**
+ * @brief Sets the SPI bus size for the ADRV9001 device by writing a specified
+ * value to a specific register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the desired SPI bus size.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SpBusSize_Set(void *device,
     uint8_t value)
 {
@@ -14361,9 +22849,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SpBusSize_Set(void *device,
     return status;
 }
 
-/**
- * Size of read/write. 0 = byte, 1 = half-word, 2 = full-word, 3 = invalid. Legacy mode overrides this to full-word reads and byte writes.
- */
+/***************************************************************************//**
+ * @brief Retrieves the size of the SPI bus from a specific register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved SPI bus size
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SpBusSize_Get(void *device,
     uint8_t *value)
 {
@@ -14378,9 +22874,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SpBusSize_Get(void *device,
 }
 
 
-/**
- * Flag indicating bus is stalled.
- */
+/***************************************************************************//**
+ * @brief Retrieves the status of a specific register and stores its value in
+ * the provided pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SpBusWaiting_Get(void *device,
     uint8_t *value)
 {
@@ -14394,9 +22898,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_SpBusWaiting_Get(void *device,
     return status;
 }
 
-/**
- * Uses style of DMA access from Mykonos and previous projects. Only SRAM is accessible.
- */
+/***************************************************************************//**
+ * @brief Sets the legacy mode value in the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the legacy mode value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SpLegacyMode_Set(void *device,
     uint8_t value)
 {
@@ -14407,9 +22918,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SpLegacyMode_Set(void *device,
     return status;
 }
 
-/**
- * Uses style of DMA access from Mykonos and previous projects. Only SRAM is accessible.
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SpLegacyMode_Get(void *device,
     uint8_t *value)
 {
@@ -14423,9 +22942,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_SpLegacyMode_Get(void *device,
     return status;
 }
 
-/**
- * (B0 New) Enable stream Proc Main clock
- */
+/***************************************************************************//**
+ * @brief Sets the main clock enable register for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A uint8_t value representing the clock enable state to be set (0
+ * or 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SpMainClkEn_Set(void *device,
     uint8_t value)
 {
@@ -14436,9 +22962,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SpMainClkEn_Set(void *device,
     return status;
 }
 
-/**
- * (B0 New) Enable stream Proc Main clock
- */
+/***************************************************************************//**
+ * @brief Retrieves the main clock enable status from a specific register of the
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SpMainClkEn_Get(void *device,
     uint8_t *value)
 {
@@ -14452,9 +22986,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SpMainClkEn_Get(void *device,
     return status;
 }
 
-/**
- * Data input/output for DMA. Writing this register causes a bus write transaction to take place. In legacy mode, any byte written will cause that byte to be written to the bus. In non-legacy mode, only writing byte 0 will cause a write transaction for the size specified in bus_size. Reading byte 3 of this register in legacy mode with rd_wrb set will cause new data to be populated. Reading byte 0 of this register in non-legacy mode with rd_wrb set will cause new data to be populated.
- */
+/***************************************************************************//**
+ * @brief The `adrv9001_NvsRegmapCore1_SpMemWriteData_Set` function writes a
+ * 32-bit value to a series of hardware registers.
+ *
+ * @param device A pointer to the device context used for writing to the
+ * hardware registers.
+ * @param value A 32-bit unsigned integer that contains the data to be written
+ * to the registers.
+ * @return The function returns an integer status code indicating the success
+ * (0) or failure (non-zero) of the last register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SpMemWriteData_Set(void *device,
     uint32_t value)
 {
@@ -14474,9 +23016,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SpMemWriteData_Set(void *device,
     return status;
 }
 
-/**
- * Data input/output for DMA. Writing this register causes a bus write transaction to take place. In legacy mode, any byte written will cause that byte to be written to the bus. In non-legacy mode, only writing byte 0 will cause a write transaction for the size specified in bus_size. Reading byte 3 of this register in legacy mode with rd_wrb set will cause new data to be populated. Reading byte 0 of this register in non-legacy mode with rd_wrb set will cause new data to be populated.
- */
+/***************************************************************************//**
+ * @brief Reads data from a series of registers and combines them into a single
+ * 32-bit value.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param value A pointer to a 32-bit unsigned integer where the combined
+ * register values will be stored.
+ * @return Returns the status of the last register read operation, with the
+ * combined register values stored in the location pointed to by the
+ * value parameter.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SpMemWriteData_Get(void *device,
     uint32_t *value)
 {
@@ -14502,9 +23052,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_SpMemWriteData_Get(void *device,
     return status;
 }
 
-/**
- * 1 = read, 0 = write
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the register map of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SpRdWrb_Set(void *device,
     uint8_t value)
 {
@@ -14515,9 +23072,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SpRdWrb_Set(void *device,
     return status;
 }
 
-/**
- * 1 = read, 0 = write
- */
+/***************************************************************************//**
+ * @brief The `adrv9001_NvsRegmapCore1_SpRdWrb_Get` function reads a specific
+ * register value from a device and stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure from which the register value
+ * will be read.
+ * @param value A pointer to a `uint8_t` variable where the read register value
+ * will be stored.
+ * @return The function returns an `int32_t` status code indicating the success
+ * or failure of the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SpRdWrb_Get(void *device,
     uint8_t *value)
 {
@@ -14531,6 +23096,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SpRdWrb_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the output selection for the GPIO RX1 channel control in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the output selection
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioRx1ChanControlOutSel_Set(void *device,
     uint8_t value)
 {
@@ -14541,6 +23117,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioRx1ChanControlOutSel_Se
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the GPIO RX1 channel control output selection value from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioRx1ChanControlOutSel_Get(void *device,
     uint8_t *value)
 {
@@ -14555,6 +23142,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioRx1ChanControlOutSel_Ge
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a value from a specific register and stores it in the
+ * provided pointer.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioRx1In_Get(void *device,
     uint8_t *value)
 {
@@ -14568,6 +23165,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioRx1In_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the output selection for the GPIO RX1 main control in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioRx1MainControlOutSel_Set(void *device,
     uint8_t value)
 {
@@ -14578,6 +23186,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioRx1MainControlOutSel_Se
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided variable.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioRx1MainControlOutSel_Get(void *device,
     uint8_t *value)
 {
@@ -14591,6 +23210,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioRx1MainControlOutSel_Ge
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO output value for the RX1 channel in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the GPIO output.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioRx1Out_Set(void *device,
     uint8_t value)
 {
@@ -14601,6 +23230,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioRx1Out_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a value from a specific register and stores it in the
+ * provided pointer.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioRx1Out_Get(void *device,
     uint8_t *value)
 {
@@ -14614,6 +23253,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioRx1Out_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the output selection for the GPIO RX2 channel control in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the GPIO RX2 channel control output selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioRx2ChanControlOutSel_Set(void *device,
     uint8_t value)
 {
@@ -14624,6 +23274,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioRx2ChanControlOutSel_Se
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device from which the register value is read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioRx2ChanControlOutSel_Get(void *device,
     uint8_t *value)
 {
@@ -14638,6 +23299,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioRx2ChanControlOutSel_Ge
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a value from a specific register and stores it in the
+ * provided pointer.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioRx2In_Get(void *device,
     uint8_t *value)
 {
@@ -14651,6 +23322,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioRx2In_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the output selection for the GPIO RX2 main control in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioRx2MainControlOutSel_Set(void *device,
     uint8_t value)
 {
@@ -14661,6 +23343,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioRx2MainControlOutSel_Se
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided variable.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioRx2MainControlOutSel_Get(void *device,
     uint8_t *value)
 {
@@ -14674,6 +23367,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioRx2MainControlOutSel_Ge
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO output value for the RX2 channel in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the GPIO output.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioRx2Out_Set(void *device,
     uint8_t value)
 {
@@ -14684,6 +23387,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioRx2Out_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a value from a specific register and stores it in the
+ * provided pointer.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioRx2Out_Get(void *device,
     uint8_t *value)
 {
@@ -14697,6 +23410,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioRx2Out_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the output selection for the GPIO transmission channel in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the output selection
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx1ChanControlOutSel_Set(void *device,
     uint8_t value)
 {
@@ -14707,6 +23431,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx1ChanControlOutSel_Se
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the output selection value from a specific register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved output
+ * selection value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx1ChanControlOutSel_Get(void *device,
     uint8_t *value)
 {
@@ -14721,6 +23456,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx1ChanControlOutSel_Ge
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a value from a specific register and stores it in the
+ * provided pointer.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx1In_Get(void *device,
     uint8_t *value)
 {
@@ -14734,6 +23479,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx1In_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the output selection for the main control of the SSI CMOS GPIO
+ * Tx1 in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx1MainControlOutSel_Set(void *device,
     uint8_t value)
 {
@@ -14744,6 +23500,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx1MainControlOutSel_Se
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided variable.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device from which the register value is read.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx1MainControlOutSel_Get(void *device,
     uint8_t *value)
 {
@@ -14757,6 +23524,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx1MainControlOutSel_Ge
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO output value for the SSI CMOS interface in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the GPIO output.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx1Out_Set(void *device,
     uint8_t value)
 {
@@ -14767,6 +23545,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx1Out_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the GPIO output value from a specific register and stores it
+ * in the provided variable.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved GPIO
+ * output value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx1Out_Get(void *device,
     uint8_t *value)
 {
@@ -14780,6 +23569,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx1Out_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO selection for the reference clock in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the GPIO selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx1RefclkGpioSel_Set(void *device,
     uint8_t value)
 {
@@ -14790,6 +23590,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx1RefclkGpioSel_Set(vo
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the GPIO selection value for the reference clock from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved GPIO
+ * selection value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx1RefclkGpioSel_Get(void *device,
     uint8_t *value)
 {
@@ -14804,6 +23615,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx1RefclkGpioSel_Get(vo
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register and stores it in the
+ * provided pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx1RefclkIn_Get(void *device,
     uint8_t *value)
 {
@@ -14817,6 +23639,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx1RefclkIn_Get(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the reference clock output for the GPIO TX1 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the reference clock output.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx1RefclkOut_Set(void *device,
     uint8_t value)
 {
@@ -14827,6 +23660,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx1RefclkOut_Set(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the reference clock output value from a specific register
+ * for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved reference
+ * clock output value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx1RefclkOut_Get(void *device,
     uint8_t *value)
 {
@@ -14840,6 +23684,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx1RefclkOut_Get(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the channel control output selection for the GPIO transmit
+ * interface of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the control register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx2ChanControlOutSel_Set(void *device,
     uint8_t value)
 {
@@ -14850,6 +23705,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx2ChanControlOutSel_Se
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided output variable.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx2ChanControlOutSel_Get(void *device,
     uint8_t *value)
 {
@@ -14864,6 +23729,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx2ChanControlOutSel_Ge
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a value from a specific register and stores it in the
+ * provided pointer.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx2In_Get(void *device,
     uint8_t *value)
 {
@@ -14877,6 +23752,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx2In_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the output selection for the GPIO transmit control of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the control register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx2MainControlOutSel_Set(void *device,
     uint8_t value)
 {
@@ -14887,6 +23773,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx2MainControlOutSel_Se
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided variable.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx2MainControlOutSel_Get(void *device,
     uint8_t *value)
 {
@@ -14900,6 +23797,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx2MainControlOutSel_Ge
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO output value for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the GPIO output.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx2Out_Set(void *device,
     uint8_t value)
 {
@@ -14910,6 +23817,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx2Out_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a value from a specific register and stores it in the
+ * provided output variable.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx2Out_Get(void *device,
     uint8_t *value)
 {
@@ -14923,6 +23840,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx2Out_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO selection for the reference clock in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the GPIO selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx2RefclkGpioSel_Set(void *device,
     uint8_t value)
 {
@@ -14933,6 +23861,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx2RefclkGpioSel_Set(vo
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the GPIO selection value for the reference clock from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved GPIO
+ * selection value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx2RefclkGpioSel_Get(void *device,
     uint8_t *value)
 {
@@ -14947,6 +23886,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx2RefclkGpioSel_Get(vo
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a device register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure from which the register value
+ * will be read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx2RefclkIn_Get(void *device,
     uint8_t *value)
 {
@@ -14960,6 +23910,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx2RefclkIn_Get(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the reference clock output for the GPIO Tx2 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the reference clock output.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx2RefclkOut_Set(void *device,
     uint8_t value)
 {
@@ -14970,6 +23931,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx2RefclkOut_Set(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from a device and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure from which the register value
+ * will be read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx2RefclkOut_Get(void *device,
     uint8_t *value)
 {
@@ -14983,6 +23955,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiCmosGpioTx2RefclkOut_Get(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the SSI RX1 port disable register for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 8-bit unsigned integer that specifies the value to write to
+ * the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiRx1PortDisable_Set(void *device,
     uint8_t value)
 {
@@ -14993,6 +23975,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiRx1PortDisable_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the SSI RX1 port disable status from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved status will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiRx1PortDisable_Get(void *device,
     uint8_t *value)
 {
@@ -15006,6 +23998,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiRx1PortDisable_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the SSI RX2 port disable register for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer that specifies the value to write to
+ * the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiRx2PortDisable_Set(void *device,
     uint8_t value)
 {
@@ -15016,6 +24018,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiRx2PortDisable_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the SSI RX2 port disable status from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved status will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiRx2PortDisable_Get(void *device,
     uint8_t *value)
 {
@@ -15029,6 +24041,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiRx2PortDisable_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Disables the SSI Tx1 port by writing a specified value to a hardware
+ * register.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param value An 8-bit unsigned integer that specifies the value to be written
+ * to the register, determining the state of the SSI Tx1 port.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiTx1PortDisable_Set(void *device,
     uint8_t value)
 {
@@ -15039,6 +24062,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiTx1PortDisable_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the SSI Tx1 port disable status from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved status will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiTx1PortDisable_Get(void *device,
     uint8_t *value)
 {
@@ -15052,6 +24085,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiTx1PortDisable_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the SSI Tx2 port disable register for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A uint8_t value that specifies the disable state to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiTx2PortDisable_Set(void *device,
     uint8_t value)
 {
@@ -15062,6 +24105,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiTx2PortDisable_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the SSI Tx2 port disable status from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved status will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SsiTx2PortDisable_Get(void *device,
     uint8_t *value)
 {
@@ -15075,6 +24128,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_SsiTx2PortDisable_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO0 pin selection in the ADRV9001 device's register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the GPIO0 pin selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_StreamProcGpio0PinSelect_Set(void *device,
     uint8_t value)
 {
@@ -15085,6 +24148,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_StreamProcGpio0PinSelect_Set(void 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the GPIO0 pin selection value from a specific register in
+ * the device.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a uint8_t variable where the retrieved GPIO0 pin
+ * selection value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_StreamProcGpio0PinSelect_Get(void *device,
     uint8_t *value)
 {
@@ -15098,6 +24172,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_StreamProcGpio0PinSelect_Get(void 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO pin selection for the ADRV9001 device by writing a
+ * specified value to a specific register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the GPIO pin selection register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_StreamProcGpio1PinSelect_Set(void *device,
     uint8_t value)
 {
@@ -15108,6 +24193,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_StreamProcGpio1PinSelect_Set(void 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the GPIO pin selection value from a specific register of the
+ * device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved GPIO pin
+ * selection value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_StreamProcGpio1PinSelect_Get(void *device,
     uint8_t *value)
 {
@@ -15121,6 +24217,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_StreamProcGpio1PinSelect_Get(void 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO2 pin selection in the ADRV9001 device's register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the GPIO2 pin selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_StreamProcGpio2PinSelect_Set(void *device,
     uint8_t value)
 {
@@ -15131,6 +24237,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_StreamProcGpio2PinSelect_Set(void 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the GPIO2 pin selection value from a specific register in
+ * the device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved GPIO2 pin
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_StreamProcGpio2PinSelect_Get(void *device,
     uint8_t *value)
 {
@@ -15144,6 +24261,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_StreamProcGpio2PinSelect_Get(void 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO3 pin selection in the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the GPIO3 pin selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_StreamProcGpio3PinSelect_Set(void *device,
     uint8_t value)
 {
@@ -15154,6 +24281,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_StreamProcGpio3PinSelect_Set(void 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided variable.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_StreamProcGpio3PinSelect_Get(void *device,
     uint8_t *value)
 {
@@ -15167,6 +24304,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_StreamProcGpio3PinSelect_Get(void 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO pin mask for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the GPIO pin mask value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the GPIO pin mask setting operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_StreamProcGpioPinMask_Set(void *device,
     uint8_t value)
 {
@@ -15177,6 +24324,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_StreamProcGpioPinMask_Set(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the GPIO pin mask value from a specific register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved GPIO pin
+ * mask will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_StreamProcGpioPinMask_Get(void *device,
     uint8_t *value)
 {
@@ -15190,9 +24348,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_StreamProcGpioPinMask_Get(void *de
     return status;
 }
 
-/**
- * General purpose SW spare bits
- */
+/***************************************************************************//**
+ * @brief Sets the value of the spare register in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the spare register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SwSpareRegister0_Set(void *device,
     uint8_t value)
 {
@@ -15203,9 +24368,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SwSpareRegister0_Set(void *device,
     return status;
 }
 
-/**
- * General purpose SW spare bits
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific spare register from the device and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SwSpareRegister0_Get(void *device,
     uint8_t *value)
 {
@@ -15219,6 +24392,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_SwSpareRegister0_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the spare register in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the spare register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SwSpareRegister1_Set(void *device,
     uint8_t value)
 {
@@ -15229,6 +24412,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SwSpareRegister1_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific spare register from the device and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SwSpareRegister1_Get(void *device,
     uint8_t *value)
 {
@@ -15242,6 +24436,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_SwSpareRegister1_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the spare register in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the spare register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SwSpareRegister2_Set(void *device,
     uint8_t value)
 {
@@ -15252,6 +24456,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SwSpareRegister2_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the spare register from the device and stores
+ * it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SwSpareRegister2_Get(void *device,
     uint8_t *value)
 {
@@ -15265,6 +24480,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_SwSpareRegister2_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the spare register 3 in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the spare register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SwSpareRegister3_Set(void *device,
     uint8_t value)
 {
@@ -15275,6 +24500,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SwSpareRegister3_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific spare register from the device and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SwSpareRegister3_Get(void *device,
     uint8_t *value)
 {
@@ -15288,6 +24524,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_SwSpareRegister3_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the spare register 4 in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the spare register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SwSpareRegister4_Set(void *device,
     uint8_t value)
 {
@@ -15298,6 +24544,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_SwSpareRegister4_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific spare register from the device and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used to access the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SwSpareRegister4_Get(void *device,
     uint8_t *value)
 {
@@ -15311,6 +24567,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_SwSpareRegister4_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the spare register 5 in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the spare register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SwSpareRegister5_Set(void *device,
     uint8_t value)
 {
@@ -15321,6 +24587,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_SwSpareRegister5_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific spare register from the device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SwSpareRegister5_Get(void *device,
     uint8_t *value)
 {
@@ -15334,6 +24610,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_SwSpareRegister5_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the spare register 6 in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the spare register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SwSpareRegister6_Set(void *device,
     uint8_t value)
 {
@@ -15344,6 +24630,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_SwSpareRegister6_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific spare register from the device and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used to access the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SwSpareRegister6_Get(void *device,
     uint8_t *value)
 {
@@ -15357,6 +24653,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_SwSpareRegister6_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the spare register 7 in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the spare register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SwSpareRegister7_Set(void *device,
     uint8_t value)
 {
@@ -15367,6 +24673,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_SwSpareRegister7_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the spare register 7 from the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SwSpareRegister7_Get(void *device,
     uint8_t *value)
 {
@@ -15380,9 +24696,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SwSpareRegister7_Get(void *device,
     return status;
 }
 
-/**
- * Powers down the MCS pulse associated with digital REF_CLK.
- */
+/***************************************************************************//**
+ * @brief Sets the digital path power-down state for the SYSREF signal in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A uint8_t value indicating the desired power-down state for the
+ * digital path.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SysrefForcePdDigpath_Set(void *device,
     uint8_t value)
 {
@@ -15393,9 +24717,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SysrefForcePdDigpath_Set(void *dev
     return status;
 }
 
-/**
- * Powers down the MCS pulse associated with digital REF_CLK.
- */
+/***************************************************************************//**
+ * @brief Retrieves the digital path power-down status from a specific register
+ * in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved power-down
+ * status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_SysrefForcePdDigpath_Get(void *device,
     uint8_t *value)
 {
@@ -15409,6 +24741,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_SysrefForcePdDigpath_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the temperature sensor clock arm selection in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the clock arm selection
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_TempSenseClkArmSel_Set(void *device,
     uint8_t value)
 {
@@ -15419,6 +24762,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_TempSenseClkArmSel_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the temperature sensor clock arm selection value from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved clock arm
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_TempSenseClkArmSel_Get(void *device,
     uint8_t *value)
 {
@@ -15432,6 +24786,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_TempSenseClkArmSel_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the temperature sensor clock divider value in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the clock divider value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_TempSenseClkDiv_Set(void *device,
     uint8_t value)
 {
@@ -15442,6 +24807,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_TempSenseClkDiv_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the temperature sensor clock divider value from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved clock
+ * divider value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_TempSenseClkDiv_Get(void *device,
     uint8_t *value)
 {
@@ -15455,6 +24831,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_TempSenseClkDiv_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the temperature sensor clock enable register for the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 8-bit unsigned integer representing the value to be written to
+ * the temperature sensor clock enable register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_TempSenseClkEn_Set(void *device,
     uint8_t value)
 {
@@ -15465,6 +24852,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_TempSenseClkEn_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the temperature sensor clock enable status from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved clock
+ * enable status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_TempSenseClkEn_Get(void *device,
     uint8_t *value)
 {
@@ -15478,6 +24876,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_TempSenseClkEn_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power-down state of the Tx1 low-frequency input buffer in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A uint8_t value indicating the desired power-down state (0 or
+ * 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx1Lo1InbufPd_Set(void *device,
     uint8_t value)
 {
@@ -15488,6 +24897,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx1Lo1InbufPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided variable.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx1Lo1InbufPd_Get(void *device,
     uint8_t *value)
 {
@@ -15501,6 +24921,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx1Lo1InbufPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power-down state of the Tx1 Lo2 input buffer in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 8-bit unsigned integer representing the power-down state to be
+ * set.
+ * @return Returns the status of the write operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx1Lo2InbufPd_Set(void *device,
     uint8_t value)
 {
@@ -15511,6 +24942,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx1Lo2InbufPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided variable.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device from which the register value is read.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx1Lo2InbufPd_Get(void *device,
     uint8_t *value)
 {
@@ -15524,6 +24966,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx1Lo2InbufPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the Tx1 Lomux power down state in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the power down state to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx1LomuxPd_Set(void *device,
     uint8_t value)
 {
@@ -15534,6 +24986,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx1LomuxPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided variable.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device from which the register value is read.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx1LomuxPd_Get(void *device,
     uint8_t *value)
 {
@@ -15547,9 +25010,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx1LomuxPd_Get(void *device,
     return status;
 }
 
-/**
- * 1’b1:  configure TX1 mag comp 13 taps PFIR coeff
- */
+/***************************************************************************//**
+ * @brief Sets the coefficient selection for the Tx1 magnitude 13-tap filter in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the coefficient selection
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx1Mag13tapsCoeffSel_Set(void *device,
     uint8_t value)
 {
@@ -15560,9 +25031,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx1Mag13tapsCoeffSel_Set(void *dev
     return status;
 }
 
-/**
- * 1’b1:  configure TX1 mag comp 13 taps PFIR coeff
- */
+/***************************************************************************//**
+ * @brief Retrieves the coefficient selection value from a specific register for
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved coefficient
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx1Mag13tapsCoeffSel_Get(void *device,
     uint8_t *value)
 {
@@ -15576,12 +25055,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx1Mag13tapsCoeffSel_Get(void *dev
     return status;
 }
 
-/**
- * 2’b00: TX1 mag comp 21 taps PFIR select bank A coeff
- *                                                       2’b01: TX1 mag comp 21 taps PFIR select bank B coeff
- *                                                       2’b10: TX1 mag comp 21 taps PFIR select bank C coeff
- *                                                       2’b11: TX1 mag comp 21 taps PFIR select bank D coeff
- */
+/***************************************************************************//**
+ * @brief Sets the Tx1 Mag21 taps bank selection in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx1Mag21tapsBankSel_Set(void *device,
     uint8_t value)
 {
@@ -15592,12 +25075,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx1Mag21tapsBankSel_Set(void *devi
     return status;
 }
 
-/**
- * 2’b00: TX1 mag comp 21 taps PFIR select bank A coeff
- *                                                       2’b01: TX1 mag comp 21 taps PFIR select bank B coeff
- *                                                       2’b10: TX1 mag comp 21 taps PFIR select bank C coeff
- *                                                       2’b11: TX1 mag comp 21 taps PFIR select bank D coeff
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register and stores it in the
+ * provided variable.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx1Mag21tapsBankSel_Get(void *device,
     uint8_t *value)
 {
@@ -15611,6 +25099,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx1Mag21tapsBankSel_Get(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the Tx1SelLo2 register value for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the Tx1SelLo2 register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx1SelLo2_Set(void *device,
     uint8_t value)
 {
@@ -15621,6 +25119,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx1SelLo2_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx1SelLo2_Get(void *device,
     uint8_t *value)
 {
@@ -15634,6 +25143,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx1SelLo2_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO mask for the Tx1 TPC decrement attenuator in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the GPIO mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx1TpcDecrAttenGpioMask_Set(void *device,
     uint8_t value)
 {
@@ -15644,6 +25164,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx1TpcDecrAttenGpioMask_Set(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the GPIO mask value for the Tx1 TPC decrement attenuator
+ * from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved GPIO mask
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx1TpcDecrAttenGpioMask_Get(void *device,
     uint8_t *value)
 {
@@ -15657,6 +25188,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx1TpcDecrAttenGpioMask_Get(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO select value for the Tx1 TPC decrement attenuator in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the GPIO select field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx1TpcDecrAttenGpioSelect_Set(void *device,
     uint8_t value)
 {
@@ -15667,6 +25209,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx1TpcDecrAttenGpioSelect_Set(void
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the GPIO select value for the Tx1 TPC decrement attenuator
+ * from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved GPIO select
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx1TpcDecrAttenGpioSelect_Get(void *device,
     uint8_t *value)
 {
@@ -15680,6 +25233,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx1TpcDecrAttenGpioSelect_Get(void
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO mask for the Tx1 TPC increment attenuator in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the GPIO mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the GPIO mask setting operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx1TpcIncrAttenGpioMask_Set(void *device,
     uint8_t value)
 {
@@ -15690,6 +25254,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx1TpcIncrAttenGpioMask_Set(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the GPIO mask value for the Tx1 TPC increment attenuator
+ * from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved GPIO mask
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx1TpcIncrAttenGpioMask_Get(void *device,
     uint8_t *value)
 {
@@ -15703,6 +25278,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx1TpcIncrAttenGpioMask_Get(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO select for the Tx1 TPC increment attenuator in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the GPIO select.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx1TpcIncrAttenGpioSelect_Set(void *device,
     uint8_t value)
 {
@@ -15713,6 +25299,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx1TpcIncrAttenGpioSelect_Set(void
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the GPIO select value for the Tx1 TPC increment attenuator
+ * from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved GPIO select
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx1TpcIncrAttenGpioSelect_Get(void *device,
     uint8_t *value)
 {
@@ -15726,6 +25323,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx1TpcIncrAttenGpioSelect_Get(void
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power-down state of the Tx2 low IF input buffer in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 8-bit unsigned integer representing the desired power-down
+ * state (0 or 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx2Lo1InbufPd_Set(void *device,
     uint8_t value)
 {
@@ -15736,6 +25344,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx2Lo1InbufPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register and stores it in the
+ * provided variable.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx2Lo1InbufPd_Get(void *device,
     uint8_t *value)
 {
@@ -15749,6 +25368,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx2Lo1InbufPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state of the Tx2 low input buffer in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A 8-bit unsigned integer representing the power down state to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx2Lo2InbufPd_Set(void *device,
     uint8_t value)
 {
@@ -15759,6 +25389,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx2Lo2InbufPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided variable.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device from which the register value is read.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx2Lo2InbufPd_Get(void *device,
     uint8_t *value)
 {
@@ -15772,6 +25413,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx2Lo2InbufPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the Tx2 Lomux power down state in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the power down state to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx2LomuxPd_Set(void *device,
     uint8_t value)
 {
@@ -15782,6 +25433,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx2LomuxPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register and stores it in the
+ * provided pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx2LomuxPd_Get(void *device,
     uint8_t *value)
 {
@@ -15795,9 +25457,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx2LomuxPd_Get(void *device,
     return status;
 }
 
-/**
- * 1’b1:  configure TX2 mag comp 13 taps PFIR coeff
- */
+/***************************************************************************//**
+ * @brief Sets the coefficient selection for the Tx2 magnitude 13-tap filter in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the coefficient selection
+ * value to be written.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx2Mag13tapsCoeffSel_Set(void *device,
     uint8_t value)
 {
@@ -15808,9 +25478,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx2Mag13tapsCoeffSel_Set(void *dev
     return status;
 }
 
-/**
- * 1’b1:  configure TX2 mag comp 13 taps PFIR coeff
- */
+/***************************************************************************//**
+ * @brief Retrieves the coefficient selection value from a specific register for
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value A pointer to a uint8_t variable where the retrieved coefficient
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx2Mag13tapsCoeffSel_Get(void *device,
     uint8_t *value)
 {
@@ -15824,12 +25502,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx2Mag13tapsCoeffSel_Get(void *dev
     return status;
 }
 
-/**
- * 2’b00: TX2 mag comp 21 taps PFIR select bank A coeff
- *                                                       2’b01: TX2 mag comp 21 taps PFIR select bank B coeff
- *                                                       2’b10: TX2 mag comp 21 taps PFIR select bank C coeff
- *                                                       2’b11: TX2 mag comp 21 taps PFIR select bank D coeff
- */
+/***************************************************************************//**
+ * @brief Sets the bank selection for the Tx2 Mag21 taps in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx2Mag21tapsBankSel_Set(void *device,
     uint8_t value)
 {
@@ -15840,12 +25522,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx2Mag21tapsBankSel_Set(void *devi
     return status;
 }
 
-/**
- * 2’b00: TX2 mag comp 21 taps PFIR select bank A coeff
- *                                                       2’b01: TX2 mag comp 21 taps PFIR select bank B coeff
- *                                                       2’b10: TX2 mag comp 21 taps PFIR select bank C coeff
- *                                                       2’b11: TX2 mag comp 21 taps PFIR select bank D coeff
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register and stores it in the
+ * provided variable.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx2Mag21tapsBankSel_Get(void *device,
     uint8_t *value)
 {
@@ -15859,6 +25546,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx2Mag21tapsBankSel_Get(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the Tx2 selection low register value for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the Tx2 selection low register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx2SelLo2_Set(void *device,
     uint8_t value)
 {
@@ -15869,6 +25566,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx2SelLo2_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used to access hardware
+ * registers.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx2SelLo2_Get(void *device,
     uint8_t *value)
 {
@@ -15882,6 +25590,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx2SelLo2_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO mask for the Tx2 TPC decrement attenuator in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the GPIO mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the GPIO mask setting operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx2TpcDecrAttenGpioMask_Set(void *device,
     uint8_t value)
 {
@@ -15892,6 +25611,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx2TpcDecrAttenGpioMask_Set(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the GPIO mask value for the Tx2 TPC decrement attenuator
+ * from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved GPIO mask
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx2TpcDecrAttenGpioMask_Get(void *device,
     uint8_t *value)
 {
@@ -15905,6 +25635,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx2TpcDecrAttenGpioMask_Get(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO select for the Tx2 TPC decrement attenuator in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the GPIO select field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx2TpcDecrAttenGpioSelect_Set(void *device,
     uint8_t value)
 {
@@ -15915,6 +25656,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx2TpcDecrAttenGpioSelect_Set(void
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the GPIO select value for the Tx2 TPC decrement attenuator
+ * from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved GPIO select
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx2TpcDecrAttenGpioSelect_Get(void *device,
     uint8_t *value)
 {
@@ -15928,6 +25680,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx2TpcDecrAttenGpioSelect_Get(void
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO mask for the Tx2 TPC increment attenuator in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the GPIO mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx2TpcIncrAttenGpioMask_Set(void *device,
     uint8_t value)
 {
@@ -15938,6 +25701,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx2TpcIncrAttenGpioMask_Set(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the GPIO mask value for the Tx2 TPC increment attenuator
+ * from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved GPIO mask
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx2TpcIncrAttenGpioMask_Get(void *device,
     uint8_t *value)
 {
@@ -15951,6 +25725,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx2TpcIncrAttenGpioMask_Get(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the GPIO select for the Tx2 TPC increment attenuator in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the GPIO select.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx2TpcIncrAttenGpioSelect_Set(void *device,
     uint8_t value)
 {
@@ -15961,6 +25746,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx2TpcIncrAttenGpioSelect_Set(void
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the GPIO select value for the Tx2 TPC increment attenuator
+ * from a specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved GPIO select
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_Tx2TpcIncrAttenGpioSelect_Get(void *device,
     uint8_t *value)
 {
@@ -15974,9 +25770,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_Tx2TpcIncrAttenGpioSelect_Get(void
     return status;
 }
 
-/**
- * 1’b1:  configure mag comp 21 taps PFIR bank A coefficients
- */
+/***************************************************************************//**
+ * @brief Sets the TxMag21 taps A coefficient selection in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the coefficient selection
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_TxMag21tapsACoeffSel_Set(void *device,
     uint8_t value)
 {
@@ -15987,9 +25790,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_TxMag21tapsACoeffSel_Set(void *dev
     return status;
 }
 
-/**
- * 1’b1:  configure mag comp 21 taps PFIR bank A coefficients
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register and stores it in the
+ * provided pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_TxMag21tapsACoeffSel_Get(void *device,
     uint8_t *value)
 {
@@ -16003,9 +25814,16 @@ static inline int32_t adrv9001_NvsRegmapCore1_TxMag21tapsACoeffSel_Get(void *dev
     return status;
 }
 
-/**
- * 1’b1:  configure mag comp 21 taps PFIR bank B coefficients
- */
+/***************************************************************************//**
+ * @brief Sets the TxMag21 tap B coefficient selection in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_TxMag21tapsBCoeffSel_Set(void *device,
     uint8_t value)
 {
@@ -16016,9 +25834,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_TxMag21tapsBCoeffSel_Set(void *dev
     return status;
 }
 
-/**
- * 1’b1:  configure mag comp 21 taps PFIR bank B coefficients
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided variable.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device from which the register value is read.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_TxMag21tapsBCoeffSel_Get(void *device,
     uint8_t *value)
 {
@@ -16032,9 +25858,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_TxMag21tapsBCoeffSel_Get(void *dev
     return status;
 }
 
-/**
- * 1’b1:  configure mag comp 21 taps PFIR bank C coefficients
- */
+/***************************************************************************//**
+ * @brief Sets the coefficient selection for the TxMag21 taps in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the coefficient selection
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_TxMag21tapsCCoeffSel_Set(void *device,
     uint8_t value)
 {
@@ -16045,9 +25879,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_TxMag21tapsCCoeffSel_Set(void *dev
     return status;
 }
 
-/**
- * 1’b1:  configure mag comp 21 taps PFIR bank C coefficients
- */
+/***************************************************************************//**
+ * @brief Retrieves the TxMag21 tap coefficient selection value from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param value A pointer to a uint8_t variable where the retrieved coefficient
+ * selection value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_TxMag21tapsCCoeffSel_Get(void *device,
     uint8_t *value)
 {
@@ -16061,9 +25903,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_TxMag21tapsCCoeffSel_Get(void *dev
     return status;
 }
 
-/**
- * 1’b1:  configure mag comp 21 taps PFIR bank D coefficients
- */
+/***************************************************************************//**
+ * @brief Sets the DC coefficient selection for the Tx Mag 21 taps in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_TxMag21tapsDCoeffSel_Set(void *device,
     uint8_t value)
 {
@@ -16074,9 +25924,17 @@ static inline int32_t adrv9001_NvsRegmapCore1_TxMag21tapsDCoeffSel_Set(void *dev
     return status;
 }
 
-/**
- * 1’b1:  configure mag comp 21 taps PFIR bank D coefficients
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided variable.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device from which the register value is read.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapCore1_TxMag21tapsDCoeffSel_Get(void *device,
     uint8_t *value)
 {

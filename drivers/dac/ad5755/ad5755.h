@@ -268,11 +268,47 @@
 /*****************************************************************************/
 /************************** Types Declarations *******************************/
 /*****************************************************************************/
-/**
- * @struct ad5755_setup
- * @brief Stores the settings that will be written to
- *        the device when the "AD5755_Init" functions is called.
- */
+/***************************************************************************//**
+ * @brief The `ad5755_setup` structure is designed to store configuration
+ * settings for the AD5755 device, which are applied during
+ * initialization. It includes fields for setting the logic state of
+ * external pins, enabling or disabling packet error checking,
+ * configuring power-on conditions, and setting short-circuit limits.
+ * Additionally, it allows for the selection of current sense resistors,
+ * enabling voltage overrange, and configuring various parameters of the
+ * dc-to-dc converter, such as compensation, phase, frequency, and
+ * maximum voltage. This structure is essential for defining the
+ * operational parameters of the AD5755 device.
+ *
+ * @param pin_ad0state Reflects the logic state of the external pin AD0, with a
+ * range of 0 to 1.
+ * @param pin_ad1state Reflects the logic state of the external pin AD1, with a
+ * range of 0 to 1.
+ * @param enable_packet_error_check Enables or disables Packet Error Checking
+ * during SPI transfers, with a range of 0 to
+ * 1.
+ * @param poc_bit Determines the state of the voltage output channels during
+ * normal operation based on the POC hardware pin, with a range
+ * of 0 to 1.
+ * @param stat_readbit Enables or disables status readback during a write, with
+ * a range of 0 to 1.
+ * @param sht_cc_lim_bit Sets a programmable short-circuit limit on the VOUT_x
+ * pin, with options for 16 mA or 8 mA.
+ * @param rset_bits Selects between an internal or external current sense
+ * resistor for the selected DAC channel, with a range of 0 to
+ * 1.
+ * @param ovrng_bits Enables 20% overrange on the voltage output channel, with a
+ * range of 0 to 1.
+ * @param dc_dc_comp_bit Selects between an internal and external compensation
+ * resistor for the dc-to-dc converter, with a range of 0
+ * to 1.
+ * @param dc_dc_phase_bit User-programmable dc-to-dc converter phase between
+ * channels, with a range of 0 to 3.
+ * @param dc_dc_freq_bit Sets the dc-to-dc switching frequency, with a range of
+ * 0 to 2.
+ * @param dc_dc_max_vbit Specifies the maximum allowed VBOOST_x voltage supplied
+ * by the dc-to-dc converter, with a range of 0 to 3.
+ ******************************************************************************/
 struct ad5755_setup {
 	/** Reflects the logic state of the external pin AD0. Range 0..1 */
 	uint8_t pin_ad0state;
@@ -324,12 +360,42 @@ struct ad5755_setup {
 };
 
 /* Supported devices */
+/***************************************************************************//**
+ * @brief The `ad5755_type_t` is an enumeration that defines the different types
+ * of devices supported by the AD5755 driver, specifically the AD5755,
+ * AD5755-1, and AD5757. This enumeration is used to identify and
+ * differentiate between these device types within the driver code,
+ * allowing for appropriate handling and configuration of each specific
+ * device.
+ *
+ * @param ID_AD5755 Represents the AD5755 device type.
+ * @param ID_AD5755_1 Represents the AD5755-1 device type.
+ * @param ID_AD5757 Represents the AD5757 device type.
+ ******************************************************************************/
 enum ad5755_type_t {
 	ID_AD5755,
 	ID_AD5755_1,
 	ID_AD5757,
 };
 
+/***************************************************************************//**
+ * @brief The `ad5755_dev` structure is designed to encapsulate the necessary
+ * components and configurations for interfacing with an AD5755 device,
+ * which is a digital-to-analog converter (DAC). It includes pointers to
+ * SPI and GPIO descriptors for communication and control, as well as a
+ * pointer to a setup structure that holds device-specific settings. The
+ * structure also contains an enumeration to specify the exact type of
+ * AD5755 device being used, allowing for flexible support of different
+ * models within the AD5755 family.
+ *
+ * @param spi_desc Pointer to a SPI descriptor for SPI communication.
+ * @param gpio_ldac Pointer to a GPIO descriptor for the LDAC pin.
+ * @param gpio_rst Pointer to a GPIO descriptor for the reset pin.
+ * @param gpio_clr Pointer to a GPIO descriptor for the clear pin.
+ * @param gpio_poc Pointer to a GPIO descriptor for the POC pin.
+ * @param p_ad5755_st Pointer to a structure containing device settings.
+ * @param this_device Enumeration indicating the specific AD5755 device type.
+ ******************************************************************************/
 struct ad5755_dev {
 	/* SPI */
 	struct no_os_spi_desc		*spi_desc;
@@ -343,6 +409,22 @@ struct ad5755_dev {
 	enum ad5755_type_t this_device;
 };
 
+/***************************************************************************//**
+ * @brief The `ad5755_init_param` structure is used to encapsulate the
+ * initialization parameters required to set up an AD5755 device. It
+ * includes SPI initialization parameters, GPIO initialization parameters
+ * for various control pins (LDAC, RST, CLR, POC), and a field to specify
+ * the specific type of AD5755 device. This structure is essential for
+ * configuring the device's communication and control interfaces before
+ * it is used in an application.
+ *
+ * @param spi_init Holds the initialization parameters for the SPI interface.
+ * @param gpio_ldac Holds the initialization parameters for the LDAC GPIO pin.
+ * @param gpio_rst Holds the initialization parameters for the RST GPIO pin.
+ * @param gpio_clr Holds the initialization parameters for the CLR GPIO pin.
+ * @param gpio_poc Holds the initialization parameters for the POC GPIO pin.
+ * @param this_device Specifies the type of AD5755 device being used.
+ ******************************************************************************/
 struct ad5755_init_param {
 	/* SPI */
 	struct no_os_spi_init_param	spi_init;
@@ -359,73 +441,330 @@ struct ad5755_init_param {
 /************************ Functions Declarations ******************************/
 /******************************************************************************/
 
-/*! Initializes the device and powers-up all channels. */
+/***************************************************************************//**
+ * @brief This function initializes the AD5755 device by setting up the
+ * necessary GPIO and SPI interfaces, configuring the device's control
+ * registers, and powering up all DAC channels. It should be called
+ * before any other operations on the AD5755 device to ensure proper
+ * setup. The function allocates memory for the device structure and
+ * configures the device based on the provided initialization parameters.
+ * It returns a status code indicating success or failure of the
+ * initialization process.
+ *
+ * @param device A pointer to a pointer of type `struct ad5755_dev`. This will
+ * be allocated and initialized by the function. The caller must
+ * ensure this pointer is valid and will receive ownership of the
+ * allocated memory.
+ * @param init_param A structure of type `struct ad5755_init_param` containing
+ * initialization parameters for the device, including SPI and
+ * GPIO configurations. The structure must be properly
+ * populated before calling this function.
+ * @return Returns an int8_t status code: 0 for success, or a negative value
+ * indicating an error during initialization.
+ ******************************************************************************/
 int8_t ad5755_init(struct ad5755_dev **device,
 		   struct ad5755_init_param init_param);
 
-/*! Free the resources allocated by ad5755_init(). */
+/***************************************************************************//**
+ * @brief This function should be called to properly release all resources
+ * associated with an AD5755 device after it is no longer needed. It
+ * ensures that the SPI and GPIO descriptors are removed and the memory
+ * allocated for the device structure is freed. This function should be
+ * called only after the device has been initialized and used, to prevent
+ * resource leaks. It returns a status code indicating the success or
+ * failure of the resource deallocation process.
+ *
+ * @param dev A pointer to an ad5755_dev structure representing the device to be
+ * removed. Must not be null. The function will handle invalid
+ * pointers by returning an error code.
+ * @return Returns an int32_t status code, where 0 indicates success and a non-
+ * zero value indicates an error occurred during resource deallocation.
+ ******************************************************************************/
 int32_t ad5755_remove(struct ad5755_dev *dev);
 
-/*! Reads the value of a register. */
+/***************************************************************************//**
+ * @brief Use this function to retrieve the current value stored in a specific
+ * register of the AD5755 device. It is essential to ensure that the
+ * device has been properly initialized before calling this function. The
+ * function communicates with the device over SPI and returns the
+ * register value. If packet error checking is enabled and a CRC error is
+ * detected, the function will return -1 to indicate an error. This
+ * function is useful for monitoring and debugging purposes, allowing you
+ * to verify the current configuration or status of the device.
+ *
+ * @param dev A pointer to an initialized ad5755_dev structure representing the
+ * device. Must not be null.
+ * @param register_address The address of the register to read from. Must be a
+ * valid register address for the AD5755 device.
+ * @return Returns the 16-bit value of the specified register, or -1 if a CRC
+ * error is detected when packet error checking is enabled.
+ ******************************************************************************/
 int32_t ad5755_get_register_value(struct ad5755_dev *dev,
 				  uint8_t register_address);
 
-/*! Writes data into a register. */
+/***************************************************************************//**
+ * @brief This function is used to write a 16-bit value to a specific register
+ * of the AD5755 device, targeting a particular channel. It is essential
+ * for configuring the device's registers to control its behavior. The
+ * function must be called with a valid device structure that has been
+ * properly initialized. It supports optional packet error checking and
+ * can return a status register value if status readback is enabled. This
+ * function is typically used in device setup or configuration routines.
+ *
+ * @param dev A pointer to an initialized ad5755_dev structure representing the
+ * device. Must not be null.
+ * @param register_address The address of the register to write to. Valid values
+ * depend on the device's register map.
+ * @param channel The channel to which the register write is directed. Valid
+ * values are typically 0 to 3, corresponding to channels A to D.
+ * @param register_value The 16-bit value to write to the specified register.
+ * Must be within the range of 0 to 65535.
+ * @return Returns a 16-bit status register value if status readback is enabled;
+ * otherwise, the return value is undefined.
+ ******************************************************************************/
 uint16_t ad5755_set_register_value(struct ad5755_dev *dev,
 				   uint8_t register_address,
 				   uint8_t channel,
 				   uint16_t register_value);
 
-/*! Performs a software reset to the device. */
+/***************************************************************************//**
+ * @brief Use this function to reset the AD5755 device to its default state via
+ * software control. This is typically necessary when you want to ensure
+ * the device is in a known state before starting configuration or
+ * operation. The function should be called when the device is
+ * initialized and ready to accept commands. It does not return any value
+ * and does not provide feedback on the success of the reset operation.
+ *
+ * @param dev A pointer to an initialized ad5755_dev structure representing the
+ * device to reset. This pointer must not be null, and the device
+ * must be properly initialized before calling this function.
+ * @return None
+ ******************************************************************************/
 void ad5755_software_reset(struct ad5755_dev *dev);
 
-/*! Enables/Disables watchdog timer and sets the timeout period. */
+/***************************************************************************//**
+ * @brief This function enables or disables the watchdog timer on the AD5755
+ * device and sets its timeout period. It should be used to ensure that
+ * the device is periodically serviced to prevent it from entering a
+ * fault state. The function must be called with a valid device structure
+ * that has been initialized. The timeout period is specified in
+ * predefined intervals, and the function will configure the device's
+ * main control register accordingly.
+ *
+ * @param dev A pointer to an initialized ad5755_dev structure representing the
+ * device. Must not be null.
+ * @param wtd_enable A uint8_t value where 0 disables the watchdog timer and 1
+ * enables it. Values outside this range may lead to undefined
+ * behavior.
+ * @param timeout A uint8_t value specifying the timeout period for the watchdog
+ * timer. Valid values are 0 (5 ms), 1 (10 ms), 2 (100 ms), and 3
+ * (200 ms). Invalid values may result in incorrect
+ * configuration.
+ * @return None
+ ******************************************************************************/
 void ad5755_watch_dog_setup(struct ad5755_dev *dev,
 			    uint8_t wtd_enable,
 			    uint8_t timeout);
 
-/*! Writes a "service pulse" to the AD5755 watchdog timer when enabled. */
+/***************************************************************************//**
+ * @brief Use this function to service the watchdog timer on an AD5755 device,
+ * ensuring it does not time out. This function should be called
+ * periodically within the configured timeout period of the watchdog
+ * timer to prevent it from triggering a reset or other protective
+ * actions. It is essential to have the watchdog timer enabled and
+ * properly configured before using this function.
+ *
+ * @param dev A pointer to an initialized ad5755_dev structure representing the
+ * device. Must not be null. The caller retains ownership of the
+ * memory.
+ * @return None
+ ******************************************************************************/
 void ad5755_feed_watch_dog_timer(struct ad5755_dev *dev);
 
-/*! Configures one of the control registers. */
+/***************************************************************************//**
+ * @brief Use this function to configure one of the control registers of the
+ * AD5755 device for a specific channel. This function is typically
+ * called after initializing the device and when you need to update the
+ * control settings for a particular channel. Ensure that the device is
+ * properly initialized before calling this function to avoid undefined
+ * behavior.
+ *
+ * @param dev A pointer to an initialized ad5755_dev structure representing the
+ * device. Must not be null.
+ * @param ctrl_reg_address The address of the control register to configure.
+ * Valid values are defined by the AD5755_CTRL_CREG(x)
+ * options.
+ * @param channel The channel number to configure. Valid values are 0 to 3,
+ * corresponding to channels A to D.
+ * @param reg_value The value to write to the control register. This is a 16-bit
+ * value that configures the register as needed.
+ * @return None
+ ******************************************************************************/
 void ad5755_set_control_registers(struct ad5755_dev *dev,
 				  uint8_t  ctrl_reg_address,
 				  uint8_t  channel,
 				  uint16_t reg_value);
 
-/*! Computes the CRC for a data buffer. */
+/***************************************************************************//**
+ * @brief Use this function to calculate an 8-bit CRC checksum for a given data
+ * buffer using a specific polynomial. This function is typically used to
+ * verify data integrity during communication with devices that support
+ * CRC error checking. Ensure that the data buffer is valid and the
+ * number of bytes specified is correct to avoid incorrect CRC results.
+ *
+ * @param data A pointer to the data buffer for which the CRC is to be
+ * calculated. Must not be null, and the buffer should contain at
+ * least 'bytes_number' bytes.
+ * @param bytes_number The number of bytes in the data buffer to include in the
+ * CRC calculation. Must be a non-zero value.
+ * @return Returns an 8-bit CRC checksum calculated over the specified data
+ * buffer.
+ ******************************************************************************/
 uint8_t ad5755_check_crc(uint8_t* data,
 			 uint8_t bytes_number);
 
-/*! Allows power-up/down of the dc-to-dc converter, DAC and internal amplifiers
-    for the selected channel. */
+/***************************************************************************//**
+ * @brief Use this function to power up or down the DC-to-DC converter, DAC, and
+ * internal amplifiers for a specific channel on the AD5755 device. This
+ * function is typically called when you need to enable or disable the
+ * output of a channel, such as during initialization or when changing
+ * the operational state of the device. Ensure that the device has been
+ * properly initialized before calling this function.
+ *
+ * @param dev A pointer to an ad5755_dev structure representing the device
+ * instance. Must not be null.
+ * @param channel The channel to be configured, specified as an integer. Valid
+ * values are 0 to 3, corresponding to channels A to D.
+ * @param pwr_status An integer indicating the desired power state. A non-zero
+ * value enables the power, while zero disables it.
+ * @return None
+ ******************************************************************************/
 void ad5755_set_channel_power(struct ad5755_dev *dev,
 			      uint8_t channel,
 			      uint8_t pwr_status);
 
-/*! Sets the range of a channel. */
+/***************************************************************************//**
+ * @brief Use this function to configure the output range of a specific channel
+ * on the AD5755 device. This function must be called after the device
+ * has been initialized and is typically used when you need to change the
+ * output voltage or current range of a channel. It ensures that the
+ * channel is set to the desired range and enables the output. The
+ * function handles setting the output code to zero or midscale as
+ * appropriate for the selected range.
+ *
+ * @param dev A pointer to an initialized ad5755_dev structure representing the
+ * device. Must not be null.
+ * @param channel The channel number to configure, typically ranging from 0 to
+ * 3, corresponding to channels A to D.
+ * @param range The desired output range for the channel, specified using
+ * predefined macros such as AD5755_R_0_5_V, AD5755_R_0_10_V, etc.
+ * Invalid range values may result in undefined behavior.
+ * @return None
+ ******************************************************************************/
 void ad5755_set_channel_range(struct ad5755_dev *dev,
 			      uint8_t channel,
 			      uint8_t range);
 
-/*! Selects if the channel clears when CLEAR pin is activated. */
+/***************************************************************************//**
+ * @brief This function configures whether a specific channel on the AD5755
+ * device will clear its output when the CLEAR pin is activated. It is
+ * typically used to control the behavior of the device in response to
+ * external clear signals. This function should be called after the
+ * device has been initialized and the channel has been set up. The
+ * function does not return a value, and it modifies the control register
+ * of the specified channel based on the provided parameters.
+ *
+ * @param dev A pointer to an ad5755_dev structure representing the device
+ * instance. Must not be null, and the device must be properly
+ * initialized before calling this function.
+ * @param channel An unsigned 8-bit integer specifying the channel to configure.
+ * Valid values are typically 0 to 3, corresponding to the
+ * available channels on the device.
+ * @param clear_en An unsigned 8-bit integer indicating whether to enable (non-
+ * zero value) or disable (zero value) the clear functionality
+ * for the specified channel.
+ * @return None
+ ******************************************************************************/
 void ad5755_channel_clear_enable(struct ad5755_dev *dev,
 				 uint8_t channel,
 				 uint8_t clear_en);
 
-/*! Configures the Digital Slew Rate Control. */
+/***************************************************************************//**
+ * @brief This function is used to configure the digital slew rate control for a
+ * specific channel on the AD5755 device. It allows enabling or disabling
+ * the slew rate control, setting the update frequency, and defining the
+ * step size for the slew rate. This function should be called when
+ * precise control over the rate of change of the output signal is
+ * required, such as in applications where sudden changes in output could
+ * cause issues. Ensure that the device is properly initialized before
+ * calling this function.
+ *
+ * @param dev A pointer to an ad5755_dev structure representing the device. Must
+ * not be null, and the device must be initialized.
+ * @param channel An integer specifying the channel to configure. Valid values
+ * are 0 to 3, corresponding to channels A to D.
+ * @param sr_en An integer to enable or disable the slew rate control. Use 1 to
+ * enable and 0 to disable.
+ * @param updt_freq An integer specifying the update frequency for the slew
+ * rate. Valid values range from 0 to 15, corresponding to
+ * predefined frequency options.
+ * @param step_size An integer specifying the step size for the slew rate. Valid
+ * values range from 0 to 7, corresponding to predefined step
+ * size options.
+ * @return None
+ ******************************************************************************/
 void ad5755_slew_rate_ctrl(struct ad5755_dev *dev,
 			   int8_t channel,
 			   int8_t sr_en,
 			   int8_t updt_freq,
 			   int8_t step_size);
 
-/*! Sets the output voltage of a channel. */
+/***************************************************************************//**
+ * @brief Use this function to set the desired output voltage on a specific
+ * channel of the AD5755 device. It is essential to ensure that the
+ * device is properly initialized and configured before calling this
+ * function. The function calculates the necessary DAC value to achieve
+ * the specified voltage, taking into account the channel's offset, gain,
+ * and range settings. It then writes this value to the device. The
+ * function returns the actual voltage set, which may differ slightly
+ * from the requested voltage due to device characteristics and range
+ * limitations.
+ *
+ * @param dev A pointer to an initialized ad5755_dev structure representing the
+ * device. Must not be null.
+ * @param channel The channel number to set the voltage on. Valid values are 0
+ * to 3, corresponding to channels A to D.
+ * @param voltage The desired output voltage to set on the specified channel.
+ * The valid range depends on the channel's configured range,
+ * which should be set prior to calling this function.
+ * @return Returns the actual voltage set on the channel, which may differ from
+ * the requested voltage due to device characteristics and range
+ * limitations.
+ ******************************************************************************/
 float ad5755_set_voltage(struct ad5755_dev *dev,
 			 uint8_t channel,
 			 float voltage);
 
-/*! Sets the output current of a channel. */
+/***************************************************************************//**
+ * @brief Use this function to configure the output current for a specific
+ * channel on an AD5755 device. This function is typically called after
+ * initializing the device and setting the desired channel range. It
+ * calculates the appropriate DAC value based on the provided current and
+ * writes it to the device, ensuring the output current matches the
+ * specified value as closely as possible. The function returns the
+ * actual current set, which may differ slightly due to device
+ * characteristics and range settings.
+ *
+ * @param dev A pointer to an initialized ad5755_dev structure representing the
+ * device. Must not be null.
+ * @param channel The channel number to set the current for. Valid values are 0
+ * to 3, corresponding to channels A to D.
+ * @param m_acurrent The desired output current in milliamperes. The valid range
+ * depends on the channel's configured range, typically
+ * between 0 mA and 24 mA.
+ * @return Returns the actual current set on the channel in milliamperes, which
+ * may differ slightly from the requested current.
+ ******************************************************************************/
 float ad5755_set_current(struct ad5755_dev *dev,
 			 uint8_t channel,
 			 float m_acurrent);

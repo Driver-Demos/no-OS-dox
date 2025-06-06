@@ -35,11 +35,37 @@
 
 #include "no_os_gpio.h"
 
+/***************************************************************************//**
+ * @brief The `mdio_bitbang_init_param` structure is used to initialize the GPIO
+ * parameters necessary for implementing the MDIO interface using bit-
+ * banging techniques. It contains two members, `mdc` and `mdio`, which
+ * are both of type `no_os_gpio_init_param`, and they define the
+ * configuration for the MDC and MDIO lines respectively. This structure
+ * is essential for setting up the low-level GPIO operations required for
+ * MDIO communication in systems where hardware support for MDIO is not
+ * available.
+ *
+ * @param mdc Represents the GPIO initialization parameters for the MDC
+ * (Management Data Clock) line.
+ * @param mdio Represents the GPIO initialization parameters for the MDIO
+ * (Management Data Input/Output) line.
+ ******************************************************************************/
 struct mdio_bitbang_init_param {
 	struct no_os_gpio_init_param mdc;
 	struct no_os_gpio_init_param mdio;
 };
 
+/***************************************************************************//**
+ * @brief The `mdio_bitbang_ops` is a global variable of type `struct
+ * no_os_mdio_ops`, which is likely used to define operations for MDIO
+ * (Management Data Input/Output) communication using bit-banging
+ * techniques. This structure is part of an implementation that allows
+ * communication with network devices over the MDIO interface by manually
+ * toggling GPIO pins to simulate the MDIO protocol.
+ *
+ * @details This variable is used to provide a set of operations for MDIO
+ * communication using GPIO bit-banging.
+ ******************************************************************************/
 extern struct no_os_mdio_ops mdio_bitbang_ops;
 
 #endif

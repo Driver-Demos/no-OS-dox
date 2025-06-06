@@ -43,7 +43,17 @@
 /*************************** Types Declarations *******************************/
 /******************************************************************************/
 
-/** IIO Descriptor */
+/***************************************************************************//**
+ * @brief The `adf4377_iio_descriptor` is an external constant structure of type
+ * `iio_device` that is used to describe the IIO (Industrial I/O) device
+ * interface for the ADF4377 component. This structure is likely defined
+ * elsewhere in the codebase and provides the necessary interface details
+ * for interacting with the ADF4377 device through the IIO subsystem.
+ *
+ * @details This variable is used to interface with the ADF4377 device via the
+ * IIO framework, providing a standardized way to access and control
+ * the device's features.
+ ******************************************************************************/
 extern struct iio_device const adf4377_iio_descriptor;
 
 #endif //IIO_ADF4377_H

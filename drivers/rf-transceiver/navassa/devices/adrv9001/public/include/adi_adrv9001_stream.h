@@ -18,77 +18,94 @@
 extern "C" {
 #endif
 
-/**
- * \brief Loads binary array into stream processor data memory
+/***************************************************************************//**
+ * @brief This function is used to load a binary array into the ADRV9001 stream
+ * processor's data memory, which is essential for powering up and down
+ * various signal chains. It should be called after the device has been
+ * initialized with adi_adrv9001_Initialize and before the ARM is loaded.
+ * The function requires a byte array obtained from the binary stream
+ * processor file provided by Analog Devices. It is important to ensure
+ * that the byteOffset and byteCount are multiples of 4, and that
+ * byteCount is at least 68 if byteOffset is 0. The function returns a
+ * code indicating success or the required action to recover from an
+ * error.
  *
- * FIXME PTN Navassa may not be 20K, check when into available
- *
- * A 20K element byte array is passed into this function.  The byte array is
- * obtained by reading the binary stream processor file provided by Analog
- * Devices.  The stream processor uses the information in the stream file to
- * properly power up and down the various signal chains.
- *
- * \note Message type: \ref timing_direct "Direct register acccess"
- *
- * \pre This function is called after adi_adrv9001_Initialize, and before ARM is loaded.
- *
- * \param[in] adrv9001       Context variable - Pointer to the ADRV9001 device data structure
- * \param[in] byteOffset     Offset (starting from 0) of where to place the binary
- *                           array (if loaded in multiple function calls)
- * \param[in] binary         Byte array containing all valid ARM file data bytes
- * \param[in] byteCount      The number of bytes in the binary array file
- * \param[in] spiWriteMode   Preferred SPI write mode
- *
- * \returns A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required action to recover
- */
+ * @param adrv9001 Context variable - Pointer to the ADRV9001 device data
+ * structure. Must not be null.
+ * @param byteOffset Offset (starting from 0) of where to place the binary
+ * array. Must be a multiple of 4.
+ * @param binary Byte array containing all valid ARM file data bytes. Must not
+ * be null.
+ * @param byteCount The number of bytes in the binary array file. Must be a
+ * multiple of 4 and at least 68 if byteOffset is 0.
+ * @param spiWriteMode Preferred SPI write mode. Must be a valid
+ * adi_adrv9001_ArmSingleSpiWriteMode_e value.
+ * @return Returns an int32_t code indicating success (ADI_COMMON_ACT_NO_ACTION)
+ * or the required action to recover.
+ ******************************************************************************/
 int32_t adi_adrv9001_Stream_Image_Write(adi_adrv9001_Device_t *adrv9001, uint32_t byteOffset, uint8_t binary[], uint32_t byteCount, adi_adrv9001_ArmSingleSpiWriteMode_e spiWriteMode);
 
- /**
- * \brief Reads back the version of the stream processor binary loaded in the ADRV9001 memory
+/***************************************************************************//**
+ * @brief Use this function to retrieve the version information of the stream
+ * processor binary currently loaded in the ADRV9001 device memory. This
+ * function should be called only after the stream processor binary has
+ * been successfully loaded into the device. It reads the version as a
+ * combination of major, minor, maintenance, and build numbers, which are
+ * then populated into the provided streamVersion structure. Ensure that
+ * the device is in a state where the stream processor binary is loaded
+ * before calling this function to avoid errors.
  *
- * This function reads the ADRV9001 memory to read back the major.minor.maintenance.build
- * version for the stream processor binary loaded in ADRV9001 memory.
- *
- * \note Message type: \ref timing_direct "Direct register acccess"
- *
- * \param[in]  adrv9001      Context variable - Pointer to the ADRV9001 device data structure
- * \param[out] streamVersion Stream processor version will be populated here, it is of struct type adi_adrv9001_StreamVersion_t.
- *
- * \returns A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required action to recover
- */
+ * @param adrv9001 Pointer to the ADRV9001 device data structure. Must not be
+ * null and should point to a valid, initialized device context.
+ * @param streamVersion Pointer to an adi_adrv9001_StreamVersion_t structure
+ * where the version information will be stored. Must not
+ * be null, and the caller is responsible for allocating
+ * this structure before calling the function.
+ * @return Returns an integer code indicating success (ADI_COMMON_ACT_NO_ACTION)
+ * or the required action to recover in case of an error.
+ ******************************************************************************/
 int32_t adi_adrv9001_Stream_Version(adi_adrv9001_Device_t *adrv9001, adi_adrv9001_StreamVersion_t *streamVersion);
 
-/**
-* \brief Configure the DGPIO to debug stream processor operation status
-*        Dedicated GPIO pins are used to route stream processor operation status:
-*        Rx1 stream processor --> DGPIO0
-*        Tx1 stream processor --> DGPIO1
-*        Rx2 stream processor --> DGPIO2 
-*        Tx2 stream processor --> DGPIO3
-*
-* \note Message type: \ref timing_mailbox "Mailbox command"
-*
-* \pre All channels state either in STANDBY or CALIBRATED
-*
-* \param[in]  adrv9001          Context variable - Pointer to the ADRV9001 device data structure
-* \param[in]  streamToGpioDebug Flag to enable or disable stream to GPIO debug feature
-*
-* \returns A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required action to recover
-*/
+/***************************************************************************//**
+ * @brief This function is used to enable or disable the stream to GPIO debug
+ * feature, which routes the operation status of the stream processor to
+ * dedicated GPIO pins. It should be called when all channels are in
+ * either the STANDBY or CALIBRATED state. This function is useful for
+ * debugging purposes, allowing the user to monitor the status of the
+ * stream processor through GPIO pins. The function returns a code
+ * indicating success or the required action to recover.
+ *
+ * @param adrv9001 Context variable - Pointer to the ADRV9001 device data
+ * structure. Must not be null, as it provides the necessary
+ * context for the operation.
+ * @param streamToGpioDebug Flag to enable or disable the stream to GPIO debug
+ * feature. A value of 'true' enables the feature,
+ * while 'false' disables it.
+ * @return A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required
+ * action to recover.
+ ******************************************************************************/
 int32_t adi_adrv9001_Stream_Gpio_Debug_Set(adi_adrv9001_Device_t *adrv9001, bool streamToGpioDebug);
 
-/**
-* \brief Get the current enabledness of stream to GPIO debug feature
-*
-* \note Message type: \ref timing_mailbox "Mailbox command"
-*
-* \pre All channels state any of STANDBY, CALIBRATED, PRIMED, RF_ENABLED
-*
-* \param[in]  adrv9001          Context variable - Pointer to the ADRV9001 device data structure
-* \param[out] streamToGpioDebug Current enabledness of stream to GPIO debug feature
-*
-* \returns A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required action to recover
-*/
+/***************************************************************************//**
+ * @brief This function is used to determine whether the stream to GPIO debug
+ * feature is currently enabled or disabled on the ADRV9001 device. It
+ * should be called when the device channels are in any of the following
+ * states: STANDBY, CALIBRATED, PRIMED, or RF_ENABLED. This function is
+ * useful for verifying the current configuration of the device's debug
+ * settings. It does not modify the state of the device, only retrieves
+ * the current setting.
+ *
+ * @param adrv9001 A pointer to the ADRV9001 device data structure. This must
+ * not be null and should point to a valid, initialized device
+ * context.
+ * @param streamToGpioDebug A pointer to a boolean variable where the function
+ * will store the current status of the stream to GPIO
+ * debug feature. This must not be null.
+ * @return Returns an integer code indicating success (ADI_COMMON_ACT_NO_ACTION)
+ * or the required action to recover. The boolean pointed to by
+ * streamToGpioDebug is set to true if the feature is enabled, or false
+ * if it is disabled.
+ ******************************************************************************/
 int32_t adi_adrv9001_Stream_Gpio_Debug_Get(adi_adrv9001_Device_t *adrv9001, bool *streamToGpioDebug);
 
 #ifdef __cplusplus

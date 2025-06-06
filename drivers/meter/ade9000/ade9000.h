@@ -990,10 +990,24 @@
 /*************************** Types Declarations *******************************/
 /******************************************************************************/
 
-/**
- * @enum ade9000_isum_cfg_e
- * @brief ADE9000 isum calculation configuration.
- */
+/***************************************************************************//**
+ * @brief The `ade9000_isum_cfg_e` is an enumeration that defines various
+ * configuration options for calculating the neutral current in the
+ * ADE9000 energy metering IC. It includes options for approximating the
+ * neutral current RMS value and detecting mismatches between neutral and
+ * phase currents, both in positive and negative directions. This
+ * enumeration is used to configure the ADE9000 device to handle
+ * different scenarios in current measurement and analysis.
+ *
+ * @param ADE9000_ISUM_APROX_N Represents an approximated neutral current RMS
+ * calculation.
+ * @param ADE9000_ISUM_DET_MISM_POS Indicates detection of a positive mismatch
+ * between neutral and phase currents.
+ * @param ADE9000_ISUM_DET_MISM_NEG Indicates detection of a negative mismatch
+ * between neutral and phase currents.
+ * @param ADE9000_ISUM_APROX_N_RMS Represents an approximated neutral current
+ * RMS calculation.
+ ******************************************************************************/
 enum ade9000_isum_cfg_e {
 	/* Approximated neutral current rms calculation */
 	ADE9000_ISUM_APROX_N,
@@ -1007,11 +1021,28 @@ enum ade9000_isum_cfg_e {
 	ADE9000_ISUM_APROX_N_RMS
 };
 
-/**
- * @enum ade9000_aregion_sel_e
- * @brief ADE9000 These bits indicate which AIGAINx and APHCALx
-    is currently being used.
- */
+/***************************************************************************//**
+ * @brief The `ade9000_aregion_sel_e` enumeration defines a set of constants
+ * used to select which gain and phase calibration settings (AIGAINx and
+ * APHCALx) are currently active in the ADE9000 device. This enumeration
+ * provides options for five different calibration settings, as well as
+ * an option to disable the calibration function entirely. It is used to
+ * configure the device's analog front-end for accurate measurement and
+ * calibration of electrical parameters.
+ *
+ * @param ADE9000_AIGAIN_APHCAL_0 Represents the first gain and phase
+ * calibration setting.
+ * @param ADE9000_AIGAIN_APHCAL_1 Represents the second gain and phase
+ * calibration setting.
+ * @param ADE9000_AIGAIN_APHCAL_2 Represents the third gain and phase
+ * calibration setting.
+ * @param ADE9000_AIGAIN_APHCAL_3 Represents the fourth gain and phase
+ * calibration setting.
+ * @param ADE9000_AIGAIN_APHCAL_4 Represents the fifth gain and phase
+ * calibration setting.
+ * @param ADE9000_AIGAIN_APHCAL_DISABLE Indicates that the gain and phase
+ * calibration function is disabled.
+ ******************************************************************************/
 enum ade9000_aregion_sel_e {
 	/* 0 */
 	ADE9000_AIGAIN_APHCAL_0,
@@ -1027,11 +1058,28 @@ enum ade9000_aregion_sel_e {
 	ADE9000_AIGAIN_APHCAL_DISABLE = 15
 };
 
-/**
- * @enum ade9000_bregion_sel_e
- * @brief ADE9000 These bits indicate which BIGAINx and BPHCALx
-    is currently being used.
- */
+/***************************************************************************//**
+ * @brief The `ade9000_bregion_sel_e` is an enumeration that defines the
+ * selection of BIGAIN and BPHCAL configurations for the ADE9000 device.
+ * It provides options to select from five different configurations, each
+ * corresponding to a specific gain and phase calibration setting, or to
+ * disable the function entirely. This enumeration is used to manage and
+ * switch between different calibration settings for the B-phase in the
+ * ADE9000 energy metering IC.
+ *
+ * @param ADE9000_BIGAIN_BPHCAL_0 Represents the first configuration of BIGAIN
+ * and BPHCAL.
+ * @param ADE9000_BIGAIN_BPHCAL_1 Represents the second configuration of BIGAIN
+ * and BPHCAL.
+ * @param ADE9000_BIGAIN_BPHCAL_2 Represents the third configuration of BIGAIN
+ * and BPHCAL.
+ * @param ADE9000_BIGAIN_BPHCAL_3 Represents the fourth configuration of BIGAIN
+ * and BPHCAL.
+ * @param ADE9000_BIGAIN_BPHCAL_4 Represents the fifth configuration of BIGAIN
+ * and BPHCAL.
+ * @param ADE9000_BIGAIN_BPHCAL_DISABLE Indicates that the BIGAIN and BPHCAL
+ * function is disabled.
+ ******************************************************************************/
 enum ade9000_bregion_sel_e {
 	/* 0 */
 	ADE9000_BIGAIN_BPHCAL_0,
@@ -1047,11 +1095,27 @@ enum ade9000_bregion_sel_e {
 	ADE9000_BIGAIN_BPHCAL_DISABLE = 15
 };
 
-/**
- * @enum ade9000_cregion_sel_e
- * @brief ADE9000 These bits indicate which CIGAINx and CPHCALx
-    is currently being used.
- */
+/***************************************************************************//**
+ * @brief The `ade9000_cregion_sel_e` is an enumeration that defines the
+ * selection of CIGAIN and CPHCAL configurations for the ADE9000 device.
+ * It provides options to select from five different configurations (0 to
+ * 4) or to disable the function entirely. This enumeration is used to
+ * specify which gain and phase calibration settings are currently active
+ * for the C phase in the ADE9000 energy metering IC.
+ *
+ * @param ADE9000_CIGAIN_CPHCAL_0 Represents the first configuration of CIGAIN
+ * and CPHCAL.
+ * @param ADE9000_CIGAIN_CPHCAL_1 Represents the second configuration of CIGAIN
+ * and CPHCAL.
+ * @param ADE9000_CIGAIN_CPHCAL_2 Represents the third configuration of CIGAIN
+ * and CPHCAL.
+ * @param ADE9000_CIGAIN_CPHCAL_3 Represents the fourth configuration of CIGAIN
+ * and CPHCAL.
+ * @param ADE9000_CIGAIN_CPHCAL_4 Represents the fifth configuration of CIGAIN
+ * and CPHCAL.
+ * @param ADE9000_CIGAIN_CPHCAL_DISABLE Indicates that the CIGAIN and CPHCAL
+ * function is disabled.
+ ******************************************************************************/
 enum ade9000_cregion_sel_e {
 	/* 0 */
 	ADE9000_CIGAIN_CPHCAL_0,
@@ -1067,11 +1131,24 @@ enum ade9000_cregion_sel_e {
 	ADE9000_CIGAIN_CPHCAL_DISABLE = 15
 };
 
-/**
- * @enum ade9000_cf4_pin_out_cfg_e
- * @brief ADE9000 These bits indicate which function
-    to output on CF4 pin
- */
+/***************************************************************************//**
+ * @brief The `ade9000_cf4_pin_out_cfg_e` is an enumeration that defines the
+ * possible configurations for the CF4 pin output on the ADE9000 device.
+ * It allows the selection of different functionalities such as digital
+ * to frequency conversion, event signaling, or data readiness
+ * indication, which can be output through the CF4 pin. This
+ * configuration is crucial for interfacing the ADE9000 with other
+ * components in a system, enabling it to communicate specific states or
+ * data through the CF4 pin.
+ *
+ * @param ADE9000_CF4_D_F_CONV Represents a digital to frequency converter
+ * output on the CF4 pin.
+ * @param ADE9000_CF4_D_F_CONV2 Represents a second digital to frequency
+ * converter output on the CF4 pin.
+ * @param ADE9000_CF4_EVENT Indicates an event output on the CF4 pin.
+ * @param ADE9000_CF4_DREADY Indicates a data ready signal output on the CF4
+ * pin.
+ ******************************************************************************/
 enum ade9000_cf4_pin_out_cfg_e {
 	/* Digital to freq converter */
 	ADE9000_CF4_D_F_CONV,
@@ -1083,11 +1160,19 @@ enum ade9000_cf4_pin_out_cfg_e {
 	ADE9000_CF4_DREADY,
 };
 
-/**
- * @enum ade9000_cf3_pin_out_cfg_e
- * @brief ADE9000 These bits indicate which function
-    to output on CF3 pin
- */
+/***************************************************************************//**
+ * @brief The `ade9000_cf3_pin_out_cfg_e` is an enumeration that defines the
+ * possible configurations for the CF3 pin output on the ADE9000 device.
+ * It allows the selection between a digital to frequency converter
+ * output and a zero-crossing output, which is determined by the ZX_SEL
+ * bits. This configuration is crucial for determining the function that
+ * the CF3 pin will perform in the context of the ADE9000's operation.
+ *
+ * @param ADE9000_CF3_D_F_CONV Represents the digital to frequency converter
+ * output on the CF3 pin.
+ * @param ADE9000_CF3_ZX Represents the zero-crossing output selected by ZX_SEL
+ * bits on the CF3 pin.
+ ******************************************************************************/
 enum ade9000_cf3_pin_out_cfg_e {
 	/* Digital to freq converter */
 	ADE9000_CF3_D_F_CONV,
@@ -1095,12 +1180,24 @@ enum ade9000_cf3_pin_out_cfg_e {
 	ADE9000_CF3_ZX,
 };
 
-/**
- * @enum ade9000_cf4_sel_e
- * @brief ADE9000 Type of energy output on the CF4 pin. Configure
-    TERMSEL4 in the COMPMODE register to select
-    which phases are included
- */
+/***************************************************************************//**
+ * @brief The `ade9000_cf4_sel_e` is an enumeration that defines the different
+ * types of energy outputs that can be configured on the CF4 pin of the
+ * ADE9000 device. This enumeration allows the selection of various power
+ * measurements, including total and fundamental active, reactive, and
+ * apparent power. It is used to configure the TERMSEL4 in the COMPMODE
+ * register to determine which phases are included in the measurement.
+ *
+ * @param ADE9000_CF4_SEL_ACTIV_P Represents total active power.
+ * @param ADE9000_CF4_SEL_REACTIV_P Represents total reactive power.
+ * @param ADE9000_CF4_SEL_APPARENT_P Represents total apparent power.
+ * @param ADE9000_CF4_SEL_FUN_ACTIVE_P Represents fundamental active power.
+ * @param ADE9000_CF4_SEL_FUN_REACTIVE_P Represents fundamental reactive power.
+ * @param ADE9000_CF4_SEL_FUN_APPARENT_P Represents fundamental apparent power.
+ * @param ADE9000_CF4_SEL_TOTAL_ACTIVE_P Represents total active power.
+ * @param ADE9000_CF4_SEL_TOTAL_ACTIVE_P_2 Represents an alternative total
+ * active power.
+ ******************************************************************************/
 enum ade9000_cf4_sel_e {
 	/* Total active power */
 	ADE9000_CF4_SEL_ACTIV_P,
@@ -1120,10 +1217,16 @@ enum ade9000_cf4_sel_e {
 	ADE9000_CF4_SEL_TOTAL_ACTIVE_P_2,
 };
 
-/**
- * @enum ade9000_freq_sel_e
- * @brief ADE9000 Freq value
- */
+/***************************************************************************//**
+ * @brief The `ade9000_freq_sel_e` is an enumeration that defines the frequency
+ * selection options for the ADE9000 device, specifically allowing the
+ * user to choose between a 50 Hz or 60 Hz frequency setting. This
+ * selection is crucial for configuring the device to operate correctly
+ * in regions with different power line frequencies.
+ *
+ * @param ADE9000_SELFREQ_50 Represents a frequency selection of 50 Hz.
+ * @param ADE9000_SELFREQ_60 Represents a frequency selection of 60 Hz.
+ ******************************************************************************/
 enum ade9000_freq_sel_e {
 	/* 50 Hz */
 	ADE9000_SELFREQ_50,
@@ -1131,10 +1234,25 @@ enum ade9000_freq_sel_e {
 	ADE9000_SELFREQ_60,
 };
 
-/**
- * @enum ade9000_vconsel_e
- * @brief ADE9000 3-wire and 4-wire hardware configuration selection
- */
+/***************************************************************************//**
+ * @brief The `ade9000_vconsel_e` enumeration defines various hardware
+ * configurations for the ADE9000 device, specifically for selecting
+ * between different 3-wire and 4-wire electrical configurations. Each
+ * enumerator represents a specific wiring setup, including standard
+ * 4-wire wye, 3-wire delta, and non-Blondel compliant configurations,
+ * allowing the device to adapt to different electrical system
+ * requirements.
+ *
+ * @param ADE9000_4WIRE_WYE Represents a 4-wire wye configuration.
+ * @param ADE9000_3WIRE_DELTA Represents a 3-wire delta configuration where VB'
+ * = VA − VC.
+ * @param ADE9000_4WIRE_WYE_VA_VC Represents a 4-wire wye configuration, non-
+ * Blondel compliant, where VB' = −VA − VC.
+ * @param ADE9000_4WIRE_WYE_VA Represents a 4-wire delta configuration, non-
+ * Blondel compliant, where VB' = −VA.
+ * @param ADE9000_3WIRE_DELTA_2 Represents a 3-wire delta configuration where
+ * VA' = VA − VB, VB' = VA − VC, and VC' = VC − VB.
+ ******************************************************************************/
 enum ade9000_vconsel_e {
 	/* 4 wire wye */
 	ADE9000_4WIRE_WYE,
@@ -1148,11 +1266,24 @@ enum ade9000_vconsel_e {
 	ADE9000_3WIRE_DELTA_2
 };
 
-/**
- * @enum ade9000_var_acc_mode_e
- * @brief ADE9000 Total and fundamental reactive power accumulation
-     mode for energy registers and CFx pulses.
- */
+/***************************************************************************//**
+ * @brief The `ade9000_var_acc_mode_e` is an enumeration that defines the
+ * different modes of accumulation for total and fundamental reactive
+ * power in the ADE9000 energy metering IC. It specifies how the energy
+ * registers and CFx pulses should accumulate reactive power, offering
+ * options for signed, absolute, positive, and negative accumulation
+ * modes. This allows for flexible configuration of the device to suit
+ * various energy measurement requirements.
+ *
+ * @param ADE9000_ACC_SIGNED Represents the signed accumulation mode for
+ * reactive power.
+ * @param ADE9000_ACC_ABSOLUTE Represents the absolute value accumulation mode
+ * for reactive power.
+ * @param ADE9000_ACC_POSITIVE Represents the positive accumulation mode for
+ * reactive power.
+ * @param ADE9000_ACC_NEGATIVE Represents the negative accumulation mode for
+ * reactive power.
+ ******************************************************************************/
 enum ade9000_var_acc_mode_e {
 	/* signed acc mode */
 	ADE9000_ACC_SIGNED,
@@ -1164,12 +1295,24 @@ enum ade9000_var_acc_mode_e {
 	ADE9000_ACC_NEGATIVE
 };
 
-/**
- * @enum ade9000_line_period_sel_e
- * @brief Selects line period measurement used for
-    VRMS½ cycle, 10 cycle rms/12 cycle rms, and
-    resampling.
- */
+/***************************************************************************//**
+ * @brief The `ade9000_line_period_sel_e` is an enumeration that defines the
+ * different modes of line period measurement used in the ADE9000 device.
+ * These modes determine how the line period is calculated for VRMS half-
+ * cycle, 10-cycle RMS/12-cycle RMS, and resampling operations. Each mode
+ * corresponds to a different type of accumulation: signed, absolute
+ * value, positive, and negative, allowing for flexible configuration
+ * based on the specific requirements of the application.
+ *
+ * @param ADE9000_APERIOD Represents the signed accumulation mode for line
+ * period measurement.
+ * @param ADE9000_BPERIOD Represents the absolute value accumulation mode for
+ * line period measurement.
+ * @param ADE9000_CPERIOD Represents the positive accumulation mode for line
+ * period measurement.
+ * @param ADE9000_COM_PERIOD Represents the negative accumulation mode for line
+ * period measurement.
+ ******************************************************************************/
 enum ade9000_line_period_sel_e {
 	/* signed acc mode */
 	ADE9000_APERIOD,
@@ -1181,12 +1324,24 @@ enum ade9000_line_period_sel_e {
 	ADE9000_COM_PERIOD
 };
 
-/**
- * @enum ade9000_zx_select_e
- * @brief Selects the zero-crossing signal, which can be
-    routed to the CF3/ZX output pin and used for
-    line cycle energy accumulation
- */
+/***************************************************************************//**
+ * @brief The `ade9000_zx_select_e` enumeration defines the possible zero-
+ * crossing signal selections for the ADE9000 device. These selections
+ * determine which phase's voltage zero-crossing signal is routed to the
+ * CF3/ZX output pin, which can be used for line cycle energy
+ * accumulation. The options include zero-crossing signals for individual
+ * phases A, B, and C, as well as a combined signal from all three
+ * phases.
+ *
+ * @param ADE9000_ZXVA_SEL Represents the zero-crossing signal for Phase A
+ * voltage.
+ * @param ADE9000_ZXVB_SEL Represents the zero-crossing signal for Phase B
+ * voltage.
+ * @param ADE9000_ZXVC_SEL Represents the zero-crossing signal for Phase C
+ * voltage.
+ * @param ADE9000_ZXCOMB_SEL Represents the zero-crossing signal for a combined
+ * signal from VA, VB, and VC.
+ ******************************************************************************/
 enum ade9000_zx_select_e {
 	/* Phase A voltage zero-crossing signal */
 	ADE9000_ZXVA_SEL,
@@ -1198,11 +1353,20 @@ enum ade9000_zx_select_e {
 	ADE9000_ZXCOMB_SEL
 };
 
-/**
- * @enum ade9000_wf_src_e
- * @brief Waveform buffer source and DREADY (data
-    ready update rate) selection
- */
+/***************************************************************************//**
+ * @brief The `ade9000_wf_src_e` enumeration defines the different waveform
+ * buffer sources and their corresponding data ready update rates for the
+ * ADE9000 device. It includes options for selecting the Sinc4 output,
+ * the Sinc4 combined with an IIR low-pass filter, and the DSP-processed
+ * current and voltage channel waveform samples. This enumeration is used
+ * to configure the source of waveform data that the ADE9000 will use for
+ * its operations.
+ *
+ * @param ADE9000_SRC_SINC4 Represents the Sinc4 output at 32 kSPS.
+ * @param ADE9000_SRC_SINC4_IIR Represents the Sinc4 + IIR LPF output at 8 kSPS.
+ * @param ADE9000_SRC_DSP Represents the current and voltage channel waveform
+ * samples processed by the DSP at 8 kSPS.
+ ******************************************************************************/
 enum ade9000_wf_src_e {
 	/* Sinc4 output at 32 kSPS */
 	ADE9000_SRC_SINC4,
@@ -1213,11 +1377,23 @@ enum ade9000_wf_src_e {
 	ADE9000_SRC_DSP
 };
 
-/**
- * @enum ade9000_wf_mode_e
- * @brief Fixed data rate waveforms filling and trigger
-    based modes.
- */
+/***************************************************************************//**
+ * @brief The `ade9000_wf_mode_e` is an enumeration that defines the different
+ * modes of operation for waveform data handling in the ADE9000 device.
+ * It specifies how the waveform buffer is managed, including stopping
+ * when full, continuous filling with specific trigger conditions, and
+ * saving event addresses. This enumeration is crucial for configuring
+ * the device's behavior in capturing and processing waveform data based
+ * on specific operational requirements.
+ *
+ * @param ADE9000_MODE_STOP_FULL Stops when the waveform buffer is full.
+ * @param ADE9000_MODE_TRIG_EN_EVENTS Continuously fills and stops only on
+ * enabled trigger events.
+ * @param ADE9000_MODE_CENTER_CAPTURE Continuously fills and centers capture
+ * around enabled trigger events.
+ * @param ADE9000_MODE_SAVE_EVENT_ADDR Continuously fills and saves the event
+ * address of enabled trigger events.
+ ******************************************************************************/
 enum ade9000_wf_mode_e {
 	/* Stop when waveform buffer is full */
 	ADE9000_MODE_STOP_FULL,
@@ -1232,11 +1408,33 @@ enum ade9000_wf_mode_e {
 	ADE9000_MODE_SAVE_EVENT_ADDR
 };
 
-/**
- * @enum ade9000_burst_ch_e
- * @brief Selects which data to read out of the waveform
-    buffer through SPI
- */
+/***************************************************************************//**
+ * @brief The `ade9000_burst_ch_e` enumeration defines the different channel
+ * configurations available for burst reading from the waveform buffer in
+ * the ADE9000 device. Each enumerator specifies a particular set of
+ * channels or a single channel that can be read in burst mode,
+ * facilitating efficient data acquisition through SPI. The enumeration
+ * also includes an option to disable burst reading, reverting to single
+ * address reads.
+ *
+ * @param ADE9000_BURST_ALL_CH Represents all channels for burst reading.
+ * @param ADE9000_BURST_IA_VA Represents the IA and VA channels for burst
+ * reading.
+ * @param ADE9000_BURST_IB_VB Represents the IB and VB channels for burst
+ * reading.
+ * @param ADE9000_BURST_IC_VC Represents the IC and VC channels for burst
+ * reading.
+ * @param ADE9000_BURST_IA Represents the IA channel for burst reading.
+ * @param ADE9000_BURST_VA Represents the VA channel for burst reading.
+ * @param ADE9000_BURST_IB Represents the IB channel for burst reading.
+ * @param ADE9000_BURST_VB Represents the VB channel for burst reading.
+ * @param ADE9000_BURST_IC Represents the IC channel for burst reading.
+ * @param ADE9000_BURST_VC Represents the VC channel for burst reading.
+ * @param ADE9000_BURST_IN Represents the IN channel for burst reading if
+ * WF_IN_EN is enabled.
+ * @param ADE9000_BURST_DISABLED Disables burst reading, allowing single address
+ * read.
+ ******************************************************************************/
 enum ade9000_burst_ch_e {
 	/* All channels */
 	ADE9000_BURST_ALL_CH,
@@ -1264,11 +1462,32 @@ enum ade9000_burst_ch_e {
 	ADE9000_BURST_DISABLED
 };
 
-/**
- * @enum ade9000_hpf_freq_e
- * @brief High-pass filter corner (f3dB) enabled when the
-    HPFDIS bit in the CONFIG0 register is equal to zero
- */
+/***************************************************************************//**
+ * @brief The `ade9000_hpf_freq_e` is an enumeration that defines various high-
+ * pass filter corner frequencies (f3dB) for the ADE9000 device. These
+ * frequencies are used to configure the high-pass filter when the HPFDIS
+ * bit in the CONFIG0 register is set to zero, allowing the user to
+ * select the desired cutoff frequency for filtering purposes. The
+ * enumeration provides a range of frequencies from 0.625 Hz to 77.39 Hz,
+ * enabling flexibility in filtering settings for different applications.
+ *
+ * @param ADE9000_HPF_77_39 Represents a high-pass filter corner frequency of
+ * 77.39 Hz.
+ * @param ADE9000_HPF_39_275 Represents a high-pass filter corner frequency of
+ * 39.275 Hz.
+ * @param ADE9000_HPF_19_79 Represents a high-pass filter corner frequency of
+ * 19.79 Hz.
+ * @param ADE9000_HPF_9_935 Represents a high-pass filter corner frequency of
+ * 9.935 Hz.
+ * @param ADE9000_HPF_4_98 Represents a high-pass filter corner frequency of
+ * 4.98 Hz.
+ * @param ADE9000_HPF_2_495 Represents a high-pass filter corner frequency of
+ * 2.495 Hz.
+ * @param ADE9000_HPF_1_25 Represents a high-pass filter corner frequency of
+ * 1.25 Hz.
+ * @param ADE9000_HPF_0_625 Represents a high-pass filter corner frequency of
+ * 0.625 Hz.
+ ******************************************************************************/
 enum ade9000_hpf_freq_e {
 	/* 77.39 Hz. */
 	ADE9000_HPF_77_39,
@@ -1288,11 +1507,32 @@ enum ade9000_hpf_freq_e {
 	ADE9000_HPF_0_625
 };
 
-/**
- * @enum ade9000_no_load_tmr_e
- * @brief This register configures how many 8 kSPS
-    samples to evaluate the no load condition over
- */
+/***************************************************************************//**
+ * @brief The `ade9000_no_load_tmr_e` is an enumeration that defines various
+ * configurations for evaluating the no load condition in the ADE9000
+ * device. Each enumerator specifies a different number of 8 kSPS samples
+ * over which the no load condition is assessed, ranging from 64 to 4096
+ * samples, with an option to disable the no load threshold entirely.
+ * This allows for flexible configuration of the no load detection based
+ * on the specific requirements of the application.
+ *
+ * @param ADE9000_NOLOAD_SAMPLES_64 Represents a configuration for evaluating
+ * the no load condition over 64 samples.
+ * @param ADE9000_NOLOAD_SAMPLES_128 Represents a configuration for evaluating
+ * the no load condition over 128 samples.
+ * @param ADE9000_NOLOAD_SAMPLES_256 Represents a configuration for evaluating
+ * the no load condition over 256 samples.
+ * @param ADE9000_NOLOAD_SAMPLES_512 Represents a configuration for evaluating
+ * the no load condition over 512 samples.
+ * @param ADE9000_NOLOAD_SAMPLES_1024 Represents a configuration for evaluating
+ * the no load condition over 1024 samples.
+ * @param ADE9000_NOLOAD_SAMPLES_2048 Represents a configuration for evaluating
+ * the no load condition over 2048 samples.
+ * @param ADE9000_NOLOAD_SAMPLES_4096 Represents a configuration for evaluating
+ * the no load condition over 4096 samples.
+ * @param ADE9000_NOLOAD_SAMPLES_DISABLE Disables the no load threshold
+ * evaluation.
+ ******************************************************************************/
 enum ade9000_no_load_tmr_e {
 	/* 64 samples */
 	ADE9000_NOLOAD_SAMPLES_64,
@@ -1312,11 +1552,23 @@ enum ade9000_no_load_tmr_e {
 	ADE9000_NOLOAD_SAMPLES_DISABLE
 };
 
-/**
- * @enum ade9000_temp_time_e
- * @brief Select the number of temperature readings to
-    average
- */
+/***************************************************************************//**
+ * @brief The `ade9000_temp_time_e` enumeration defines different configurations
+ * for temperature measurement intervals and sample sizes in the ADE9000
+ * device. Each enumerator specifies a distinct sampling rate and the
+ * corresponding time interval for obtaining new temperature
+ * measurements, allowing for flexibility in temperature monitoring based
+ * on the application's requirements.
+ *
+ * @param ADE9000_TEMP_TIME_1 Represents a temperature measurement every 1.25 ms
+ * with 1 sample.
+ * @param ADE9000_TEMP_TIME_256 Represents a temperature measurement every 320
+ * ms with 256 samples.
+ * @param ADE9000_TEMP_TIME_512 Represents a temperature measurement every 640
+ * ms with 512 samples.
+ * @param ADE9000_TEMP_TIME_1024 Represents a temperature measurement every 1.3
+ * seconds with 1024 samples.
+ ******************************************************************************/
 enum ade9000_temp_time_e {
 	/* 1 sample. New temperature measurement every
 	1.25 ms. */
@@ -1332,10 +1584,20 @@ enum ade9000_temp_time_e {
 	ADE9000_TEMP_TIME_1024
 };
 
-/**
- * @enum ade9000_pga_gain_e
- * @brief PGA gain
- */
+/***************************************************************************//**
+ * @brief The `ade9000_pga_gain_e` is an enumeration that defines the possible
+ * gain settings for the Programmable Gain Amplifier (PGA) in the ADE9000
+ * device. It provides four distinct gain levels, ranging from 1 to 4,
+ * allowing for the adjustment of signal amplification based on the
+ * specific requirements of the application. This enumeration is used to
+ * configure the gain of the PGA to optimize the signal-to-noise ratio
+ * and ensure accurate measurements.
+ *
+ * @param ADE9000_PGA_GAIN_1 Represents a PGA gain setting of 1.
+ * @param ADE9000_PGA_GAIN_2 Represents a PGA gain setting of 2.
+ * @param ADE9000_PGA_GAIN_3 Represents a PGA gain setting of 3.
+ * @param ADE9000_PGA_GAIN_4 Represents a PGA gain setting of 4.
+ ******************************************************************************/
 enum ade9000_pga_gain_e {
 	/* Gain = 1 */
 	ADE9000_PGA_GAIN_1,
@@ -1347,30 +1609,58 @@ enum ade9000_pga_gain_e {
 	ADE9000_PGA_GAIN_4
 };
 
-/**
- * @enum ade9000_phase
- * @brief ADE9000 available phases.
- */
+/***************************************************************************//**
+ * @brief The `ade9000_phase` enumeration defines the available phases (A, B,
+ * and C) for the ADE9000 device, which is used in power measurement and
+ * monitoring applications. Each enumerator corresponds to a specific
+ * phase, allowing the software to reference and manipulate data related
+ * to that phase in the ADE9000 system.
+ *
+ * @param ADE9000_PHASE_A Represents phase A in the ADE9000 device.
+ * @param ADE9000_PHASE_B Represents phase B in the ADE9000 device.
+ * @param ADE9000_PHASE_C Represents phase C in the ADE9000 device.
+ ******************************************************************************/
 enum ade9000_phase {
 	ADE9000_PHASE_A,
 	ADE9000_PHASE_B,
 	ADE9000_PHASE_C
 };
 
-/**
- * @enum ade9000_egy_model
- * @brief ADE9000 available user energy use models.
- */
+/***************************************************************************//**
+ * @brief The `ade9000_egy_model` is an enumeration that defines the available
+ * energy use models for the ADE9000 device. It provides three distinct
+ * models: one that includes a reset feature, another that calculates
+ * energy based on half line cycles, and a third that uses a specified
+ * number of samples for energy calculation. This enumeration is used to
+ * configure the energy measurement behavior of the ADE9000 device.
+ *
+ * @param ADE9000_EGY_WITH_RESET Represents an energy model with reset
+ * functionality.
+ * @param ADE9000_EGY_HALF_LINE_CYCLES Represents an energy model based on half
+ * line cycles.
+ * @param ADE9000_EGY_NR_SAMPLES Represents an energy model based on a number of
+ * samples.
+ ******************************************************************************/
 enum ade9000_egy_model {
 	ADE9000_EGY_WITH_RESET,
 	ADE9000_EGY_HALF_LINE_CYCLES,
 	ADE9000_EGY_NR_SAMPLES
 };
 
-/**
- * @struct ade9000_init_param
- * @brief ADE9000 Device initialization parameters.
- */
+/***************************************************************************//**
+ * @brief The `ade9000_init_param` structure is used to define the
+ * initialization parameters for the ADE9000 device. It includes a
+ * pointer to the SPI initialization parameters, which are necessary for
+ * setting up the communication interface with the device, and a boolean
+ * flag to enable or disable the temperature sensor functionality. This
+ * structure is essential for configuring the device during its
+ * initialization phase.
+ *
+ * @param spi_init A pointer to a structure that holds the SPI initialization
+ * parameters for device communication.
+ * @param temp_en A boolean flag indicating whether the temperature sensor is
+ * enabled.
+ ******************************************************************************/
 struct ade9000_init_param {
 	/** Device communication descriptor */
 	struct no_os_spi_init_param 	*spi_init;
@@ -1378,10 +1668,23 @@ struct ade9000_init_param {
 	bool				temp_en;
 };
 
-/**
- * @struct ade9000_dev
- * @brief ADE9000 Device structure.
- */
+/***************************************************************************//**
+ * @brief The `ade9000_dev` structure is designed to represent an ADE9000
+ * device, encapsulating essential parameters for device communication
+ * and measurement data. It includes a pointer to an SPI descriptor for
+ * handling communication with the device, and fields to store various
+ * measurement values such as WATT, IRMS, VRMS, and temperature. This
+ * structure is central to managing and accessing the ADE9000's
+ * functionalities, providing a convenient way to store and retrieve
+ * measurement data and device state.
+ *
+ * @param spi_desc Device communication descriptor for SPI interface.
+ * @param watt_val Stores the WATT value as a 32-bit unsigned integer.
+ * @param irms_val Stores the IRMS value as a 32-bit unsigned integer.
+ * @param vrms_val Stores the VRMS value as a 32-bit unsigned integer.
+ * @param temp_deg Stores the temperature value in degrees as a 32-bit signed
+ * integer.
+ ******************************************************************************/
 struct ade9000_dev {
 	/** Device communication descriptor */
 	struct no_os_spi_desc		*spi_desc;
@@ -1400,38 +1703,240 @@ struct ade9000_dev {
 /******************************************************************************/
 
 /* Read device register. */
+/***************************************************************************//**
+ * @brief Use this function to read a 16-bit or 32-bit register value from the
+ * ADE9000 device. It requires a valid device structure and a register
+ * address to read from. The function will store the read value in the
+ * provided output parameter. Ensure that the device has been properly
+ * initialized before calling this function. The function handles both
+ * 16-bit and 32-bit registers based on the address range. It returns an
+ * error code if the device structure or output parameter is null, or if
+ * the SPI communication fails.
+ *
+ * @param dev A pointer to an initialized ade9000_dev structure. Must not be
+ * null. Represents the device from which the register is to be read.
+ * @param reg_addr A 16-bit unsigned integer representing the address of the
+ * register to read. The address must be within the valid range
+ * of the device's register map.
+ * @param reg_data A pointer to a 32-bit unsigned integer where the read
+ * register value will be stored. Must not be null. The function
+ * writes the register value to this location.
+ * @return Returns 0 on success, or a negative error code on failure, such as
+ * -ENODEV if the device is not initialized or -EINVAL if the reg_data
+ * pointer is null.
+ ******************************************************************************/
 int ade9000_read(struct ade9000_dev *dev, uint16_t reg_addr,
 		 uint32_t *reg_data);
 
 /* Write device register. */
+/***************************************************************************//**
+ * @brief Use this function to write a 16-bit or 32-bit value to a specific
+ * register of the ADE9000 device. It is essential to ensure that the
+ * device structure is properly initialized and not null before calling
+ * this function. The function handles both 16-bit and 32-bit registers
+ * based on the register address provided. It returns an error code if
+ * the device is not available or if the SPI communication fails.
+ *
+ * @param dev A pointer to an initialized ade9000_dev structure representing the
+ * device. Must not be null.
+ * @param reg_addr A 16-bit unsigned integer specifying the register address to
+ * write to. The address determines whether the register is
+ * 16-bit or 32-bit.
+ * @param reg_data A 32-bit unsigned integer containing the data to be written
+ * to the specified register. For 16-bit registers, only the
+ * lower 16 bits are used.
+ * @return Returns 0 on success or a negative error code on failure, such as
+ * -ENODEV if the device is not available.
+ ******************************************************************************/
 int ade9000_write(struct ade9000_dev *dev, uint16_t reg_addr,
 		  uint32_t reg_data);
 
 /* Update specific register bits. */
+/***************************************************************************//**
+ * @brief This function is used to modify specific bits in a register of the
+ * ADE9000 device. It reads the current value of the register, applies a
+ * mask to clear the bits to be updated, and then sets the new bits as
+ * specified by the reg_data parameter. This function should be called
+ * when you need to change specific settings or configurations in the
+ * device without affecting other bits in the register. It requires a
+ * valid device structure and a valid register address. If the device
+ * structure is null, the function returns an error.
+ *
+ * @param dev A pointer to an ade9000_dev structure representing the device.
+ * Must not be null. If null, the function returns -ENODEV.
+ * @param reg_addr The address of the register to be updated. Must be a valid
+ * register address for the ADE9000 device.
+ * @param mask A bitmask indicating which bits in the register should be
+ * updated. Only the bits set in this mask will be affected.
+ * @param reg_data The new data to be written to the register, masked by the
+ * mask parameter. Only the bits specified by the mask will be
+ * updated with this data.
+ * @return Returns 0 on success or a negative error code on failure, such as if
+ * the device is not available or if reading or writing the register
+ * fails.
+ ******************************************************************************/
 int ade9000_update_bits(struct ade9000_dev *dev, uint16_t reg_addr,
 			uint32_t mask, uint32_t reg_data);
 
 /* Read temperature */
+/***************************************************************************//**
+ * @brief This function retrieves the current temperature reading from the
+ * ADE9000 device and stores it in the device structure. It should be
+ * called when a temperature measurement is needed, and the device must
+ * be properly initialized before calling this function. The function
+ * handles the start of a temperature conversion, waits for the
+ * conversion to complete, and then calculates the temperature in degrees
+ * Celsius. If the device pointer is null, the function returns an error.
+ * It also returns an error if the temperature conversion does not
+ * complete within a specified timeout.
+ *
+ * @param dev A pointer to an initialized ade9000_dev structure. Must not be
+ * null. The function will return an error if this parameter is null.
+ * @return Returns 0 on success, or a negative error code on failure. On
+ * success, the temperature in degrees Celsius is stored in the temp_deg
+ * field of the ade9000_dev structure.
+ ******************************************************************************/
 int ade9000_read_temp(struct ade9000_dev *dev);
 
 /* Read Energy/Power for specific phase */
+/***************************************************************************//**
+ * @brief Use this function to read the instantaneous RMS current, RMS voltage,
+ * and active power for a specified phase of the ADE9000 device. This
+ * function should be called when you need to obtain these measurements
+ * for a particular phase (A, B, or C). Ensure that the device is
+ * properly initialized before calling this function. The function
+ * updates the device structure with the measured values in milliampere
+ * (mA), millivolt (mV), and milliwatt (mW) respectively. It returns an
+ * error code if the device is not initialized or if an invalid phase is
+ * specified.
+ *
+ * @param dev A pointer to an initialized ade9000_dev structure. Must not be
+ * null. The function will return -ENODEV if this parameter is null.
+ * @param phase An enum value of type ade9000_phase indicating the phase
+ * (ADE9000_PHASE_A, ADE9000_PHASE_B, or ADE9000_PHASE_C) for which
+ * data is to be read. If an invalid phase is provided, the
+ * function returns -EINVAL.
+ * @return Returns 0 on success. On failure, returns a negative error code
+ * indicating the type of error (e.g., -ENODEV for uninitialized device,
+ * -EINVAL for invalid phase). The function updates the irms_val,
+ * vrms_val, and watt_val fields of the ade9000_dev structure with the
+ * read values.
+ ******************************************************************************/
 int ade9000_read_data_ph(struct ade9000_dev *dev, enum ade9000_phase phase);
 
 /* Set User Energy use model */
+/***************************************************************************//**
+ * @brief This function configures the energy measurement model of the ADE9000
+ * device based on the specified model and value. It should be called
+ * when you need to set or change the energy measurement configuration.
+ * The function requires a valid device structure and a model type. The
+ * value parameter is used differently depending on the model; for the
+ * ADE9000_EGY_WITH_RESET model, it must be set to 1. The function
+ * returns an error code if the device is not initialized, if the model
+ * is invalid, or if the value is inappropriate for the selected model.
+ *
+ * @param dev A pointer to an initialized ade9000_dev structure representing the
+ * device. Must not be null.
+ * @param model An enum ade9000_egy_model value specifying the energy model to
+ * set. Valid values are ADE9000_EGY_WITH_RESET,
+ * ADE9000_EGY_HALF_LINE_CYCLES, and ADE9000_EGY_NR_SAMPLES.
+ * @param value A uint16_t value used to configure the energy model. For
+ * ADE9000_EGY_WITH_RESET, it must be 1; for other models, it
+ * specifies the energy time or number of samples.
+ * @return Returns 0 on success or a negative error code on failure, such as
+ * -ENODEV if the device is not initialized or -EINVAL for invalid
+ * parameters.
+ ******************************************************************************/
 int ade9000_set_egy_model(struct ade9000_dev *dev, enum ade9000_egy_model model,
 			  uint16_t value);
 
 /* Initialize the device. */
+/***************************************************************************//**
+ * @brief This function initializes the ADE9000 device by setting up the
+ * necessary SPI communication and configuring the device registers
+ * according to the provided initialization parameters. It must be called
+ * before any other operations on the device. The function performs a
+ * software reset, waits for the device to stabilize, and verifies the
+ * chip ID to ensure proper communication. It also optionally enables the
+ * temperature sensor based on the initialization parameters. If
+ * initialization fails at any step, it cleans up allocated resources and
+ * returns an error code.
+ *
+ * @param device A pointer to a pointer of ade9000_dev structure where the
+ * initialized device instance will be stored. Must not be null.
+ * The caller takes ownership of the allocated device structure
+ * upon successful initialization.
+ * @param init_param A structure containing initialization parameters, including
+ * SPI initialization settings and a flag to enable the
+ * temperature sensor. The SPI initialization parameter must
+ * be valid and properly configured.
+ * @return Returns 0 on successful initialization. On failure, returns a
+ * negative error code and does not modify the device pointer.
+ ******************************************************************************/
 int ade9000_init(struct ade9000_dev **device,
 		 struct ade9000_init_param init_param);
 
 /* Setup the device */
+/***************************************************************************//**
+ * @brief This function sets up the ADE9000 device by configuring its registers
+ * with default values necessary for its operation. It must be called
+ * after the device has been initialized and before any data acquisition
+ * or processing is performed. The function configures various
+ * operational parameters such as channel gains, device configuration,
+ * and enables specific interrupts. It is essential to ensure that the
+ * `dev` parameter is not null before calling this function, as a null
+ * pointer will result in an error. The function returns an error code if
+ * any of the register writes fail, indicating that the setup was not
+ * successful.
+ *
+ * @param dev A pointer to an `ade9000_dev` structure representing the device to
+ * be configured. Must not be null. The caller retains ownership of
+ * the memory.
+ * @return Returns 0 on success, or a negative error code if the setup fails due
+ * to a null device pointer or unsuccessful register writes.
+ ******************************************************************************/
 int ade9000_setup(struct ade9000_dev *dev);
 
 /* Remove the device and release resources. */
+/***************************************************************************//**
+ * @brief Use this function to properly remove an ADE9000 device instance and
+ * free associated resources. It should be called when the device is no
+ * longer needed, ensuring that any allocated resources are released.
+ * This function must be called after the device has been initialized and
+ * used, to prevent resource leaks. It handles the removal of the SPI
+ * descriptor and frees the device structure. Ensure that the device
+ * pointer is valid and initialized before calling this function.
+ *
+ * @param dev A pointer to an initialized `ade9000_dev` structure representing
+ * the device to be removed. Must not be null. If the pointer is
+ * invalid or uninitialized, the behavior is undefined.
+ * @return Returns 0 on success, or a negative error code if the SPI descriptor
+ * removal fails.
+ ******************************************************************************/
 int ade9000_remove(struct ade9000_dev *dev);
 
 /* Get interrupt indicator from STATUS0 register. */
+/***************************************************************************//**
+ * @brief Use this function to obtain the interrupt status from the STATUS0
+ * register of the ADE9000 device. It is essential to ensure that the
+ * device is properly initialized before calling this function. The
+ * function reads the STATUS0 register and applies a mask to determine
+ * the specific interrupt status. This function is useful for monitoring
+ * and handling specific interrupt events. Ensure that the `dev` and
+ * `status` pointers are valid and not null before calling this function.
+ *
+ * @param dev A pointer to an initialized `ade9000_dev` structure representing
+ * the device. Must not be null. If null, the function returns
+ * -ENODEV.
+ * @param msk A 32-bit mask used to filter specific bits of interest from the
+ * STATUS0 register. The mask determines which bits in the register
+ * are checked.
+ * @param status A pointer to a uint8_t where the result of the masked status
+ * will be stored. Must not be null. If null, the function returns
+ * -EINVAL.
+ * @return Returns 0 on success, or a negative error code on failure. The
+ * `status` pointer is updated with the masked interrupt status.
+ ******************************************************************************/
 int ade9000_get_int_status0(struct ade9000_dev *dev, uint32_t msk,
 			    uint8_t *status);
 

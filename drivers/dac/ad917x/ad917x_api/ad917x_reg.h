@@ -14,9 +14,59 @@
 
 #include "api_def.h"
 
+/***************************************************************************//**
+ * @brief This function is used to write multiple register values to an AD917x
+ * device in a single operation. It is useful when configuring the device
+ * with a predefined set of register settings. The function iterates over
+ * a table of register-value pairs and writes each pair to the device. It
+ * must be called with a valid device handle and a properly initialized
+ * table of register data. If any write operation fails, the function
+ * returns an error code immediately, allowing the caller to handle the
+ * error appropriately.
+ *
+ * @param h A pointer to an ad917x_handle_t structure representing the device
+ * handle. Must not be null. The caller retains ownership.
+ * @param tbl A pointer to an array of adi_reg_data structures, each containing
+ * a register address and a value to write. Must not be null. The
+ * caller retains ownership.
+ * @param count The number of register-value pairs in the table. Must be greater
+ * than zero.
+ * @return Returns an int32_t error code. Returns API_ERROR_OK on success, or an
+ * error code if any register write fails.
+ ******************************************************************************/
 int32_t ad917x_register_write_tbl(ad917x_handle_t *h,
 				  struct adi_reg_data *tbl, uint32_t count);
 
+/***************************************************************************//**
+ * @brief This function is used to read a sequence of consecutive registers from
+ * an AD917x device over SPI. It is typically called when multiple
+ * register values need to be retrieved in a single operation, which can
+ * be more efficient than reading each register individually. The
+ * function requires a valid device handle and a buffer to store the read
+ * data. It will attempt to read the specified number of registers
+ * starting from the given address. If any read operation fails, the
+ * function will return an error code, and the data buffer may contain
+ * partial results.
+ *
+ * @param h A pointer to an ad917x_handle_t structure representing the device
+ * handle. This must be a valid handle initialized prior to calling
+ * this function. The caller retains ownership.
+ * @param address The starting register address from which to begin reading.
+ * This is a 16-bit unsigned integer representing a valid
+ * register address in the AD917x device.
+ * @param data A pointer to a buffer where the read data will be stored. This
+ * buffer must be large enough to hold 'count' bytes. The caller is
+ * responsible for allocating and managing the memory for this
+ * buffer.
+ * @param count The number of consecutive registers to read. This is a 32-bit
+ * unsigned integer specifying how many bytes of data to read
+ * starting from 'address'. The function will attempt to read this
+ * many registers, but if an error occurs, fewer registers may be
+ * read.
+ * @return Returns an int32_t error code. API_ERROR_OK is returned on success,
+ * while a non-zero error code indicates a failure during the read
+ * operation.
+ ******************************************************************************/
 int32_t ad917x_register_read_block(ad917x_handle_t *h,
 				   const uint16_t address, uint8_t *data, uint32_t count);
 

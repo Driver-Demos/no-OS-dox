@@ -68,12 +68,35 @@ ongoing work.
 
 /******************************************************************************/
 /*************************** Types Declarations *******************************/
-/******************************************************************************/
+/***************************************************************************//**
+ * @brief The `device_type` enumeration defines two constants, `LTC2312_12` and
+ * `LTC2312_14`, which are used to specify the resolution of the LTC2312
+ * analog-to-digital converter (ADC) device, either 12-bit or 14-bit.
+ * This enumeration is used within the `ltc2312_dev` and
+ * `ltc2312_init_param` structures to indicate the specific type of
+ * device being initialized or operated upon.
+ *
+ * @param LTC2312_12 Represents a 12-bit version of the LTC2312 device.
+ * @param LTC2312_14 Represents a 14-bit version of the LTC2312 device.
+ ******************************************************************************/
 enum device_type {
 	LTC2312_12,
 	LTC2312_14
 };
 
+/***************************************************************************//**
+ * @brief The `ltc2312_dev` structure is designed to represent a device
+ * configuration for the LTC2312 ADC, encapsulating both the device type
+ * and the SPI communication descriptor. This structure is essential for
+ * initializing and managing the communication with the ADC, allowing for
+ * operations such as reading data and converting it to voltage. It
+ * serves as a central data structure for handling the device's
+ * characteristics and communication interface.
+ *
+ * @param type Specifies the type of the device, which can be either LTC2312_12
+ * or LTC2312_14.
+ * @param spi_desc A pointer to a SPI descriptor used for SPI communication.
+ ******************************************************************************/
 struct ltc2312_dev {
 	/* Device characteristics */
 	enum device_type type;
@@ -81,6 +104,17 @@ struct ltc2312_dev {
 	struct no_os_spi_desc *spi_desc;
 };
 
+/***************************************************************************//**
+ * @brief The `ltc2312_init_param` structure is used to initialize an LTC2312
+ * device, specifying both the device type and the SPI interface
+ * parameters. It is essential for setting up the device correctly before
+ * any operations can be performed, ensuring that the device
+ * characteristics and communication settings are properly configured.
+ *
+ * @param type Specifies the type of the device, either LTC2312_12 or
+ * LTC2312_14.
+ * @param spi_init Holds the initialization parameters for the SPI interface.
+ ******************************************************************************/
 struct ltc2312_init_param {
 	/* Device characteristics */
 	enum device_type type;
@@ -92,16 +126,87 @@ struct ltc2312_init_param {
 /************************ Functions Declarations ******************************/
 /******************************************************************************/
 /* Initializes the ltc231x. */
+/***************************************************************************//**
+ * @brief This function sets up an LTC2312 device by allocating memory for the
+ * device structure and initializing the SPI interface based on the
+ * provided initialization parameters. It must be called before any other
+ * operations on the LTC2312 device to ensure that the device is properly
+ * configured. The function expects valid initialization parameters and
+ * will return an error if memory allocation fails or if the SPI
+ * initialization is unsuccessful. The caller is responsible for managing
+ * the memory of the device structure, including freeing it when no
+ * longer needed.
+ *
+ * @param device A pointer to a pointer of type `struct ltc2312_dev`. This will
+ * be allocated and initialized by the function. Must not be null.
+ * @param init_param A pointer to a `struct ltc2312_init_param` containing the
+ * initialization parameters for the device, including SPI
+ * settings and device type. Must not be null and should be
+ * properly initialized before calling this function.
+ * @return Returns 0 on success, or a negative error code if memory allocation
+ * or SPI initialization fails.
+ ******************************************************************************/
 int32_t ltc2312_setup(struct ltc2312_dev **device,
 		      struct ltc2312_init_param *init_param);
 
 /* Free the resources allocated by ltc231x_setup(). */
+/***************************************************************************//**
+ * @brief Use this function to release all resources allocated for an LTC2312
+ * device after it is no longer needed. This function should be called to
+ * clean up after a successful setup with `ltc2312_setup`. It ensures
+ * that the SPI descriptor associated with the device is properly removed
+ * and the memory allocated for the device structure is freed. The
+ * function must be called with a valid device pointer; otherwise, it
+ * returns an error code.
+ *
+ * @param dev A pointer to an `ltc2312_dev` structure representing the device to
+ * be removed. Must not be null. If null, the function returns -1.
+ * @return Returns 0 on successful removal of the device. If the device pointer
+ * is null, returns -1. If an error occurs during SPI removal, the
+ * function returns the error code from the SPI removal operation.
+ ******************************************************************************/
 int32_t ltc2312_remove(struct ltc2312_dev *dev);
 
 /* Reads the LTC2315 and returns 32-bit data in offset binary format. */
+/***************************************************************************//**
+ * @brief This function reads multiple values from the LTC2312 ADC, averages
+ * them, and stores the result in the provided pointer. It is typically
+ * used to obtain a stable ADC reading by averaging out noise. The
+ * function must be called with a valid device structure that has been
+ * properly initialized using `ltc2312_setup`. The pointer to store the
+ * ADC code must not be null, as the function will write the averaged ADC
+ * value to this location. If the SPI communication fails at any point,
+ * the function will return a non-zero error code.
+ *
+ * @param dev A pointer to an initialized `ltc2312_dev` structure representing
+ * the ADC device. Must not be null.
+ * @param ptr_adc_code A pointer to a `uint16_t` where the averaged ADC code
+ * will be stored. Must not be null.
+ * @return Returns 0 on success or a non-zero error code if SPI communication
+ * fails.
+ ******************************************************************************/
 int32_t ltc2312_read(struct ltc2312_dev *dev, uint16_t *ptr_adc_code);
 
 /* Calculates the LTC2315 input voltage given the binary data and LSB weight. */
+/***************************************************************************//**
+ * @brief This function is used to convert a raw ADC code obtained from the
+ * LTC2312 device into a corresponding input voltage, based on a given
+ * reference voltage. It should be called after successfully reading an
+ * ADC code from the device. The function requires a valid device
+ * structure and a reference voltage to perform the conversion. The
+ * result is stored in the provided voltage pointer. Ensure that the
+ * voltage pointer is not null before calling this function.
+ *
+ * @param dev A pointer to an ltc2312_dev structure representing the initialized
+ * device. Must not be null.
+ * @param adc_code A 16-bit unsigned integer representing the raw ADC code to be
+ * converted.
+ * @param vref A floating-point value representing the reference voltage used
+ * for conversion. Should be a positive, non-zero value.
+ * @param voltage A pointer to a float where the calculated input voltage will
+ * be stored. Must not be null.
+ * @return None
+ ******************************************************************************/
 void ltc2312_code_to_voltage(struct ltc2312_dev *dev, uint16_t adc_code,
 			     float vref, float *voltage);
 

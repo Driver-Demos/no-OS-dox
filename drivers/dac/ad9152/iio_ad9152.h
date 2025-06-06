@@ -37,7 +37,15 @@
 #include "iio_types.h"
 #include "ad9152.h"
 
-/** IIO Descriptor */
+/***************************************************************************//**
+ * @brief The `ad9152_iio_descriptor` is a constant structure of type
+ * `iio_device` that is declared as an external variable. It is intended
+ * to provide a descriptor for the AD9152 device within the Industrial
+ * I/O (IIO) framework.
+ *
+ * @details This variable is used to interface with the AD9152 device through
+ * the IIO subsystem, allowing for configuration and data exchange.
+ ******************************************************************************/
 extern struct iio_device const ad9152_iio_descriptor;
 
 #endif //IIO_AD9152_H

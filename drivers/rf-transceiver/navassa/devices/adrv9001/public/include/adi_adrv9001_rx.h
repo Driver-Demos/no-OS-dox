@@ -18,55 +18,36 @@
 extern "C" {
 #endif
 
-/**
- * \brief Programs the gain table settings for Rx channels.
+/***************************************************************************//**
+ * @brief This function is used to load or reconfigure the gain table for
+ * specified Rx channels. It should be called after device initialization
+ * and before running initialization calibrations if a custom gain table
+ * is needed. The function allows for partial gain table loads, which can
+ * be useful in scenarios with memory constraints or when loading
+ * multiple regions. Users must ensure that the gain table rows and
+ * indices are correctly specified, and that the device context is
+ * properly initialized before calling this function.
  *
- * This function can be called by the user to load a custom gain table or
- * to reconfigure the gain table.The gain table for a receiver type is set with the
- * parameters passed by adi_adrv9001_RxGainTableRow_t gainTablePtr array.
- * The array length (n) is dependent upon receiver type.
- * The (n) value is conveyed by numGainIndicesInTable.
- * All gain tables have a maximum index and a minimum index specified by
- * MAX_RX_GAIN_TABLE_NUMINDICES and MIN_RX_GAIN_TABLE_INDEX
- * The minimum gain index is application dependent, this can be modified
- * in the user space, the absolute maximum and minimum indices are specified
- * by MAX_GAIN_TABLE_INDEX and MIN_GAIN_TABLE_INDEX
- *
- * The Rx max gain index is user configurable. A separate call has to be made
- * to adi_adrv9001_RxMinMaxGainIndexSet() API to update the min and max gain
- * indices for a given Rx Channel. Updating min and max gain indices are
- * decoupled from the main gain table loading so that the user has flexibility
- * to load multiple gain table regions and switch between them during runtime.
- *
- * Partial gain table loads can be done through this API in case of memory constraints / multiple region loading
- * For example, consider a 256 row gain table which needs to be loaded in 4 consecutive calls.
- * In this case the config parameters for partial loads would be
- * Partial Load 1 : gainTableRow[] = gainTable[63:0], gainIndexOffset = 63, numGainIndicesInTable = 64
- * Partial Load 2 : gainTableRow[] = gainTable[127:64], gainIndexOffset = 127, numGainIndicesInTable = 64
- * Partial Load 3 : gainTableRow[] = gainTable[191:128], gainIndexOffset = 191, numGainIndicesInTable = 64
- * Partial Load 4 : gainTableRow[] = gainTable[255:192], gainIndexOffset = 255, numGainIndicesInTable = 64
- *
- * After this multiple partial gain table load, call the function adi_adrv9001_RxMinMaxGainIndexSet(minIndex = 0, maxIndex = 255).
- *
- * \note Message type: \ref timing_direct "Direct register access"
- *
- * \pre This function called automatically during initialization to load
- *      the default gain table. If the BBIC desires to change or update the
- *      gain table, it may call this function after initialization but before
- *      running init cals.
- *
- * \param[in] adrv9001           Context variable - Pointer to the ADRV9001 device data structure
- * \param[in] port               The desired Rx or ORx port
- * \param[in] channel            The Rx Channel from which to write the gain table
- *                               specifying the Rx Channels for which to write the gain table
- * \param[in] gainIndexOffset    The starting gain index from which the gain table is written
- * \param[in] gainTableRows      Array of gain table row entries to write
- * \param[in] arraySize          The number of gain table rows to write
- * \param[in] lnaConfig          The desired LNA configuration
- * \param[in] gainTableType      Gain table loaded during ADRV9001 initialization
- *
- * \returns A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required action to recover
- */
+ * @param device Pointer to the ADRV9001 device data structure. Must not be
+ * null.
+ * @param port The desired Rx or ORx port. Must be a valid port enumeration
+ * value.
+ * @param channel The Rx channel for which to write the gain table. Must be a
+ * valid channel enumeration value.
+ * @param gainIndexOffset The starting gain index from which the gain table is
+ * written. Must be within the valid range of gain
+ * indices.
+ * @param gainTableRows Array of gain table row entries to write. Must not be
+ * null and should have at least 'arraySize' elements.
+ * @param arraySize The number of gain table rows to write. Must be greater than
+ * zero and within the limits of the gain table size.
+ * @param lnaConfig Pointer to the desired LNA configuration. Must not be null
+ * if external LNA is present.
+ * @param gainTableType The type of gain table to load. Must be a valid gain
+ * table type enumeration value.
+ * @return Returns an integer code indicating success or the required action to
+ * recover.
+ ******************************************************************************/
 int32_t adi_adrv9001_Rx_GainTable_Write(adi_adrv9001_Device_t *adrv9001,
                                         adi_common_Port_e port,
                                         adi_common_ChannelNumber_e channel,
@@ -76,26 +57,35 @@ int32_t adi_adrv9001_Rx_GainTable_Write(adi_adrv9001_Device_t *adrv9001,
                                         adi_adrv9001_RxLnaConfig_t *lnaConfig,
                                         adi_adrv9001_RxGainTableType_e gainTableType);
 
-/**
- * \brief Reads the gain table entries for the specified Rx channel
+/***************************************************************************//**
+ * @brief Use this function to retrieve the current gain table settings from the
+ * ADRV9001 device for a specified Rx channel. It reads the gain table
+ * entries starting from a given gain index offset and stores them in the
+ * provided array. This function can be called anytime after the device
+ * has been initialized. It is useful for verifying or inspecting the
+ * gain table configuration. Ensure that the provided array is large
+ * enough to hold the desired number of gain table entries. If the actual
+ * number of gain indices read is not needed, you can pass NULL for the
+ * numGainIndicesRead parameter.
  *
- * This function can be called by the user to read back the currently programmed gain table
- * for a given channel. This function reads the current gain table settings from ADRV9001 gain table Static RAMs
- * for the requested channel and stores it in the provided memory reference of type adi_adrv9001_RxGainTableCfg_t
- *
- * \note Message type: \ref timing_direct "Direct register access"
- *
- * \param[in] adrv9001               Context variable - Pointer to the ADRV9001 device data structure
- * \param[in]  channel               The Rx Channel from which to read the gain table
- * \param[in]  gainIndexOffset       The gain index from which gain table read back should start
- * \param[out] gainTableRows         Read back array for gain table row entries which will be updated with the read back values
- * \param[in]  arraySize             The size of the gainTableRows array; the max number of gain table rows to read
- * \param[out] numGainIndicesRead    The actual no. of gain indices read. Pass NULL if this info is not needed
- *
- * \pre This function can be called by the user anytime after initialization.
- *
- * \returns A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required action to recover
- */
+ * @param device Pointer to the ADRV9001 device data structure. Must not be
+ * null.
+ * @param channel The Rx channel from which to read the gain table. Must be a
+ * valid channel number.
+ * @param gainIndexOffset The gain index from which the gain table read should
+ * start. Must be within the valid range of gain indices.
+ * @param gainTableRows Array to store the read gain table row entries. Must not
+ * be null and should have enough space to store the
+ * entries.
+ * @param arraySize The size of the gainTableRows array, indicating the maximum
+ * number of gain table rows to read. Must be greater than
+ * zero.
+ * @param numGainIndicesRead Pointer to store the actual number of gain indices
+ * read. Can be null if this information is not
+ * needed.
+ * @return Returns an integer code indicating success or the required action to
+ * recover.
+ ******************************************************************************/
 int32_t adi_adrv9001_Rx_GainTable_Read(adi_adrv9001_Device_t *adrv9001,
                                        adi_common_ChannelNumber_e channel,
                                        uint8_t  gainIndexOffset,
@@ -103,472 +93,606 @@ int32_t adi_adrv9001_Rx_GainTable_Read(adi_adrv9001_Device_t *adrv9001,
                                        uint32_t arraySize,
                                        uint16_t *numGainIndicesRead);
 
- /**
- * \brief Sets the Manual Gain Index for the given Rx channel
+/***************************************************************************//**
+ * @brief Use this function to manually set the gain index for a specific Rx
+ * channel on the ADRV9001 device. This function is applicable when the
+ * gain control mode is set to SPI. The gain index must be within the
+ * valid range defined by the gain table's minimum and maximum indices.
+ * If the provided gain index is out of range, the function will return
+ * an error. The new gain setting will only take effect when the channel
+ * is in a state where clocks are enabled, such as during transitions to
+ * PRIMED or RF_ENABLED states.
  *
- * The maximum index is 255 and the minimum index is application specific.
- *
- * If the value passed in the gainIndex parameter is within range of the gain
- * table minimum and maximum indices, the Rx channel gain index will be written
- * to the transceiver.
- * Else, an error will be returned.
- *
- * The default gain table can take values between 0xB7 and 0xFF,
- * even though every index is accessible from 0x00 to 0xFF.
- *
- * \note Message type: \ref timing_direct "Direct register access"
- * \note The new gain only takes effect in States where Clocks are enabled:
- *       Clocks are enabled in the following transitions:
- *           CALIBRATED->PRIMED
- *           PRIMED->RF_ENABLED
- *
- *       Clocks are disabled in the following transitions:
- *           RF_ENABLED->PRIMED
- *
- * \pre If gain control mode is ADI_ADRV9001_RX_GAIN_CONTROL_MODE_SPI:
- *      channel state is any of STANDBY, CALIBRATED, PRIMED, RF_ENABLED
- *
- * \param[in] adrv9001      Context variable - Pointer to the ADRV9001 device data structure
- * \param[in] channel       The Rx Channel for which to set the gain
- * \param[in] gainIndex     The gain table index to set the channel to
- *
- * \returns A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required action to recover
- */
+ * @param device Pointer to the ADRV9001 device data structure. Must not be
+ * null. The caller retains ownership.
+ * @param channel The Rx channel for which to set the gain. Must be a valid
+ * channel number as defined by adi_common_ChannelNumber_e.
+ * @param gainIndex The gain table index to set for the specified channel. Must
+ * be within the valid range of the gain table's minimum and
+ * maximum indices.
+ * @return Returns an int32_t code indicating success (ADI_COMMON_ACT_NO_ACTION)
+ * or the required action to recover.
+ ******************************************************************************/
 int32_t adi_adrv9001_Rx_Gain_Set(adi_adrv9001_Device_t *adrv9001,
                                  adi_common_ChannelNumber_e channel,
                                  uint8_t gainIndex);
 
-/**
- * \brief Reads the current AGC Gain Index for the requested channel.
- *        - The current gain index value read will be Rx Gain index in Rx mode
- *        - The current gain index value read will be ORx Gain index in ORx mode
+/***************************************************************************//**
+ * @brief Use this function to obtain the current Automatic Gain Control (AGC)
+ * gain index for a specified Rx channel. It is useful for monitoring the
+ * gain settings applied to the channel. This function should be called
+ * when the channel is in any of the following states: STANDBY,
+ * CALIBRATED, PRIMED, or RF_ENABLED. However, note that gain indices are
+ * only tracked after the channel state is RF_ENABLED. The function
+ * returns the gain index as it was the last time the clocks were
+ * enabled.
  *
- * This function reads the gain index of the channel last time clocks were enabled
- *
- * \note Message type: \ref timing_direct "Direct register access
- * 
- * \pre Channel state is any of STANDBY, CALIBRATED, PRIMED, RF_ENABLED
- *      However, gain indices are tracked only after the channel state is RF_ENABLED
- *      and returns the gainIndex of the channel last time clocks were enabled
- *
- * \param[in]  adrv9001     Context variable - Pointer to the ADRV9001 device data structure
- * \param[in]  channel      The Rx Channel from which to read the gain
- * \param[out] gainIndex    The current gain table index the channel is set to
- *
- * \returns A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required action to recover
- */
+ * @param adrv9001 Pointer to the ADRV9001 device data structure. Must not be
+ * null. The caller retains ownership.
+ * @param channel The Rx channel from which to read the gain. Must be a valid
+ * channel number as defined by adi_common_ChannelNumber_e.
+ * @param gainIndex Pointer to a uint8_t where the current gain index will be
+ * stored. Must not be null. The function writes the gain index
+ * to this location.
+ * @return Returns an int32_t code indicating success (ADI_COMMON_ACT_NO_ACTION)
+ * or the required action to recover.
+ ******************************************************************************/
 int32_t adi_adrv9001_Rx_Gain_Get(adi_adrv9001_Device_t *adrv9001,
                                  adi_common_ChannelNumber_e channel,
                                  uint8_t *gainIndex);
 
-/**
- * \brief Reads back the RSSI (Received Signal Strength Indicator) status for the given Rx channel
+/***************************************************************************//**
+ * @brief Use this function to obtain the Received Signal Strength Indicator
+ * (RSSI) for a specific Rx channel. It should be called when the channel
+ * state is RF_ENABLED. This function provides the RSSI measurement in
+ * milli-decibels (mdB) and is useful for monitoring signal strength.
+ * Ensure that the device is properly initialized and the channel is in
+ * the correct state before calling this function.
  *
- * \note Message type: \ref timing_mailbox "Mailbox command"
- *
- * \pre Channel state is RF_ENABLED
- *
- * \param[in]  adrv9001         Context variable - Pointer to the ADRV9001 device data structure
- * \param[in]  channel          RX Channel for which RSSI status to be read back
- * \param[out] rxRssiPower_mdB  The measured Rx RSSI power, denoted in mdB
- *
- * \returns A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required action to recover
- */
+ * @param adrv9001 Pointer to the ADRV9001 device data structure. Must not be
+ * null and should be properly initialized.
+ * @param channel The Rx channel for which the RSSI status is to be read. Must
+ * be a valid channel number as defined by
+ * adi_common_ChannelNumber_e.
+ * @param rxRssiPower_mdB Pointer to a uint32_t where the measured Rx RSSI power
+ * will be stored, in milli-decibels (mdB). Must not be
+ * null.
+ * @return Returns an int32_t code indicating success (ADI_COMMON_ACT_NO_ACTION)
+ * or the required action to recover.
+ ******************************************************************************/
 int32_t adi_adrv9001_Rx_Rssi_Read(adi_adrv9001_Device_t *adrv9001,
                                   adi_common_ChannelNumber_e channel,
                                   uint32_t *rxRssiPower_mdB);
 
-/**
- * \brief This function gets the decimated Power (Dec Power) for the specified channel.
+/***************************************************************************//**
+ * @brief Use this function to obtain the decimated power measurement of a
+ * specified Rx channel in millidecibels full scale (mdBFS). It is
+ * suitable for runtime power monitoring of the Rx channel. The function
+ * requires a valid device context and channel number, and it outputs the
+ * power measurement to a provided pointer. The resolution of the
+ * measurement is 250 mdB, and the dynamic range is 60 dB. If the
+ * receiver is disabled during measurement, a value of 200000 mdBFS is
+ * returned. Ensure the channel is within the valid range before calling
+ * this function.
  *
- * This function can be used to get the Dec Power of RX channel in runtime.
- *
- * The location of the power measurement is given by agcCfg->power->powerInputSelect
- * The number of samples used by power measurement is given by 8*2^(agcCfg->power->powerMeasurementDuration) at the IQ rate,
- * if measured at RFIR output. This number of samples must be less than the agcCfg->gainUpdateCounter.
- * If the receiver is disabled (all zero samples) during the power measurement, this function returns a '200000' for rxDecPower_mdBFS
- *
- * The resolution of this function is 250mdB.
- * The dynamic range of this function is 60dB. Signals lower than -60dBFS may not be measured accurately.
- *
- * \note Message type: \ref timing_direct "Direct register acccess"
- *
- * \param[in]  adrv9001          Context variable - Pointer to the ADRV9001 device data structure
- * \param[in]  channel           An enum ( of type adi_common_ChannelNumber_e) to select Rx Channel.
- * \param[out] rxDecPower_mdBFS  Pointer to store the ADRV9001 Dec Power return. Value returned is in mdBFS. If all samples are zero, a '200000' is returned
- *
- * \returns A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required action to recover
- */
+ * @param adrv9001 Pointer to the ADRV9001 device data structure. Must not be
+ * null.
+ * @param channel Enum value of type adi_common_ChannelNumber_e specifying the
+ * Rx channel. Must be ADI_CHANNEL_1 or ADI_CHANNEL_2.
+ * @param rxDecPower_mdBFS Pointer to a uint16_t where the decimated power in
+ * mdBFS will be stored. Must not be null.
+ * @return Returns an int32_t code indicating success or the required action to
+ * recover. On success, rxDecPower_mdBFS is updated with the decimated
+ * power value.
+ ******************************************************************************/
 int32_t adi_adrv9001_Rx_DecimatedPower_Get(adi_adrv9001_Device_t *adrv9001,
                                            adi_common_ChannelNumber_e channel,
                                            uint16_t *rxDecPower_mdBFS);
 
-/**
- * \brief Configure the Rx interface gain control
+/***************************************************************************//**
+ * @brief Use this function to set the desired Rx interface gain control
+ * configuration for a specific channel on the ADRV9001 device. This
+ * function should be called when the channel is in the CALIBRATED state.
+ * It is essential for configuring the gain control parameters, which can
+ * affect the performance of the receiver. Ensure that the device and
+ * channel parameters are valid and that the configuration structure is
+ * properly initialized before calling this function.
  *
- * \note Message type: \ref timing_mailbox "Mailbox command"
- *
- * \pre Channel state is CALIBRATED
- *
- * \param[in] adrv9001               Context variable - Pointer to the ADRV9001 device data structure
- * \param[in] channel                The Rx channel for which to configure the interface gain control
- * \param[in] rxInterfaceGainConfig  The desired Rx interface gain control configuration
- *
- * \returns A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required action to recover
- */
+ * @param adrv9001 Pointer to the ADRV9001 device data structure. Must not be
+ * null, and the device should be properly initialized.
+ * @param channel The Rx channel for which to configure the interface gain
+ * control. Must be a valid channel number as defined by
+ * adi_common_ChannelNumber_e.
+ * @param rxInterfaceGainConfig Pointer to the desired Rx interface gain control
+ * configuration structure. Must not be null and
+ * should be properly initialized with the desired
+ * settings.
+ * @return Returns an int32_t code indicating success (ADI_COMMON_ACT_NO_ACTION)
+ * or the required action to recover.
+ ******************************************************************************/
 int32_t adi_adrv9001_Rx_InterfaceGain_Configure(adi_adrv9001_Device_t *adrv9001,
                                                 adi_common_ChannelNumber_e channel,
                                                 adi_adrv9001_RxInterfaceGainCtrl_t *rxInterfaceGainConfig);
 
-/**
- * \brief Set the Rx interface gain
+/***************************************************************************//**
+ * @brief This function sets the interface gain for a specified Rx channel on
+ * the ADRV9001 device. It should be called when the channel is in the
+ * RF_ENABLED state and the gain control mode is set to manual. This
+ * function is useful for adjusting the gain settings of the receiver
+ * interface to optimize signal reception. Ensure that the device and
+ * channel are properly initialized and configured before calling this
+ * function.
  *
- * \note Message type: \ref timing_mailbox "Mailbox command"
- *
- * \pre Channel state is any of PRIMED, RF_ENABLED
- *
- * \pre This function may be called only when the specified channel is in RF_ENABLED state.
- * 'gainControlMode' in adi_adrv9001_RxInterfaceGainCtrl_t struct must be ADI_ADRV9001_RX_INTERFACE_GAIN_CONTROL_MANUAL
- *  to set the Rx interface gain
- *
- * \param[in] adrv9001   Context variable - Pointer to the ADRV9001 device data structure
- * \param[in] channel    The Rx channel for which the interface gain has to be configured
- * \param[in] gain       The gain value to be set for the given Rx channel
- *
- * \returns A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required action to recover
- */
+ * @param adrv9001 Pointer to the ADRV9001 device data structure. Must not be
+ * null. The caller retains ownership.
+ * @param channel The Rx channel for which the interface gain is to be set. Must
+ * be a valid channel number as defined by
+ * adi_common_ChannelNumber_e.
+ * @param gain The gain value to be set for the specified Rx channel. Must be a
+ * valid value as defined by adi_adrv9001_RxInterfaceGain_e.
+ * @return Returns an int32_t code indicating success (ADI_COMMON_ACT_NO_ACTION)
+ * or the required action to recover.
+ ******************************************************************************/
 int32_t adi_adrv9001_Rx_InterfaceGain_Set(adi_adrv9001_Device_t *adrv9001,
                                           adi_common_ChannelNumber_e channel,
                                           adi_adrv9001_RxInterfaceGain_e gain);
 
-/**
- * \brief Inspect the Rx interface gain control configuration
+/***************************************************************************//**
+ * @brief Use this function to retrieve the current configuration of the Rx
+ * interface gain control for a specified channel. It provides details
+ * about the gain control mode, update timing, and other related
+ * settings. This function is useful for verifying the current gain
+ * control settings and ensuring they are configured as expected. It must
+ * be called when the channel is in one of the following states:
+ * CALIBRATED, PRIMED, or RF_ENABLED.
  *
- * \note Message type: \ref timing_mailbox "Mailbox command"
- *
- * \pre Channel state any of CALIBRATED, PRIMED, RF_ENABLED
- *
- * \param[in]  adrv9001                  Context variable - Pointer to the ADRV9001 device data structure
- * \param[in]  channel                   The Rx channel for which to inspect the interface gain control configuration
- * \param[out] rxInterfaceGainConfig     The current Rx interface gain control configuration
- * \param[out] gainTableType             The current gain table type loaded
- *
- * \returns A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required action to recover
- */
+ * @param adrv9001 Pointer to the ADRV9001 device data structure. Must not be
+ * null.
+ * @param channel The Rx channel for which to inspect the interface gain control
+ * configuration. Must be a valid channel number.
+ * @param rxInterfaceGainConfig Pointer to a structure where the current Rx
+ * interface gain control configuration will be
+ * stored. Must not be null.
+ * @param gainTableType Pointer to a variable where the current gain table type
+ * will be stored. Must not be null.
+ * @return Returns an integer code indicating success or the required action to
+ * recover. The output parameters are updated with the current
+ * configuration values.
+ ******************************************************************************/
 int32_t adi_adrv9001_Rx_InterfaceGain_Inspect(adi_adrv9001_Device_t *adrv9001,
                                               adi_common_ChannelNumber_e channel,
                                               adi_adrv9001_RxInterfaceGainCtrl_t *rxInterfaceGainConfig,
                                               adi_adrv9001_RxGainTableType_e *gainTableType);
 
-/**
- * \brief Get the Rx interface gain for the given Rx channel
+/***************************************************************************//**
+ * @brief Use this function to obtain the current interface gain setting for a
+ * specific Rx channel on the ADRV9001 device. It is essential to ensure
+ * that the channel is in one of the following states before calling this
+ * function: CALIBRATED, PRIMED, or RF_ENABLED. This function is useful
+ * for monitoring or debugging purposes to verify the gain settings
+ * applied to the channel.
  *
- * \note Message type: \ref timing_mailbox "Mailbox command"
- *
- * \pre Channel state any of CALIBRATED, PRIMED, RF_ENABLED
- *
- * \param[in]  adrv9001  Context variable - Pointer to the ADRV9001 device data structure
- * \param[in]  channel   The Rx channel from which to read the interface gain
- * \param[out] gain      The current Rx interface gain
- *
- * \returns A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required action to recover
- */
+ * @param device A pointer to the adi_adrv9001_Device_t structure representing
+ * the ADRV9001 device. Must not be null.
+ * @param channel An enum value of type adi_common_ChannelNumber_e specifying
+ * the Rx channel from which to read the interface gain. Must be
+ * a valid channel number.
+ * @param gain A pointer to an adi_adrv9001_RxInterfaceGain_e variable where the
+ * current Rx interface gain will be stored. Must not be null.
+ * @return Returns an int32_t code indicating success (ADI_COMMON_ACT_NO_ACTION)
+ * or the required action to recover.
+ ******************************************************************************/
 int32_t adi_adrv9001_Rx_InterfaceGain_Get(adi_adrv9001_Device_t *adrv9001,
                                           adi_common_ChannelNumber_e channel,
                                           adi_adrv9001_RxInterfaceGain_e *gain);
-/**
-* \brief Set the Seed for Rx interface gain for the next frame, seedGain is applied by rising edge on associated GPIO
-*
-* \note Message type: \ref timing_direct "Direct register access"
-*
-* \pre Channel state is any of CALIBRATED, PRIMED, RF_ENABLED
-*
-* \pre Seeding of interfaceGain is only enabled when controlMode = ADI_ADRV9001_RX_INTERFACE_GAIN_CONTROL_AUTOMATIC
-*
-* \param[in] adrv9001   Context variable - Pointer to the ADRV9001 device data structure
-* \param[in] channel    The Rx channel for which the interface gain has to be configured
-* \param[in] seedGain   The gain value to be seeded for next frame by rising edge on associated GPIO
-*
-* \returns A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required action to recover
-*/
+/***************************************************************************//**
+ * @brief This function sets the seed gain for the Rx interface gain, which will
+ * be applied at the rising edge of the associated GPIO for the next
+ * frame. It should be used when the channel is in any of the CALIBRATED,
+ * PRIMED, or RF_ENABLED states. The function is applicable only when the
+ * control mode is set to
+ * ADI_ADRV9001_RX_INTERFACE_GAIN_CONTROL_AUTOMATIC. It is important to
+ * ensure that the device and channel parameters are valid before calling
+ * this function.
+ *
+ * @param device A pointer to the ADRV9001 device data structure. Must not be
+ * null, and the device should be properly initialized.
+ * @param channel The Rx channel for which the interface gain is to be
+ * configured. Must be a valid channel number as defined by
+ * adi_common_ChannelNumber_e.
+ * @param seedGain The gain value to be seeded for the next frame. Must be a
+ * valid value of type adi_adrv9001_RxInterfaceGain_e.
+ * @return A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required
+ * action to recover.
+ ******************************************************************************/
 int32_t adi_adrv9001_Rx_InterfaceGain_SeedGain_Set(adi_adrv9001_Device_t *adrv9001,
 	                                                adi_common_ChannelNumber_e channel,
 	                                                adi_adrv9001_RxInterfaceGain_e seedGain);
 
-/**
-* \brief Get the Seed for Rx interface gain for the next frame, seedGain is applied by rising edge on associated GPIO
-*
-* \note Message type: \ref timing_direct "Direct register access"
-*
-* \pre Channel state any of CALIBRATED, PRIMED, RF_ENABLED
-*
-* \param[in]  adrv9001  Context variable - Pointer to the ADRV9001 device data structure
-* \param[in]  channel   The Rx channel from which to read the interface gain
-* \param[out] seedGain  The gain value to be seeded for next frame by rising edge on associated GPIO
-*
-* \returns A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required action to recover
-*/
+/***************************************************************************//**
+ * @brief Use this function to obtain the current seed gain value for the
+ * specified Rx channel, which will be applied at the next frame by a
+ * rising edge on the associated GPIO. This function is applicable when
+ * the channel is in any of the CALIBRATED, PRIMED, or RF_ENABLED states.
+ * It is important to ensure that the device is properly initialized and
+ * the channel is in a valid state before calling this function.
+ *
+ * @param adrv9001 Pointer to the ADRV9001 device data structure. Must not be
+ * null.
+ * @param channel The Rx channel from which to read the interface gain. Must be
+ * a valid channel number.
+ * @param seedGain Pointer to a variable where the seed gain value will be
+ * stored. Must not be null.
+ * @return Returns an integer code indicating success or the required action to
+ * recover.
+ ******************************************************************************/
 int32_t adi_adrv9001_Rx_InterfaceGain_SeedGain_Get( adi_adrv9001_Device_t *adrv9001,
                                                     adi_common_ChannelNumber_e channel,
                                                     adi_adrv9001_RxInterfaceGain_e *seedGain);
 
-/**
-* \brief Get the EndOfFrameGain for Rx interface gain, EndOfFrameGain is updated by falling edge on associated GPIO
-*
-* \note Message type: \ref timing_direct "Direct register access"
-*
-* \pre Channel state any of CALIBRATED, PRIMED, RF_ENABLED
-*
-* \param[in]  adrv9001          Context variable - Pointer to the ADRV9001 device data structure
-* \param[in]  channel           The Rx channel from which to read the interface gain
-* \param[out] endOfFrameGain    The gain value at end of previous frame, latched by falling edge on associated GPIO
-*
-* \returns A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required action to recover
-*/
+/***************************************************************************//**
+ * @brief Use this function to obtain the gain value at the end of the previous
+ * frame for a specified Rx channel. This value is latched by a falling
+ * edge on the associated GPIO. The function should be called when the
+ * channel is in one of the following states: CALIBRATED, PRIMED, or
+ * RF_ENABLED. It is important to ensure that the device context and
+ * channel parameters are valid before calling this function.
+ *
+ * @param device A pointer to the adi_adrv9001_Device_t structure representing
+ * the ADRV9001 device context. Must not be null.
+ * @param channel An enum value of type adi_common_ChannelNumber_e specifying
+ * the Rx channel from which to read the interface gain. Valid
+ * values are typically ADI_CHANNEL_1 or ADI_CHANNEL_2.
+ * @param endOfFrameGain A pointer to an adi_adrv9001_RxInterfaceGain_e variable
+ * where the end-of-frame gain will be stored. Must not be
+ * null.
+ * @return Returns an int32_t code indicating success (ADI_COMMON_ACT_NO_ACTION)
+ * or the required action to recover.
+ ******************************************************************************/
 int32_t adi_adrv9001_Rx_InterfaceGain_EndOfFrameGain_Get(   adi_adrv9001_Device_t *adrv9001,
 	                                                        adi_common_ChannelNumber_e channel,
 	                                                        adi_adrv9001_RxInterfaceGain_e *endOfFrameGain);
 	
-/**
- * \brief Set the NCO frequency to correct for small deviations in Rx LO frequency
+/***************************************************************************//**
+ * @brief Use this function to adjust the NCO frequency for a specified Rx
+ * channel to correct small deviations in the local oscillator (LO)
+ * frequency. This function is typically called when there is a need to
+ * fine-tune the frequency offset for a channel. The frequency correction
+ * can be applied immediately or at the start of the next available
+ * frame, depending on the 'immediate' parameter. Ensure that the device
+ * context is properly initialized before calling this function.
  *
- * \note Message type: \ref timing_prioritymailbox "High-priority mailbox command"
- *
- * \param[in] adrv9001              Context variable - Pointer to the ADRV9001 device data structure
- * \param[in] channel               The Rx channel for which to set the NCO frequency
- * \param[in] frequencyOffset_Hz    The desired offset frequency, denoted in Hz
- * \param[in] immediate             Whether to change the frequency immediately (true), or
- *                                  update it at the start of the next available frame (false)
- *
- * \returns A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required action to recover
- */
+ * @param device Pointer to the ADRV9001 device data structure. Must not be null
+ * and should be properly initialized before use.
+ * @param channel The Rx channel for which to set the NCO frequency. Must be a
+ * valid channel number as defined by adi_common_ChannelNumber_e.
+ * @param frequencyOffset_Hz The desired frequency offset in Hertz. This value
+ * is used to adjust the NCO frequency.
+ * @param immediate Boolean flag indicating whether the frequency change should
+ * be applied immediately (true) or at the start of the next
+ * available frame (false).
+ * @return Returns an int32_t code indicating success (ADI_COMMON_ACT_NO_ACTION)
+ * or the required action to recover.
+ ******************************************************************************/
 int32_t adi_adrv9001_Rx_FrequencyCorrection_Set(adi_adrv9001_Device_t *adrv9001,
                                                 adi_common_ChannelNumber_e channel,
                                                 int32_t frequencyOffset_Hz,
                                                 bool immediate);
 
 
-/**
- * \brief Set the enabledness of dynamic switch between Low Power and High Power ADCs
- * 
- * \note Message type: \ref timing_mailbox "Mailbox command"
+/***************************************************************************//**
+ * @brief This function enables or disables the dynamic switching between Low
+ * Power and High Power ADCs for a specified Rx channel. It should be
+ * called when the channel is in either the STANDBY or CALIBRATED state.
+ * This function is useful for optimizing power consumption based on the
+ * operational requirements of the channel. Ensure that the device
+ * context and channel are correctly specified before calling this
+ * function.
  *
- * \pre Channel state any of STANDBY, CALIBRATED
- *
- * \param[in] adrv9001   Context variable - Pointer to the ADRV9001 device data structure
- * \param[in] channel    The Rx Channel for which to set the enabledness of the ADC dynamic switch
- * \param[in] enable     A boolean flag to enable or disable dynamic switching between LP and HP ADCs
- * 
- * \returns A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required action to recover
- */
+ * @param adrv9001 Pointer to the ADRV9001 device data structure. Must not be
+ * null. The caller retains ownership.
+ * @param channel The Rx Channel for which to set the enabledness of the ADC
+ * dynamic switch. Must be a valid channel number as defined by
+ * adi_common_ChannelNumber_e.
+ * @param enable A boolean flag indicating whether to enable (true) or disable
+ * (false) dynamic switching between Low Power and High Power
+ * ADCs.
+ * @return Returns an integer code indicating success (ADI_COMMON_ACT_NO_ACTION)
+ * or the required action to recover.
+ ******************************************************************************/
 int32_t adi_adrv9001_Rx_AdcSwitchEnable_Set(adi_adrv9001_Device_t *adrv9001, 
                                             adi_common_ChannelNumber_e channel,
                                             bool enable);
 
-/**
- * \brief Get the enabledness of dynamic switch between Low Power and High Power ADCs
- * 
- * \note Message type: \ref timing_mailbox "Mailbox command"
+/***************************************************************************//**
+ * @brief This function is used to check whether the dynamic switching between
+ * Low Power and High Power ADCs is enabled for a specific Rx channel. It
+ * should be called when the channel is in any of the states: STANDBY,
+ * CALIBRATED, PRIMED, or RF_ENABLED. The function provides the current
+ * enabled state through a boolean output parameter. It is useful for
+ * verifying the configuration of ADC dynamic switching in the system.
  *
- * \pre Channel state any of STANDBY, CALIBRATED, PRIMED, RF_ENABLED
- *
- * \param[in]  adrv9001   Context variable - Pointer to the ADRV9001 device data structure
- * \param[in]  channel    The Rx Channel for which to get the current enabledness of the ADC dynamic switch
- * \param[out] enable     A boolean flag to get the current enabledness of the ADC dynamic switch
- * 
- * \returns A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required action to recover
- */
+ * @param adrv9001 Pointer to the ADRV9001 device data structure. Must not be
+ * null, as it provides the context for the operation.
+ * @param channel The Rx Channel for which to get the current enabledness of the
+ * ADC dynamic switch. Must be a valid channel number as defined
+ * by adi_common_ChannelNumber_e.
+ * @param enable Pointer to a boolean where the current enabled state of the ADC
+ * dynamic switch will be stored. Must not be null.
+ * @return Returns an int32_t code indicating success (ADI_COMMON_ACT_NO_ACTION)
+ * or the required action to recover.
+ ******************************************************************************/
 int32_t adi_adrv9001_Rx_AdcSwitchEnable_Get(adi_adrv9001_Device_t *adrv9001, 
                                             adi_common_ChannelNumber_e channel,
                                             bool *enable);
 
-/**
- * \brief Configure ADC dynamic switch settings for the specified channel
- * 
- * \note Message type: \ref timing_mailbox "Mailbox command"
+/***************************************************************************//**
+ * @brief Use this function to configure the ADC dynamic switch settings for a
+ * specified Rx channel on the ADRV9001 device. This function should be
+ * called when the channel state is CALIBRATED. It allows the user to set
+ * the desired configuration for dynamic switching between low power and
+ * high power ADCs, which can optimize power consumption and performance
+ * based on the application's requirements. Ensure that the device and
+ * channel are properly initialized and in the correct state before
+ * calling this function.
  *
- * \pre Channel state must be CALIBRATED
- *
- * \param[in] adrv9001         Context variable - Pointer to the ADRV9001 device data structure
- * \param[in] channel          The Rx Channel for which to set the enabledness of the ADC dynamic switch
- * \param[in] switchConfig     The desired ADC dynamic switch configuration
- * 
- * \returns A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required action to recover
- */
+ * @param device Pointer to the ADRV9001 device data structure. Must not be
+ * null. The caller retains ownership.
+ * @param channel The Rx channel for which to configure the ADC dynamic switch.
+ * Must be a valid channel number as defined by
+ * adi_common_ChannelNumber_e.
+ * @param switchConfig Pointer to the desired ADC dynamic switch configuration.
+ * Must not be null. The caller retains ownership.
+ * @return Returns an int32_t code indicating success (ADI_COMMON_ACT_NO_ACTION)
+ * or the required action to recover.
+ ******************************************************************************/
 int32_t adi_adrv9001_Rx_AdcSwitch_Configure(adi_adrv9001_Device_t *adrv9001, 
                                             adi_common_ChannelNumber_e channel,
                                             adi_adrv9001_AdcSwitchCfg_t *switchConfig);
 
-/**
- * \brief Inspect the current ADC dynamic switch settings for the specified channel
- * 
- * \note Message type: \ref timing_mailbox "Mailbox command"
+/***************************************************************************//**
+ * @brief Use this function to retrieve the current configuration of the ADC
+ * dynamic switch for a specified Rx channel. It is useful for verifying
+ * the current ADC switch settings during various operational states.
+ * This function can be called when the channel is in any of the
+ * following states: STANDBY, CALIBRATED, PRIMED, or RF_ENABLED. Ensure
+ * that the device context and channel are correctly specified before
+ * calling this function.
  *
- * \pre Channel state any of STANDBY, CALIBRATED, PRIMED, RF_ENABLED
- *
- * \param[in]  adrv9001         Context variable - Pointer to the ADRV9001 device data structure
- * \param[in]  channel          The Rx Channel for which to get the current enabledness of the ADC dynamic switch
- * \param[out] switchConfig     The current ADC dynamic switch configuration
- * 
- * \returns A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required action to recover
- */
+ * @param adrv9001 Pointer to the ADRV9001 device data structure. Must not be
+ * null. The caller retains ownership.
+ * @param channel The Rx Channel for which to inspect the ADC dynamic switch
+ * settings. Must be a valid channel number as defined by
+ * adi_common_ChannelNumber_e.
+ * @param switchConfig Pointer to an adi_adrv9001_AdcSwitchCfg_t structure where
+ * the current ADC dynamic switch configuration will be
+ * stored. Must not be null.
+ * @return Returns an int32_t code indicating success (ADI_COMMON_ACT_NO_ACTION)
+ * or the required action to recover. The switchConfig parameter is
+ * populated with the current ADC dynamic switch settings.
+ ******************************************************************************/
 int32_t adi_adrv9001_Rx_AdcSwitch_Inspect(adi_adrv9001_Device_t *adrv9001, 
                                           adi_common_ChannelNumber_e channel,
                                           adi_adrv9001_AdcSwitchCfg_t *switchConfig);
 
-/**
- * \brief Get the current ADC type for the specified channel
- * 
- * \note Message type: \ref timing_mailbox "Mailbox command"
+/***************************************************************************//**
+ * @brief Use this function to obtain the current ADC type for a given channel
+ * on the ADRV9001 device. It is applicable when the channel is in any of
+ * the following states: STANDBY, CALIBRATED, PRIMED, or RF_ENABLED. This
+ * function is useful for checking the ADC configuration during runtime
+ * to ensure the correct ADC type is being used for the channel.
  *
- * \pre Channel state any of STANDBY, CALIBRATED, PRIMED, RF_ENABLED
- *
- * \param[in]  adrv9001   Context variable - Pointer to the ADRV9001 device data structure
- * \param[in]  channel    The Channel for which to get the ADC type
- * \param[out] adcType    The current ADC type
- * 
- * \returns A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required action to recover
- */
+ * @param adrv9001 Pointer to the ADRV9001 device data structure. Must not be
+ * null, as it provides the context for the operation.
+ * @param channel The channel number for which the ADC type is to be retrieved.
+ * It must be a valid channel number as defined by the
+ * adi_common_ChannelNumber_e enumeration.
+ * @param adcType Pointer to a variable where the current ADC type will be
+ * stored. Must not be null, as it is used to return the result
+ * of the function.
+ * @return Returns an integer code indicating success or the required action to
+ * recover from an error. The adcType parameter is updated with the
+ * current ADC type on success.
+ ******************************************************************************/
 int32_t adi_adrv9001_Rx_AdcType_Get(adi_adrv9001_Device_t *adrv9001, 
                                     adi_common_ChannelNumber_e channel,
                                     adi_adrv9001_AdcType_e *adcType);
 
-/**
-* \brief Configure GPIO pins to route the ADRV9001 Rx1 and Rx2 gain indices
-*
-* \note  gain index ranges from 183 to 255 and occupies 8-bits[7:0]. So the 'msb' is always be '1'.
-*        Hence the 'msb' control out mux register for gain index is replaced with 'gt_gain_index', which allowstoggles/triggers on the gain_change.
-*        So in BBIC, the user must replace the 'msb' received with '1' always.
-*        
-* \pre Channel state must be CALIBRATED
-*      Level of GPIO pins is only reflective of channel gainIndex when channel is in the RF_ENABLED state
-*
-* \param[in] adrv9001           Context variable - Pointer to the ADRV9001 device data structure
-* \param[in] channel            The channel of the specified port for which to route gain index to the specified GPIO pin
-* \param[in] gainIndexPinCfg    The desired DGPIO pin selection to route gain index for the specified channel
-*
-* \returns A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required action to recover
-*/
+/***************************************************************************//**
+ * @brief This function configures the GPIO pins to route the gain indices for
+ * the specified Rx channel on the ADRV9001 device. It should be called
+ * when the channel state is CALIBRATED, and the GPIO pin levels will
+ * reflect the channel gain index only when the channel is in the
+ * RF_ENABLED state. This function is useful for applications that
+ * require external monitoring or control of the gain index via GPIO.
+ *
+ * @param device Pointer to the ADRV9001 device data structure. Must not be
+ * null.
+ * @param channel The Rx channel for which to configure the GPIO routing. Must
+ * be a valid channel number as defined by
+ * adi_common_ChannelNumber_e.
+ * @param gainIndexPinCfgchannel Pointer to the desired GPIO pin configuration
+ * for routing the gain index. Must not be null.
+ * @return Returns an int32_t code indicating success or the required action to
+ * recover.
+ ******************************************************************************/
 int32_t adi_adrv9001_Rx_GainIndex_Gpio_Configure(adi_adrv9001_Device_t *adrv9001,
                                                  adi_common_ChannelNumber_e channel,
                                                  adi_adrv9001_GainIndexPinCfg_t *gainIndexPinCfg);
 
-/**
- * \brief Configure RX port switching
- * 
- * \note Message type: \ref timing_mailbox "Mailbox command"
+/***************************************************************************//**
+ * @brief This function is used to configure the RX port switching settings for
+ * the ADRV9001 device. It should be called when the device is in the
+ * STANDBY state to ensure proper configuration. The function takes a
+ * configuration structure that specifies the desired settings for the RX
+ * port switching, including frequency ranges and enabling options.
+ * Proper validation of the input parameters is performed, and the
+ * function returns a status code indicating success or the required
+ * action to recover from an error.
  *
- * \pre Channel state must be STANDBY
- *
- * \param[in] adrv9001         Context variable - Pointer to the ADRV9001 device data structure
- * \param[in] switchConfig     The desired RX port switch configuration
- * 
- * \returns A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required action to recover
- */
+ * @param adrv9001 Pointer to the ADRV9001 device data structure. Must not be
+ * null. The caller retains ownership.
+ * @param switchConfig Pointer to the RX port switch configuration structure.
+ * Must not be null. The structure should be properly
+ * initialized with the desired configuration settings
+ * before calling this function.
+ * @return Returns an int32_t code indicating success (ADI_COMMON_ACT_NO_ACTION)
+ * or the required action to recover from an error.
+ ******************************************************************************/
 int32_t adi_adrv9001_Rx_PortSwitch_Configure(adi_adrv9001_Device_t *adrv9001, 
                                              adi_adrv9001_RxPortSwitchCfg_t *switchConfig);
 
-/**
- * \brief Inspect the current RX port switching settings
- * 
- * \note Message type: \ref timing_mailbox "Mailbox command"
+/***************************************************************************//**
+ * @brief Use this function to retrieve the current configuration of the RX port
+ * switching for a specified ADRV9001 device. It is useful for verifying
+ * the current settings of the RX port switch, especially after
+ * configuration changes. This function can be called when the channel
+ * state is any of STANDBY, CALIBRATED, PRIMED, or RF_ENABLED. Ensure
+ * that the device and switchConfig pointers are valid before calling
+ * this function.
  *
- * \pre Channel state any of STANDBY, CALIBRATED, PRIMED, RF_ENABLED
- *
- * \param[in]  adrv9001         Context variable - Pointer to the ADRV9001 device data structure
- * \param[out] switchConfig     The current RX port switch configuration
- * 
- * \returns A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required action to recover
- */
+ * @param adrv9001 Pointer to the ADRV9001 device data structure. Must not be
+ * null. The caller retains ownership.
+ * @param switchConfig Pointer to a structure where the current RX port switch
+ * configuration will be stored. Must not be null. The
+ * caller retains ownership.
+ * @return Returns an integer code indicating success (ADI_COMMON_ACT_NO_ACTION)
+ * or the required action to recover.
+ ******************************************************************************/
 int32_t adi_adrv9001_Rx_PortSwitch_Inspect(adi_adrv9001_Device_t *adrv9001, 
                                            adi_adrv9001_RxPortSwitchCfg_t *switchConfig);
 
-/**
- * \brief Configure the external LNA for the desired RX channel
- * 
- * \note Message type: \ref timing_direct "Direct register access"
+/***************************************************************************//**
+ * @brief This function configures the external Low Noise Amplifier (LNA) for a
+ * specified RX channel on the ADRV9001 device. It should be called when
+ * the channel is in the STANDBY state. The function sets up the LNA
+ * configuration based on the provided parameters, including the gain
+ * table type. Proper configuration of the LNA is essential for optimal
+ * receiver performance, especially in environments with varying signal
+ * strengths. This function must be used with care to ensure that the LNA
+ * settings are compatible with the overall system design and
+ * requirements.
  *
- * \pre Channel state must be STANDBY
- *
- * \param[in] adrv9001         Context variable - Pointer to the ADRV9001 device data structure
- * \param[in] channel          The Rx Channel from which to configure the external LNA
- * \param[in] lnaConfig        The desired LNA configuration
- * \param[in] gainTableType      Gain table loaded during ADRV9001 initialization
- * 
- * \returns A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required action to recover
- */
+ * @param device Pointer to the ADRV9001 device data structure. Must not be
+ * null, and the device should be properly initialized before
+ * calling this function.
+ * @param channel The RX channel to configure, specified as an enum of type
+ * adi_common_ChannelNumber_e. Must be a valid channel number for
+ * the device.
+ * @param lnaConfig Pointer to the desired LNA configuration structure of type
+ * adi_adrv9001_RxLnaConfig_t. Must not be null and should be
+ * properly populated with the desired configuration settings.
+ * @param gainTableType The gain table type to be used, specified as an enum of
+ * type adi_adrv9001_RxGainTableType_e. Determines the gain
+ * table settings applied during configuration.
+ * @return A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required
+ * action to recover.
+ ******************************************************************************/
 int32_t adi_adrv9001_Rx_ExternalLna_Configure(adi_adrv9001_Device_t *adrv9001,
                                               adi_common_ChannelNumber_e channel,
                                               adi_adrv9001_RxLnaConfig_t *lnaConfig,
                                               adi_adrv9001_RxGainTableType_e gainTableType);
 
-/**
- * \brief Set LNA digital gain delay for the desired RX channel
- * 
- * \note Message type: \ref timing_direct "Direct register access"
+/***************************************************************************//**
+ * @brief This function configures the digital gain delay for the external Low
+ * Noise Amplifier (LNA) on a specified RX channel. It should be used
+ * when the channel is in either the STANDBY or CALIBRATED state. The
+ * function adjusts the gain delay by a fixed value to ensure proper
+ * timing alignment. It is important to ensure that the device is
+ * properly initialized and the channel is in the correct state before
+ * calling this function to avoid unexpected behavior.
  *
- * \pre Channel state must be STANDBY, CALIBRATED
- *
- * \param[in] adrv9001              Context variable - Pointer to the ADRV9001 device data structure
- * \param[in] channel               The Rx Channel from which to configure the external LNA
- * \param[in] lnaDigitalGainDelay   The desired LNA gain delay
- * \param[in] gainTableType         Gain table loaded during ADRV9001 initialization
- * 
- * \returns A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required action to recover
- */
+ * @param device A pointer to the ADRV9001 device data structure. Must not be
+ * null, and the device should be properly initialized.
+ * @param channel The RX channel to configure, specified as an enum of type
+ * adi_common_ChannelNumber_e. Must be a valid channel number.
+ * @param lnaDigitalGainDelay The desired LNA digital gain delay, specified as a
+ * uint16_t. The value is adjusted internally by a
+ * fixed amount.
+ * @param gainTableType The type of gain table loaded during ADRV9001
+ * initialization, specified as an enum of type
+ * adi_adrv9001_RxGainTableType_e. Must be a valid gain
+ * table type.
+ * @return Returns an int32_t code indicating success or the required action to
+ * recover.
+ ******************************************************************************/
 int32_t adi_adrv9001_Rx_ExternalLna_DigitalGainDelay_Set(adi_adrv9001_Device_t *adrv9001,
                                                          adi_common_ChannelNumber_e channel,
                                                          uint16_t lnaDigitalGainDelay,
                                                          adi_adrv9001_RxGainTableType_e gainTableType);
 
-/**
- * \brief Get LNA digital gain delay for the desired RX channel
- * 
- * \note Message type: \ref timing_direct "Direct register access"
+/***************************************************************************//**
+ * @brief Use this function to obtain the current digital gain delay setting for
+ * the external LNA of a specified RX channel. It is applicable in any
+ * channel state, including STANDBY, CALIBRATED, PRIMED, and RF_ENABLED.
+ * This function is useful for verifying the current configuration of the
+ * LNA digital gain delay, which can be critical for ensuring optimal
+ * signal processing and gain control in the receiver path.
  *
- * \pre Channel state is any of STANDBY, CALIBRATED, PRIMED, RF_ENABLED
- *
- * \param[in]  adrv9001              Context variable - Pointer to the ADRV9001 device data structure
- * \param[in]  channel               The Rx Channel from which to configure the external LNA
- * \param[out] lnaDigitalGainDelay   The current LNA gain delay
- * 
- * \returns A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required action to recover
- */
+ * @param adrv9001 Pointer to the ADRV9001 device data structure. Must not be
+ * null, as it provides the context for the device operation.
+ * @param channel Specifies the RX channel for which the LNA digital gain delay
+ * is to be retrieved. Must be a valid channel number as defined
+ * by adi_common_ChannelNumber_e.
+ * @param lnaDigitalGainDelay Pointer to a uint16_t where the current LNA
+ * digital gain delay will be stored. Must not be
+ * null, as it is used to return the delay value to
+ * the caller.
+ * @return Returns an int32_t code indicating success or the required action to
+ * recover from an error.
+ ******************************************************************************/
 int32_t adi_adrv9001_Rx_ExternalLna_DigitalGainDelay_Get(adi_adrv9001_Device_t *adrv9001,
                                                          adi_common_ChannelNumber_e channel,
                                                          uint16_t *lnaDigitalGainDelay);
 	
-/**
- * \brief Configure LOID settings
- * 
- * \note Message type: \ref timing_mailbox "Mailbox command"
+/***************************************************************************//**
+ * @brief Use this function to set the LOID (Local Oscillator Interference
+ * Detection) configuration for a specific Rx channel on the ADRV9001
+ * device. This function should be called when the channel is in either
+ * the STANDBY or CALIBRATED state. It is essential for setting up the
+ * LOID parameters, which include enabling the feature and setting the
+ * threshold levels. Proper configuration of these settings is crucial
+ * for effective interference detection.
  *
- * \pre channel state is any of STANDBY, CALIBRATED
- *
- * \param[in] adrv9001		Context variable - Pointer to the ADRV9001 device settings data structure
- * \param[in] channel       The channel to configure
- * \param[in] loidConfig    The desired LOID configuration
- * 
- * \returns A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required action to recover
- */
+ * @param adrv9001 A pointer to the ADRV9001 device data structure. This must
+ * not be null and should be properly initialized before calling
+ * the function. The caller retains ownership.
+ * @param channel An enumeration value of type adi_common_ChannelNumber_e
+ * specifying the Rx channel to configure. Must be a valid
+ * channel number supported by the device.
+ * @param loidConfig A pointer to an adi_adrv9001_RxrfdcLoidCfg_t structure
+ * containing the desired LOID configuration settings. This
+ * must not be null and should be properly populated with
+ * valid configuration data before calling the function. The
+ * caller retains ownership.
+ * @return Returns an int32_t code indicating success (ADI_COMMON_ACT_NO_ACTION)
+ * or the required action to recover.
+ ******************************************************************************/
 int32_t adi_adrv9001_Rx_Loid_Configure(adi_adrv9001_Device_t *adrv9001,
                                    adi_common_ChannelNumber_e channel,
 		                           adi_adrv9001_RxrfdcLoidCfg_t *loidConfig);
 
 
-/**
- * \brief Inspect LOID settings
- * 
- * \note Message type: \ref timing_mailbox "Mailbox command"
+/***************************************************************************//**
+ * @brief Use this function to retrieve the current LOID (Local Oscillator ID)
+ * configuration for a specified Rx channel on the ADRV9001 device. This
+ * function is useful for verifying the LOID settings after they have
+ * been configured. It can be called when the channel is in any of the
+ * following states: STANDBY, CALIBRATED, PRIMED, or RF_ENABLED. Ensure
+ * that the device context and channel are correctly specified before
+ * calling this function.
  *
- * \pre channel state is any of STANDBY, CALIBRATED, PRIMED, RF_ENABLED
- *
- * \param[in] adrv9001		Context variable - Pointer to the ADRV9001 device settings data structure
- * \param[in] channel       The channel to configure
- * \param[out] loidConfig   The current LOID configuration
- * 
- * \returns A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required action to recover
- */
+ * @param adrv9001 Pointer to the ADRV9001 device data structure. Must not be
+ * null. The caller retains ownership.
+ * @param channel The Rx channel for which to inspect the LOID settings. Must be
+ * a valid channel number as defined by
+ * adi_common_ChannelNumber_e.
+ * @param loidConfig Pointer to a structure where the current LOID configuration
+ * will be stored. Must not be null. The function will
+ * populate this structure with the LOID settings.
+ * @return Returns an int32_t code indicating success (ADI_COMMON_ACT_NO_ACTION)
+ * or the required action to recover.
+ ******************************************************************************/
 int32_t adi_adrv9001_Rx_Loid_Inspect(adi_adrv9001_Device_t *adrv9001,
                                    adi_common_ChannelNumber_e channel,
 		                           adi_adrv9001_RxrfdcLoidCfg_t *loidConfig);

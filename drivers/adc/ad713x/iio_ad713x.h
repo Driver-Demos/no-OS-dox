@@ -48,10 +48,22 @@
 
 struct ad713x_iio;
 
-/**
- * @struct ad713x_iio_init_param
- * @brief AD713x IIO initialization structure
- */
+/***************************************************************************//**
+ * @brief The `ad713x_iio_init_param` structure is used to initialize the AD713x
+ * IIO interface, containing pointers to device handlers and
+ * configuration parameters such as the reference voltage and a function
+ * for cache management. It facilitates the setup of the AD713x device
+ * within an IIO framework, ensuring proper communication and data
+ * handling through SPI and cache management.
+ *
+ * @param drv_dev Pointer to the AD713x driver handler.
+ * @param iio_dev Pointer to a generic IIO device handler.
+ * @param vref_int Stores the integer part of the reference voltage (VREF).
+ * @param vref_micro Stores the decimal part of the reference voltage (VREF).
+ * @param spi_eng_desc Pointer to the SPI Engine driver handler.
+ * @param dcache_invalidate_range Function pointer to invalidate the data cache
+ * for a specified address range.
+ ******************************************************************************/
 struct ad713x_iio_init_param {
 	/** AD713x driver handler */
 	struct ad713x_dev *drv_dev;
@@ -67,13 +79,57 @@ struct ad713x_iio_init_param {
 	void (*dcache_invalidate_range)(uint32_t address, uint32_t bytes_count);
 };
 
+/***************************************************************************//**
+ * @brief The `ad713x_iio_desc` is an external global variable of type `struct
+ * iio_device`. It is intended to represent an IIO (Industrial I/O)
+ * device descriptor for the AD713x series of devices, which are likely
+ * analog-to-digital converters (ADCs) or similar components.
+ *
+ * @details This variable is used to interface with the AD713x devices through
+ * the IIO framework, providing a standardized way to interact with the
+ * device's data and configuration.
+ ******************************************************************************/
 extern struct iio_device ad713x_iio_desc;
 
-/** Allocate memory for AD713x IIO handler. */
+/***************************************************************************//**
+ * @brief This function sets up and initializes an AD713x IIO device using the
+ * provided initialization parameters. It must be called before any
+ * operations are performed on the device. The function allocates memory
+ * for the device structure and configures it based on the parameters
+ * provided. If the initialization is successful, a pointer to the
+ * initialized device structure is returned through the `desc` parameter.
+ * The function expects valid initialization parameters and will return
+ * an error if the parameters are null or if memory allocation fails.
+ *
+ * @param desc A pointer to a pointer where the initialized AD713x IIO device
+ * structure will be stored. Must not be null. The caller is
+ * responsible for managing the memory of the structure after
+ * initialization.
+ * @param param A pointer to an `ad713x_iio_init_param` structure containing the
+ * initialization parameters for the AD713x device. Must not be
+ * null. The structure should be properly populated with valid
+ * device handlers and configuration values before calling this
+ * function.
+ * @return Returns 0 on successful initialization. Returns a negative error code
+ * if initialization fails, such as when parameters are invalid or
+ * memory allocation fails.
+ ******************************************************************************/
 int iio_ad713x_init(struct ad713x_iio **desc,
 		    struct ad713x_iio_init_param *param);
 
-/** Free memory allocated by iio_ad713x_init(). */
+/***************************************************************************//**
+ * @brief Use this function to release resources associated with an AD713x IIO
+ * handler that were previously allocated using iio_ad713x_init. It is
+ * important to call this function to prevent memory leaks when the
+ * AD713x IIO handler is no longer needed. Ensure that the provided
+ * descriptor is not null before calling this function, as passing a null
+ * pointer will result in an error.
+ *
+ * @param desc A pointer to the AD713x IIO handler to be freed. Must not be
+ * null. If null, the function returns an error code.
+ * @return Returns 0 on successful deallocation, or a negative error code if the
+ * input is invalid (e.g., -EINVAL if desc is null).
+ ******************************************************************************/
 int iio_ad713x_remove(struct ad713x_iio *desc);
 
 #endif /* IIO_SUPPORT */

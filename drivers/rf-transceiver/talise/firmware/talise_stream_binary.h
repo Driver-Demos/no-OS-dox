@@ -319,6 +319,16 @@ License limited to Analog Devices transceiver / receiver / transmitter products.
 
 */
 
+/***************************************************************************//**
+ * @brief The `streamBinary` variable is a global array of unsigned 8-bit
+ * integers (bytes) that contains a sequence of binary data. This array
+ * is initialized with a large set of hexadecimal values, which likely
+ * represent a binary stream or firmware data used in the software.
+ *
+ * @details This variable is used to store and provide access to a predefined
+ * binary data stream, potentially for use in hardware communication or
+ * firmware loading.
+ ******************************************************************************/
 uint8_t streamBinary[] = {
 	0x00, 0x02, 0x00, 0x20, 0x10, 0x02, 0x00, 0x20, 0x32, 0x00, 0x00, 0x10,
 	0x11, 0x02, 0x00, 0x00, 0xa0, 0x03, 0x00, 0x20, 0x90, 0x05, 0x00, 0x20,
@@ -663,4 +673,14 @@ uint8_t streamBinary[] = {
 	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
 	0x20, 0xf7, 0x13, 0x63
 };
+/***************************************************************************//**
+ * @brief The variable `streamBinary_len` is a global variable of type
+ * `uint32_t` that holds the length of the `streamBinary` array. It is
+ * initialized to 4096, indicating that the `streamBinary` array is
+ * expected to contain 4096 bytes of data.
+ *
+ * @details This variable is used to specify the size of the `streamBinary`
+ * array, ensuring that operations on the array do not exceed its
+ * allocated memory.
+ ******************************************************************************/
 uint32_t streamBinary_len = 4096;

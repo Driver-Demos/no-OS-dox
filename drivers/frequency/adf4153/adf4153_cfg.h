@@ -37,6 +37,18 @@
 #ifndef __ADF4153_CFG_H__
 #define __ADF4153_CFG_H__
 
+/***************************************************************************//**
+ * @brief The `adf4153_st` is a global variable of type `struct
+ * adf4153_settings_t` that holds configuration settings for the ADF4153
+ * frequency synthesizer. It includes parameters such as input frequency,
+ * channel spacing, fractional and integer values, and various control
+ * settings like fast-lock, prescaler, and power-down options. These
+ * settings are used to initialize and control the behavior of the
+ * ADF4153 device.
+ *
+ * @details This variable is used to configure the ADF4153 frequency synthesizer
+ * during its initialization phase.
+ ******************************************************************************/
 struct adf4153_settings_t adf4153_st = {
 	25000000,                           // RFIN is 25Mhz
 	150000,                             // Channel spacing is 150 Khz

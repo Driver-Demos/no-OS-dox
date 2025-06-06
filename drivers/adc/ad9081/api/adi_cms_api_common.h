@@ -48,6 +48,13 @@ static inline uint32_t adi_api_utils_log2(uint32_t a)
 #include <stddef.h>
 #include <stdarg.h>
 
+/***************************************************************************//**
+ * @brief The function `adi_api_utils_is_power_of_two` checks if a given 64-bit
+ * unsigned integer is a power of two.
+ *
+ * @param x A 64-bit unsigned integer to be checked if it is a power of two.
+ * @return Returns 1 if the input number is a power of two, otherwise returns 0.
+ ******************************************************************************/
 static inline int32_t adi_api_utils_is_power_of_two(uint64_t x)
 {
 	if (x == 0)
@@ -62,6 +69,17 @@ static inline int32_t adi_api_utils_is_power_of_two(uint64_t x)
 	return 1;
 }
 
+/***************************************************************************//**
+ * @brief The `adi_api_utils_gcd` function calculates the greatest common
+ * divisor (GCD) of two integers using a simple iterative method.
+ *
+ * @param u An integer representing the first number for which the GCD is to be
+ * calculated.
+ * @param v An integer representing the second number for which the GCD is to be
+ * calculated.
+ * @return The function returns an integer representing the greatest common
+ * divisor of the two input integers.
+ ******************************************************************************/
 static inline int32_t adi_api_utils_gcd(int32_t u, int32_t v)
 {
 	uint32_t div;
@@ -77,6 +95,16 @@ static inline int32_t adi_api_utils_gcd(int32_t u, int32_t v)
 	return common_div;
 }
 
+/***************************************************************************//**
+ * @brief The `adi_api_utils_log2` function calculates the base-2 logarithm of a
+ * given power of two number.
+ *
+ * @param a A 32-bit unsigned integer representing a power of two number for
+ * which the base-2 logarithm is to be calculated.
+ * @return The function returns an 8-bit unsigned integer representing the
+ * base-2 logarithm of the input number `a`, assuming `a` is a power of
+ * two.
+ ******************************************************************************/
 static inline uint32_t adi_api_utils_log2(uint32_t a)
 {
 	uint8_t b = 0;
@@ -91,9 +119,54 @@ static inline uint32_t adi_api_utils_log2(uint32_t a)
 #include "adi_cms_api_config.h"
 
 /*============= D E F I N E S ==============*/
-/*!
- * @brief  Enumerate error code
- */
+/***************************************************************************//**
+ * @brief The `adi_cms_error_e` is an enumeration that defines a comprehensive
+ * set of error codes used in the Analog Devices API to indicate various
+ * error conditions. Each enumerator represents a specific error
+ * scenario, ranging from general errors, invalid parameters, and pointer
+ * issues, to more specific hardware-related errors such as SPI transfer
+ * errors, PLL lock failures, and function control errors. This
+ * enumeration is crucial for error handling and debugging within the
+ * API, providing clear and specific error codes that can be used to
+ * diagnose and resolve issues effectively.
+ *
+ * @param API_CMS_ERROR_OK No Error.
+ * @param API_CMS_ERROR_ERROR General Error.
+ * @param API_CMS_ERROR_NULL_PARAM Null parameter.
+ * @param API_CMS_ERROR_SPI_SDO Wrong value assigned to the SDO in device
+ * structure.
+ * @param API_CMS_ERROR_INVALID_HANDLE_PTR Device handler pointer is invalid.
+ * @param API_CMS_ERROR_INVALID_XFER_PTR Invalid pointer to the SPI xfer
+ * function assigned.
+ * @param API_CMS_ERROR_INVALID_DELAYUS_PTR Invalid pointer to the delay_us
+ * function assigned.
+ * @param API_CMS_ERROR_INVALID_PARAM Invalid parameter passed.
+ * @param API_CMS_ERROR_INVALID_RESET_CTRL_PTR Invalid pointer to the reset
+ * control function assigned.
+ * @param API_CMS_ERROR_NOT_SUPPORTED Not supported.
+ * @param API_CMS_ERROR_VCO_OUT_OF_RANGE The VCO is out of range.
+ * @param API_CMS_ERROR_PLL_NOT_LOCKED PLL is not locked.
+ * @param API_CMS_ERROR_DLL_NOT_LOCKED DLL is not locked.
+ * @param API_CMS_ERROR_MODE_NOT_IN_TABLE JESD Mode not in table.
+ * @param API_CMS_ERROR_JESD_PLL_NOT_LOCKED PD STBY function error.
+ * @param API_CMS_ERROR_JESD_SYNC_NOT_DONE JESD_SYNC_NOT_DONE.
+ * @param API_CMS_ERROR_FTW_LOAD_ACK FTW acknowledge not received.
+ * @param API_CMS_ERROR_NCO_NOT_ENABLED The NCO is not enabled.
+ * @param API_CMS_ERROR_INIT_SEQ_FAIL Initialization sequence failed.
+ * @param API_CMS_ERROR_TEST_FAILED Test failed.
+ * @param API_CMS_ERROR_SPI_XFER SPI transfer error.
+ * @param API_CMS_ERROR_TX_EN_PIN_CTRL TX enable function error.
+ * @param API_CMS_ERROR_RESET_PIN_CTRL HW reset function error.
+ * @param API_CMS_ERROR_EVENT_HNDL Event handling error.
+ * @param API_CMS_ERROR_HW_OPEN HW open function error.
+ * @param API_CMS_ERROR_HW_CLOSE HW close function error.
+ * @param API_CMS_ERROR_LOG_OPEN Log open error.
+ * @param API_CMS_ERROR_LOG_WRITE Log write error.
+ * @param API_CMS_ERROR_LOG_CLOSE Log close error.
+ * @param API_CMS_ERROR_DELAY_US Delay error.
+ * @param API_CMS_ERROR_PD_STBY_PIN_CTRL PD STBY function error.
+ * @param API_CMS_ERROR_SYSREF_CTRL SYSREF enable function error.
+ ******************************************************************************/
 typedef enum {
 	API_CMS_ERROR_OK = 0, /*!< No Error */
 	API_CMS_ERROR_ERROR = -1, /*!< General Error  */
@@ -136,9 +209,29 @@ typedef enum {
 
 } adi_cms_error_e;
 
-/*!
- * @brief  Enumerate log source type
- */
+/***************************************************************************//**
+ * @brief The `adi_cms_log_type_e` is an enumeration that defines various log
+ * message types for a system, allowing for categorization of log
+ * messages into none, error, warning, informational, SPI-related, API-
+ * related, or all-inclusive categories. Each log type is associated with
+ * a specific hexadecimal value, enabling bitwise operations for log
+ * filtering and selection.
+ *
+ * @param ADI_CMS_LOG_NONE Represents no log type selected with a value of
+ * 0x0000.
+ * @param ADI_CMS_LOG_ERR Represents an error message log type with a value of
+ * 0x0001.
+ * @param ADI_CMS_LOG_WARN Represents a warning message log type with a value of
+ * 0x0002.
+ * @param ADI_CMS_LOG_MSG Represents a tips info message log type with a value
+ * of 0x0004.
+ * @param ADI_CMS_LOG_SPI Represents an SPI read/write info message log type
+ * with a value of 0x0010.
+ * @param ADI_CMS_LOG_API Represents an API info message log type with a value
+ * of 0x0020.
+ * @param ADI_CMS_LOG_ALL Represents all log types selected with a value of
+ * 0xFFFF.
+ ******************************************************************************/
 typedef enum {
 	ADI_CMS_LOG_NONE = 0x0000, /*!< all not selected */
 	ADI_CMS_LOG_ERR = 0x0001, /*!< error message */
@@ -149,9 +242,20 @@ typedef enum {
 	ADI_CMS_LOG_ALL = 0xFFFF /*!< all selected */
 } adi_cms_log_type_e;
 
-/*!
- * @brief  ADI Device Identification Data
- */
+/***************************************************************************//**
+ * @brief The `adi_cms_chip_id_t` structure is used to store identification data
+ * for an ADI device. It includes fields for the chip type, product ID,
+ * product grade, and device revision, which collectively provide a
+ * unique identifier for the specific device model and version. This
+ * structure is essential for distinguishing between different devices
+ * and their respective versions in a system that utilizes multiple ADI
+ * components.
+ *
+ * @param chip_type Chip Type Code.
+ * @param prod_id Product ID Code.
+ * @param prod_grade Product Grade Code.
+ * @param dev_revision Device Revision.
+ ******************************************************************************/
 typedef struct {
 	uint8_t chip_type; /*!< Chip Type Code */
 	uint16_t prod_id; /*!< Product ID Code */
@@ -159,17 +263,42 @@ typedef struct {
 	uint8_t dev_revision; /*!< Device Revision */
 } adi_cms_chip_id_t;
 
-/*!
- * @brief  API register access structure
- */
+/***************************************************************************//**
+ * @brief The `adi_cms_reg_data_t` structure is used to represent a register and
+ * its corresponding value in a device. It contains two members: `reg`,
+ * which holds the address of the register, and `val`, which holds the
+ * value to be written to or read from that register. This structure is
+ * typically used in contexts where direct manipulation of device
+ * registers is required, such as in low-level hardware interfacing or
+ * driver development.
+ *
+ * @param reg Register address.
+ * @param val Register value.
+ ******************************************************************************/
 typedef struct {
 	uint16_t reg; /*!< Register address */
 	uint8_t val; /*!< Register value */
 } adi_cms_reg_data_t;
 
-/*!
- * @brief  SPI mode settings
- */
+/***************************************************************************//**
+ * @brief The `adi_cms_spi_sdo_config_e` is an enumeration that defines
+ * different SPI (Serial Peripheral Interface) configurations for a
+ * device. It includes options for no configuration (`SPI_NONE`), a
+ * 4-wire configuration with SDO active (`SPI_SDO`), and a 3-wire
+ * configuration with SDIO active (`SPI_SDIO`). The `SPI_CONFIG_MAX` is
+ * used as a boundary marker to indicate the maximum configuration value.
+ * This enumeration is useful for setting and managing the SPI
+ * communication mode in devices that support multiple SPI
+ * configurations.
+ *
+ * @param SPI_NONE Represents no SPI configuration, used for testing.
+ * @param SPI_SDO Indicates SDO is active, applicable for 4-wire SPI
+ * configuration.
+ * @param SPI_SDIO Indicates SDIO is active, applicable for 3-wire SPI
+ * configuration.
+ * @param SPI_CONFIG_MAX Represents the maximum value for SPI configuration,
+ * used as a boundary marker.
+ ******************************************************************************/
 typedef enum {
 	SPI_NONE = 0, /*!< Keep this for test */
 	SPI_SDO = 1, /*!< SDO  active, 4-wire only */
@@ -177,33 +306,77 @@ typedef enum {
 	SPI_CONFIG_MAX = 3 /*!< Keep it last */
 } adi_cms_spi_sdo_config_e;
 
-/*!
- * @brief  SPI bit order settings
- */
+/***************************************************************************//**
+ * @brief The `adi_cms_spi_msb_config_e` is an enumeration that defines the bit
+ * order configuration for SPI communication. It allows the user to
+ * specify whether the most significant bit (MSB) or the least
+ * significant bit (LSB) is transmitted first during SPI data transfers.
+ * This configuration is crucial for ensuring compatibility with
+ * different SPI devices that may require different bit orderings.
+ *
+ * @param SPI_MSB_LAST Represents the configuration where the least significant
+ * bit (LSB) is transmitted first.
+ * @param SPI_MSB_FIRST Represents the configuration where the most significant
+ * bit (MSB) is transmitted first.
+ ******************************************************************************/
 typedef enum {
 	SPI_MSB_LAST = 0, /*!< LSB first */
 	SPI_MSB_FIRST = 1 /*!< MSB first */
 } adi_cms_spi_msb_config_e;
 
-/*!
- * @brief  SPI address increment settings
- */
+/***************************************************************************//**
+ * @brief The `adi_cms_spi_addr_inc_e` is an enumeration that defines the modes
+ * for SPI address increment settings. It provides two options:
+ * `SPI_ADDR_DEC_AUTO` for automatic address decrementing and
+ * `SPI_ADDR_INC_AUTO` for automatic address incrementing. This
+ * enumeration is used to configure how the SPI address should be
+ * adjusted automatically during operations.
+ *
+ * @param SPI_ADDR_DEC_AUTO Represents an auto-decremented SPI address mode with
+ * a value of 0.
+ * @param SPI_ADDR_INC_AUTO Represents an auto-incremented SPI address mode with
+ * a value of 1.
+ ******************************************************************************/
 typedef enum {
 	SPI_ADDR_DEC_AUTO = 0, /*!< auto decremented */
 	SPI_ADDR_INC_AUTO = 1 /*!< auto incremented */
 } adi_cms_spi_addr_inc_e;
 
-/*!
- *@brief driver operation mode
- */
+/***************************************************************************//**
+ * @brief The `adi_cms_driver_mode_config_e` is an enumeration that defines the
+ * driver operation modes for a device, specifically indicating whether
+ * the device operates in open-drain mode or CMOS mode. This enumeration
+ * is used to configure the electrical characteristics of the device's
+ * output drivers, allowing for flexibility in interfacing with different
+ * types of circuits.
+ *
+ * @param OPEN_DRAIN_MODE Represents the open-drain mode configuration with a
+ * value of 0.
+ * @param CMOS_MODE Represents the CMOS mode configuration with a value of 1.
+ ******************************************************************************/
 typedef enum {
 	OPEN_DRAIN_MODE = 0,
 	CMOS_MODE = 1
 } adi_cms_driver_mode_config_e;
 
-/*!
- * @brief  Enumerate Impedance Types
- */
+/***************************************************************************//**
+ * @brief The `adi_cms_signal_impedance_type_e` is an enumeration that defines
+ * different types of signal impedance configurations for a device. It
+ * includes options for no internal resistor, a 100-ohm internal
+ * resistor, a 50-ohm internal resistor, and an unknown resistor type.
+ * This enumeration is used to specify the impedance characteristics of a
+ * signal path within the device, which can be critical for ensuring
+ * proper signal integrity and matching in various applications.
+ *
+ * @param ADI_CMS_NO_INTERNAL_RESISTOR Represents the absence of an internal
+ * resistor.
+ * @param ADI_CMS_INTERNAL_RESISTOR_100_OHM Represents an internal resistor with
+ * a value of 100 ohms.
+ * @param ADI_CMS_INTERNAL_RESISTOR_50_OHM Represents an internal resistor with
+ * a value of 50 ohms.
+ * @param ADI_CMS_INTERNAL_RESISTOR_UNKNOWN Represents an unknown type of
+ * internal resistor.
+ ******************************************************************************/
 typedef enum {
 	ADI_CMS_NO_INTERNAL_RESISTOR = 0, /*!< disable internal resistor */
 	ADI_CMS_INTERNAL_RESISTOR_100_OHM = 1, /*!< internal 100ohm resistor */
@@ -211,9 +384,21 @@ typedef enum {
 	ADI_CMS_INTERNAL_RESISTOR_UNKNOWN = 3 /*!< unknown type */
 } adi_cms_signal_impedance_type_e;
 
-/*!
- * @brief  Enumerate Signal Types
- */
+/***************************************************************************//**
+ * @brief The `adi_cms_signal_type_e` is an enumeration that defines various
+ * types of signal standards used in communication systems. Each
+ * enumerator represents a specific signal type, such as CMOS, LVDS, CML,
+ * LVPECL, and an unknown type, with corresponding integer values. This
+ * enumeration is useful for categorizing and handling different signal
+ * types within the software, allowing for clear and consistent signal
+ * type management.
+ *
+ * @param SIGNAL_CMOS CMOS signal type represented by the value 0.
+ * @param SIGNAL_LVDS LVDS signal type represented by the value 1.
+ * @param SIGNAL_CML CML signal type represented by the value 2.
+ * @param SIGNAL_LVPECL LVPECL signal type represented by the value 3.
+ * @param SIGNAL_UNKNOWN Unknown signal type represented by the value 4.
+ ******************************************************************************/
 typedef enum {
 	SIGNAL_CMOS = 0, /*!< CMOS signal */
 	SIGNAL_LVDS = 1, /*!< LVDS signal */
@@ -222,18 +407,37 @@ typedef enum {
 	SIGNAL_UNKNOWN = 4 /*!< UNKNOW signal */
 } adi_cms_signal_type_e;
 
-/*!
- * @brief  Enumerate coupling mode
- */
+/***************************************************************************//**
+ * @brief The `adi_cms_signal_coupling_e` is an enumeration that defines the
+ * possible coupling modes for a signal. It includes three members:
+ * `COUPLING_AC` for AC coupled signals, `COUPLING_DC` for DC signals,
+ * and `COUPLING_UNKNOWN` for cases where the coupling type is not known.
+ * This enumeration is used to specify the type of signal coupling in
+ * various applications, providing a clear and standardized way to handle
+ * different signal coupling scenarios.
+ *
+ * @param COUPLING_AC Represents an AC coupled signal with a value of 0.
+ * @param COUPLING_DC Represents a DC signal with a value of 1.
+ * @param COUPLING_UNKNOWN Represents an unknown coupling type with a value of
+ * 2.
+ ******************************************************************************/
 typedef enum {
 	COUPLING_AC = 0, /*!< AC coupled signal */
 	COUPLING_DC = 1, /*!< DC signal */
 	COUPLING_UNKNOWN = 2 /*!< UNKNOWN coupling */
 } adi_cms_signal_coupling_e;
 
-/*!
- * @brief  Enumerates JESD LINK Signals
- */
+/***************************************************************************//**
+ * @brief The `adi_cms_jesd_link_e` is an enumeration that defines the possible
+ * states of JESD links in a system. It provides options to specify no
+ * link, individual links (0 or 1), or all links, which can be used to
+ * configure or query the status of JESD links in a device.
+ *
+ * @param JESD_LINK_NONE Represents no JESD link.
+ * @param JESD_LINK_0 Represents JESD link 0.
+ * @param JESD_LINK_1 Represents JESD link 1.
+ * @param JESD_LINK_ALL Represents all JESD links.
+ ******************************************************************************/
 typedef enum {
 	JESD_LINK_NONE = 0, /*!< JESD link none  */
 	JESD_LINK_0 = 1, /*!< JESD link 0 */
@@ -241,18 +445,41 @@ typedef enum {
 	JESD_LINK_ALL = 3 /*!< All JESD links  */
 } adi_cms_jesd_link_e;
 
-/*!
- * @brief  Enumerates SYNCOUTB Output Signals
- */
+/***************************************************************************//**
+ * @brief The `adi_cms_jesd_syncoutb_e` is an enumeration that defines the
+ * possible SYNCOUTB output signals for a JESD interface. It includes
+ * options for individual SYNCOUTB signals (0 and 1) as well as a
+ * collective option for all SYNCOUTB signals. This enumeration is used
+ * to specify which SYNCOUTB signal(s) are active or being referenced in
+ * a given context, providing a clear and concise way to manage SYNCOUTB
+ * signal configurations in the system.
+ *
+ * @param SYNCOUTB_0 Represents the SYNCOUTB 0 signal.
+ * @param SYNCOUTB_1 Represents the SYNCOUTB 1 signal.
+ * @param SYNCOUTB_ALL Represents all SYNCOUTB signals.
+ ******************************************************************************/
 typedef enum {
 	SYNCOUTB_0 = 0x0, /*!< SYNCOUTB 0 */
 	SYNCOUTB_1 = 0x1, /*!< SYNCOUTB 1 */
 	SYNCOUTB_ALL = 0xFF /*!< ALL SYNCOUTB SIGNALS */
 } adi_cms_jesd_syncoutb_e;
 
-/*!
- * @brief  Enumerates SYSREF Synchronization Mode
- */
+/***************************************************************************//**
+ * @brief The `adi_cms_jesd_sysref_mode_e` is an enumeration that defines
+ * various modes for SYSREF synchronization in a JESD (Joint Electron
+ * Device Engineering Council) interface. It includes modes for no SYSREF
+ * support, one-shot SYSREF, continuous synchronization, monitoring mode,
+ * and an invalid mode for error handling or uninitialized states. This
+ * enumeration is used to configure and manage the SYSREF signal behavior
+ * in JESD systems, which is crucial for synchronizing data converters in
+ * high-speed data transmission applications.
+ *
+ * @param SYSREF_NONE No SYSREF Support.
+ * @param SYSREF_ONESHOT ONE-SHOT SYSREF.
+ * @param SYSREF_CONT Continuous SysRef sync.
+ * @param SYSREF_MON SYSREF monitor mode.
+ * @param SYSREF_MODE_INVALID Invalid SYSREF mode.
+ ******************************************************************************/
 typedef enum {
 	SYSREF_NONE = 0, /*!< No SYSREF Support */
 	SYSREF_ONESHOT = 1, /*!< ONE-SHOT SYSREF */
@@ -261,9 +488,27 @@ typedef enum {
 	SYSREF_MODE_INVALID = 4
 } adi_cms_jesd_sysref_mode_e;
 
-/*!
- * @brief  Enumerates PRBS pattern type
- */
+/***************************************************************************//**
+ * @brief The `adi_cms_jesd_prbs_pattern_e` is an enumeration that defines
+ * various Pseudo-Random Binary Sequence (PRBS) patterns used in JESD
+ * (Joint Electron Device Engineering Council) interfaces. These patterns
+ * are used for testing and validation of data transmission systems,
+ * ensuring that the communication link is functioning correctly by
+ * generating a known sequence of bits. The enumeration includes several
+ * standard PRBS patterns, such as PRBS7, PRBS9, PRBS15, PRBS23, and
+ * PRBS31, each differing in the length of the sequence and the
+ * complexity of the pattern. The `PRBS_NONE` member indicates that no
+ * PRBS pattern is applied, while `PRBS_MAX` serves as a boundary marker
+ * for the number of patterns defined.
+ *
+ * @param PRBS_NONE Represents the state where PRBS is turned off.
+ * @param PRBS7 Represents the PRBS7 pattern.
+ * @param PRBS9 Represents the PRBS9 pattern.
+ * @param PRBS15 Represents the PRBS15 pattern.
+ * @param PRBS23 Represents the PRBS23 pattern.
+ * @param PRBS31 Represents the PRBS31 pattern.
+ * @param PRBS_MAX Indicates the number of PRBS pattern types available.
+ ******************************************************************************/
 typedef enum {
 	PRBS_NONE = 0, /*!< PRBS   off */
 	PRBS7 = 1, /*!< PRBS7  pattern */
@@ -274,18 +519,56 @@ typedef enum {
 	PRBS_MAX = 6 /*!< Number of member */
 } adi_cms_jesd_prbs_pattern_e;
 
-/*!
- * @brief  Enumerates all available Jesd Subclass Modes
- */
+/***************************************************************************//**
+ * @brief The `adi_cms_jesd_subclass_e` is an enumeration that defines the
+ * available JESD subclass modes, which are used to specify the
+ * operational subclass of a JESD interface. It includes two valid
+ * subclasses, 0 and 1, and an invalid subclass option for error handling
+ * or undefined states.
+ *
+ * @param JESD_SUBCLASS_0 Represents JESD Subclass 0.
+ * @param JESD_SUBCLASS_1 Represents JESD Subclass 1.
+ * @param JESD_SUBCLASS_INVALID Represents an invalid JESD Subclass.
+ ******************************************************************************/
 typedef enum {
 	JESD_SUBCLASS_0 = 0, /*!< JESD SUBCLASS 0 */
 	JESD_SUBCLASS_1 = 1, /*!< JESD SUBCLASS 1 */
 	JESD_SUBCLASS_INVALID = 2
 } adi_cms_jesd_subclass_e;
 
-/*!
- * @brief  Defines JESD Parameters
- */
+/***************************************************************************//**
+ * @brief The `adi_cms_jesd_param_t` structure defines various parameters for
+ * configuring a JESD (Joint Electron Device Engineering Council)
+ * interface, which is used in high-speed data converters. It includes
+ * fields for specifying the number of lanes, octets in a frame,
+ * converters, samples, and frames for a multi-frame, as well as settings
+ * for converter resolution, bit packing, and various JESD-specific
+ * parameters such as device ID, bank ID, lane ID, subclass, and
+ * scrambling options. This structure is essential for setting up and
+ * managing the JESD interface in devices that require precise data
+ * transmission configurations.
+ *
+ * @param jesd_l No of lanes.
+ * @param jesd_f No of octets in a frame.
+ * @param jesd_m No of converters.
+ * @param jesd_s No of samples.
+ * @param jesd_hd High Density.
+ * @param jesd_k No of frames for a multi-frame.
+ * @param jesd_n Converter resolution.
+ * @param jesd_np Bit packing sample.
+ * @param jesd_cf Parameter CF.
+ * @param jesd_cs Parameter CS.
+ * @param jesd_did Device ID DID.
+ * @param jesd_bid Bank ID BID.
+ * @param jesd_lid0 Lane ID for lane0.
+ * @param jesd_subclass Subclass.
+ * @param jesd_scr Scramble enable.
+ * @param jesd_duallink Link mode (single/dual).
+ * @param jesd_jesdv Version (0:204A, 1:204B, 2:204C).
+ * @param jesd_mode_id JESD mode ID.
+ * @param jesd_mode_c2r_en JESD mode C2R enable.
+ * @param jesd_mode_s_sel JESD mode S value.
+ ******************************************************************************/
 typedef struct {
 	uint8_t jesd_l; /*!< No of lanes */
 	uint8_t jesd_f; /*!< No of octets in a frame */
@@ -309,9 +592,18 @@ typedef struct {
 	uint8_t jesd_mode_s_sel; /*!< JESD mode S value */
 } adi_cms_jesd_param_t;
 
-/*!
- * @brief  Enumerate ADI Device Operating Mode
- */
+/***************************************************************************//**
+ * @brief The `adi_cms_chip_op_mode_t` is an enumeration that defines the
+ * operational modes of a chip, specifically indicating whether the chip
+ * is using only the transmit (Tx) path, only the receive (Rx) path, or
+ * both paths simultaneously. This enumeration is useful for configuring
+ * the chip's operation mode in applications where different
+ * communication paths are required.
+ *
+ * @param TX_ONLY Chip using Tx path only.
+ * @param RX_ONLY Chip using Rx path only.
+ * @param TX_RX_ONLY Chip using both Tx and Rx paths.
+ ******************************************************************************/
 typedef enum {
 	TX_ONLY = 1, /*!< Chip using Tx path only */
 	RX_ONLY = 2, /*!< Chip using Rx path only */

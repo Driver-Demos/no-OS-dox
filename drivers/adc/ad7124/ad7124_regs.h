@@ -37,8 +37,16 @@
 
 #include "ad7124.h"
 
-/*! Array holding the info for the ad7124 registers - address, initial value,
-    size and access type. */
+/***************************************************************************//**
+ * @brief The `ad7124_regs` is an external array of structures, each of type
+ * `ad7124_st_reg`, which holds information about the AD7124 device
+ * registers. This array is used to store details such as the register
+ * address, initial value, size, and access type for each register in the
+ * AD7124 series of devices.
+ *
+ * @details This variable is used to manage and access the configuration and
+ * status registers of AD7124 devices.
+ ******************************************************************************/
 extern struct ad7124_st_reg ad7124_regs[AD7124_REG_NO];
 
 #endif /* __AD7124_REGS_H__ */

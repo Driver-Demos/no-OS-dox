@@ -293,6 +293,90 @@
 #define MCR_REG_GPIO_CONFIGURE                    0x3FA
 #define MCR_REG_TEST_DAC_GAIN                     0x3FD
 
+/***************************************************************************//**
+ * @brief The `adf7023_bbram` structure is a comprehensive configuration data
+ * structure for the ADF7023 radio transceiver, containing numerous
+ * fields that control various aspects of the device's operation. These
+ * fields include interrupt masks, wakeup settings, channel frequency,
+ * radio configuration parameters, synchronization settings, and address
+ * filtering options, among others. Each field is associated with a
+ * specific register address, allowing for precise control over the
+ * radio's behavior. This structure is essential for configuring the
+ * ADF7023 to meet specific application requirements, ensuring optimal
+ * performance and functionality.
+ *
+ * @param interrupt_mask0 Defines the first set of interrupt masks for the
+ * device.
+ * @param interrupt_mask1 Defines the second set of interrupt masks for the
+ * device.
+ * @param number_of_wakeups0 Specifies the lower byte of the number of wakeups.
+ * @param number_of_wakeups1 Specifies the upper byte of the number of wakeups.
+ * @param number_of_wakeups_irq_threshold0 Specifies the lower byte of the
+ * wakeup interrupt threshold.
+ * @param number_of_wakeups_irq_threshold1 Specifies the upper byte of the
+ * wakeup interrupt threshold.
+ * @param rx_dwell_time Defines the dwell time for the receiver.
+ * @param parmtime_divider Sets the parameter time divider.
+ * @param swm_rssi_thresh Sets the RSSI threshold for the software modem.
+ * @param channel_freq0 Specifies the lower byte of the channel frequency.
+ * @param channel_freq1 Specifies the middle byte of the channel frequency.
+ * @param channel_freq2 Specifies the upper byte of the channel frequency.
+ * @param radio_cfg0 Contains configuration settings for the radio.
+ * @param radio_cfg1 Contains additional configuration settings for the radio.
+ * @param radio_cfg2 Contains further configuration settings for the radio.
+ * @param radio_cfg3 Contains more configuration settings for the radio.
+ * @param radio_cfg4 Contains additional configuration settings for the radio.
+ * @param radio_cfg5 Contains further configuration settings for the radio.
+ * @param radio_cfg6 Contains more configuration settings for the radio.
+ * @param radio_cfg7 Contains additional configuration settings for the radio.
+ * @param radio_cfg8 Contains further configuration settings for the radio.
+ * @param radio_cfg9 Contains more configuration settings for the radio.
+ * @param radio_cfg10 Contains additional configuration settings for the radio.
+ * @param radio_cfg11 Contains further configuration settings for the radio.
+ * @param image_reject_cal_phase Specifies the phase for image rejection
+ * calibration.
+ * @param image_reject_cal_amplitude Specifies the amplitude for image rejection
+ * calibration.
+ * @param mode_control Controls various modes of the device.
+ * @param preamble_match Defines the preamble match settings.
+ * @param symbol_mode Specifies the symbol mode settings.
+ * @param preamble_len Defines the length of the preamble.
+ * @param crc_poly0 Specifies the lower byte of the CRC polynomial.
+ * @param crc_poly1 Specifies the upper byte of the CRC polynomial.
+ * @param syncControl Controls synchronization settings.
+ * @param sync_byte0 Specifies the first synchronization byte.
+ * @param sync_byte1 Specifies the second synchronization byte.
+ * @param sync_byte2 Specifies the third synchronization byte.
+ * @param tx_base_adr Defines the base address for transmission.
+ * @param rx_base_adr Defines the base address for reception.
+ * @param packet_length_control Controls the packet length settings.
+ * @param packet_length_max Specifies the maximum packet length.
+ * @param static_reg_fix Indicates static register fix settings.
+ * @param address_match_offset Specifies the offset for address matching.
+ * @param address_length Defines the length of the address.
+ * @param address_filtering0 Specifies the first address filtering setting.
+ * @param address_filtering1 Specifies the second address filtering setting.
+ * @param address_filtering2 Specifies the third address filtering setting.
+ * @param address_filtering3 Specifies the fourth address filtering setting.
+ * @param address_filtering4 Specifies the fifth address filtering setting.
+ * @param address_filtering5 Specifies the sixth address filtering setting.
+ * @param address_filtering6 Specifies the seventh address filtering setting.
+ * @param address_filtering7 Specifies the eighth address filtering setting.
+ * @param address_filtering8 Specifies the ninth address filtering setting.
+ * @param address_filtering9 Specifies the tenth address filtering setting.
+ * @param address_filtering10 Specifies the eleventh address filtering setting.
+ * @param address_filtering11 Specifies the twelfth address filtering setting.
+ * @param address_filtering12 Specifies the thirteenth address filtering
+ * setting.
+ * @param rssi_wait_time Defines the wait time for RSSI measurement.
+ * @param testmodes Specifies the test modes for the device.
+ * @param transition_clock_div Sets the clock divider for transitions.
+ * @param reserved0 Reserved for future use.
+ * @param reserved1 Reserved for future use.
+ * @param reserved2 Reserved for future use.
+ * @param rx_synth_lock_time Specifies the lock time for the RX synthesizer.
+ * @param tx_synth_lock_time Specifies the lock time for the TX synthesizer.
+ ******************************************************************************/
 struct adf7023_bbram {
 	uint8_t interrupt_mask0;                  // 0x100
 	uint8_t interrupt_mask1;                  // 0x101
@@ -367,6 +451,22 @@ struct adf7023_bbram {
 /*************************** Types Declarations *******************************/
 /******************************************************************************/
 
+/***************************************************************************//**
+ * @brief The `adf7023_dev` structure is designed to encapsulate the necessary
+ * components for interfacing with the ADF7023 transceiver device. It
+ * includes pointers to SPI and GPIO descriptors for managing
+ * communication and control lines, as well as a structure to hold the
+ * current configuration settings of the device. This structure is
+ * essential for initializing and operating the ADF7023, providing a
+ * centralized representation of the device's state and interface
+ * connections.
+ *
+ * @param spi_desc Pointer to a SPI descriptor for SPI communication.
+ * @param gpio_cs Pointer to a GPIO descriptor for chip select control.
+ * @param gpio_miso Pointer to a GPIO descriptor for MISO line control.
+ * @param adf7023_bbram_current Current settings of the ADF7023 device stored in
+ * battery-backed RAM.
+ ******************************************************************************/
 struct adf7023_dev {
 	/* SPI */
 	struct no_os_spi_desc		*spi_desc;
@@ -377,6 +477,20 @@ struct adf7023_dev {
 	struct adf7023_bbram	adf7023_bbram_current;
 };
 
+/***************************************************************************//**
+ * @brief The `adf7023_init_param` structure is used to encapsulate the
+ * initialization parameters required for setting up the ADF7023 device.
+ * It includes configuration details for the SPI interface and the
+ * necessary GPIO pins, specifically the chip select and MISO pins, which
+ * are essential for communication with the device. This structure is
+ * typically used during the initialization process to ensure that the
+ * device is correctly configured for operation.
+ *
+ * @param spi_init Holds the initialization parameters for the SPI interface.
+ * @param gpio_cs Holds the initialization parameters for the GPIO chip select
+ * pin.
+ * @param gpio_miso Holds the initialization parameters for the GPIO MISO pin.
+ ******************************************************************************/
 struct adf7023_init_param {
 	/* SPI */
 	struct no_os_spi_init_param	spi_init;
@@ -390,55 +504,273 @@ struct adf7023_init_param {
 /******************************************************************************/
 
 /* Initializes the ADF7023. */
+/***************************************************************************//**
+ * @brief This function initializes the ADF7023 device by setting up the
+ * necessary SPI and GPIO interfaces and configuring the device with
+ * default settings. It must be called before any other operations on the
+ * ADF7023 device. The function allocates memory for the device structure
+ * and initializes the SPI and GPIO descriptors based on the provided
+ * initialization parameters. It also ensures the device is ready to
+ * accept commands by checking the status and setting the necessary
+ * configurations. If initialization fails at any step, the function
+ * returns an error code.
+ *
+ * @param device A pointer to a pointer of type `struct adf7023_dev`. This will
+ * be allocated and initialized by the function. The caller must
+ * ensure this pointer is valid and will receive ownership of the
+ * allocated memory.
+ * @param init_param A structure of type `struct adf7023_init_param` containing
+ * the initialization parameters for SPI and GPIO. This must
+ * be properly configured before calling the function.
+ * @return Returns 0 on success or a negative error code if initialization
+ * fails. The `device` pointer is set to point to the initialized device
+ * structure on success.
+ ******************************************************************************/
 int32_t adf7023_init(struct adf7023_dev **device,
 		     struct adf7023_init_param init_param);
 
 /* Free the resources allocated by adf7023_init(). */
+/***************************************************************************//**
+ * @brief This function is used to release all resources that were allocated for
+ * an ADF7023 device during its initialization. It should be called when
+ * the device is no longer needed to ensure that all associated
+ * resources, such as SPI and GPIO descriptors, are properly freed. This
+ * function must be called after the device has been initialized with
+ * `adf7023_init`. Failure to call this function may result in resource
+ * leaks.
+ *
+ * @param dev A pointer to an `adf7023_dev` structure representing the device to
+ * be removed. This pointer must not be null, and it must point to a
+ * valid device structure that was previously initialized. If the
+ * pointer is invalid, the behavior is undefined.
+ * @return Returns an `int32_t` value indicating the success or failure of the
+ * resource deallocation. A return value of 0 indicates success, while a
+ * non-zero value indicates an error occurred during the removal
+ * process.
+ ******************************************************************************/
 int32_t adf7023_remove(struct adf7023_dev *dev);
 
 /* Reads the status word of the ADF7023. */
+/***************************************************************************//**
+ * @brief Use this function to retrieve the current status word from the ADF7023
+ * device. This function is typically called to check the device's
+ * operational status or to verify that it is ready for further
+ * operations. It must be called with a valid device structure that has
+ * been properly initialized. The function communicates with the device
+ * over SPI and writes the status word to the provided memory location.
+ *
+ * @param dev A pointer to an initialized adf7023_dev structure representing the
+ * device. Must not be null.
+ * @param status A pointer to a uint8_t variable where the status word will be
+ * stored. Must not be null.
+ * @return None
+ ******************************************************************************/
 void adf7023_get_status(struct adf7023_dev *dev,
 			uint8_t* status);
 
 /* Initiates a command. */
+/***************************************************************************//**
+ * @brief This function is used to send a command to the ADF7023 device, which
+ * is a radio transceiver. It should be called when a specific operation
+ * or state transition is required on the device. The function asserts
+ * the chip select line, sends the command byte, and then deasserts the
+ * chip select line, ensuring the command is properly communicated to the
+ * device. It is important to ensure that the device is properly
+ * initialized before calling this function.
+ *
+ * @param dev A pointer to an adf7023_dev structure representing the device.
+ * This must be a valid, initialized device structure and must not be
+ * null.
+ * @param command A uint8_t value representing the command to be sent to the
+ * device. This should be a valid command as defined by the
+ * device's command set.
+ * @return None
+ ******************************************************************************/
 void adf7023_set_command(struct adf7023_dev *dev,
 			 uint8_t command);
 
 /* Sets a FW state and waits until the device enters in that state. */
+/***************************************************************************//**
+ * @brief This function is used to change the firmware state of an ADF7023
+ * device to a specified state and waits until the device successfully
+ * transitions to that state. It should be called when a change in the
+ * operational state of the device is required, such as transitioning
+ * between PHY_OFF, PHY_ON, PHY_RX, PHY_TX, or PHY_SLEEP states. The
+ * function ensures that the device has entered the desired state before
+ * returning, making it suitable for use in scenarios where state
+ * confirmation is necessary.
+ *
+ * @param dev A pointer to an adf7023_dev structure representing the device.
+ * Must not be null, and the device should be properly initialized
+ * before calling this function.
+ * @param fw_state A uint8_t value representing the desired firmware state.
+ * Valid values include FW_STATE_PHY_OFF, FW_STATE_PHY_ON,
+ * FW_STATE_PHY_RX, FW_STATE_PHY_TX, and FW_STATE_PHY_SLEEP. If
+ * an invalid state is provided, the device will transition to
+ * the PHY_SLEEP state.
+ * @return None
+ ******************************************************************************/
 void adf7023_set_fw_state(struct adf7023_dev *dev,
 			  uint8_t fw_state);
 
 /* Reads data from the RAM. */
+/***************************************************************************//**
+ * @brief This function is used to read a specified number of bytes from the RAM
+ * of an ADF7023 device starting at a given address. It is typically
+ * called when data stored in the device's RAM needs to be accessed for
+ * processing or analysis. The function requires a valid device structure
+ * and a pre-allocated buffer to store the read data. It is important to
+ * ensure that the address and length parameters are within the valid
+ * range of the device's RAM to avoid undefined behavior.
+ *
+ * @param dev A pointer to an initialized adf7023_dev structure representing the
+ * device. Must not be null.
+ * @param address The starting address in the device's RAM from which data will
+ * be read. Must be within the valid RAM address range of the
+ * device.
+ * @param length The number of bytes to read from the RAM. Must be a positive
+ * integer and should not exceed the available RAM size from the
+ * specified address.
+ * @param data A pointer to a buffer where the read data will be stored. The
+ * buffer must be pre-allocated and large enough to hold 'length'
+ * bytes. Must not be null.
+ * @return None
+ ******************************************************************************/
 void adf7023_get_ram(struct adf7023_dev *dev,
 		     uint32_t address,
 		     uint32_t length,
 		     uint8_t* data);
 
 /* Writes data to RAM. */
+/***************************************************************************//**
+ * @brief Use this function to write a sequence of bytes to a specific address
+ * in the RAM of an ADF7023 device. It is essential to ensure that the
+ * device is properly initialized before calling this function. The
+ * function requires a valid device structure, a starting address within
+ * the device's RAM, the length of the data to be written, and a pointer
+ * to the data buffer. The function does not perform any validation on
+ * the address or length, so the caller must ensure these parameters are
+ * within valid ranges for the device's memory.
+ *
+ * @param dev A pointer to an initialized adf7023_dev structure representing the
+ * device. Must not be null.
+ * @param address The starting address in the device's RAM where data will be
+ * written. The caller must ensure this is within the valid range
+ * of the device's memory.
+ * @param length The number of bytes to write to the device's RAM. The caller
+ * must ensure this does not exceed the available memory space
+ * from the starting address.
+ * @param data A pointer to the buffer containing the data to be written. Must
+ * not be null and must have at least 'length' bytes available.
+ * @return None
+ ******************************************************************************/
 void adf7023_set_ram(struct adf7023_dev *dev,
 		     uint32_t address,
 		     uint32_t length,
 		     uint8_t* data);
 
 /* Receives one packet. */
+/***************************************************************************//**
+ * @brief Use this function to receive a packet from the ADF7023 device after it
+ * has been properly initialized and configured. The function transitions
+ * the device to the PHY_RX state and waits for a valid packet with a
+ * correct CRC to be received. It then retrieves the packet length and
+ * the packet data itself. This function should be called when the device
+ * is ready to receive data, and the caller must ensure that the provided
+ * buffers are large enough to hold the expected data.
+ *
+ * @param dev A pointer to an initialized adf7023_dev structure representing the
+ * device. Must not be null.
+ * @param packet A pointer to a buffer where the received packet data will be
+ * stored. The buffer must be large enough to hold the expected
+ * packet data. Must not be null.
+ * @param length A pointer to a uint8_t variable where the length of the
+ * received packet will be stored. Must not be null.
+ * @return None
+ ******************************************************************************/
 void adf7023_receive_packet(struct adf7023_dev *dev,
 			    uint8_t* packet,
 			    uint8_t* length);
 
 /* Transmits one packet. */
+/***************************************************************************//**
+ * @brief Use this function to send a data packet through the ADF7023
+ * transceiver. It must be called with a valid device structure and a
+ * properly formatted packet. The function sets the device to the PHY_TX
+ * state and waits for the transmission to complete. Ensure the device is
+ * initialized and configured before calling this function. The packet
+ * length should not exceed the maximum allowed by the device.
+ *
+ * @param dev A pointer to an initialized adf7023_dev structure representing the
+ * device. Must not be null.
+ * @param packet A pointer to the data buffer containing the packet to be
+ * transmitted. The caller retains ownership and must ensure the
+ * buffer is valid and contains at least 'length' bytes.
+ * @param length The length of the packet to be transmitted. Must be a positive
+ * value and should not exceed the device's maximum packet length.
+ * @return None
+ ******************************************************************************/
 void adf7023_transmit_packet(struct adf7023_dev *dev,
 			     uint8_t* packet,
 			     uint8_t length);
 
 /* Sets the channel frequency. */
+/***************************************************************************//**
+ * @brief Use this function to configure the channel frequency of the ADF7023
+ * device. This function must be called after the device has been
+ * initialized and is typically used when setting up or changing the
+ * communication parameters of the device. The function takes a frequency
+ * value in Hertz and converts it to the appropriate format for the
+ * device's internal registers. Ensure that the device is in a state that
+ * allows frequency changes before calling this function.
+ *
+ * @param dev A pointer to an initialized adf7023_dev structure representing the
+ * device. Must not be null. The caller retains ownership.
+ * @param ch_freq The desired channel frequency in Hertz. Must be a positive
+ * integer. The function will convert this value to the
+ * appropriate format for the device.
+ * @return None
+ ******************************************************************************/
 void adf7023_set_channel_frequency(struct adf7023_dev *dev,
 				   uint32_t ch_freq);
 
 /* Sets the data rate. */
+/***************************************************************************//**
+ * @brief Use this function to configure the data rate of the ADF7023 device. It
+ * must be called with a valid device structure and a desired data rate
+ * value. The function updates the device's configuration registers to
+ * reflect the new data rate and reconfigures the device accordingly.
+ * This function should be called when the device is not actively
+ * transmitting or receiving data to avoid communication errors.
+ *
+ * @param dev A pointer to an initialized adf7023_dev structure representing the
+ * device. Must not be null.
+ * @param data_rate The desired data rate in bits per second. The value is
+ * divided by 100 internally, so it should be a multiple of 100
+ * for accurate configuration.
+ * @return None
+ ******************************************************************************/
 void adf7023_set_data_rate(struct adf7023_dev *dev,
 			   uint32_t data_rate);
 
 /* Sets the frequency deviation. */
+/***************************************************************************//**
+ * @brief Use this function to configure the frequency deviation of the ADF7023
+ * device, which is a critical parameter for modulation schemes. This
+ * function should be called when you need to adjust the frequency
+ * deviation to match specific communication requirements. It must be
+ * called after the device has been initialized and before starting any
+ * transmission or reception operations. The function updates the
+ * device's configuration and ensures the device is in the correct state
+ * for the new settings to take effect.
+ *
+ * @param dev A pointer to an initialized adf7023_dev structure representing the
+ * device. Must not be null. The caller retains ownership.
+ * @param freq_dev The desired frequency deviation in Hertz. The value is
+ * divided by 100 internally, so it should be a multiple of 100
+ * for precise configuration.
+ * @return None
+ ******************************************************************************/
 void adf7023_set_frequency_deviation(struct adf7023_dev *dev,
 				     uint32_t freq_dev);
 

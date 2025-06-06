@@ -36,6 +36,17 @@
 
 #include "ad717x.h"
 
+/***************************************************************************//**
+ * @brief The `ad4111_regs` is an array of structures of type `ad717x_st_reg`,
+ * which represents the register configuration for the AD4111 device.
+ * Each element in the array corresponds to a specific register in the
+ * AD4111, with fields specifying the register address, default value,
+ * and size in bytes. This array is used to initialize and configure the
+ * AD4111 device registers for proper operation.
+ *
+ * @details This variable is used to store and manage the configuration settings
+ * for the AD4111 device registers.
+ ******************************************************************************/
 ad717x_st_reg ad4111_regs[] = {
 	{ AD717X_STATUS_REG, 0x00, 1 },
 	{

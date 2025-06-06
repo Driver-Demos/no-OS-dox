@@ -1067,6 +1067,20 @@
 #define CRC_POLY_128KHZ				               0x00001021ul
 #define CRC_CHECK_CONST_128KHz			         0x00001D0Ful
 
+/***************************************************************************//**
+ * @brief The `adas1000_dev` structure is designed to encapsulate the essential
+ * parameters and state information required for interfacing with the
+ * ADAS1000 device, which is used for ECG data acquisition. It includes a
+ * pointer to an SPI descriptor for communication, as well as fields to
+ * specify the frame size and rate, and the number of inactive words in a
+ * frame, which are crucial for configuring and managing the data flow
+ * from the ADAS1000.
+ *
+ * @param spi_desc Pointer to the SPI descriptor used for communication.
+ * @param frame_size Size of the ADAS1000 data frame in bytes.
+ * @param frame_rate Rate at which ADAS1000 frames are processed.
+ * @param inactive_words_no Number of inactive words in a data frame.
+ ******************************************************************************/
 struct adas1000_dev {
 	/** SPI Descriptor */
 	struct no_os_spi_desc *spi_desc;
@@ -1078,6 +1092,17 @@ struct adas1000_dev {
 	uint32_t inactive_words_no;
 };
 
+/***************************************************************************//**
+ * @brief The `adas1000_init_param` structure is used to initialize the ADAS1000
+ * device, which is a medical-grade analog front-end for ECG and
+ * respiration monitoring. It contains parameters necessary for setting
+ * up the SPI communication and configuring the frame rate at which the
+ * device operates, ensuring proper data acquisition and processing.
+ *
+ * @param spi_init Contains the SPI initialization parameters for the ADAS1000
+ * device.
+ * @param frame_rate Specifies the frame rate for the ADAS1000 device.
+ ******************************************************************************/
 struct adas1000_init_param {
 	/** SPI Initialization Parameters */
 	struct no_os_spi_init_param spi_init;
@@ -1085,6 +1110,22 @@ struct adas1000_init_param {
 	uint32_t frame_rate;
 };
 
+/***************************************************************************//**
+ * @brief The `read_param` structure is used to manage the parameters for
+ * reading frames from a device, specifically controlling the start and
+ * stop of the read sequence, waiting for readiness, and handling
+ * repeated headers. It is designed to facilitate the configuration of
+ * reading operations in a device communication context, ensuring that
+ * the read process is executed according to the specified conditions.
+ *
+ * @param start_read Indicates if the frames read sequence should be initiated.
+ * @param stop_read Indicates if the frames read sequence should be stopped upon
+ * function exit.
+ * @param wait_for_ready Indicates if the function should wait for the READY bit
+ * to be set in the header.
+ * @param ready_repeat Indicates if the device is configured to repeat the
+ * header until the READY bit is set.
+ ******************************************************************************/
 struct read_param {
 	/** Set to true if a the frames read sequence must be started. */
 	bool start_read;
@@ -1103,40 +1144,224 @@ struct read_param {
 /******************************************************************************/
 /* Functions Prototypes */
 /******************************************************************************/
-/** Compute SPI frequency based on frame rate */
+/***************************************************************************//**
+ * @brief This function calculates the SPI clock frequency required for the
+ * ADAS1000 device based on the specified frame rate. It should be used
+ * when configuring the SPI communication settings for the ADAS1000. The
+ * function requires a valid initialization parameter structure that
+ * specifies the frame rate. The computed SPI frequency is returned
+ * through a pointer parameter. The function assumes that the frame rate
+ * provided is one of the predefined rates supported by the ADAS1000.
+ *
+ * @param init_param A pointer to a `struct adas1000_init_param` that contains
+ * the frame rate for which the SPI frequency is to be
+ * computed. The frame rate must be one of the predefined
+ * constants (e.g., ADAS1000_16KHZ_FRAME_RATE). The pointer
+ * must not be null.
+ * @param spi_freq A pointer to a `uint32_t` where the computed SPI frequency
+ * will be stored. The pointer must not be null.
+ * @return Returns 0 on success. The computed SPI frequency is stored in the
+ * location pointed to by `spi_freq`.
+ ******************************************************************************/
 int32_t adas1000_compute_spi_freq(struct adas1000_init_param *init_param,
 				  uint32_t *spi_freq);
 
 /* Initializes the communication with ADAS1000 and checks if the device is present.*/
+/***************************************************************************//**
+ * @brief This function initializes the ADAS1000 device by allocating necessary
+ * resources and setting up the SPI communication based on the provided
+ * initialization parameters. It must be called before any other
+ * operations on the ADAS1000 device. The function configures the device
+ * with the specified frame rate, performs a soft reset, activates all
+ * channels, and sets the frame rate. If any step fails, the function
+ * returns an error code and ensures that allocated resources are freed.
+ * Successful initialization results in a pointer to the device structure
+ * being set.
+ *
+ * @param device A double pointer to a struct adas1000_dev. This will be
+ * allocated and initialized by the function. Must not be null.
+ * @param init_param A pointer to a struct adas1000_init_param containing
+ * initialization parameters such as SPI settings and frame
+ * rate. Must not be null.
+ * @return Returns 0 on success, or a negative error code on failure. On
+ * success, the device pointer is set to a newly allocated and
+ * initialized device structure.
+ ******************************************************************************/
 int32_t adas1000_init(struct adas1000_dev **device,
 		      const struct adas1000_init_param *init_param);
 
 /* Reads the value of a ADAS1000 register */
+/***************************************************************************//**
+ * @brief Use this function to read the value of a specific register from the
+ * ADAS1000 device. It requires a valid device structure and a register
+ * address to read from. The function will store the read value in the
+ * provided memory location. Ensure that the device has been properly
+ * initialized before calling this function. The function returns an
+ * error code if the read operation fails.
+ *
+ * @param device A pointer to an initialized adas1000_dev structure. Must not be
+ * null. The caller retains ownership.
+ * @param reg_addr The address of the register to read from. Must be a valid
+ * register address for the ADAS1000.
+ * @param reg_data A pointer to a uint32_t where the read register value will be
+ * stored. Must not be null. The caller provides the memory.
+ * @return Returns 0 on success, or -1 if the read operation fails.
+ ******************************************************************************/
 int32_t adas1000_read(struct adas1000_dev *device, uint8_t reg_addr,
 		      uint32_t *reg_data);
 
 /* Writes a value into a ADAS1000 register */
+/***************************************************************************//**
+ * @brief Use this function to write a 32-bit value to a specific register of
+ * the ADAS1000 device. This function is typically called when
+ * configuring the device or updating its settings. Ensure that the
+ * device has been properly initialized before calling this function. The
+ * function communicates with the device over SPI, and the operation's
+ * success is indicated by the return value.
+ *
+ * @param device A pointer to an initialized `adas1000_dev` structure
+ * representing the device. Must not be null.
+ * @param reg_addr The 8-bit address of the register to which the data will be
+ * written. Valid register addresses are defined by the device's
+ * register map.
+ * @param reg_data The 32-bit data to be written to the specified register. The
+ * data is split into three bytes and sent over SPI.
+ * @return Returns an `int32_t` indicating the success or failure of the SPI
+ * write operation. A non-zero return value indicates an error.
+ ******************************************************************************/
 int32_t adas1000_write(struct adas1000_dev *device, uint8_t reg_addr,
 		       uint32_t reg_data);
 
 /* Performs a software reset of the ADAS1000 */
+/***************************************************************************//**
+ * @brief Use this function to reset the ADAS1000 device to its default state by
+ * clearing all registers to their reset values. This function should be
+ * called when a reset of the device is required, such as during
+ * initialization or when recovering from an error state. It is important
+ * to ensure that the device is properly initialized before calling this
+ * function. The function will return an error code if the reset
+ * operation fails, which can be used for error handling.
+ *
+ * @param device A pointer to an initialized `adas1000_dev` structure
+ * representing the device to be reset. Must not be null. The
+ * function will return an error if the device is not properly
+ * initialized.
+ * @return Returns an `int32_t` value indicating the success or failure of the
+ * reset operation. A return value of 0 indicates success, while a non-
+ * zero value indicates an error.
+ ******************************************************************************/
 int32_t adas1000_soft_reset(struct adas1000_dev *device);
 
 /* Compute frame size. */
+/***************************************************************************//**
+ * @brief This function calculates the frame size for an ADAS1000 device based
+ * on its current frame rate and the number of inactive words. It should
+ * be called whenever the frame rate or the number of inactive words
+ * changes to ensure the device's frame size is correctly updated. The
+ * function assumes that the device structure is properly initialized and
+ * that the frame rate is set to one of the predefined constants. It
+ * modifies the frame size field of the device structure.
+ *
+ * @param device A pointer to an adas1000_dev structure representing the device.
+ * The structure must be initialized, and the frame_rate field
+ * must be set to a valid frame rate constant. The function will
+ * update the frame_size field based on the current frame rate and
+ * inactive words.
+ * @return Returns 0 on successful computation of the frame size. The frame_size
+ * field of the device structure is updated with the computed size.
+ ******************************************************************************/
 int32_t adas1000_compute_frame_size(struct adas1000_dev *device);
 
 /* Selects which words are not included in a data frame */
+/***************************************************************************//**
+ * @brief This function is used to configure the ADAS1000 device to exclude
+ * specific words from the data frame based on the provided mask. It
+ * should be called when you need to adjust the data frame composition by
+ * marking certain words as inactive. The function reads the current
+ * frame control register, applies the mask to set inactive channels, and
+ * writes the updated value back. It also updates the device's internal
+ * count of inactive words and recalculates the frame size. Ensure the
+ * device is properly initialized before calling this function.
+ *
+ * @param device A pointer to an initialized `adas1000_dev` structure
+ * representing the device. Must not be null.
+ * @param words_mask A 32-bit mask indicating which words to exclude from the
+ * data frame. Each bit corresponds to a word, with a set bit
+ * indicating exclusion.
+ * @return Returns an `int32_t` status code: 0 for success, or a negative error
+ * code if an error occurs during register read/write operations or
+ * frame size computation.
+ ******************************************************************************/
 int32_t adas1000_set_inactive_framewords(struct adas1000_dev *device,
 		uint32_t words_mask);
 
 /* Sets the frame rate */
+/***************************************************************************//**
+ * @brief This function configures the frame rate of the ADAS1000 device by
+ * updating the Frame Control Register with the specified rate. It should
+ * be called when a change in the data output rate is required. The
+ * function reads the current register value, modifies it to reflect the
+ * new frame rate, and writes it back. It handles specific predefined
+ * frame rates and defaults to 2 kHz if an unsupported rate is provided.
+ * Ensure the device is initialized before calling this function.
+ *
+ * @param device A pointer to an initialized adas1000_dev structure representing
+ * the device. Must not be null.
+ * @param rate The desired frame rate for the device. Supported values are
+ * ADAS1000_16KHZ_FRAME_RATE, ADAS1000_128KHZ_FRAME_RATE,
+ * ADAS1000_31_25HZ_FRAME_RATE, and ADAS1000_2KHZ_FRAME_RATE. If an
+ * unsupported value is provided, the frame rate defaults to 2 kHz.
+ * @return Returns 0 on success or a negative error code if the operation fails,
+ * such as when reading or writing to the device fails.
+ ******************************************************************************/
 int32_t adas1000_set_frame_rate(struct adas1000_dev *device, uint32_t rate);
 
 /* Reads the specified number of frames */
+/***************************************************************************//**
+ * @brief This function is used to read a specified number of data frames from
+ * an ADAS1000 device into a provided buffer. It can optionally start and
+ * stop the read sequence based on the parameters provided. The function
+ * supports waiting for the READY bit in the frame header before reading
+ * data, which is useful for ensuring data readiness. It is important to
+ * ensure that the device is properly initialized and configured before
+ * calling this function. The function returns an error code if any
+ * operation fails during the read process.
+ *
+ * @param device A pointer to an initialized `adas1000_dev` structure
+ * representing the device to read from. Must not be null.
+ * @param data_buff A pointer to a buffer where the read data will be stored.
+ * The buffer must be large enough to hold the specified number
+ * of frames. Must not be null.
+ * @param frame_cnt The number of frames to read from the device. Must be a
+ * positive integer.
+ * @param read_data_param A pointer to a `read_param` structure that specifies
+ * additional read options, such as whether to start or
+ * stop the read sequence and whether to wait for the
+ * READY bit. Must not be null.
+ * @return Returns an `int32_t` error code: 0 on success, or a negative error
+ * code on failure.
+ ******************************************************************************/
 int32_t adas1000_read_data(struct adas1000_dev *device, uint8_t *data_buff,
 			   uint32_t frame_cnt, struct read_param *read_data_param);
 
 /* Computes the CRC for a frame */
+/***************************************************************************//**
+ * @brief Use this function to calculate the Cyclic Redundancy Check (CRC) for a
+ * data frame associated with an ADAS1000 device. This function is
+ * essential for ensuring data integrity during communication. The CRC
+ * computation is based on the frame rate of the device, which determines
+ * the polynomial and word size used. It is important to ensure that the
+ * device structure and buffer are properly initialized and valid before
+ * calling this function.
+ *
+ * @param device A pointer to an initialized `adas1000_dev` structure
+ * representing the ADAS1000 device. Must not be null.
+ * @param buff A pointer to a buffer containing the data frame for which the CRC
+ * is to be computed. Must not be null and should be properly sized
+ * according to the device's frame size.
+ * @return Returns a 32-bit unsigned integer representing the computed CRC value
+ * for the given data frame.
+ ******************************************************************************/
 uint32_t adas1000_compute_frame_crc(struct adas1000_dev * device,
 				    uint8_t *buff);
 

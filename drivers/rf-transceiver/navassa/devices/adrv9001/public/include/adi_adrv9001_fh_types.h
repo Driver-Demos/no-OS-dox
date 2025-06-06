@@ -60,9 +60,43 @@ extern "C" {
  */
 #define ADI_ADRV9001_FH_MAX_TX_FE_POWERON_FRAME_DELAY 64u
 
-/**
- * \brief Enumeration of frequency hopping modes
- */
+/***************************************************************************//**
+ * @brief The `adi_adrv9001_FhMode_e` is an enumeration that defines the
+ * different modes of frequency hopping available in the ADRV9001 system.
+ * Each mode specifies a unique method of handling frequency hopping,
+ * including whether the local oscillator (LO) is muxed or retuned, and
+ * whether the frequency hopping table is processed before or during the
+ * operation. The modes also include options for dual-hop control,
+ * allowing independent management of two channels.
+ *
+ * @param ADI_ADRV9001_FHMODE_LO_MUX_PREPROCESS Frequency hopping with LO
+ * muxing, where the frequency
+ * hopping table is processed
+ * before the operation.
+ * @param ADI_ADRV9001_FHMODE_LO_MUX_REALTIME_PROCESS Frequency hopping with LO
+ * muxing, where the
+ * frequency hopping table is
+ * processed during the
+ * operation.
+ * @param ADI_ADRV9001_FHMODE_LO_RETUNE_REALTIME_PROCESS Frequency hopping with
+ * LO retuning during
+ * transition time, with
+ * the table processed
+ * during the operation.
+ * @param ADI_ADRV9001_FHMODE_LO_RETUNE_REALTIME_PROCESS_DUAL_HOP Two HOP
+ * signals
+ * control
+ * channels
+ * independently,
+ * with LO
+ * retuning
+ * during
+ * transition and
+ * table
+ * processing
+ * during the
+ * operation.
+ ******************************************************************************/
 typedef enum {
     ADI_ADRV9001_FHMODE_LO_MUX_PREPROCESS          = 0u,   /*!< Frequency hopping with LO muxing. Frequency hopping table is processed before the frequency hopping operation. */
     ADI_ADRV9001_FHMODE_LO_MUX_REALTIME_PROCESS    = 1u,   /*!< Frequency hopping with LO muxing. Frequency hopping table is processed during frequency hopping operation. */
@@ -71,6 +105,26 @@ typedef enum {
                                                                        Frequency hopping table is processed during frequency hopping operation. */
 } adi_adrv9001_FhMode_e;
 
+/***************************************************************************//**
+ * @brief The `adi_adrv9001_TableIndexCtrl_e` is an enumeration that defines the
+ * control mechanisms for indexing through frequency hopping tables in
+ * the ADRV9001 system. It provides options for automatic looping through
+ * a table, a ping-pong mechanism between two tables, and GPIO-based
+ * indexing, allowing for flexible control of frequency hopping
+ * operations.
+ *
+ * @param ADI_ADRV9001_TABLEINDEXCTRL_AUTO_LOOP Automatically increment through
+ * a frequency hopping table and
+ * wrap around once the end has
+ * been reached.
+ * @param ADI_ADRV9001_TABLEINDEXCTRL_AUTO_PING_PONG Ping pong operation between
+ * two frequency hopping
+ * tables, automatically
+ * switching once the end of
+ * one table is reached.
+ * @param ADI_ADRV9001_TABLEINDEXCTRL_GPIO Use GPIO pins to index entries within
+ * a frequency hopping table.
+ ******************************************************************************/
 typedef enum {
     ADI_ADRV9001_TABLEINDEXCTRL_AUTO_LOOP      = 0u, /*!< Automatically increment through a frequency hopping table and wrap around once end has been reached */
     ADI_ADRV9001_TABLEINDEXCTRL_AUTO_PING_PONG = 1u, /*!< Ping pong operation between ADI_ADRV9001_FHHOPTABLE_A and ADI_ADRV9001_FHHOPTABLE_B. 
@@ -79,26 +133,60 @@ typedef enum {
     ADI_ADRV9001_TABLEINDEXCTRL_GPIO           = 2u, /*!< Use GPIO pins to index entries within a frequency hopping table */
 } adi_adrv9001_TableIndexCtrl_e;
 
-/**
- * \brief Enumeration of frequency hopping table ID's 
- */
+/***************************************************************************//**
+ * @brief The `adi_adrv9001_FhHopTable_e` is an enumeration that defines
+ * identifiers for frequency hopping tables used in the ADRV9001 device.
+ * It provides two constants, `ADI_ADRV9001_FHHOPTABLE_A` and
+ * `ADI_ADRV9001_FHHOPTABLE_B`, which are used to reference two distinct
+ * hop tables stored in ARM memory. This enumeration is part of the
+ * frequency hopping configuration, allowing the system to select between
+ * different pre-defined frequency hopping tables.
+ *
+ * @param ADI_ADRV9001_FHHOPTABLE_A ID for hop table A in arm memory.
+ * @param ADI_ADRV9001_FHHOPTABLE_B ID for hop table B in arm memory.
+ ******************************************************************************/
 typedef enum {
     ADI_ADRV9001_FHHOPTABLE_A = 0u, /*!< ID for hop table A in arm memory */
     ADI_ADRV9001_FHHOPTABLE_B = 1u, /*!< ID for hop table B in arm memory */
 } adi_adrv9001_FhHopTable_e;
 
-/**
- * \brief Enumeration of hop frame Indices
- */
+/***************************************************************************//**
+ * @brief The `adi_adrv9001_FhFrameIndex_e` is an enumeration that defines
+ * indices for hop frames in the context of frequency hopping operations.
+ * It distinguishes between the current hop frame in progress and the
+ * upcoming hop frame, which is relevant in specific frequency hopping
+ * modes such as LO_MUX. This enumeration is part of the ADRV9001 API,
+ * which is used for configuring and managing frequency hopping in radio
+ * frequency applications.
+ *
+ * @param ADI_ADRV9001_FHFRAMEINDEX_CURRENT_FRAME Hop frame currently in
+ * progress.
+ * @param ADI_ADRV9001_FHFRAMEINDEX_UPCOMING_FRAME The upcoming hop frame after
+ * the current, applicable only
+ * in LO_MUX mode.
+ ******************************************************************************/
 typedef enum {
     ADI_ADRV9001_FHFRAMEINDEX_CURRENT_FRAME  = 0u, /*!< Hop frame currently in progress */
     ADI_ADRV9001_FHFRAMEINDEX_UPCOMING_FRAME = 1u, /*!< The upcoming hop frame after the current. 
                                                         Only applicable in LO_MUX, will match CURRENT in LO_RETUNE*/
 } adi_adrv9001_FhFrameIndex_e;
 
-/**
- * \brief Enumeration of FH per dynamic load type used by FPGA in ADI eval system, not necesary in customer application
- */
+/***************************************************************************//**
+ * @brief The `adi_adrv9001_FhPerDynamicLoad_e` is an enumeration that defines
+ * the number of frequency hops per dynamic load operation in the
+ * ADRV9001 frequency hopping system. It is used to specify how many hops
+ * should occur for each dynamic load, with options for 1, 4, or 8 hops.
+ * This enumeration is particularly relevant in the context of FPGA
+ * operations within the ADI evaluation system, although it is not
+ * necessary for customer applications.
+ *
+ * @param ADI_ADRV9001_FH_HOP_PER_DYNAMIC_LOAD_ONE Represents 1 HOP per Dynamic
+ * Load.
+ * @param ADI_ADRV9001_FH_HOP_PER_DYNAMIC_LOAD_FOUR Represents 4 HOPs per
+ * Dynamic Load.
+ * @param ADI_ADRV9001_FH_HOP_PER_DYNAMIC_LOAD_EIGHT Represents 8 HOPs per
+ * Dynamic Load.
+ ******************************************************************************/
 typedef enum adi_adrv9001_FhPerDynamicLoad
 {
     ADI_ADRV9001_FH_HOP_PER_DYNAMIC_LOAD_ONE = 0,    /*!< 1 HOP per Dynamic Load */
@@ -106,26 +194,71 @@ typedef enum adi_adrv9001_FhPerDynamicLoad
     ADI_ADRV9001_FH_HOP_PER_DYNAMIC_LOAD_EIGHT = 2   /*!< 8 HOP per Dynamic Load */
 } adi_adrv9001_FhPerDynamicLoad_e;
 
-/**
- * \brief Enumeration of hop signals
- */
+/***************************************************************************//**
+ * @brief The `adi_adrv9001_FhHopSignal_e` is an enumeration that defines the
+ * possible hop signals used in the ADRV9001 frequency hopping
+ * configuration. It includes two members, `ADI_ADRV9001_FH_HOP_SIGNAL_1`
+ * and `ADI_ADRV9001_FH_HOP_SIGNAL_2`, which represent different hop
+ * signals that can be used to control frequency hopping operations. This
+ * enumeration is part of the broader frequency hopping setup, allowing
+ * for the selection and control of hop signals in the ADRV9001 system.
+ *
+ * @param ADI_ADRV9001_FH_HOP_SIGNAL_1 Hop 1 signal.
+ * @param ADI_ADRV9001_FH_HOP_SIGNAL_2 Hop 2 signal.
+ ******************************************************************************/
 typedef enum adi_adrv9001_FhHopSignal
 {
     ADI_ADRV9001_FH_HOP_SIGNAL_1 = 0, /*!< Hop 1 signal */
     ADI_ADRV9001_FH_HOP_SIGNAL_2 = 1  /*!< Hop 2 signal */
 } adi_adrv9001_FhHopSignal_e;
 
-/**
- * \brief Enumeration of frequency hopping table select modes 
- */
+/***************************************************************************//**
+ * @brief The `adi_adrv9001_FhHopTableSelectMode_e` is an enumeration that
+ * defines the modes for selecting frequency hopping tables in the
+ * ADRV9001 device. It provides two modes: 'INDEPENDENT', where each GPIO
+ * pin controls its respective channel, and 'COMMON', where a single GPIO
+ * pin can control both channels simultaneously. This enumeration is used
+ * to configure how the frequency hopping table selection is managed in
+ * the device, allowing for flexible control based on the application
+ * requirements.
+ *
+ * @param ADI_ADRV9001_FHHOPTABLESELECTMODE_INDEPENDENT Each assigned GPIO pin
+ * controls the
+ * corresponding channel.
+ * @param ADI_ADRV9001_FHHOPTABLESELECTMODE_COMMON hopTableSelectGpioConfig[0]
+ * is used to control both
+ * channels, where applicable.
+ ******************************************************************************/
 typedef enum {
     ADI_ADRV9001_FHHOPTABLESELECTMODE_INDEPENDENT = 0u,     /*!< Each assigned GPIO pin controls the corresponding channel */
     ADI_ADRV9001_FHHOPTABLESELECTMODE_COMMON = 1u,          /*!< hopTableSelectGpioConfig[0] is used to control both channels, where applicable */
 } adi_adrv9001_FhHopTableSelectMode_e;
 
-/**
- * \brief Settings for HOP frame information
- */
+/***************************************************************************//**
+ * @brief The `adi_adrv9001_FhHopFrame_t` structure is used to define the
+ * settings for a frequency hopping frame in the ADRV9001 system. It
+ * includes fields for specifying offset frequencies for Rx1 and Rx2,
+ * attenuation levels for Tx1 and Tx2, gain indices for Rx1 and Rx2, and
+ * the operating frequency. The structure is designed to be flexible,
+ * with certain fields being ignored depending on whether the frame is
+ * designated for transmission (Tx) or reception (Rx). This allows for
+ * efficient configuration of frequency hopping parameters in dynamic
+ * radio environments.
+ *
+ * @param rx1OffsetFrequencyHz Rx1 Offset frequency, ignored by firmware if
+ * frame is not Rx.
+ * @param rx2OffsetFrequencyHz Rx2 Offset frequency, ignored by firmware if
+ * frame is not Rx.
+ * @param tx1Attenuation_fifthdB Tx1 attenuation in 0.2dBs, ignored if frame is
+ * Rx.
+ * @param tx2Attenuation_fifthdB Tx2 attenuation in 0.2dBs, ignored if frame is
+ * Rx.
+ * @param rx1GainIndex Starting Rx1 gain index for hop frame, ignored if frame
+ * is Tx.
+ * @param rx2GainIndex Starting Rx2 gain index for hop frame, ignored if frame
+ * is Tx.
+ * @param hopFrequencyHz Operating frequency in Hz.
+ ******************************************************************************/
 typedef struct {
     int32_t  rx1OffsetFrequencyHz;   /*!< Rx1 Offset frequency. This field is ignored by firmware if frame is not Rx */
     int32_t  rx2OffsetFrequencyHz;   /*!< Rx2 Offset frequency. This field is ignored by firmware if frame is not Rx */
@@ -136,16 +269,31 @@ typedef struct {
     uint64_t hopFrequencyHz; /*!< Operating frequency in Hz */
 } adi_adrv9001_FhHopFrame_t;
 
-/**
- * \brief Frequency hopping gain setup by pin config
- *  Up to 8 Rx gains and 8 Tx attenuation levels can be loaded to ARM memory and
- *  indexed during frequency hopping operation by up to 3 GPIO pins.
- *  This structure provides the configuration data for GPIO assignment and 
- *  gain/attenuation table loading. 
- * 
- *  The user can load any valid Rx gain index or Tx attenuation level
- *  in the tables.
- */
+/***************************************************************************//**
+ * @brief The `adi_adrv9001_FhGainSetupByPinCfg_t` structure is used to
+ * configure the gain setup for frequency hopping operations by utilizing
+ * GPIO pins. It includes information about the number of entries and the
+ * actual tables for Rx gain and Tx attenuation, as well as the
+ * configuration of GPIO pins used for gain control. This structure is
+ * particularly useful when gain levels need to be dynamically adjusted
+ * during frequency hopping, allowing for up to 8 Rx gains and 8 Tx
+ * attenuation levels to be indexed by up to 3 GPIO pins. The
+ * configuration is ignored if the gainSetupByPin option is not enabled.
+ *
+ * @param numRxGainTableEntries Number of gain levels in the Rx gain table,
+ * ignored if gainSetupByPin is false.
+ * @param rxGainTable Array representing the Rx gain table used in frequency
+ * hopping, ignored if gainSetupByPin is false.
+ * @param numTxAttenTableEntries Number of attenuation levels in the Tx
+ * attenuation table, ignored if gainSetupByPin is
+ * false.
+ * @param txAttenTable Array representing the Tx attenuation table used in
+ * frequency hopping, ignored if gainSetupByPin is false.
+ * @param numGainCtrlPins Number of pins assigned for gain control, ignored if
+ * gainSetupByPin is false.
+ * @param gainSelectGpioConfig Array of pin configurations for gain select,
+ * ignored if gainSetupByPin is false.
+ ******************************************************************************/
 typedef struct { 
     /* Rx gain table information */
     uint8_t                          numRxGainTableEntries;         /*!< Number of gain levels in Rx gain table. Ignored if gainSetupByPin is false. */
@@ -159,17 +307,69 @@ typedef struct {
     adi_adrv9001_GpioCfg_t           gainSelectGpioConfig[ADI_ADRV9001_FH_MAX_NUM_GAIN_SELECT_PINS];  /*!< Pin configuration for gain select. Ignored if gainSetupByPin is false. */
 } adi_adrv9001_FhGainSetupByPinCfg_t; 
 
-/**
- * \brief Hop Table Select configurations.
- */
+/***************************************************************************//**
+ * @brief The `adi_adrv9001_FhhopTableSelectCfg_t` structure is used to
+ * configure the selection mode and GPIO pin configuration for frequency
+ * hopping table selection in the ADRV9001 device. It allows the user to
+ * specify whether the hop table selection is controlled independently
+ * for each channel or commonly for both channels, and provides the GPIO
+ * configuration for the selection pins. This configuration is crucial
+ * for setting up the frequency hopping operation in the device, ensuring
+ * that the correct hop table is selected based on the desired control
+ * mode.
+ *
+ * @param hopTableSelectMode Mode of control for hop table select, either
+ * independent or common pin control.
+ * @param hopTableSelectGpioConfig Array of pin configurations for hop table
+ * select, ignored if unassigned.
+ ******************************************************************************/
 typedef struct {
     adi_adrv9001_FhHopTableSelectMode_e     hopTableSelectMode;             /*!< Mode of control for hop table select. Independent or common pin contorl */
     adi_adrv9001_GpioCfg_t                  hopTableSelectGpioConfig[2u];   /*!< Pin configuration for hop table select. Not an error if unassigned, just ignored.*/
 } adi_adrv9001_FhhopTableSelectCfg_t;
 
-/**
- * \brief Frequency hopping configuration data
- */
+/***************************************************************************//**
+ * @brief The `adi_adrv9001_FhCfg_t` structure is a comprehensive configuration
+ * data structure for managing frequency hopping operations in the
+ * ADRV9001 system. It includes settings for frequency hopping modes, hop
+ * signals for RF ports, zero-IF operation configuration, GPIO pin
+ * configurations for hop signals and table index selection, and control
+ * types for frequency hopping tables. Additionally, it specifies the
+ * range for Rx gain indices, Tx attenuation levels, and operating
+ * frequencies, as well as frame duration and delay settings. The
+ * structure also supports gain setup by pin and automatic gain control
+ * (AGC) gain index seeding, providing flexibility and precision in
+ * frequency hopping operations.
+ *
+ * @param mode Frequency hopping mode.
+ * @param rxPortHopSignals Hop signals for each RF port for reception.
+ * @param txPortHopSignals Hop signals for each RF port for transmission.
+ * @param rxZeroIfEnable Configures the Rx ports for zero-IF operation.
+ * @param hopSignalGpioConfig Pin configuration for HOP1 and HOP2 signals.
+ * @param hopTableSelectConfig Configuration for hop table select signal.
+ * @param tableIndexCtrl Control type for frequency hopping table selection.
+ * @param minRxGainIndex Minimum Rx gain index for frequency hopping operation.
+ * @param maxRxGainIndex Maximum Rx gain index for frequency hopping operation.
+ * @param minTxAtten_mdB Minimum Tx attenuation level for frequency hopping
+ * operation.
+ * @param maxTxAtten_mdB Maximum Tx attenuation level for frequency hopping
+ * operation.
+ * @param minOperatingFrequency_Hz Minimum operating frequency for frequency
+ * hopping operation.
+ * @param maxOperatingFrequency_Hz Maximum operating frequency for frequency
+ * hopping operation.
+ * @param minFrameDuration_us Minimum frame duration supported during frequency
+ * hopping operation.
+ * @param txAnalogPowerOnFrameDelay Delay for Tx analog front end relative to
+ * the first Tx setup rising edge.
+ * @param numTableIndexPins Number of pins for table indexing.
+ * @param tableIndexGpioConfig Pin configuration for table index selection.
+ * @param gainSetupByPin Indicates if GPIO pins are used for Tx/Rx gain index
+ * for the next hop frame.
+ * @param gainSetupByPinConfig Configuration for gain setup by pin.
+ * @param enableAGCGainIndexSeeding Enables seeding of the hardware value for
+ * gain index with rxGainIndex from FHTable.
+ ******************************************************************************/
 typedef struct {
     adi_adrv9001_FhMode_e              mode;                        /*!< Frequency hopping mode */
     adi_adrv9001_FhHopSignal_e         rxPortHopSignals[ADI_ADRV9001_NUM_CHANNELS]; /*!< Hop Signals for each RF port [0] = Rx1, [1] = Rx2 */

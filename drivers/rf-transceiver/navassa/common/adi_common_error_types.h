@@ -30,9 +30,28 @@ extern "C" {
 
 #define ADI_ERROR_MSG_MAX_LEN 314
 
-/**
-*  \brief ADI common error structure
-*/
+/***************************************************************************//**
+ * @brief The `adi_common_ErrStruct_t` is a comprehensive error handling
+ * structure used in the ADI common library to encapsulate detailed
+ * information about errors encountered during API operations. It
+ * includes fields for identifying the source and code of the error, the
+ * specific line, function, and file where the error occurred, and the
+ * variable associated with the error. Additionally, it stores a
+ * descriptive error message, tracks the last and current actions taken,
+ * and includes a flag to enable or disable error logging. This structure
+ * is essential for debugging and managing error states in the library.
+ *
+ * @param errSource Current source of error returned.
+ * @param errCode Current error code returned.
+ * @param errLine Line of the source code where the error was returned.
+ * @param errFunc Function name where the error occurred.
+ * @param errFile File name where the error occurred.
+ * @param varName Variable name which has the error.
+ * @param errormessage Error message to describe the error.
+ * @param lastAction Previous action detected.
+ * @param newAction Current action detected.
+ * @param logEnable Log errors enable flag.
+ ******************************************************************************/
 typedef struct adi_common_ErrStruct
 {
     int32_t errSource;         /*!< Current source of error returned */
@@ -48,21 +67,22 @@ typedef struct adi_common_ErrStruct
     uint8_t logEnable;         /*!< Log errors enable flag */
 } adi_common_ErrStruct_t;
 
-/**
-*  \brief Unique Common error sources for Common layer.
-*
-**  Common error sources will be given the following range: 0x0000 - 0x0FFF
-*   Specific error sources for different devices/boards will be given the following range:
-*   Devices 0xd000 - 0xdFFF where d is the device number
-*
-* TODO: replace by unique error source
-* Shall this become common layer:
-* -HAL
-* -COMMON
-* -DEVICE
-* -BF
-* -API
-*/
+/***************************************************************************//**
+ * @brief The `adi_common_ErrSources_e` is an enumeration that defines various
+ * sources of errors within the ADI common library. It categorizes errors
+ * into four distinct sources: API errors, ADI HAL errors, ADI BitField
+ * errors, and ADI Device HAL errors. Each enumerator represents a
+ * specific error source, allowing for precise identification and
+ * handling of errors within the library's error management system.
+ *
+ * @param ADI_COMMON_ERRSRC_API Error detected in API.
+ * @param ADI_COMMON_ERRSRC_ADI_HAL ADI HAL Error Source with error codes
+ * defined by adi_common_hal_Err_e.
+ * @param ADI_COMMON_ERRSRC_DEVICEBF ADI BitField Error Source with error codes
+ * defined by adrv9001_BF_Err_t.
+ * @param ADI_COMMON_ERRSRC_DEVICEHAL ADI Device HAL Error Source with error
+ * codes defined in device error extension.
+ ******************************************************************************/
 typedef enum adi_common_ErrSources
 {
     ADI_COMMON_ERRSRC_API,                    /*!< Error detected in API */

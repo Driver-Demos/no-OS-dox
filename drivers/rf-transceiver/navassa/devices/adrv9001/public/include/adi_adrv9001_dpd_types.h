@@ -41,9 +41,20 @@
 #define pREG_NVS_AHB_TX_DPD_TOP_DPD_TOP_RX_I_N(base,index)      ((base) + IDX_NVS_AHB_TX_DPD_TOP_DPD_TOP_RX_I_N(index))
 #define pREG_NVS_AHB_TX_DPD_TOP_DPD_TOP_RX_Q_N(base,index)      ((base) + IDX_NVS_AHB_TX_DPD_TOP_DPD_TOP_RX_Q_N(index))
 
-/**
- * \brief Supported DPD amplifier types
- */
+/***************************************************************************//**
+ * @brief The `adi_adrv9001_DpdAmplifier_e` is an enumeration that defines the
+ * types of Digital Pre-Distortion (DPD) amplifiers supported by the
+ * ADRV9001 device. It includes options for no amplifier, a default
+ * amplifier, and a GaN amplifier, allowing the user to specify the type
+ * of amplifier used in the DPD configuration.
+ *
+ * @param ADI_ADRV9001_DPDAMPLIFIER_NONE Represents the absence of a DPD
+ * amplifier.
+ * @param ADI_ADRV9001_DPDAMPLIFIER_DEFAULT Represents the default type of DPD
+ * amplifier.
+ * @param ADI_ADRV9001_DPDAMPLIFIER_GAN Represents a Gallium Nitride (GaN) type
+ * DPD amplifier.
+ ******************************************************************************/
 typedef enum adi_adrv9001_DpdAmplifier
 {
     ADI_ADRV9001_DPDAMPLIFIER_NONE,
@@ -51,18 +62,38 @@ typedef enum adi_adrv9001_DpdAmplifier
     ADI_ADRV9001_DPDAMPLIFIER_GAN
 } adi_adrv9001_DpdAmplifier_e;
 
-/**
- * \brief Supported DPD LUT sizes
- */
+/***************************************************************************//**
+ * @brief The `adi_adrv9001_DpdLutSize_e` is an enumeration that defines the
+ * supported sizes for the Digital Pre-Distortion (DPD) Look-Up Table
+ * (LUT) in the ADRV9001 device. It provides two options, 256 and 512,
+ * which specify the bit size of the LUT used in the DPD process. This
+ * enumeration is part of the configuration settings for the DPD feature,
+ * allowing users to select the appropriate LUT size based on their
+ * application requirements.
+ *
+ * @param ADI_ADRV9001_DPDLUTSIZE_256 Represents a DPD LUT size of 256.
+ * @param ADI_ADRV9001_DPDLUTSIZE_512 Represents a DPD LUT size of 512.
+ ******************************************************************************/
 typedef enum adi_adrv9001_DpdLutSize
 {
     ADI_ADRV9001_DPDLUTSIZE_256,
     ADI_ADRV9001_DPDLUTSIZE_512
 } adi_adrv9001_DpdLutSize_e;
 
-/**
- * \brief Supported DPD models
- */
+/***************************************************************************//**
+ * @brief The `adi_adrv9001_DpdModel_e` is an enumeration that defines the
+ * supported Digital Pre-Distortion (DPD) models for the ADRV9001 device.
+ * Each enumerator corresponds to a specific DPD model, identified by a
+ * unique integer value. This enumeration is used to specify which DPD
+ * model should be applied in the device's configuration, allowing for
+ * flexibility in selecting the appropriate model for different
+ * operational scenarios.
+ *
+ * @param ADI_ADRV9001_DPDMODEL_0 Represents the DPD model with identifier 0.
+ * @param ADI_ADRV9001_DPDMODEL_1 Represents the DPD model with identifier 1.
+ * @param ADI_ADRV9001_DPDMODEL_3 Represents the DPD model with identifier 3.
+ * @param ADI_ADRV9001_DPDMODEL_4 Represents the DPD model with identifier 4.
+ ******************************************************************************/
 typedef enum adi_adrv9001_DpdModel
 {
     ADI_ADRV9001_DPDMODEL_0 = 0,
@@ -71,9 +102,28 @@ typedef enum adi_adrv9001_DpdModel
     ADI_ADRV9001_DPDMODEL_4 = 4
 } adi_adrv9001_DpdModel_e;
 
-/**
- * \brief DPD settings that must be configured in the STANDBY state
- */
+/***************************************************************************//**
+ * @brief The `adi_adrv9001_DpdInitCfg_t` structure is used to configure the
+ * initial settings for the Digital Pre-Distortion (DPD) feature in the
+ * ADRV9001 device. It includes fields to enable the DPD actuator,
+ * specify the type of power amplifier, define the size of the Look-Up
+ * Table (LUT), and select the DPD model. Additionally, it allows for
+ * customization of model tap orders and includes settings for LUT
+ * scaling and Closed Loop Gain Control (CLGC) enablement. This
+ * configuration is crucial for optimizing the performance of the DPD
+ * system in the device's signal processing chain.
+ *
+ * @param enable Indicates whether the DPD actuator is placed in the datapath.
+ * @param amplifierType Specifies the type of Power Amplifier used.
+ * @param lutSize Defines the bit size of the DPD LUT.
+ * @param model Determines the DPD Model to be used.
+ * @param changeModelTapOrders Indicates if custom Tap Orders should be used in
+ * the model.
+ * @param modelOrdersForEachTap Bitmap for each tap in a model to indicate
+ * included power terms.
+ * @param preLutScale Prescaler for the LUT with a range from 0 to 3.75.
+ * @param clgcEnable Indicates if CLGC is enabled.
+ ******************************************************************************/
 typedef struct adi_adrv9001_DpdInitCfg
 {
     bool enable;                                    /*!< When true, the DPD actuator is placed in the datapath and
@@ -89,9 +139,57 @@ typedef struct adi_adrv9001_DpdInitCfg
     uint8_t clgcEnable;                             //!< CLGC Enable */
 } adi_adrv9001_DpdInitCfg_t;
 
-/**
- * \brief DPD settings that may be configured in the CALIBRATED state
- */
+/***************************************************************************//**
+ * @brief The `adi_adrv9001_DpdCfg_t` structure is used to configure the Digital
+ * Pre-Distortion (DPD) settings for the ADRV9001 device. It includes
+ * parameters for sample count, power scaling, signal power thresholds,
+ * and detection thresholds, as well as flags for LUT switching and
+ * special frame usage. The structure also contains settings for CLGC
+ * (Closed Loop Gain Control) such as loop status, gain targets, and
+ * filter coefficients. Additionally, it specifies the capture delay time
+ * and the sampling rate for the DPD actuator and capture, providing a
+ * comprehensive configuration for optimizing signal alignment and power
+ * management in the device.
+ *
+ * @param numberOfSamples Number of samples to use for DPD, ranging from 3 to
+ * 4096.
+ * @param additionalPowerScale Additional scaling on the 2nd and higher order
+ * power terms to maintain nominal magnitude.
+ * @param rxTxNormalizationLowerThreshold Tx signal power lower threshold for
+ * Rx/Tx data alignment, with a range of
+ * 0 to 1.0.
+ * @param rxTxNormalizationUpperThreshold Tx signal power upper threshold for
+ * Rx/Tx data alignment, with a range of
+ * 0 to 1.0.
+ * @param detectionPowerThreshold Signal power threshold for detection, in U1.31
+ * format.
+ * @param detectionPeakThreshold Signal power threshold for peak detection, in
+ * U1.31 format.
+ * @param countsLessThanPowerThreshold Number of points below
+ * detectionPowerThreshold that causes
+ * capture discard, disable with 4096.
+ * @param countsGreaterThanPeakThreshold Number of points above
+ * detectionPeakThreshold that causes
+ * capture discard, disable with 0.
+ * @param immediateLutSwitching Indicates if the LUT switches immediately or at
+ * the end of a Tx frame.
+ * @param useSpecialFrame Indicates if DPD runs only on a user-indicated special
+ * frame.
+ * @param resetLuts Indicates if LUTs are reset to unity, always read as 0 and
+ * self-clearing.
+ * @param timeFilterCoefficient Time filter coefficient in U1.31 format.
+ * @param dpdSamplingRate_Hz Sampling rate in Hz for the DPD actuator and
+ * capture, read-only.
+ * @param clgcLoopOpen Indicates if the loop is open and TX attenuators are not
+ * updated, used to measure target gain.
+ * @param clgcGainTarget_HundredthdB Target gain sent in 1/100 dB.
+ * @param clgcFilterAlpha Filter coefficient for the filtered gain values.
+ * @param clgcLastGain_HundredthdB Last gain value, only valid during Get.
+ * @param clgcFilteredGain_HundredthdB Filtered gain value, only valid during
+ * Get.
+ * @param captureDelay_us Time delay for capture relative to the start of the
+ * frame, applicable to both DPD and CLGC.
+ ******************************************************************************/
 typedef struct adi_adrv9001_DpdCfg
 {
     uint32_t numberOfSamples;           //!< Number of samples to use for DPD (min: 3; max: 4096) */
@@ -141,12 +239,40 @@ typedef struct adi_adrv9001_DpdCfg
 	uint32_t captureDelay_us;               /*!< Amount of time that capture will be delayed (beyond normal) relative to the start of the frame.  This parameter applies to both DPD and CLGC. */
 } adi_adrv9001_DpdCfg_t;
 
+/***************************************************************************//**
+ * @brief The `adi_adrv9001_DpdCoefficients_t` structure is used to store
+ * coefficients for the Digital Pre-Distortion (DPD) feature in the
+ * ADRV9001 device. It contains a `region` field that specifies the
+ * region of the Look-Up Table (LUT) initialization data, which can range
+ * from 0 to 7, and a `coefficients` array that holds the DPD
+ * coefficients, with the size defined by the constant
+ * `ADI_ADRV9001_DPD_NUM_COEFFICIENTS`. This structure is essential for
+ * configuring and managing the DPD functionality, which is used to
+ * improve the linearity of power amplifiers in RF systems.
+ *
+ * @param region The region of the LUT initialization data (valid 0 - 7).
+ * @param coefficients DPD coefficients stored in an array of size
+ * ADI_ADRV9001_DPD_NUM_COEFFICIENTS.
+ ******************************************************************************/
 typedef struct adi_adrv9001_DpdCoefficients
 {
     uint8_t region;     //!< The region of the LUT initialization data (valid 0 - 7)
     uint8_t coefficients[ADI_ADRV9001_DPD_NUM_COEFFICIENTS];    //!< DPD coefficients
 }adi_adrv9001_DpdCoefficients_t;
 
+/***************************************************************************//**
+ * @brief The `adi_adrv9001_DpdFhRegions_t` structure defines a frequency region
+ * for the ADRV9001 DPD (Digital Pre-Distortion) functionality,
+ * specifying a range of carrier frequencies that are included in the
+ * region. It uses two 64-bit unsigned integers to denote the start and
+ * end frequencies in Hertz, allowing precise definition of the frequency
+ * boundaries for DPD operations.
+ *
+ * @param startFrequency_Hz Carrier frequency greater than or equal to this is
+ * included in the region.
+ * @param endFrequency_Hz Carrier frequency less than this is included in the
+ * region.
+ ******************************************************************************/
 typedef struct adi_adrv9001_DpdFhRegions
 {
     uint64_t startFrequency_Hz; //!< Carrier frequency greater than or equal to this is included in the region

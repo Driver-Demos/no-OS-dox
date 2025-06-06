@@ -41,7 +41,18 @@
 
 /******************************************************************************/
 /************************* Variables Declarations *****************************/
-/******************************************************************************/
+/***************************************************************************//**
+ * @brief The `adf7023_bbram_default` is a global variable of type `struct
+ * adf7023_bbram` that holds the default configuration settings for the
+ * ADF7023 transceiver. It includes various parameters such as interrupt
+ * masks, wakeup numbers, channel frequency, radio configuration, and
+ * address filtering settings. These settings are used to initialize the
+ * transceiver with predefined values for operation.
+ *
+ * @details This variable is used to provide a default configuration for the
+ * ADF7023 transceiver, ensuring consistent initialization across
+ * different instances.
+ ******************************************************************************/
 struct adf7023_bbram adf7023_bbram_default = {
 	/* interrupt_mask0 - 0x100 */
 	BBRAM_INTERRUPT_MASK_0_INTERRUPT_TX_EOF |

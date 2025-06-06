@@ -44,6 +44,16 @@
 /************************ Variables Declarations ******************************/
 /******************************************************************************/
 
+/***************************************************************************//**
+ * @brief The `adis1655x_chip_info` is a constant global variable of type
+ * `struct adis_chip_info`. It is used to store information specific to
+ * the ADIS1655x series of devices, which are likely inertial sensors or
+ * similar components from Analog Devices.
+ *
+ * @details This variable is used to provide device-specific information for the
+ * ADIS1655x series, facilitating configuration and interaction with
+ * these devices in the software.
+ ******************************************************************************/
 extern const struct adis_chip_info adis1655x_chip_info;
 
 #endif

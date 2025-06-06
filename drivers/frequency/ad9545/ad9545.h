@@ -440,19 +440,61 @@
 #define AD9545_MIN_DIV_RATIO		4
 #define AD9545_MAX_DIV_RATIO		256
 
+/***************************************************************************//**
+ * @brief The `ad9545_comm_type` is an enumeration that defines the types of
+ * communication interfaces available for the AD9545 device, specifically
+ * SPI and I2C. This enum is used to specify the communication protocol
+ * to be used when interfacing with the AD9545 device, allowing for
+ * flexibility in how the device is connected and controlled.
+ *
+ * @param SPI Represents the Serial Peripheral Interface communication type.
+ * @param I2C Represents the Inter-Integrated Circuit communication type.
+ ******************************************************************************/
 enum ad9545_comm_type {
 	SPI,
 	I2C,
 };
 
+/***************************************************************************//**
+ * @brief The `ad9545_apll_rate_ranges_hz` is a static constant 2x2 array of
+ * unsigned integers. It defines two ranges of frequencies in hertz for
+ * the APLL (Analog Phase-Locked Loop) of the AD9545 device. The first
+ * range is from 2,424,000,000 Hz to 3,232,000,000 Hz, and the second
+ * range is from 3,232,000,000 Hz to 4,040,000,000 Hz.
+ *
+ * @details This variable is used to specify the valid frequency ranges for the
+ * APLL in the AD9545 device.
+ ******************************************************************************/
 static const unsigned int ad9545_apll_rate_ranges_hz[2][2] = {
 	{2424000000U, 3232000000U}, {3232000000U, 4040000000U}
 };
 
+/***************************************************************************//**
+ * @brief The `ad9545_apll_pfd_rate_ranges_hz` is a static constant array of two
+ * unsigned integers. It defines the range of frequencies in hertz for
+ * the phase frequency detector (PFD) of the APLL (Analog Phase-Locked
+ * Loop) in the AD9545 device. The values in the array are 162,000,000 Hz
+ * and 350,000,000 Hz, representing the minimum and maximum PFD rates,
+ * respectively.
+ *
+ * @details This variable is used to specify the valid frequency range for the
+ * APLL PFD in the AD9545 driver.
+ ******************************************************************************/
 static const unsigned int ad9545_apll_pfd_rate_ranges_hz[2] = {
 	162000000U, 350000000U
 };
 
+/***************************************************************************//**
+ * @brief The `ad9545_vco_calibration_op` is a static constant 2D array of
+ * unsigned short integers. It contains a sequence of register operations
+ * for calibrating the VCO (Voltage-Controlled Oscillator) in the AD9545
+ * device. Each element in the array is a pair of values, where the first
+ * value is a register address and the second is the data to be written
+ * to that register.
+ *
+ * @details This variable is used to define a series of operations for VCO
+ * calibration in the AD9545 device.
+ ******************************************************************************/
 static const unsigned short ad9545_vco_calibration_op[][2] = {
 	{AD9545_CALIB_CLK, 0},
 	{AD9545_IO_UPDATE, AD9545_UPDATE_REGS},
@@ -460,64 +502,217 @@ static const unsigned short ad9545_vco_calibration_op[][2] = {
 	{AD9545_IO_UPDATE, AD9545_UPDATE_REGS},
 };
 
+/***************************************************************************//**
+ * @brief The `ad9545_tdc_source_mapping` is a static constant array of unsigned
+ * 8-bit integers. It contains a predefined set of values that likely
+ * correspond to specific TDC (Time-to-Digital Converter) source mappings
+ * for the AD9545 device.
+ *
+ * @details This array is used to map TDC sources to specific indices or
+ * configurations within the AD9545 driver.
+ ******************************************************************************/
 static const uint8_t ad9545_tdc_source_mapping[] = {
 	0, 1, 2, 3, 8, 9,
 };
 
+/***************************************************************************//**
+ * @brief The `ad9545_fast_acq_excess_bw_map` is a constant array of unsigned
+ * 32-bit integers. It contains a series of values that represent
+ * different bandwidth settings for fast acquisition in the AD9545
+ * device.
+ *
+ * @details This array is used to map different excess bandwidth values for fast
+ * acquisition processes in the AD9545 driver.
+ ******************************************************************************/
 static const uint32_t ad9545_fast_acq_excess_bw_map[] = {
 	0, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024,
 };
 
+/***************************************************************************//**
+ * @brief The `ad9545_fast_acq_timeout_map` is a constant array of unsigned
+ * 32-bit integers that defines a set of timeout values for fast
+ * acquisition processes in the AD9545 driver. The array contains
+ * specific timeout durations in milliseconds, ranging from 1 ms to
+ * 50,000 ms. These values are likely used to configure or control the
+ * timing behavior of the fast acquisition feature in the AD9545 device.
+ *
+ * @details This variable is used to map specific timeout durations for fast
+ * acquisition processes in the AD9545 driver.
+ ******************************************************************************/
 static const uint32_t ad9545_fast_acq_timeout_map[] = {
 	1, 10, 50, 100, 500, 1000, 10000, 50000,
 };
 
+/***************************************************************************//**
+ * @brief The `ad9545_hyst_scales_bp` is a static constant array of unsigned
+ * 32-bit integers. It contains a series of breakpoint values used for
+ * hysteresis scaling in the AD9545 driver. The values in the array are
+ * 0, 3125, 6250, 12500, 25000, 50000, 75000, and 87500.
+ *
+ * @details This array is used to define specific breakpoint values for
+ * hysteresis scaling in the AD9545 device operations.
+ ******************************************************************************/
 static const uint32_t ad9545_hyst_scales_bp[] = {
 	0, 3125, 6250, 12500, 25000, 50000, 75000, 87500
 };
 
+/***************************************************************************//**
+ * @brief The `ad9545_out_source_ua` is a static constant array of unsigned
+ * 32-bit integers. It contains three elements with values 7500, 12500,
+ * and 15000, which likely represent current source values in
+ * microamperes for the AD9545 device outputs.
+ *
+ * @details This array is used to define specific current source values for
+ * configuring the output of the AD9545 device.
+ ******************************************************************************/
 static const uint32_t ad9545_out_source_ua[] = {
 	7500, 12500, 15000
 };
 
+/***************************************************************************//**
+ * @brief The `ad9545_rate_change_limit_map` is a static constant array of
+ * unsigned 32-bit integers. It contains a series of predefined rate
+ * change limits used in the AD9545 driver.
+ *
+ * @details This array is used to define the permissible rate change limits for
+ * the AD9545 device, likely to ensure stability and performance during
+ * clock rate adjustments.
+ ******************************************************************************/
 static const uint32_t ad9545_rate_change_limit_map[] = {
 	715, 1430, 2860, 5720, 11440, 22880, 45760,
 };
 
+/***************************************************************************//**
+ * @brief The `ad9545_ref_m_clk_names` is a static constant array of string
+ * literals representing the names of reference clocks for the AD9545
+ * device. It contains three elements: "Ref-M0", "Ref-M1", and "Ref-M2".
+ *
+ * @details This array is used to identify and reference the different reference
+ * clocks available in the AD9545 device.
+ ******************************************************************************/
 static const char * const ad9545_ref_m_clk_names[] = {
 	"Ref-M0", "Ref-M1", "Ref-M2",
 };
 
+/***************************************************************************//**
+ * @brief The `ad9545_ref_clk_names` is a static constant array of string
+ * literals representing the names of reference clocks for the AD9545
+ * device. It contains four elements: "Ref-A", "Ref-AA", "Ref-B", and
+ * "Ref-BB".
+ *
+ * @details This array is used to identify and reference the different reference
+ * clock inputs available on the AD9545 device.
+ ******************************************************************************/
 static const char * const ad9545_ref_clk_names[] = {
 	"Ref-A", "Ref-AA", "Ref-B", "Ref-BB",
 };
 
+/***************************************************************************//**
+ * @brief The `ad9545_in_clk_names` is a static constant array of string
+ * literals representing the names of input clock dividers for the AD9545
+ * device. It contains four elements: "Ref-A-Div", "Ref-AA-Div", "Ref-B-
+ * Div", and "Ref-BB-Div". These names are likely used to identify
+ * different input clock sources or configurations within the AD9545
+ * driver.
+ *
+ * @details This variable is used to provide human-readable names for input
+ * clock dividers in the AD9545 driver, facilitating easier reference
+ * and debugging.
+ ******************************************************************************/
 static const char * const ad9545_in_clk_names[] = {
 	"Ref-A-Div", "Ref-AA-Div", "Ref-B-Div", "Ref-BB-Div",
 };
 
+/***************************************************************************//**
+ * @brief The `ad9545_out_clk_names` is a static constant array of string
+ * literals representing the names of output clock dividers for the
+ * AD9545 device. It includes names like "Q0A-div", "Q0AA-div",
+ * "Q0B-div", etc., which correspond to different output clock channels
+ * of the device. This array is used to provide human-readable
+ * identifiers for the various output clocks available in the AD9545
+ * clock generator.
+ *
+ * @details This variable is used to map output clock channels to their
+ * respective names for easier identification and reference in the
+ * AD9545 driver.
+ ******************************************************************************/
 static const char * const ad9545_out_clk_names[] = {
 	"Q0A-div", "Q0AA-div", "Q0B-div", "Q0BB-div", "Q0C-div", "Q0CC-div", "Q1A-div", "Q1AA-div",
 	"Q1B-div", "Q1BB-div",
 };
 
+/***************************************************************************//**
+ * @brief The `ad9545_pll_clk_names` is a static constant array of string
+ * literals that contains the names of the PLL clocks used in the AD9545
+ * driver. It includes two elements: "PLL0" and "PLL1".
+ *
+ * @details This array is used to reference the names of the PLL clocks within
+ * the AD9545 driver, likely for identification or configuration
+ * purposes.
+ ******************************************************************************/
 static const char * const ad9545_pll_clk_names[] = {
 	"PLL0", "PLL1",
 };
 
+/***************************************************************************//**
+ * @brief The `ad9545_aux_nco_clk_names` is a static constant array of string
+ * literals, each representing the name of an auxiliary Numerically
+ * Controlled Oscillator (NCO) clock in the AD9545 device. It contains
+ * two elements: "AUX_NCO0" and "AUX_NCO1".
+ *
+ * @details This array is used to reference the names of auxiliary NCO clocks
+ * within the AD9545 driver, likely for configuration or identification
+ * purposes.
+ ******************************************************************************/
 static const char * const ad9545_aux_nco_clk_names[] = {
 	"AUX_NCO0", "AUX_NCO1",
 };
 
+/***************************************************************************//**
+ * @brief The `ad9545_aux_tdc_clk_names` is a static constant array of string
+ * literals representing the names of auxiliary TDC (Time-to-Digital
+ * Converter) clocks in the AD9545 device. It contains two elements:
+ * "AUX_TDC0" and "AUX_TDC1".
+ *
+ * @details This array is used to reference the auxiliary TDC clock names within
+ * the AD9545 driver code.
+ ******************************************************************************/
 static const char * const ad9545_aux_tdc_clk_names[] = {
 	"AUX_TDC0", "AUX_TDC1",
 };
 
+/***************************************************************************//**
+ * @brief The `ad9545_ref_mode` is an enumeration that defines the types of
+ * reference modes available for the AD9545 device. It includes two
+ * modes: `AD9545_SINGLE_ENDED`, which is used for single-ended reference
+ * configurations, and `AD9545_DIFFERENTIAL`, which is used for
+ * differential reference configurations. This enumeration is used to
+ * specify the electrical configuration of the reference input to the
+ * device.
+ *
+ * @param AD9545_SINGLE_ENDED Represents a single-ended reference mode with a
+ * value of 0.
+ * @param AD9545_DIFFERENTIAL Represents a differential reference mode.
+ ******************************************************************************/
 enum ad9545_ref_mode {
 	AD9545_SINGLE_ENDED = 0,
 	AD9545_DIFFERENTIAL,
 };
 
+/***************************************************************************//**
+ * @brief The `ad9545_single_ended_config` enumeration defines various
+ * configurations for single-ended input modes in the AD9545 device. It
+ * includes options for AC coupling, DC coupling at different voltage
+ * levels (1.2V and 1.8V), and an input pull-up configuration. This
+ * enumeration is used to specify the electrical characteristics of the
+ * input interface for the AD9545 clock generation and distribution
+ * system.
+ *
+ * @param AD9545_AC_COUPLED_IF Represents an AC coupled interface configuration.
+ * @param AD9545_DC_COUPLED_1V2 Represents a DC coupled configuration with 1.2V.
+ * @param AD9545_DC_COUPLED_1V8 Represents a DC coupled configuration with 1.8V.
+ * @param AD9545_IN_PULL_UP Represents a configuration with an input pull-up.
+ ******************************************************************************/
 enum ad9545_single_ended_config {
 	AD9545_AC_COUPLED_IF = 0,
 	AD9545_DC_COUPLED_1V2,
@@ -525,18 +720,58 @@ enum ad9545_single_ended_config {
 	AD9545_IN_PULL_UP,
 };
 
+/***************************************************************************//**
+ * @brief The `ad9545_diferential_config` is an enumeration that defines
+ * different types of differential configurations for the AD9545 device.
+ * It includes options for AC coupling, DC coupling, and DC coupling with
+ * LVDS, allowing the user to specify the desired electrical coupling
+ * method for the differential inputs of the device.
+ *
+ * @param AD9545_AC_COUPLED Represents an AC coupled differential configuration.
+ * @param AD9545_DC_COUPLED Represents a DC coupled differential configuration.
+ * @param AD9545_DC_COUPLED_LVDS Represents a DC coupled LVDS differential
+ * configuration.
+ ******************************************************************************/
 enum ad9545_diferential_config {
 	AD9545_AC_COUPLED = 0,
 	AD9545_DC_COUPLED,
 	AD9545_DC_COUPLED_LVDS,
 };
 
+/***************************************************************************//**
+ * @brief The `ad9545_output_mode` enumeration defines the different output
+ * modes available for the AD9545 device, which is a clock generator and
+ * distribution IC. Each enumerator represents a specific configuration
+ * of the output dividers, allowing the user to select between single or
+ * dual divider modes, with or without differential signaling. This
+ * configuration is crucial for setting up the output characteristics of
+ * the device to match the requirements of the application.
+ *
+ * @param AD9545_SINGLE_DIV_DIF Represents a single divider differential output
+ * mode.
+ * @param AD9545_SINGLE_DIV Represents a single divider output mode.
+ * @param AD9545_DUAL_DIV Represents a dual divider output mode.
+ ******************************************************************************/
 enum ad9545_output_mode {
 	AD9545_SINGLE_DIV_DIF = 0,
 	AD9545_SINGLE_DIV,
 	AD9545_DUAL_DIV,
 };
 
+/***************************************************************************//**
+ * @brief The `ad9545_outputs_regs` structure is used to define the register
+ * settings for output modulation in the AD9545 device. It includes
+ * registers for configuring the modulator, setting the modulation
+ * counter, and enabling n-shot functionality, along with a mask for the
+ * n-shot enable register. This structure is essential for managing the
+ * output characteristics of the AD9545 clock generator.
+ *
+ * @param modulator_reg A 16-bit register for configuring the modulator.
+ * @param modulation_counter_reg A 16-bit register for setting the modulation
+ * counter.
+ * @param nshot_en_reg A 16-bit register for enabling n-shot functionality.
+ * @param nshot_en_msk An 8-bit mask for n-shot enable register.
+ ******************************************************************************/
 struct ad9545_outputs_regs {
 	uint16_t	modulator_reg;
 	uint16_t	modulation_counter_reg;
@@ -544,6 +779,17 @@ struct ad9545_outputs_regs {
 	uint8_t	nshot_en_msk;
 };
 
+/***************************************************************************//**
+ * @brief The `ad9545_out_regs` is a static constant array of structures, each
+ * of type `ad9545_outputs_regs`. This array contains configurations for
+ * the output registers of the AD9545 device, specifying modulator
+ * registers, modulation counter registers, n-shot enable registers, and
+ * n-shot enable masks for different output channels.
+ *
+ * @details This variable is used to define the register settings for various
+ * output channels of the AD9545 device, facilitating the configuration
+ * of its output modulation and n-shot functionalities.
+ ******************************************************************************/
 static const struct ad9545_outputs_regs ad9545_out_regs[] = {
 	{
 		.modulator_reg = AD9545_MODULATOR_A0,
@@ -607,6 +853,30 @@ static const struct ad9545_outputs_regs ad9545_out_regs[] = {
 	},
 };
 
+/***************************************************************************//**
+ * @brief The `ad9545_out_clk` structure is designed to manage the configuration
+ * and state of an output clock in the AD9545 device. It includes
+ * pointers to the device context and hardware clock descriptors, as well
+ * as fields for managing the output's usage status, current source,
+ * mode, and requested rate. This structure is essential for configuring
+ * and controlling the output clocks of the AD9545, allowing for precise
+ * clock management and customization.
+ *
+ * @param dev Pointer to the ad9545_dev structure, representing the device
+ * context.
+ * @param output_used Boolean indicating if the output is currently in use.
+ * @param source_current Boolean indicating if the source current is active.
+ * @param output_mode Enum specifying the output mode of the clock.
+ * @param source_ua Unsigned 32-bit integer representing the source current in
+ * microamperes.
+ * @param hw Pointer to a no_os_clk_desc structure, representing the hardware
+ * clock descriptor.
+ * @param address Unsigned integer representing the address of the output clock.
+ * @param rate_requested_hz Unsigned 64-bit integer representing the requested
+ * clock rate in hertz.
+ * @param parent_clk Pointer to a no_os_clk_desc structure, representing the
+ * parent clock descriptor.
+ ******************************************************************************/
 struct ad9545_out_clk {
 	struct ad9545_dev	*dev;
 	bool			output_used;
@@ -619,6 +889,28 @@ struct ad9545_out_clk {
 	struct no_os_clk_desc	*parent_clk;
 };
 
+/***************************************************************************//**
+ * @brief The `ad9545_dpll_profile` structure defines a profile for a digital
+ * phase-locked loop (DPLL) in the AD9545 device. It includes
+ * configuration parameters such as address, parent clock index,
+ * priority, loop bandwidth, and settings for fast acquisition. The
+ * structure also includes flags for enabling the profile and feedback
+ * tagging, as well as specifying the source for the time-to-digital
+ * converter. This structure is essential for managing the DPLL
+ * configurations in the AD9545 clock generation and distribution system.
+ *
+ * @param address The address of the DPLL profile.
+ * @param parent_index The index of the parent clock source.
+ * @param priority The priority level of the DPLL profile.
+ * @param loop_bw_uhz The loop bandwidth in microhertz.
+ * @param fast_acq_excess_bw The excess bandwidth for fast acquisition.
+ * @param fast_acq_timeout_ms The timeout for fast acquisition in milliseconds.
+ * @param fast_acq_settle_ms The settling time for fast acquisition in
+ * milliseconds.
+ * @param en A boolean indicating if the DPLL profile is enabled.
+ * @param tdc_source The source for the time-to-digital converter.
+ * @param fb_tagging A boolean indicating if feedback tagging is enabled.
+ ******************************************************************************/
 struct ad9545_dpll_profile {
 	unsigned int	address;
 	unsigned int	parent_index;
@@ -632,6 +924,31 @@ struct ad9545_dpll_profile {
 	bool		fb_tagging;
 };
 
+/***************************************************************************//**
+ * @brief The `ad9545_pll_clk` structure represents a phase-locked loop (PLL)
+ * clock configuration for the AD9545 device. It includes information
+ * about the device, usage status, address, hardware descriptor, parent
+ * clocks, DPLL profiles, and various operational parameters such as
+ * free-run frequency, fast acquisition trigger mode, requested rate, and
+ * slew rate limit. This structure is essential for managing PLL settings
+ * and behavior in the AD9545 clock generation system.
+ *
+ * @param dev Pointer to the ad9545 device structure.
+ * @param pll_used Boolean indicating if the PLL is used.
+ * @param address Address of the PLL.
+ * @param hw Pointer to the hardware clock descriptor.
+ * @param num_parents Number of parent clocks.
+ * @param parents Array of pointers to parent clock descriptors.
+ * @param profiles Array of DPLL profiles for the PLL.
+ * @param free_run_freq Frequency for free-run mode.
+ * @param fast_acq_trigger_mode Mode for fast acquisition trigger.
+ * @param rate_requested_hz Requested rate in hertz.
+ * @param internal_zero_delay Boolean indicating if internal zero delay is used.
+ * @param internal_zero_delay_source Source for internal zero delay.
+ * @param internal_zero_delay_source_rate_hz Rate of the internal zero delay
+ * source in hertz.
+ * @param slew_rate_limit_ps Slew rate limit in picoseconds.
+ ******************************************************************************/
 struct ad9545_pll_clk {
 	struct ad9545_dev		*dev;
 	bool				pll_used;
@@ -649,6 +966,38 @@ struct ad9545_pll_clk {
 	uint32_t			slew_rate_limit_ps;
 };
 
+/***************************************************************************//**
+ * @brief The `ad9545_ref_in_clk` structure is designed to manage the
+ * configuration and state of a reference input clock for the AD9545
+ * device. It includes pointers to hardware and device descriptors,
+ * configuration parameters such as divider ratios and tolerance, and
+ * settings for monitoring and validation. The structure supports both
+ * single-ended and differential configurations, with specific fields for
+ * managing phase and frequency lock parameters. This structure is
+ * essential for setting up and maintaining the stability and accuracy of
+ * the reference clock input in the AD9545 system.
+ *
+ * @param hw Pointer to a hardware clock descriptor.
+ * @param dev Pointer to the AD9545 device structure.
+ * @param r_div_ratio Reference divider ratio for the clock.
+ * @param ref_used Boolean indicating if the reference is used.
+ * @param d_tol_ppb Tolerance in parts per billion for the reference clock.
+ * @param monitor_hyst_scale Scale for monitoring hysteresis.
+ * @param valid_t_ms Time in milliseconds for which the reference is considered
+ * valid.
+ * @param parent_clk Pointer to the parent clock descriptor.
+ * @param address Address of the reference input clock.
+ * @param mode Mode of the reference input clock, either single-ended or
+ * differential.
+ * @param freq_thresh_ps Frequency threshold in picoseconds.
+ * @param phase_thresh_ps Phase threshold in picoseconds.
+ * @param phase_lock_fill_rate Rate at which phase lock is filled.
+ * @param phase_lock_drain_rate Rate at which phase lock is drained.
+ * @param freq_lock_fill_rate Rate at which frequency lock is filled.
+ * @param freq_lock_drain_rate Rate at which frequency lock is drained.
+ * @param s_conf Configuration for single-ended mode.
+ * @param d_conf Configuration for differential mode.
+ ******************************************************************************/
 struct ad9545_ref_in_clk {
 	struct no_os_clk_desc		*hw;
 	struct ad9545_dev		*dev;
@@ -672,6 +1021,23 @@ struct ad9545_ref_in_clk {
 	};
 };
 
+/***************************************************************************//**
+ * @brief The `ad9545_aux_nco_clk` structure is designed to manage auxiliary
+ * Numerically Controlled Oscillator (NCO) clocks within the AD9545
+ * device. It includes a hardware clock descriptor, a flag to indicate if
+ * the NCO is active, a reference to the AD9545 device, and configuration
+ * parameters such as address, frequency threshold, and phase threshold,
+ * which are crucial for precise clock management and synchronization
+ * tasks.
+ *
+ * @param hw Pointer to a clock descriptor for hardware clock management.
+ * @param nco_used Boolean flag indicating if the NCO is in use.
+ * @param dev Pointer to the AD9545 device structure.
+ * @param address Unsigned integer representing the address of the NCO.
+ * @param freq_thresh_ps Unsigned integer for frequency threshold in
+ * picoseconds.
+ * @param phase_thresh_ps Unsigned integer for phase threshold in picoseconds.
+ ******************************************************************************/
 struct ad9545_aux_nco_clk {
 	struct no_os_clk_desc		*hw;
 	bool				nco_used;
@@ -681,6 +1047,24 @@ struct ad9545_aux_nco_clk {
 	unsigned int			phase_thresh_ps;
 };
 
+/***************************************************************************//**
+ * @brief The `ad9545_aux_tdc_clk` structure is designed to represent an
+ * auxiliary Time-to-Digital Converter (TDC) clock within the AD9545
+ * device. It includes pointers to the hardware clock descriptor and the
+ * AD9545 device, as well as configuration details such as the TDC's
+ * address and associated pin number. The structure also tracks whether
+ * the TDC is actively used and maintains a reference to its parent
+ * clock, facilitating the management and configuration of TDC-related
+ * operations in the AD9545 clocking system.
+ *
+ * @param hw Pointer to a hardware clock descriptor.
+ * @param tdc_used Boolean indicating if the TDC is used.
+ * @param dev Pointer to the AD9545 device structure.
+ * @param address Unsigned integer representing the address of the TDC.
+ * @param pin_nr Unsigned integer representing the pin number associated with
+ * the TDC.
+ * @param parent_clk Pointer to the parent clock descriptor.
+ ******************************************************************************/
 struct ad9545_aux_tdc_clk {
 	struct no_os_clk_desc		*hw;
 	bool				tdc_used;
@@ -690,6 +1074,24 @@ struct ad9545_aux_tdc_clk {
 	struct no_os_clk_desc		*parent_clk;
 };
 
+/***************************************************************************//**
+ * @brief The `ad9545_aux_dpll_clk` structure is designed to manage auxiliary
+ * DPLL (Digital Phase-Locked Loop) clock settings within the AD9545
+ * device. It includes pointers to clock descriptors for both the
+ * hardware and parent clocks, a boolean to indicate DPLL usage, and
+ * several configuration parameters such as the source, loop bandwidth,
+ * and rate change limit. This structure is integral for configuring and
+ * controlling the auxiliary DPLL functionality in the AD9545 clock
+ * generation system.
+ *
+ * @param hw Pointer to a clock descriptor for hardware clock management.
+ * @param dpll_used Boolean indicating if the DPLL is used.
+ * @param dev Pointer to the AD9545 device structure.
+ * @param source Unsigned integer representing the source of the DPLL.
+ * @param loop_bw_mhz Unsigned integer specifying the loop bandwidth in MHz.
+ * @param rate_change_limit Unsigned integer defining the rate change limit.
+ * @param parent_clk Pointer to the parent clock descriptor.
+ ******************************************************************************/
 struct ad9545_aux_dpll_clk {
 	struct no_os_clk_desc		*hw;
 	bool				dpll_used;
@@ -700,6 +1102,21 @@ struct ad9545_aux_dpll_clk {
 	struct no_os_clk_desc		*parent_clk;
 };
 
+/***************************************************************************//**
+ * @brief The `ad9545_sys_clk` structure is used to define the configuration of
+ * the system clock for the AD9545 device. It includes settings for
+ * enabling a frequency doubler, specifying the use of a crystal
+ * oscillator, and storing the reference and system frequencies in hertz.
+ * This structure is essential for configuring the clocking system of the
+ * AD9545, which is a high-performance clock generator and distribution
+ * device.
+ *
+ * @param sys_clk_freq_doubler Indicates if the system clock frequency doubler
+ * is enabled.
+ * @param sys_clk_crystal Specifies if a crystal is used for the system clock.
+ * @param ref_freq_hz Holds the reference frequency in hertz.
+ * @param sys_freq_hz Stores the system frequency in hertz.
+ ******************************************************************************/
 struct ad9545_sys_clk {
 	bool				sys_clk_freq_doubler;
 	bool				sys_clk_crystal;
@@ -724,6 +1141,36 @@ typedef int32_t (*ad9545_reg_write_multi_func)(struct ad9545_dev *dev,
 		uint8_t *reg_data,
 		uint16_t count);
 
+/***************************************************************************//**
+ * @brief The `ad9545_dev` structure is a comprehensive data structure used to
+ * manage and configure the AD9545 device, which is a high-performance
+ * clock generator. It includes descriptors for both SPI and I2C
+ * communication interfaces, function pointers for register read and
+ * write operations, and various clock configuration structures. The
+ * structure supports multiple clock types, including system, auxiliary
+ * DPLL, PLL, reference input, output, NCO, and TDC clocks, allowing for
+ * extensive customization and control of the device's clocking
+ * capabilities. The communication type is specified by an enumeration,
+ * and the structure is designed to facilitate the initialization,
+ * configuration, and management of the AD9545 device in a flexible and
+ * efficient manner.
+ *
+ * @param spi_desc Pointer to the SPI descriptor for SPI communication.
+ * @param i2c_desc Pointer to the I2C descriptor for I2C communication.
+ * @param reg_read Function pointer for reading a single register.
+ * @param reg_write Function pointer for writing to a single register.
+ * @param reg_read_multiple Function pointer for reading multiple registers.
+ * @param reg_write_multiple Function pointer for writing to multiple registers.
+ * @param comm_type Enumeration indicating the communication type (SPI or I2C).
+ * @param sys_clk Structure containing system clock settings.
+ * @param aux_dpll_clk Structure containing auxiliary DPLL clock settings.
+ * @param pll_clks Array of structures for PLL clock settings.
+ * @param ref_in_clks Array of structures for reference input clock settings.
+ * @param out_clks Array of structures for output clock settings.
+ * @param aux_nco_clks Array of structures for auxiliary NCO clock settings.
+ * @param aux_tdc_clks Array of structures for auxiliary TDC clock settings.
+ * @param clks Array of pointers to clock descriptors.
+ ******************************************************************************/
 struct ad9545_dev {
 	/* SPI */
 	struct no_os_spi_desc		*spi_desc;
@@ -750,6 +1197,27 @@ struct ad9545_dev {
 
 };
 
+/***************************************************************************//**
+ * @brief The `ad9545_init_param` structure is used to initialize the AD9545
+ * device, encapsulating all necessary parameters for setting up
+ * communication interfaces (SPI or I2C), system clock, auxiliary DPLL,
+ * PLL clocks, reference input clocks, output clocks, auxiliary NCO
+ * clocks, and auxiliary TDC clocks. This structure provides a
+ * comprehensive configuration setup for the AD9545, allowing for
+ * detailed customization of its clocking and communication
+ * functionalities.
+ *
+ * @param spi_init Pointer to SPI initialization parameters.
+ * @param i2c_init Pointer to I2C initialization parameters.
+ * @param comm_type Communication type, either SPI or I2C.
+ * @param sys_clk System clock configuration parameters.
+ * @param aux_dpll_clk Auxiliary DPLL clock configuration parameters.
+ * @param pll_clks Array of PLL clock configuration parameters.
+ * @param ref_in_clks Array of reference input clock configuration parameters.
+ * @param out_clks Array of output clock configuration parameters.
+ * @param aux_nco_clks Array of auxiliary NCO clock configuration parameters.
+ * @param aux_tdc_clks Array of auxiliary TDC clock configuration parameters.
+ ******************************************************************************/
 struct ad9545_init_param {
 	/* SPI */
 	struct no_os_spi_init_param	*spi_init;
@@ -773,59 +1241,324 @@ struct ad9545_init_param {
 /************************ Functions Declarations ******************************/
 /******************************************************************************/
 /* Reads a single byte from the specified SPI register address */
+/***************************************************************************//**
+ * @brief Use this function to read a single byte of data from a specific
+ * register address on the AD9545 device via SPI communication. This
+ * function is essential for retrieving configuration or status
+ * information from the device. Ensure that the device has been properly
+ * initialized and configured for SPI communication before calling this
+ * function. The function will return an error code if the read operation
+ * fails, which should be handled appropriately by the caller.
+ *
+ * @param dev A pointer to an initialized ad9545_dev structure representing the
+ * device. Must not be null.
+ * @param reg_addr The 16-bit address of the register to read from. Must be a
+ * valid register address for the AD9545 device.
+ * @param reg_data A pointer to a uint8_t variable where the read byte will be
+ * stored. Must not be null.
+ * @return Returns an int32_t value indicating the success or failure of the
+ * operation. A non-negative value indicates success, while a negative
+ * value indicates an error.
+ ******************************************************************************/
 int32_t ad9545_spi_reg_read(struct ad9545_dev *dev,
 			    uint16_t reg_addr,
 			    uint8_t *reg_data);
 
 /* Reads multiple bytes starting from the specified SPI register address */
+/***************************************************************************//**
+ * @brief Use this function to read a sequence of bytes from the AD9545 device
+ * starting at a specified SPI register address. It is essential to
+ * ensure that the `count` parameter does not exceed 512, as this is the
+ * maximum number of bytes that can be read in a single operation. The
+ * function requires a valid device structure and a buffer to store the
+ * read data. It returns an error code if the operation fails or if the
+ * `count` exceeds the limit.
+ *
+ * @param dev A pointer to an initialized `ad9545_dev` structure representing
+ * the device. Must not be null.
+ * @param reg_addr The starting register address from which to begin reading. It
+ * is a 16-bit unsigned integer.
+ * @param reg_data A pointer to a buffer where the read data will be stored. The
+ * buffer must be large enough to hold `count` bytes. Must not
+ * be null.
+ * @param count The number of bytes to read from the device. Must be between 1
+ * and 512 inclusive. If greater than 512, the function returns an
+ * error.
+ * @return Returns 0 on success or a negative error code on failure, such as if
+ * `count` exceeds 512.
+ ******************************************************************************/
 int32_t ad9545_spi_reg_read_multiple(struct ad9545_dev *dev,
 				     uint16_t reg_addr,
 				     uint8_t *reg_data,
 				     uint16_t count);
 /* Writes a single byte to the specified SPI register address */
+/***************************************************************************//**
+ * @brief Use this function to write a single byte of data to a specific
+ * register address on the AD9545 device via SPI communication. This
+ * function is typically called when you need to configure or update a
+ * register on the device. Ensure that the device has been properly
+ * initialized and that the SPI communication interface is correctly set
+ * up before calling this function. The function returns an error code if
+ * the write operation fails.
+ *
+ * @param dev A pointer to an ad9545_dev structure representing the device. Must
+ * not be null and should be properly initialized with SPI settings.
+ * @param reg_addr The 16-bit address of the register to which the data will be
+ * written. Must be a valid register address for the AD9545
+ * device.
+ * @param reg_data The 8-bit data to be written to the specified register
+ * address. Any value within the range of an 8-bit unsigned
+ * integer is valid.
+ * @return Returns an int32_t error code indicating the success or failure of
+ * the SPI write operation.
+ ******************************************************************************/
 int32_t ad9545_spi_reg_write(struct ad9545_dev *dev,
 			     uint16_t reg_addr,
 			     uint8_t reg_data);
 /* Writes multiple bytes starting from the specified SPI register address */
+/***************************************************************************//**
+ * @brief This function is used to write a sequence of bytes to a specified
+ * register address on the AD9545 device via SPI communication. It is
+ * essential to ensure that the device is properly initialized and
+ * configured for SPI communication before calling this function. The
+ * function handles up to 512 bytes of data, and any attempt to write
+ * more than this will result in an error. This function is typically
+ * used when multiple consecutive register writes are needed, such as
+ * during device configuration or data transfer operations.
+ *
+ * @param dev A pointer to an initialized ad9545_dev structure representing the
+ * device. Must not be null.
+ * @param reg_addr The starting register address where the data will be written.
+ * It is a 16-bit unsigned integer.
+ * @param reg_data A pointer to the data buffer containing the bytes to be
+ * written. The buffer must contain at least 'count' bytes. Must
+ * not be null.
+ * @param count The number of bytes to write. Must be between 1 and 512
+ * inclusive. If greater than 512, the function returns an error.
+ * @return Returns 0 on success or a negative error code on failure, such as
+ * when 'count' exceeds 512.
+ ******************************************************************************/
 int32_t ad9545_spi_reg_write_multiple(struct ad9545_dev *dev,
 				      uint16_t reg_addr,
 				      uint8_t *reg_data,
 				      uint16_t count);
 /* Reads a single byte from the specified I2C register address */
+/***************************************************************************//**
+ * @brief Use this function to read a single byte from a specific register of
+ * the AD9545 device over the I2C interface. This function is typically
+ * called when you need to retrieve configuration or status information
+ * from the device. Ensure that the device has been properly initialized
+ * and that the I2C communication is correctly set up before calling this
+ * function. The function will return an error code if the read operation
+ * fails.
+ *
+ * @param dev A pointer to an initialized ad9545_dev structure representing the
+ * device. Must not be null.
+ * @param reg_addr The 16-bit address of the register to read from. Must be a
+ * valid register address for the AD9545 device.
+ * @param reg_data A pointer to a uint8_t variable where the read byte will be
+ * stored. Must not be null.
+ * @return Returns an int32_t value indicating success (0) or an error code if
+ * the read operation fails.
+ ******************************************************************************/
 int32_t ad9545_i2c_reg_read(struct ad9545_dev *dev,
 			    uint16_t reg_addr,
 			    uint8_t *reg_data);
 /* Writes a single byte to the specified I2C register address */
+/***************************************************************************//**
+ * @brief This function is used to write a single byte of data to a specific
+ * register address on the AD9545 device via the I2C interface. It is
+ * typically called when there is a need to configure or update a
+ * register on the device. The function requires a valid device structure
+ * that has been properly initialized for I2C communication. It is
+ * important to ensure that the register address is within the valid
+ * range for the device and that the device is ready for communication.
+ * The function returns an integer status code indicating the success or
+ * failure of the write operation.
+ *
+ * @param dev A pointer to an ad9545_dev structure representing the device. This
+ * must be initialized and configured for I2C communication. Must not
+ * be null.
+ * @param reg_addr A 16-bit unsigned integer specifying the register address to
+ * write to. The address must be within the valid range of the
+ * device's register map.
+ * @param reg_data An 8-bit unsigned integer representing the data to be written
+ * to the specified register. The data is masked to ensure it is
+ * a single byte.
+ * @return Returns an int32_t status code. A value of 0 typically indicates
+ * success, while a negative value indicates an error occurred during
+ * the write operation.
+ ******************************************************************************/
 int32_t ad9545_i2c_reg_write(struct ad9545_dev *dev,
 			     uint16_t reg_addr,
 			     uint8_t reg_data);
 /* Reads multiple bytes starting from the specified I2C register address */
+/***************************************************************************//**
+ * @brief This function is used to read a sequence of bytes from a specified
+ * register address on an AD9545 device using I2C communication. It is
+ * essential to ensure that the device has been properly initialized and
+ * that the I2C communication is set up before calling this function. The
+ * function reads up to 512 bytes, and if the requested count exceeds
+ * this limit, it returns an error. It is important to provide a valid
+ * buffer to store the read data, and the function will populate this
+ * buffer with the data read from the device.
+ *
+ * @param dev A pointer to an initialized ad9545_dev structure representing the
+ * device. Must not be null.
+ * @param reg_addr The starting register address from which to begin reading.
+ * Must be a valid register address for the device.
+ * @param reg_data A pointer to a buffer where the read data will be stored.
+ * Must not be null and should have enough space to hold 'count'
+ * bytes.
+ * @param count The number of bytes to read from the device. Must be between 1
+ * and 512 inclusive. If greater than 512, the function returns an
+ * error.
+ * @return Returns 0 on success, or a negative error code if the read operation
+ * fails or if 'count' exceeds 512.
+ ******************************************************************************/
 int32_t ad9545_i2c_reg_read_multiple(struct ad9545_dev *dev,
 				     uint16_t reg_addr,
 				     uint8_t *reg_data,
 				     uint16_t count);
 /* Writes multiple bytes starting from the specified I2C register address */
+/***************************************************************************//**
+ * @brief Use this function to write a sequence of bytes to a specific register
+ * address on the AD9545 device via I2C. This function is essential when
+ * you need to configure or update multiple register values in a single
+ * operation. Ensure that the device is properly initialized and that the
+ * I2C communication is set up before calling this function. The function
+ * will return an error if the number of bytes to write exceeds the
+ * buffer limit of 512 bytes.
+ *
+ * @param dev A pointer to an initialized ad9545_dev structure representing the
+ * device. Must not be null.
+ * @param reg_addr The starting register address where the data will be written.
+ * It is a 16-bit unsigned integer.
+ * @param reg_data A pointer to the data buffer containing the bytes to be
+ * written. The caller retains ownership and it must not be
+ * null.
+ * @param count The number of bytes to write from the reg_data buffer. Must be
+ * less than or equal to 512; otherwise, the function returns an
+ * error.
+ * @return Returns 0 on success or a negative error code on failure, such as
+ * when the count exceeds 512.
+ ******************************************************************************/
 int32_t ad9545_i2c_reg_write_multiple(struct ad9545_dev *dev,
 				      uint16_t reg_addr,
 				      uint8_t *reg_data,
 				      uint16_t count);
 /* Modifies specific bits in the specified register and writes the new value. */
+/***************************************************************************//**
+ * @brief This function is used to modify specific bits in a register of the
+ * AD9545 device by applying a mask and then writing the new value. It is
+ * useful when only certain bits of a register need to be updated without
+ * affecting the others. The function first reads the current value of
+ * the register, applies the mask to clear the bits, and then sets the
+ * specified bits with the provided data. It should be called when
+ * precise bit-level control of a register is required.
+ *
+ * @param dev A pointer to an ad9545_dev structure representing the device. Must
+ * not be null. The caller retains ownership.
+ * @param reg_addr The address of the register to be modified. Must be a valid
+ * register address for the AD9545 device.
+ * @param mask A bitmask indicating which bits in the register should be
+ * modified. Bits set to 1 in the mask will be affected.
+ * @param data The new data to be written to the specified bits in the register.
+ * Only the bits specified by the mask will be updated with this
+ * data.
+ * @return Returns an int32_t value indicating success (0) or an error code if
+ * the operation fails.
+ ******************************************************************************/
 int32_t ad9545_write_mask(struct ad9545_dev *dev,
 			  uint16_t reg_addr,
 			  uint32_t mask,
 			  uint8_t data);
 
 /* Calibrates the APLLs of the AD9545 device. */
+/***************************************************************************//**
+ * @brief Use this function to calibrate all active APLLs (Analog Phase-Locked
+ * Loops) in the AD9545 device. It should be called when the device is
+ * initialized and configured, and before any operations that depend on
+ * the APLLs being calibrated. The function iterates over all PLLs in the
+ * device and calibrates those that are marked as used. If any
+ * calibration fails, the function returns an error code, and no further
+ * PLLs are calibrated. This function is essential for ensuring the
+ * correct operation of the APLLs.
+ *
+ * @param dev A pointer to an initialized ad9545_dev structure. This structure
+ * must be properly configured with the PLLs that are intended to be
+ * used. The pointer must not be null, and the function will return
+ * an error if the device is not correctly set up.
+ * @return Returns 0 on success, indicating all used APLLs were calibrated
+ * successfully. Returns a negative error code if any APLL calibration
+ * fails, indicating which APLL caused the failure.
+ ******************************************************************************/
 int ad9545_calib_aplls(struct ad9545_dev *dev);
 
 /* Device Setup */
+/***************************************************************************//**
+ * @brief This function sets up the AD9545 device by configuring its system
+ * clock, input references, auxiliary NCOs, and other components
+ * necessary for its operation. It must be called after the device has
+ * been initialized and before any other operations are performed. The
+ * function checks for lock status of PLLs and auxiliary DPLLs, issuing
+ * warnings if any are unlocked or if there are reference faults. It
+ * returns an error code if any setup step fails, allowing the caller to
+ * handle initialization errors appropriately.
+ *
+ * @param dev A pointer to an initialized ad9545_dev structure representing the
+ * device. Must not be null, and the device must be properly
+ * initialized before calling this function.
+ * @return Returns 0 on success, or a negative error code if any setup step
+ * fails.
+ ******************************************************************************/
 int32_t ad9545_setup(struct ad9545_dev *dev);
 
 /* Device Initialization */
+/***************************************************************************//**
+ * @brief This function sets up the AD9545 device using the provided
+ * initialization parameters, configuring it for either SPI or I2C
+ * communication based on the specified communication type. It must be
+ * called before any other operations on the device to ensure proper
+ * setup. The function allocates memory for the device structure,
+ * initializes communication interfaces, and configures the device
+ * registers. If initialization fails at any step, it returns an error
+ * code and cleans up any allocated resources.
+ *
+ * @param device A pointer to a pointer of type `struct ad9545_dev`. This will
+ * be allocated and initialized by the function. The caller must
+ * ensure this pointer is valid and will receive ownership of the
+ * allocated memory.
+ * @param init_param A pointer to a `struct ad9545_init_param` containing the
+ * initialization parameters. This includes communication type
+ * and specific settings for the device. Must not be null, and
+ * the structure should be properly populated before calling
+ * the function.
+ * @return Returns 0 on success or a negative error code on failure, indicating
+ * the type of error encountered during initialization.
+ ******************************************************************************/
 int32_t ad9545_init(struct ad9545_dev **device,
 		    struct ad9545_init_param *init_param);
 
 /* Free resources */
+/***************************************************************************//**
+ * @brief This function is used to release all resources allocated for an AD9545
+ * device instance. It should be called when the device is no longer
+ * needed to ensure proper cleanup and avoid memory leaks. The function
+ * handles both SPI and I2C communication types, freeing the respective
+ * descriptors. It also frees any allocated clock resources associated
+ * with the device. The function must be called with a valid device
+ * pointer, and it returns an error code if the device pointer is null or
+ * if any underlying resource removal fails.
+ *
+ * @param dev A pointer to an ad9545_dev structure representing the device
+ * instance to be removed. Must not be null. The function will return
+ * -EINVAL if this parameter is null. The caller relinquishes
+ * ownership of the memory pointed to by this parameter, which will
+ * be freed by the function.
+ * @return Returns 0 on success or a negative error code if an error occurs
+ * during resource removal.
+ ******************************************************************************/
 int32_t ad9545_remove(struct ad9545_dev *dev);
 
 

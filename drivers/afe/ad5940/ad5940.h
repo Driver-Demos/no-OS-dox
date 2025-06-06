@@ -2404,6 +2404,29 @@
  *
 */
 /* SPI Module */
+/***************************************************************************//**
+ * @brief The SPIPointer_Type is an enumeration that defines a set of constants
+ * representing base addresses for various hardware blocks, such as SPI,
+ * AGPIO, AFECON, and others, with specific memory sizes (16B or 32B). It
+ * also includes user-defined base addresses, allowing for custom
+ * configurations. This enum is typically used in embedded systems to
+ * facilitate the selection of peripheral base addresses for
+ * communication and control.
+ *
+ * @param SPI_POINTER_SPI Base address set to SPI block, a 16B Peripheral.
+ * @param SPI_POINTER_AGPIO Base address set to AGPIO block, a 16B Peripheral.
+ * @param SPI_POINTER_AFECON Base address set to AFECON block, a 16B Peripheral.
+ * @param SPI_POINTER_WUPTMR Base address set to Wakeup Timer block, a 16B
+ * Peripheral.
+ * @param SPI_POINTER_ALLON Base address set to Always on block, a 16B
+ * Peripheral.
+ * @param SPI_POINTER_INTC Base address set to INTC (interrupt controller)
+ * block, a 32B Peripheral.
+ * @param SPI_POINTER_AFE Base address set to AFE block, a 32B Peripheral.
+ * @param SPI_POINTER_USER0 User defined base address 0.
+ * @param SPI_POINTER_USER1 User defined base address 1.
+ * @param SPI_POINTER_USER2 User defined base address 2.
+ ******************************************************************************/
 typedef enum {
 	SPI_POINTER_SPI   =  0,  /**< Base address set to SPI block. 16B Peripheral*/
 	SPI_POINTER_AGPIO =  1,  /**< Base address set to AGPIO block. 16B Peripheral */
@@ -2563,11 +2586,24 @@ typedef enum {
 #define LPMODECTRL_NONE                0       /**< No blocks selected */
 /** @} */
 
-/**
- * @defgroup AFERESULT_Const
- * @brief The available AFE results type. Used for function @ref AD5940_ReadAfeResult
- * @{
-*/
+/***************************************************************************//**
+ * @brief The `ad5940_afe_result` is an enumeration that defines various result
+ * types from the AD5940 AFE (Analog Front End) operations, including
+ * results from SINC filters, temperature sensor readings, DFT (Discrete
+ * Fourier Transform) calculations, and statistical computations such as
+ * mean and variance. Each enumerator represents a specific type of
+ * result that can be obtained from the AFE, facilitating the
+ * identification and handling of these results in the software.
+ *
+ * @param AFERESULT_SINC3 SINC3 result.
+ * @param AFERESULT_SINC2 SINC2+NOTCH result.
+ * @param AFERESULT_TEMPSENSOR Temperature sensor result.
+ * @param AFERESULT_DFTREAL DFT Real result.
+ * @param AFERESULT_DFTIMAGE DFT Imaginary result.
+ * @param AFERESULT_STATSMEAN Statistic Mean result.
+ * @param AFERESULT_STATSVAR Statistic Variance result.
+ * @param AFERESULT_COUNT Represents the count of AFE results.
+ ******************************************************************************/
 enum ad5940_afe_result {
 	AFERESULT_SINC3, /**< SINC3 result */
 	AFERESULT_SINC2, /**< SINC2+NOTCH result */
@@ -3559,6 +3595,32 @@ enum ad5940_afe_result {
  * @{
 */
 
+/***************************************************************************//**
+ * @brief The AFERefCfg_Type structure is designed to configure various
+ * reference and buffer settings for an Analog Front End (AFE) system. It
+ * includes options to enable or disable high and low power band-gaps,
+ * reference buffers, and DAC reference buffers. Additionally, it
+ * provides control over thermal buffering, current limiting, and
+ * capacitor discharge functionalities, allowing for precise management
+ * of power and signal integrity in the AFE system.
+ *
+ * @param HpBandgapEn Enable High power band-gap, controlling the
+ * AFECON.HPREFDIS bit.
+ * @param Hp1V8BuffEn High power 1.8V reference buffer enable.
+ * @param Hp1V1BuffEn High power 1.1V reference buffer enable.
+ * @param Lp1V8BuffEn Low power 1.8V reference buffer enable.
+ * @param Lp1V1BuffEn Low power 1.1V reference buffer enable.
+ * @param LpBandgapEn Enable Low power band-gap.
+ * @param LpRefBufEn Enable the 2.5V low power reference buffer.
+ * @param LpRefBoostEn Boost buffer current.
+ * @param HSDACRefEn Enable DAC reference buffer from HP Bandgap.
+ * @param Hp1V8ThemBuff Thermal Buffer for internal 1.8V reference to AIN3 pin.
+ * @param Hp1V8Ilimit Current limit for High power 1.8V reference buffer.
+ * @param Disc1V8Cap Discharge 1.8V capacitor by shorting external 1.8V decouple
+ * capacitor to ground.
+ * @param Disc1V1Cap Discharge 1.1V capacitor by shorting external 1.1V decouple
+ * capacitor to ground.
+ ******************************************************************************/
 typedef struct {
 	/* ADC/DAC/TIA reference and buffer */
 	bool HpBandgapEn;     /**< Enable High power band-gap. Clear bit AFECON.HPREFDIS will enable Bandgap, while set this bit will disable bandgap */
@@ -3584,18 +3646,49 @@ typedef struct {
  * @{
 */
 
-/**
- * Structure for ADC Basic settings include MUX and PGA.
-*/
+/***************************************************************************//**
+ * @brief The `ADCBaseCfg_Type` structure is used to configure the basic
+ * settings of an Analog-to-Digital Converter (ADC). It includes fields
+ * for selecting the positive and negative input channels, as well as the
+ * programmable gain amplifier (PGA) settings, each of which is selected
+ * from a predefined set of options. This structure is essential for
+ * setting up the ADC to correctly interpret and process analog signals.
+ *
+ * @param ADCMuxP ADC Positive input channel selection, chosen from a predefined
+ * set of options.
+ * @param ADCMuxN ADC Negative input channel selection, chosen from a predefined
+ * set of options.
+ * @param ADCPga ADC Programmable Gain Amplifier settings, chosen from a
+ * predefined set of options.
+ ******************************************************************************/
 typedef struct {
 	uint32_t ADCMuxP;         /**< ADC Positive input channel selection. select from @ref ADCMUXP */
 	uint32_t ADCMuxN;         /**< ADC negative input channel selection. select from @ref ADCMUXN */
 	uint32_t ADCPga;          /**< ADC PGA settings, select from @ref ADCPGA */
 } ADCBaseCfg_Type;
 
-/**
- * Structure for ADC filter settings.
-*/
+/***************************************************************************//**
+ * @brief The `ADCFilterCfg_Type` structure is used to configure various
+ * parameters and operational flags for an ADC's filtering system. It
+ * includes settings for oversampling ratios for SINC3 and SINC2 filters,
+ * the number of averages, and the ADC core's sample rate. Additionally,
+ * it provides boolean flags to enable or bypass specific filter modules
+ * and clocks, such as the Notch filter, SINC3, SINC2+Notch, DFT, and
+ * Waveform Generator clocks, allowing for flexible control over the
+ * ADC's filtering behavior.
+ *
+ * @param ADCSinc3Osr Oversampling ratio for the SINC3 filter.
+ * @param ADCSinc2Osr Oversampling ratio for the SINC2 filter.
+ * @param ADCAvgNum Number of averages for the ADC.
+ * @param ADCRate Sample rate of the ADC core.
+ * @param BpNotch Flag to bypass the Notch filter module.
+ * @param BpSinc3 Flag to bypass the SINC3 module.
+ * @param Sinc3ClkEnable Flag to enable the SINC3 clock.
+ * @param Sinc2NotchClkEnable Flag to enable the SINC2+Notch clock.
+ * @param Sinc2NotchEnable Flag to enable the SINC2+Notch block.
+ * @param DFTClkEnable Flag to enable the DFT clock.
+ * @param WGClkEnable Flag to enable the Waveform Generator clock.
+ ******************************************************************************/
 typedef struct {
 	uint32_t ADCSinc3Osr;
 	uint32_t ADCSinc2Osr;
@@ -3611,18 +3704,38 @@ typedef struct {
 } ADCFilterCfg_Type;
 /** @} */
 
-/**
- * DFT Configuration structure.
-*/
+/***************************************************************************//**
+ * @brief The `DFTCfg_Type` structure is used to configure the Discrete Fourier
+ * Transform (DFT) settings. It includes fields for specifying the DFT
+ * number and source, both as 32-bit unsigned integers, and a boolean
+ * flag to enable or disable the application of a Hanning window, which
+ * is a type of window function used to reduce spectral leakage in signal
+ * processing.
+ *
+ * @param DftNum DFT number, represented as a 32-bit unsigned integer.
+ * @param DftSrc DFT Source, represented as a 32-bit unsigned integer.
+ * @param HanWinEn Boolean flag to enable or disable the Hanning window.
+ ******************************************************************************/
 typedef struct {
 	uint32_t DftNum;      /**< DFT number */
 	uint32_t DftSrc;      /**< DFT Source */
 	bool HanWinEn;    /**< Enable Hanning window */
 } DFTCfg_Type;
 
-/**
- * ADC digital comparator
-*/
+/***************************************************************************//**
+ * @brief The `ADCDigComp_Type` structure is designed to define the minimum and
+ * maximum limit values for an ADC (Analog-to-Digital Converter) code,
+ * along with their respective hysteresis values. This structure is
+ * useful in applications where it is necessary to monitor and control
+ * the range of ADC values, ensuring they stay within specified limits.
+ * The hysteresis values help in preventing frequent toggling of the
+ * limit status due to minor fluctuations in the ADC readings.
+ *
+ * @param ADCMin The ADC code minimum limit value.
+ * @param ADCMinHys The hysteresis value for the ADC minimum limit.
+ * @param ADCMax The ADC code maximum limit value.
+ * @param ADCMaxHys The hysteresis value for the ADC maximum limit.
+ ******************************************************************************/
 typedef struct {
 	uint16_t ADCMin;      /**< The ADC code minimum limit value */
 	uint16_t ADCMinHys;
@@ -3630,18 +3743,40 @@ typedef struct {
 	uint16_t ADCMaxHys;
 } ADCDigComp_Type; /**< @todo not tested */
 
-/**
- * Statistic function
-*/
+/***************************************************************************//**
+ * @brief The `StatCfg_Type` is a structure designed to configure statistical
+ * parameters. It includes a field for the standard deviation
+ * configuration (`StatDev`), a field for specifying the sample size
+ * (`StatSample`), and a boolean field (`StatEnable`) to enable or
+ * disable the statistical block. This structure is useful for managing
+ * statistical settings in applications that require statistical analysis
+ * or data processing.
+ *
+ * @param StatDev Statistic standard deviation configure.
+ * @param StatSample Sample size.
+ * @param StatEnable Set true to enable statistic block.
+ ******************************************************************************/
 typedef struct {
 	uint32_t StatDev;     /**< Statistic standard deviation configure */
 	uint32_t StatSample;  /**< Sample size */
 	bool StatEnable;  /**< Set ture to enable statistic block */
 } StatCfg_Type;
 
-/**
- * Switch matrix configure
- */
+/***************************************************************************//**
+ * @brief The SWMatrixCfg_Type is a structure used to configure a matrix of
+ * switches, each represented by a 32-bit unsigned integer. It includes
+ * four members: Dswitch, Pswitch, Nswitch, and Tswitch, which are used
+ * to select and configure different switch options for various terminals
+ * in a system. This structure is likely used in hardware configuration
+ * or signal routing applications where precise control over switch
+ * settings is required.
+ *
+ * @param Dswitch Selects from a predefined set of switch options such as
+ * SWD_RCAL0, SWD_AIN0, etc.
+ * @param Pswitch Represents a configuration switch for a positive terminal.
+ * @param Nswitch Represents a configuration switch for a negative terminal.
+ * @param Tswitch Represents a configuration switch for a test terminal.
+ ******************************************************************************/
 typedef struct {
 	uint32_t Dswitch; /**< Select from SWD_RCAL0, SWD_AIN0, ... */
 	uint32_t Pswitch;
@@ -3649,7 +3784,28 @@ typedef struct {
 	uint32_t Tswitch;
 } SWMatrixCfg_Type;
 
-/** HSTIA Configure */
+/***************************************************************************//**
+ * @brief The HSTIACfg_Type is a configuration structure for a High-Speed
+ * Transimpedance Amplifier (HSTIA) that includes settings for bias, RTIA
+ * selection, CTIA value, and diode switch control. It allows for
+ * detailed configuration of the amplifier's internal components, such as
+ * the biasing and feedback network, to optimize performance for specific
+ * applications. The structure provides fields to control both active and
+ * deactivated states of the RTIA and Rload, as well as an option to
+ * close a switch for an internal diode, enhancing the flexibility and
+ * adaptability of the amplifier's configuration.
+ *
+ * @param HstiaBias Specifies the bias setting for the HSTIA, with a note about
+ * closing the switch at LPDAC when Vzero is selected.
+ * @param HstiaRtiaSel Selects the RTIA (transimpedance amplifier resistor)
+ * value for the HSTIA.
+ * @param HstiaCtia Sets the internal CTIA (capacitive transimpedance amplifier)
+ * value ranging from 1 to 32 pF.
+ * @param DiodeClose Indicates whether the switch for the internal back-to-back
+ * diode is closed.
+ * @param HstiaDeRtia Specifies the deactivated RTIA value for the HSTIA.
+ * @param HstiaDeRload Specifies the deactivated Rload value for the HSTIA.
+ ******************************************************************************/
 typedef struct {
 	uint32_t HstiaBias;         /**< @todo When select Vzero as bias, the switch at LPDAC should be closed */
 	uint32_t HstiaRtiaSel;
@@ -3659,27 +3815,50 @@ typedef struct {
 	uint32_t HstiaDeRload;
 } HSTIACfg_Type;
 
-/** HSDAC Configure */
+/***************************************************************************//**
+ * @brief The HSDACCfg_Type structure is used to configure the settings of a
+ * high-speed digital-to-analog converter (DAC). It includes fields for
+ * setting the gain of the excitation buffer and the DAC itself, as well
+ * as a field for determining the update rate of the DAC. This structure
+ * allows for flexible configuration of the DAC's performance
+ * characteristics, making it suitable for various applications requiring
+ * precise analog signal generation.
+ *
+ * @param ExcitBufGain Selects the gain for the excitation buffer, options
+ * include EXCITBUFGAIN_2 and EXCITBUFGAIN_0P25.
+ * @param HsDacGain Selects the gain for the high-speed DAC, options include
+ * HSDACGAIN_1 and HSDACGAIN_0P2.
+ * @param HsDacUpdateRate Specifies the divider for the DAC update rate, with a
+ * valid range from 7 to 255.
+ ******************************************************************************/
 typedef struct {
 	uint32_t ExcitBufGain;      /**< Select from  EXCITBUFGAIN_2, EXCITBUFGAIN_0P25 */
 	uint32_t HsDacGain;         /**< Select from  HSDACGAIN_1, HSDACGAIN_0P2 */
 	uint32_t HsDacUpdateRate;   /**< Divider for DAC update. Available range is 7~255. */
 } HSDACCfg_Type;
 
-/** LPDAC Configure
- * @note The LPDAC structure:
- * Switch to select DAC ouput to Vzero and Vbias nodes. Vzero and Vbias can select from DAC6BIT and DAC12BIT output freely.
- * LPDAC  >DAC6BIT ---- Vzero   LPDACVZERO_12BIT
- *                 \--- Vbias   LPDACVBIAS_6BIT
- *        >DAC12BIT---- Vzero   LPDACVZERO_6BIT
- *                 \--- Vbias   LPDACVBIAS_12BIT
- * Vzero/Vbias switch, controlled by @ref LPDACCfg_Type LpDacSW
- * Vzero ------PIN
- *       \-----LPTIA  LPDACSW_VZERO2LPTIA. LPTIA positive input
- *        \----HSTIA  LPDACSW_VZERO2LPAMP. HSTIA positive input. Note, there is a MUX on HSTIA positive input pin to select the bias voltage between Vzero and 1.1V fixed internal reference.
- * Vbias ------PIN    LPDACSW_VBIAS2PIN
- *       \-----LPAMP  LPDACSW_VBIAS2LPAMP positive input. The potential state amplifier input, or called LPAMP or PA(potential amplifier).
-*/
+/***************************************************************************//**
+ * @brief The LPDACCfg_Type structure is used to configure a Low Power Digital-
+ * to-Analog Converter (DAC) with various settings including source
+ * selection, output connections, switch settings, reference selection,
+ * and power management. It supports both 6-bit and 12-bit DAC data
+ * configurations and includes options for resetting and powering up the
+ * DAC. This structure is essential for managing the DAC's behavior in a
+ * low power environment, ensuring flexibility and control over its
+ * operation.
+ *
+ * @param LpDacSrc Specifies the source of the Low Power DAC, either
+ * LPDACSRC_MMR or LPDACSRC_WG.
+ * @param LpDacVzeroMux Determines which DAC output connects to Vzero, either
+ * 6Bit or 12Bit DAC.
+ * @param LpDacVbiasMux Determines which DAC output connects to Vbias.
+ * @param LpDacSW Configures the LPDAC switch settings, available from Si2.
+ * @param LpDacRef Specifies the reference selection for the DAC.
+ * @param DataRst Indicates whether to reset the register REG_AFE_LPDACDAT0DATA.
+ * @param PowerEn Controls the power-up state of REG_AFE_LPDACDAT0.
+ * @param DacData12Bit Holds the data for the 12-bit DAC.
+ * @param DacData6Bit Holds the data for the 6-bit DAC.
+ ******************************************************************************/
 typedef struct {
 	uint32_t LpDacSrc;        /**< LPDACSRC_MMR or LPDACSRC_WG. Note: HSDAC is always connects to WG. Disable HSDAC if there is need. */
 	uint32_t LpDacVzeroMux;   /**< Select which DAC output connects to Vzero. 6Bit or 12Bit DAC */
@@ -3693,9 +3872,31 @@ typedef struct {
 	/** @todo connection with HSTIA Vbias selection */
 } LPDACCfg_Type;
 
-/**
- * Low power amplifiers(PA and TIA)
-*/
+/***************************************************************************//**
+ * @brief The LPAmpCfg_Type is a structure that encapsulates configuration
+ * parameters for a low-power amplifier system, specifically focusing on
+ * the transimpedance amplifier (TIA) and power amplifier (PA)
+ * components. It includes resistor values for feedback, load, and
+ * transimpedance, as well as power mode settings and switch
+ * configurations. Additionally, it provides boolean flags to control the
+ * power state of the PA and TIA, allowing for efficient power management
+ * in low-power applications.
+ *
+ * @param LpTiaRf Represents the feedback resistor value for the low-power
+ * transimpedance amplifier.
+ * @param LpTiaRload Specifies the load resistor value for the low-power
+ * transimpedance amplifier.
+ * @param LpTiaRtia Defines the transimpedance resistor value for the low-power
+ * transimpedance amplifier.
+ * @param LpAmpPwrMod Indicates the power mode configuration for the low-power
+ * power amplifier and transimpedance amplifier.
+ * @param LpTiaSW Represents a set of switches for the low-power transimpedance
+ * amplifier, configured using the LPTIASW() macro.
+ * @param LpPaPwrEn Boolean flag to enable or disable power for the low-power
+ * power amplifier.
+ * @param LpTiaPwrEn Boolean flag to enable or disable power for the low-power
+ * transimpedance amplifier.
+ ******************************************************************************/
 typedef struct {
 	uint32_t LpTiaRf;
 	uint32_t LpTiaRload;
@@ -3706,9 +3907,27 @@ typedef struct {
 	bool LpTiaPwrEn;
 } LPAmpCfg_Type;
 
-/**
- * Trapezoid Generator parameters
-*/
+/***************************************************************************//**
+ * @brief The WGTrapzCfg_Type is a structure used to configure a trapezoidal
+ * waveform generator, containing parameters for two DC levels, two delay
+ * settings, and two slope settings, all of which are represented as
+ * 32-bit unsigned integers. This configuration allows for precise
+ * control over the waveform characteristics, enabling the generation of
+ * customized trapezoidal waveforms.
+ *
+ * @param WGTrapzDCLevel1 Represents the first DC level configuration for the
+ * trapezoidal waveform generator.
+ * @param WGTrapzDCLevel2 Represents the second DC level configuration for the
+ * trapezoidal waveform generator.
+ * @param WGTrapzDelay1 Specifies the first delay parameter for the trapezoidal
+ * waveform generator.
+ * @param WGTrapzDelay2 Specifies the second delay parameter for the trapezoidal
+ * waveform generator.
+ * @param WGTrapzSlope1 Defines the first slope parameter for the trapezoidal
+ * waveform generator.
+ * @param WGTrapzSlope2 Defines the second slope parameter for the trapezoidal
+ * waveform generator.
+ ******************************************************************************/
 typedef struct {
 	uint32_t WGTrapzDCLevel1;
 	uint32_t WGTrapzDCLevel2;
@@ -3718,9 +3937,19 @@ typedef struct {
 	uint32_t WGTrapzSlope2;
 } WGTrapzCfg_Type;
 
-/**
- * Sin wave generator parameters
-*/
+/***************************************************************************//**
+ * @brief The `WGSinCfg_Type` structure is used to configure a waveform
+ * generator with parameters for sine wave generation. It includes fields
+ * for frequency, amplitude, offset, and phase, allowing precise control
+ * over the characteristics of the generated sine wave. Each field is
+ * represented as a 32-bit unsigned integer, providing a wide range of
+ * values for configuration.
+ *
+ * @param SinFreqWord Frequency word.
+ * @param SinAmplitudeWord Amplitude word, range is 0 to 2047.
+ * @param SinOffsetWord Offset word, range is 0 to 4095.
+ * @param SinPhaseWord Phase word.
+ ******************************************************************************/
 typedef struct {
 	uint32_t SinFreqWord;       /**< Frequency word */
 	uint32_t SinAmplitudeWord;  /**< Amplitude word, range is 0 to 2047 */
@@ -3728,9 +3957,24 @@ typedef struct {
 	uint32_t SinPhaseWord;
 } WGSinCfg_Type;
 
-/**
- * Waveform generator configuration
-*/
+/***************************************************************************//**
+ * @brief The `WGCfg_Type` structure is designed to configure a waveform
+ * generator (WG) with options for different waveform types, including
+ * trapezoid and sine waves. It includes fields to enable or disable gain
+ * and offset calibration, and it specifies the waveform generator type
+ * and the data to be moved to the DAC data register. This structure is
+ * essential for setting up and controlling the behavior of the waveform
+ * generator in a system.
+ *
+ * @param WgType Selects the waveform generator type from predefined options.
+ * @param GainCalEn Enables or disables gain calibration.
+ * @param OffsetCalEn Enables or disables offset calibration.
+ * @param TrapzCfg Holds configuration settings for the trapezoid waveform
+ * generator.
+ * @param SinCfg Holds configuration settings for the sine wave generator.
+ * @param WgCode Specifies the 12-bit data that the waveform generator will
+ * transfer to the DAC data register.
+ ******************************************************************************/
 typedef struct {
 	uint32_t WgType;            /**< Select from WGTYPE_MMR, WGTYPE_SIN, WGTYPE_TRAPZ. HSDAC is always connected to WG. */
 	bool GainCalEn;         /**< Enable Gain calibration */
@@ -3740,9 +3984,23 @@ typedef struct {
 	uint32_t WgCode;            /**< The 12bit data WG will move to DAC data register. */
 } WGCfg_Type;
 
-/**
- * High speed loop configuration
- * */
+/***************************************************************************//**
+ * @brief The HSLoopCfg_Type is a composite data structure that encapsulates
+ * configuration settings for various components of a high-speed loop
+ * system, including a switch matrix, DAC, waveform generator, and
+ * transimpedance amplifier. Each member of the structure is a
+ * configuration type specific to a component, allowing for organized and
+ * modular configuration management.
+ *
+ * @param SWMatCfg An instance of SWMatrixCfg_Type, representing the
+ * configuration for the switch matrix.
+ * @param HsDacCfg An instance of HSDACCfg_Type, representing the configuration
+ * for the high-speed DAC.
+ * @param WgCfg An instance of WGCfg_Type, representing the configuration for
+ * the waveform generator.
+ * @param HsTiaCfg An instance of HSTIACfg_Type, representing the configuration
+ * for the high-speed transimpedance amplifier.
+ ******************************************************************************/
 typedef struct {
 	SWMatrixCfg_Type SWMatCfg;
 	HSDACCfg_Type HsDacCfg;
@@ -3750,17 +4008,41 @@ typedef struct {
 	HSTIACfg_Type HsTiaCfg;
 } HSLoopCfg_Type;
 
-/**
- * Low power loop Configure
- * */
+/***************************************************************************//**
+ * @brief The LPLoopCfg_Type is a structure that encapsulates configuration
+ * settings for a low-power loop, specifically including settings for a
+ * digital-to-analog converter and an amplifier. It is designed to
+ * aggregate the configurations of these two components, likely for use
+ * in a system where low-power operation is critical, such as in battery-
+ * powered or energy-efficient devices.
+ *
+ * @param LpDacCfg This member is of type LPDACCfg_Type and holds the
+ * configuration for the low-power digital-to-analog converter.
+ * @param LpAmpCfg This member is of type LPAmpCfg_Type and holds the
+ * configuration for the low-power amplifier.
+ ******************************************************************************/
 typedef struct {
 	LPDACCfg_Type LpDacCfg;
 	LPAmpCfg_Type LpAmpCfg;
 } LPLoopCfg_Type;
 
-/**
- * DSP Configure
- * */
+/***************************************************************************//**
+ * @brief The DSPCfg_Type is a composite data structure that encapsulates
+ * various configuration settings related to digital signal processing.
+ * It aggregates multiple configuration types, each responsible for a
+ * specific aspect of the ADC and signal processing, such as base
+ * settings, filtering, digital comparison, DFT, and statistical
+ * analysis. This struct allows for organized and centralized management
+ * of these configurations, facilitating easier manipulation and access
+ * within a digital signal processing context.
+ *
+ * @param ADCBaseCfg Holds the base configuration settings for the ADC.
+ * @param ADCFilterCfg Contains the filter configuration settings for the ADC.
+ * @param ADCDigCompCfg Stores the digital comparator configuration for the ADC.
+ * @param DftCfg Represents the configuration for the Discrete Fourier Transform
+ * (DFT).
+ * @param StatCfg Includes the statistical configuration settings.
+ ******************************************************************************/
 typedef struct {
 	ADCBaseCfg_Type ADCBaseCfg;
 	ADCFilterCfg_Type ADCFilterCfg;
@@ -3769,9 +4051,21 @@ typedef struct {
 	StatCfg_Type StatCfg;
 } DSPCfg_Type;
 
-/**
- * GPIO Configure
- * */
+/***************************************************************************//**
+ * @brief The AGPIOCfg_Type is a structure used to configure the settings of
+ * General Purpose Input/Output (GPIO) pins. It includes fields to set
+ * the function of the pins, enable or disable their output and input
+ * capabilities, control pull-up or pull-down resistors, and specify the
+ * output value for the GPIOOUT register. This structure allows for
+ * detailed configuration of GPIO behavior on a microcontroller or
+ * similar device.
+ *
+ * @param FuncSet AGP0 to AGP7 function sets.
+ * @param OutputEnSet Enable output of selected pins, disable other pins.
+ * @param InputEnSet Enable input of selected pins, disable other pins.
+ * @param PullEnSet Enable pull up or down on selected pin, disable other pins.
+ * @param OutVal Value for GPIOOUT register.
+ ******************************************************************************/
 typedef struct {
 	uint32_t FuncSet;         /**< AGP0 to AGP7 function sets */
 	uint32_t OutputEnSet;     /**< AGPIO_Pin0|AGPIO_Pin1|...|AGPIO_Pin7, Enable output of selected pins, disable other pins */
@@ -3780,9 +4074,25 @@ typedef struct {
 	uint32_t OutVal;          /**< Value for GPIOOUT register */
 } AGPIOCfg_Type;
 
-/**
- * FIFO configure
-*/
+/***************************************************************************//**
+ * @brief The `FIFOCfg_Type` structure is used to configure a FIFO (First-In-
+ * First-Out) buffer, which is a type of data structure that manages data
+ * in a sequential order. This structure includes settings to enable or
+ * disable the FIFO, choose the mode of operation, allocate memory,
+ * select the data source, and set a threshold for generating interrupts.
+ * These configurations allow for efficient data management and retrieval
+ * in systems where data needs to be processed in the order it was
+ * received.
+ *
+ * @param FIFOEn Enable DATAFIFO; disabling it will reset the FIFO.
+ * @param FIFOMode Specifies whether the FIFO operates in stream mode or
+ * standard mode.
+ * @param FIFOSize Determines the allocation of the internal 6kB SRAM shared
+ * between Data FIFO and sequencer.
+ * @param FIFOSrc Selects the data source to be stored in the FIFO.
+ * @param FIFOThresh Sets the FIFO threshold value, which can trigger an
+ * interrupt to read data before the FIFO is full.
+ ******************************************************************************/
 typedef struct {
 	bool FIFOEn;          /**< Enable DATAFIFO. Disable FIFO will reset FIFO */
 	uint32_t FIFOMode;        /**< Stream mode or standard FIFO mode */
@@ -3791,9 +4101,25 @@ typedef struct {
 	uint32_t FIFOThresh;      /**< FIFO threshold value. Threshold can be used to generate interrupt so MCU can read back data before FIFO is full */
 } FIFOCfg_Type;
 
-/**
- * Sequencer configure
-*/
+/***************************************************************************//**
+ * @brief The SEQCfg_Type structure is designed to configure a sequencer, which
+ * is a component that executes a series of commands in a specified
+ * order. It includes settings for memory size, enabling the sequencer,
+ * and managing timing between command executions. Some fields are marked
+ * as unused and should not be utilized. The structure ensures that the
+ * sequencer operates within the constraints of available SRAM and
+ * provides options to clear operational counters and CRC values.
+ *
+ * @param SeqMemSize Sequencer memory size, ensuring total SRAM usage is less
+ * than 6kB.
+ * @param SeqEnable Flag to enable the sequencer, allowing it to run with a
+ * valid trigger.
+ * @param SeqBreakEn Unused flag, not recommended for use.
+ * @param SeqIgnoreEn Unused flag, not recommended for use.
+ * @param SeqCntCRCClr Flag to clear sequencer count and CRC.
+ * @param SeqWrTimer Specifies the wait time in clock cycles after each command
+ * execution.
+ ******************************************************************************/
 typedef struct {
 	uint32_t SeqMemSize;      /**< Sequencer memory size. SRAM is used by both FIFO and Sequencer. Make sure the total SRAM used is less than 6kB. */
 	bool SeqEnable;       /**< Enable sequencer. Only with valid trigger, sequencer can run */
@@ -3803,9 +4129,25 @@ typedef struct {
 	uint32_t SeqWrTimer;      /**< Set wait how much clocks after every commands executed */
 } SEQCfg_Type;
 
-/**
- * Sequence info structure
-*/
+/***************************************************************************//**
+ * @brief The SEQInfo_Type structure is designed to encapsulate information
+ * about a sequence in the context of the AF5940 system. It includes
+ * fields for identifying the sequence, specifying its location and
+ * length in SRAM, and determining whether the sequence commands should
+ * be written to SRAM. Additionally, it holds a pointer to the sequence
+ * commands stored in the MCU, facilitating the management and execution
+ * of sequences within the system.
+ *
+ * @param SeqId A 32-bit unsigned integer representing the sequence identifier.
+ * @param SeqRamAddr A 32-bit unsigned integer indicating the start address in
+ * AF5940 SRAM.
+ * @param SeqLen A 32-bit unsigned integer specifying the length of the
+ * sequence.
+ * @param WriteSRAM A boolean flag indicating whether to write the command to
+ * SRAM.
+ * @param pSeqCmd A pointer to a constant 32-bit unsigned integer array storing
+ * the sequencer commands in the MCU.
+ ******************************************************************************/
 typedef struct {
 	uint32_t SeqId;
 	uint32_t SeqRamAddr;      /**< The start address that in AF5940 SRAM */
@@ -3815,9 +4157,26 @@ typedef struct {
 	*pSeqCmd;  /**< Pointer to the sequencer commands that stored in MCU */
 } SEQInfo_Type;
 
-/**
- * Wakeup Timer Configure
- * */
+/***************************************************************************//**
+ * @brief The WUPTCfg_Type is a structure used to configure a wake-up timer,
+ * containing fields for defining the end sequence, order, sleep and
+ * wake-up times for multiple sequences, and a boolean to enable the
+ * timer. This structure is likely used in systems where precise control
+ * over sleep and wake-up sequences is necessary, such as in power
+ * management for embedded systems.
+ *
+ * @param WuptEndSeq A 32-bit unsigned integer representing the end sequence of
+ * the wake-up timer.
+ * @param WuptOrder An array of eight 32-bit unsigned integers defining the
+ * order of wake-up sequences.
+ * @param SeqxSleepTime An array of four 32-bit unsigned integers specifying the
+ * sleep time for each sequence, ranging from 0 to
+ * 0x000f_ffff.
+ * @param SeqxWakeupTime An array of four 32-bit unsigned integers indicating
+ * the wake-up time for each sequence.
+ * @param WuptEn A boolean flag that enables the timer, causing it to start
+ * running when set to true.
+ ******************************************************************************/
 typedef struct {
 	uint32_t WuptEndSeq;       /**<  */
 	uint32_t WuptOrder[8];     /**<  */
@@ -3827,9 +4186,26 @@ typedef struct {
 } WUPTCfg_Type;
 
 
-/**
- * Clock configure
-*/
+/***************************************************************************//**
+ * @brief The CLKCfg_Type structure is used to configure clock settings for a
+ * system, including the sources and dividers for both system and ADC
+ * clocks. It also includes boolean flags to enable or configure various
+ * oscillators, such as the internal high-frequency oscillator (HFOSC)
+ * and low-frequency oscillator (LFOSC), as well as an external crystal
+ * oscillator driver. This structure allows for flexible clock management
+ * in embedded systems.
+ *
+ * @param SysClkSrc Specifies the source of the system clock.
+ * @param ADCCLkSrc Specifies the source of the ADC clock.
+ * @param SysClkDiv Defines the divider for the system clock.
+ * @param ADCClkDiv Defines the divider for the ADC clock.
+ * @param HFOSCEn Indicates whether the internal 16MHz/32MHz HFOSC is enabled.
+ * @param HfOSC32MHzMode Indicates whether the internal HFOSC is set to output
+ * 32MHz.
+ * @param LFOSCEn Indicates whether the internal 32kHz oscillator is enabled.
+ * @param HFXTALEn Indicates whether the external crystal oscillator driver is
+ * enabled.
+ ******************************************************************************/
 typedef struct {
 	uint32_t SysClkSrc;
 	uint32_t ADCCLkSrc;
@@ -3842,9 +4218,27 @@ typedef struct {
 } CLKCfg_Type;
 
 
-/**
- * HSTIA internal RTIA calibration structure
-*/
+/***************************************************************************//**
+ * @brief The HSRTIACal_Type is a structure used for configuring and calibrating
+ * a high-speed transimpedance amplifier (TIA) system. It includes
+ * parameters for calibration frequency, resistor values, and clock
+ * frequencies, as well as configurations for signal processing
+ * components like the SINC filters and discrete Fourier transform. The
+ * structure also allows for the selection of result output format,
+ * either in polar or Cartesian coordinates, making it versatile for
+ * various signal processing applications.
+ *
+ * @param fFreq Calibration frequency.
+ * @param fRcal Rcal resistor value in Ohm.
+ * @param SysClkFreq The real frequency of system clock.
+ * @param AdcClkFreq The real frequency of ADC clock.
+ * @param HsTiaCfg Configuration for the high-speed transimpedance amplifier.
+ * @param ADCSinc3Osr Oversampling ratio for SINC3 filter.
+ * @param ADCSinc2Osr Oversampling ratio for SINC2 filter.
+ * @param DftCfg Configuration for the discrete Fourier transform.
+ * @param bPolarResult Determines if results are returned in polar or Cartesian
+ * coordinates.
+ ******************************************************************************/
 typedef struct {
 	float fFreq;                /**< Calibration frequency */
 	float fRcal;                /**< Rcal resistor value in Ohm*/
@@ -3858,9 +4252,28 @@ typedef struct {
 	uint32_t bPolarResult;   /**< bTRUE-Polar coordinate:Return results in Magnitude and Phase. bFALSE-Cartesian coordinate: Return results in Real part and Imaginary Part */
 } HSRTIACal_Type;
 
-/**
- * LPTIA internal RTIA calibration structure
-*/
+/***************************************************************************//**
+ * @brief The LPRTIACal_Type is a structure used for configuring and performing
+ * calibration of RTIA (Resistor Transimpedance Amplifier) in a system.
+ * It includes parameters for calibration frequency, resistor values,
+ * system and ADC clock frequencies, amplifier configuration, ADC
+ * oversampling ratios, and the format of the calibration results. This
+ * structure is essential for ensuring accurate calibration and
+ * measurement in systems that require precise impedance analysis.
+ *
+ * @param fFreq Calibration frequency, set to 0.0 for DC calibration.
+ * @param fRcal Rcal resistor value in Ohm.
+ * @param SysClkFreq The real frequency of the system clock.
+ * @param AdcClkFreq The real frequency of the ADC clock.
+ * @param LpAmpCfg Selects which RTIA to calibrate.
+ * @param ADCSinc3Osr SINC3OSR_5, SINC3OSR_4, or SINC3OSR_2 for ADC SINC3
+ * oversampling ratio.
+ * @param ADCSinc2Osr SINC3OSR_5, SINC3OSR_4, or SINC3OSR_2 for ADC SINC2
+ * oversampling ratio.
+ * @param DftCfg Configuration for the Discrete Fourier Transform.
+ * @param bPolarResult Determines if results are returned in polar (magnitude
+ * and phase) or Cartesian (real and imaginary) coordinates.
+ ******************************************************************************/
 typedef struct {
 	float fFreq;                /**< Calibration frequency. @todo DC not vefiried now. Set it to 0.0 for DC calibration */
 	float fRcal;                /**< Rcal resistor value in Ohm*/
@@ -3874,18 +4287,44 @@ typedef struct {
 	uint32_t bPolarResult;      /**< bTRUE-Polar coordinate:Return results in Magnitude and Phase. bFALSE-Cartesian coordinate: Return results in Real part and Imaginary Part */
 } LPRTIACal_Type;
 
-/**
- * LFOSC frequency measure structrue
-*/
+/***************************************************************************//**
+ * @brief The LFOSCMeasure_Type is a structure designed to hold parameters
+ * necessary for measuring the Low-Frequency Oscillator (LFOSC)
+ * frequency. It includes the starting address of the calibration
+ * sequence, the duration of the calibration process in milliseconds, and
+ * the system clock frequency. This structure is essential for
+ * configuring and executing precise LFOSC frequency measurements,
+ * ensuring accurate calibration and system performance.
+ *
+ * @param CalSeqAddr Sequence start address.
+ * @param CalDuration Time used for calibration in unit of ms, recommended to
+ * use tens of milliseconds like 10ms.
+ * @param SystemClkFreq System clock frequency.
+ ******************************************************************************/
 typedef struct {
 	uint32_t CalSeqAddr;        /**< Sequence start address */
 	float CalDuration;          /**< Time used for calibration in unit of ms. Recommend to use tens of millisecond like 10ms */
 	float SystemClkFreq;        /**< System clock frequency.  */
 } LFOSCMeasure_Type; /**< Parameters to measure LFOSC frequency */
 
-/**
- * Structrue for calculating how much system clocks needed for specified number of data
-*/
+/***************************************************************************//**
+ * @brief The `ClksCalInfo_Type` structure is designed to hold configuration and
+ * calibration information for an ADC (Analog-to-Digital Converter)
+ * system. It includes parameters for oversampling ratios for Sinc3 and
+ * Sinc2 filters, the number of averages, and the source for DFT
+ * (Discrete Fourier Transform). Additionally, it contains fields for
+ * data type and count, as well as a ratio of the system clock to the ADC
+ * clock frequency, which is crucial for synchronizing operations between
+ * the system and the ADC.
+ *
+ * @param ADCSinc3Osr Specifies the oversampling ratio for the ADC Sinc3 filter.
+ * @param ADCSinc2Osr Specifies the oversampling ratio for the ADC Sinc2 filter.
+ * @param ADCAvgNum Indicates the number of averages for the ADC.
+ * @param DftSrc Represents the source for the Discrete Fourier Transform.
+ * @param DataType Defines the type of data being processed.
+ * @param DataCount Counts the number of data points.
+ * @param RatioSys2AdcClk Ratio of system clock to ADC clock frequency.
+ ******************************************************************************/
 typedef struct {
 	uint32_t ADCSinc3Osr;
 	uint32_t ADCSinc2Osr;
@@ -3897,9 +4336,25 @@ typedef struct {
 	float RatioSys2AdcClk;/**< Ratio of system clock to ADC clock frequency */
 } ClksCalInfo_Type;
 
-/**
- * Software controlled Sweep Function
- * */
+/***************************************************************************//**
+ * @brief The SoftSweepCfg_Type is a configuration structure used to control the
+ * parameters of a frequency sweep operation in software. It includes
+ * settings for enabling the sweep, defining the start and stop
+ * frequencies, the number of points in the sweep, the type of sweep
+ * (linear or logarithmic), and tracking the current position within the
+ * sweep. This structure is essential for applications requiring precise
+ * frequency modulation and control.
+ *
+ * @param SweepEn Indicates if the software can automatically sweep frequency,
+ * enabled when set to 1.
+ * @param SweepStart Defines the starting frequency for the sweep.
+ * @param SweepStop Defines the ending frequency for the sweep.
+ * @param SweepPoints Specifies the number of points between the start and stop
+ * frequencies.
+ * @param SweepLog Determines if the sweep step is linear (0) or logarithmic
+ * (1).
+ * @param SweepIndex Represents the current position in the sweep.
+ ******************************************************************************/
 typedef struct {
 	bool SweepEn;         /**< Software can automatically sweep frequency from following parameters. Set value to 1 to enable it. */
 	float SweepStart;         /**< Sweep start frequency. Software will go back to the start frequency when it reaches SWEEP_STOP */
@@ -3909,41 +4364,97 @@ typedef struct {
 	uint32_t SweepIndex;      /**< Current position of sweep */
 } SoftSweepCfg_Type;
 
-/**
- * Impedance result in Polar coordinate
-*/
+/***************************************************************************//**
+ * @brief The `fImpPol_Type` is a structure that represents a polar coordinate
+ * system, consisting of two floating-point members: `Magnitude` and
+ * `Phase`. The `Magnitude` member stores the length or size of the
+ * vector, while the `Phase` member stores the angle in radians or
+ * degrees, indicating the direction of the vector. This structure is
+ * useful in applications involving complex numbers, signal processing,
+ * or any domain where polar coordinates are preferred over Cartesian
+ * coordinates.
+ *
+ * @param Magnitude Represents the magnitude component of a polar coordinate.
+ * @param Phase Represents the phase angle component of a polar coordinate.
+ ******************************************************************************/
 typedef struct {
 	float Magnitude;
 	float Phase;
 } fImpPol_Type; //Polar
 
-/**
- * Impedance result in Cartesian coordinate
-*/
+/***************************************************************************//**
+ * @brief The `fImpCar_Type` structure is used to represent complex numbers in
+ * Cartesian form, consisting of two floating-point members: `Real` for
+ * the real component and `Image` for the imaginary component. This
+ * structure is useful in mathematical computations involving complex
+ * numbers, allowing for easy manipulation and storage of both parts of a
+ * complex number.
+ *
+ * @param Real Represents the real part of a complex number in Cartesian form.
+ * @param Image Represents the imaginary part of a complex number in Cartesian
+ * form.
+ ******************************************************************************/
 typedef struct {
 	float Real;
 	float Image;
 } fImpCar_Type; //Cartesian
 
-/**
- * int32_t type Impedance result in Cartesian coordinate
-*/
+/***************************************************************************//**
+ * @brief The `iImpCar_Type` structure is designed to represent a complex number
+ * using two 32-bit integers, one for the real part and one for the
+ * imaginary part. This structure is useful in applications where complex
+ * number arithmetic is required, and the precision of 32-bit integers is
+ * sufficient for the real and imaginary components.
+ *
+ * @param Real Represents the real part of a complex number as a 32-bit integer.
+ * @param Image Represents the imaginary part of a complex number as a 32-bit
+ * integer.
+ ******************************************************************************/
 typedef struct {
 	int32_t Real;
 	int32_t Image;
 } iImpCar_Type;
 
-/**
- * Structure used to store register information(address and its data)
- * */
+/***************************************************************************//**
+ * @brief The SEQGenRegInfo_Type is a structure designed to hold information
+ * about a sequencer register, specifically its address and value. The
+ * address is stored in an 8-bit field, which is sufficient for the
+ * sequencer's addressing needs, while the value is stored in a 24-bit
+ * field, reflecting the sequencer's limitation on register data size.
+ * This structure is likely used in contexts where compact representation
+ * of register information is crucial, such as in embedded systems or
+ * hardware interfacing.
+ *
+ * @param RegAddr 8-bit field representing the register address for the
+ * sequencer.
+ * @param RegValue 24-bit field representing the register value, limited by the
+ * sequencer.
+ ******************************************************************************/
 typedef struct {
 	uint32_t RegAddr  : 8;  /* 8bit address is enough for sequencer */
 	uint32_t RegValue : 24; /* Reg data is limited to 24bit by sequencer  */
 } SEQGenRegInfo_Type;
 
-/**
- * Sequencer generator data base.
- */
+/***************************************************************************//**
+ * @brief The SeqGen structure is designed to manage and control the generation
+ * of sequences, providing fields to start the generator, manage buffer
+ * size, and store the generated sequence. It includes pointers to the
+ * sequence buffer and register information, as well as fields to track
+ * the sequence length, register count, and any errors encountered during
+ * operation.
+ *
+ * @param EngineStart Indicates whether the generator should start immediately.
+ * @param BufferSize Specifies the total size of the buffer used for sequence
+ * generation.
+ * @param pSeqBuff Pointer to the buffer where the generated sequence is stored.
+ * @param SeqLen Holds the length of the generated sequence.
+ * @param pRegInfo Pointer to a structure containing register information for
+ * the sequence generator.
+ * @param RegCount Stores the count of registers used in the sequence
+ * generation.
+ * @param LastError Records the last error code encountered during sequence
+ * generation.
+ ******************************************************************************/
 struct SeqGen {
 	bool EngineStart;   /* Start the generator now */
 	uint32_t BufferSize;    /* Total buffer size */
@@ -3955,18 +4466,41 @@ struct SeqGen {
 	int LastError;
 };
 
-/**
- * ad5940 device driver initialization parameters.
- */
+/***************************************************************************//**
+ * @brief The `ad5940_init_param` structure is designed to encapsulate the
+ * initialization parameters required for setting up the AD5940 device.
+ * It includes configurations for the SPI interface and two GPIO pins,
+ * which are essential for the device's communication and control
+ * operations. This structure ensures that all necessary hardware
+ * interfaces are properly initialized before the device is used.
+ *
+ * @param spi_init Holds the initialization parameters for the SPI interface.
+ * @param reset_gpio_init Contains the initialization parameters for the reset
+ * GPIO pin.
+ * @param gp0_gpio_init Stores the initialization parameters for the general-
+ * purpose GPIO pin 0.
+ ******************************************************************************/
 struct ad5940_init_param {
 	struct no_os_spi_init_param spi_init;
 	struct no_os_gpio_init_param reset_gpio_init;
 	struct no_os_gpio_init_param gp0_gpio_init;
 };
 
-/**
- * ad5940 device driver handler.
- */
+/***************************************************************************//**
+ * @brief The `ad5940_dev` structure is designed to encapsulate the necessary
+ * components for interfacing with an AD5940 device. It includes pointers
+ * to SPI and GPIO descriptors, which are essential for communication and
+ * control of the device's hardware pins. Additionally, it contains a
+ * `SeqGen` instance, which is likely used for generating sequences
+ * required for the device's operation. This structure serves as a
+ * central point for managing the device's hardware interface and
+ * operational sequences.
+ *
+ * @param spi Pointer to a SPI descriptor used for SPI communication.
+ * @param reset_gpio Pointer to a GPIO descriptor for the reset pin.
+ * @param gp0_gpio Pointer to a GPIO descriptor for the general-purpose pin 0.
+ * @param SeqGenDB Instance of SeqGen used for sequence generation.
+ ******************************************************************************/
 struct ad5940_dev {
 	struct no_os_spi_desc *spi;
 	struct no_os_gpio_desc *reset_gpio;
@@ -3983,165 +4517,1846 @@ struct ad5940_dev {
  * @{
 */
 /* 0. Device driver init/remove functions */
+/***************************************************************************//**
+ * @brief This function is used to initialize the AD5940 device, setting up
+ * necessary hardware configurations such as SPI, GPIO, and clock
+ * settings. It must be called with valid parameters after allocating
+ * memory for the device structure. If any of the initialization steps
+ * fail, the function will clean up any allocated resources before
+ * returning an error code. It is important to ensure that the `device`
+ * pointer is not null and that the `init_param` structure is properly
+ * populated with the required initialization parameters.
+ *
+ * @param device A pointer to a pointer of type `struct ad5940_dev`. This must
+ * not be null, and the caller retains ownership of the memory
+ * allocated for the device structure.
+ * @param init_param A pointer to a `struct ad5940_init_param` that contains the
+ * initialization parameters for the AD5940 device. This must
+ * not be null and should be properly initialized with valid
+ * values.
+ * @return Returns 0 on successful initialization of the device. On failure, it
+ * returns a negative error code indicating the type of error
+ * encountered during the initialization process.
+ ******************************************************************************/
 int ad5940_init(struct ad5940_dev **device,
 		struct ad5940_init_param *init_param);
+/***************************************************************************//**
+ * @brief This function is intended to be called when the `ad5940` device is no
+ * longer needed, allowing for proper cleanup of resources. It should
+ * only be called after the device has been initialized and used. The
+ * function safely handles a null pointer for the device, ensuring that
+ * no operations are performed if the pointer is invalid. After calling
+ * this function, the caller should not use the device pointer again, as
+ * it will be freed.
+ *
+ * @param dev A pointer to the `ad5940_dev` structure representing the device to
+ * be removed. Must not be null; if null, the function will return
+ * immediately without performing any operations.
+ * @return Returns 0 upon successful removal of the device. No other values are
+ * returned.
+ ******************************************************************************/
 int ad5940_remove(struct ad5940_dev *dev);
 
 /* 1. Basic SPI functions */
+/***************************************************************************//**
+ * @brief This function is used to write a 32-bit value to a specified register
+ * address in the device. It should be called after ensuring that the
+ * device has been properly initialized and is ready for communication.
+ * If the device's sequence generator is active, the function will use a
+ * specific sequence write method; otherwise, it will perform a standard
+ * SPI write. It is important to check that the device pointer is valid
+ * before calling this function, as passing a null pointer will result in
+ * an error.
+ *
+ * @param dev A pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null; passing a null pointer will result in an error.
+ * @param RegAddr The address of the register to write to. This should be a
+ * valid register address as defined by the device's
+ * specifications.
+ * @param RegData The 32-bit data to write to the specified register. This value
+ * should be formatted correctly according to the register's
+ * expected data type.
+ * @return Returns 0 on success, or a negative error code if the operation
+ * fails, such as -EINVAL for invalid input.
+ ******************************************************************************/
 int ad5940_WriteReg(struct ad5940_dev *dev, uint16_t RegAddr, uint32_t RegData);
+/***************************************************************************//**
+ * @brief This function is used to read a specific register from the AD5940
+ * device. It should be called after the device has been properly
+ * initialized and configured. If the sequence generator is active, the
+ * function will read the register using the sequence read method;
+ * otherwise, it will use the SPI read method. It is important to ensure
+ * that the `dev` parameter is not null before calling this function, as
+ * passing a null pointer will result in an error.
+ *
+ * @param dev A pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null; otherwise, the function will return an error.
+ * @param RegAddr The address of the register to be read. This should be a valid
+ * register address as defined by the AD5940 specifications.
+ * @param RegData A pointer to a `uint32_t` where the read register value will
+ * be stored. Caller retains ownership of this pointer, and it
+ * must not be null.
+ * @return Returns 0 on success, or a negative error code if the operation
+ * fails.
+ ******************************************************************************/
 int ad5940_ReadReg(struct ad5940_dev *dev, uint16_t RegAddr, uint32_t *RegData);
+/***************************************************************************//**
+ * @brief This function is used to write a value to a specific register while
+ * applying a mask to control which bits are modified. It should be
+ * called when there is a need to update certain bits of a register
+ * without affecting others. The function first reads the current value
+ * of the register, applies the mask to clear the bits specified, and
+ * then sets the bits according to the provided data. It is important to
+ * ensure that the `dev` parameter is valid and properly initialized
+ * before calling this function. If the register read operation fails,
+ * the function will return an error code.
+ *
+ * @param dev A pointer to an `ad5940_dev` structure representing the device.
+ * Must not be null and should be properly initialized.
+ * @param RegAddr The address of the register to be modified. This should be a
+ * valid register address for the device.
+ * @param mask A 32-bit mask that specifies which bits in the register should be
+ * cleared. The mask should be properly defined to avoid unintended
+ * modifications.
+ * @param RegData A 32-bit value that specifies the new data to be written to
+ * the register. This value will be combined with the existing
+ * register value according to the mask.
+ * @return Returns 0 on success, or a negative error code if the operation
+ * fails.
+ ******************************************************************************/
 int ad5940_WriteReg_mask(struct ad5940_dev *dev, uint16_t RegAddr,
 			 uint32_t mask, uint32_t RegData);
+/***************************************************************************//**
+ * @brief This function is used to read data from the FIFO buffer of the
+ * `ad5940` device. It should be called after the device has been
+ * properly initialized. The function allows reading a specified number
+ * of data entries, with a minimum requirement of reading at least 4
+ * bytes. If the requested read count is less than 4, it reads the data
+ * one entry at a time. If the read count is 4 or more, it uses a more
+ * efficient method to read the data. The function will return an error
+ * code if the device pointer is null or if any read operation fails.
+ *
+ * @param dev A pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null.
+ * @param pBuffer A pointer to a buffer where the read data will be stored.
+ * Caller retains ownership of the buffer.
+ * @param uiReadCount The number of data entries to read from the FIFO buffer.
+ * Must be at least 4 for efficient reading; otherwise, it
+ * will read fewer entries.
+ * @return Returns 0 on success, or a negative error code if an error occurs
+ * during the read operation.
+ ******************************************************************************/
 int ad5940_FIFORd(struct ad5940_dev *dev, uint32_t *pBuffer,
 		  uint32_t uiReadCount);
 
 /* 2. AD5940 Top Control functions */
+/***************************************************************************//**
+ * @brief This function is used to enable or disable specific Analog Front End
+ * (AFE) features based on the provided control settings. It should be
+ * called after initializing the `ad5940_dev` structure. The `AfeCtrlSet`
+ * parameter specifies which AFE features to control, while the `State`
+ * parameter determines whether to enable or disable those features. If
+ * the `State` is true, the specified features will be enabled; if false,
+ * they will be disabled. The function reads the current AFE
+ * configuration, modifies it according to the specified settings, and
+ * writes the updated configuration back. It is important to ensure that
+ * the `dev` parameter is valid and properly initialized before calling
+ * this function.
+ *
+ * @param dev Pointer to an `ad5940_dev` structure representing the device. Must
+ * not be null and should be properly initialized.
+ * @param AfeCtrlSet Bitmask representing the AFE features to control. Valid
+ * values are defined by the AFECTRL_* constants. The function
+ * will only modify bits that are set in this mask.
+ * @param State Boolean value indicating whether to enable (true) or disable
+ * (false) the specified AFE features. This parameter must be a
+ * valid boolean.
+ * @return Returns 0 on success, or a negative error code if the operation
+ * fails.
+ ******************************************************************************/
 int ad5940_AFECtrlS(struct ad5940_dev *dev, uint32_t AfeCtrlSet, bool State);
+/***************************************************************************//**
+ * @brief This function is used to configure the low power mode settings of the
+ * device. It should be called after the device has been properly
+ * initialized. The `EnSet` parameter specifies which blocks to enable,
+ * while the function automatically determines which blocks to disable
+ * based on the current settings. It is important to ensure that the
+ * device is in a state that allows for low power mode changes, as
+ * invalid configurations may lead to unexpected behavior. The function
+ * will return an error code if the read or write operations to the
+ * device's registers fail.
+ *
+ * @param dev A pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null.
+ * @param EnSet A bitmask indicating which low power mode features to enable.
+ * Valid values are defined by the `LPMODECTRL_*` constants. The
+ * function will handle invalid values by ignoring them.
+ * @return Returns 0 on success, or a negative error code if the operation
+ * fails.
+ ******************************************************************************/
 int ad5940_LPModeCtrlS(struct ad5940_dev *dev, uint32_t EnSet);
+/***************************************************************************//**
+ * @brief This function configures the power and bandwidth settings for the
+ * Analog Front End (AFE) of the device. It should be called after
+ * initializing the device and before starting any data acquisition
+ * processes. The function combines the power and bandwidth parameters
+ * into a single register value and writes it to the appropriate
+ * register. Ensure that the values provided for power and bandwidth are
+ * within the valid ranges defined by the device specifications to avoid
+ * unexpected behavior.
+ *
+ * @param dev A pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null.
+ * @param AfePwr The power setting for the AFE. This value should be within the
+ * valid range specified in the device documentation.
+ * @param AfeBw The bandwidth setting for the AFE. This value should also be
+ * within the valid range specified in the device documentation.
+ * @return Returns the result of the register write operation, which indicates
+ * success or failure of the operation.
+ ******************************************************************************/
 int ad5940_AFEPwrBW(struct ad5940_dev *dev, uint32_t AfePwr,
 		    uint32_t AfeBw); /* AFE power mode and system bandwidth control */
+/***************************************************************************//**
+ * @brief This function is used to configure the reference settings of the
+ * Analog Front End (AFE) device. It should be called after the device
+ * has been properly initialized. The function modifies various reference
+ * buffer configurations based on the settings provided in the
+ * `AFERefCfg_Type` structure. It is important to ensure that the `dev`
+ * parameter is valid and that the `pBufCfg` structure is properly
+ * populated with the desired configuration values. If any read or write
+ * operation fails, the function will return an error code.
+ *
+ * @param dev A pointer to the `ad5940_dev` structure representing the AFE
+ * device. Must not be null.
+ * @param pBufCfg A pointer to an `AFERefCfg_Type` structure containing the
+ * configuration settings for the reference. Must not be null and
+ * should be properly initialized with valid values.
+ * @return Returns 0 on success, or a negative error code if any operation
+ * fails.
+ ******************************************************************************/
 int ad5940_REFCfgS(struct ad5940_dev *dev, AFERefCfg_Type *pBufCfg);
 
 /* 3. High_Speed_Loop Functions */
+/***************************************************************************//**
+ * @brief This function is used to configure the high-speed loop settings for a
+ * specified device. It must be called after the device has been properly
+ * initialized. The function takes a pointer to a configuration structure
+ * that contains various settings for the high-speed loop, including DAC,
+ * TIA, switch matrix, and waveform generator configurations. If any of
+ * the configuration steps fail, the function will return an error code,
+ * allowing the caller to handle the failure appropriately.
+ *
+ * @param dev A pointer to an `ad5940_dev` structure representing the device to
+ * be configured. Must not be null.
+ * @param pHsLoopCfg A pointer to an `HSLoopCfg_Type` structure containing the
+ * configuration settings for the high-speed loop. Must not be
+ * null.
+ * @return Returns a non-negative integer on success, or a negative error code
+ * if any configuration step fails.
+ ******************************************************************************/
 int ad5940_HSLoopCfgS(struct ad5940_dev *dev, HSLoopCfg_Type *pHsLoopCfg);
+/***************************************************************************//**
+ * @brief This function is used to configure the switch matrix settings for the
+ * device. It should be called after the device has been properly
+ * initialized. The function takes a pointer to a `SWMatrixCfg_Type`
+ * structure that contains the desired switch configurations. If any of
+ * the register write operations fail, the function will return an error
+ * code. It is important to ensure that the provided configuration
+ * structure is valid and properly initialized before calling this
+ * function.
+ *
+ * @param dev A pointer to an `ad5940_dev` structure representing the device.
+ * Must not be null.
+ * @param pSwMatrix A pointer to a `SWMatrixCfg_Type` structure containing the
+ * switch configuration values. Must not be null.
+ * @return Returns 0 on success, or a negative error code if any of the register
+ * write operations fail.
+ ******************************************************************************/
 int ad5940_SWMatrixCfgS(struct ad5940_dev *dev, SWMatrixCfg_Type *pSwMatrix);
+/***************************************************************************//**
+ * @brief This function is used to configure the high-speed digital-to-analog
+ * converter (DAC) settings for a specified device. It should be called
+ * after the device has been properly initialized. The configuration is
+ * determined by the parameters provided in the `HSDACCfg_Type`
+ * structure, which includes settings for excitation buffer gain, DAC
+ * gain, and update rate. It is important to ensure that the values set
+ * in the configuration structure are valid, as invalid settings may lead
+ * to undefined behavior. The function will write the configuration to
+ * the appropriate register of the device.
+ *
+ * @param dev A pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null.
+ * @param pHsDacCfg A pointer to an `HSDACCfg_Type` structure containing the DAC
+ * configuration settings. Must not be null. The structure
+ * should have valid values for excitation buffer gain, DAC
+ * gain, and update rate.
+ * @return Returns an integer indicating the success or failure of the
+ * operation. A return value of 0 typically indicates success, while a
+ * negative value indicates an error.
+ ******************************************************************************/
 int ad5940_HSDacCfgS(struct ad5940_dev *dev, HSDACCfg_Type *pHsDacCfg);
+/***************************************************************************//**
+ * @brief This function is used to configure the HSTIA (High-Speed
+ * Transimpedance Amplifier) settings for a given device. It must be
+ * called after the device has been properly initialized. The
+ * configuration is specified through the `HSTIACfg_Type` structure,
+ * which includes parameters for resistance, load, bias, and diode
+ * status. It is important to ensure that the parameters provided are
+ * within the valid ranges; otherwise, the function will return an error.
+ * The function may modify the device's internal registers based on the
+ * provided configuration.
+ *
+ * @param dev A pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null.
+ * @param pHsTiaCfg A pointer to an `HSTIACfg_Type` structure containing the
+ * configuration settings. Must not be null. The fields within
+ * this structure must adhere to specific valid ranges;
+ * otherwise, the function will return an error.
+ * @return Returns 0 on success, or a negative error code indicating the type of
+ * failure.
+ ******************************************************************************/
 int ad5940_HSTIACfgS(struct ad5940_dev *dev, HSTIACfg_Type *pHsTiaCfg);
 
 /* 4. Low_Power_Loop Functions*/
+/***************************************************************************//**
+ * @brief This function is used to configure the low-power loop settings for a
+ * specified device. It must be called with a valid device handle that
+ * has been properly initialized. The configuration is specified through
+ * a pointer to an `LPLoopCfg_Type` structure, which contains the
+ * necessary settings for both the DAC and the amplifier. If the
+ * configuration for the DAC fails, the function will return an error
+ * code, and the amplifier configuration will not be attempted.
+ * Therefore, it is important to check the return value to ensure that
+ * the configuration was successful.
+ *
+ * @param dev A pointer to an `ad5940_dev` structure representing the device to
+ * be configured. Must not be null and should point to a valid,
+ * initialized device.
+ * @param pLpLoopCfg A pointer to an `LPLoopCfg_Type` structure containing the
+ * configuration settings for the low-power loop. Must not be
+ * null. The structure must be properly populated with valid
+ * DAC and amplifier configuration data.
+ * @return Returns a non-negative integer on success, indicating the result of
+ * the amplifier configuration. If an error occurs during the DAC
+ * configuration, a negative error code is returned.
+ ******************************************************************************/
 int ad5940_LPLoopCfgS(struct ad5940_dev *dev, LPLoopCfg_Type *pLpLoopCfg);
+/***************************************************************************//**
+ * @brief This function is used to configure the Low Power Digital-to-Analog
+ * Converter (LPDAC) settings for a specified device. It should be called
+ * after initializing the device and before using the LPDAC
+ * functionality. The configuration is determined by the parameters
+ * provided in the `LPDACCfg_Type` structure. It is important to ensure
+ * that the device pointer is valid and that the configuration structure
+ * is properly initialized. The function may return an error code if the
+ * configuration fails, such as if the device is not ready or if invalid
+ * settings are provided.
+ *
+ * @param dev A pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null.
+ * @param pLpDacCfg A pointer to an `LPDACCfg_Type` structure containing the
+ * configuration settings for the LPDAC. Must not be null and
+ * should be properly initialized with valid values.
+ * @return Returns 0 on success, or a negative error code indicating the type of
+ * failure.
+ ******************************************************************************/
 int ad5940_LPDACCfgS(struct ad5940_dev *dev, LPDACCfg_Type *pLpDacCfg);
+/***************************************************************************//**
+ * @brief This function is used to write a 12-bit data value and a 6-bit data
+ * value to the LPDAC register of the specified device. It should be
+ * called after the device has been properly initialized. The 6-bit data
+ * is masked to ensure it fits within the valid range, and the 12-bit
+ * data is also masked accordingly. If the provided `dev` pointer is
+ * null, the function will not perform the write operation, and it is
+ * expected that the caller ensures the validity of the device context
+ * before invoking this function.
+ *
+ * @param dev Pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null.
+ * @param Data12Bit A 12-bit value to be written to the LPDAC register. Valid
+ * values are in the range of 0 to 4095. The function will mask
+ * this value to ensure it fits within the 12-bit limit.
+ * @param Data6Bit A 6-bit value to be written to the LPDAC register. Valid
+ * values are in the range of 0 to 63. The function will mask
+ * this value to ensure it fits within the 6-bit limit.
+ * @return Returns an integer indicating the success or failure of the write
+ * operation. A return value of 0 typically indicates success, while a
+ * negative value may indicate an error.
+ ******************************************************************************/
 int ad5940_LPDACWriteS(struct ad5940_dev *dev, uint16_t Data12Bit,
 		       uint8_t Data6Bit);
+/***************************************************************************//**
+ * @brief This function is used to configure the low-power amplifier settings
+ * for the device. It should be called after the device has been properly
+ * initialized. The configuration is determined by the values provided in
+ * the `pLpAmpCfg` structure, which specifies various parameters such as
+ * power enable states and gain settings. If any of the parameters in
+ * `pLpAmpCfg` are invalid, the function will handle them appropriately,
+ * ensuring that the device remains in a safe state. It is important to
+ * ensure that the `dev` parameter is not null before calling this
+ * function.
+ *
+ * @param dev A pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null.
+ * @param pLpAmpCfg A pointer to the `LPAmpCfg_Type` structure containing the
+ * configuration settings for the low-power amplifier. Must not
+ * be null.
+ * @return Returns 0 on success, or a negative error code if the configuration
+ * fails.
+ ******************************************************************************/
 int ad5940_LPAMPCfgS(struct ad5940_dev *dev, LPAmpCfg_Type *pLpAmpCfg);
 
 /* 5. DSP_Block_Functions */
+/***************************************************************************//**
+ * @brief This function is used to configure various Digital Signal Processing
+ * (DSP) settings for the AD5940 device. It should be called after the
+ * device has been properly initialized and is ready for configuration.
+ * The function takes a pointer to a `DSPCfg_Type` structure, which
+ * contains the necessary configuration parameters. If any of the
+ * individual configuration steps fail, the function will return an error
+ * code, allowing the caller to handle the failure appropriately. It is
+ * important to ensure that the provided configuration structure is valid
+ * and properly populated before calling this function.
+ *
+ * @param dev A pointer to an `ad5940_dev` structure representing the device to
+ * be configured. Must not be null.
+ * @param pDSPCfg A pointer to a `DSPCfg_Type` structure containing the DSP
+ * configuration settings. Must not be null and should be
+ * properly initialized with valid configuration values.
+ * @return Returns a non-negative integer on success, or a negative error code
+ * if any configuration step fails.
+ ******************************************************************************/
 int ad5940_DSPCfgS(struct ad5940_dev *dev, DSPCfg_Type *pDSPCfg);
+/***************************************************************************//**
+ * @brief This function retrieves a specific result from the AFE (Analog Front
+ * End) of the device, identified by the `AfeResultSel` parameter. It
+ * must be called after the device has been properly initialized. The
+ * function will read the result into the memory location pointed to by
+ * `rd`. If an invalid selection is provided, the function will return an
+ * error code. It is important to ensure that the pointer `rd` is valid
+ * and points to a memory location that can store the result.
+ *
+ * @param dev A pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null.
+ * @param AfeResultSel An identifier for the specific AFE result to read. Valid
+ * values include `AFERESULT_SINC3`, `AFERESULT_SINC2`,
+ * `AFERESULT_TEMPSENSOR`, `AFERESULT_DFTREAL`,
+ * `AFERESULT_DFTIMAGE`, `AFERESULT_STATSMEAN`, and
+ * `AFERESULT_STATSVAR`. If an invalid value is provided,
+ * the function will return an error.
+ * @param rd A pointer to a `uint32_t` variable where the read result will be
+ * stored. Caller retains ownership and must ensure this pointer is
+ * valid and points to allocated memory.
+ * @return Returns 0 on success, or a negative error code if the read operation
+ * fails or if an invalid `AfeResultSel` is provided.
+ ******************************************************************************/
 int ad5940_ReadAfeResult(struct ad5940_dev *dev, uint32_t AfeResultSel,
 			 uint32_t *rd);
 
 /* 5.1 ADC Block */
+/***************************************************************************//**
+ * @brief This function is used to configure the base settings of the ADC in the
+ * device. It should be called after initializing the device and before
+ * starting any ADC operations. The function expects a valid pointer to
+ * an `ad5940_dev` structure representing the device and a pointer to an
+ * `ADCBaseCfg_Type` structure containing the configuration parameters.
+ * It performs validation on certain parameters to ensure they are within
+ * acceptable ranges. If any of the parameters are invalid, the function
+ * will not proceed with the configuration.
+ *
+ * @param dev A pointer to an `ad5940_dev` structure representing the device.
+ * Must not be null.
+ * @param pADCInit A pointer to an `ADCBaseCfg_Type` structure containing the
+ * ADC configuration parameters. Must not be null. The structure
+ * must have valid values for `ADCMuxP`, `ADCMuxN`, `ADCPga`,
+ * and `ADCAAF`.
+ * @return Returns an integer indicating the success or failure of the
+ * operation. A return value of 0 typically indicates success, while a
+ * negative value indicates an error.
+ ******************************************************************************/
 int ad5940_ADCBaseCfgS(struct ad5940_dev *dev, ADCBaseCfg_Type *pADCInit);
+/***************************************************************************//**
+ * @brief This function is used to configure the ADC filter settings for the
+ * device. It should be called after the device has been properly
+ * initialized. The function takes a pointer to an `ADCFilterCfg_Type`
+ * structure that contains the filter configuration parameters. It is
+ * important to ensure that the parameters within this structure are
+ * valid, as the function performs checks on them. If any of the
+ * parameters are invalid, the function will return an error code.
+ * Additionally, the function modifies the device's internal registers
+ * based on the provided configuration, which may affect the ADC's
+ * behavior.
+ *
+ * @param dev A pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null.
+ * @param pFiltCfg A pointer to an `ADCFilterCfg_Type` structure containing the
+ * filter configuration. Must not be null. The fields within
+ * this structure must contain valid values as per the defined
+ * constraints.
+ * @return Returns 0 on success, or a negative error code if the configuration
+ * fails.
+ ******************************************************************************/
 int ad5940_ADCFilterCfgS(struct ad5940_dev *dev, ADCFilterCfg_Type *pFiltCfg);
+/***************************************************************************//**
+ * @brief This function is used to enable or disable the ADC power based on the
+ * provided state. It should be called after the device has been properly
+ * initialized. The function reads the current configuration of the ADC
+ * power control register, modifies it according to the desired state,
+ * and writes the updated configuration back to the register. If the read
+ * operation fails, the function returns an error code. It is important
+ * to ensure that the `dev` parameter is valid and that the device is in
+ * a state where power control can be modified.
+ *
+ * @param dev A pointer to an `ad5940_dev` structure representing the device.
+ * Must not be null and should point to a valid initialized device.
+ * @param State A boolean value indicating the desired power state of the ADC.
+ * If true, the ADC will be powered on; if false, it will be
+ * powered off.
+ * @return Returns 0 on success, or a negative error code if the operation
+ * fails.
+ ******************************************************************************/
 int ad5940_ADCPowerCtrlS(struct ad5940_dev *dev, bool State);
+/***************************************************************************//**
+ * @brief This function is used to enable or disable the ADC conversion in the
+ * device. It should be called after the device has been properly
+ * initialized. The `State` parameter determines whether the ADC
+ * conversion is turned on or off. If the function encounters an error
+ * while reading the current configuration, it will return an error code.
+ * It is important to ensure that the device is in a valid state before
+ * calling this function to avoid unexpected behavior.
+ *
+ * @param dev A pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null.
+ * @param State A boolean value indicating the desired state of the ADC
+ * conversion. `true` to enable conversion, `false` to disable it.
+ * @return Returns 0 on success, or a negative error code if the operation
+ * fails.
+ ******************************************************************************/
 int ad5940_ADCConvtCtrlS(struct ad5940_dev *dev, bool State);
+/***************************************************************************//**
+ * @brief This function is used to configure the ADC multiplexer settings for a
+ * specific device. It should be called after the device has been
+ * properly initialized. The function takes two parameters that specify
+ * the positive and negative inputs for the ADC multiplexer. It is
+ * important to ensure that the provided values for the multiplexer
+ * inputs are valid according to the device specifications. If the
+ * function encounters an error while reading or writing the register, it
+ * will return a negative error code.
+ *
+ * @param dev A pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null.
+ * @param ADCMuxP The positive input selection for the ADC multiplexer. Must be
+ * a valid value as defined by the device specifications.
+ * @param ADCMuxN The negative input selection for the ADC multiplexer. Must be
+ * a valid value as defined by the device specifications.
+ * @return Returns 0 on success, or a negative error code if an error occurs
+ * during the register read or write operations.
+ ******************************************************************************/
 int ad5940_ADCMuxCfgS(struct ad5940_dev *dev, uint32_t ADCMuxP,
 		      uint32_t ADCMuxN);
+/***************************************************************************//**
+ * @brief This function is used to configure the digital compensation settings
+ * for the ADC in the device. It should be called after the device has
+ * been properly initialized and before starting any ADC operations. The
+ * function writes the specified minimum and maximum ADC values along
+ * with their respective hysteresis settings to the appropriate
+ * registers. If any of the write operations fail, the function will
+ * return an error code, indicating the failure.
+ *
+ * @param dev A pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null.
+ * @param pCompCfg A pointer to an `ADCDigComp_Type` structure containing the
+ * compensation configuration values. Must not be null. The
+ * structure should have valid values for `ADCMin`, `ADCMinHys`,
+ * `ADCMax`, and `ADCMaxHys`.
+ * @return Returns 0 on success, or a negative error code if any of the register
+ * write operations fail.
+ ******************************************************************************/
 int ad5940_ADCDigCompCfgS(struct ad5940_dev *dev, ADCDigComp_Type *pCompCfg);
+/***************************************************************************//**
+ * @brief This function is used to configure statistical settings for the Analog
+ * Front End (AFE) device. It should be called after the device has been
+ * properly initialized and before starting any measurements that require
+ * statistical analysis. The function allows enabling or disabling
+ * statistics, setting the number of samples to be taken, and configuring
+ * the standard deviation settings. It is important to ensure that the
+ * `pStatCfg` parameter is valid and properly initialized before calling
+ * this function, as invalid configurations may lead to undefined
+ * behavior.
+ *
+ * @param dev A pointer to the `ad5940_dev` structure representing the AFE
+ * device. Must not be null.
+ * @param pStatCfg A pointer to a `StatCfg_Type` structure containing the
+ * statistical configuration settings. Must not be null and
+ * should be properly initialized before use.
+ * @return Returns an integer indicating the success or failure of the
+ * configuration operation. A return value of 0 typically indicates
+ * success, while a negative value indicates an error.
+ ******************************************************************************/
 int ad5940_StatisticCfgS(struct ad5940_dev *dev, StatCfg_Type *pStatCfg);
+/***************************************************************************//**
+ * @brief This function is used to set the number of times the ADC conversion is
+ * repeated. It should be called after initializing the `ad5940_dev`
+ * structure and before starting any ADC conversions. The `Number`
+ * parameter specifies how many times the ADC should repeat the
+ * conversion, with a maximum value of 255. If an invalid value is
+ * provided (greater than 255), the function will not perform the write
+ * operation, ensuring that the ADC configuration remains valid.
+ *
+ * @param dev A pointer to an `ad5940_dev` structure representing the device.
+ * Must not be null, and the caller retains ownership.
+ * @param Number An unsigned integer specifying the number of ADC conversion
+ * repetitions. Valid values range from 0 to 255. If the value is
+ * greater than 255, the function will not execute the write
+ * operation.
+ * @return Returns an integer indicating the success or failure of the
+ * operation. A return value of 0 typically indicates success, while a
+ * negative value indicates an error.
+ ******************************************************************************/
 int ad5940_ADCRepeatCfgS(struct ad5940_dev *dev, uint32_t Number);
+/***************************************************************************//**
+ * @brief This function is used to configure the DFT settings for the device,
+ * including the DFT source, number of DFT points, and whether to enable
+ * the Hanning window. It should be called after initializing the device
+ * and before starting any DFT operations. The function modifies the
+ * device's internal registers based on the provided configuration. If
+ * the DFT source is set to average, the average function is enabled
+ * automatically. Ensure that the `pDftCfg` parameter is valid and
+ * properly initialized before calling this function.
+ *
+ * @param dev A pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null.
+ * @param pDftCfg A pointer to a `DFTCfg_Type` structure containing the DFT
+ * configuration settings. Must not be null. The structure should
+ * be properly initialized with valid values for DFT source,
+ * number of DFT points, and Hanning window enable flag.
+ * @return Returns 0 on success, or a negative error code if the configuration
+ * fails.
+ ******************************************************************************/
 int ad5940_DFTCfgS(struct ad5940_dev *dev, DFTCfg_Type *pDftCfg);
 
 /* 5.2 Waveform Generator Block */
+/***************************************************************************//**
+ * @brief This function is used to configure the waveform generator based on the
+ * specified settings in the `WGCfg_Type` structure. It must be called
+ * after initializing the device represented by the `ad5940_dev` pointer.
+ * The function supports different waveform types, including sine and
+ * trapezoidal waveforms, and applies the corresponding configuration
+ * parameters. If the waveform type is not recognized, it defaults to
+ * writing DAC data. The function also allows enabling gain and offset
+ * calibration through the configuration structure. It is important to
+ * ensure that the provided configuration structure is valid and properly
+ * initialized before calling this function.
+ *
+ * @param dev Pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null.
+ * @param pWGInit Pointer to the `WGCfg_Type` structure containing the waveform
+ * generator configuration. Must not be null. The structure must
+ * be properly initialized with valid values for the waveform
+ * type and its parameters.
+ * @return Returns a non-negative integer on success, or a negative error code
+ * if the configuration fails at any point.
+ ******************************************************************************/
 int ad5940_WGCfgS(struct ad5940_dev *dev, WGCfg_Type *pWGInit);
+/***************************************************************************//**
+ * @brief This function is used to set the digital-to-analog converter (DAC)
+ * code for the AD5940 device. It should be called after the device has
+ * been properly initialized. The function takes a 12-bit DAC code, which
+ * is masked to ensure it falls within the valid range. If the provided
+ * code exceeds the valid range, it will be clamped to fit. The function
+ * will return an error code if the write operation to the device fails.
+ *
+ * @param dev A pointer to an `ad5940_dev` structure representing the device.
+ * Must not be null, and the caller retains ownership.
+ * @param code A 32-bit unsigned integer representing the DAC code. Valid values
+ * are in the range of 0 to 4095 (12-bit). The function will mask
+ * this value to ensure it fits within the valid range.
+ * @return Returns an integer indicating the success or failure of the write
+ * operation. A return value of 0 typically indicates success, while a
+ * negative value indicates an error.
+ ******************************************************************************/
 int ad5940_WGDACCodeS(struct ad5940_dev *dev,
 		      uint32_t code); /* Directly write DAC Code */
+/***************************************************************************//**
+ * @brief This function is used to set the frequency of the waveform generator
+ * based on the specified sine frequency and clock frequency. It must be
+ * called after the device has been properly initialized. The function
+ * calculates a frequency word from the provided sine frequency and
+ * waveform generator clock, and writes this value to the appropriate
+ * register. If the input parameters are invalid, the function may return
+ * an error code, indicating failure to set the frequency.
+ *
+ * @param dev A pointer to an `ad5940_dev` structure representing the device.
+ * Must not be null, and the caller retains ownership.
+ * @param SinFreqHz The desired sine frequency in Hertz. This value should be
+ * within the operational range of the waveform generator. If
+ * it is out of range, the function may return an error.
+ * @param WGClock The clock frequency for the waveform generator in Hertz. This
+ * value must be valid and non-zero; otherwise, the function may
+ * return an error.
+ * @return Returns an integer indicating the success or failure of the
+ * operation. A return value of 0 typically indicates success, while a
+ * negative value indicates an error.
+ ******************************************************************************/
 int ad5940_WGFreqCtrlS(struct ad5940_dev *dev, float SinFreqHz, float WGClock);
+/***************************************************************************//**
+ * @brief This function is used to compute the frequency word for a waveform
+ * generator based on the desired sine frequency and the waveform
+ * generator clock frequency. It should be called when you need to set
+ * the frequency of the waveform generator, ensuring that the `WGClock`
+ * is not zero to avoid division by zero errors. The function will clamp
+ * the calculated frequency word to the maximum allowable value based on
+ * the bit width defined by `__BITWIDTH_WGFCW`, which can be either 26 or
+ * 24 bits. If the input values are invalid, such as a zero clock
+ * frequency, the function will return a default value of zero.
+ *
+ * @param SinFreqHz The desired sine frequency in Hertz. This value should be a
+ * positive float representing the frequency you want to
+ * generate.
+ * @param WGClock The clock frequency for the waveform generator in Hertz. This
+ * value must be a positive float and must not be zero;
+ * otherwise, the function will return zero.
+ * @return Returns a `uint32_t` representing the calculated frequency word,
+ * which is clamped to the maximum value based on the bit width. If the
+ * input `WGClock` is zero, the function returns zero.
+ ******************************************************************************/
 uint32_t ad5940_WGFreqWordCal(float SinFreqHz, float WGClock);
 
 /* 6. Sequencer_FIFO */
+/***************************************************************************//**
+ * @brief This function is used to configure the FIFO settings of the device,
+ * including enabling or disabling the FIFO, setting the FIFO mode, size,
+ * and threshold. It must be called after initializing the device and
+ * before using the FIFO for data operations. The function first disables
+ * the FIFO, then configures the command data settings, sets the FIFO
+ * threshold, and finally enables the FIFO if specified. If any of the
+ * register write or read operations fail, the function will return an
+ * error code.
+ *
+ * @param dev A pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null.
+ * @param pFifoCfg A pointer to a `FIFOCfg_Type` structure containing the FIFO
+ * configuration settings. Must not be null. The structure
+ * should specify the FIFO mode, size, threshold, and whether
+ * the FIFO should be enabled.
+ * @return Returns 0 on success, or a negative error code if any operation
+ * fails.
+ ******************************************************************************/
 int ad5940_FIFOCfg(struct ad5940_dev *dev, FIFOCfg_Type *pFifoCfg);
+/***************************************************************************//**
+ * @brief This function is used to obtain the current configuration of the FIFO
+ * for a specified device. It should be called after the device has been
+ * properly initialized. The function populates the provided
+ * `FIFOCfg_Type` structure with the FIFO mode, size, threshold, enable
+ * status, and source. If the provided configuration pointer is null, the
+ * function will return an error. Additionally, if any read operation
+ * from the device registers fails, the function will return the
+ * corresponding error code.
+ *
+ * @param dev A pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null.
+ * @param pFifoCfg A pointer to a `FIFOCfg_Type` structure where the FIFO
+ * configuration will be stored. Must not be null.
+ * @return Returns 0 on success, or a negative error code if an error occurs
+ * during the operation.
+ ******************************************************************************/
 int ad5940_FIFOGetCfg(struct ad5940_dev *dev,
 		      FIFOCfg_Type *pFifoCfg);  /* Read back current configuration */
+/***************************************************************************//**
+ * @brief This function is used to configure the FIFO source and enable or
+ * disable the FIFO for the AFE (Analog Front End). It should be called
+ * after initializing the `ad5940_dev` structure and before using the
+ * FIFO for data operations. The `FifoSrc` parameter specifies the source
+ * of the FIFO data, while the `FifoEn` parameter determines whether the
+ * FIFO is enabled or disabled. It is important to ensure that the `dev`
+ * parameter is valid and properly initialized, as passing a null or
+ * uninitialized pointer may lead to undefined behavior.
+ *
+ * @param dev Pointer to an `ad5940_dev` structure representing the device. Must
+ * not be null and should be properly initialized before calling this
+ * function.
+ * @param FifoSrc An unsigned 32-bit integer representing the source selection
+ * for the FIFO. The valid range depends on the specific
+ * implementation and should conform to the expected source
+ * values defined in the device's documentation.
+ * @param FifoEn A boolean value indicating whether to enable (`true`) or
+ * disable (`false`) the FIFO. This parameter controls the
+ * operational state of the FIFO.
+ * @return Returns an integer indicating the success or failure of the
+ * operation. A return value of 0 typically indicates success, while a
+ * negative value may indicate an error.
+ ******************************************************************************/
 int ad5940_FIFOCtrlS(struct ad5940_dev *dev, uint32_t FifoSrc,
 		     bool FifoEn);   /* Configure FIFO data source. This function will also enable FIFO in same time */
+/***************************************************************************//**
+ * @brief This function is used to configure the FIFO threshold for the
+ * specified device. It should be called after the device has been
+ * properly initialized to ensure that the settings take effect. The FIFO
+ * threshold determines the level at which the FIFO will trigger an
+ * interrupt or other action. It is important to provide a valid
+ * threshold value to avoid unexpected behavior.
+ *
+ * @param dev A pointer to an `ad5940_dev` structure representing the device.
+ * Must not be null.
+ * @param FIFOThresh A 32-bit unsigned integer representing the desired FIFO
+ * threshold. The value should be within the valid range
+ * defined by the device specifications. If an invalid value
+ * is provided, the behavior is undefined.
+ * @return Returns an integer indicating the success or failure of the
+ * operation. A return value of 0 typically indicates success, while a
+ * negative value indicates an error.
+ ******************************************************************************/
 int ad5940_FIFOThrshSet(struct ad5940_dev *dev, uint32_t FIFOThresh);
+/***************************************************************************//**
+ * @brief This function is used to obtain the current count of items in the FIFO
+ * of the specified device. It should be called after the device has been
+ * properly initialized. The function reads the FIFO count status
+ * register and updates the provided count pointer with the number of
+ * items present in the FIFO. If the device is not initialized or if
+ * there is an error reading the register, the function will return an
+ * error code.
+ *
+ * @param dev A pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null and should point to a valid initialized device.
+ * @param cnt A pointer to a `uint32_t` variable where the FIFO count will be
+ * stored. Must not be null; the function will write the FIFO count
+ * to this location.
+ * @return Returns 0 on success, indicating that the FIFO count has been
+ * successfully retrieved and stored in the provided pointer. If an
+ * error occurs during the register read, a negative error code is
+ * returned.
+ ******************************************************************************/
 int ad5940_FIFOGetCnt(struct ad5940_dev *dev,
 		      uint32_t *cnt);     /* Get current FIFO count */
+/***************************************************************************//**
+ * @brief This function is used to configure the sequencer settings for the
+ * device. It must be called after the device has been properly
+ * initialized. The function modifies the sequencer's memory
+ * configuration and control settings based on the provided configuration
+ * structure. If the sequencer is enabled, it will also set the write
+ * timer. It is important to ensure that the sequencer is disabled before
+ * making certain changes, as this can affect the internal state of the
+ * sequencer. The function handles various error conditions, returning
+ * negative values if any register read or write operations fail.
+ *
+ * @param dev A pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null.
+ * @param pSeqCfg A pointer to a `SEQCfg_Type` structure containing the
+ * configuration settings for the sequencer. Must not be null.
+ * The structure should be properly initialized before passing it
+ * to the function.
+ * @return Returns 0 on success, or a negative error code if any operation
+ * fails.
+ ******************************************************************************/
 int ad5940_SEQCfg(struct ad5940_dev *dev, SEQCfg_Type *pSeqCfg);
+/***************************************************************************//**
+ * @brief This function is used to obtain the current configuration settings of
+ * the sequence from the specified device. It must be called with a valid
+ * device handle that has been properly initialized. The function reads
+ * from specific registers to populate the provided `SEQCfg_Type`
+ * structure with the sequence memory size, sequence enable status, and
+ * write timer value. If the provided configuration pointer is null, the
+ * function will return an error. Additionally, if any register read
+ * operation fails, the function will return the corresponding error
+ * code.
+ *
+ * @param dev A pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null and should point to a valid initialized device.
+ * @param pSeqCfg A pointer to a `SEQCfg_Type` structure where the configuration
+ * will be stored. Must not be null; if it is null, the function
+ * returns an error.
+ * @return Returns 0 on success, or a negative error code if an error occurs
+ * during the operation.
+ ******************************************************************************/
 int ad5940_SEQGetCfg(struct ad5940_dev *dev,
 		     SEQCfg_Type *pSeqCfg);    /* Read back current configuration */
+/***************************************************************************//**
+ * @brief This function is used to enable or disable the sequence operation of
+ * the AFE (Analog Front End). It should be called after the device has
+ * been properly initialized. The function reads the current state of the
+ * sequence control register, modifies it based on the `SeqEn` parameter,
+ * and writes the updated value back to the register. If the read or
+ * write operations fail, the function will return an error code. It is
+ * important to ensure that the `dev` parameter points to a valid device
+ * structure before calling this function.
+ *
+ * @param dev A pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null and should point to a valid device instance.
+ * @param SeqEn A boolean value indicating whether to enable (`true`) or disable
+ * (`false`) the sequence operation. Valid values are `true` or
+ * `false`.
+ * @return Returns 0 on success, or a negative error code if the read or write
+ * operation fails.
+ ******************************************************************************/
 int ad5940_SEQCtrlS(struct ad5940_dev *dev, bool SeqEn);
+/***************************************************************************//**
+ * @brief This function is used to stop the ongoing sequence operation in the
+ * AFE (Analog Front End). It should be called when you need to halt the
+ * sequence, for instance, during an error recovery process or when the
+ * operation is no longer needed. Ensure that the `dev` parameter is
+ * properly initialized and points to a valid `ad5940_dev` structure
+ * before calling this function. Calling this function with an
+ * uninitialized or null `dev` pointer may lead to undefined behavior.
+ *
+ * @param dev A pointer to an `ad5940_dev` structure representing the device.
+ * Must not be null and should be properly initialized before use.
+ * @return Returns an integer indicating the success or failure of the
+ * operation. A return value of 0 typically indicates success, while a
+ * negative value indicates an error.
+ ******************************************************************************/
 int ad5940_SEQHaltS(struct ad5940_dev *dev);
+/***************************************************************************//**
+ * @brief This function is used to initiate a specific sequence identified by
+ * `SeqId` in the AD5940 device. It must be called with a valid `SeqId`
+ * that corresponds to one of the predefined sequence identifiers. If the
+ * provided `SeqId` exceeds the maximum allowed value, the function will
+ * return an error. It is important to ensure that the device is properly
+ * initialized before calling this function to avoid undefined behavior.
+ *
+ * @param dev Pointer to an `ad5940_dev` structure representing the device. Must
+ * not be null and the caller retains ownership.
+ * @param SeqId Identifier for the sequence to trigger, which must be in the
+ * range of 0 to 3. If `SeqId` is greater than 3, the function will
+ * return an error.
+ * @return Returns 0 on success, or a negative error code if the `SeqId` is
+ * invalid.
+ ******************************************************************************/
 int ad5940_SEQMmrTrig(struct ad5940_dev *dev,
 		      uint32_t SeqId); /* Manually trigger sequence */
+/***************************************************************************//**
+ * @brief This function is used to write a series of commands to the command
+ * FIFO of the device. It should be called after the device has been
+ * properly initialized and is ready to accept commands. The function
+ * takes a starting address and writes each command sequentially to the
+ * specified address in the FIFO. If any write operation fails, the
+ * function will return an error code, allowing the caller to handle the
+ * failure appropriately. It is important to ensure that the command
+ * count is valid and that the device is in a state to accept commands.
+ *
+ * @param dev A pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null.
+ * @param StartAddr The starting address in the command FIFO where commands will
+ * be written. This address should be within the valid range of
+ * the FIFO.
+ * @param pCommand A pointer to an array of commands to be written. Must not be
+ * null and should point to a valid memory location containing
+ * at least `CmdCnt` commands.
+ * @param CmdCnt The number of commands to write to the FIFO. Must be greater
+ * than zero.
+ * @return Returns 0 on success, or a negative error code if any write operation
+ * fails.
+ ******************************************************************************/
 int ad5940_SEQCmdWrite(struct ad5940_dev *dev, uint32_t StartAddr,
 		       const uint32_t *pCommand, uint32_t CmdCnt);
+/***************************************************************************//**
+ * @brief This function is used to configure the sequence information for a
+ * specified sequence ID on the AD5940 device. It must be called after
+ * the device has been properly initialized. The function takes a pointer
+ * to a `SEQInfo_Type` structure, which contains the sequence ID, length,
+ * RAM address, and an optional command sequence to write to SRAM. If the
+ * sequence ID is invalid, the function will return an error.
+ * Additionally, if the `WriteSRAM` flag is set to true, the function
+ * will write the command sequence to the specified RAM address. It is
+ * important to ensure that the sequence length and RAM address are valid
+ * to avoid unexpected behavior.
+ *
+ * @param dev Pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null.
+ * @param pSeq Pointer to a `SEQInfo_Type` structure containing sequence
+ * configuration details. Must not be null. The `SeqId` must be one
+ * of the valid sequence IDs (0-3), and `SeqLen` should be a valid
+ * length for the sequence. If `WriteSRAM` is true, `pSeqCmd` must
+ * point to a valid command sequence.
+ * @return Returns 0 on success, or a negative error code if an error occurs,
+ * such as an invalid sequence ID or failure to write to SRAM.
+ ******************************************************************************/
 int ad5940_SEQInfoCfg(struct ad5940_dev *dev, SEQInfo_Type *pSeq);
+/***************************************************************************//**
+ * @brief This function is used to obtain details about a specific sequence
+ * identified by `SeqId`. It must be called with a valid `ad5940_dev`
+ * device structure that has been properly initialized. The caller should
+ * ensure that the `pSeqInfo` pointer is not null before invoking the
+ * function, as passing a null pointer will result in an error. The
+ * function reads the sequence information from the device registers
+ * corresponding to the provided `SeqId`, which must be one of the
+ * predefined sequence IDs. If the `SeqId` is invalid, the function will
+ * return an error. The retrieved information is populated in the
+ * `SEQInfo_Type` structure pointed to by `pSeqInfo`, which includes the
+ * sequence ID, length, and RAM address.
+ *
+ * @param dev Pointer to an `ad5940_dev` structure representing the device. Must
+ * not be null and must be initialized before use.
+ * @param SeqId Identifier for the sequence to retrieve information about. Valid
+ * values are predefined sequence IDs (e.g., SEQID_0, SEQID_1,
+ * SEQID_2, SEQID_3). Passing an invalid ID will result in an
+ * error.
+ * @param pSeqInfo Pointer to a `SEQInfo_Type` structure where the sequence
+ * information will be stored. Must not be null; otherwise, the
+ * function will return an error.
+ * @return Returns 0 on success, or a negative error code if an error occurs,
+ * such as invalid input parameters.
+ ******************************************************************************/
 int ad5940_SEQInfoGet(struct ad5940_dev *dev, uint32_t SeqId,
 		      SEQInfo_Type *pSeqInfo);
+/***************************************************************************//**
+ * @brief This function is used to configure the GPIO settings of the AD5940
+ * device. It should be called after the device has been properly
+ * initialized. The `Gpio` parameter specifies the desired GPIO
+ * configuration, and it is essential to ensure that the value provided
+ * is valid for the specific GPIO settings supported by the device.
+ * Calling this function with an invalid `Gpio` value may result in
+ * undefined behavior.
+ *
+ * @param dev A pointer to an `ad5940_dev` structure representing the device.
+ * Must not be null, and the caller retains ownership of this
+ * pointer.
+ * @param Gpio A 32-bit unsigned integer representing the GPIO configuration.
+ * The valid range and specific values depend on the device's GPIO
+ * capabilities. Invalid values may lead to undefined behavior.
+ * @return Returns an integer indicating the success or failure of the
+ * operation. A return value of 0 typically indicates success, while a
+ * negative value indicates an error.
+ ******************************************************************************/
 int ad5940_SEQGpioCtrlS(struct ad5940_dev *dev,
 			uint32_t GpioSet);   /* Sequencer can control GPIO0~7 if the GPIO function is set to SYNC */
+/***************************************************************************//**
+ * @brief This function is used to retrieve the sequence timeout value from the
+ * specified device. It should be called after the device has been
+ * properly initialized. The function reads the value from the device's
+ * register and stores it in the provided pointer. If the pointer is null
+ * or if the device is not initialized correctly, the function may return
+ * an error.
+ *
+ * @param dev A pointer to an `ad5940_dev` structure representing the device.
+ * Must not be null and should point to a valid initialized device.
+ * @param cnt A pointer to a `uint32_t` variable where the sequence timeout
+ * value will be stored. Must not be null; if it is null, the
+ * function will return an error.
+ * @return Returns 0 on success, indicating that the sequence timeout value was
+ * read successfully. Returns a negative error code if the read
+ * operation fails.
+ ******************************************************************************/
 int ad5940_SEQTimeOutRd(struct ad5940_dev *dev,
 			uint32_t *cnt);  /* Read back current sequence time out value */
-int ad5940_SEQGpioTrigCfg(void); /* @todo not done */
+/***************************************************************************//**
+ * @brief This function is used to configure the wakeup timer settings for the
+ * device, including sleep and wakeup times for multiple sequences. It
+ * should be called after the device has been properly initialized and
+ * before starting any operations that depend on the wakeup timer. The
+ * function writes the configuration to specific registers, and it is
+ * important to ensure that the provided configuration structure is
+ * valid. If any of the write operations fail, the function will return
+ * an error code, indicating the failure.
+ *
+ * @param dev A pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null.
+ * @param pWuptCfg A pointer to a `WUPTCfg_Type` structure containing the
+ * configuration settings for the wakeup timer. Must not be
+ * null. The structure should contain valid sleep and wakeup
+ * times for at least four sequences.
+ * @return Returns 0 on success, or a negative error code if any of the register
+ * write operations fail.
+ ******************************************************************************/
 int ad5940_WUPTCfg(struct ad5940_dev *dev, WUPTCfg_Type *pWuptCfg);
+/***************************************************************************//**
+ * @brief This function is used to enable or disable the wake-up timer in the
+ * device. It should be called after the device has been properly
+ * initialized. The function reads the current configuration of the wake-
+ * up timer, modifies it based on the `Enable` parameter, and writes the
+ * updated configuration back to the device. If the read operation fails,
+ * the function will return an error code. It is important to ensure that
+ * the device pointer is valid before calling this function.
+ *
+ * @param dev A pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null and should point to a valid device instance.
+ * @param Enable A boolean value indicating whether to enable (true) or disable
+ * (false) the wake-up timer. Valid values are true or false.
+ * @return Returns 0 on success, or a negative error code if the operation
+ * fails.
+ ******************************************************************************/
 int ad5940_WUPTCtrl(struct ad5940_dev *dev,
 		    bool Enable);  /* Enable or disable Wakeup timer */
+/***************************************************************************//**
+ * @brief This function is used to set the wakeup and sleep durations for a
+ * specific sequence identified by `SeqId`. It must be called with a
+ * valid `ad5940_dev` structure that has been properly initialized. The
+ * `SeqId` parameter determines which sequence's timing settings are
+ * being configured, and it must be one of the predefined sequence IDs.
+ * The function will write the specified `WakeupTime` and `SleepTime`
+ * values to the appropriate registers. If an invalid `SeqId` is
+ * provided, the function will return an error code. It is important to
+ * ensure that the `SleepTime` and `WakeupTime` values are within
+ * acceptable ranges to avoid unexpected behavior.
+ *
+ * @param dev Pointer to an `ad5940_dev` structure representing the device. Must
+ * not be null and must be initialized before use.
+ * @param SeqId Identifier for the sequence to configure. Valid values are
+ * SEQID_0, SEQID_1, SEQID_2, and SEQID_3. An invalid value will
+ * result in an error.
+ * @param SleepTime Duration for which the device will remain in sleep mode,
+ * specified in milliseconds. Must be a non-negative integer.
+ * @param WakeupTime Duration for which the device will be awake, specified in
+ * milliseconds. Must be a non-negative integer.
+ * @return Returns 0 on success, or a negative error code if an invalid `SeqId`
+ * is provided or if any write operation fails.
+ ******************************************************************************/
 int ad5940_WUPTTime(struct ad5940_dev *dev, uint32_t SeqId, uint32_t SleepTime,
 		    uint32_t WakeupTime);
 
 /* 7. MISC_Block */
 /* 7.1 Clock system */
+/***************************************************************************//**
+ * @brief This function is used to configure the clock settings of the device,
+ * enabling or disabling various oscillators based on the provided
+ * configuration. It should be called after the device has been
+ * initialized and before any operations that depend on the clock
+ * settings. The function modifies the clock configuration according to
+ * the specified parameters, and it waits for the oscillators to
+ * stabilize before proceeding. If any of the oscillator enable flags are
+ * set to true, the function will enable the corresponding oscillator and
+ * ensure it is ready for use. It is important to ensure that the
+ * `pClkCfg` parameter is valid and properly initialized before calling
+ * this function.
+ *
+ * @param dev A pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null.
+ * @param pClkCfg A pointer to a `CLKCfg_Type` structure containing the clock
+ * configuration settings. Must not be null. The structure should
+ * be properly initialized with valid values for oscillator
+ * enable flags and clock sources.
+ * @return Returns 0 on success, or a negative error code if an error occurs
+ * during the configuration process.
+ ******************************************************************************/
 int ad5940_CLKCfg(struct ad5940_dev *dev, CLKCfg_Type *pClkCfg);
+/***************************************************************************//**
+ * @brief This function is used to configure the high-frequency oscillator to
+ * either 32MHz or 16MHz based on the provided mode. It must be called
+ * after the device has been properly initialized. The function disables
+ * the ACLK during the clock change to ensure stable operation and waits
+ * for the oscillator to be ready before re-enabling the ACLK. If the
+ * input mode is invalid or if any read or write operations fail, the
+ * function will return an error code.
+ *
+ * @param dev A pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null.
+ * @param Mode32MHz A boolean value indicating the desired oscillator frequency.
+ * If true, sets the oscillator to 32MHz; if false, sets it to
+ * 16MHz.
+ * @return Returns 0 on success, or a negative error code if any operation
+ * fails.
+ ******************************************************************************/
 int ad5940_HFOSC32MHzCtrl(struct ad5940_dev *dev, bool Mode32MHz);
 
 /* 7.2 AFE Interrupt */
+/***************************************************************************//**
+ * @brief This function is used to configure the interrupt settings for the
+ * Analog Front End (AFE) by enabling or disabling specific interrupt
+ * sources. It should be called after initializing the `ad5940_dev`
+ * structure and before using the AFE to ensure that the desired
+ * interrupts are correctly set up. The function modifies the interrupt
+ * configuration based on the provided parameters, and it is important to
+ * ensure that the `AfeIntcSel` parameter corresponds to a valid
+ * interrupt selection. If the function encounters an error while reading
+ * or writing the register, it will return a negative error code.
+ *
+ * @param dev Pointer to an `ad5940_dev` structure representing the device. Must
+ * not be null.
+ * @param AfeIntcSel Selects which interrupt configuration register to modify.
+ * Valid values are `AFEINTC_0` or `AFEINTC_1`.
+ * @param AFEIntSrc Specifies the interrupt source to enable or disable. This
+ * value should correspond to a valid interrupt source defined
+ * in the API.
+ * @param State Boolean value indicating whether to enable (true) or disable
+ * (false) the specified interrupt source.
+ * @return Returns 0 on success, or a negative error code if an error occurs
+ * during register read or write operations.
+ ******************************************************************************/
 int ad5940_INTCCfg(struct ad5940_dev *dev, uint32_t AfeIntcSel,
 		   uint32_t AFEIntSrc, bool State);
+/***************************************************************************//**
+ * @brief This function is used to obtain the configuration settings of a
+ * specified interrupt controller within the device. It should be called
+ * after the device has been properly initialized. The function takes an
+ * interrupt controller selection parameter to determine which
+ * configuration to retrieve. If the provided selection is invalid, the
+ * function will handle it gracefully by returning an error code. It is
+ * important to ensure that the `cfg` pointer is valid and points to a
+ * memory location where the configuration can be stored.
+ *
+ * @param dev A pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null.
+ * @param AfeIntcSel An integer representing the interrupt controller selection.
+ * Valid values are `AFEINTC_0` or `AFEINTC_1`. The function
+ * will return an error if an invalid selection is provided.
+ * @param cfg A pointer to a `uint32_t` where the configuration will be stored.
+ * Caller retains ownership and must ensure this pointer is valid and
+ * points to allocated memory.
+ * @return Returns an integer indicating the success or failure of the
+ * operation. A return value of 0 indicates success, while a negative
+ * value indicates an error.
+ ******************************************************************************/
 int ad5940_INTCGetCfg(struct ad5940_dev *dev, uint32_t AfeIntcSel,
 		      uint32_t *cfg);
+/***************************************************************************//**
+ * @brief This function is used to clear specific interrupt flags in the
+ * interrupt controller of the device. It should be called when the
+ * application has handled the interrupt and wants to reset the
+ * corresponding flag. The function requires a valid device structure,
+ * which must be initialized prior to calling this function. If the
+ * provided interrupt source selection is invalid, the behavior is
+ * undefined.
+ *
+ * @param dev A pointer to a valid `struct ad5940_dev` representing the device.
+ * Must not be null and should be properly initialized before use.
+ * @param AfeIntSrcSel A 32-bit unsigned integer representing the interrupt
+ * source selection to be cleared. Valid values depend on
+ * the specific interrupt sources defined for the device.
+ * @return Returns the result of the register write operation, which indicates
+ * success or failure of the operation.
+ ******************************************************************************/
 int ad5940_INTCClrFlag(struct ad5940_dev *dev, uint32_t AfeIntSrcSel);
+/***************************************************************************//**
+ * @brief This function is used to determine if a specific interrupt flag,
+ * identified by `AfeIntSrcSel`, is set in the interrupt control register
+ * specified by `AfeIntcSel`. It should be called after the device has
+ * been properly initialized and configured. The function reads the
+ * relevant register and checks the specified interrupt source flag. If
+ * the flag is set, it returns true; otherwise, it returns false. Ensure
+ * that the provided `dev` pointer is valid and that the interrupt
+ * control selection is within the expected range.
+ *
+ * @param dev A pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null.
+ * @param AfeIntcSel The interrupt control selection, which determines which
+ * interrupt flag register to check. Valid values are
+ * `AFEINTC_0` or `AFEINTC_1`.
+ * @param AfeIntSrcSel The specific interrupt source flag to check within the
+ * selected interrupt control register. This value should
+ * correspond to the defined interrupt sources.
+ * @return Returns true if the specified interrupt source flag is set;
+ * otherwise, returns false.
+ ******************************************************************************/
 bool ad5940_INTCTestFlag(struct ad5940_dev *dev, uint32_t AfeIntcSel,
 			 uint32_t AfeIntSrcSel); /* Check if selected interrupt happened */
+/***************************************************************************//**
+ * @brief This function is used to obtain the current status of an interrupt
+ * flag from the AFE (Analog Front End) device. It should be called after
+ * the device has been properly initialized and configured. The function
+ * takes a selection parameter to specify which interrupt flag to read,
+ * and it writes the result to the provided flag pointer. If the
+ * selection parameter is invalid, the function will not modify the flag
+ * value. It is important to ensure that the `flag` pointer is not null
+ * before calling this function.
+ *
+ * @param dev A pointer to the `ad5940_dev` structure representing the AFE
+ * device. Must not be null.
+ * @param AfeIntcSel An identifier for the specific interrupt flag to retrieve.
+ * Valid values are `AFEINTC_0` or `AFEINTC_1`.
+ * @param flag A pointer to a `uint32_t` variable where the interrupt flag
+ * status will be stored. Caller retains ownership and must ensure
+ * this pointer is not null.
+ * @return Returns 0 on success, or a negative error code if the operation
+ * fails.
+ ******************************************************************************/
 int ad5940_INTCGetFlag(struct ad5940_dev *dev, uint32_t AfeIntcSel,
 		       uint32_t *flag); /* Get current INTC interrupt flag */
 
 /* 7.3 GPIO */
+/***************************************************************************//**
+ * @brief This function is used to configure the General Purpose Input/Output
+ * (GPIO) settings of the AD5940 device. It should be called after
+ * initializing the device and before using the GPIO pins for input or
+ * output operations. The function sets various configurations such as
+ * function selection, output enable, input enable, pull-up/pull-down
+ * settings, and output values based on the provided configuration
+ * structure. If any of the register writes fail, the function will
+ * return an error code, indicating the specific failure.
+ *
+ * @param dev A pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null.
+ * @param pAgpioCfg A pointer to an `AGPIOCfg_Type` structure containing the
+ * GPIO configuration settings. Must not be null.
+ * @return Returns 0 on success, or a negative error code if any of the register
+ * writes fail.
+ ******************************************************************************/
 int ad5940_AGPIOCfg(struct ad5940_dev *dev, AGPIOCfg_Type *pAgpioCfg);
+/***************************************************************************//**
+ * @brief This function is used to configure the General Purpose Input/Output
+ * (GPIO) settings for the specified device. It should be called after
+ * the device has been properly initialized to ensure that the
+ * configuration is applied correctly. The function takes a configuration
+ * value that determines the behavior of the GPIO pins. If the provided
+ * device pointer is null, the function will not perform any operation
+ * and may return an error code.
+ *
+ * @param dev A pointer to an `ad5940_dev` structure representing the device to
+ * be configured. Must not be null.
+ * @param uiCfgSet A 32-bit unsigned integer representing the configuration
+ * settings for the GPIO. The valid range depends on the
+ * specific GPIO settings defined in the device's documentation.
+ * @return Returns an integer indicating the success or failure of the
+ * operation. A return value of 0 typically indicates success, while a
+ * negative value indicates an error.
+ ******************************************************************************/
 int ad5940_AGPIOFuncCfg(struct ad5940_dev *dev, uint32_t uiCfgSet);
+/***************************************************************************//**
+ * @brief This function is used to enable specific General Purpose Input/Output
+ * (GPIO) pins on the device. It should be called after the device has
+ * been properly initialized. The `uiPinSet` parameter specifies which
+ * pins to enable, and it is important to ensure that the values provided
+ * correspond to valid GPIO pins for the device. If invalid values are
+ * passed, the behavior is undefined, and it may lead to unexpected
+ * results.
+ *
+ * @param dev A pointer to an `ad5940_dev` structure representing the device.
+ * Must not be null.
+ * @param uiPinSet A 32-bit unsigned integer representing the GPIO pins to
+ * enable. Each bit corresponds to a specific GPIO pin. Valid
+ * values depend on the device's GPIO configuration.
+ * @return Returns an integer indicating the success or failure of the
+ * operation. A return value of 0 typically indicates success, while a
+ * negative value indicates an error.
+ ******************************************************************************/
 int ad5940_AGPIOOen(struct ad5940_dev *dev, uint32_t uiPinSet);
+/***************************************************************************//**
+ * @brief This function is used to enable or disable specific General Purpose
+ * Input/Output (GPIO) pins on the device. It should be called after the
+ * device has been properly initialized. The `uiPinSet` parameter
+ * specifies which pins to modify, and the function will write this
+ * configuration to the appropriate register. It is important to ensure
+ * that the `dev` parameter is not null before calling this function, as
+ * passing a null pointer may lead to undefined behavior.
+ *
+ * @param dev A pointer to an `ad5940_dev` structure representing the device.
+ * Must not be null.
+ * @param uiPinSet A 32-bit unsigned integer that specifies the GPIO pins to
+ * enable or disable. The specific bits in this integer
+ * correspond to individual GPIO pins.
+ * @return Returns the result of the register write operation, which indicates
+ * success or failure.
+ ******************************************************************************/
 int ad5940_AGPIOIen(struct ad5940_dev *dev, uint32_t uiPinSet);
+/***************************************************************************//**
+ * @brief This function is used to configure the General Purpose Input/Output
+ * (GPIO) pins of the device. It should be called after initializing the
+ * device to ensure that the configuration is applied correctly. The
+ * function takes a set of pins to be configured, and it is important to
+ * ensure that the `dev` parameter is valid and points to an initialized
+ * `ad5940_dev` structure. If the provided `uiPinSet` contains invalid
+ * values, the behavior is undefined, and the function may return an
+ * error code.
+ *
+ * @param dev A pointer to an `ad5940_dev` structure representing the device.
+ * Must not be null and must point to a valid, initialized device.
+ * @param uiPinSet A 32-bit unsigned integer representing the GPIO pins to be
+ * configured. The valid range depends on the specific hardware
+ * capabilities. Invalid values may lead to undefined behavior.
+ * @return Returns an integer indicating the success or failure of the
+ * operation. A return value of 0 typically indicates success, while a
+ * negative value indicates an error.
+ ******************************************************************************/
 int ad5940_AGPIOPen(struct ad5940_dev *dev, uint32_t uiPinSet);
 
 /* 7.4 LPMODE */
+/***************************************************************************//**
+ * @brief This function is used to control the low power mode of the device. It
+ * should be called when there is a need to conserve power, typically
+ * when the device is idle. The `LPModeEn` parameter determines whether
+ * to enter or exit low power mode. It is important to ensure that the
+ * device is properly initialized before calling this function. If the
+ * device is already in the desired state, calling this function will
+ * have no adverse effects.
+ *
+ * @param dev Pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null.
+ * @param LPModeEn Boolean value indicating whether to enable (true) or disable
+ * (false) low power mode. Valid values are true or false.
+ * @return Returns an integer indicating the success or failure of the
+ * operation. A non-negative value typically indicates success, while a
+ * negative value indicates an error.
+ ******************************************************************************/
 int ad5940_LPModeEnS(struct ad5940_dev *dev,
 		     bool LPModeEn); /* Enable LP mode or disable it. */
+/***************************************************************************//**
+ * @brief This function is used to configure the low-power mode clock selection
+ * for the `ad5940_dev` device. It should be called after the device has
+ * been properly initialized. The `LPModeClk` parameter specifies the
+ * clock selection value, which must be within the valid range defined by
+ * the device specifications. If an invalid value is provided, the
+ * function may return an error code, indicating that the operation was
+ * unsuccessful.
+ *
+ * @param dev A pointer to an `ad5940_dev` structure representing the device.
+ * Must not be null, and the caller retains ownership.
+ * @param LPModeClk An unsigned 32-bit integer representing the low-power mode
+ * clock selection. Valid values depend on the device
+ * specifications. The function will return an error if the
+ * value is out of range.
+ * @return Returns an integer indicating the success or failure of the
+ * operation. A return value of 0 typically indicates success, while a
+ * negative value indicates an error.
+ ******************************************************************************/
 int ad5940_LPModeClkS(struct ad5940_dev *dev, uint32_t LPModeClk);
 
 /* 7.5 Power */
+/***************************************************************************//**
+ * @brief This function is used to set or clear the sleep key for the AFE
+ * (Analog Front End) in the `ad5940_dev` device. It should be called
+ * when you need to manage the sleep state of the AFE, typically after
+ * initializing the device. The function expects a valid device pointer
+ * and a sleep key value, and it will return an error code if the device
+ * pointer is null or if the write operation fails.
+ *
+ * @param dev A pointer to an `ad5940_dev` structure representing the device.
+ * Must not be null; the caller retains ownership.
+ * @param SlpKey A 32-bit unsigned integer representing the sleep key value to
+ * be set. Valid values depend on the specific implementation and
+ * requirements of the AFE.
+ * @return Returns an integer indicating the success or failure of the
+ * operation, where a value of 0 typically indicates success and any
+ * non-zero value indicates an error.
+ ******************************************************************************/
 int ad5940_SleepKeyCtrlS(struct ad5940_dev *dev,
 			 uint32_t SlpKey); /* enter the correct key to allow AFE to enter sleep mode */
+/***************************************************************************//**
+ * @brief This function is used to put the AFE (Analog Front End) into sleep
+ * mode, which is essential for power management in applications where
+ * the device is not actively in use. It should be called when the device
+ * is initialized and ready to enter a low-power state. Ensure that any
+ * necessary data has been processed or saved before invoking this
+ * function, as entering sleep mode may halt ongoing operations. The
+ * function will return an error code if the operation fails, so it is
+ * important to check the return value for successful execution.
+ *
+ * @param dev A pointer to an `ad5940_dev` structure representing the device.
+ * Must not be null, as it is required to identify the specific
+ * device instance. If the pointer is invalid or null, the function
+ * may return an error.
+ * @return Returns an integer indicating the success or failure of the
+ * operation. A return value of 0 typically indicates success, while any
+ * non-zero value indicates an error.
+ ******************************************************************************/
 int ad5940_EnterSleepS(struct ad5940_dev
 		       *dev);      /* Put AFE to hibernate/sleep mode and keep LP loop as the default settings. */
+/***************************************************************************//**
+ * @brief This function is used to safely shut down the device by turning off
+ * specific low-power loop configurations and entering hibernate mode. It
+ * must be called when the device is no longer in use to conserve power.
+ * The function first initializes necessary configurations, then disables
+ * the low-power loop and reference configurations. It also unlocks the
+ * sleep key before transitioning the device into hibernate mode. Ensure
+ * that the device is properly initialized before calling this function,
+ * as it relies on the device context provided.
+ *
+ * @param dev A pointer to an `ad5940_dev` structure representing the device
+ * context. Must not be null and should point to a valid device that
+ * has been initialized.
+ * @return Returns a non-negative integer on success, or a negative error code
+ * if any operation fails during the shutdown process.
+ ******************************************************************************/
 int ad5940_ShutDownS(struct ad5940_dev
 		     *dev);    /* Unlock the key, turn off LP loop and enter sleep/hibernate mode  */
+/***************************************************************************//**
+ * @brief This function is used to wake up the AFE device by repeatedly checking
+ * its status until it is ready. It should be called when the device is
+ * expected to be in a low-power state and needs to be activated. The
+ * function will attempt to read the device's status register and verify
+ * if it matches the expected identifier. The `TryCount` parameter
+ * controls how many attempts to make before giving up; if it is set to a
+ * non-positive value, the function will continue trying indefinitely. It
+ * is important to ensure that the `dev` parameter is properly
+ * initialized before calling this function.
+ *
+ * @param dev A pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null and should be properly initialized before use.
+ * @param TryCount An integer specifying the maximum number of attempts to wake
+ * up the device. A value of zero or negative indicates that the
+ * function should keep trying indefinitely.
+ * @return Returns the number of attempts made to wake up the device. A negative
+ * value indicates an error occurred during the read operation.
+ ******************************************************************************/
 int ad5940_WakeUp(struct ad5940_dev *dev,
 		  int32_t TryCount);   /* Try to wakeup AFE by read register */
+/***************************************************************************//**
+ * @brief This function is used to perform a hardware reset on the AD5940
+ * device, which is necessary to reinitialize the device state. It should
+ * be called when the device needs to be reset, such as after a
+ * configuration change or when recovering from an error state. The
+ * function sets the reset GPIO pin low, waits for a brief period, then
+ * sets it high again, allowing the device to exit the reset state. It is
+ * important to ensure that the device is properly initialized before
+ * calling this function.
+ *
+ * @param dev A pointer to an `ad5940_dev` structure representing the device to
+ * be reset. This pointer must not be null and should point to a
+ * valid device structure. If the pointer is invalid or the device is
+ * not properly initialized, the function may not behave as expected.
+ * @return Returns 0 on success, or a negative error code if the reset operation
+ * fails or if the device identification read from the register does not
+ * match the expected value.
+ ******************************************************************************/
 int ad5940_HWReset(struct ad5940_dev
 		   *dev);       /* Do hardware reset to AD5940 using RESET pin */
 
 /* Calibration functions */
 /* 8. Calibration */
+/***************************************************************************//**
+ * @brief This function is used to perform calibration of the high-speed
+ * transimpedance amplifier (RTIA) in the specified device. It must be
+ * called after the device has been properly initialized and configured.
+ * The calibration configuration is provided through the `pCalCfg`
+ * parameter, which must not be null and should contain valid settings,
+ * including a non-zero `fRcal` value and a valid `HstiaRtiaSel`. The
+ * results of the calibration are written to the `pResult` parameter,
+ * which must also not be null. The function handles various edge cases,
+ * such as invalid configuration values, and will return an error code if
+ * any preconditions are not met.
+ *
+ * @param dev Pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null.
+ * @param pCalCfg Pointer to a `HSRTIACal_Type` structure containing calibration
+ * configuration. Must not be null, `fRcal` must be non-zero, and
+ * `HstiaRtiaSel` must be within valid range.
+ * @param pResult Pointer to a result structure where calibration results will
+ * be stored. Must not be null.
+ * @return Returns 0 on success, or a negative error code if any input
+ * parameters are invalid or if an error occurs during calibration.
+ ******************************************************************************/
 int ad5940_HSRtiaCal(struct ad5940_dev *dev, HSRTIACal_Type *pCalCfg,
 		     void *pResult);
+/***************************************************************************//**
+ * @brief This function is used to calibrate the Low Power Resistance
+ * Transimpedance Amplifier (LPRTIA) in a specific device. It must be
+ * called after the device has been properly initialized and configured.
+ * The calibration process requires valid configuration parameters,
+ * including the reference resistance value and the transimpedance
+ * settings. If any of the input parameters are invalid, the function
+ * will return an error code. The results of the calibration are written
+ * to the provided result pointer, which can either be in rectangular or
+ * polar form based on the configuration. It is important to ensure that
+ * the device is in a suitable state for calibration before invoking this
+ * function.
+ *
+ * @param dev Pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null.
+ * @param pCalCfg Pointer to a `LPRTIACal_Type` structure containing calibration
+ * configuration parameters. Must not be null. The `fRcal` field
+ * must be greater than zero, and the `LpTiaRtia` field must be
+ * within valid limits.
+ * @param pResult Pointer to a result structure where the calibration results
+ * will be stored. Must not be null.
+ * @return Returns 0 on success, or a negative error code if any input
+ * parameters are invalid or if an error occurs during the calibration
+ * process.
+ ******************************************************************************/
 int ad5940_LPRtiaCal(struct ad5940_dev *dev, LPRTIACal_Type *pCalCfg,
 		     void *pResult);
+/***************************************************************************//**
+ * @brief This function is used to measure the frequency of the low-frequency
+ * oscillator (LFOSC) in a device. It should be called after the device
+ * has been properly initialized and configured. The function modifies
+ * certain internal registers, and the user is responsible for re-
+ * initializing the device after the measurement is complete. It is
+ * important to ensure that the configuration structure is valid and that
+ * the frequency pointer is not null before calling this function. If the
+ * calibration duration specified in the configuration is less than the
+ * minimum required value, the function will return an error.
+ *
+ * @param dev A pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null.
+ * @param pCfg A pointer to an `LFOSCMeasure_Type` structure containing
+ * configuration parameters for the measurement. Must not be null.
+ * The `CalDuration` field must be at least 1.0 ms.
+ * @param pFreq A pointer to a float where the measured frequency will be
+ * stored. Must not be null.
+ * @return Returns 0 on success, or a negative error code on failure. The
+ * measured frequency is stored in the location pointed to by `pFreq`.
+ ******************************************************************************/
 int ad5940_LFOSCMeasure(struct ad5940_dev *dev, LFOSCMeasure_Type *pCfg,
 			float *pFreq) ; /* Measure current LFOSC frequency. */
 /** @todo add temperature sensor functions */
 
 /* 9. Pure software functions. Functions with no register access. These functions are helpers */
 /* Sequence Generator */
+/***************************************************************************//**
+ * @brief This function is used to initialize the sequence generator for the
+ * specified device. It must be called before using the sequence
+ * generator to ensure that the buffer is properly set up. The function
+ * expects a valid device structure and a buffer with a size of at least
+ * 2 elements. If the provided buffer size is less than 2, the function
+ * will return an error. After successful initialization, the sequence
+ * generator's internal state is reset, and it is ready for use.
+ *
+ * @param dev A pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null.
+ * @param pBuffer A pointer to a buffer that will hold the sequence data. The
+ * buffer must be allocated by the caller and should be large
+ * enough to hold at least `BufferSize` elements.
+ * @param BufferSize The size of the buffer pointed to by `pBuffer`. Must be at
+ * least 2; otherwise, the function will return an error.
+ * @return Returns 0 on successful initialization. If the buffer size is less
+ * than 2, it returns -EINVAL to indicate an invalid argument.
+ ******************************************************************************/
 int ad5940_SEQGenInit(struct ad5940_dev *dev, uint32_t *pBuffer,
 		      uint32_t BufferSize);/* Initialize sequence generator workspace */
+/***************************************************************************//**
+ * @brief This function is used to enable or disable the sequence generator
+ * within the specified device. It should be called after the device has
+ * been properly initialized. When enabling the sequence generator, it
+ * resets the sequence length and clears any previous error messages. If
+ * the sequence generator is disabled, it simply updates the state
+ * without affecting other parameters. Ensure that the `dev` parameter is
+ * valid and properly initialized before calling this function.
+ *
+ * @param dev A pointer to an `ad5940_dev` structure representing the device.
+ * Must not be null and should point to a valid, initialized device
+ * instance.
+ * @param enable A boolean value indicating whether to enable (true) or disable
+ * (false) the sequence generator. Valid values are true or false.
+ * @return Returns 0 on success, indicating that the operation was completed
+ * without errors.
+ ******************************************************************************/
 int ad5940_SEQGenCtrl(struct ad5940_dev *dev,
 		      bool bTRUE);  /* Enable or disable sequence generator */
+/***************************************************************************//**
+ * @brief This function is used to add a command word to the sequence
+ * generator's buffer, which is part of the device's sequence generation
+ * functionality. It should be called after the device has been properly
+ * initialized and configured. The function checks if there is enough
+ * space in the buffer to accommodate the new command; if there is
+ * insufficient space, it sets an error code indicating memory allocation
+ * failure. It is important to ensure that the sequence buffer is
+ * properly allocated and that the device structure is valid before
+ * calling this function.
+ *
+ * @param dev A pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null and should point to a valid initialized device
+ * instance.
+ * @param CmdWord The command word to be inserted into the sequence buffer. This
+ * is a 32-bit unsigned integer representing the command. There
+ * are no specific constraints on the value of this parameter,
+ * but it should be meaningful within the context of the sequence
+ * generation.
+ * @return Returns 0 on success. If there is an error due to insufficient buffer
+ * space, the `LastError` field in the device structure is set to
+ * indicate the error.
+ ******************************************************************************/
 int ad5940_SEQGenInsert(struct ad5940_dev *dev,
 			uint32_t CmdWord); /* Manually insert a sequence command */
+/***************************************************************************//**
+ * @brief This function retrieves the current sequence command buffer and its
+ * length from the specified device. It should be called after the
+ * sequence generator has been initialized and populated with commands.
+ * The function allows the caller to access the sequence command data and
+ * its length, which can be useful for processing or debugging. If the
+ * provided pointers are null, the corresponding data will not be
+ * fetched. The function also returns the last error encountered by the
+ * sequence generator, which can be used to determine if any issues
+ * occurred during the last operation.
+ *
+ * @param dev A pointer to an `ad5940_dev` structure representing the device.
+ * Must not be null.
+ * @param ppSeqCmd A pointer to a pointer that will receive the address of the
+ * sequence command buffer. If null, the command buffer will not
+ * be fetched.
+ * @param pSeqLen A pointer to a variable that will receive the length of the
+ * sequence. If null, the length will not be fetched.
+ * @return Returns the last error code from the sequence generator. A value of
+ * zero indicates no error.
+ ******************************************************************************/
 int ad5940_SEQGenFetchSeq(struct ad5940_dev *dev, const uint32_t **ppSeqCmd,
 			  uint32_t *pSeqCount);  /* Fetch generated sequence and start a new sequence */
+/***************************************************************************//**
+ * @brief This function is used to compute the necessary clock settings for the
+ * ADC based on the provided filter information. It should be called
+ * after initializing the device and when the filter parameters are set.
+ * The function expects valid filter information and clock pointers; if
+ * any of the inputs are invalid, it will return an error code. The
+ * function handles various data types and configurations, adjusting the
+ * filter parameters as needed, and it may invoke itself recursively to
+ * compute the clock settings for different data types. The output clock
+ * value is written to the provided pointer.
+ *
+ * @param dev Pointer to the `ad5940_dev` structure representing the device.
+ * Must not be null.
+ * @param pFilterInfo Pointer to a `ClksCalInfo_Type` structure containing
+ * filter settings. Must not be null and must contain valid
+ * settings for `ADCSinc2Osr`, `ADCSinc3Osr`, and
+ * `ADCAvgNum`.
+ * @param pClocks Pointer to a `uint32_t` where the calculated clock value will
+ * be stored. Must not be null.
+ * @return Returns 0 on success, or a negative error code if any input
+ * parameters are invalid.
+ ******************************************************************************/
 int ad5940_ClksCalculate(struct ad5940_dev *dev, ClksCalInfo_Type *pFilterInfo,
-			 uint32_t *pClocks);  /* @todo add notch filter calculation. Calculate how much clocks to reach n points of data */
+/***************************************************************************//**
+ * @brief This function is used to compute the next frequency value in a
+ * frequency sweep based on the provided configuration. It should be
+ * called after initializing the sweep configuration and can be invoked
+ * repeatedly to obtain subsequent frequency values. The function handles
+ * both linear and logarithmic sweeps, adjusting the frequency according
+ * to the current index and the specified start and stop frequencies. It
+ * is important to ensure that the sweep configuration is valid and that
+ * the sweep index is properly managed to avoid out-of-bounds access.
+ *
+ * @param dev A pointer to an `ad5940_dev` structure representing the device
+ * context. Must not be null.
+ * @param pSweepCfg A pointer to a `SoftSweepCfg_Type` structure containing the
+ * sweep configuration parameters. Must not be null.
+ * @param pNextFreq A pointer to a float where the calculated next frequency
+ * will be stored. Caller retains ownership and must ensure it
+ * is valid.
+ * @return The function does not return a value but updates the float pointed to
+ * by `pNextFreq` with the calculated frequency for the next step in the
+ * sweep.
+ ******************************************************************************/
 void ad5940_SweepNext(struct ad5940_dev *dev, SoftSweepCfg_Type *pSweepCfg,
 		      float *pNextFreq);
+/***************************************************************************//**
+ * @brief This function performs division of one complex number by another, both
+ * represented as `fImpCar_Type`. It is essential to ensure that the
+ * denominator (the second parameter) is not zero, as this will lead to
+ * undefined behavior. The function should be called when you need to
+ * compute the quotient of two complex numbers, and it will return a new
+ * `fImpCar_Type` instance containing the result. The caller should be
+ * aware that if the denominator has both real and imaginary parts equal
+ * to zero, the behavior is undefined.
+ *
+ * @param a A pointer to the first complex number (the numerator). Must not be
+ * null.
+ * @param b A pointer to the second complex number (the denominator). Must not
+ * be null and must not represent the complex number (0 + 0i) to avoid
+ * division by zero.
+ * @return Returns a new `fImpCar_Type` instance representing the result of the
+ * division. The result will contain the real and imaginary parts of the
+ * quotient.
+ ******************************************************************************/
 fImpCar_Type ad5940_ComplexDivFloat(fImpCar_Type *a, fImpCar_Type *b);
+/***************************************************************************//**
+ * @brief This function is used to perform multiplication of two complex numbers
+ * represented by `fImpCar_Type` structures. It takes two pointers to
+ * `fImpCar_Type` as input, which must not be null, and returns a new
+ * `fImpCar_Type` structure containing the result of the multiplication.
+ * The function assumes that the input structures are properly
+ * initialized and contain valid floating-point values. If either input
+ * pointer is null, the behavior is undefined.
+ *
+ * @param a Pointer to the first complex number, must not be null. It should
+ * contain valid floating-point values for both the real and imaginary
+ * parts.
+ * @param b Pointer to the second complex number, must not be null. It should
+ * also contain valid floating-point values for both the real and
+ * imaginary parts.
+ * @return Returns a new `fImpCar_Type` structure representing the product of
+ * the two input complex numbers.
+ ******************************************************************************/
 fImpCar_Type ad5940_ComplexMulFloat(fImpCar_Type *a, fImpCar_Type *b);
+/***************************************************************************//**
+ * @brief This function computes the sum of two complex numbers represented by
+ * `fImpCar_Type` structures. It should be called when you need to
+ * perform addition on complex numbers, ensuring that both input pointers
+ * are valid and point to initialized `fImpCar_Type` instances. The
+ * function does not modify the input values but returns a new
+ * `fImpCar_Type` instance containing the result of the addition.
+ *
+ * @param a Pointer to the first complex number to be added. Must not be null
+ * and should point to a valid `fImpCar_Type` instance.
+ * @param b Pointer to the second complex number to be added. Must not be null
+ * and should point to a valid `fImpCar_Type` instance.
+ * @return Returns a new `fImpCar_Type` instance representing the sum of the two
+ * input complex numbers.
+ ******************************************************************************/
 fImpCar_Type ad5940_ComplexAddFloat(fImpCar_Type *a, fImpCar_Type *b);
+/***************************************************************************//**
+ * @brief This function is used to perform subtraction between two complex
+ * numbers represented by `fImpCar_Type`. It takes two pointers to
+ * `fImpCar_Type` structures, which must not be null, and computes the
+ * difference of their real and imaginary parts. It is important to
+ * ensure that both input pointers are valid before calling this
+ * function, as passing null pointers may lead to undefined behavior. The
+ * result is a new `fImpCar_Type` structure containing the difference.
+ *
+ * @param a Pointer to the first complex number from which the second will be
+ * subtracted. Must not be null.
+ * @param b Pointer to the second complex number to be subtracted from the
+ * first. Must not be null.
+ * @return Returns a new `fImpCar_Type` structure representing the result of the
+ * subtraction, containing the real and imaginary parts of the
+ * difference.
+ ******************************************************************************/
 fImpCar_Type ad5940_ComplexSubFloat(fImpCar_Type *a, fImpCar_Type *b);
+/***************************************************************************//**
+ * @brief This function performs division of two complex numbers represented by
+ * `iImpCar_Type` structures. It is essential to ensure that the second
+ * complex number (the divisor) is not zero, as this will lead to
+ * undefined behavior. The function should be called when you need to
+ * compute the quotient of two complex numbers, and it will return a new
+ * complex number representing the result of the division. Be cautious of
+ * edge cases where the divisor has both real and imaginary parts equal
+ * to zero.
+ *
+ * @param a Pointer to the first complex number (the dividend). Must not be
+ * null.
+ * @param b Pointer to the second complex number (the divisor). Must not be null
+ * and must not represent the complex number zero (both real and
+ * imaginary parts should not be zero).
+ * @return Returns a new `fImpCar_Type` structure representing the result of the
+ * division of the two complex numbers.
+ ******************************************************************************/
 fImpCar_Type ad5940_ComplexDivInt(iImpCar_Type *a, iImpCar_Type *b);
+/***************************************************************************//**
+ * @brief This function is used to perform multiplication of two complex numbers
+ * represented by `iImpCar_Type` structures. It takes two pointers to
+ * these structures as input, which must not be null. The function
+ * computes the product and returns a new `fImpCar_Type` structure
+ * containing the result. It is important to ensure that both input
+ * parameters are valid and initialized before calling this function, as
+ * passing null pointers may lead to undefined behavior.
+ *
+ * @param a Pointer to the first complex number of type `iImpCar_Type`. Must not
+ * be null and should point to a valid initialized structure.
+ * @param b Pointer to the second complex number of type `iImpCar_Type`. Must
+ * not be null and should point to a valid initialized structure.
+ * @return Returns an `fImpCar_Type` structure representing the product of the
+ * two input complex numbers.
+ ******************************************************************************/
 fImpCar_Type ad5940_ComplexMulInt(iImpCar_Type *a, iImpCar_Type *b);
+/***************************************************************************//**
+ * @brief This function computes the magnitude of a complex number represented
+ * by the `fImpCar_Type` structure, which contains real and imaginary
+ * components. It should be called with a valid pointer to an initialized
+ * `fImpCar_Type` instance. The function will return the magnitude as a
+ * floating-point value, which is the square root of the sum of the
+ * squares of the real and imaginary parts. If the input pointer is null,
+ * the behavior is undefined, so it is essential to ensure that the
+ * pointer is valid before calling this function.
+ *
+ * @param a A pointer to an instance of `fImpCar_Type`, which must not be null.
+ * The structure should be properly initialized with valid real and
+ * imaginary values. Passing a null pointer will lead to undefined
+ * behavior.
+ * @return Returns a float representing the magnitude of the complex number,
+ * calculated as the square root of the sum of the squares of the real
+ * and imaginary components.
+ ******************************************************************************/
 float     ad5940_ComplexMag(fImpCar_Type *a);
+/***************************************************************************//**
+ * @brief This function computes the phase (or angle) of a complex number
+ * represented by the `fImpCar_Type` structure. It should be called when
+ * you need to determine the phase of a complex number, which is useful
+ * in various applications such as signal processing and control systems.
+ * The input structure must be properly initialized and should not be
+ * null. The function handles the calculation using the `atan2` function,
+ * which ensures that the phase is correctly computed across all
+ * quadrants.
+ *
+ * @param a A pointer to a `fImpCar_Type` structure representing a complex
+ * number. The structure must not be null and should contain valid
+ * values for both the real and imaginary parts. If the pointer is
+ * null, the behavior is undefined.
+ * @return Returns the phase of the complex number as a float, measured in
+ * radians.
+ ******************************************************************************/
 float     ad5940_ComplexPhase(fImpCar_Type *a);
 
 /**

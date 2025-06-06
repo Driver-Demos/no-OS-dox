@@ -20,9 +20,33 @@
 extern "C" {
 #endif
 
-/**
- * \brief Settings for HOP frame information to match ARM firmware struct type
- */
+/***************************************************************************//**
+ * @brief The `adrv9001_FhHopFrame_t` structure is used to define the settings
+ * for a frequency hopping (FH) frame in the ADRV9001 system, matching
+ * the ARM firmware struct type. It includes fields for specifying the
+ * operating frequency in Hz, both lower and upper 32-bits, as well as
+ * offset frequencies for Rx1 and Rx2, which are ignored if the frame is
+ * not for reception or if the profile does not use an intermediate
+ * frequency (IF). Additionally, it contains fields for Tx1 and Tx2
+ * attenuation levels expressed in 0.2 dB increments, which are ignored
+ * if the frame is for reception, and starting gain indices for Rx1 and
+ * Rx2, which are ignored if the frame is for transmission.
+ *
+ * @param hopFrequencyHz_LSB Lower 32-bits of Operating frequency in Hz.
+ * @param hopFrequencyHz_MSB Upper 32-bits of Operating frequency in Hz.
+ * @param rx1OffsetFrequencyHz Rx1 Offset frequency, ignored if frame is not Rx
+ * or if profile does not operate with an IF.
+ * @param rx2OffsetFrequencyHz Rx2 Offset frequency, ignored if frame is not Rx
+ * or if profile does not operate with an IF.
+ * @param tx1Attenuation_fifthdB Tx1 attenuation in 0.2dBs, ignored if frame is
+ * Rx.
+ * @param tx2Attenuation_fifthdB Tx2 attenuation in 0.2dBs, ignored if frame is
+ * Rx.
+ * @param rx1GainIndex Starting Rx1 gain index for hop frame, ignored if frame
+ * is Tx.
+ * @param rx2GainIndex Starting Rx2 gain index for hop frame, ignored if frame
+ * is Tx.
+ ******************************************************************************/
 typedef struct {
     uint32_t hopFrequencyHz_LSB;		/*!< Lower 32-bits of Operating frequency in Hz */
     uint32_t hopFrequencyHz_MSB;		/*!< Upper 32-bits of Operating frequency in Hz */

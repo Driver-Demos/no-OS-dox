@@ -16,6 +16,15 @@
 #ifdef __KERNEL__
 #include <linux/kernel.h>
 
+/***************************************************************************//**
+ * @brief The `atoi` function converts a string to an integer using the
+ * `kstrtoint` function.
+ *
+ * @param str A pointer to a constant character string that represents the
+ * number to be converted.
+ * @return The function returns the integer value converted from the string, or
+ * an error code if the conversion fails.
+ ******************************************************************************/
 static inline int atoi(const char *str)
 {
     int val = 0, ret;

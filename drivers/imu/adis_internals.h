@@ -49,9 +49,42 @@
 #define ADIS_WRITE_REG(reg)		((NO_OS_BIT(7) | (reg)))
 #define ADIS_READ_REG(reg)		((reg) & NO_OS_GENMASK(6,0))
 
-/** @struct adis_timeout
- *  @brief ADIS chip timeouts
- */
+/***************************************************************************//**
+ * @brief The `adis_timeout` structure is designed to encapsulate various
+ * timeout durations required for different operations on an ADIS chip.
+ * Each member of the structure represents a specific wait time, either
+ * in milliseconds or microseconds, that is necessary after executing
+ * certain commands or operations, such as hardware resets, factory
+ * calibration restores, self-tests, flash memory updates, and other
+ * configuration changes. This structure is crucial for ensuring that the
+ * chip has adequate time to complete these operations before proceeding
+ * with further instructions, thereby maintaining the integrity and
+ * reliability of the chip's performance.
+ *
+ * @param reset_ms Wait time in milliseconds needed after a hardware reset.
+ * @param fact_calib_restore_ms Wait time in milliseconds needed after a factory
+ * calibration restore command is issued.
+ * @param self_test_ms Wait time in milliseconds needed after a self test
+ * command is issued.
+ * @param fls_mem_update_ms Wait time in milliseconds needed after a flash
+ * memory update command is issued.
+ * @param fls_mem_test_ms Wait time in milliseconds needed after a flash memory
+ * test command is issued.
+ * @param sw_reset_ms Wait time in milliseconds needed after a software reset
+ * command is issued.
+ * @param dec_rate_update_us Wait time in microseconds needed after a write
+ * command is issued for the decimation rate field.
+ * @param filt_size_var_b_update_us Wait time in microseconds needed after a
+ * write command is issued for the filter size
+ * variable b field.
+ * @param msc_reg_update_us Wait time in microseconds needed after a write
+ * command is issued in the miscellaneous control
+ * register.
+ * @param sens_bw_update_ms Wait time in milliseconds needed after a write
+ * command is issued to change the internal sensor
+ * bandwidth field in the miscellaneous control
+ * register.
+ ******************************************************************************/
 struct adis_timeout {
 	/** Wait time in milliseconds needed after a hardware reset. */
 	uint16_t reset_ms;
@@ -94,9 +127,17 @@ struct adis_timeout {
 	uint16_t sens_bw_update_ms;
 };
 
-/** @struct adis_clk_freq_limit
- *  @brief ADIS frequency limit for input synchronization clock
- */
+/***************************************************************************//**
+ * @brief The `adis_clk_freq_limit` structure defines the frequency limits for
+ * ADIS clocks, specifying the minimum and maximum allowable frequencies
+ * in Hertz. This structure is used to ensure that the clock frequencies
+ * used in ADIS devices remain within the specified operational range,
+ * which is crucial for maintaining proper synchronization and
+ * functionality of the device.
+ *
+ * @param min_freq Minimum allowed frequency for adis clocks in Hertz.
+ * @param max_freq Maximum allowed frequency for adis clocks in Hertz.
+ ******************************************************************************/
 struct adis_clk_freq_limit {
 	/** Minimum allowed frequency for adis clocks in Hertz. */
 	uint32_t min_freq;
@@ -104,17 +145,36 @@ struct adis_clk_freq_limit {
 	uint32_t max_freq;
 };
 
-/** @struct adis_scale_members
- *  @brief ADIS generic scale members structure.
- */
+/***************************************************************************//**
+ * @brief The `adis_scale_members` structure is a simple data structure used to
+ * store two scale factors, `scale_m1` and `scale_m2`, which are
+ * represented as 32-bit unsigned integers. These scale factors are
+ * likely used in the context of the ADIS device to adjust or calibrate
+ * measurements or outputs. The structure provides a straightforward way
+ * to encapsulate these two related values.
+ *
+ * @param scale_m1 Represents the first scale factor for the ADIS device.
+ * @param scale_m2 Represents the second scale factor for the ADIS device.
+ ******************************************************************************/
 struct adis_scale_members {
 	uint32_t scale_m1;
 	uint32_t scale_m2;
 };
 
-/** @struct adis_field
- *  @brief ADIS device field structure
- */
+/***************************************************************************//**
+ * @brief The `adis_field` structure is used to define a specific field within a
+ * register of an ADIS device. It contains information about the
+ * register's address (`reg_addr`), the size of the register
+ * (`reg_size`), and a mask (`field_mask`) that specifies the particular
+ * bits within the register that are relevant to the field. This
+ * structure is essential for accessing and manipulating specific fields
+ * within the device's registers, allowing for precise control and
+ * configuration of the device's functionality.
+ *
+ * @param reg_addr Address of the register in which the field is found.
+ * @param reg_size Size of the register in which the field is found.
+ * @param field_mask The mask of the field in a register.
+ ******************************************************************************/
 struct adis_field {
 	/** Address of the register in which the field is found. */
 	uint16_t 	reg_addr;
@@ -124,9 +184,154 @@ struct adis_field {
 	uint32_t 	field_mask;
 };
 
-/** @struct adis_data_field_map_def
- *  @brief ADIS filed map definition structure
- */
+/***************************************************************************//**
+ * @brief The `adis_data_field_map_def` structure is a comprehensive data
+ * structure used to define various diagnostic, configuration, and data
+ * fields for an ADIS device. It includes fields for error and status
+ * indicators, raw sensor data, bias and scale adjustments, FIFO
+ * configurations, synchronization settings, and command bits for
+ * operations like self-test and memory updates. This structure is
+ * essential for managing and interfacing with the ADIS device, providing
+ * a detailed map of all relevant fields necessary for device operation
+ * and diagnostics.
+ *
+ * @param diag_stat Status/Error Flag Indicators register.
+ * @param diag_snsr_init_failure_mask Sensor initialization failure bit mask.
+ * @param diag_data_path_overrun_mask Data path overrun bit mask.
+ * @param diag_fls_mem_update_failure_mask Flash memory update failure bit mask.
+ * @param diag_spi_comm_err_mask SPI communication error bit mask.
+ * @param diag_standby_mode_mask Standby mode bit mask.
+ * @param diag_snsr_failure_mask Sensor failure bit mask.
+ * @param diag_mem_failure_mask Memory failure bit mask.
+ * @param diag_clk_err_mask Clock error bit mask.
+ * @param diag_gyro1_failure_mask Gyroscope 1 failure bit mask.
+ * @param diag_gyro2_failure_mask Gyroscope 2 failure bit mask.
+ * @param diag_accl_failure_mask Accelerometer failure bit mask.
+ * @param diag_x_axis_gyro_failure_mask X-Axis gyroscope failure bit mask.
+ * @param diag_y_axis_gyro_failure_mask Y-Axis gyroscope failure bit mask.
+ * @param diag_z_axis_gyro_failure_mask Z-Axis gyroscope failure bit mask.
+ * @param diag_x_axis_accl_failure_mask X-Axis accelerometer failure bit mask.
+ * @param diag_y_axis_accl_failure_mask Y-Axis accelerometer failure bit mask.
+ * @param diag_z_axis_accl_failure_mask Z-Axis accelerometer failure bit mask.
+ * @param diag_aduc_mcu_fault_mask ADuC microcontroller fault bit mask.
+ * @param diag_config_calib_crc_error_mask Configuration and/or calibration CRC
+ * error bit mask.
+ * @param diag_overrange_mask Overrange event occurred bit mask.
+ * @param diag_temp_err_mask Temperature error bit mask.
+ * @param diag_power_supply_failure_mask Power supply failure bit mask.
+ * @param diag_boot_memory_failure_mask Power supply failure bit mask.
+ * @param diag_reg_nvm_err_mask Register NVM error bit mask.
+ * @param diag_wdg_timer_flag_mask Watchdog timer flag bit mask.
+ * @param diag_int_proc_supply_err_mask Internal processor supply error bit
+ * mask.
+ * @param diag_ext_5v_supply_err_mask External 5V supply error bit mask.
+ * @param diag_int_snsr_supply_err_mask Internal sensor supply error bit mask.
+ * @param diag_int_reg_err_mask Internal regulator error bit mask.
+ * @param temp_flags Status/Error Flag Indicators register.
+ * @param x_gyro X-axis gyroscope raw data.
+ * @param y_gyro Y-axis gyroscope raw data.
+ * @param z_gyro Z-axis gyroscope raw data.
+ * @param x_accl X-axis accelerometer raw data.
+ * @param y_accl Y-axis accelerometer raw data.
+ * @param z_accl Z-axis accelerometer raw data.
+ * @param temp_out Temperature raw data.
+ * @param time_stamp Time stamp raw data.
+ * @param data_cntr Data update counter.
+ * @param x_deltang X-axis delta angle raw data.
+ * @param y_deltang Y-axis delta angle raw data.
+ * @param z_deltang Z-axis delta angle raw data.
+ * @param x_deltvel X-axis delta velocity raw data.
+ * @param y_deltvel Y-axis delta velocity raw data.
+ * @param z_deltvel Z-axis delta velocity raw data.
+ * @param fifo_cnt FIFO sample count.
+ * @param spi_chksum SPI dynamic checksum.
+ * @param xg_bias X-axis gyroscope offset correction.
+ * @param yg_bias Y-axis gyroscope offset correction.
+ * @param zg_bias Z-axis gyroscope offset correction.
+ * @param xa_bias X-axis accelerometer offset correction.
+ * @param ya_bias Y-axis accelerometer offset correction.
+ * @param za_bias Z-axis accelerometer offset correction.
+ * @param xg_scale X-axis gyroscope scale adjustment.
+ * @param yg_scale Y-axis gyroscope scale adjustment.
+ * @param zg_scale Z-axis gyroscope scale adjustment.
+ * @param xa_scale X-axis accelerometer scale adjustment.
+ * @param ya_scale Y-axis accelerometer scale adjustment.
+ * @param za_scale Z-axis accelerometer scale adjustment.
+ * @param fifo_en FIFO mode enable.
+ * @param fifo_overflow FIFO overflow behavior.
+ * @param fifo_wm_int_en FIFO watermark interrupt enable.
+ * @param fifo_wm_int_pol FIFO watermark interrupt polarity.
+ * @param fifo_wm_lvl FIFO watermark threshold level.
+ * @param filt_size_var_b Filter size variable B.
+ * @param gyro_meas_range Gyroscope measurement range.
+ * @param dr_selection Data ready line selection.
+ * @param dr_polarity Data ready polarity.
+ * @param dr_enable Data ready enable.
+ * @param sync_selection SYNC signal input line selection.
+ * @param sync_polarity SYNC signal polarity.
+ * @param sync_mode SYNC mode select.
+ * @param alarm_selection Alarm indicator select.
+ * @param alarm_polarity Alarm indicator polarity.
+ * @param alarm_enable Alarm indicator enable.
+ * @param gpio_ctrl General-purpose input and output control.
+ * @param sens_bw Internal sensor bandwidth.
+ * @param pt_of_perc_algnmt Point of percussion alignment enable bit.
+ * @param linear_accl_comp Linear acceleration compensation enable bit.
+ * @param burst_sel Burst read output array selection.
+ * @param burst32 32-bit burst enable bit.
+ * @param timestamp32 32-bit timestamp enable bit.
+ * @param sync_4khz 4khz internal sync enable bit.
+ * @param accl_fir_enable Accelerometer FIR filter control bit.
+ * @param gyro_fir_enable Gyroscope FIR filter control bit.
+ * @param up_scale External clock scale factor.
+ * @param dec_rate Decimation rate.
+ * @param bias_corr_tbc Bias correction time base control.
+ * @param bias_corr_en_xg X-axis gyroscope bias correction enable.
+ * @param bias_corr_en_yg Y-axis gyroscope bias correction enable.
+ * @param bias_corr_en_zg Z-axis gyroscope bias correction enable.
+ * @param bias_corr_en_xa X-axis accelerometer bias correction enable.
+ * @param bias_corr_en_ya Y-axis accelerometer bias correction enable.
+ * @param bias_corr_en_za Z-axis accelerometer bias correction enable.
+ * @param write_lock Write lock command bit.
+ * @param bias_corr_update Bias correction update command bit.
+ * @param fact_calib_restore Factory calibration restore command bit.
+ * @param snsr_self_test Sensor self test command bit.
+ * @param fls_mem_update Flash memory update command bit.
+ * @param fls_mem_test Flash memory test command bit.
+ * @param fifo_flush FIFO flush command bit.
+ * @param sw_res Software reset command bit.
+ * @param proc_rev Processor revision number.
+ * @param firm_rev Firmware revision.
+ * @param firm_d Factory configuration day.
+ * @param firm_m Factory configuration month.
+ * @param firm_y Factory configuration year.
+ * @param boot_rev Boot loader revision.
+ * @param prod_id Product identification.
+ * @param serial_num Serial number.
+ * @param lot_num Lot specific number.
+ * @param usr_scr_1 User Scratch Pad Register 1.
+ * @param usr_scr_2 User Scratch Pad Register 2.
+ * @param usr_scr_3 User Scratch Pad Register 3.
+ * @param usr_scr_4 User Scratch Pad Register 4.
+ * @param fls_mem_wr_cntr Flash memory endurance counter.
+ * @param coeff_c0 FIR Filter Coefficient C0.
+ * @param fir_en_xg X-axis gyroscope filter enable.
+ * @param fir_en_yg Y-axis gyroscope filter enable.
+ * @param fir_en_zg Z-axis gyroscope filter enable.
+ * @param fir_en_xa X-axis accelerometer filter enable.
+ * @param fir_en_ya Y-axis accelerometer filter enable.
+ * @param fir_en_za Z-axis accelerometer filter enable.
+ * @param fir_bank_sel_xg X-axis gyroscope filter bank selection.
+ * @param fir_bank_sel_yg Y-axis gyroscope filter bank selection.
+ * @param fir_bank_sel_zg Z-axis gyroscope filter bank selection.
+ * @param fir_bank_sel_xa X-axis accelerometer filter bank selection.
+ * @param fir_bank_sel_ya Y-axis accelerometer filter bank selection.
+ * @param fir_bank_sel_za Z-axis accelerometer filter bank selection.
+ * @param coeff_bank_a FIR Filter Coefficient Bank A.
+ * @param coeff_bank_b FIR Filter Coefficient Bank B.
+ * @param coeff_bank_c FIR Filter Coefficient Bank C.
+ * @param coeff_bank_d FIR Filter Coefficient Bank D.
+ ******************************************************************************/
 struct adis_data_field_map_def {
 	/** Status/Error Flag Indicators register. */
 	struct adis_field diag_stat;
@@ -416,9 +621,52 @@ struct adis_data_field_map_def {
 	struct adis_field coeff_bank_d;
 };
 
-/** @struct adis_chip_info
- *  @brief ADIS specific chip information structure
- */
+/***************************************************************************//**
+ * @brief The `adis_chip_info` structure encapsulates various chip-specific
+ * parameters and configurations for ADIS devices, including
+ * initialization parameters, field map configurations, clock frequency
+ * limits, timeouts, and SPI transaction delays. It also includes flags
+ * for paging and lock settings, maximum allowed values for various
+ * fields, and function pointers for operations such as reading and
+ * writing registers, handling burst data, and managing low pass filter
+ * frequencies. This structure is essential for defining the operational
+ * characteristics and capabilities of a specific ADIS chip, allowing for
+ * tailored interaction and control.
+ *
+ * @param ip Chip specific initialization parameters.
+ * @param field_map Chip specific field map configuration.
+ * @param sync_clk_freq_limits Chip specific synchronization clock frequency
+ * limits.
+ * @param sampling_clk_limits Chip specific sampling clock frequency limits.
+ * @param timeouts Chip specific timeouts.
+ * @param flags Chip specific flags.
+ * @param read_delay Chip specific read delay for SPI transactions.
+ * @param write_delay Chip specific write delay for SPI transactions.
+ * @param cs_change_delay Chip specific chip select change delay for SPI
+ * transactions.
+ * @param has_paging Flag to specify whether the SPI transaction addressing
+ * supports paging.
+ * @param has_lock Flag to specify whether a write lock setting is available.
+ * @param filt_size_var_b_max Maximum allowed value for filter size variable B
+ * field.
+ * @param dec_rate_max Maximum allowed value for decimation rate field.
+ * @param sync_mode_max Maximum allowed value for sync mode select field.
+ * @param fls_mem_wr_cntr_max Maximum allowed value for flash memory write
+ * counter.
+ * @param bias_corr_tbc_max Maximum allowed encoded value for bias correction
+ * time base control.
+ * @param fir_coef_idx_max Maximum FIR filter coefficient id.
+ * @param int_clk Internal clock frequency in Hertz.
+ * @param get_scale Function to obtain the channel scale members.
+ * @param read_reg Function for reading a register.
+ * @param write_reg Function for writing a register.
+ * @param read_burst_data Function for reading burst data.
+ * @param get_offset Function for reading channel offset.
+ * @param read_sync_mode Function for reading sync_mode.
+ * @param write_sync_mode Function for writing sync_mode.
+ * @param write_lpf Function for writing the low pass filter frequency.
+ * @param read_lpf Function for reading the low pass filter frequency.
+ ******************************************************************************/
 struct adis_chip_info {
 	/** Chip specific initialization parameters. */
 	const struct adis_init_param 		*ip;
@@ -490,19 +738,128 @@ struct adis_chip_info {
 			enum adis_axis_type axis, uint32_t *freq);
 };
 
-/*! Check if the checksum for burst data is correct. */
+/***************************************************************************//**
+ * @brief Use this function to verify the integrity of burst data by checking
+ * its checksum. It is essential to ensure that the buffer contains the
+ * expected data format, with the checksum located at the end of the data
+ * segment. The function should be called when you need to confirm that
+ * the data received is complete and uncorrupted. Ensure that the buffer
+ * is properly initialized and contains at least `size` bytes, and that
+ * `idx` is within the valid range of the buffer.
+ *
+ * @param buffer A pointer to the buffer containing the burst data. Must not be
+ * null and should have at least `size` bytes allocated.
+ * @param size The total size of the buffer in bytes, including the checksum.
+ * Must be greater than the checksum size.
+ * @param idx The starting index in the buffer from which to begin checksum
+ * validation. Must be less than `size - ADIS_CHECKSUM_SIZE`.
+ * @return Returns `true` if the checksum is valid, otherwise `false`.
+ ******************************************************************************/
 bool adis_validate_checksum(uint8_t *buffer, uint8_t size, uint8_t idx);
-/*! Update device diagnosis flags according to the received parameter. */
+/***************************************************************************//**
+ * @brief This function updates the diagnostic flags of an ADIS device using the
+ * provided diagnostic status value. It should be called whenever the
+ * diagnostic status needs to be reflected in the device's diagnostic
+ * flags. The function requires a valid ADIS device structure and a
+ * diagnostic status value to operate correctly. It does not return any
+ * value, and the caller is responsible for ensuring that the ADIS device
+ * structure is properly initialized before calling this function.
+ *
+ * @param adis A pointer to an adis_dev structure representing the ADIS device.
+ * Must not be null, and the structure should be properly
+ * initialized before calling this function. The caller retains
+ * ownership.
+ * @param diag_stat A 32-bit unsigned integer representing the diagnostic
+ * status. This value is used to update the diagnostic flags in
+ * the ADIS device structure.
+ * @return None
+ ******************************************************************************/
 void adis_update_diag_flags(struct adis_dev *adis, uint32_t diag_stat);
-/*! Update temperature flags. */
+/***************************************************************************//**
+ * @brief This function updates the temperature flags within an ADIS device
+ * structure based on the provided temperature register value. It is used
+ * to set specific flags that indicate temperature-related conditions for
+ * various sensors in the device. This function should be called whenever
+ * the temperature register value is updated or needs to be interpreted.
+ * The function does not perform any validation on the input parameters,
+ * so it is expected that the caller provides a valid ADIS device
+ * structure and a correctly formatted temperature register value.
+ *
+ * @param adis A pointer to an adis_dev structure representing the ADIS device.
+ * Must not be null, and the structure should be properly
+ * initialized before calling this function. The caller retains
+ * ownership.
+ * @param temp_reg A 16-bit unsigned integer representing the temperature
+ * register value. This value is used to update the temperature
+ * flags in the ADIS device structure.
+ * @return None
+ ******************************************************************************/
 void adis_update_temp_flags(struct adis_dev *adis, uint16_t temp_reg);
-/*! Write adis 32-bit unsigned field. */
+/***************************************************************************//**
+ * @brief This function writes a 32-bit unsigned integer value to a specified
+ * field within an ADIS device. It is used when you need to update a
+ * specific field in the device's register with a new value. Before
+ * calling this function, ensure that the field and device are properly
+ * initialized and that the value to be written is within the valid range
+ * defined by the field's mask. If the value exceeds the allowable range,
+ * the function will return an error code. This function is typically
+ * used in device configuration or control scenarios where precise
+ * register manipulation is required.
+ *
+ * @param adis A pointer to an initialized `adis_dev` structure representing the
+ * ADIS device. Must not be null. The caller retains ownership.
+ * @param field An `adis_field` structure specifying the register address, size,
+ * and mask of the field to be written. Must be valid and properly
+ * initialized.
+ * @param field_val A 32-bit unsigned integer representing the value to write to
+ * the specified field. Must be within the range allowed by the
+ * field's mask; otherwise, the function returns an error.
+ * @return Returns 0 on success, or a negative error code if the value is out of
+ * range or if the write operation fails.
+ ******************************************************************************/
 int adis_write_field_u32(struct adis_dev *adis, struct adis_field field,
 			 uint32_t field_val);
-/*! Read adis 32-bit signed field. */
+/***************************************************************************//**
+ * @brief Use this function to read a 32-bit signed value from a specified field
+ * of an ADIS device. It is essential to ensure that the `adis` device
+ * structure is properly initialized before calling this function. The
+ * function extracts the value from the specified register and applies
+ * the field mask to retrieve the desired field value. It then sign-
+ * extends the value based on the field mask. This function is useful for
+ * accessing specific data fields within the device's registers.
+ *
+ * @param adis A pointer to an initialized `adis_dev` structure representing the
+ * ADIS device. Must not be null.
+ * @param field An `adis_field` structure specifying the register address, size,
+ * and field mask of the field to be read. The field mask
+ * determines which bits of the register are relevant.
+ * @param field_val A pointer to an `int32_t` where the read and processed field
+ * value will be stored. Must not be null.
+ * @return Returns 0 on success, or a negative error code if the read operation
+ * fails.
+ ******************************************************************************/
 int adis_read_field_s32(struct adis_dev *adis, struct adis_field field,
 			int32_t *field_val);
-/*! Read adis 32-bit unsigned field. */
+/***************************************************************************//**
+ * @brief Use this function to read a specific 32-bit unsigned field from an
+ * ADIS device, identified by the provided field structure. This function
+ * is typically called when you need to retrieve configuration or status
+ * information from the device. Ensure that the ADIS device is properly
+ * initialized before calling this function. The function will return an
+ * error code if the read operation fails, and the output parameter will
+ * not be modified in such cases.
+ *
+ * @param adis A pointer to an initialized adis_dev structure representing the
+ * ADIS device. Must not be null.
+ * @param field An adis_field structure specifying the register address, size,
+ * and mask of the field to be read. The structure must be
+ * correctly populated with valid values.
+ * @param field_val A pointer to a uint32_t where the read field value will be
+ * stored. Must not be null. The value is only modified if the
+ * function succeeds.
+ * @return Returns 0 on success, or a negative error code if the read operation
+ * fails.
+ ******************************************************************************/
 int adis_read_field_u32(struct adis_dev *adis, struct adis_field field,
 			uint32_t *field_val);
 

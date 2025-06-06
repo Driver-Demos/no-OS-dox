@@ -1351,7 +1351,33 @@
 
 /******************************************************************************/
 /*************************** Types Declarations *******************************/
-/******************************************************************************/
+/***************************************************************************//**
+ * @brief The `ad9144_dev` structure is a comprehensive representation of the
+ * AD9144 DAC device, encapsulating all necessary configurations and
+ * states required for its operation. It includes pointers to SPI and
+ * JESD204 interfaces, which are essential for communication and data
+ * transmission. The structure also holds parameters for sample rate,
+ * number of converters and lanes, and interpolation settings, which
+ * define the data processing characteristics of the DAC. Additionally,
+ * it manages the configuration of the internal PLL, including its enable
+ * state and frequency settings, which are crucial for clock management
+ * and signal integrity. The lane multiplexing array allows for flexible
+ * data routing across the available lanes.
+ *
+ * @param spi_desc Pointer to a SPI descriptor for communication.
+ * @param jdev Pointer to a JESD204 device structure.
+ * @param link_config Configuration for the JESD204 link.
+ * @param sample_rate_khz Sample rate in kilohertz.
+ * @param num_converters Number of converters in the device.
+ * @param num_lanes Number of lanes used for data transmission.
+ * @param interpolation Interpolation factor for the DAC.
+ * @param fcenter_shift Frequency center shift value.
+ * @param lane_mux Array for lane multiplexing configuration.
+ * @param pll_enable Flag to enable or disable the internal DAC PLL.
+ * @param pll_ref_frequency_khz External reference clock frequency in kilohertz
+ * for the PLL.
+ * @param pll_dac_frequency_khz Target PLL output frequency in kilohertz.
+ ******************************************************************************/
 struct ad9144_dev {
 	/* SPI */
 	struct no_os_spi_desc *spi_desc;
@@ -1376,6 +1402,37 @@ struct ad9144_dev {
 	uint32_t	pll_dac_frequency_khz;
 };
 
+/***************************************************************************//**
+ * @brief The `ad9144_init_param` structure is used to initialize and configure
+ * the AD9144 device, a high-speed digital-to-analog converter. It
+ * includes parameters for setting up the SPI interface, configuring the
+ * number of converters and lanes, and defining the interpolation factor.
+ * Additionally, it manages JESD204 settings, lane multiplexing, and PLL
+ * configurations, including enabling the internal DAC PLL and specifying
+ * reference and target frequencies. This structure is essential for
+ * setting up the device's operational parameters and ensuring proper
+ * communication and data processing.
+ *
+ * @param spi_init Initializes the SPI interface parameters.
+ * @param spi3wire Configures the SPI interface to use 3 or 4 wires.
+ * @param num_converters Specifies the number of converters in use.
+ * @param num_lanes Indicates the number of lanes available.
+ * @param interpolation Sets the interpolation factor for the device.
+ * @param fcenter_shift Defines the frequency center shift value.
+ * @param stpl_samples Holds sample data for short transport layer tests.
+ * @param lane_rate_kbps Specifies the lane rate in kilobits per second.
+ * @param prbs_type Defines the type of PRBS (Pseudo-Random Binary Sequence)
+ * used.
+ * @param jesd204_mode Sets the JESD204 mode of operation.
+ * @param jesd204_subclass Specifies the JESD204 subclass.
+ * @param jesd204_scrambling Enables or disables JESD204 scrambling.
+ * @param lane_mux Configures the lane multiplexing settings.
+ * @param pll_enable Enables or disables the internal DAC PLL.
+ * @param pll_ref_frequency_khz Specifies the external reference clock frequency
+ * in kHz when using the DAC PLL.
+ * @param pll_dac_frequency_khz Specifies the target PLL output frequency in kHz
+ * when using the DAC PLL.
+ ******************************************************************************/
 struct ad9144_init_param {
 	/* SPI */
 	struct no_os_spi_init_param	spi_init;
@@ -1404,39 +1461,249 @@ struct ad9144_init_param {
 
 /******************************************************************************/
 /************************ Functions Declarations ******************************/
-/******************************************************************************/
+/***************************************************************************//**
+ * @brief This function sets up the AD9144 device using the provided
+ * initialization parameters, configuring the device's SPI interface,
+ * power settings, and JESD204 link. It must be called before any other
+ * operations on the AD9144 device. The function performs a series of
+ * checks to ensure the device is correctly identified and operational,
+ * including verifying the chip ID and scratchpad functionality. It also
+ * configures the device's interpolation mode and optionally sets up the
+ * internal PLL if enabled. The function returns an error code if
+ * initialization fails at any step, such as memory allocation failure or
+ * invalid chip ID.
+ *
+ * @param device A pointer to a pointer of type struct ad9144_dev. This will be
+ * allocated and initialized by the function. Must not be null.
+ * @param init_param A pointer to a struct ad9144_init_param containing the
+ * initialization parameters for the device. Must not be null
+ * and should be properly initialized with valid settings for
+ * SPI, interpolation, lane rate, and other device-specific
+ * configurations.
+ * @return Returns 0 on success or -1 on failure, such as memory allocation
+ * failure or invalid chip ID.
+ ******************************************************************************/
 int32_t ad9144_setup_legacy(struct ad9144_dev **device,
 			    const struct ad9144_init_param *init_param);
 
 /* Initialize ad9144_dev, JESD FSM ON*/
+/***************************************************************************//**
+ * @brief This function initializes the AD9144 device and sets up the JESD204B
+ * interface according to the provided initialization parameters. It must
+ * be called before any other operations on the AD9144 device. The
+ * function allocates memory for the device structure, initializes the
+ * SPI interface, and configures the device registers. It also verifies
+ * the device ID and performs a scratchpad test to ensure communication
+ * integrity. If any step fails, the function returns an error code and
+ * the device is not initialized.
+ *
+ * @param device A pointer to a pointer of type `struct ad9144_dev`. This will
+ * be allocated and initialized by the function. The caller must
+ * ensure this pointer is valid and will receive ownership of the
+ * allocated memory.
+ * @param init_param A pointer to a constant `struct ad9144_init_param`
+ * containing the initialization parameters. This must not be
+ * null and should be properly initialized with valid
+ * configuration settings for the AD9144 device.
+ * @return Returns 0 on success, or a negative error code if initialization
+ * fails. On success, the `device` pointer is updated to point to the
+ * initialized device structure.
+ ******************************************************************************/
 int32_t ad9144_setup_jesd_fsm(struct ad9144_dev **device,
 			      const struct ad9144_init_param *init_param);
 
+/***************************************************************************//**
+ * @brief Use this function to properly release and clean up resources
+ * associated with an AD9144 device when it is no longer needed. This
+ * function should be called to avoid memory leaks and ensure that the
+ * SPI descriptor associated with the device is also removed. It is
+ * important to call this function only after the device has been
+ * successfully initialized and used, and before the program terminates
+ * or the device is no longer needed.
+ *
+ * @param dev A pointer to an ad9144_dev structure representing the device to be
+ * removed. Must not be null. The function will handle the
+ * deallocation of resources, and the caller should not use the
+ * pointer after this function is called.
+ * @return Returns an int32_t indicating the success or failure of the SPI
+ * removal operation. A non-zero value indicates an error.
+ ******************************************************************************/
 int32_t ad9144_remove(struct ad9144_dev *dev);
 
+/***************************************************************************//**
+ * @brief Use this function to read a specific register from the AD9144 device
+ * using the SPI interface. It requires a valid device structure and a
+ * register address to read from. The function will store the read value
+ * in the provided memory location. Ensure that the device has been
+ * properly initialized before calling this function. The function
+ * returns an integer status code indicating success or failure of the
+ * SPI operation.
+ *
+ * @param dev A pointer to an initialized ad9144_dev structure representing the
+ * device. Must not be null.
+ * @param reg_addr The 16-bit address of the register to read from. Valid
+ * register addresses are specific to the AD9144 device.
+ * @param reg_data A pointer to a uint8_t where the read register value will be
+ * stored. Must not be null.
+ * @return Returns an int32_t status code from the SPI operation, where 0
+ * typically indicates success and a negative value indicates an error.
+ ******************************************************************************/
 int32_t ad9144_spi_read(struct ad9144_dev *dev,
 			uint16_t reg_addr,
 			uint8_t *reg_data);
 
+/***************************************************************************//**
+ * @brief Use this function to write a byte of data to a specific register of
+ * the AD9144 device through the SPI interface. This function is
+ * typically called when configuring the device or updating its settings.
+ * Ensure that the device has been properly initialized and that the SPI
+ * interface is correctly configured before calling this function. The
+ * function returns an error code if the SPI communication fails.
+ *
+ * @param dev A pointer to an initialized ad9144_dev structure representing the
+ * device. Must not be null.
+ * @param reg_addr The 16-bit address of the register to write to. Valid
+ * register addresses are specific to the AD9144 device.
+ * @param reg_data The 8-bit data to write to the specified register. Any 8-bit
+ * value is valid.
+ * @return Returns an int32_t error code indicating the success or failure of
+ * the SPI write operation.
+ ******************************************************************************/
 int32_t ad9144_spi_write(struct ad9144_dev *dev,
 			 uint16_t reg_addr,
 			 uint8_t reg_data);
 
+/***************************************************************************//**
+ * @brief This function is used to verify if a specific SPI register on the
+ * AD9144 device matches the expected data. It repeatedly reads the
+ * register and checks if the masked register data equals the expected
+ * data. The function will retry up to 100 times, introducing a delay
+ * between each attempt. This function is useful for ensuring that a
+ * register has reached a desired state before proceeding with further
+ * operations. It should be called when the device is expected to be in a
+ * specific state, and the caller should handle the case where the
+ * function returns an error, indicating that the expected state was not
+ * reached within the timeout period.
+ *
+ * @param dev A pointer to an initialized ad9144_dev structure representing the
+ * device. Must not be null.
+ * @param reg_addr The address of the SPI register to be checked. Must be a
+ * valid register address for the AD9144 device.
+ * @param reg_mask A bitmask to apply to the register data before comparison.
+ * Determines which bits are relevant for the status check.
+ * @param exp_reg_data The expected data to compare against the masked register
+ * data. Only the bits specified by reg_mask are considered.
+ * @return Returns 0 if the register data matches the expected data within the
+ * timeout period, or -1 if the expected data is not observed after 100
+ * attempts.
+ ******************************************************************************/
 int32_t ad9144_spi_check_status(struct ad9144_dev *dev,
 				uint16_t reg_addr,
 				uint8_t reg_mask,
 				uint8_t exp_reg_data);
 
+/***************************************************************************//**
+ * @brief This function is used to verify the status of the AD9144 device by
+ * checking the synchronization and checksum flags across all lanes. It
+ * should be called to ensure that the device is properly synchronized
+ * and that data integrity is maintained. The function reads specific
+ * registers to determine if the code group synchronization, initial lane
+ * alignment, frame synchronization, and checksum are correct. It is
+ * important to call this function after the device has been initialized
+ * and configured to ensure proper operation.
+ *
+ * @param dev A pointer to an initialized ad9144_dev structure. This parameter
+ * must not be null, and the structure should be properly configured
+ * before calling this function. The function will read from the
+ * device associated with this structure.
+ * @return Returns 0 if all status checks pass, or -1 if any of the checks fail,
+ * indicating a problem with synchronization or data integrity.
+ ******************************************************************************/
 int32_t ad9144_status(struct ad9144_dev *dev);
 
+/***************************************************************************//**
+ * @brief This function is used to conduct a short pattern test on the AD9144
+ * device to verify its data integrity. It should be called when the
+ * device is initialized and configured, and the test samples are set up
+ * in the initialization parameters. The function iterates over each DAC
+ * converter and sample, writing test patterns to the device and checking
+ * the status for mismatches. It is important to ensure that the device
+ * and initialization parameters are correctly set up before calling this
+ * function to avoid unexpected behavior.
+ *
+ * @param dev A pointer to an initialized ad9144_dev structure representing the
+ * device. Must not be null.
+ * @param init_param A pointer to an ad9144_init_param structure containing
+ * initialization parameters, including the short pattern test
+ * samples. Must not be null and should be properly configured
+ * with valid test samples.
+ * @return Returns 0 on success, or -1 if a mismatch is detected during the
+ * test.
+ ******************************************************************************/
 int32_t ad9144_short_pattern_test(struct ad9144_dev *dev,
 				  const struct ad9144_init_param *init_param);
 
+/***************************************************************************//**
+ * @brief This function is used to perform a Pseudo-Random Binary Sequence
+ * (PRBS) test on the AD9144 device's datapath to verify data integrity.
+ * It should be called when the device is initialized and configured for
+ * operation. The function checks for synchronization and errors in both
+ * the I and Q channels, and returns a status indicating the success or
+ * failure of the test. It is important to ensure that the device is
+ * properly initialized and configured before calling this function to
+ * avoid unexpected results.
+ *
+ * @param dev A pointer to an initialized ad9144_dev structure representing the
+ * device. Must not be null.
+ * @param init_param A pointer to an ad9144_init_param structure containing
+ * initialization parameters, including the PRBS type. Must
+ * not be null.
+ * @return Returns 0 on success, or -1 if the PRBS test fails due to
+ * synchronization or channel errors.
+ ******************************************************************************/
 int32_t ad9144_datapath_prbs_test(struct ad9144_dev *dev,
 				  const struct ad9144_init_param *init_param);
 
+/***************************************************************************//**
+ * @brief Use this function to perform a calibration of the DACs in the AD9144
+ * device. This function should be called when the device is initialized
+ * and ready for operation, ensuring that the DACs are properly
+ * calibrated for accurate performance. It is important to ensure that
+ * the device structure is correctly initialized and that the number of
+ * converters is set appropriately before calling this function. The
+ * function will attempt to calibrate each DAC and will log a message if
+ * any DAC fails to calibrate. This function does not return an error
+ * code, so it is important to monitor the log for any calibration
+ * failures.
+ *
+ * @param dev A pointer to an initialized ad9144_dev structure. This structure
+ * must be properly set up with the correct number of converters
+ * before calling this function. The pointer must not be null.
+ * @return Returns 0 on completion, but does not indicate success or failure of
+ * individual DAC calibrations.
+ ******************************************************************************/
 int32_t ad9144_dac_calibrate(struct ad9144_dev *dev);
 
+/***************************************************************************//**
+ * @brief This function sets the Numerically Controlled Oscillator (NCO)
+ * frequency and phase for the AD9144 device. It should be called when
+ * you need to adjust the carrier frequency and phase of the output
+ * signal. The function requires a valid device structure and expects the
+ * carrier frequency to be within the range of the device's capabilities.
+ * The phase must be specified in degrees and should be within the range
+ * of -180 to 179. The function handles negative frequencies by selecting
+ * the appropriate sideband. It returns an error code if the phase is out
+ * of range or if any SPI communication fails.
+ *
+ * @param dev A pointer to an initialized ad9144_dev structure. Must not be
+ * null. The caller retains ownership.
+ * @param f_carrier_khz The desired carrier frequency in kHz. Negative values
+ * are allowed and will select the opposite sideband.
+ * @param phase The desired phase offset in degrees, ranging from -180 to 179.
+ * Values outside this range will result in an error.
+ * @return Returns 0 on success or a negative error code on failure, such as
+ * invalid phase or SPI communication errors.
+ ******************************************************************************/
 int32_t ad9144_set_nco(struct ad9144_dev *dev, int32_t f_carrier_khz,
 		       int16_t phase);
 

@@ -50,6 +50,18 @@
 /************************ Variables Declarations ******************************/
 /******************************************************************************/
 
+/***************************************************************************//**
+ * @brief The `adis1650x_chip_info` is a global constant variable of type
+ * `struct adis_chip_info`. It is declared as an external variable,
+ * indicating that its definition is located in another source file. This
+ * structure likely contains information specific to the ADIS1650x series
+ * of devices, such as device identification, configuration parameters,
+ * or operational characteristics.
+ *
+ * @details This variable is used to provide detailed information about the
+ * ADIS1650x device series, facilitating device-specific operations and
+ * configurations.
+ ******************************************************************************/
 extern const struct adis_chip_info adis1650x_chip_info;
 
 #endif

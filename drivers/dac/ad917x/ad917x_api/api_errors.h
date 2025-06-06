@@ -62,13 +62,15 @@
 /** HW Close function error */
 #define API_ERROR_HW_CLOSE  -(ENODEV)
 
-/**
- * \brief Return string representation of the error code
+/***************************************************************************//**
+ * @brief The `adi_api_get_error_string` function is designed to return a string
+ * representation of an error code. It takes an integer `error_code` as a
+ * parameter and returns a pointer to a null-terminated string that
+ * describes the error.
  *
- * \param error_code Error code.
- *
- * \retval char* Pointer to a null terminated string
- */
+ * @details This function is used to convert error codes into human-readable
+ * strings for easier debugging and error handling.
+ ******************************************************************************/
 char *adi_api_get_error_string(int error_code);
 
 /** @} */

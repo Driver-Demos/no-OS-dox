@@ -22,273 +22,206 @@ extern "C" {
  * Initialization functions
  ****************************************************************************
  */
-/**
- * \brief Performs a Hardware Initialization for Talise Device.
+/***************************************************************************//**
+ * @brief This function initializes the hardware components necessary for the
+ * operation of the Talise device by calling the ADI HAL function
+ * ADIHAL_openHw. It sets the HAL timeout limit and prepares the device
+ * for further operations. This function should be called after the
+ * device's devHalInfo member has been properly initialized with the
+ * necessary hardware configuration details. It handles various hardware
+ * initialization errors by returning specific recovery actions.
  *
- * This API shall call the ADI HAL function ADIHAL_openHw for
- * Talise Hardware initialization.  This HAL function initializes all the external
- * hardware blocks required in the operation of the Talise device.
- * This API will also set the HAL timeout limit for the HAL driver as per API
- * requirements.
- *
- * \pre This function may be called after device->devHalInfo has been initialized with
- * user values
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \param device Pointer to Talise device data structure. taliseDevice_t member
- *               devHalInfo shall be initialized with all the required information to initialize
- *               external Hardware required for Talise operation for example
- *               power, pull ups, SPI master etc
- *
- * \retval TALACT_ERR_CHECK_PARAM Recovery action for bad parameter check
- * \retval TALACT_ERR_CHECK_TIMER Recovery action for timer time-out check required
- * \retval TALACT_ERR_RESET_SPI Recovery action for SPI reset required
- * \retval TALACT_ERR_RESET_GPIO Recovery action for user GPIO reset required
- * \retval TALACT_NO_ACTION Function completed successfully, no action required
- */
+ * @param device Pointer to a taliseDevice_t structure. The devHalInfo member
+ * must be initialized with the necessary information for hardware
+ * initialization, such as power settings, pull-ups, and SPI
+ * master configuration. The pointer must not be null.
+ * @return Returns a uint32_t value indicating the result of the operation.
+ * Possible return values include TALACT_NO_ACTION for successful
+ * completion, or specific error codes indicating the need for recovery
+ * actions such as TALACT_ERR_RESET_SPI, TALACT_ERR_RESET_GPIO,
+ * TALACT_ERR_CHECK_TIMER, or TALACT_ERR_CHECK_PARAM.
+ ******************************************************************************/
 uint32_t TALISE_openHw(taliseDevice_t *device);
 
-/**
- * \brief Performs a hardware shutdown for Talise Device.
+/***************************************************************************//**
+ * @brief This function is used to shut down the hardware components of a Talise
+ * device by calling the ADI HAL function ADIHAL_closeHw. It should be
+ * called when the device is no longer needed or before re-
+ * initialization. The function requires that the device's devHalInfo
+ * member is properly initialized with user values. It handles various
+ * hardware errors by returning specific recovery actions, ensuring that
+ * the device is safely shut down.
  *
- * This API shall call the ADI HAL function ADIHAL_closeHw for
- * Talise Hardware shutdown.  This HAL function shuts down all the external
- * hardware blocks required in the operation of the Talise device.
- *
- * \pre This function may be called any time after device->devHalInfo has been
- * initialized with user values
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \param device Pointer to Talise device data structure. taliseDevice_t member
- * devHalInfo shall be initialized with all the required information to initialize
- * supporting Hardware for Talise operation for example
- * power, pull ups, SPI master etc
- *
- * \retval TALACT_ERR_CHECK_PARAM Recovery action for bad parameter check
- * \retval TALACT_ERR_CHECK_TIMER Recovery action for timer time-out check required
- * \retval TALACT_ERR_RESET_SPI Recovery action for SPI reset required
- * \retval TALACT_ERR_RESET_GPIO Recovery action for user GPIO reset required
- * \retval TALACT_NO_ACTION Function completed successfully, no action required
- */
+ * @param device Pointer to a taliseDevice_t structure. The devHalInfo member
+ * must be initialized with all necessary information for shutting
+ * down the external hardware components of the Talise device. The
+ * pointer must not be null.
+ * @return Returns a uint32_t value indicating the result of the shutdown
+ * operation. Possible return values include TALACT_NO_ACTION for
+ * successful completion, or specific error codes indicating the type of
+ * recovery action required.
+ ******************************************************************************/
 uint32_t TALISE_closeHw(taliseDevice_t *device);
 
-/**
- * \brief Performs a hard reset on the TALISE DUT (Toggles RESETB pin on device)
+/***************************************************************************//**
+ * @brief This function toggles the RESETB pin on the Talise device, effectively
+ * performing a hard reset. It should be called any time after the
+ * device's hardware information has been initialized. The function is
+ * designed to reset only the device associated with the SPI chip select
+ * specified in the device's settings. It handles potential hardware
+ * communication errors and attempts to ensure the device is reset
+ * properly. This function is useful for recovering from errors or
+ * reinitializing the device to a known state.
  *
- * Toggles the Talise devices RESETB pin.  Only resets the device with
- * the SPI chip select indicated in the device->spiSettings structure.
- *
- * \pre This function may be called any time after device->devHalInfo has been
- * initialized with user values
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \param device Pointer to Talise device data structure containing settings
- *
- * \retval TALACT_WARN_RESET_LOG Recovery action for log reset
- * \retval TALACT_WARN_RESET_GPIO Recovery action to warn user a GPIO reset may be required
- * \retval TALACT_ERR_RESET_GPIO Recovery action for user GPIO reset required
- * \retval TALACT_NO_ACTION Function completed successfully, no action required
- */
+ * @param device Pointer to a taliseDevice_t structure containing the device
+ * settings. The devHalInfo member must be initialized with the
+ * necessary hardware information. The pointer must not be null,
+ * and the function will handle errors related to hardware
+ * communication.
+ * @return Returns a uint32_t value indicating the recovery action required.
+ * Possible values include TALACT_WARN_RESET_LOG,
+ * TALACT_WARN_RESET_GPIO, TALACT_ERR_RESET_GPIO, and TALACT_NO_ACTION,
+ * which indicate the success of the operation or the type of recovery
+ * action needed.
+ ******************************************************************************/
 uint32_t TALISE_resetDevice(taliseDevice_t *device);
 
-/**
- * \brief Initializes the Talise device based on the desired device settings.
+/***************************************************************************//**
+ * @brief This function sets up the Talise device according to the provided
+ * initialization settings, configuring various components such as the
+ * CLKPLL, digital clocks, JESD204b settings, and FIR filters. It
+ * prepares the device for further operations like multichip
+ * synchronization and ARM initialization. The function must be called
+ * after all necessary data structures have been initialized. It handles
+ * parameter validation and returns specific error codes for invalid
+ * inputs or other issues encountered during initialization.
  *
- * This function initializes the Talise device, setting up the CLKPLL, digital clocks,
- * JESD204b settings, FIR Filters, digital filtering.  It does not load the ARM
- * or perform any of the ARM init calibrations. It also sets the Rx Manual gain indexes and
- * TxAttenuation settings to the initial values found in the device data structure.  It leaves the
- * Talise in a state ready for multichip sync (which can bring up the JESD204 links), the
- * ARM to be loaded, and the init calibrations run.
- *
- * \pre This function is the very first API to be called by the user to configure the device
- * after all dependent data structures have been initialized
- *
- * \dep_begin
- * \dep{device (all members)}
- * \dep{init (all members)}
- * \dep_end
- *
- * \param device Pointer to Talise device data structure
- * \param init Pointer to Talise initialization settings structures
- *
- * \retval TALACT_WARN_RESET_LOG Recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM Recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI Recovery action for SPI reset required
- * \retval TALACT_NO_ACTION Function completed successfully, no action required
- */
+ * @param device Pointer to a taliseDevice_t structure that must be initialized
+ * with necessary hardware information before calling this
+ * function. Must not be null.
+ * @param init Pointer to a taliseInit_t structure containing the initialization
+ * settings for the device. Must not be null.
+ * @return Returns a uint32_t value indicating the result of the initialization
+ * process. Possible return values include TALACT_NO_ACTION for success,
+ * TALACT_ERR_CHECK_PARAM for parameter errors, and other codes
+ * indicating specific recovery actions.
+ ******************************************************************************/
 uint32_t TALISE_initialize(taliseDevice_t *device, taliseInit_t *init);
 
-/**
- * \brief API To safely Shutdown Talise
+/***************************************************************************//**
+ * @brief Use this function to safely shut down the Talise device by performing
+ * a hardware reset, ensuring the device is in a safe state for shutdown
+ * or re-initialization. It can be called at any time, provided the
+ * device's hardware information has been configured with user settings.
+ * This function is essential for ensuring the device is properly reset
+ * before being powered down or reconfigured.
  *
- * The User should call this function to safely shutdown Talise Device.
- * The function performs a hardware reset to reset the Talise Device into a safe
- * state for shutdown or re-initialization.
- *
- * \pre This function may be called at any time but not before device->devHalInfo
- * has been configured with user device settings
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \retval TALACT_NO_ACTION Function completed successfully, no action required
- */
+ * @param device Pointer to a taliseDevice_t structure containing the device
+ * settings. The device's devHalInfo must be initialized with the
+ * necessary information for hardware operation. The pointer must
+ * not be null, and the function will handle invalid input by
+ * returning an appropriate recovery action.
+ * @return Returns a uint32_t value indicating the recovery action required.
+ * Possible values include TALACT_NO_ACTION for successful completion or
+ * other values indicating specific recovery actions needed.
+ ******************************************************************************/
 uint32_t TALISE_shutdown(taliseDevice_t *device);
 
-/**
- * \brief Reads back the multi-chip sync status
+/***************************************************************************//**
+ * @brief This function retrieves the status of the multi-chip synchronization
+ * (MCS) state machine from the Talise device and stores it in the
+ * provided mcsStatus pointer. It is intended to be used after the device
+ * has been initialized and the PLL lock status has been verified. The
+ * function checks the synchronization status of various components such
+ * as JESD, digital clocks, CLK PLL, and device clock divider. A bit
+ * value of 1 in the mcsStatus indicates that synchronization has
+ * occurred, while a bit value of 0 indicates it has not. The function
+ * requires a valid pointer for mcsStatus and will return an error if it
+ * is null.
  *
- * This function returns the status of the Talise MCS state machine via the mcsStatus pointer.
- * The 4 LSBs of the uint8_t value at mcsStatus represent the sync status
- * of JESD, Digital Clocks, CLK PLL and Device Clock divider.
-
- *  mcsStatus | bit Description
- * -----------|--------------------------------------------------------
- *       [0]  | MCS JESD SYSREF Status
- *       [1]  | MCS Digital Clocks Sync Status
- *       [2]  | MCS CLKPLL SDM Sync Status
- *       [3]  | MCS Device Clock divider Sync Status
- *
- * A bit value of 1 indicates that the sync occured
- * A bit value of 0 indicates that the sync has not occured.
- *
- *
- * \pre This function can be called any time after the device has been initialized and PLL lock status has
- * been verified.
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \param device is a pointer to the device settings structure
- * \param mcsStatus Returns the mcsStatus word described in the table above.
- *
- * \retval TALACT_WARN_RESET_LOG Recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM Recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI Recovery action for SPI reset required
- * \retval TALACT_NO_ACTION Function completed successfully, no action required
- */
+ * @param device Pointer to the Talise device data structure. Must be
+ * initialized and configured before calling this function.
+ * @param mcsStatus Pointer to a uint8_t where the MCS status will be stored.
+ * Must not be null. The 4 LSBs of the value represent the sync
+ * status of JESD, digital clocks, CLK PLL, and device clock
+ * divider.
+ * @return Returns a uint32_t indicating the recovery action required. Possible
+ * values include TALACT_NO_ACTION for successful completion,
+ * TALACT_ERR_CHECK_PARAM for a bad parameter check, and
+ * TALACT_ERR_RESET_SPI for an SPI reset requirement.
+ ******************************************************************************/
 uint32_t TALISE_getMultiChipSyncStatus(taliseDevice_t *device,
 				       uint8_t *mcsStatus);
 
-/**
- * \brief Sets up the chip for multichip sync, and cleans up after MCS.
+/***************************************************************************//**
+ * @brief This function is used to enable or reset the multichip synchronization
+ * (MCS) state machine in the Talise device, which is necessary for
+ * deterministic latency in systems with multiple transceivers. It should
+ * be called after all transceivers have been initialized and before
+ * starting the ARM initialization. When `enableMcs` is set to 1, the
+ * function resets the MCS state machine, and when set to 0, it allows
+ * reading the MCS status. The function can optionally return the MCS
+ * status through the `mcsStatus` parameter if it is not null. This
+ * function must be called after the device has been initialized and the
+ * PLL lock status has been verified.
  *
- *  When working with multiple transceivers or even only one transceiver that
- *  requires deterministic latency between the Tx and observation and or main
- *  Rx JESD204B data path, Multichip sync is necessary.  This function should
- *  be run after all transceivers have finished the TALISE_initialize(),
- *  and before TALISE_initArm().
- *
- *  When the enableMcs parameter = 1, this function will reset the MCS state
- *  machine in the Talise device.  Calling the function again, will reset
- *  the state machine and expect the MCS sequence to start over.
- *
- *  When the enableMcs parameter = 0, the MCS state machine is not changed,
- *  allowing the user to read back the MCS status in the mcsStatus parameter.
- *
- *  Typical sequence:
- *  1) Initialize all Talise devices in system using TALISE_initialize()
- *  2) Run TALISE_enableMultichipSync with enableMcs = 1
- *  3) Send at least 3 SYSREF pulses, and verify mcsStatus is set for each
- *     MCS step
- *  4) Run TALISE_enableMultichipSync with enableMcs = 0 and verify mcsStatus
- *     returns a x0B (CLKPLL in interger mode), or x0F (CLKPLL in fractional
- *     mode).
- *  5) Continue with init sequnece ...Run initARM, loadArm, etc
- *
- *  mcsStatus | bit Description
- * -----------|--------------------------------------------------------
- *       [0]  | MCS JESD SYSREF Status (1 = sync occurred)
- *       [1]  | MCS Digital Clocks Sync Status (1 = sync occurred)
- *       [2]  | MCS CLKPLL SDM Sync Status (1 = sync occurred)
- *       [3]  | MCS Device Clock divider Sync Status (1 = sync occurred)
- *
- * \pre This function is called after the device has been initialized and PLL lock status has
- * been verified
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \param device is a pointer to the device settings structure
- * \param enableMcs =1 will enable/reset the MCS state machine
- * \param mcsStatus optional parameter, if pointer is not null, the function will return the mcsStatus word described in the table above.
- *
- * \retval TALACT_WARN_RESET_LOG Recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM Recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI Recovery action for SPI reset required
- * \retval TALACT_NO_ACTION Function completed successfully, no action required
- */
+ * @param device Pointer to the Talise device data structure. Must be
+ * initialized and not null.
+ * @param enableMcs A uint8_t value where 1 enables/resets the MCS state machine
+ * and 0 allows reading the MCS status.
+ * @param mcsStatus Optional pointer to a uint8_t where the MCS status will be
+ * stored if not null. The status reflects the sync status of
+ * various components.
+ * @return Returns a uint32_t indicating the recovery action required, such as
+ * TALACT_NO_ACTION for success or other values for specific error
+ * handling.
+ ******************************************************************************/
 uint32_t TALISE_enableMultichipSync(taliseDevice_t *device, uint8_t enableMcs,
 				    uint8_t *mcsStatus);
 
-/**
- * \brief Resets the JESD204 serializer
+/***************************************************************************//**
+ * @brief This function is used to reset the JESD204 serializer of the Talise
+ * device. It should be called when a reset of the serializer is
+ * required, such as during initialization or error recovery. The
+ * function interacts with the device's hardware abstraction layer to
+ * toggle the serializer's reset state, ensuring that the serializer is
+ * properly reset and ready for operation. It is important to ensure that
+ * the device's hardware interface is correctly initialized before
+ * calling this function.
  *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \param device is a pointer to the device settings structure
- *
- * \retval TALACT_WARN_RESET_LOG Recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM Recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI Recovery action for SPI reset required
- * \retval TALACT_NO_ACTION Function completed successfully, no action required
- */
+ * @param device A pointer to the Talise device data structure. This structure
+ * must be properly initialized with the necessary hardware
+ * information before calling this function. The pointer must not
+ * be null, and the function will handle invalid pointers by
+ * returning an error code.
+ * @return Returns a uint32_t value indicating the result of the operation.
+ * Possible return values include TALACT_NO_ACTION for successful
+ * completion, TALACT_ERR_RESET_SPI if a SPI reset is required, and
+ * other error codes indicating specific recovery actions.
+ ******************************************************************************/
 uint32_t TALISE_serializerReset(taliseDevice_t *device);
 
-/**
- * \brief Sets up the chip for multichip LOs Phase synchronization
+/***************************************************************************//**
+ * @brief This function is used to synchronize the RF local oscillators (LOs)
+ * across multiple Talise devices, which is essential for applications
+ * like active antenna systems and beamforming. It should be called after
+ * setting the RF PLL frequency and before running initial calibrations.
+ * The function can enable or disable the digital test clock, affecting
+ * the MCS state machine and clock synchronization. It is important to
+ * ensure the device is initialized, the ARM is loaded, and PLL lock
+ * status is verified before calling this function.
  *
- *  LOs on multiple chips can be phase synchronized to support active
- *  antenna system and beam forming applications.This function should
- *  be run after all transceivers have finished the TALISE_setRfPllFrequency(),
- *  and before TALISE_runInitCals().
- *
- *  When the enableDigTestClk parameter = 1, this function will reset the MCS state
- *  machine in the Talise device and switch the ARM to run on device clock scaled instead of HSDIGCLK
- *
- *  When the enableDigTestClk parameter = 0, this function will enable Mcs Digital Clocks Sync and JESD204 sysref,
- *  switch the ARM back the HSDIGCLK.
- *
- *  Typical sequence:
- *  1) Initialize all Talise devices in system using TALISE_initialize(),load the ARM and stream processor
- *  2) Set the RF PLL frequency with TALISE_setRfPllFrequency
- *  3) Run TALISE_enableMultichipRfLOPhaseSync with enableDigTestClk = 1 before TALISE_runInitCals()
- *  4) Send at least 4 SYSREF pulses
- *  5) Run TALISE_enableMultichipRfLOPhaseSync with enableDigTestClk = 0
- *  6) Send at least 4 SYSREF pulses
- *  7) Continue with init sequence ...Run initCals, bring up JESD204, etc
- *
- * \pre This function is called after the device has been initialized, ARM is loaded and PLL lock status has
- * been verified
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \param device is a pointer to the device settings structure
- * \param enableDigTestClk =1 will enable/reset the MCS state machine and switch between device clock scaled and
- * HSDIGCLK
- *
- * \retval TALACT_WARN_RESET_LOG Recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM Recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI Recovery action for SPI reset required
- * \retval TALACT_NO_ACTION Function completed successfully, no action required
- */
+ * @param device A pointer to the Talise device data structure. It must be
+ * initialized and configured with the necessary device settings
+ * before calling this function.
+ * @param enableDigTestClk A uint8_t value where 1 enables and resets the MCS
+ * state machine, switching between device clock scaled
+ * and HSDIGCLK, and 0 disables the digital test clock.
+ * Values outside this range are treated as 0.
+ * @return Returns a uint32_t value indicating the recovery action required,
+ * such as TALACT_NO_ACTION for success or various error codes for
+ * different failure scenarios.
+ ******************************************************************************/
 uint32_t TALISE_enableMultichipRfLOPhaseSync(taliseDevice_t *device,
 		uint8_t enableDigTestClk);
 
@@ -301,169 +234,143 @@ uint32_t TALISE_enableMultichipRfLOPhaseSync(taliseDevice_t *device,
  * Helper functions
  ****************************************************************************
  */
-/**
- * \brief Configures one or more FIR filters in the device
+/***************************************************************************//**
+ * @brief This function is used to program a specific FIR filter in the Talise
+ * device by writing the provided filter coefficients and settings to the
+ * appropriate filter bank. It is typically called during device
+ * initialization but can also be used to update a filter configuration
+ * later, which may require recalibration. The function requires a valid
+ * device structure, a filter identifier, and a filter configuration
+ * structure. It performs parameter validation and returns an error if
+ * the number of coefficients exceeds the allowed maximum or if the
+ * filter gain is invalid.
  *
- * The device stores up to 5 FIR filter banks (2Rx | 2Obs Rx | Loopback & 2Tx).
- * Rx filters can have 24, 48, or 72 taps.
- * Tx filters can have 20, 40, 60, or 80 taps.
- *
- * The function is not called directly. It is called as a part of the TALISE_initialize() function.
- * The function could be used to change A FIR filter later, but would require calibrations to be rerun.
- *
- * \pre This function is called during device initialization
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \param device Pointer to the Talise data structure
- * \param filterToProgram Name of the desired filter to program
- * \param firFilter Pointer to the filter to write into the device
- *
- * \retval TALACT_WARN_RESET_LOG Recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM Recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI Recovery action for SPI reset required
- * \retval TALACT_NO_ACTION Function completed successfully, no action required
- */
+ * @param device Pointer to a taliseDevice_t structure representing the Talise
+ * device. Must be initialized and not null.
+ * @param filterToProgram An identifier of type talisefirName_t specifying which
+ * FIR filter to program. Must be a valid filter name;
+ * otherwise, an error is returned.
+ * @param firFilter Pointer to a taliseFir_t structure containing the filter
+ * coefficients and gain settings. Must not be null, and the
+ * number of coefficients must be within the allowed range for
+ * the specified filter.
+ * @return Returns a uint32_t value indicating the result of the operation, with
+ * specific error codes for invalid parameters or successful completion.
+ ******************************************************************************/
 uint32_t TALISE_programFir(taliseDevice_t *device,
 			   talisefirName_t filterToProgram, taliseFir_t *firFilter);
 
-/**
- * \brief Calculates high speed digital clocks used in the Talise device
+/***************************************************************************//**
+ * @brief This function calculates the internal high-speed digital clock
+ * frequencies for the Talise device based on the provided digital clock
+ * settings. It updates the device's state with the calculated clock
+ * frequencies, which are used by other API functions. This function
+ * should be called after the device's clock settings have been
+ * initialized. It handles invalid high-speed divider values by returning
+ * an error code.
  *
- * This is a helper function called in TALISE_initialize() to calculate the internal
- * digital clocks in Talise for use throughout other API functions.  The calculated
- * values are stored in the Talise API device structure with other other run-time state
- * information for the API.
- *
- * \pre This function is private and is not called directly by the user.
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \param device Structure pointer to the Talise device data structure containing settings
- * \param digClocks Pointer to the Talise digital clocks initialization data structure
- *
- * \retval TALACT_WARN_RESET_LOG Recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM Recovery action for bad parameter check
- * \retval TALACT_NO_ACTION Function completed successfully, no action required
- */
+ * @param device Pointer to a Talise device data structure. Must not be null and
+ * should be properly initialized with device settings.
+ * @param digClocks Pointer to a structure containing the digital clock
+ * initialization data. Must not be null and should contain
+ * valid clock settings.
+ * @return Returns a uint32_t value indicating the success or failure of the
+ * operation. A return value of TALACT_NO_ACTION indicates success,
+ * while other values indicate specific error conditions.
+ ******************************************************************************/
 uint32_t TALISE_calculateDigitalClocks(taliseDevice_t *device,
 				       taliseDigClocks_t *digClocks);
 
-/**
- * \brief Verifies the init structure profiles are valid combinations
+/***************************************************************************//**
+ * @brief Use this function to ensure that the Rx, Tx, and ORx profiles
+ * specified in the initialization structure are valid and compatible
+ * with each other. It checks the clock rates and other parameters to
+ * confirm that the profiles can operate together without conflicts. This
+ * function should be called after the device and initialization
+ * structures are properly set up. It returns an error if any profile is
+ * invalid or if there is a mismatch in the expected clock rates.
  *
- * This function checks that the Rx/Tx/ORx profiles have valid clock rates in
- * order to operate together.  Rx/Tx and ORx share a common high speed digital
- * clock. If an invalid combination of profiles is detected, an error will be
- * returned. If a profile in the init structure is unused, the user should zero
- * out all members of that particular profile structure.  If a Rx/Tx/ORx profile
- * has an IQ rate = 0, it is assumed that the profile is disabled.
- *
- * \pre This function is private and is not called directly by the user.
- *
- * This function uses TALISE_verifyTxProfile(), TALISE_verifyRxProfile(), and
- * TALISE_verifyOrxProfile() as helper functions.
- *
- * \dep_begin
- * \dep{device->devStateInfo}
- * \dep{init-> (most members)}
- * \dep_end
- *
- * \param device Structure pointer to Talise device data structure
- * \param init Pointer to Talise initialization settings structures
- *
- * \retval TALACT_ERR_CHECK_PARAM Recovery action for bad parameter check
- * \retval TALACT_NO_ACTION Function completed successfully, no action required
- */
+ * @param device Pointer to a taliseDevice_t structure representing the Talise
+ * device. Must not be null. The function will return an error if
+ * this parameter is null.
+ * @param init Pointer to a taliseInit_t structure containing the initialization
+ * settings for the Talise device. Must not be null. The function
+ * will return an error if this parameter is null.
+ * @return Returns a uint32_t value indicating the result of the verification. A
+ * return value of TALACT_NO_ACTION indicates success, while other
+ * values indicate specific errors or required recovery actions.
+ ******************************************************************************/
 uint32_t TALISE_verifyProfiles(taliseDevice_t *device, taliseInit_t *init);
 
-/**
- * \brief Sets the Talise device SPI settings (3wire/4wire, MSBFirst, etc).
+/***************************************************************************//**
+ * @brief This function configures the SPI settings for the Talise device using
+ * the parameters provided in the `spi` structure. It sets the SPI mode,
+ * address auto-increment direction, bit order, and wire mode. The
+ * function must be called with a properly initialized `device` and `spi`
+ * structure. It handles invalid CMOS pad drive strength values by
+ * returning an error. The function also verifies the SPI settings after
+ * configuration to ensure they work correctly.
  *
- * This function will use the settings in the passed spi structure parameter
- * to set SPI stream mode, address auto increment direction, MSBFirst/LSBfirst,
- * and 3wire/4wire mode for the Talise SPI controller.  The Talise device
- * always uses SPI MODE 0 (CPHA=0, CPOL=0) and a 16-bit instruction word.
- *
- * \pre This function is a helper function and does not need to be called
- *      directly by the user.
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep{init->spiSettings->MSBFirst}
- * \dep{init->spiSettings->enSpiStreaming}
- * \dep{init->spiSettings->autoIncAddrUp}
- * \dep{init->spiSettings->fourWireMode}
- * \dep_end
- *
- * \param device Structure pointer to Talise device data structure
- * \param spi Pointer to Talise SPI controller settings - not platform hardware SPI settings
- *
- * \retval TALACT_WARN_RESET_LOG Recovery action for log reset
- * \retval TALACT_ERR_RESET_SPI Recovery action for SPI reset required
- * \retval TALACT_NO_ACTION Function completed successfully, no action required
- */
+ * @param device Pointer to a `taliseDevice_t` structure representing the Talise
+ * device. Must be initialized with valid device information. The
+ * caller retains ownership.
+ * @param spi Pointer to a `taliseSpiSettings_t` structure containing the
+ * desired SPI settings. Must not be null and should be properly
+ * initialized with valid settings. The caller retains ownership.
+ * @return Returns a `uint32_t` value indicating the result of the operation.
+ * Possible return values include `TALACT_NO_ACTION` for success, or
+ * error codes indicating specific issues encountered during
+ * configuration.
+ ******************************************************************************/
 uint32_t TALISE_setSpiSettings(taliseDevice_t *device,
 			       taliseSpiSettings_t *spi);
 
-/**
- * \brief Verifies whether the existing SPI settings work.
+/***************************************************************************//**
+ * @brief This function checks the SPI communication by performing read and
+ * write operations on specific registers of the Talise device. It is
+ * used to ensure that the SPI settings are correctly configured and
+ * functioning as expected. The function reads from known read-only
+ * registers and writes to a scratchpad register, verifying the data
+ * integrity by reading back the written values. It should be called
+ * after setting the SPI configuration to validate the setup. The
+ * function returns a status code indicating the success or failure of
+ * the verification process.
  *
- * This function checks the SPI settings set through TALISE_setSpiSettings for
- * correct functionality. The function performs the following function:
- *
- * 1. Reads readonly register to check SPI read operation.
- * 2. Writes scratchpad register with 10110110, reads back the data
- * 3. Writes scratchpad register with 01001001, reads back the data
- *
- * The function performs the above operation on registers at the lower end of
- * the register address space, and on the upper end of the register address
- * space.
- *
- * \pre This function is a helper function and does not need to be called
- *      directly by the user.  This function is called automatically at
- *      the end of TALISE_setSpiSettings()
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \param device Structure pointer to Talise device data structure
- *
- * \retval TALACT_WARN_RESET_LOG Recovery action for log reset
- * \retval TALACT_ERR_RESET_SPI Recovery action for SPI reset required
- * \retval TALACT_ERR_RESET_FULL Recovery action for full chip reset required
- * \retval TALACT_NO_ACTION Function completed successfully, no action required
- */
+ * @param device Pointer to a taliseDevice_t structure containing the device
+ * settings. The devHalInfo member must be initialized with the
+ * necessary information for SPI operations. The pointer must not
+ * be null, and the function will handle invalid pointers by
+ * returning an error code.
+ * @return Returns a uint32_t status code indicating the result of the SPI
+ * verification. Possible return values include TALACT_NO_ACTION for
+ * success, TALACT_ERR_RESET_SPI for SPI reset required, and
+ * TALACT_ERR_RESET_FULL for a full chip reset required.
+ ******************************************************************************/
 uint32_t TALISE_verifySpiReadWrite(taliseDevice_t *device);
 
-/**
- * \brief Sets the CLKPLL output frequency
+/***************************************************************************//**
+ * @brief This function configures the digital clocks of the Talise device based
+ * on the provided clock settings. It must be called after the device has
+ * been properly initialized and before any operations that depend on the
+ * digital clocks. The function validates the input clock settings and
+ * adjusts the internal clock dividers and synthesizer settings
+ * accordingly. It handles various clock frequency ranges and ensures
+ * that the PLL and VCO are set up correctly. If the input parameters are
+ * invalid, the function returns an error code indicating the type of
+ * error encountered.
  *
- * This function updates the Synth and Loop filter settings based on a VCO
- * frequency LUT. The VCO frequency break points for the Synth LUT can be
- * found in an array called vcoFreqArrayMhz.
- *
- * \pre This function is private and is not called directly by the user.
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \param device Structure pointer to the TALISE data structure
- * \param clockSettings pointer to clock setting structure holding information about CLKPLL configuration
- *
- * \retval TALACT_WARN_RESET_LOG Recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM Recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI Recovery action for SPI reset required
- * \retval TALACT_ERR_CHECK_TIMER Recovery action for bad wait timer check
- * \retval TALACT_NO_ACTION Function completed successfully, no action required
-
- */
+ * @param device Pointer to a taliseDevice_t structure representing the Talise
+ * device. Must be initialized with valid device information. The
+ * caller retains ownership and it must not be null.
+ * @param clockSettings Pointer to a taliseDigClocks_t structure containing the
+ * desired clock settings. Must be initialized with valid
+ * clock configuration data. The caller retains ownership
+ * and it must not be null.
+ * @return Returns a uint32_t value indicating the result of the operation.
+ * Possible return values include TALACT_NO_ACTION for success, or
+ * various error codes for parameter validation failures or other
+ * issues.
+ ******************************************************************************/
 uint32_t TALISE_initDigitalClocks(taliseDevice_t *device,
 				  taliseDigClocks_t *clockSettings);
 /****************************************************************************
@@ -471,116 +378,116 @@ uint32_t TALISE_initDigitalClocks(taliseDevice_t *device,
  ****************************************************************************
  */
 
-/**
- * \brief Sets the digital Tx PFIR SYNC clock divider.
+/***************************************************************************//**
+ * @brief This function configures the digital clock divider used to synchronize
+ * the Tx PFIR each time the Tx channel powers up. It should be called
+ * during device initialization and is typically not invoked directly by
+ * the user. The function ensures that the sync clock is set to the FIR's
+ * output clock divided by two or slower. It requires a valid Tx profile
+ * and checks for valid FIR coefficients and interpolation settings. If
+ * the parameters are invalid, it returns an error code indicating the
+ * issue.
  *
- * This function is a helper function.  It is called automatically in
- * TALISE_initialize() and should not need to be called by the BBIC.
- *
- * This function sets the digital clock divider that is used to synchronize the
- * Tx PFIR each time the Tx channel power up.  The Sync clock must
- * be set to the FIRs (output clock / 2) or slower.
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \param device Structure pointer to the Talise data structure containing settings
- * \param txProfile txProfile settings
- *
- * \retval TALACT_NO_ACTION Function completed successfully
- * \retval TALACT_ERR_CHECK_PARAM Recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI Recovery action for SPI reset required
- */
+ * @param device Pointer to the Talise device data structure. Must be
+ * initialized and not null.
+ * @param txProfile Pointer to the Tx profile settings. Must be initialized and
+ * not null, with valid FIR coefficients and interpolation
+ * settings.
+ * @return Returns a uint32_t indicating the success or failure of the
+ * operation. Possible return values include TALACT_NO_ACTION for
+ * success, or error codes for various parameter validation failures.
+ ******************************************************************************/
 uint32_t TALISE_setTxPfirSyncClk(taliseDevice_t *device,
 				 taliseTxProfile_t *txProfile);
 
-/**
- * \brief Sets the digital Rx PFIR SYNC clock divider.
+/***************************************************************************//**
+ * @brief This function configures the digital clock divider used to synchronize
+ * the Rx and ORx PFIRs each time the channels power up. It ensures that
+ * the sync clock is set to the slowest of the Rx or ORx PFIR output
+ * clock divided by two. This function is typically called automatically
+ * during the initialization process and should not need to be called
+ * directly by the user.
  *
- * This function is a helper function.  It is called automatically in
- * TALISE_initialize() and should not need to be called by the BBIC.
- *
- * This function sets the digital clock divider that is used to synchronize the
- * Rx/ORx PFIRs each time the channels power up. The Sync clock must
- * be set to the slowest of Rx/ORx PFIR (output clock / 2).
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \param device Structure pointer to the Talise data structure containing settings
- * \param rxProfile rxProfile settings
- * \param orxProfile orxProfile settings
- *
- * \retval TALACT_NO_ACTION Function completed successfully
- * \retval TALACT_ERR_CHECK_PARAM Recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI Recovery action for SPI reset required
- */
+ * @param device Pointer to the Talise device data structure containing
+ * settings. Must not be null.
+ * @param rxProfile Pointer to the Rx profile settings. Must not be null and
+ * should contain valid configuration data.
+ * @param orxProfile Pointer to the ORx profile settings. Must not be null and
+ * should contain valid configuration data.
+ * @return Returns a uint32_t indicating the status of the operation. Possible
+ * return values include TALACT_NO_ACTION for successful completion,
+ * TALACT_ERR_CHECK_PARAM for parameter errors, and TALACT_ERR_RESET_SPI
+ * for SPI reset requirements.
+ ******************************************************************************/
 uint32_t TALISE_setRxPfirSyncClk(taliseDevice_t *device,
 				 taliseRxProfile_t *rxProfile, taliseORxProfile_t *orxProfile);
 
-/**
- * \brief Get API version number
+/***************************************************************************//**
+ * @brief Use this function to obtain the current version numbers of the Talise
+ * API, which include the silicon, major, minor, and build versions. This
+ * function is useful for verifying compatibility and ensuring that the
+ * correct API version is being used. It is important to ensure that all
+ * pointer parameters are valid and non-null before calling this
+ * function, as passing null pointers will result in an error.
  *
- * This function reads back the version number of the API
- *
- * \param device Pointer to the Talise data structure
- * \param siVer A pointer to the current silicon version number.
- * \param majorVer A pointer to the current major version number.
- * \param minorVer A pointer to the current minor version number.
- * \param buildVer A pointer to the current build version number.
- *
- * \retval TALACT_WARN_RESET_LOG recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM recovery action for bad parameter check
- * \retval TALACT_NO_ACTION function completed successfully, no action required *
- */
+ * @param device Pointer to the Talise device data structure. Must be properly
+ * initialized before calling this function.
+ * @param siVer Pointer to a uint32_t where the silicon version number will be
+ * stored. Must not be null.
+ * @param majorVer Pointer to a uint32_t where the major version number will be
+ * stored. Must not be null.
+ * @param minorVer Pointer to a uint32_t where the minor version number will be
+ * stored. Must not be null.
+ * @param buildVer Pointer to a uint32_t where the build version number will be
+ * stored. Must not be null.
+ * @return Returns a uint32_t indicating the success or failure of the
+ * operation. A return value of TALACT_NO_ACTION indicates success,
+ * while other values indicate specific error conditions.
+ ******************************************************************************/
 uint32_t TALISE_getApiVersion(taliseDevice_t *device, uint32_t *siVer,
 			      uint32_t *majorVer, uint32_t *minorVer, uint32_t *buildVer);
 
-/**
- * \brief Reads back the silicon revision for the Talise Device
+/***************************************************************************//**
+ * @brief Use this function to obtain the silicon revision of a Talise device,
+ * which is useful for identifying the specific version of the hardware
+ * in use. This function should be called after the device has been
+ * properly initialized. It requires a valid pointer to a
+ * `taliseDevice_t` structure and a non-null pointer to a `uint8_t`
+ * variable where the revision will be stored. The function handles null
+ * pointers by returning an error code, ensuring that the caller is
+ * informed of invalid input.
  *
- * revision's bit  |  Description
- * ----------------|-----------------
- *       3:0       |  minor revision
- *       7:4       |  major revision
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \param device Structure pointer to the Talise data structure containing settings
- * \param revision Return value of the Talise silicon revision in hex where
-        upper nibble (4 bits) indicates the major revision and the lower nibble
-        indicates the minor revision.
- *
- * \retval TALACT_WARN_RESET_LOG recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM recovery action for bad parameter check
- * \retval TALACT_NO_ACTION function completed successfully, no action required *
- */
+ * @param device Pointer to a `taliseDevice_t` structure containing the device
+ * settings. Must be initialized and not null.
+ * @param revision Pointer to a `uint8_t` where the silicon revision will be
+ * stored. Must not be null. If null, the function returns an
+ * error code.
+ * @return Returns a `uint32_t` indicating the success or type of error
+ * encountered. A successful call results in the silicon revision being
+ * stored in the provided `revision` pointer.
+ ******************************************************************************/
 uint32_t TALISE_getDeviceRev(taliseDevice_t *device, uint8_t *revision);
 
-/**
- * \brief Reads back the Product ID for the Talise Device
+/***************************************************************************//**
+ * @brief This function retrieves the Product ID of the Talise device and stores
+ * it in the provided memory location. It should be called when the
+ * Product ID is needed for identification or verification purposes. The
+ * function requires a valid device structure and a non-null pointer for
+ * storing the Product ID. If the provided pointer is null, the function
+ * will handle this as an error and return an appropriate error code. The
+ * function returns a status code indicating the success or failure of
+ * the operation, which can be used to determine if any recovery actions
+ * are necessary.
  *
- *  productId  |  Description
- * ------------|---------------
- *       1     |  AD9379   (TDD device)
- *       2     |  AD9378-1 (Rx Only Device)
- *       3     |  AD9378-2 (Tx /ORx Device)
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \param device Structure pointer to the Talise data structure containing settings
- * \param productId Return value of the Talise product Id
- *
- * \retval TALACT_WARN_RESET_LOG recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM recovery action for bad parameter check
- * \retval TALACT_NO_ACTION function completed successfully, no action required *
- */
+ * @param device Pointer to a taliseDevice_t structure containing the device
+ * settings. The device structure must be properly initialized
+ * before calling this function.
+ * @param productId Pointer to a uint8_t where the Product ID will be stored.
+ * Must not be null, as a null pointer will result in an error.
+ * @return Returns a uint32_t status code indicating the result of the
+ * operation. Possible values include success or specific error codes
+ * that suggest recovery actions.
+ ******************************************************************************/
 uint32_t TALISE_getProductId(taliseDevice_t *device, uint8_t *productId);
 
 #ifdef __cplusplus

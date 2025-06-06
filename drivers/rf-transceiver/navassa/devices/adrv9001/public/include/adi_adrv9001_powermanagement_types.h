@@ -16,9 +16,22 @@
 
 #define ADI_ADRV9001_NUM_LDOS 19
 
-/**
- * \brief LDO configurations for power saving
- */
+/***************************************************************************//**
+ * @brief The `adi_adrv9001_LdoPowerSavingMode_e` is an enumeration that defines
+ * various power saving modes for Low Dropout Regulators (LDOs) in the
+ * ADRV9001 system. Each mode specifies a different configuration for
+ * power management, ranging from normal operation to various methods of
+ * turning off the LDOs, either through hardware or software, and
+ * includes a bypass mode. This enumeration is used to configure the
+ * power saving settings for each LDO in the system.
+ *
+ * @param ADI_ADRV9001_LDO_POWER_SAVING_MODE_1 Normal operation.
+ * @param ADI_ADRV9001_LDO_POWER_SAVING_MODE_2 Always off via PCB wiring.
+ * @param ADI_ADRV9001_LDO_POWER_SAVING_MODE_3 Always off via software.
+ * @param ADI_ADRV9001_LDO_POWER_SAVING_MODE_4 Always off via software, VBAT
+ * shorted to VOUT.
+ * @param ADI_ADRV9001_LDO_POWER_SAVING_MODE_5 Bypass.
+ ******************************************************************************/
 typedef enum adi_adrv9001_LdoPowerSavingMode
 {
     ADI_ADRV9001_LDO_POWER_SAVING_MODE_1,   /*!< Normal operation */
@@ -28,6 +41,18 @@ typedef enum adi_adrv9001_LdoPowerSavingMode
     ADI_ADRV9001_LDO_POWER_SAVING_MODE_5    /*!< Bypass */
 } adi_adrv9001_LdoPowerSavingMode_e;
 
+/***************************************************************************//**
+ * @brief The `adi_adrv9001_PowerManagementSettings_t` structure is designed to
+ * manage power settings for a series of Low Dropout Regulators (LDOs) in
+ * the ADRV9001 device. It contains an array, `ldoPowerSavingModes`,
+ * which holds the power saving mode for each of the 19 LDOs, allowing
+ * for fine-grained control over the power consumption of different
+ * components within the device. This structure is crucial for optimizing
+ * power usage and ensuring efficient operation of the ADRV9001.
+ *
+ * @param ldoPowerSavingModes An array specifying the power saving mode for each
+ * of the 19 LDOs.
+ ******************************************************************************/
 typedef struct adi_adrv9001_PowerManagementSettings
 {
     /**

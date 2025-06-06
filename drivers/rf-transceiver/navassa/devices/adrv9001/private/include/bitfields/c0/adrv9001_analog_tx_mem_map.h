@@ -13,17 +13,56 @@
 
 #include "adrv9001_bf_hal.h"
 
+/***************************************************************************//**
+ * @brief The `adrv9001_BfAnalogTxMemMap_e` is an enumeration that defines
+ * memory map addresses for analog transmit channels in the ADRV9001
+ * device. It provides symbolic names for specific memory locations
+ * associated with the analog transmit functionality, allowing for easier
+ * reference and manipulation of these addresses in the code. This
+ * enumeration is part of the bitfield accessors for the analog transmit
+ * memory map, facilitating the configuration and control of the analog
+ * transmit paths in the device.
+ *
+ * @param ADRV9001_BF_TX1_ANA Represents the memory map address for the first
+ * analog transmit channel.
+ * @param ADRV9001_BF_TX2_ANA Represents the memory map address for the second
+ * analog transmit channel.
+ ******************************************************************************/
 typedef enum adrv9001_BfAnalogTxMemMap_e
 {
     ADRV9001_BF_TX1_ANA    =   0x3800,
     ADRV9001_BF_TX2_ANA    =   0x3a00
 } adrv9001_BfAnalogTxMemMap_e;
 
+/***************************************************************************//**
+ * @brief The `analogTxMemMapInstances` is a static constant array of type
+ * `adrv9001_BfAnalogTxMemMap_e`, which is an enumeration representing
+ * different analog transmit memory map instances. It contains two
+ * elements: `ADRV9001_BF_TX1_ANA` and `ADRV9001_BF_TX2_ANA`, which
+ * correspond to specific memory map addresses for the analog transmit
+ * paths in the ADRV9001 device.
+ *
+ * @details This array is used to reference specific analog transmit memory map
+ * instances for operations such as register and field reads or writes
+ * in the ADRV9001 device.
+ ******************************************************************************/
 static const adrv9001_BfAnalogTxMemMap_e analogTxMemMapInstances[] = {
     ADRV9001_BF_TX1_ANA,
     ADRV9001_BF_TX2_ANA
 };
 
+/***************************************************************************//**
+ * @brief Sets a spare memory register for the analog transmit path in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device context, which is used to access the
+ * hardware.
+ * @param instance An enumerated value indicating which analog transmit memory
+ * map instance to modify.
+ * @param value An 8-bit value to be written to the specified register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_AnalogTxMemSpare_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -35,6 +74,17 @@ static inline int32_t adrv9001_AnalogTxMemMap_AnalogTxMemSpare_Set(void *const d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the spare memory value from the analog transmit memory map.
+ *
+ * @param device A pointer to the device context used for communication.
+ * @param instance An enumerated value representing the specific analog transmit
+ * memory map instance.
+ * @param value A pointer to a `uint8_t` where the retrieved value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_AnalogTxMemSpare_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -49,9 +99,20 @@ static inline int32_t adrv9001_AnalogTxMemMap_AnalogTxMemSpare_Get(void *const d
     return status;
 }
 
-/**
- * write this bit high to observe the temp sensor data from the serdes IP on aux dac 0.  Active high in burn-in mode
- */
+/***************************************************************************//**
+ * @brief Sets the auxiliary DAC temperature sensor observation bit for the
+ * specified analog transmit memory map instance.
+ *
+ * @param device A pointer to the device context, which is used to access the
+ * hardware.
+ * @param instance An enumerated value representing the specific analog transmit
+ * memory map instance (e.g., `ADRV9001_BF_TX1_ANA` or
+ * `ADRV9001_BF_TX2_ANA`).
+ * @param value A `uint8_t` value that indicates whether to enable or disable
+ * the temperature sensor observation (active high).
+ * @return Returns an `int32_t` status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_AuxDacTempSensorObs_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -63,9 +124,20 @@ static inline int32_t adrv9001_AnalogTxMemMap_AuxDacTempSensorObs_Set(void *cons
     return status;
 }
 
-/**
- * write this bit high to observe the temp sensor data from the serdes IP on aux dac 0.  Active high in burn-in mode
- */
+/***************************************************************************//**
+ * @brief Retrieves the observed temperature sensor value from the auxiliary DAC
+ * of the specified analog transmit memory map instance.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * hardware.
+ * @param instance An enumerated value representing the specific analog transmit
+ * memory map instance (e.g., ADRV9001_BF_TX1_ANA or
+ * ADRV9001_BF_TX2_ANA).
+ * @param value A pointer to a `uint8_t` where the retrieved temperature sensor
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_AuxDacTempSensorObs_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -80,6 +152,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_AuxDacTempSensorObs_Get(void *cons
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the auxiliary DAC test mode enable bit in the analog transmit
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog transmit memory map.
+ * @param value A uint8_t value that indicates whether to enable or disable the
+ * test mode (1 to enable, 0 to disable).
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_AuxDacTestModeEn_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -91,6 +176,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_AuxDacTestModeEn_Set(void *const d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the auxiliary DAC test mode enable status from the specified
+ * analog transmit memory map.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog transmit memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_AuxDacTestModeEn_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -105,6 +203,20 @@ static inline int32_t adrv9001_AnalogTxMemMap_AuxDacTestModeEn_Get(void *const d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the calibration tone driver attenuation for a specified analog
+ * transmit memory map instance.
+ *
+ * @param device A pointer to the device context, which is used to access the
+ * hardware.
+ * @param instance An enumerated value representing the specific analog transmit
+ * memory map instance (e.g., `ADRV9001_BF_TX1_ANA` or
+ * `ADRV9001_BF_TX2_ANA`).
+ * @param value An 8-bit unsigned integer representing the attenuation value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_CalToneDriverAttn_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -116,6 +228,20 @@ static inline int32_t adrv9001_AnalogTxMemMap_CalToneDriverAttn_Set(void *const 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the calibration tone driver attenuation value from the
+ * specified analog transmit memory map instance.
+ *
+ * @param device A pointer to the device context, which is used to access the
+ * hardware.
+ * @param instance An enumerated value representing the specific analog transmit
+ * memory map instance (e.g., `ADRV9001_BF_TX1_ANA` or
+ * `ADRV9001_BF_TX2_ANA`).
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * attenuation value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation, where a value of 0 typically indicates success.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_CalToneDriverAttn_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -130,6 +256,17 @@ static inline int32_t adrv9001_AnalogTxMemMap_CalToneDriverAttn_Get(void *const 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state for the analog tone driver input buffer.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which instance of the analog TX
+ * memory map to modify.
+ * @param value A uint8_t value indicating the desired power down state (0 or
+ * 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_CalToneDriverInbufPd_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -141,6 +278,17 @@ static inline int32_t adrv9001_AnalogTxMemMap_CalToneDriverInbufPd_Set(void *con
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the power down status of the calibration tone driver input
+ * buffer.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog TX memory map.
+ * @param value A pointer to a uint8_t where the retrieved value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_CalToneDriverInbufPd_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -155,6 +303,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_CalToneDriverInbufPd_Get(void *con
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state for the calibration tone driver in the
+ * analog transmit memory map.
+ *
+ * @param device A pointer to the device context that is used for communication
+ * with the hardware.
+ * @param instance An enumerated value indicating which instance of the analog
+ * transmit memory map to configure.
+ * @param value A uint8_t value that indicates the desired power down state (0
+ * or 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_CalToneDriverPd_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -166,6 +327,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_CalToneDriverPd_Set(void *const de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the power down status of the calibration tone driver in the
+ * analog transmit memory map.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * hardware.
+ * @param instance An enumerated value indicating which instance of the analog
+ * transmit memory map to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved power down
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_CalToneDriverPd_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -180,6 +354,18 @@ static inline int32_t adrv9001_AnalogTxMemMap_CalToneDriverPd_Get(void *const de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the LDO bypass configuration for the analog transmitter.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific analog
+ * transmitter instance (e.g., TX1 or TX2).
+ * @param value A uint8_t value indicating the desired bypass setting for the
+ * LDO.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_ConverterLdoBypass_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -191,6 +377,16 @@ static inline int32_t adrv9001_AnalogTxMemMap_ConverterLdoBypass_Set(void *const
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the LDO bypass status from the analog transmit memory map.
+ *
+ * @param device A pointer to the device context used for communication.
+ * @param instance An enumerator indicating which instance of the analog
+ * transmit memory map to access.
+ * @param value A pointer to a uint8_t where the retrieved value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_ConverterLdoBypass_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -205,6 +401,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_ConverterLdoBypass_Get(void *const
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the thermal shutdown disable bit for the converter LDO in the
+ * analog transmit memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog transmit memory map.
+ * @param value A uint8_t value that indicates whether to enable or disable the
+ * thermal shutdown feature.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_ConverterLdoDisThermalShutdown_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -216,6 +425,20 @@ static inline int32_t adrv9001_AnalogTxMemMap_ConverterLdoDisThermalShutdown_Set
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the thermal shutdown status of the converter LDO for a
+ * specified analog transmit memory map instance.
+ *
+ * @param device A pointer to the device context, which is used to access the
+ * hardware.
+ * @param instance An enumerated value representing the specific analog transmit
+ * memory map instance (e.g., `ADRV9001_BF_TX1_ANA` or
+ * `ADRV9001_BF_TX2_ANA`).
+ * @param value A pointer to a `uint8_t` variable where the retrieved thermal
+ * shutdown status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_ConverterLdoDisThermalShutdown_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -230,6 +453,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_ConverterLdoDisThermalShutdown_Get
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the filter bypass configuration for the converter LDO in the
+ * analog transmit memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog transmit memory map.
+ * @param value A uint8_t value indicating whether to enable or disable the
+ * filter bypass.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_ConverterLdoFilterBypass_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -241,6 +477,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_ConverterLdoFilterBypass_Set(void 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the filter bypass status of the converter LDO in the analog
+ * transmit memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog transmit memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved filter
+ * bypass status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_ConverterLdoFilterBypass_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -255,6 +504,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_ConverterLdoFilterBypass_Get(void 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the current limit increment for the LDO converter in the analog
+ * transmit memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog transmit memory map.
+ * @param value An 8-bit unsigned integer representing the value to set for the
+ * current limit increment.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_ConverterLdoIlimitInc_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -266,6 +528,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_ConverterLdoIlimitInc_Set(void *co
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the increment value for the LDO current limit from the
+ * analog transmit memory map.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog transmit memory map.
+ * @param value A pointer to a `uint8_t` where the retrieved value will be
+ * stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_ConverterLdoIlimitInc_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -281,6 +556,18 @@ static inline int32_t adrv9001_AnalogTxMemMap_ConverterLdoIlimitInc_Get(void *co
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the status of the converter LDO from the analog transmit
+ * memory map.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which instance of the analog
+ * transmit memory map to access.
+ * @param value A pointer to a uint8_t where the retrieved status will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_ConverterLdoStatus_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -295,6 +582,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_ConverterLdoStatus_Get(void *const
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the thermal shutdown configuration for the LDO converter in the
+ * ADRV9001 analog transmit memory map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog transmit memory map.
+ * @param value A 8-bit unsigned integer representing the value to set for the
+ * thermal shutdown configuration.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_ConverterLdoThermalShutdown0c_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -306,6 +606,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_ConverterLdoThermalShutdown0c_Set(
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the thermal shutdown status of the converter LDO for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog transmit memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved thermal
+ * shutdown status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_ConverterLdoThermalShutdown0c_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -320,6 +633,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_ConverterLdoThermalShutdown0c_Get(
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the output voltage selection for the converter LDO in the analog
+ * transmit memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog transmit memory map.
+ * @param value An 8-bit unsigned integer representing the desired output
+ * voltage selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_ConverterLdoVoutSel_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -331,6 +657,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_ConverterLdoVoutSel_Set(void *cons
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the output voltage selection for the converter LDO in the
+ * analog transmit memory map.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog transmit memory map.
+ * @param value A pointer to a `uint8_t` where the retrieved output voltage
+ * selection will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_ConverterLdoVoutSel_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -345,6 +684,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_ConverterLdoVoutSel_Get(void *cons
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the output voltage trim for the converter LDO in the ADRV9001
+ * analog transmit memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific analog transmit
+ * memory map instance (e.g., TX1 or TX2).
+ * @param value An 8-bit unsigned integer representing the trim value to set for
+ * the output voltage.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_ConverterLdoVoutTrim_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -356,6 +708,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_ConverterLdoVoutTrim_Set(void *con
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the LDO voltage trim value from the analog transmit memory
+ * map.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog transmit memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved trim value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_ConverterLdoVoutTrim_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -370,6 +735,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_ConverterLdoVoutTrim_Get(void *con
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the low source transmit (Tx) enable bit in the analog transmit
+ * memory map.
+ *
+ * @param device A pointer to the device context, which is used to access the
+ * hardware.
+ * @param instance An enumerated value representing the specific analog transmit
+ * memory map instance (e.g., Tx1 or Tx2).
+ * @param value A uint8_t value that indicates whether to enable (1) or disable
+ * (0) the low source transmit.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_EnableLoSourceTx_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -381,6 +759,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_EnableLoSourceTx_Set(void *const d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the Enable Low Source Transmit setting from the
+ * analog transmit memory map.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * hardware.
+ * @param instance An enumerated value representing the specific analog transmit
+ * memory map instance.
+ * @param value A pointer to a `uint8_t` where the retrieved value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_EnableLoSourceTx_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -395,6 +786,17 @@ static inline int32_t adrv9001_AnalogTxMemMap_EnableLoSourceTx_Get(void *const d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the bypass resistance for the IDIST bias in the analog transmit
+ * memory map.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which instance of the analog
+ * transmit memory map to modify.
+ * @param value A uint8_t value representing the bypass resistance setting.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_IdistBypassBiasRes_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -406,6 +808,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_IdistBypassBiasRes_Set(void *const
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the bypass bias resistor value for the IDIST in the analog
+ * transmit memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog transmit memory map.
+ * @param value A pointer to a `uint8_t` where the retrieved value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_IdistBypassBiasRes_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -420,6 +835,18 @@ static inline int32_t adrv9001_AnalogTxMemMap_IdistBypassBiasRes_Get(void *const
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the low offset and low phase detector filter configuration for
+ * the analog transmit memory map.
+ *
+ * @param device A pointer to the device context that is used for the operation.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog transmit memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the low offset and low phase detector filter.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_LoOffsetLoPhaseDetFilter_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -431,6 +858,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_LoOffsetLoPhaseDetFilter_Set(void 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the low offset and low phase detector filter value from the
+ * analog transmit memory map.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * hardware.
+ * @param instance An enumerated value indicating which instance of the analog
+ * transmit memory map to access.
+ * @param value A pointer to a `uint8_t` where the retrieved filter value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_LoOffsetLoPhaseDetFilter_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -445,6 +885,18 @@ static inline int32_t adrv9001_AnalogTxMemMap_LoOffsetLoPhaseDetFilter_Get(void 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the AC coupling enable bit for the low offset low phase detector
+ * filter in the analog transmit memory map.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog transmit memory map.
+ * @param value A uint8_t value that indicates whether to enable or disable AC
+ * coupling (1 to enable, 0 to disable).
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_LoOffsetLoPhaseDetFilterAcCoupleEn_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -456,6 +908,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_LoOffsetLoPhaseDetFilterAcCoupleEn
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the AC coupling enable bit for the low offset
+ * low phase detector filter in the analog transmit memory map.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog transmit memory map.
+ * @param value A pointer to a `uint8_t` where the retrieved value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_LoOffsetLoPhaseDetFilterAcCoupleEn_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -470,6 +935,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_LoOffsetLoPhaseDetFilterAcCoupleEn
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the low offset and low phase detector power down bit in the
+ * analog transmit memory map.
+ *
+ * @param device A pointer to the device context, which is used to access the
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog transmit memory map.
+ * @param value A 8-bit unsigned integer that specifies the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_LoOffsetLoPhaseDetPd_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -481,6 +959,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_LoOffsetLoPhaseDetPd_Set(void *con
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the low offset and low phase detector power down status from
+ * the analog transmit memory map.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog transmit memory map.
+ * @param value A pointer to a `uint8_t` where the retrieved value will be
+ * stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_LoOffsetLoPhaseDetPd_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -495,6 +986,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_LoOffsetLoPhaseDetPd_Get(void *con
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state of the LDO (Low Dropout Regulator) for the
+ * analog transmitter.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog transmitter memory map.
+ * @param value A uint8_t value indicating the desired power down state (0 for
+ * active, 1 for power down).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_PdConverterLdo_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -506,6 +1010,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_PdConverterLdo_Set(void *const dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the power down status of the LDO converter for the specified
+ * analog transmit instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific analog transmit
+ * instance (e.g., TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_PdConverterLdo_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -520,6 +1037,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_PdConverterLdo_Get(void *const dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the bias resistor bypass for the IDist block in the analog
+ * transmit memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog transmit memory map.
+ * @param value A uint8_t value that indicates whether to enable or disable the
+ * bias resistor bypass.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_PdIDist_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -531,6 +1061,20 @@ static inline int32_t adrv9001_AnalogTxMemMap_PdIDist_Set(void *const device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `PdIDist` field from the analog transmit
+ * memory map.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * hardware.
+ * @param instance An enumerator of type `adrv9001_BfAnalogTxMemMap_e` that
+ * specifies which instance of the analog transmit memory map to
+ * access.
+ * @param value A pointer to a `uint8_t` where the retrieved value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_PdIDist_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -545,9 +1089,17 @@ static inline int32_t adrv9001_AnalogTxMemMap_PdIDist_Get(void *const device,
     return status;
 }
 
-/**
- * Setting this bit powers down the TX mixer LO DELAY BUFFER.
- */
+/***************************************************************************//**
+ * @brief Sets the power down state of the TX mixer LO delay buffer.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which instance of the analog TX
+ * memory map to modify.
+ * @param value A uint8_t value that indicates whether to power down (1) or
+ * power up (0) the LO delay buffer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_PdTxLoDelayBuffer_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -559,9 +1111,16 @@ static inline int32_t adrv9001_AnalogTxMemMap_PdTxLoDelayBuffer_Set(void *const 
     return status;
 }
 
-/**
- * Setting this bit powers down the TX mixer LO DELAY BUFFER.
- */
+/***************************************************************************//**
+ * @brief Retrieves the power down status of the TX mixer LO delay buffer.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which analog TX memory map instance
+ * to access.
+ * @param value A pointer to a uint8_t where the retrieved value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_PdTxLoDelayBuffer_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -576,9 +1135,18 @@ static inline int32_t adrv9001_AnalogTxMemMap_PdTxLoDelayBuffer_Get(void *const 
     return status;
 }
 
-/**
- * Setting this bit powers down the TX mixer LO DELAY BUFFER.
- */
+/***************************************************************************//**
+ * @brief Sets the override for the TX mixer LO delay buffer power down.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog TX memory map.
+ * @param value A uint8_t value that indicates whether to enable or disable the
+ * override for the LO delay buffer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_PdTxLoDelayBufferOverride_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -590,9 +1158,16 @@ static inline int32_t adrv9001_AnalogTxMemMap_PdTxLoDelayBufferOverride_Set(void
     return status;
 }
 
-/**
- * Setting this bit powers down the TX mixer LO DELAY BUFFER.
- */
+/***************************************************************************//**
+ * @brief Retrieves the override value for the TX mixer LO delay buffer.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which analog TX memory map instance
+ * to access.
+ * @param value A pointer to a uint8_t where the retrieved value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_PdTxLoDelayBufferOverride_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -607,9 +1182,16 @@ static inline int32_t adrv9001_AnalogTxMemMap_PdTxLoDelayBufferOverride_Get(void
     return status;
 }
 
-/**
- * Setting this bit powers down the TX mixer LO DELAY BUFFER.
- */
+/***************************************************************************//**
+ * @brief Sets the override selection for the TX mixer LO delay buffer.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating the specific analog TX memory map
+ * instance.
+ * @param value A uint8_t value to set the override selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_PdTxLoDelayBufferOverrideSelect_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -621,9 +1203,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_PdTxLoDelayBufferOverrideSelect_Se
     return status;
 }
 
-/**
- * Setting this bit powers down the TX mixer LO DELAY BUFFER.
- */
+/***************************************************************************//**
+ * @brief Retrieves the override selection status for the TX mixer LO delay
+ * buffer.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * hardware.
+ * @param instance An enumerated value indicating which instance of the analog
+ * TX memory map to access.
+ * @param value A pointer to a `uint8_t` where the retrieved value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_PdTxLoDelayBufferOverrideSelect_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -638,9 +1230,18 @@ static inline int32_t adrv9001_AnalogTxMemMap_PdTxLoDelayBufferOverrideSelect_Ge
     return status;
 }
 
-/**
- * These bits program the cap for the RC filter at the input of the transmit upconverter.
- */
+/***************************************************************************//**
+ * @brief Sets the configuration for the analog transmit baseband filter
+ * capacitors.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which analog transmit memory map
+ * instance to configure.
+ * @param value A 16-bit unsigned integer representing the configuration value
+ * for the capacitors.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero).
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxAbbfCg_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint16_t value)
@@ -655,9 +1256,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxAbbfCg_Set(void *const device,
     return status;
 }
 
-/**
- * These bits program the cap for the RC filter at the input of the transmit upconverter.
- */
+/***************************************************************************//**
+ * @brief Retrieves the Tx ABBF capacitor gain settings from the analog transmit
+ * memory map.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * hardware.
+ * @param instance An enumerated value representing the specific analog transmit
+ * instance (e.g., Tx1 or Tx2).
+ * @param value A pointer to a `uint16_t` variable where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxAbbfCg_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint16_t *const value)
@@ -676,9 +1287,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxAbbfCg_Get(void *const device,
     return status;
 }
 
-/**
- * These bits control the bias current for the ABBF peak detectors according to the following settings. Increasing this value increases the bias current, decreases the peak detector attack time, and increases peak detector ripple.   000 --   800nA 001 --   400nA 010 --   200nA 011 --   100nA 100 --   50nA 101 --   50nA 110 --   50nA 111 --   50nA
- */
+/***************************************************************************//**
+ * @brief Sets the decay value for the ABBF peak detectors in the analog
+ * transmit memory map.
+ *
+ * @param device A pointer to the device context, which is used to access the
+ * hardware.
+ * @param instance An enumerated type indicating which instance of the analog
+ * transmit memory map is being accessed.
+ * @param value An 8-bit unsigned integer representing the decay value to be set
+ * for the ABBF peak detectors.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxAbbfPeakdetDecay_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -690,9 +1311,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxAbbfPeakdetDecay_Set(void *const
     return status;
 }
 
-/**
- * These bits control the bias current for the ABBF peak detectors according to the following settings. Increasing this value increases the bias current, decreases the peak detector attack time, and increases peak detector ripple.   000 --   800nA 001 --   400nA 010 --   200nA 011 --   100nA 100 --   50nA 101 --   50nA 110 --   50nA 111 --   50nA
- */
+/***************************************************************************//**
+ * @brief Retrieves the decay value of the ABBF peak detector from the specified
+ * analog transmit memory map.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * hardware.
+ * @param instance An enumerated value representing the specific analog transmit
+ * memory map instance (e.g., TX1 or TX2).
+ * @param value A pointer to a `uint8_t` where the retrieved decay value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxAbbfPeakdetDecay_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -707,6 +1338,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxAbbfPeakdetDecay_Get(void *const
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state for the auxiliary low buffer in the analog
+ * transmit memory map.
+ *
+ * @param device A pointer to the device context that is used for communication
+ * with the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog transmit memory map.
+ * @param value A uint8_t value indicating the desired power down state (0 or
+ * 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxAuxLoBufPd_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -718,6 +1362,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxAuxLoBufPd_Set(void *const devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the power down status of the auxiliary low buffer in the
+ * analog transmit memory map.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * hardware.
+ * @param instance An enumerator indicating which instance of the analog
+ * transmit memory map to access.
+ * @param value A pointer to a `uint8_t` where the retrieved value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxAuxLoBufPd_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -732,9 +1389,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxAuxLoBufPd_Get(void *const devic
     return status;
 }
 
-/**
- * TX BBF block poweredows - debug only
- */
+/***************************************************************************//**
+ * @brief Sets the debug configuration for the TX BBF block in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating which instance of the analog
+ * TX memory map to configure.
+ * @param value A 16-bit unsigned integer representing the debug configuration
+ * value to set.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the operations performed.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxBbfDebug_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint16_t value)
@@ -749,9 +1416,18 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxBbfDebug_Set(void *const device,
     return status;
 }
 
-/**
- * TX BBF block poweredows - debug only
- */
+/***************************************************************************//**
+ * @brief Retrieves the debug information for the TX BBF block.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * hardware.
+ * @param instance An enumerator indicating which instance of the analog TX
+ * memory map to access.
+ * @param value A pointer to a `uint16_t` variable where the retrieved debug
+ * value will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the read operations failed.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxBbfDebug_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint16_t *const value)
@@ -770,9 +1446,16 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxBbfDebug_Get(void *const device,
     return status;
 }
 
-/**
- * TX BBF power control.  When programmed to > 0, reduces the power consumed by the filter amplifiers.
- */
+/***************************************************************************//**
+ * @brief Sets the power control for the TX BBF block.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which analog TX memory map instance
+ * to configure.
+ * @param value A uint8_t value representing the power control setting.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxBbfPowCtrlB_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -784,9 +1467,16 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxBbfPowCtrlB_Set(void *const devi
     return status;
 }
 
-/**
- * TX BBF power control.  When programmed to > 0, reduces the power consumed by the filter amplifiers.
- */
+/***************************************************************************//**
+ * @brief Retrieves the power control setting for the TX BBF block.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which analog TX memory map instance
+ * to access.
+ * @param value A pointer to a uint8_t where the retrieved value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxBbfPowCtrlB_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -801,6 +1491,16 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxBbfPowCtrlB_Get(void *const devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the spare register value for the analog transmit memory map.
+ *
+ * @param device A pointer to the device context used for communication.
+ * @param instance An enumerator indicating which analog transmit memory map
+ * instance to modify.
+ * @param value The 8-bit value to be written to the spare register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxBbfSpare_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -812,6 +1512,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxBbfSpare_Set(void *const device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the spare value from the analog transmit memory map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * hardware.
+ * @param instance An enumerated value representing the specific analog transmit
+ * memory map instance.
+ * @param value A pointer to a `uint8_t` where the retrieved spare value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxBbfSpare_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -826,9 +1539,16 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxBbfSpare_Get(void *const device,
     return status;
 }
 
-/**
- * When this bit is set, the Tx synthesizer is forced to power down.
- */
+/***************************************************************************//**
+ * @brief Sets the power down state for the Tx synthesizer.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which analog Tx memory map instance
+ * to modify.
+ * @param value A uint8_t value indicating the power down state to set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxCmCorrPd_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -840,9 +1560,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxCmCorrPd_Set(void *const device,
     return status;
 }
 
-/**
- * When this bit is set, the Tx synthesizer is forced to power down.
- */
+/***************************************************************************//**
+ * @brief Retrieves the Tx correction power down status from the analog transmit
+ * memory map.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog transmit memory map.
+ * @param value A pointer to a `uint8_t` where the retrieved value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxCmCorrPd_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -857,9 +1587,18 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxCmCorrPd_Get(void *const device,
     return status;
 }
 
-/**
- * When this bit is set, the Tx synthesizer is forced to power down.
- */
+/***************************************************************************//**
+ * @brief Sets the power down override for the Tx mixer correction.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog Tx memory map.
+ * @param value A uint8_t value that indicates whether to enable or disable the
+ * power down override.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxCmCorrPdOverride_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -871,9 +1610,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxCmCorrPdOverride_Set(void *const
     return status;
 }
 
-/**
- * When this bit is set, the Tx synthesizer is forced to power down.
- */
+/***************************************************************************//**
+ * @brief Retrieves the Tx correction power down override status from the analog
+ * transmit memory map.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog transmit memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxCmCorrPdOverride_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -888,9 +1637,16 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxCmCorrPdOverride_Get(void *const
     return status;
 }
 
-/**
- * When this bit is set, the Tx synthesizer is forced to power down.
- */
+/***************************************************************************//**
+ * @brief Sets the power down override selection for the Tx mixer.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerated value representing the specific analog Tx
+ * memory map instance.
+ * @param value A uint8_t value indicating the power down override selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxCmCorrPdOverrideSelect_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -902,9 +1658,17 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxCmCorrPdOverrideSelect_Set(void 
     return status;
 }
 
-/**
- * When this bit is set, the Tx synthesizer is forced to power down.
- */
+/***************************************************************************//**
+ * @brief Retrieves the power down override selection status for the Tx
+ * synthesizer.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which analog Tx memory map instance
+ * to access.
+ * @param value A pointer to a uint8_t where the retrieved value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxCmCorrPdOverrideSelect_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -919,10 +1683,18 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxCmCorrPdOverrideSelect_Get(void 
     return status;
 }
 
-/**
- * These bits set the value of Tx1 LO select when in SPI Direct mode.
- *  tx1 cmlo bias
- */
+/***************************************************************************//**
+ * @brief Sets the Tx1 common mode voltage for the analog transmit path.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value indicating which instance of the analog
+ * transmit memory map is being accessed.
+ * @param value A uint8_t value representing the common mode voltage setting to
+ * be applied.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxCmloBias_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -934,10 +1706,18 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxCmloBias_Set(void *const device,
     return status;
 }
 
-/**
- * These bits set the value of Tx1 LO select when in SPI Direct mode.
- *  tx1 cmlo bias
- */
+/***************************************************************************//**
+ * @brief Retrieves the TxCmloBias value from the specified analog transmit
+ * memory map instance.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which analog transmit memory map
+ * instance to access.
+ * @param value A pointer to a `uint8_t` where the retrieved value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxCmloBias_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -952,10 +1732,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxCmloBias_Get(void *const device,
     return status;
 }
 
-/**
- * These bits set the value of Tx1 LO select when in SPI Direct mode.
- *  tx1 cmlo correction dac i
- */
+/***************************************************************************//**
+ * @brief Sets the Tx1 common mode voltage and correction DAC values for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog transmit memory map.
+ * @param value A 16-bit unsigned integer representing the value to be set for
+ * the DAC.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxCmloDacI_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint16_t value)
@@ -970,10 +1759,17 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxCmloDacI_Set(void *const device,
     return status;
 }
 
-/**
- * These bits set the value of Tx1 LO select when in SPI Direct mode.
- *  tx1 cmlo correction dac i
- */
+/***************************************************************************//**
+ * @brief Retrieves the Tx1 CMLO DAC I value from the specified device instance.
+ *
+ * @param device A pointer to the device context used for communication.
+ * @param instance An enumerated value representing the specific analog transmit
+ * instance.
+ * @param value A pointer to a `uint16_t` where the retrieved DAC value will be
+ * stored.
+ * @return Returns the status of the read operations, with the final DAC I value
+ * stored in the provided `value` pointer.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxCmloDacI_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint16_t *const value)
@@ -992,6 +1788,16 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxCmloDacI_Get(void *const device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the latch bit for the DAC in the TxCMLO register.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which instance of the analog
+ * transmit memory map to modify.
+ * @param value A uint8_t value to set the latch bit.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxCmloDacLatchb_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -1003,6 +1809,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxCmloDacLatchb_Set(void *const de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the TxCmloDacLatchb register for a specified
+ * analog transmit instance.
+ *
+ * @param device A pointer to the device context, which is used to access the
+ * hardware.
+ * @param instance An enumerated value representing the specific analog transmit
+ * instance (e.g., ADRV9001_BF_TX1_ANA or ADRV9001_BF_TX2_ANA).
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxCmloDacLatchb_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -1017,10 +1836,18 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxCmloDacLatchb_Get(void *const de
     return status;
 }
 
-/**
- * These bits set the value of Tx1 LO select when in SPI Direct mode.
- *  tx1 cmlo correction dac q
- */
+/***************************************************************************//**
+ * @brief Sets the TxCmlo DAC Q value in the ADRV9001 analog transmit memory
+ * map.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which analog transmit memory map
+ * instance to modify.
+ * @param value A 16-bit unsigned integer representing the value to set for the
+ * TxCmlo DAC Q.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxCmloDacQ_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint16_t value)
@@ -1035,10 +1862,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxCmloDacQ_Set(void *const device,
     return status;
 }
 
-/**
- * These bits set the value of Tx1 LO select when in SPI Direct mode.
- *  tx1 cmlo correction dac q
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the TxCmlo DAC Q setting from the analog
+ * transmit memory map.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog transmit memory map.
+ * @param value A pointer to a `uint16_t` where the retrieved DAC Q value will
+ * be stored.
+ * @return Returns an `int32_t` status code indicating the success or failure of
+ * the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxCmloDacQ_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint16_t *const value)
@@ -1057,6 +1893,17 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxCmloDacQ_Get(void *const device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the TxCmloSel2xDiode configuration in the analog transmit memory
+ * map.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating the specific instance of the analog
+ * transmit memory map.
+ * @param value A uint8_t value representing the configuration to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxCmloSel2xDiode_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -1068,6 +1915,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxCmloSel2xDiode_Set(void *const d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `TxCmloSel2xDiode` field from the analog
+ * transmit memory map.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog transmit memory map.
+ * @param value A pointer to a `uint8_t` where the retrieved value will be
+ * stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxCmloSel2xDiode_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -1082,6 +1942,17 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxCmloSel2xDiode_Get(void *const d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the configuration for the Tx CMLO selection in the analog
+ * transmit memory map.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which instance of the analog
+ * transmit memory map is being configured.
+ * @param value A uint8_t value representing the configuration to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxCmloSel2xMixer_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -1093,6 +1964,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxCmloSel2xMixer_Set(void *const d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `TxCmloSel2xMixer` setting from the
+ * specified device instance.
+ *
+ * @param device A pointer to the device context from which the value is to be
+ * read.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog transmit memory map.
+ * @param value A pointer to a `uint8_t` where the retrieved value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxCmloSel2xMixer_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -1107,10 +1991,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxCmloSel2xMixer_Get(void *const d
     return status;
 }
 
-/**
- * These bits set the Tx LO common mode voltage according to the following settings: 000 --  Vdd18 '- 0.25V 001 --  Vdd18 '- 0.25V 010 --  Vdd18 '- 0.45V 011 --  Vdd18 '- 0.55V
- *  Tx Lo Cm
- */
+/***************************************************************************//**
+ * @brief Sets the Tx LO common mode voltage for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerator of type `adrv9001_BfAnalogTxMemMap_e`
+ * indicating which instance of the analog Tx memory map to
+ * configure.
+ * @param value An 8-bit unsigned integer representing the desired common mode
+ * voltage setting.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxLoCm_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -1122,10 +2015,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxLoCm_Set(void *const device,
     return status;
 }
 
-/**
- * These bits set the Tx LO common mode voltage according to the following settings: 000 --  Vdd18 '- 0.25V 001 --  Vdd18 '- 0.25V 010 --  Vdd18 '- 0.45V 011 --  Vdd18 '- 0.55V
- *  Tx Lo Cm
- */
+/***************************************************************************//**
+ * @brief Retrieves the Tx LO common mode voltage setting from the specified
+ * device instance.
+ *
+ * @param device A pointer to the device context that is used to access the
+ * hardware.
+ * @param instance An enumerated value indicating which analog Tx memory map
+ * instance to access.
+ * @param value A pointer to a `uint8_t` where the retrieved common mode voltage
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxLoCm_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -1140,10 +2042,17 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxLoCm_Get(void *const device,
     return status;
 }
 
-/**
- * Setting this bit powers down the Tx1 LO delay correction DAC. Note that this does not disable the LO path, it only disables the I/Q LO delay tuning.
- *  Tx1 Lo Delay Corr Pd
- */
+/***************************************************************************//**
+ * @brief Sets the power down state for the Tx1 LO delay correction DAC.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which analog Tx memory map instance
+ * to modify.
+ * @param value A uint8_t value indicating the desired power down state (0 or
+ * 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxLoDelayCorrPd_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -1155,10 +2064,18 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxLoDelayCorrPd_Set(void *const de
     return status;
 }
 
-/**
- * Setting this bit powers down the Tx1 LO delay correction DAC. Note that this does not disable the LO path, it only disables the I/Q LO delay tuning.
- *  Tx1 Lo Delay Corr Pd
- */
+/***************************************************************************//**
+ * @brief Retrieves the power down status of the Tx1 LO delay correction DAC.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * hardware.
+ * @param instance An enumerated value indicating which instance of the analog
+ * Tx memory map to access.
+ * @param value A pointer to a `uint8_t` where the retrieved value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxLoDelayCorrPd_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -1173,10 +2090,16 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxLoDelayCorrPd_Get(void *const de
     return status;
 }
 
-/**
- * Setting this bit powers down the Tx1 LO delay correction DAC. Note that this does not disable the LO path, it only disables the I/Q LO delay tuning.
- *  Tx1 Lo Delay Corr Pd
- */
+/***************************************************************************//**
+ * @brief Sets the power down override for the TX mixer LO delay correction.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which analog TX memory map instance
+ * to modify.
+ * @param value A uint8_t value indicating the power down state to set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxLoDelayCorrPdOverride_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -1188,10 +2111,17 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxLoDelayCorrPdOverride_Set(void *
     return status;
 }
 
-/**
- * Setting this bit powers down the Tx1 LO delay correction DAC. Note that this does not disable the LO path, it only disables the I/Q LO delay tuning.
- *  Tx1 Lo Delay Corr Pd
- */
+/***************************************************************************//**
+ * @brief Retrieves the power down override status for the TX mixer LO delay
+ * correction.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which instance of the analog TX
+ * memory map to access.
+ * @param value A pointer to a uint8_t where the retrieved value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxLoDelayCorrPdOverride_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -1206,10 +2136,18 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxLoDelayCorrPdOverride_Get(void *
     return status;
 }
 
-/**
- * Setting this bit powers down the Tx1 LO delay correction DAC. Note that this does not disable the LO path, it only disables the I/Q LO delay tuning.
- *  Tx1 Lo Delay Corr Pd
- */
+/***************************************************************************//**
+ * @brief Sets the power down override for the TX mixer LO delay buffer.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type indicating which instance of the analog TX
+ * memory map is being accessed.
+ * @param value A 8-bit unsigned integer that specifies the value to set for the
+ * power down override.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxLoDelayCorrPdOverrideSelect_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -1221,10 +2159,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxLoDelayCorrPdOverrideSelect_Set(
     return status;
 }
 
-/**
- * Setting this bit powers down the Tx1 LO delay correction DAC. Note that this does not disable the LO path, it only disables the I/Q LO delay tuning.
- *  Tx1 Lo Delay Corr Pd
- */
+/***************************************************************************//**
+ * @brief Retrieves the Tx LO Delay Correction Power Down Override Select status
+ * from the device.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog Tx memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxLoDelayCorrPdOverrideSelect_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -1239,6 +2186,18 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxLoDelayCorrPdOverrideSelect_Get(
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the bias resistor bypass for the Tx LO delay DAC.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog Tx memory map.
+ * @param value A uint8_t value that indicates whether to bypass the bias
+ * resistor (1) or not (0).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxLoDelayDacBiasResBypass_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -1250,6 +2209,18 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxLoDelayDacBiasResBypass_Set(void
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the bias resistor bypass status for the Tx LO delay DAC.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog Tx memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxLoDelayDacBiasResBypass_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -1264,6 +2235,16 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxLoDelayDacBiasResBypass_Get(void
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the DAC resolution for the TX LO delay.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which analog TX memory map instance
+ * to modify.
+ * @param value The value to set for the DAC resolution.
+ * @return Returns the status of the write operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxLoDelayDacRes_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -1275,6 +2256,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxLoDelayDacRes_Set(void *const de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the DAC resolution value for the TX LO delay from the
+ * specified device instance.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog TX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved DAC
+ * resolution value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxLoDelayDacRes_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -1289,6 +2283,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxLoDelayDacRes_Get(void *const de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the bypass mode for the Tx Low Dropout Regulator (LDO) in the
+ * ADRV9001 analog transmit memory map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog transmit memory map.
+ * @param value A uint8_t value indicating whether to enable or disable the
+ * bypass mode.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxLoLdoBypass_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -1300,6 +2307,20 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxLoLdoBypass_Set(void *const devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the bypass status of the Tx Low Dropout Regulator (LDO) for
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device context, which is used to access the
+ * hardware.
+ * @param instance An enumerator of type `adrv9001_BfAnalogTxMemMap_e` that
+ * specifies which instance of the analog transmit memory map to
+ * access.
+ * @param value A pointer to a `uint8_t` where the retrieved value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxLoLdoBypass_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -1314,6 +2335,18 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxLoLdoBypass_Get(void *const devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the bypass state for the low-pass filter in the Tx LDO of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating which instance of the analog
+ * Tx memory map to configure.
+ * @param value A uint8_t value indicating the desired bypass state (0 or 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxLoLdoFilterBypass_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -1325,6 +2358,17 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxLoLdoFilterBypass_Set(void *cons
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the bypass status of the low-pass filter in the Tx LDO.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which analog Tx memory map instance
+ * to access.
+ * @param value A pointer to a uint8_t where the retrieved filter bypass status
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxLoLdoFilterBypass_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -1339,6 +2383,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxLoLdoFilterBypass_Get(void *cons
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state for the Tx Low Dropout Regulator (LDO) in
+ * the ADRV9001 analog transmit memory map.
+ *
+ * @param device A pointer to the device context, which is used to access the
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog transmit memory map.
+ * @param value A uint8_t value that indicates the desired power down state (0
+ * for active, 1 for power down).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxLoLdoPd_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -1350,6 +2407,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxLoLdoPd_Set(void *const device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the power down status of the Tx Low Dropout Regulator (LDO)
+ * for a specified analog transmit instance.
+ *
+ * @param device A pointer to the device context that is used to access the
+ * hardware.
+ * @param instance An enumerator of type `adrv9001_BfAnalogTxMemMap_e` that
+ * specifies which analog transmit instance to access.
+ * @param value A pointer to a `uint8_t` where the retrieved power down status
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxLoLdoPd_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -1365,6 +2435,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxLoLdoPd_Get(void *const device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the status of the Tx Low Dropout Regulator (LDO) for the
+ * specified analog transmit instance.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * hardware.
+ * @param instance An enumerator indicating which analog transmit instance to
+ * query.
+ * @param value A pointer to a `uint8_t` where the retrieved status will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxLoLdoStatus_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -1379,6 +2462,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxLoLdoStatus_Get(void *const devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the output voltage selection for the Tx Low Dropout Regulator
+ * (LDO) in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating which analog transmit memory
+ * map instance to configure.
+ * @param value An 8-bit unsigned integer representing the desired output
+ * voltage selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxLoLdoVoutSel_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -1390,6 +2486,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxLoLdoVoutSel_Set(void *const dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the voltage selection for the Tx Low Dropout Regulator (LDO)
+ * in the ADRV9001 analog transmit memory map.
+ *
+ * @param device A pointer to the device context, which is used to access the
+ * hardware.
+ * @param instance An enumerated value indicating which instance of the analog
+ * transmit memory map is being accessed.
+ * @param value A pointer to a `uint8_t` variable where the retrieved voltage
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxLoLdoVoutSel_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -1404,6 +2513,16 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxLoLdoVoutSel_Get(void *const dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the voltage trim for the Tx low dropout regulator.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which analog Tx memory map instance
+ * to modify.
+ * @param value An 8-bit unsigned integer representing the trim value to set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxLoLdoVoutTrim_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -1415,6 +2534,18 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxLoLdoVoutTrim_Set(void *const de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the trim value for the Tx low dropout regulator output
+ * voltage.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerated value representing the specific analog Tx
+ * memory map instance.
+ * @param value A pointer to a uint8_t where the retrieved trim value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxLoLdoVoutTrim_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -1429,6 +2560,16 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxLoLdoVoutTrim_Get(void *const de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the `TxLoLineRTerm` field in the analog transmit memory map.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which instance of the analog
+ * transmit memory map to modify.
+ * @param value A `uint8_t` value to set for the `TxLoLineRTerm` field.
+ * @return Returns an `int32_t` indicating the success or failure of the write
+ * operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxLoLineRTerm_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -1440,6 +2581,20 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxLoLineRTerm_Set(void *const devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the TxLoLineR termination setting from the
+ * specified device instance.
+ *
+ * @param device A pointer to the device context from which the value is to be
+ * read.
+ * @param instance An enumerator of type `adrv9001_BfAnalogTxMemMap_e` that
+ * specifies which instance of the analog transmit memory map to
+ * access.
+ * @param value A pointer to a `uint8_t` where the retrieved value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxLoLineRTerm_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -1454,6 +2609,17 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxLoLineRTerm_Get(void *const devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state for the TX low line receive buffer.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which analog TX memory map instance
+ * to configure.
+ * @param value A uint8_t value indicating the desired power down state (0 for
+ * active, 1 for power down).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxLoLineRcvBufPd_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -1465,6 +2631,20 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxLoLineRcvBufPd_Set(void *const d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the power down status of the low line receiver buffer in the
+ * analog transmit memory map.
+ *
+ * @param device A pointer to the device context, which is used to access the
+ * hardware.
+ * @param instance An enumerator of type `adrv9001_BfAnalogTxMemMap_e` that
+ * specifies which instance of the analog transmit memory map to
+ * access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved power down
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxLoLineRcvBufPd_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -1479,6 +2659,16 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxLoLineRcvBufPd_Get(void *const d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the bias power down state for the Tx low line termination.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which analog Tx memory map instance
+ * to configure.
+ * @param value A uint8_t value representing the desired bias power down state.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxLoLineTermBiasPd_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -1490,6 +2680,21 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxLoLineTermBiasPd_Set(void *const
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the TxLoLineTermBiasPd value from the specified analog
+ * transmit memory map instance.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * hardware.
+ * @param instance An enumerated value representing the specific analog transmit
+ * memory map instance (e.g., ADRV9001_BF_TX1_ANA or
+ * ADRV9001_BF_TX2_ANA).
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation, with the retrieved value stored in the provided
+ * pointer.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxLoLineTermBiasPd_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -1504,6 +2709,18 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxLoLineTermBiasPd_Get(void *const
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the line termination enable state for the TX low frequency path.
+ *
+ * @param device A pointer to the device context that is used for communication
+ * with the hardware.
+ * @param instance An enumerated value indicating which instance of the analog
+ * TX memory map to modify.
+ * @param value A uint8_t value that specifies whether to enable or disable the
+ * line termination (1 to enable, 0 to disable).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxLoLineTermEnable_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -1515,6 +2732,20 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxLoLineTermEnable_Set(void *const
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the status of the low line termination enable setting for
+ * the specified analog transmit instance.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * hardware.
+ * @param instance An enumerated value representing the specific analog transmit
+ * instance (e.g., `ADRV9001_BF_TX1_ANA` or
+ * `ADRV9001_BF_TX2_ANA`).
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxLoLineTermEnable_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -1529,6 +2760,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxLoLineTermEnable_Get(void *const
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the bias resistor calibration value for the transmit path of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating which instance of the analog
+ * transmit memory map to modify.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxPdAmpBiasResCal_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -1540,6 +2784,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxPdAmpBiasResCal_Set(void *const 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the bias resistor calibration value for the transmit path of
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerator value indicating which instance of the analog
+ * transmit memory map to access.
+ * @param value A pointer to a uint8_t variable where the retrieved calibration
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxPdAmpBiasResCal_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -1554,6 +2811,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxPdAmpBiasResCal_Get(void *const 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down mode for the digital mixer in the analog transmit
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog transmit memory map.
+ * @param value A 1-bit value indicating whether to enable or disable the power
+ * down mode.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxPdDmEn_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -1565,6 +2835,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxPdDmEn_Set(void *const device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the power down mode for the digital mixer in the analog
+ * transmit memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog transmit memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxPdDmEn_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -1579,6 +2862,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxPdDmEn_Get(void *const device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the low noise selection for the transmit path in the ADRV9001
+ * analog transmit memory map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog transmit memory map.
+ * @param value A uint8_t value that indicates the low noise selection to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxPdLowNoiseSel_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -1590,6 +2886,18 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxPdLowNoiseSel_Set(void *const de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the low noise selection value for the transmit power down
+ * configuration.
+ *
+ * @param device A pointer to the device context used for communication.
+ * @param instance An enumerated value representing the specific analog transmit
+ * memory map instance.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxPdLowNoiseSel_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -1604,6 +2912,18 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxPdLowNoiseSel_Get(void *const de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the programmable OTA bias for the transmit path in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating which analog transmit memory
+ * map instance to configure.
+ * @param value An 8-bit unsigned integer representing the bias value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxPdProgOtaBias_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -1615,6 +2935,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxPdProgOtaBias_Set(void *const de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the programmed OTA bias value from the analog transmit
+ * memory map.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * hardware.
+ * @param instance An enumerated value representing the specific analog transmit
+ * memory map instance (e.g., TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved OTA bias
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxPdProgOtaBias_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -1629,6 +2962,18 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxPdProgOtaBias_Get(void *const de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the Rin boost value for the analog transmit memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog transmit memory map.
+ * @param value An 8-bit unsigned integer representing the Rin boost value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxPdRinBoost_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -1640,6 +2985,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxPdRinBoost_Set(void *const devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `TxPdRinBoost` field from the analog
+ * transmit memory map.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog transmit memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxPdRinBoost_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -1654,10 +3012,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxPdRinBoost_Get(void *const devic
     return status;
 }
 
-/**
- * These bits set how many data lanes are enabled for the transmit path according to the following settings: 00 --  1 data lane from transceiver to BBP in CMOS mode, invalid in LVDS mode 01 --  2 data lanes from transceiver to BBP 10 --  4 data lanes from transceiver to BBP 11 --  Invalid configuration in both CMOS and LVDS modes
- *  Tx Pdbias
- */
+/***************************************************************************//**
+ * @brief Sets the Tx bias configuration for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific analog Tx
+ * memory map instance (e.g., ADRV9001_BF_TX1_ANA or
+ * ADRV9001_BF_TX2_ANA).
+ * @param value An 8-bit unsigned integer representing the desired bias
+ * configuration to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxPdbias_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -1669,10 +3036,17 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxPdbias_Set(void *const device,
     return status;
 }
 
-/**
- * These bits set how many data lanes are enabled for the transmit path according to the following settings: 00 --  1 data lane from transceiver to BBP in CMOS mode, invalid in LVDS mode 01 --  2 data lanes from transceiver to BBP 10 --  4 data lanes from transceiver to BBP 11 --  Invalid configuration in both CMOS and LVDS modes
- *  Tx Pdbias
- */
+/***************************************************************************//**
+ * @brief Retrieves the Tx Pdbias value from the analog transmit memory map.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which analog transmit memory map
+ * instance to access.
+ * @param value A pointer to a `uint8_t` where the retrieved value will be
+ * stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxPdbias_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -1687,10 +3061,16 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxPdbias_Get(void *const device,
     return status;
 }
 
-/**
- * This bit selects different bias sources for Tx pre-distortion amplifier. 0 selects a local PTAT source which gives a bias current proportional to absolute temperature and is roughly 80A at room temperature. The current also varies with poly resistance. 1 selects external resistor bias which is 100A constant across temperature. This bit is for internal test only.
- *  Tx Predist Amp Bias
- */
+/***************************************************************************//**
+ * @brief Sets the bias source for the Tx pre-distortion amplifier.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which analog Tx memory map instance
+ * to configure.
+ * @param value A uint8_t value that determines the bias source selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxPredistAmpBias_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -1702,10 +3082,17 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxPredistAmpBias_Set(void *const d
     return status;
 }
 
-/**
- * This bit selects different bias sources for Tx pre-distortion amplifier. 0 selects a local PTAT source which gives a bias current proportional to absolute temperature and is roughly 80A at room temperature. The current also varies with poly resistance. 1 selects external resistor bias which is 100A constant across temperature. This bit is for internal test only.
- *  Tx Predist Amp Bias
- */
+/***************************************************************************//**
+ * @brief Retrieves the bias setting for the Tx pre-distortion amplifier.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which analog Tx memory map instance
+ * to access.
+ * @param value A pointer to a uint8_t where the retrieved bias value will be
+ * stored.
+ * @return Returns an integer status code indicating success or failure of the
+ * read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxPredistAmpBias_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -1720,6 +3107,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxPredistAmpBias_Get(void *const d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the manual startup bias for the Tx pre-distortion amplifier.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerator of type `adrv9001_BfAnalogTxMemMap_e` that
+ * specifies which instance of the analog Tx memory map to
+ * configure.
+ * @param value A `uint8_t` value that specifies the bias setting for the Tx
+ * pre-distortion amplifier.
+ * @return Returns an `int32_t` status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxPredistAmpBiasManualStartup_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -1731,6 +3131,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxPredistAmpBiasManualStartup_Set(
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the manual startup bias setting for the Tx pre-distortion
+ * amplifier.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * hardware.
+ * @param instance An enumerated value indicating which instance of the analog
+ * Tx memory map to access.
+ * @param value A pointer to a `uint8_t` where the retrieved bias value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxPredistAmpBiasManualStartup_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -1745,6 +3158,16 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxPredistAmpBiasManualStartup_Get(
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the bias for the Tx pre-distortion amplifier's PTAT start.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which analog Tx memory map instance
+ * to configure.
+ * @param value A uint8_t value representing the bias setting to be applied.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxPredistAmpBiasPtatStart_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -1756,6 +3179,17 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxPredistAmpBiasPtatStart_Set(void
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the bias PTAT start value for the Tx pre-distortion
+ * amplifier.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which analog Tx memory map instance
+ * to access.
+ * @param value A pointer to a uint8_t where the retrieved value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxPredistAmpBiasPtatStart_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -1770,10 +3204,17 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxPredistAmpBiasPtatStart_Get(void
     return status;
 }
 
-/**
- * This bit selects different bias sources for Tx pre-distortion amplifier. 0 selects a local PTAT source which gives a bias current proportional to absolute temperature and is roughly 80A at room temperature. The current also varies with poly resistance. 1 selects external resistor bias which is 100A constant across temperature. This bit is for internal test only.
- *  Tx Predist Amp Cc
- */
+/***************************************************************************//**
+ * @brief Sets the Tx pre-distortion amplifier bias configuration in the analog
+ * transmit memory map.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which analog transmit memory map
+ * instance to configure.
+ * @param value A byte value representing the bias configuration to set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxPredistAmpCc_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -1785,10 +3226,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxPredistAmpCc_Set(void *const dev
     return status;
 }
 
-/**
- * This bit selects different bias sources for Tx pre-distortion amplifier. 0 selects a local PTAT source which gives a bias current proportional to absolute temperature and is roughly 80A at room temperature. The current also varies with poly resistance. 1 selects external resistor bias which is 100A constant across temperature. This bit is for internal test only.
- *  Tx Predist Amp Cc
- */
+/***************************************************************************//**
+ * @brief Retrieves the Tx pre-distortion amplifier configuration from the
+ * specified device instance.
+ *
+ * @param device A pointer to the device context that allows access to the
+ * hardware.
+ * @param instance An enumerated value indicating which analog Tx memory map
+ * instance to access.
+ * @param value A pointer to a `uint8_t` where the retrieved value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxPredistAmpCc_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -1803,10 +3253,16 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxPredistAmpCc_Get(void *const dev
     return status;
 }
 
-/**
- * Setting these bits bypasses two huge filtering resistors in the bias circuits of the Tx pre-distortion amplifier. The bits are for internal test only.
- *  Tx Predist Amp Filter Bypass
- */
+/***************************************************************************//**
+ * @brief Sets the bypass state for the Tx pre-distortion amplifier filter.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which analog Tx memory map instance
+ * to configure.
+ * @param value A uint8_t value indicating the bypass state (0 or 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxPredistAmpFilterBypass_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -1818,10 +3274,16 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxPredistAmpFilterBypass_Set(void 
     return status;
 }
 
-/**
- * Setting these bits bypasses two huge filtering resistors in the bias circuits of the Tx pre-distortion amplifier. The bits are for internal test only.
- *  Tx Predist Amp Filter Bypass
- */
+/***************************************************************************//**
+ * @brief Retrieves the bypass status of the Tx pre-distortion amplifier filter.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which instance of the analog Tx
+ * memory map to access.
+ * @param value A pointer to a uint8_t where the retrieved value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxPredistAmpFilterBypass_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -1836,10 +3298,16 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxPredistAmpFilterBypass_Get(void 
     return status;
 }
 
-/**
- * This bit selects different bias sources for Tx pre-distortion amplifier. 0 selects a local PTAT source which gives a bias current proportional to absolute temperature and is roughly 80A at room temperature. The current also varies with poly resistance. 1 selects external resistor bias which is 100A constant across temperature. This bit is for internal test only.
- *  Tx Predist Amp Rz
- */
+/***************************************************************************//**
+ * @brief Sets the Tx pre-distortion amplifier's Rz bias source.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which analog Tx memory map instance
+ * to configure.
+ * @param value A uint8_t value representing the bias source selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxPredistAmpRz_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -1851,10 +3319,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxPredistAmpRz_Set(void *const dev
     return status;
 }
 
-/**
- * This bit selects different bias sources for Tx pre-distortion amplifier. 0 selects a local PTAT source which gives a bias current proportional to absolute temperature and is roughly 80A at room temperature. The current also varies with poly resistance. 1 selects external resistor bias which is 100A constant across temperature. This bit is for internal test only.
- *  Tx Predist Amp Rz
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the Tx pre-distortion amplifier Rz setting from
+ * the specified device instance.
+ *
+ * @param device A pointer to the device context that is used to access the
+ * hardware.
+ * @param instance An enumerated value indicating which analog Tx memory map
+ * instance to access.
+ * @param value A pointer to a `uint8_t` where the retrieved value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxPredistAmpRz_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -1869,9 +3346,17 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxPredistAmpRz_Get(void *const dev
     return status;
 }
 
-/**
- * When this bit is set, the Tx synthesizer is forced to power down.
- */
+/***************************************************************************//**
+ * @brief Sets the power down state for the Tx pre-distortion amplifier.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which analog Tx memory map instance
+ * to configure.
+ * @param value A uint8_t value indicating the desired power down state (0 or
+ * 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxPredistPd_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -1883,9 +3368,16 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxPredistPd_Set(void *const device
     return status;
 }
 
-/**
- * When this bit is set, the Tx synthesizer is forced to power down.
- */
+/***************************************************************************//**
+ * @brief Retrieves the power down status of the Tx pre-distortion amplifier.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which analog Tx memory map instance
+ * to access.
+ * @param value A pointer to a uint8_t where the retrieved value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxPredistPd_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -1900,9 +3392,17 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxPredistPd_Get(void *const device
     return status;
 }
 
-/**
- * These bits set how many data lanes are enabled for the transmit path according to the following settings: 00 --  1 data lane from transceiver to BBP in CMOS mode, invalid in LVDS mode 01 --  2 data lanes from transceiver to BBP 10 --  4 data lanes from transceiver to BBP 11 --  Invalid configuration in both CMOS and LVDS modes
- */
+/***************************************************************************//**
+ * @brief Sets the Tx pre-distortion power down override for the specified
+ * instance.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerated value representing the specific analog Tx
+ * memory map instance.
+ * @param value A uint8_t value to set the power down override.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxPredistPdoverride_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -1914,9 +3414,20 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxPredistPdoverride_Set(void *cons
     return status;
 }
 
-/**
- * These bits set how many data lanes are enabled for the transmit path according to the following settings: 00 --  1 data lane from transceiver to BBP in CMOS mode, invalid in LVDS mode 01 --  2 data lanes from transceiver to BBP 10 --  4 data lanes from transceiver to BBP 11 --  Invalid configuration in both CMOS and LVDS modes
- */
+/***************************************************************************//**
+ * @brief Retrieves the Tx pre-distortion power down override setting from the
+ * specified device instance.
+ *
+ * @param device A pointer to the device context that is used to access the
+ * hardware.
+ * @param instance An enumerator of type `adrv9001_BfAnalogTxMemMap_e` that
+ * specifies which instance of the analog transmit memory map to
+ * access.
+ * @param value A pointer to a `uint8_t` where the retrieved value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxPredistPdoverride_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -1931,6 +3442,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxPredistPdoverride_Get(void *cons
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the Tx pre-distortion power down override select for the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific analog Tx
+ * memory map instance (e.g., Tx1 or Tx2).
+ * @param value A uint8_t value that indicates the power down override select
+ * setting.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxPredistPdoverrideSelect_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -1942,6 +3466,18 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxPredistPdoverrideSelect_Set(void
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the Tx pre-distortion power down override selection value
+ * from the analog transmit memory map.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating the specific analog transmit memory
+ * map instance.
+ * @param value A pointer to a `uint8_t` where the retrieved value will be
+ * stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxPredistPdoverrideSelect_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -1956,9 +3492,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxPredistPdoverrideSelect_Get(void
     return status;
 }
 
-/**
- * Setting these bits enable the power down override for the Tx upconverters. Setting [D1] enables the power down override for the Tx2 upconverter in 0x20A[D1]. Setting [D0] enables the power down override for the Tx1 upconverter in 0x20A[D0].
- */
+/***************************************************************************//**
+ * @brief Sets the power down state for the transmit upconverter in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating which instance of the analog
+ * transmit memory map to configure.
+ * @param value A uint8_t value indicating the desired power down state (0 or
+ * 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxUpconvPd_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -1970,9 +3516,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxUpconvPd_Set(void *const device,
     return status;
 }
 
-/**
- * Setting these bits enable the power down override for the Tx upconverters. Setting [D1] enables the power down override for the Tx2 upconverter in 0x20A[D1]. Setting [D0] enables the power down override for the Tx1 upconverter in 0x20A[D0].
- */
+/***************************************************************************//**
+ * @brief Retrieves the power down status of the transmit upconverter for a
+ * specified instance.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * hardware.
+ * @param instance An enumerated value indicating which instance of the analog
+ * transmit memory map to access.
+ * @param value A pointer to a `uint8_t` where the retrieved power down status
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxUpconvPd_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -1987,9 +3543,16 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxUpconvPd_Get(void *const device,
     return status;
 }
 
-/**
- * Setting these bits enable the power down override for the Tx upconverters. Setting [D1] enables the power down override for the Tx2 upconverter in 0x20A[D1]. Setting [D0] enables the power down override for the Tx1 upconverter in 0x20A[D0].
- */
+/***************************************************************************//**
+ * @brief Sets the power down override for the transmit upconverter.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which analog transmit memory map
+ * instance to modify.
+ * @param value A uint8_t value indicating the power down override setting.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxUpconvPdoverride_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -2001,9 +3564,18 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxUpconvPdoverride_Set(void *const
     return status;
 }
 
-/**
- * Setting these bits enable the power down override for the Tx upconverters. Setting [D1] enables the power down override for the Tx2 upconverter in 0x20A[D1]. Setting [D0] enables the power down override for the Tx1 upconverter in 0x20A[D0].
- */
+/***************************************************************************//**
+ * @brief Retrieves the power down override setting for the transmit
+ * upconverter.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which analog transmit memory map
+ * instance to access.
+ * @param value A pointer to a `uint8_t` where the retrieved value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxUpconvPdoverride_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -2018,9 +3590,16 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxUpconvPdoverride_Get(void *const
     return status;
 }
 
-/**
- * Setting these bits enable the power down override for the Tx upconverters. Setting [D1] enables the power down override for the Tx2 upconverter in 0x20A[D1]. Setting [D0] enables the power down override for the Tx1 upconverter in 0x20A[D0].
- */
+/***************************************************************************//**
+ * @brief Sets the power down override for the transmit upconverter.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which instance of the analog
+ * transmit memory map is being accessed.
+ * @param value A uint8_t value that specifies the power down override setting.
+ * @return Returns the status of the write operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxUpconvPdoverrideSelect_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -2032,9 +3611,18 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxUpconvPdoverrideSelect_Set(void 
     return status;
 }
 
-/**
- * Setting these bits enable the power down override for the Tx upconverters. Setting [D1] enables the power down override for the Tx2 upconverter in 0x20A[D1]. Setting [D0] enables the power down override for the Tx1 upconverter in 0x20A[D0].
- */
+/***************************************************************************//**
+ * @brief Retrieves the power down override selection for the transmit
+ * upconverter.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which instance of the analog
+ * transmit memory map to access.
+ * @param value A pointer to a `uint8_t` where the retrieved value will be
+ * stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxUpconvPdoverrideSelect_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -2049,6 +3637,16 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxUpconvPdoverrideSelect_Get(void 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the Vcm control for the analog transmit memory map.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which analog transmit memory map
+ * instance to configure.
+ * @param value A uint8_t value representing the Vcm control setting.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxVcmCntrl_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -2060,6 +3658,16 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxVcmCntrl_Set(void *const device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the Vcm control value from the analog transmit memory map.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which analog transmit memory map
+ * instance to access.
+ * @param value A pointer to a uint8_t where the retrieved value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxVcmCntrl_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -2074,9 +3682,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxVcmCntrl_Get(void *const device,
     return status;
 }
 
-/**
- * These bits are the compensation capacitor control word for the input opamp in the BBF biquad (opamp A). Increasing this word increases the compensation capacitor setting, which increases stability at the expense of wideband linearity performance. See the user guide for more details.
- */
+/***************************************************************************//**
+ * @brief Sets the compensation capacitor control word for the input opamp in
+ * the BBF biquad.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog transmit memory map.
+ * @param value An 8-bit unsigned integer representing the compensation
+ * capacitor control setting.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxabbfCcCntA_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -2088,9 +3706,18 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxabbfCcCntA_Set(void *const devic
     return status;
 }
 
-/**
- * These bits are the compensation capacitor control word for the input opamp in the BBF biquad (opamp A). Increasing this word increases the compensation capacitor setting, which increases stability at the expense of wideband linearity performance. See the user guide for more details.
- */
+/***************************************************************************//**
+ * @brief Retrieves the compensation capacitor control word for the input opamp
+ * in the BBF biquad.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating the specific instance of the analog
+ * transmit memory map.
+ * @param value A pointer to a `uint8_t` where the retrieved value will be
+ * stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxabbfCcCntA_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -2105,9 +3732,17 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxabbfCcCntA_Get(void *const devic
     return status;
 }
 
-/**
- * These bits are the compensation capacitor control word for the input opamp in the BBF biquad (opamp A). Increasing this word increases the compensation capacitor setting, which increases stability at the expense of wideband linearity performance. See the user guide for more details.
- */
+/***************************************************************************//**
+ * @brief Sets the TxabbfCcCntB compensation capacitor control word for the
+ * input opamp in the BBF biquad.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which instance of the analog Tx
+ * memory map is being accessed.
+ * @param value The value to set for the compensation capacitor control.
+ * @return Returns the status of the write operation, where a non-zero value
+ * indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxabbfCcCntB_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -2119,9 +3754,18 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxabbfCcCntB_Set(void *const devic
     return status;
 }
 
-/**
- * These bits are the compensation capacitor control word for the input opamp in the BBF biquad (opamp A). Increasing this word increases the compensation capacitor setting, which increases stability at the expense of wideband linearity performance. See the user guide for more details.
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the compensation capacitor control word for the
+ * input opamp in the BBF biquad (opamp B).
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which analog transmit memory map
+ * instance to access.
+ * @param value A pointer to a `uint8_t` where the retrieved value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxabbfCcCntB_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -2136,9 +3780,17 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxabbfCcCntB_Get(void *const devic
     return status;
 }
 
-/**
- * Setting these bits enable the power down override for the Tx baseband filters. Setting [D5] enables the power down override for the Tx2 BBF in 0x209[D5]. Setting [D4] enables the power down override for the Tx1 BBF in 0x209[D4].
- */
+/***************************************************************************//**
+ * @brief Sets the power down state for the TX baseband filter.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which analog TX memory map instance
+ * to modify.
+ * @param value A uint8_t value indicating the desired power down state (0 or
+ * 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxbbfPd_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -2150,9 +3802,16 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxbbfPd_Set(void *const device,
     return status;
 }
 
-/**
- * Setting these bits enable the power down override for the Tx baseband filters. Setting [D5] enables the power down override for the Tx2 BBF in 0x209[D5]. Setting [D4] enables the power down override for the Tx1 BBF in 0x209[D4].
- */
+/***************************************************************************//**
+ * @brief Retrieves the power down status of the TX baseband filter.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which instance of the analog TX
+ * memory map to access.
+ * @param value A pointer to a uint8_t where the retrieved value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxbbfPd_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -2167,9 +3826,16 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxbbfPd_Get(void *const device,
     return status;
 }
 
-/**
- * Setting these bits enable the power down override for the Tx baseband filters. Setting [D5] enables the power down override for the Tx2 BBF in 0x209[D5]. Setting [D4] enables the power down override for the Tx1 BBF in 0x209[D4].
- */
+/***************************************************************************//**
+ * @brief Sets the power down override for the TX mixer LO delay buffer.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which analog TX memory map instance
+ * to modify.
+ * @param value A uint8_t value indicating the power down state to set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxbbfPdoverride_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -2181,9 +3847,16 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxbbfPdoverride_Set(void *const de
     return status;
 }
 
-/**
- * Setting these bits enable the power down override for the Tx baseband filters. Setting [D5] enables the power down override for the Tx2 BBF in 0x209[D5]. Setting [D4] enables the power down override for the Tx1 BBF in 0x209[D4].
- */
+/***************************************************************************//**
+ * @brief Retrieves the override value for the Tx baseband filter power down.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which analog Tx memory map instance
+ * to access.
+ * @param value A pointer to a uint8_t where the retrieved value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxbbfPdoverride_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -2198,9 +3871,16 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxbbfPdoverride_Get(void *const de
     return status;
 }
 
-/**
- * Setting these bits enable the power down override for the Tx baseband filters. Setting [D5] enables the power down override for the Tx2 BBF in 0x209[D5]. Setting [D4] enables the power down override for the Tx1 BBF in 0x209[D4].
- */
+/***************************************************************************//**
+ * @brief Sets the override selection for the TX baseband filter power down.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which analog TX memory map instance
+ * to modify.
+ * @param value A uint8_t value indicating the override selection state.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxbbfPdoverrideSelect_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -2212,9 +3892,16 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxbbfPdoverrideSelect_Set(void *co
     return status;
 }
 
-/**
- * Setting these bits enable the power down override for the Tx baseband filters. Setting [D5] enables the power down override for the Tx2 BBF in 0x209[D5]. Setting [D4] enables the power down override for the Tx1 BBF in 0x209[D4].
- */
+/***************************************************************************//**
+ * @brief Retrieves the override selection value for the Tx baseband filter.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which analog Tx memory map instance
+ * to access.
+ * @param value A pointer to a uint8_t where the retrieved value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxbbfPdoverrideSelect_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -2229,10 +3916,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxbbfPdoverrideSelect_Get(void *co
     return status;
 }
 
-/**
- * This bit sets the Tx output supply voltage being used. Clear this bit for 1.8V, set it for 1.3V
- *  Txuc Lv
- */
+/***************************************************************************//**
+ * @brief Sets the Tx output supply voltage for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerator of type `adrv9001_BfAnalogTxMemMap_e`
+ * indicating which instance of the analog transmit memory map
+ * to modify.
+ * @param value A `uint8_t` value that specifies the desired output supply
+ * voltage level (1.8V or 1.3V).
+ * @return Returns an `int32_t` status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxucLv_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -2244,10 +3940,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxucLv_Set(void *const device,
     return status;
 }
 
-/**
- * This bit sets the Tx output supply voltage being used. Clear this bit for 1.8V, set it for 1.3V
- *  Txuc Lv
- */
+/***************************************************************************//**
+ * @brief Retrieves the Tx output supply voltage setting from the analog
+ * transmit memory map.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * hardware.
+ * @param instance An enumerator indicating which instance of the analog
+ * transmit memory map to access.
+ * @param value A pointer to a `uint8_t` where the retrieved voltage setting
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxucLv_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -2262,6 +3967,17 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxucLv_Get(void *const device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF cascode level for the analog transmit memory map.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating the specific analog transmit memory
+ * map instance.
+ * @param value An 8-bit unsigned integer representing the RF cascode level to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxucRfcascLvl_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -2273,6 +3989,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxucRfcascLvl_Set(void *const devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RF cascode level setting from the analog transmit memory
+ * map.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * hardware.
+ * @param instance An enumerated value representing the specific analog transmit
+ * instance (e.g., TX1 or TX2).
+ * @param value A pointer to a `uint8_t` where the retrieved RF cascode level
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxucRfcascLvl_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -2287,10 +4016,17 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxucRfcascLvl_Get(void *const devi
     return status;
 }
 
-/**
- * These bits set the cascode off voltage according to the following equation:
- *  Txuc Vcascctrl
- */
+/***************************************************************************//**
+ * @brief Sets the cascode control voltage for the transmit upconverter.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which analog transmit memory map
+ * instance to configure.
+ * @param value A uint8_t value representing the cascode control voltage to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxucVcascctrl_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -2302,10 +4038,19 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxucVcascctrl_Set(void *const devi
     return status;
 }
 
-/**
- * These bits set the cascode off voltage according to the following equation:
- *  Txuc Vcascctrl
- */
+/***************************************************************************//**
+ * @brief Retrieves the cascode control voltage setting from the analog transmit
+ * memory map.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog transmit memory map.
+ * @param value A pointer to a `uint8_t` where the retrieved cascode control
+ * voltage will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxucVcascctrl_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)
@@ -2320,10 +4065,16 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxucVcascctrl_Get(void *const devi
     return status;
 }
 
-/**
- * These bits set the cascode off voltage according to the following equation:
- *  Txuc Vcascoff
- */
+/***************************************************************************//**
+ * @brief Sets the cascode off voltage for the analog transmit path.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating the specific analog transmit
+ * instance.
+ * @param value The cascode off voltage value to be set.
+ * @return Returns the status of the write operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxucVcascoff_Set(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     const uint8_t value)
@@ -2335,10 +4086,18 @@ static inline int32_t adrv9001_AnalogTxMemMap_TxucVcascoff_Set(void *const devic
     return status;
 }
 
-/**
- * These bits set the cascode off voltage according to the following equation:
- *  Txuc Vcascoff
- */
+/***************************************************************************//**
+ * @brief Retrieves the cascode off voltage setting from the analog transmit
+ * memory map.
+ *
+ * @param device A pointer to the device context used for communication.
+ * @param instance An enumerated value representing the specific analog transmit
+ * instance.
+ * @param value A pointer to a `uint8_t` where the retrieved cascode off voltage
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogTxMemMap_TxucVcascoff_Get(void *const device,
     adrv9001_BfAnalogTxMemMap_e instance,
     uint8_t *const value)

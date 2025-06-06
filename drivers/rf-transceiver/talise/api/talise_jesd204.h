@@ -26,290 +26,237 @@ extern "C" {
  ****************************************************************************
  */
 
-/**
- * \brief Sets up the JESD204B Serializers
+/***************************************************************************//**
+ * @brief This function sets up the JESD204B serializers by configuring the
+ * serializer lanes shared between two framers based on the provided
+ * initialization settings. It adjusts the serializer lane clock
+ * frequency, powers up the necessary serializer lanes, resets them, and
+ * configures pre-emphasis, amplitude, and lane polarity inversion
+ * settings. The function ensures that the serializer lane clock is set
+ * to the faster of the Rx and ORx framer rates, allowing for automatic
+ * oversampling or bit repetition to handle clock rate differences. It is
+ * essential to call this function after initializing the device and
+ * before starting data transmission.
  *
- * This function uses init->rx.framerSel and init->obsRx.framerSel to determine
- * the framerA and framerB structures settings to use to setup the correct serializer
- * lanes that are shared between the two framers. This function configures the following
- * for the serializers:
- *   1) Sets the serializer lane clock frequency
- *   2) Powers up the requested serializer lanes
- *   3) Resets the powered up serializers
- *   4) Sets the serializers preEmphasis
- *   5) Sets the serializers amplitude
- *   6) Sets the serializer PN invert setting per lane
- *
- * Since the Rx and ORx IQ data rates can be different, and the serializers are shared between
- * the two framers, the serializer lane clock is set for the faster of the two
- * framer rates.  The framers will automatically oversample or bit repeat to
- * account for the clock rate difference, depending on the oversample framer parameter. The
- * oversample mode is only needed if Rx and ORx share the same framer and have different
- * IQ sample rates.
- *
- * \pre This function is private and is not called directly by the user.
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep{init->rx (most members)}
- * \dep{init->obsRx (most members)}
- * \dep{init->jesd204Settings (most members)}
- * \dep{init->clocks.clkPllVcoFreq_kHz}
- * \dep_end
- *
- * \param device Structure pointer to the device settings structure
- * \param init Pointer to the device initialization settings structure
- *
- * \retval TALACT_ERR_CHECK_PARAM Recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI Recovery action for SPI reset required
- * \retval TALACT_NO_ACTION Function completed successfully, no action required
- */
+ * @param device Pointer to the taliseDevice_t structure containing device
+ * settings. Must not be null.
+ * @param init Pointer to the taliseInit_t structure containing initialization
+ * settings. Must not be null and should be properly configured with
+ * valid framer and serializer settings.
+ * @return Returns a uint32_t value indicating the result of the operation:
+ * TALACT_NO_ACTION for success, TALACT_ERR_CHECK_PARAM for parameter
+ * errors, or TALACT_ERR_RESET_SPI for SPI reset required.
+ ******************************************************************************/
 uint32_t TALISE_setupSerializers(taliseDevice_t *device, taliseInit_t *init);
 
-/**
- * \brief Sets up the JESD204B Deserializers
+/***************************************************************************//**
+ * @brief This function is automatically invoked by TALISE_initialize() when a
+ * valid Tx profile is present. It configures the deserializer lanes,
+ * sets the deserializer clocks, and applies PN inversion and EQ settings
+ * based on the provided device and initialization structures. It is
+ * essential for setting up the JESD204B data path for transmission. The
+ * function expects valid configuration parameters and will return
+ * specific error codes if any parameter is invalid or if a reset is
+ * required. It should not be called directly by the user.
  *
- * This function is called automatically by TALISE_initialize() if the Tx profile is valid.
- * This function enables the necessary deserializer lanes, sets the deserializer clocks
- * PN inversion settings, and EQ settings based on the info found in the device data structure.
- *
- * \pre This function is private and is not called directly by the user.
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep{init->tx.deframerSel}
- * \dep{init->jesd204Settings (most members)}
- * \dep{init->tx.txProfile.txInputRate_kHz}
- * \dep{init->clocks.clkPllVcoFreq_kHz}
- * \dep_end
- *
- * \param device Structure pointer to the device settings structure
- * \param init Pointer to the device initialization settings data structure
- *
- * \retval TALACT_WARN_RESET_LOG Recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM Recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI Recovery action for SPI reset required
- * \retval TALACT_NO_ACTION Function completed successfully, no action required
- */
+ * @param device A pointer to the taliseDevice_t structure containing the device
+ * settings. Must not be null.
+ * @param init A pointer to the taliseInit_t structure containing the
+ * initialization settings. Must not be null and should contain
+ * valid JESD204B configuration parameters.
+ * @return Returns a uint32_t value indicating the recovery action required:
+ * TALACT_NO_ACTION for success, TALACT_ERR_CHECK_PARAM for parameter
+ * errors, TALACT_ERR_RESET_SPI for SPI reset required, or
+ * TALACT_WARN_RESET_LOG for log reset warning.
+ ******************************************************************************/
 uint32_t TALISE_setupDeserializers(taliseDevice_t *device, taliseInit_t *init);
 
-/**
- * \brief Sets up the JESD204B Framer
+/***************************************************************************//**
+ * @brief This function sets up the JESD204B framer for the specified device and
+ * initialization settings. It configures the framer based on the
+ * selected framer (A or B) and the settings provided in the
+ * initialization structure. The function handles various parameter
+ * checks and will disable the framer if the number of converters (M) is
+ * zero or if no lanes are enabled. It is important to ensure that the
+ * initialization settings are correctly configured before calling this
+ * function, as invalid parameters will result in error codes and
+ * recommended recovery actions. This function is typically called during
+ * the device initialization process and is not intended to be called
+ * directly by the user.
  *
- * If the number of converters, M = 0 or no lanes are enabled, then the framer will be disabled.
- * Otherwise, the framer selected in the framerSelect parameter will be configured based on the
- * settings in the data structure.
- *
- * \pre This function is private and is not called directly by the user.
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep{init->rxChannels}
- * \dep{init->jesd204Settings.framerA :All members}
- * \dep{init->jesd204Settings.framerB :All members}
- * \dep_end
- *
- * \param device Structure pointer to the device settings structure
- * \param init Pointer to init settings for this Talise instance
- * \param framerSel Select the framer to configure (TAL_FRAMER_A or TAL_FRAMER_B)
- *
- * \retval TALACT_WARN_RESET_LOG Recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM Recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI Recovery action for SPI reset required
- * \retval TALACT_NO_ACTION Function completed successfully, no action required
- */
+ * @param device A pointer to the taliseDevice_t structure containing the device
+ * settings. Must not be null.
+ * @param init A pointer to the taliseInit_t structure containing the
+ * initialization settings for the device. Must not be null and
+ * should be properly initialized with valid settings.
+ * @param framerSel An enumeration of type taliseFramerSel_t indicating which
+ * framer to configure (TAL_FRAMER_A or TAL_FRAMER_B). Invalid
+ * values will result in an error.
+ * @return Returns a uint32_t value indicating the result of the operation.
+ * Possible return values include TALACT_NO_ACTION for success,
+ * TALACT_ERR_CHECK_PARAM for parameter errors, and TALACT_ERR_RESET_SPI
+ * for SPI reset requirements.
+ ******************************************************************************/
 uint32_t TALISE_setupJesd204bFramer(taliseDevice_t *device, taliseInit_t *init,
 				    taliseFramerSel_t framerSel);
 
-/**
- * \brief Sets up the JESD204B Deframer
+/***************************************************************************//**
+ * @brief This function updates the JESD204B deframer settings based on the
+ * provided device and initialization structures. It is typically called
+ * automatically during the device initialization process if the Tx
+ * profile is valid. The function configures various parameters such as
+ * lane enablement, clock settings, and synchronization options. It
+ * requires a valid Tx profile and appropriate deframer selection. The
+ * function handles invalid parameters by returning specific error codes,
+ * ensuring robust error checking and recovery.
  *
- * This function updates the JESD204B deframer settings.
- *
- * \pre This function is private and is not called directly by the user.
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep{init->jesd204Settings}
- * \dep{init->tx}
- * \dep_end
- *
- * \param device Structure pointer to device settings data structure
- * \param init Pointer to device initialization settings data structure
- * \param deframerSel Desired deframer to configure
- *
- * \retval TALACT_ERR_CHECK_PARAM Recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI Recovery action for SPI reset required
- * \retval TALACT_NO_ACTION Function completed successfully, no action required
- */
+ * @param device Pointer to the device settings data structure. Must not be null
+ * and should be properly initialized before calling this
+ * function.
+ * @param init Pointer to the device initialization settings data structure.
+ * Must not be null and should contain valid JESD204B settings.
+ * @param deframerSel Specifies the deframer to configure. Must be a valid
+ * deframer selection (e.g., TAL_DEFRAMER_A or
+ * TAL_DEFRAMER_B).
+ * @return Returns a uint32_t value indicating the result of the operation.
+ * Possible return values include TALACT_ERR_CHECK_PARAM for parameter
+ * errors, TALACT_ERR_RESET_SPI for SPI reset requirements, and
+ * TALACT_NO_ACTION for successful completion.
+ ******************************************************************************/
 uint32_t TALISE_setupJesd204bDeframer(taliseDevice_t *device,
 				      taliseInit_t *init, taliseDeframerSel_t deframerSel);
 
-/**
- * \brief Enables/Disables the JESD204B Framer
+/***************************************************************************//**
+ * @brief This function is used to enable or disable the JESD204B framer link
+ * for a specified framer or combination of framers. It is typically not
+ * necessary to call this function unless there is a need to reset the
+ * link. The function can be called at any time after the device has been
+ * initialized. It returns a status code indicating the success of the
+ * operation or any required recovery actions.
  *
- * This function is normally not necessary.  In the event that the link needs to be reset, this
- * function allows a framer to be disabled and re-enabled.
- *
- * \pre This function may be called any time after device initialization
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \param device is a pointer to the device settings structure
- * \param framerSel Desired framer to reset.
- * \param enable 0 = Disable the selected framer, 1 = enable the selected framer link
- *
- * \retval TALACT_WARN_RESET_LOG Recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM Recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI Recovery action for SPI reset required
- * \retval TALACT_NO_ACTION Function completed successfully, no action required
- */
+ * @param device A pointer to the taliseDevice_t structure representing the
+ * device settings. Must not be null.
+ * @param framerSel Specifies the framer(s) to be enabled or disabled. Valid
+ * values are TAL_FRAMER_A, TAL_FRAMER_B, or
+ * TAL_FRAMER_A_AND_B. Invalid values result in an error.
+ * @param enable A uint8_t value where 0 disables and any non-zero value enables
+ * the selected framer link.
+ * @return Returns a uint32_t value indicating the result of the operation,
+ * which can be a success or a specific recovery action code.
+ ******************************************************************************/
 uint32_t TALISE_enableFramerLink(taliseDevice_t *device,
 				 taliseFramerSel_t framerSel, uint8_t enable);
 
-/**
- * \brief Enables/Disables the JESD204B Deframer
+/***************************************************************************//**
+ * @brief This function allows the user to enable or disable the JESD204B
+ * deframer link for a specified deframer. It is typically used when a
+ * link reset is necessary. The function can be called at any time after
+ * the device has been initialized. When enabling the link, ensure that
+ * valid serializer data is being sent to lock the Talise CDR (recovered
+ * clock).
  *
- * This function is normally not necessary.  In the event that the link needs to be reset, this
- * function allows a deframer to be disabled and re-enabled.  During disable, the lane FIFOs
- * for the selected deframer are also disabled.  When the deframer link is enabled, the
- * lane FIFOs for the selected deframer are re-enabled (reset).  The BBIC should send valid
- * serializer data before enabling the link so the Talise CDR (recovered clock) is locked.
- *
- * \pre This function may be called any time after device initialization.
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \param device Pointer to the Talised device settings data structure
- * \param deframerSel Desired deframer to reset.
- * \param enable 0 = Disable the selected deframer, 1 = enable the selected deframer link
- *
- * \retval TALACT_WARN_RESET_LOG Recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM Recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI Recovery action for SPI reset required
- * \retval TALACT_NO_ACTION Function completed successfully, no action required
- */
+ * @param device Pointer to the Talise device settings data structure. Must not
+ * be null.
+ * @param deframerSel Specifies the deframer to be enabled or disabled. Valid
+ * values are TAL_DEFRAMER_A or TAL_DEFRAMER_B.
+ * @param enable A uint8_t value where 0 disables the selected deframer and any
+ * non-zero value enables the selected deframer link.
+ * @return Returns a uint32_t value indicating the recovery action.
+ * TALACT_NO_ACTION indicates success, while other values suggest
+ * specific recovery actions.
+ ******************************************************************************/
 uint32_t TALISE_enableDeframerLink(taliseDevice_t *device,
 				   taliseDeframerSel_t deframerSel, uint8_t enable);
 
-/**
- * \brief Enables or disables the external SYSREF JESD204b signal to the transceiver's framers
+/***************************************************************************//**
+ * @brief Use this function to control the gating of the external SYSREF signal
+ * to the specified JESD204B framer(s) on the transceiver. This is
+ * typically used to ensure that the SYSREF signal is only active when
+ * the framer is correctly configured and ready to receive it. The
+ * function should be called after the device has been initialized and
+ * the JESD204B framer is enabled. It is important to select the correct
+ * framer(s) and ensure that the enable parameter is set appropriately to
+ * either allow or block the SYSREF signal.
  *
- * For the framer to retime its LMFC (local multi frame clock), a SYSREF rising edge is required.
- * The external SYSREF signal at the pin can be gated off internally so the framer does not see
- * a potential invalid SYSREF pulse before it is configured correctly.
- *
- * By default Talise has the SYSREF signal ungated, however, the Talise Multichip Sync state machine
- * still does not allow the external SYSREF to reach the framer until the other stages of multichip
- * sync have completed.  As long as the external SYSREF is correctly configured before performing MCS,
- * this function may not be needed by the BBIC, since the MCS state machine gates the SYSREF to the
- * framer.
- *
- * \pre This function is called after the device has been initialized and the JESD204B framer is enabled
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \param device is a pointer to the device settings structure
- * \param framerSel Select framer to enable/disable SYSREF input for (Valid TAL_FRAMER_A, TAL_FRAMER_B or TAL_FRAMER_A_AND_B)
- * \param enable = '1' enables SYSREF to deframer, '0' disables SYSREF to deframer
- *
- * \retval TALACT_WARN_RESET_LOG Recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM Recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI Recovery action for SPI reset required
- * \retval TALACT_NO_ACTION Function completed successfully, no action required
- */
+ * @param device Pointer to the device settings structure. Must not be null.
+ * @param framerSel Specifies which framer(s) to enable or disable the SYSREF
+ * input for. Valid values are TAL_FRAMER_A, TAL_FRAMER_B, or
+ * TAL_FRAMER_A_AND_B.
+ * @param enable A non-zero value enables the SYSREF signal to the framer, while
+ * zero disables it.
+ * @return Returns a uint32_t value indicating the result of the operation,
+ * where TALACT_NO_ACTION indicates success, and other values indicate
+ * specific error conditions or required recovery actions.
+ ******************************************************************************/
 uint32_t TALISE_enableSysrefToFramer(taliseDevice_t *device,
 				     taliseFramerSel_t framerSel, uint8_t enable);
 
-/**
- * \brief Enables or disables the external SYSREF JESD204b signal to the transceiver's deframers
+/***************************************************************************//**
+ * @brief This function is used to control the gating of the external SYSREF
+ * signal to the specified JESD204B deframers on the transceiver. It
+ * should be called after the device has been initialized and the
+ * JESD204B deframer is enabled. The function allows the user to enable
+ * or disable the SYSREF signal for one or both deframers, ensuring that
+ * the SYSREF signal is only active when the deframer is correctly
+ * configured. This is important for maintaining synchronization and
+ * avoiding invalid SYSREF pulses.
  *
- * \pre This function is called after the device has been initialized and the JESD204B deframer is enabled
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \param device is a pointer to the device settings structure
- * \param deframerSel Select deframer to enable/disable SYSREF input for (Valid TAL_DEFRAMER_A, TAL_DEFRAMER_B or TAL_DEFRAMER_A_AND_B)
- * \param enable = '1' enables SYSREF to deframer, '0' disables SYSREF to deframer
- *
- * \retval TALACT_WARN_RESET_LOG Recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM Recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI Recovery action for SPI reset required
- * \retval TALACT_NO_ACTION Function completed successfully, no action required
- */
+ * @param device A pointer to the taliseDevice_t structure representing the
+ * device settings. Must not be null.
+ * @param deframerSel Specifies which deframer(s) to enable or disable the
+ * SYSREF input for. Valid values are TAL_DEFRAMER_A,
+ * TAL_DEFRAMER_B, or TAL_DEFRAMER_A_AND_B.
+ * @param enable A uint8_t value where '1' enables the SYSREF to the deframer
+ * and '0' disables it. Any non-zero value is treated as '1'.
+ * @return Returns a uint32_t value indicating the result of the operation,
+ * which can be a recovery action such as TALACT_NO_ACTION for success
+ * or an error code for failure.
+ ******************************************************************************/
 uint32_t TALISE_enableSysrefToDeframer(taliseDevice_t *device,
 				       taliseDeframerSel_t deframerSel, uint8_t enable);
 
-/**
- * \brief Reads the Talise framer status for the framer selected by the framerSel input parameter
+/***************************************************************************//**
+ * @brief Use this function to obtain the current status of a specified JESD204B
+ * framer in a Talise device. It is essential that the Rx JESD204B
+ * link(s) are configured and operational before calling this function.
+ * The function provides a status byte that includes various flags
+ * indicating the framer's current state, such as SYSREF reception and
+ * configuration validity. This function should be used to monitor the
+ * framer's operational status and diagnose potential issues.
  *
- * \pre The Rx JESD204B link(s) needs to be configured and running to use this function
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * framerStatus |  Description
- * -------------|-----------------------------------------------------------------------------
- *         [6]  | Flag indicating that configuration parameters are not supported when set(1). Valid only on C0 or higher silicon revisions. This field is set to 0 for lower revisions.
- *         [5]  | JESD204 Negative Edge Count for SYNC  0 = not greater than zero, 1 = greater than zero
- *         [4]  | Reserved (0)
- *         [3]  | SYNCB IN select (which SYNCB IN pin is used by the requested framer) 0 = SYNCBIN0, 1 = SYNCBIN1
- *         [2]  | Current SYNCBIN level (1= high, 0 = low)
- *         [1]  | SYSREF phase error ? a new SYSREF had different timing than the first that set the LMFC timing.
- *         [0]  | SYSREF received by framer
- *
- * \param device is a pointer to the device settings structure
- * \param framerSel Read back the framer status of the selected framer (A or B)
- * \param framerStatus is the RX framer status byte read
- *
- * \retval TALACT_WARN_RESET_LOG recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI recovery action for SPI reset required
- * \retval TALACT_NO_ACTION function completed successfully, no action required
- */
+ * @param device A pointer to the taliseDevice_t structure representing the
+ * device. Must not be null.
+ * @param framerSel Specifies which framer's status to read. Valid values are
+ * TAL_FRAMER_A or TAL_FRAMER_B.
+ * @param framerStatus A pointer to a uint8_t where the framer status byte will
+ * be stored. Must not be null.
+ * @return Returns a uint32_t value indicating the result of the operation.
+ * TALACT_NO_ACTION indicates success, while other values suggest
+ * specific recovery actions.
+ ******************************************************************************/
 uint32_t TALISE_readFramerStatus(taliseDevice_t *device,
 				 taliseFramerSel_t framerSel, uint8_t *framerStatus);
 
-/**
- * \brief Reads the status of the requested deframer
+/***************************************************************************//**
+ * @brief Use this function to obtain the current status of a specified JESD204B
+ * deframer. It is essential that the Tx JESD204B link(s) are configured
+ * and operational before calling this function. The function provides a
+ * status word that includes various flags indicating the state of the
+ * deframer, such as configuration validity, checksum validity, and
+ * synchronization errors. This function should be used to monitor the
+ * deframer's operational status and diagnose potential issues.
  *
- * \pre The Tx JESD204B link(s) needs to be configured and running to use this function
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- *   deframerStatus  |  Bit Name                |  Description
- *   ----------------|--------------------------|---------------------------------------------
- *              [8]  | Tx JESD Config Invalid   | Flag indicating that configuration parameters are not supported when set(1). Valid only on C0 or higher silicon revisions. This field is set to 0 for lower revisions.
- *              [7]  | Valid checksum           | 1 if the checksum calculated by the Talise matched the one sent in the ILAS data.
- *              [6]  | EOF Event                | This bit captures the internal status of the framer End of Frame event. Value =1 if framing error during ILAS
- *              [5]  | EOMF Event               | This bit captures the internal status of the framer End of Multi-Frame event. Value =1 if framing error during ILAS
- *              [4]  | FS Lost                  | This bit captures the internal status of the framer Frame Symbol event. Value =1 if framing error during ILAS or user data (invalid replacement characters)
- *              [3]  | LMFC out                 | Not useful to read across SPI
- *              [2]  | User Data Valid          | =1 when in user data (deframer link is up and sending valid DAC data)
- *              [1]  | SYSREF Received          | Deframer has received the external SYSREF signal
- *              [0]  | Sync Error               | A link synchronization error occurred
- *
- *
- * \param device is a pointer to the device settings structure
- * \param deframerSel Select the deframer to read back the status of
- * \param deframerStatus 8bit deframer status word return value
- *
- * \retval TALACT_WARN_RESET_LOG recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI recovery action for SPI reset required
- * \retval TALACT_NO_ACTION function completed successfully, no action required
- */
+ * @param device A pointer to the taliseDevice_t structure representing the
+ * device. Must not be null.
+ * @param deframerSel Specifies which deframer to read the status from. Must be
+ * a valid taliseDeframerSel_t value, such as TAL_DEFRAMER_A
+ * or TAL_DEFRAMER_B.
+ * @param deframerStatus A pointer to a uint16_t variable where the deframer
+ * status will be stored. Must not be null.
+ * @return Returns a uint32_t value indicating the recovery action status.
+ * Possible values include TALACT_NO_ACTION for successful completion,
+ * or other values indicating specific error conditions.
+ ******************************************************************************/
 uint32_t TALISE_readDeframerStatus(taliseDevice_t *device,
 				   taliseDeframerSel_t deframerSel, uint16_t *deframerStatus);
 
@@ -323,51 +270,55 @@ uint32_t TALISE_readDeframerStatus(taliseDevice_t *device,
  ****************************************************************************
  */
 
-/**
- * \brief Sets the DAC sample crossbar
+/***************************************************************************//**
+ * @brief This function is used to set up the DAC sample crossbar for a
+ * specified transmission channel, allowing the mapping of deframer
+ * outputs to specific DAC channel I or Q converter inputs. It should be
+ * called during the JESD204B initialization process. The function
+ * requires valid channel selection and DAC crossbar settings, and it
+ * returns a status code indicating the success or failure of the
+ * operation. Invalid channel selections or DAC crossbar settings will
+ * result in an error.
  *
- * \pre This function is called during JESD204B initialization
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \param device is a pointer to the device settings structure
- * \param channelSel is a taliseTxChannels_t enumerated data type for DAC crossbar channel selection, where only TX1 or TX2 are valid choices
- * \param dacXbar is taliseDacSampleXbar_t enumerated data type used to map any deframer output to a specific DAC channel I or Q converter input for Tx
- *
- * In the event that less than four (4) DACs are enabled for deframing, the least significant deframer outputs are used
- *
- * \retval TALACT_WARN_RESET_LOG Recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM Recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI Recovery action for SPI reset required
- * \retval TALACT_NO_ACTION Function completed successfully, no action required
- */
+ * @param device A pointer to the taliseDevice_t structure representing the
+ * device settings. Must not be null.
+ * @param channelSel An enumerated value of type taliseTxChannels_t specifying
+ * the transmission channel to configure. Only TAL_TX1 or
+ * TAL_TX2 are valid.
+ * @param dacXbar A taliseDacSampleXbar_t structure specifying the DAC crossbar
+ * settings for mapping deframer outputs to DAC inputs. Must
+ * contain valid settings for both dacChanI and dacChanQ.
+ * @return Returns a uint32_t value indicating the result of the operation,
+ * where TALACT_NO_ACTION indicates success and other values indicate
+ * specific errors or required recovery actions.
+ ******************************************************************************/
 uint32_t TALISE_setupDacSampleXbar(taliseDevice_t *device,
 				   taliseTxChannels_t channelSel, taliseDacSampleXbar_t dacXbar);
 
-/**
- * \brief Sets the ADC sample crossbar to map Rx1/Rx2/ORx1/ORx2 'I/Q' data to
- * the chosen JESD204B framer's converter
+/***************************************************************************//**
+ * @brief This function is used to set up the ADC sample crossbar, which maps
+ * Rx1/Rx2/ORx1/ORx2 'I/Q' data to the selected JESD204B framer's
+ * converter. It should be called during the JESD204B initialization
+ * process. The function requires a valid device structure and a framer
+ * selection, which must be either TAL_FRAMER_A or TAL_FRAMER_B. The
+ * adcXbar parameter specifies the crossbar settings for the eight
+ * converters. If an invalid framer selection is provided, the function
+ * will return an error. The function returns a status code indicating
+ * success or the type of error encountered, along with a recommended
+ * recovery action.
  *
- * \pre This function is called during JESD204B initialization
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \param device is a pointer to the device settings structure
- * \param framerSel selects framer A or framer B to set the ADC crossbar on
- * it's input where only TAL_FRAMER_A or TAL_FRAMER_B are valid choices
- * \param adcXbar is the ADC crossbar setting for the framer of choice
- *
- * The adcXbar is a structure of crossbar settings for the eight converters
- * The settings use the taliseAdcSampleXbarSelect_t enumerated type
- *
- * \retval Returns uint32_t value of the enumerated type talRecoveryActions_t
- * TALACT_NO_ACTION indicates the API completed successfully. Any other value indicates
- * an error with a recommended Recovery action.
- */
+ * @param device A pointer to the taliseDevice_t structure representing the
+ * device settings. Must not be null.
+ * @param framerSel An enumerated value of type taliseFramerSel_t indicating
+ * which framer to configure. Valid values are TAL_FRAMER_A or
+ * TAL_FRAMER_B. Invalid values result in an error.
+ * @param adcXbar A taliseAdcSampleXbar_t structure containing the crossbar
+ * settings for the eight converters. Each setting must be valid
+ * as per taliseAdcSampleXbarSelect_t enumeration.
+ * @return Returns a uint32_t value representing the status of the operation.
+ * TALACT_NO_ACTION indicates success, while other values indicate an
+ * error with a recommended recovery action.
+ ******************************************************************************/
 uint32_t TALISE_setupAdcSampleXbar(taliseDevice_t *device,
 				   taliseFramerSel_t framerSel, taliseAdcSampleXbar_t adcXbar);
 /****************************************************************************
@@ -375,444 +326,313 @@ uint32_t TALISE_setupAdcSampleXbar(taliseDevice_t *device,
  ****************************************************************************
  */
 
-/**
- * \brief Selects the PRBS type and enables or disables RX Framer PRBS generation
+/***************************************************************************//**
+ * @brief This function is used to enable the generation of test data on the
+ * specified JESD204B framer for debugging purposes. It allows the user
+ * to select the framer, the type of test data, and the point in the data
+ * path where the test data should be injected. This function is
+ * typically used for testing and debugging the JESD204B lanes and should
+ * be called after the device has been initialized. The function checks
+ * for valid input parameters and returns an error if any parameter is
+ * invalid.
  *
- * This is a debug function to be used for debug of the Rx JESD204B lanes.
- * Rx data transmission on the JESD204B link(s) is not possible
- * when the framer test data is activated.  To disable PRBS call this function
- * again with the framer data source set to FTD_ADC_DATA.
- *
- * \pre This function may be called any time after device initialization
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \param device is a pointer to the device settings structure
- * \param framerSelect select the framer of interest, FRAMER_A, FRAMER_B, or FRAMER_A_AND_B
- * \param testDataSource selects the desired test data pattern (normal data path = FTD_ADC_DATA)
- * \param injectPoint Point in data path to inject the test data.
- *                    PRBS data should be injected into serializer for physical
- *                    layer testing.
- *
- * \retval TALACT_WARN_RESET_LOG recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI recovery action for SPI reset required
- * \retval TALACT_NO_ACTION function completed successfully, no action required
- */
+ * @param device Pointer to the device settings structure. Must not be null.
+ * @param framerSelect Specifies the framer(s) to enable test data on. Valid
+ * values are TAL_FRAMER_A, TAL_FRAMER_B, or
+ * TAL_FRAMER_A_AND_B.
+ * @param testDataSource Specifies the source of the test data. Must be a valid
+ * taliseFramerDataSource_t value, with a maximum value of
+ * TAL_FTD_RAMP.
+ * @param injectPoint Specifies the point in the data path to inject the test
+ * data. Must be a valid taliseFramerInjectPoint_t value,
+ * with a maximum value of TAL_FTD_POST_LANEMAP.
+ * @return Returns a uint32_t value indicating the success or failure of the
+ * operation. TALACT_NO_ACTION indicates success, while other values
+ * indicate specific errors or required recovery actions.
+ ******************************************************************************/
 uint32_t TALISE_enableFramerTestData(taliseDevice_t *device,
 				     taliseFramerSel_t framerSelect, taliseFramerDataSource_t testDataSource,
 				     taliseFramerInjectPoint_t injectPoint);
 
-/**
- * \brief Injects an error into the Framer test data by inverting the data
+/***************************************************************************//**
+ * @brief This function is used for debugging the Rx JESD204B lanes by injecting
+ * an error into the framer test data. It should be called after the
+ * framer test data is enabled. The function inverts the test data for
+ * the selected framer, which can be either TAL_FRAMER_A or TAL_FRAMER_B.
+ * The function does not support TAL_FRAMER_A_AND_B. It is important to
+ * ensure that the framer test data is activated before calling this
+ * function, as Rx data transmission on the JESD204B link(s) is not
+ * possible when the framer test data is activated.
  *
- * This is a debug function to be used for debug of the the Rx JESD204B lanes.
- * Rx data transmission on the JESD204B link(s) is not possible
- * when the framer test data is activated.
- *
- * \pre This function is called after the framer test data is enabled.
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \param device is a pointer to the device settings structure
- * \param framerSelect Select the desired framer (TAL_FRAMER_A or TAL_FRAMER_B), TAL_FRAMER_A_AND_B not supported
- *
- * \retval TALACT_WARN_RESET_LOG recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI recovery action for SPI reset required
- * \retval TALACT_NO_ACTION function completed successfully, no action required
- */
+ * @param device A pointer to the device settings structure. Must not be null.
+ * @param framerSelect Selects the desired framer to inject the error into.
+ * Valid values are TAL_FRAMER_A or TAL_FRAMER_B.
+ * TAL_FRAMER_A_AND_B is not supported. If an invalid value
+ * is provided, the function will handle it as an error.
+ * @return Returns a uint32_t value indicating the recovery action.
+ * TALACT_NO_ACTION indicates success, while other values suggest
+ * specific recovery actions.
+ ******************************************************************************/
 uint32_t TALISE_injectFramerTestDataError(taliseDevice_t *device,
 		taliseFramerSel_t framerSelect);
 
-/**
- * \brief Configures and enables or disables the transceiver's lane/sample PRBS
- *        checker.
+/***************************************************************************//**
+ * @brief This function is used to configure and enable the Pseudo-Random Binary
+ * Sequence (PRBS) checker for the JESD204B deframer, which is useful for
+ * debugging the Tx JESD204B lanes. It can be called any time after the
+ * device has been initialized. The function requires valid parameters
+ * for the polynomial order and checker location, and it will return an
+ * error if these parameters are outside their valid ranges. The function
+ * also clears the deframer PRBS counters before enabling the checker.
  *
- * This is a debug function to be used for debug of the Tx JESD204B lanes.
- * The Tx link(s) need to be configured and on to use this function. If the
- * checkerLocation is TAL_PRBSCHECK_LANEDATA, the PRBS is checked at the
- * output of the deserializer. If the checkLocation is TAL_PRBSCHECK_SAMPLEDATA
- * the PRBS data is expected to be framed JESD204b data and the PRBS is checked
- * after the JESD204b data is deframed.  For the sample data, there is only
- * a PRBS checker on deframer output 0.  The lane PRBS has a checker on each
- * deserializer lane.
- *
- * \pre This function may be called any time after device initialization
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \param device is a pointer to the device settings structure
- * \param polyOrder selects the PRBS type based on enum values (TAL_PRBS_DISABLE, TAL_PRBS7, TAL_PRBS15, TAL_PRBS31)
- * \param checkerLocation Check at deserializer (framer0 input) or sample (framer 0 output).
- *
- * \retval TALACT_WARN_RESET_LOG recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI recovery action for SPI reset required
- * \retval TALACT_NO_ACTION function completed successfully, no action required
- */
+ * @param device Pointer to the device settings structure. Must not be null.
+ * @param polyOrder Specifies the PRBS polynomial order. Valid values are
+ * TAL_PRBS_DISABLE, TAL_PRBS7, TAL_PRBS15, and TAL_PRBS31.
+ * Invalid values will result in an error.
+ * @param checkerLocation Specifies the location to check the PRBS. Valid values
+ * are TAL_PRBSCHECK_LANEDATA and
+ * TAL_PRBSCHECK_SAMPLEDATA. Invalid values will result
+ * in an error.
+ * @return Returns a uint32_t value indicating the recovery action.
+ * TALACT_NO_ACTION indicates success, while other values indicate
+ * specific errors or required recovery actions.
+ ******************************************************************************/
 uint32_t TALISE_enableDeframerPrbsChecker(taliseDevice_t *device,
 		taliseDeframerPrbsOrder_t polyOrder, taliseDefPrbsCheckLoc_t checkerLocation);
 
-/**
- * \brief Clears the deserializer lane and deframer sample PRBS error counters
+/***************************************************************************//**
+ * @brief Use this function to reset the PRBS error counters associated with the
+ * deframer in a Talise device. This is typically done to clear any
+ * accumulated error counts before starting a new test or measurement. It
+ * is important to ensure that the Tx JESD204B link(s) are configured and
+ * running before calling this function. The function returns a status
+ * code indicating the success of the operation or any required recovery
+ * actions.
  *
- * \pre The Tx JESD204B link(s) needs to be configured and running to use this function
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \param device is a pointer to the device settings structure
-  *
- * \retval TALACT_WARN_RESET_LOG recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI recovery action for SPI reset required
- * \retval TALACT_NO_ACTION function completed successfully, no action required
- */
+ * @param device A pointer to the taliseDevice_t structure representing the
+ * device settings. This parameter must not be null, and the
+ * caller retains ownership.
+ * @return Returns a uint32_t value representing the recovery action status.
+ * TALACT_NO_ACTION indicates success, while other values suggest
+ * specific recovery actions.
+ ******************************************************************************/
 uint32_t TALISE_clearDeframerPrbsCounters(taliseDevice_t *device);
 
-/**
- * \brief Reads the deserializer lane or deframer sample PRBS counters
+/***************************************************************************//**
+ * @brief Use this function to retrieve the PRBS error count and inversion
+ * status for a specific lane of the JESD204B deframer. It is essential
+ * to ensure that the Tx JESD204B link is configured and running before
+ * calling this function. The function requires valid pointers for the
+ * error count and inversion status outputs, and it will return an error
+ * if these pointers are null. The lane parameter must be within the
+ * valid range of 0 to 3, and the function will handle invalid lane
+ * values by returning an error.
  *
- * In the case that the PRBS checker is set to check at the deframer output
- * sample, there is only a checker on the Deframer Sample 0 output.  In this
- * case the lane function parameter is ignored and the sample 0 PRBS counter
- * is returned.
- *
- * \pre The Tx JESD204B link(s) needs to be configured and running to use this function
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \param device Pointer to the device settings structure
- * \param lane Specify which lane to read the counter back for. (Valid 0-3)
- * \param prbsErrorCount Pointer to single uint8_t variable that returns the
- *        8-bit PRBS error count
- *
- * \param prbsInvertedStatus Pointer to single uint8_t variable that returns
- *        the bitmask indicating PRBS sequence is valid but inverted.
- *
- *    prbsInvertedStatus |  Description
- *    -------------------|---------------------------------------------
- *                  [3]  | Lane3 PRBS sequence is valid but inverted
- *                  [2]  | Lane2 PRBS sequence is valid but inverted
- *                  [1]  | Lane1 PRBS sequence is valid but inverted
- *                  [0]  | Lane0 PRBS sequence is valid but inverted
- *
- *
- * \retval TALACT_WARN_RESET_LOG recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI recovery action for SPI reset required
- * \retval TALACT_NO_ACTION function completed successfully, no action required
- */
+ * @param device Pointer to the taliseDevice_t structure representing the device
+ * settings. Must not be null.
+ * @param lane Specifies the lane for which to read the PRBS counters. Valid
+ * values are 0 to 3. An invalid value will result in an error.
+ * @param prbsErrorCount Pointer to a uint8_t variable where the function will
+ * store the 8-bit PRBS error count. Must not be null.
+ * @param prbsInvertedStatus Pointer to a uint8_t variable where the function
+ * will store the PRBS inversion status bitmask. Must
+ * not be null.
+ * @return Returns a uint32_t value indicating the status of the operation, with
+ * specific values representing different recovery actions or errors.
+ ******************************************************************************/
 uint32_t TALISE_readDeframerPrbsCounters(taliseDevice_t *device, uint8_t lane,
 		uint8_t *prbsErrorCount, uint8_t *prbsInvertedStatus);
 
-/**
- * \brief Compares received Lane0 ILAS configuration to Talise deframer
- *        configuration and returns 32-bit mask indicating values that
- *        mismatched.  Actual lane0 ILAS configuration and deframer
- *        configuration values can be obtained by passing a pointer to a
- *        structure of type taliseJesd204bLane0Config_t to the dfrmCfg and
- *        dfrmIlas function parameters individually or together.  Passing NULL
- *        to either of these parameters will result in no values returned for
- *        that parameter.
+/***************************************************************************//**
+ * @brief This function is used to compare the received Lane0 ILAS configuration
+ * with the current deframer configuration and returns a 32-bit mask
+ * indicating any mismatched values. It is essential to call this
+ * function when the Rx JESD204B link(s) are configured and running. The
+ * function can also return the actual ILAS and deframer configuration
+ * values if pointers to the respective structures are provided. If these
+ * pointers are null, the function will not return configuration data for
+ * those parameters.
  *
- * \pre The Rx JESD204B link(s) needs to be configured and running to use
- *      this function
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * mismatch Mask|  Description
- * -------------|------------------------------------------
- *         [17] | Lane3 Checksum, 0 = match, 1 = mismatch
- *         [16] | Lane2 Checksum, 0 = match, 1 = mismatch
- *         [15] | Lane1 Checksum, 0 = match, 1 = mismatch
- *         [14] | Lane0 Checksum, 0 = match, 1 = mismatch
- *         [13] | HD, 0 = match, 1 = mismatch
- *         [12] | CF, 0 = match, 1 = mismatch
- *         [11] | S, 0 = match, 1 = mismatch
- *         [10] | NP, 0 = match, 1 = mismatch
- *         [9]  | CS, 0 = match, 1 = mismatch
- *         [8]  | N, 0 = match, 1 = mismatch
- *         [7]  | M, 0 = match, 1 = mismatch
- *         [6]  | K, 0 = match, 1 = mismatch
- *         [5]  | F, 0 = match, 1 = mismatch
- *         [4]  | SCR, 0 = match, 1 = mismatch
- *         [3]  | L, 0 = match, 1 = mismatch
- *         [2]  | LID0, 0 = match, 1 = mismatch
- *         [1]  | BID, 0 = match, 1 = mismatch
- *         [0]  | DID, 0 = match, 1 = mismatch
- *
- * \param device Pointer to the device settings structure
- * \param deframerSelect Enum indicating which deframer to address.
- * \param mismatch Pointer to a single uint32_t variable for reporting the ILAS
- *                 match status. Always returned.
- *
- * \param dfrmCfg Pointer to a taliseJesd204bLane0Config_t structure that
- *                returns the deframer configuration settings.  If NULL, data
- *                is not returned to the pointer.
- *
- * \param dfrmIlas Pointer to a taliseJesd204bLane0Config_t structure that
- *                 returns the received Lane0 ILAS settings.  If NULL, no data
- *                 is returned to this pointer.
- *
- * \retval TALACT_WARN_RESET_LOG recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI recovery action for SPI reset required
- * \retval TALACT_NO_ACTION function completed successfully, no action required
- */
+ * @param device Pointer to the device settings structure. Must not be null.
+ * @param deframerSelect Enum indicating which deframer to address. Must be a
+ * valid deframer selection.
+ * @param mismatch Pointer to a uint32_t variable where the ILAS match status
+ * will be reported. Must not be null.
+ * @param dfrmCfg Pointer to a taliseJesd204bLane0Config_t structure to receive
+ * the deframer configuration settings. If null, no data is
+ * returned.
+ * @param dfrmIlas Pointer to a taliseJesd204bLane0Config_t structure to receive
+ * the received Lane0 ILAS settings. If null, no data is
+ * returned.
+ * @return Returns a uint32_t value indicating the recovery action.
+ * TALACT_NO_ACTION indicates success, while other values suggest
+ * specific recovery actions.
+ ******************************************************************************/
 uint32_t TALISE_getDfrmIlasMismatch(taliseDevice_t *device,
 				    taliseDeframerSel_t deframerSelect, uint32_t *mismatch,
 				    taliseJesd204bLane0Config_t *dfrmCfg, taliseJesd204bLane0Config_t *dfrmIlas);
 
-/**
- * \brief Reads the IRQ interrupt clear register of the specified deframer.
- * This function reads the contents of the deframer IRQ clear register.  Use this function whenever a general purpose (GP)
- * deframer IRQ asserts to find the maskable deframer IRQ sources.  Note: Deframer IRQ sources Elastic Buffer Error Flag,
- * Sysref Buffer Error, and the four Lane FIFO Async Error IRQ sources are always enabled and can not be masked in the
- * interrupt clear register.
+/***************************************************************************//**
+ * @brief Use this function to obtain the current interrupt mask settings for a
+ * specified deframer in the Talise device. This function is useful for
+ * understanding which interrupts are currently enabled for the deframer.
+ * It must be called after the JESD204B link has been initialized. Ensure
+ * that the `irqMask` pointer is not null before calling this function,
+ * as a null pointer will result in an error. The function will return a
+ * recovery action code indicating the success or failure of the
+ * operation.
  *
- * \pre This function may be called any time after JESD204B link initialization
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \param device is a pointer to the device settings structure
- * \param deframerSelect selects the deframer to interrogate.
- * \param irqMask is a pointer to the bit mask value containing the contents of the deframer IRQ Clear Register
- *
- *                 Bit   |  Description
- *          -------------|-----------------------------------------------------------------------------
- *                  [8]  | CMM - Reserved
- *                  [7]  | BD - Bad Disparity error counter  0 = No Interrupt, 1 = Interrupt Asserted
- *                  [6]  | Not-In-Table error counter  0 = No Interrupt, 1 = Interrupt Asserted
- *                  [5]  | Unexpected K error counter  0 = No Interrupt, 1 = Interrupt Asserted
- *                  [4]  | ILD - Inter-lane De-skew  0 = No Interrupt, 1 = Interrupt Asserted
- *                  [3]  | ILS - Initial lane synce  0 = No Interrupt, 1 = Interrupt Asserted
- *                  [2]  | GCS - Good Check Sum  0 = No Interrupt, 1 = Interrupt Asserted
- *                  [1]  | FS - Frame Sync 0 = No Interrupt, 1 = Interrupt Asserted
- *                  [0]  | CSG - Code Group Sync  0 = No Interrupt, 1 = Interrupt Asserted
- *
- *
- * \retval TALACT_WARN_RESET_LOG recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI recovery action for SPI reset required
- * \retval TALACT_NO_ACTION function completed successfully, no action required
- */
+ * @param device A pointer to the taliseDevice_t structure representing the
+ * device. The caller retains ownership and it must not be null.
+ * @param deframerSelect An enumerated value of type taliseDeframerSel_t
+ * indicating which deframer to query. Valid values are
+ * TAL_DEFRAMER_A and TAL_DEFRAMER_B.
+ * @param irqMask A pointer to a uint16_t variable where the IRQ mask will be
+ * stored. Must not be null.
+ * @return Returns a uint32_t value representing the recovery action code.
+ * TALACT_NO_ACTION indicates success, while other values indicate
+ * specific errors or required recovery actions.
+ ******************************************************************************/
 uint32_t TALISE_getDfrmIrqMask(taliseDevice_t *device,
 			       taliseDeframerSel_t deframerSelect, uint16_t *irqMask);
 
-/**
- * \brief Writes the IRQ interrupt clear register of the specified deframer.
- * This function writes the specified IRQ mask value to the deframer IRQ clear register.  Use this function whenever a general purpose (GP)
- * deframer IRQ asserts to clear the pending maskable deframer IRQ or to enable/disable deframer interrupt sources. Note: Deframer IRQ sources
- * Elastic Buffer Error Flag, Sysref Buffer Error, and the four Lane FIFO Async Error IRQ sources are always enabled and can not be masked in the
- * interrupt clear register.  This function does not read-modify-write the interrupt clear register. To manually clear the interrupt, write
- * a one (set) to disable or mask the bit of the interrupt followed by writing a zero (clear) to enable the bit of the interrupt.  However, if the interrupt condition
- * still exists after setting the mask bit, the corresponding IRQ vector bit will re-assert.
+/***************************************************************************//**
+ * @brief Use this function to configure the interrupt mask for a specific
+ * deframer in the JESD204B interface. It allows enabling or disabling
+ * specific interrupt sources by writing a mask value to the deframer's
+ * IRQ clear register. This function should be called after the JESD204B
+ * link has been initialized. Ensure that the deframerSelect parameter is
+ * valid, as invalid values will result in an error. The function returns
+ * a status code indicating the success or failure of the operation.
  *
- * \pre This function may be called any time after Jesd204B link initialization
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \param device is a pointer to the device settings structure
- * \param deframerSelect selects the deframer to interrogate.
- * \param irqMask is the bit mask value to be written to the deframer IRQ Clear Register (this is not a read-modify-write)
- *
- *                 Bit   |  Description
- *          -------------|-----------------------------------------------------------------------------
- *                  [8]  | CMM - Reserved
- *                  [7]  | BD - Bad Disparity error counter  1 = Disable/Clear Interrupt, 0 = Enable Interrupt to assert corresponding bit in IRQ Vector Register
- *                  [6]  | Not-In-Table error counter  1 = Disable/Clear Interrupt, 0 = Enable Interrupt to assert corresponding bit in IRQ Vector Register
- *                  [5]  | Unexpected K error counter  1 = Disable/Clear Interrupt, 0 = Enable Interrupt to assert corresponding bit in IRQ Vector Register
- *                  [4]  | ILD - Inter-lane De-skew  1 = Disable/Clear Interrupt, 0 = Enable Interrupt to assert corresponding bit in IRQ Vector Register
- *                  [3]  | ILS - Initial lane sync  1 = Disable/Clear Interrupt, 0 = Enable Interrupt to assert corresponding bit in IRQ Vector Register
- *                  [2]  | GCS - Good Check Sum  1 = Disable/Clear Interrupt, 0 = Enable Interrupt to assert corresponding bit in IRQ Vector Register
- *                  [1]  | FS - Frame Sync 1 = Disable/Clear Interrupt, 0 = Enable Interrupt to assert corresponding bit in IRQ Vector Register
- *                  [0]  | CSG - Code Group Sync  1 = Disable/Clear Interrupt, 0 = Enable Interrupt to assert corresponding bit in IRQ Vector Register
- *
- *
- * \retval TALACT_WARN_RESET_LOG recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI recovery action for SPI reset required
- * \retval TALACT_NO_ACTION function completed successfully, no action required
- */
+ * @param device Pointer to the taliseDevice_t structure representing the
+ * device. Must not be null.
+ * @param deframerSelect Specifies which deframer to configure. Must be either
+ * TAL_DEFRAMER_A or TAL_DEFRAMER_B. Invalid values will
+ * trigger an error.
+ * @param irqMask 16-bit mask value to be written to the deframer IRQ clear
+ * register. This is not a read-modify-write operation.
+ * @return Returns a uint32_t status code indicating the result of the
+ * operation. TALACT_NO_ACTION indicates success, while other values
+ * indicate specific errors or required recovery actions.
+ ******************************************************************************/
 uint32_t TALISE_setDfrmIrqMask(taliseDevice_t *device,
 			       taliseDeframerSel_t deframerSelect, uint16_t irqMask);
 
-/**
- * \brief Write the IRQ interrupt clear register for the specified deframer.
- * This function clears all deframer IRQ sources.  Use this function whenever a general purpose (GP)
- * deframer IRQ asserts to clear the pending deframer IRQ.
+/***************************************************************************//**
+ * @brief Use this function to clear all interrupt requests for a specified
+ * JESD204B deframer after a general purpose deframer IRQ asserts. It is
+ * essential to call this function after initializing the JESD204B link
+ * to ensure that any pending interrupts are cleared. The function
+ * requires a valid deframer selection and will return an error if the
+ * selection is invalid. It is important to handle the return value to
+ * determine if any recovery actions are needed.
  *
- * \pre This function may be called any time after JESD204 link initialization
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \param device is a pointer to the device settings structure
- * \param deframerSelect selects the deframer to interrogate.
- *
- * \retval TALACT_WARN_RESET_LOG recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI recovery action for SPI reset required
- * \retval TALACT_NO_ACTION function completed successfully, no action required
- */
+ * @param device A pointer to the taliseDevice_t structure representing the
+ * device settings. Must not be null, and the caller retains
+ * ownership.
+ * @param deframerSelect An enumerated value of type taliseDeframerSel_t
+ * indicating which deframer to clear interrupts for.
+ * Valid values are TAL_DEFRAMER_A and TAL_DEFRAMER_B. If
+ * an invalid value is provided, the function returns an
+ * error.
+ * @return Returns a uint32_t value indicating the result of the operation.
+ * TALACT_NO_ACTION indicates success, while other values suggest
+ * specific recovery actions are needed.
+ ******************************************************************************/
 uint32_t TALISE_clearDfrmIrq(taliseDevice_t *device,
 			     taliseDeframerSel_t deframerSelect);
 
-/**
- * \brief Read the IRQ interrupt source registers for the specified deframer.
- * This function fetches the contents of the deframer IRQ Vector register and other IRQ sources.  Use this function whenever
- * a general purpose (GP) deframer IRQ asserts to determine the source of the deframer IRQ.  Common IRQ sources are Bad Disparity (BD),
- * Not-In_Table (NIT), and Unexpected K-char (UEK) counters greater than the specified error threshold count value.
+/***************************************************************************//**
+ * @brief Use this function to determine the source of an interrupt for a
+ * specified deframer after a general purpose deframer IRQ asserts. It
+ * should be called any time after the JESD204 link initialization. The
+ * function requires valid pointers for the device and irqSourceValue
+ * parameters, and a valid deframerSelect value. If the irqSourceValue
+ * pointer is null or deframerSelect is invalid, the function will handle
+ * these as errors.
  *
- * \pre This function may be called any time after JESD204 link initialization
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \param device is a pointer to the device settings structure
- * \param deframerSelect selects the deframer to interrogate.
- * \param irqSourceValue is a pointer to a bit mask containing the status of the IRQ Vector source register at read time.
- *
- *                 Bit   |  Description
- *          -------------|-----------------------------------------------------------------------------
- *                  [14] | Lane3 Fifo Async Error - Set when lane pointers have come out of alignment during write or clear
- *                  [13] | Lane2 Fifo Async Error - Set when lane pointers have come out of alignment during write or clear
- *                  [12] | Lane1 Fifo Async Error - Set when lane pointers have come out of alignment during write or clear
- *                  [11] | Lane0 Fifo Async Error - Set when lane pointers have come out of alignment during write or clear
- *                  [10] | Sysref Phase Error - Set when sysref is misaligned to global LMFC
- *                  [9]  | Elastic Buffer Error Flag - Set when pointer come out of alignment during write or clear
- *                  [8]  | CMM - Configuration mismatch for lane0  0 = No Interrupt, 1 = Interrupt Asserted
- *                  [7]  | BD - Bad Disparity error counter  0 = No Interrupt, 1 = Interrupt Asserted
- *                  [6]  | Not-In-Table error counter  0 = No Interrupt, 1 = Interrupt Asserted
- *                  [5]  | Unexpected K error counter  0 = No Interrupt, 1 = Interrupt Asserted
- *                  [4]  | ILD - Inter-lane De-skew  0 = No Interrupt, 1 = Interrupt Asserted
- *                  [3]  | ILS - Initial lane synce  0 = No Interrupt, 1 = Interrupt Asserted
- *                  [2]  | GCS - Good Check Sum  0 = No Interrupt, 1 = Interrupt Asserted
- *                  [1]  | FS - Frame Sync 0 = No Interrupt, 1 = Interrupt Asserted
- *                  [0]  | CSG - Code Group Sync  0 = No Interrupt, 1 = Interrupt Asserted
- *
- *
- * \retval TALACT_WARN_RESET_LOG recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI recovery action for SPI reset required
- * \retval TALACT_NO_ACTION function completed successfully, no action required
- */
+ * @param device A pointer to the taliseDevice_t structure representing the
+ * device settings. Must not be null.
+ * @param deframerSelect An enumerated value of type taliseDeframerSel_t
+ * indicating which deframer to interrogate. Valid values
+ * are TAL_DEFRAMER_A and TAL_DEFRAMER_B.
+ * @param irqSourceValue A pointer to a uint16_t variable where the IRQ source
+ * status will be stored. Must not be null.
+ * @return Returns a uint32_t value indicating the status of the operation, with
+ * specific values representing different recovery actions or success.
+ ******************************************************************************/
 uint32_t TALISE_getDfrmIrqSource(taliseDevice_t *device,
 				 taliseDeframerSel_t deframerSelect, uint16_t *irqSourceValue);
 
-/**
- * \brief Private function for scanning deframer error counters to report which lane number is reporting an counter overflow.
+/***************************************************************************//**
+ * @brief This function checks for lane count errors in the specified deframer
+ * and updates the provided error mask to indicate which deframer inputs
+ * are reporting errors. It should be called when a deframer is suspected
+ * of having lane count errors. The function requires a valid device
+ * pointer and a deframer selection. It will return an error if the
+ * deframer selection is invalid or if the error mask pointer is null.
+ * The function also clears the error counters after checking.
  *
- * \pre This function may be called any time a deframer is reporting an error counter terminal count reached interrupt.
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \param device is a pointer to the device settings structure
- * \param deframer selects the deframer to interrogate.
- * \param deframerInputsMask is a pointer to the deframer inputs bitmask
- *        indicating the input that is reporting an error. Note that these are
- *        not phyiscal lanes, but are inputs to the deframer after the lane
- *        cross bar.
- *
- *     bit  |  Lane
- *     -----|----------------
- *       0  |  deframer Input 0
- *       1  |  deframer Input 1
- *       2  |  deframer Input 2
- *       3  |  deframer Input 3
- *
- * \retval TALACT_WARN_RESET_LOG recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI recovery action for SPI reset required
- * \retval TALACT_NO_ACTION function completed successfully, no action required
- */
+ * @param device A pointer to the taliseDevice_t structure representing the
+ * device. Must not be null.
+ * @param deframer An enumerated value of type taliseDeframerSel_t indicating
+ * which deframer to check. Must be TAL_DEFRAMER_A or
+ * TAL_DEFRAMER_B.
+ * @param deframerInputsMask A pointer to an int32_t where the function will
+ * store the error mask indicating which deframer
+ * inputs have errors. Must not be null.
+ * @return Returns a talRecoveryActions_t value indicating the recovery action
+ * required. Updates the deframerInputsMask with the error status.
+ ******************************************************************************/
 talRecoveryActions_t talFindDfrmrLaneCntErr(taliseDevice_t *device,
 		taliseDeframerSel_t deframer, int32_t *deframerInputsMask);
 
-/**
- * \brief Private function for scanning deframer error flags to report which lane number is reporting an error.
+/***************************************************************************//**
+ * @brief This function is used to determine which deframer lanes are reporting
+ * errors by reading error flags from a specified deframer register
+ * address. It is typically called when a deframer is reporting an error
+ * interrupt. The function requires a valid pointer to store the deframer
+ * inputs mask, which indicates the lanes with errors. If the pointer is
+ * null, the function returns an error. The function reads the error
+ * flags and updates the mask based on the specified nibble, either upper
+ * or lower, to identify the lanes with errors.
  *
- * \pre This function may be called any time a deframer is reporting an error interrupt.
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \param device is a pointer to the device settings structure
- * \param dfrmErrAddress deframer register address to interrogate.
- * \param nibbleToUse specify nibble to use
- * \param deframerInputsMask is a pointer to the deframer inputs bitmask
- *        indicating the input that is reporting an error. Note that these are
- *        not phyiscal lanes, but are inputs to the deframer after the lane
- *        cross bar.
- *
- *     bit  |  Lane
- *     -----|------------------
- *       0  |  deframer Input 0
- *       1  |  deframer Input 1
- *       2  |  deframer Input 2
- *       3  |  deframer Input 3
- *
- * \retval TALACT_WARN_RESET_LOG recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI recovery action for SPI reset required
- * \retval TALACT_NO_ACTION function completed successfully, no action required
- */
+ * @param device A pointer to the taliseDevice_t structure representing the
+ * device settings. Must not be null.
+ * @param dfrmErrAddress The address of the deframer register to read error
+ * flags from. Must be a valid register address.
+ * @param nibbleToUse Specifies which nibble of the error flags to use (0 for
+ * lower nibble, 1 for upper nibble). Values outside this
+ * range are treated as 1.
+ * @param deframerInputsMask A pointer to an int32_t where the function will
+ * store the bitmask indicating which deframer inputs
+ * are reporting errors. Must not be null.
+ * @return Returns a talRecoveryActions_t value indicating the recovery action
+ * required, if any. Updates the deframerInputsMask with the error
+ * status of the lanes.
+ ******************************************************************************/
 talRecoveryActions_t talFindDfrmrLaneErr(taliseDevice_t *device,
 		uint32_t dfrmErrAddress, uint8_t nibbleToUse, int32_t *deframerInputsMask);
 
-/**
- * \brief Manually toggles JESD204B framer SYNCB signal internal to framer
+/***************************************************************************//**
+ * @brief This function is used to manually toggle the SYNCB signal internal to
+ * the JESD204B framer, which is typically not necessary unless
+ * instructed by an ADI applications engineer. It is intended for use in
+ * systems that do not conform to the JESD204B specification, allowing
+ * the framer to transition states without external SYNCB control. This
+ * function should be called during device initialization after enabling
+ * the framer link and sending a SYSREF pulse.
  *
- *  NOTE: DO NOT USE THIS FUNCTION UNLESS INSTRUCTED TO BY AN ADI APPLICATIONS
- *  ENGINEER.
- *
- *  This function is normally not needed and should only be used when required
- *  by the system hardware due to non-conformance to the JESD204B specification.
- *
- *  Normally, during initialization, the framer moves from the CGS state to ILAS
- *  state when the BBIC sends a rising edge on the SYNCB pin.  In systems that
- *  do not control the SYNCB per the JESD204B spec, this function allows a method
- *  to toggle SYNCB internal to the Talise device framer, allowing valid high
- *  speed serial data to start outputting from the Talise device.
- *
- *  This function would be used during device initialization when the JESD204B
- *  links are being initialized, after enabling the Talise framer link, and
- *  after sending a SYSREF pulse.
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \param device Pointer to the device settings structure
- * \param framerSel Enum to select framer to apply SYNCB reset to
- *
- * \retval TALACT_WARN_RESET_LOG recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI recovery action for SPI reset required
- * \retval TALACT_NO_ACTION function completed successfully, no action required
- */
+ * @param device Pointer to the device settings structure. Must not be null.
+ * @param framerSel Enum value selecting the framer to apply the SYNCB toggle
+ * to. Valid values are TAL_FRAMER_A, TAL_FRAMER_B, or
+ * TAL_FRAMER_A_AND_B. Invalid values result in a parameter
+ * error.
+ * @return Returns a uint32_t value indicating the recovery action.
+ * TALACT_NO_ACTION indicates success, while other values suggest
+ * specific recovery actions.
+ ******************************************************************************/
 uint32_t TALISE_framerSyncbToggle(taliseDevice_t *device,
 				  taliseFramerSel_t framerSel);
 

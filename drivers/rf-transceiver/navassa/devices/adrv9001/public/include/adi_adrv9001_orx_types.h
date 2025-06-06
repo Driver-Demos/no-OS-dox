@@ -47,9 +47,20 @@ extern "C" {
 *********************************************************************************************************
 */
 
-/**
- * \brief Enumeration for ORX BBDC rejection algorithm enable status
- */
+/***************************************************************************//**
+ * @brief The `adi_adrv9001_OrxBbdcRejectionStatus_e` is an enumeration that
+ * defines the status of the ORX baseband DC rejection algorithm in the
+ * ADRV9001 API. It provides three possible states: disabled, enabled,
+ * and paused, allowing for control over the algorithm's operation in the
+ * ORX datapath.
+ *
+ * @param ADI_ADRV9001_ORX_BBDC_REJECTION_DISABLED ORX baseband DC rejection
+ * algorithm disabled.
+ * @param ADI_ADRV9001_ORX_BBDC_REJECTION_ENABLED ORX baseband DC rejection
+ * algorithm enabled.
+ * @param ADI_ADRV9001_ORX_BBDC_REJECTION_PAUSED ORX baseband DC rejection
+ * algorithm paused (but enabled).
+ ******************************************************************************/
 typedef enum adi_adrv9001_OrxBbdcRejectionStatus
 {
     ADI_ADRV9001_ORX_BBDC_REJECTION_DISABLED = 0,  /*!< ORX baseband DC rejection algorithm disabled */

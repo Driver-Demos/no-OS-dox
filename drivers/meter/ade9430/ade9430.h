@@ -849,30 +849,58 @@
 /*************************** Types Declarations *******************************/
 /******************************************************************************/
 
-/**
- * @enum ade9430_phase
- * @brief ADE9430 available phases.
- */
+/***************************************************************************//**
+ * @brief The `ade9430_phase` enumeration defines the available phases (A, B,
+ * and C) for the ADE9430 device, which is used in power measurement and
+ * monitoring applications. Each enumerator corresponds to a specific
+ * phase that the device can measure, allowing for phase-specific
+ * operations and data retrieval.
+ *
+ * @param ADE9430_PHASE_A Represents phase A in the ADE9430 device.
+ * @param ADE9430_PHASE_B Represents phase B in the ADE9430 device.
+ * @param ADE9430_PHASE_C Represents phase C in the ADE9430 device.
+ ******************************************************************************/
 enum ade9430_phase {
 	ADE9430_PHASE_A,
 	ADE9430_PHASE_B,
 	ADE9430_PHASE_C
 };
 
-/**
- * @enum ade9430_egy_model
- * @brief ADE9430 available user energy use models.
- */
+/***************************************************************************//**
+ * @brief The `ade9430_egy_model` enumeration defines the available energy use
+ * models for the ADE9430 device. Each enumerator represents a different
+ * method of calculating or managing energy data, allowing users to
+ * select the appropriate model for their application needs. This
+ * enumeration is part of the ADE9430 driver, which is used to interface
+ * with the ADE9430 energy metering IC.
+ *
+ * @param ADE9430_EGY_WITH_RESET Represents an energy model with reset
+ * functionality.
+ * @param ADE9430_EGY_HALF_LINE_CYCLES Represents an energy model based on half
+ * line cycles.
+ * @param ADE9430_EGY_NR_SAMPLES Represents an energy model based on a number of
+ * samples.
+ ******************************************************************************/
 enum ade9430_egy_model {
 	ADE9430_EGY_WITH_RESET,
 	ADE9430_EGY_HALF_LINE_CYCLES,
 	ADE9430_EGY_NR_SAMPLES
 };
 
-/**
- * @struct ade9430_init_param
- * @brief ADE9430 Device initialization parameters.
- */
+/***************************************************************************//**
+ * @brief The `ade9430_init_param` structure is used to define the
+ * initialization parameters for the ADE9430 device. It includes a
+ * pointer to the SPI initialization parameters, which are necessary for
+ * setting up the communication interface with the device, and a boolean
+ * flag to enable or disable the temperature measurement feature. This
+ * structure is essential for configuring the device before it is used in
+ * an application.
+ *
+ * @param spi_init A pointer to a structure that holds the SPI initialization
+ * parameters for device communication.
+ * @param temp_en A boolean flag indicating whether the temperature feature is
+ * enabled.
+ ******************************************************************************/
 struct ade9430_init_param {
 	/** Device communication descriptor */
 	struct no_os_spi_init_param 	*spi_init;
@@ -880,10 +908,21 @@ struct ade9430_init_param {
 	bool				temp_en;
 };
 
-/**
- * @struct ade9430_dev
- * @brief ADE9430 Device structure.
- */
+/***************************************************************************//**
+ * @brief The `ade9430_dev` structure is designed to represent a device instance
+ * for the ADE9430 energy metering IC. It includes a communication
+ * descriptor for SPI interactions and variables to store key measurement
+ * values such as wattage, current RMS, voltage RMS, and temperature.
+ * This structure is essential for managing and accessing the device's
+ * data and configuration in a structured manner.
+ *
+ * @param spi_desc Pointer to a device communication descriptor for SPI.
+ * @param watt_val Stores the WATT value as a 32-bit unsigned integer.
+ * @param irms_val Stores the IRMS value as a 32-bit unsigned integer.
+ * @param vrms_val Stores the VRMS value as a 32-bit unsigned integer.
+ * @param temp_deg Stores the temperature value in degrees as a 32-bit signed
+ * integer.
+ ******************************************************************************/
 struct ade9430_dev {
 	/** Device communication descriptor */
 	struct no_os_spi_desc		*spi_desc;
@@ -902,32 +941,185 @@ struct ade9430_dev {
 /******************************************************************************/
 
 /* Read device register. */
+/***************************************************************************//**
+ * @brief Use this function to read a 16-bit or 32-bit register value from the
+ * ADE9430 device. It is essential to ensure that the device has been
+ * properly initialized before calling this function. The function reads
+ * the specified register address and stores the result in the provided
+ * output parameter. It handles both 16-bit and 32-bit register reads
+ * based on the register address range. This function returns an error
+ * code if the read operation fails, so it is important to check the
+ * return value to ensure successful execution.
+ *
+ * @param dev A pointer to an initialized ade9430_dev structure representing the
+ * device. Must not be null.
+ * @param reg_addr The 16-bit address of the register to read. Valid register
+ * addresses are defined in the ADE9430 register map.
+ * @param reg_data A pointer to a uint32_t variable where the read register
+ * value will be stored. Must not be null.
+ * @return Returns 0 on success, or a negative error code if the read operation
+ * fails.
+ ******************************************************************************/
 int ade9430_read(struct ade9430_dev *dev, uint16_t reg_addr,
 		 uint32_t *reg_data);
 
 /* Write device register. */
+/***************************************************************************//**
+ * @brief This function is used to write a 32-bit data value to a specified
+ * register address on the ADE9430 device. It is essential to ensure that
+ * the device has been properly initialized before calling this function.
+ * The function handles both 16-bit and 32-bit register writes based on
+ * the register address range. It is important to provide a valid
+ * register address and data to avoid undefined behavior. The function
+ * returns an integer status code indicating the success or failure of
+ * the write operation.
+ *
+ * @param dev A pointer to an initialized ade9430_dev structure representing the
+ * device. Must not be null.
+ * @param reg_addr A 16-bit unsigned integer specifying the register address to
+ * write to. Must be a valid register address within the
+ * device's register map.
+ * @param reg_data A 32-bit unsigned integer containing the data to be written
+ * to the specified register.
+ * @return Returns an integer status code from the underlying SPI write
+ * operation, where 0 typically indicates success and a negative value
+ * indicates an error.
+ ******************************************************************************/
 int ade9430_write(struct ade9430_dev *dev, uint16_t reg_addr,
 		  uint32_t reg_data);
 
 /* Update specific register bits. */
+/***************************************************************************//**
+ * @brief This function is used to modify specific bits in a register of the
+ * ADE9430 device. It reads the current value of the register, applies a
+ * mask to clear the bits to be updated, and then sets the new bits as
+ * specified by the reg_data parameter. This function is typically used
+ * when only certain bits of a register need to be changed without
+ * affecting the other bits. It must be called with a valid device
+ * structure and register address. The function returns an error code if
+ * the read or write operation fails.
+ *
+ * @param dev A pointer to an ade9430_dev structure representing the device.
+ * Must not be null. The caller retains ownership.
+ * @param reg_addr The address of the register to be updated. Must be a valid
+ * register address for the ADE9430 device.
+ * @param mask A bitmask indicating which bits in the register should be
+ * updated. Bits set to 1 in the mask will be updated.
+ * @param reg_data The new data to be written to the register, masked by the
+ * mask parameter. Only the bits specified by the mask will be
+ * updated.
+ * @return Returns 0 on success or a negative error code if the read or write
+ * operation fails.
+ ******************************************************************************/
 int ade9430_update_bits(struct ade9430_dev *dev, uint16_t reg_addr,
 			uint32_t mask, uint32_t reg_data);
 
 /* Read temperature */
+/***************************************************************************//**
+ * @brief This function retrieves the current temperature reading from the
+ * ADE9430 device and stores it in the device structure. It should be
+ * called when a temperature measurement is needed. The function
+ * initiates a temperature reading, waits for the measurement to
+ * complete, and then reads the result. It requires a valid device
+ * structure that has been properly initialized. The function returns an
+ * error code if the reading process fails at any step.
+ *
+ * @param dev A pointer to an initialized `ade9430_dev` structure. This
+ * parameter must not be null, and the device must be properly
+ * configured before calling this function. The function will update
+ * the `temp_deg` field in this structure with the temperature
+ * reading.
+ * @return Returns 0 on success, or a negative error code if the temperature
+ * reading fails.
+ ******************************************************************************/
 int ade9430_read_temp(struct ade9430_dev *dev);
 
 /* Read Energy/Power for specific phase */
+/***************************************************************************//**
+ * @brief Use this function to read the instantaneous RMS current, RMS voltage,
+ * and active power for a specified phase of the ADE9430 device. It must
+ * be called with a valid device structure and a specified phase (A, B,
+ * or C). The function updates the device structure with the read values,
+ * converting them to nanoamperes, nanovolts, and microwatts,
+ * respectively. If an invalid phase is provided, the function returns an
+ * error. Ensure the device is properly initialized before calling this
+ * function.
+ *
+ * @param dev A pointer to an initialized ade9430_dev structure. Must not be
+ * null. The function updates this structure with the read values.
+ * @param phase An enum value of type ade9430_phase specifying the phase
+ * (ADE9430_PHASE_A, ADE9430_PHASE_B, or ADE9430_PHASE_C) for which
+ * data is to be read. If an invalid phase is provided, the
+ * function returns an error.
+ * @return Returns 0 on success, or a negative error code if the phase is
+ * invalid or if reading from the device fails.
+ ******************************************************************************/
 int ade9430_read_data_ph(struct ade9430_dev *dev, enum ade9430_phase phase);
 
 /* Set User Energy use model */
+/***************************************************************************//**
+ * @brief This function sets the energy measurement model for the ADE9430
+ * device, allowing the user to specify how energy is accumulated or
+ * measured. It should be called when the user needs to configure the
+ * device for a specific energy measurement mode. The function requires a
+ * valid device structure and a model type, and it may return an error if
+ * the model or value is invalid. The function modifies the device's
+ * configuration registers to reflect the chosen energy model.
+ *
+ * @param dev A pointer to an initialized ade9430_dev structure representing the
+ * device. Must not be null.
+ * @param model An enum value of type ade9430_egy_model specifying the energy
+ * model to set. Valid values are ADE9430_EGY_WITH_RESET,
+ * ADE9430_EGY_HALF_LINE_CYCLES, and ADE9430_EGY_NR_SAMPLES.
+ * @param value A uint16_t value used in conjunction with the model. For
+ * ADE9430_EGY_WITH_RESET, this must be 1. For other models, it
+ * specifies the number of half-line cycles or samples.
+ * @return Returns 0 on success or a negative error code on failure, such as
+ * -EINVAL for invalid parameters.
+ ******************************************************************************/
 int ade9430_set_egy_model(struct ade9430_dev *dev, enum ade9430_egy_model model,
 			  uint16_t value);
 
 /* Initialize the device. */
+/***************************************************************************//**
+ * @brief This function sets up the ADE9430 device for operation by initializing
+ * the SPI communication and configuring the device registers. It must be
+ * called before any other operations on the device. The function
+ * allocates memory for the device structure and performs a series of
+ * checks to ensure the device is correctly identified and configured. If
+ * initialization fails at any step, it cleans up allocated resources and
+ * returns an error code. This function should be called once before
+ * using the device, and the device pointer will be populated upon
+ * successful initialization.
+ *
+ * @param device A double pointer to a struct ade9430_dev. This will be
+ * allocated and initialized by the function. Must not be null.
+ * @param init_param A struct ade9430_init_param containing initialization
+ * parameters, including SPI initialization settings and a
+ * flag to enable the temperature sensor. The caller retains
+ * ownership of this structure.
+ * @return Returns 0 on successful initialization. On failure, returns a
+ * negative error code and does not modify the device pointer.
+ ******************************************************************************/
 int ade9430_init(struct ade9430_dev **device,
 		 struct ade9430_init_param init_param);
 
 /* Remove the device and release resources. */
+/***************************************************************************//**
+ * @brief Use this function to properly release all resources associated with an
+ * ADE9430 device when it is no longer needed. This function should be
+ * called to clean up after the device has been initialized and used,
+ * ensuring that any allocated memory and hardware resources are freed.
+ * It is important to call this function to prevent resource leaks in
+ * your application.
+ *
+ * @param dev A pointer to an `ade9430_dev` structure representing the device to
+ * be removed. This pointer must not be null, and the device must
+ * have been previously initialized. If the pointer is invalid, the
+ * behavior is undefined.
+ * @return Returns 0 on success, or a negative error code if the operation
+ * fails.
+ ******************************************************************************/
 int ade9430_remove(struct ade9430_dev *dev);
 
 #endif // __ADE9430_H__

@@ -13,6 +13,25 @@
 
 #include "adrv9001_bf_hal.h"
 
+/***************************************************************************//**
+ * @brief The `adrv9001_BfNvsPllMemMap_e` is an enumeration that defines memory
+ * map addresses for various PLL (Phase-Locked Loop) components in the
+ * ADRV9001 device. Each enumerator corresponds to a specific PLL type,
+ * such as auxiliary, clock, RF1, RF2, and low power clock PLLs, with
+ * unique hexadecimal addresses used for configuration or identification
+ * within the device's memory map.
+ *
+ * @param ADRV9001_BF_AUX_PLL Represents the auxiliary PLL with a memory map
+ * address of 0x1800.
+ * @param ADRV9001_BF_CLK_PLL Represents the clock PLL with a memory map address
+ * of 0x1a00.
+ * @param ADRV9001_BF_RF1_PLL Represents the RF1 PLL with a memory map address
+ * of 0x1c00.
+ * @param ADRV9001_BF_RF2_PLL Represents the RF2 PLL with a memory map address
+ * of 0x1e00.
+ * @param ADRV9001_BF_CLK_PLL_LP Represents the low power clock PLL with a
+ * memory map address of 0x3600.
+ ******************************************************************************/
 typedef enum adrv9001_BfNvsPllMemMap_e
 {
     ADRV9001_BF_AUX_PLL    =   0x1800,
@@ -23,6 +42,18 @@ typedef enum adrv9001_BfNvsPllMemMap_e
 } adrv9001_BfNvsPllMemMap_e;
 
 
+/***************************************************************************//**
+ * @brief Sets the reset value for the AB counter in the NVS PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type indicating the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value representing the reset state to be set for the
+ * AB counter.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_AbCounterResetb_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -34,6 +65,18 @@ static inline int32_t adrv9001_NvsPllMemMap_AbCounterResetb_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the AB counter reset bit from the NVS PLL
+ * memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_AbCounterResetb_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -48,6 +91,19 @@ static inline int32_t adrv9001_NvsPllMemMap_AbCounterResetb_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the abort state of the NVS PLL memory map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit integer representing the value to be written to the
+ * memory map.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Abort_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -59,6 +115,18 @@ static inline int32_t adrv9001_NvsPllMemMap_Abort_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the abort status from the NVS PLL memory map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific NVS PLL memory
+ * map instance.
+ * @param value A pointer to a uint8_t variable where the retrieved abort status
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Abort_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -74,6 +142,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Abort_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the auxiliary ADC ready status from a specific register in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved ADC ready
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_AuxAdcReady_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -88,6 +169,19 @@ static inline int32_t adrv9001_NvsPllMemMap_AuxAdcReady_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state of the auxiliary low buffer for the north
+ * PLL in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value indicating the desired power down state (0 or
+ * 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_AuxLoBufNorthPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -99,6 +193,19 @@ static inline int32_t adrv9001_NvsPllMemMap_AuxLoBufNorthPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the auxiliary low buffer north power down
+ * setting from a specified device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_AuxLoBufNorthPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -113,6 +220,19 @@ static inline int32_t adrv9001_NvsPllMemMap_AuxLoBufNorthPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state of the auxiliary low buffer for the south
+ * PLL in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value indicating the desired power down state to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_AuxLoBufSouthPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -124,6 +244,19 @@ static inline int32_t adrv9001_NvsPllMemMap_AuxLoBufSouthPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the auxiliary low buffer south power down
+ * register from the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_AuxLoBufSouthPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -138,6 +271,19 @@ static inline int32_t adrv9001_NvsPllMemMap_AuxLoBufSouthPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the off-chip low-frequency driver power down state in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A 8-bit unsigned integer that indicates the desired power down
+ * state.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_AuxLoDriverOffchipLobufPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -149,6 +295,19 @@ static inline int32_t adrv9001_NvsPllMemMap_AuxLoDriverOffchipLobufPd_Set(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_AuxLoDriverOffchipLobufPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -163,6 +322,19 @@ static inline int32_t adrv9001_NvsPllMemMap_AuxLoDriverOffchipLobufPd_Get(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the off-chip power-down state of the auxiliary low driver in the
+ * ADRV9001 NVS PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value indicating the desired power-down state (0 or
+ * 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_AuxLoDriverOffchipPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -174,6 +346,19 @@ static inline int32_t adrv9001_NvsPllMemMap_AuxLoDriverOffchipPd_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the off-chip power-down status of the auxiliary low driver
+ * from the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved power-down
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_AuxLoDriverOffchipPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -188,6 +373,19 @@ static inline int32_t adrv9001_NvsPllMemMap_AuxLoDriverOffchipPd_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state of the auxiliary low TIA tuner buffer in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value indicating the desired power down state to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_AuxLoTiaTunerBufPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -199,6 +397,19 @@ static inline int32_t adrv9001_NvsPllMemMap_AuxLoTiaTunerBufPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the tuner buffer power down status from a specific register
+ * for the given device instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved status will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_AuxLoTiaTunerBufPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -213,6 +424,19 @@ static inline int32_t adrv9001_NvsPllMemMap_AuxLoTiaTunerBufPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the bypass load delay for the NVS PLL memory map in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the bypass load delay.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_BypLoadDelay_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -224,6 +448,18 @@ static inline int32_t adrv9001_NvsPllMemMap_BypLoadDelay_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the bypass load delay value from the PLL memory map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL memory map
+ * instance.
+ * @param value A pointer to a uint8_t variable where the retrieved bypass load
+ * delay value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_BypLoadDelay_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -238,6 +474,17 @@ static inline int32_t adrv9001_NvsPllMemMap_BypLoadDelay_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets a value in the NVS PLL memory map for a specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer value to be written to the memory map.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Calper_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -249,6 +496,18 @@ static inline int32_t adrv9001_NvsPllMemMap_Calper_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific value from a memory-mapped register for the PLL
+ * calibration.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Calper_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -263,6 +522,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Calper_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets a specific calibration type value in the NVS PLL memory map for
+ * the given device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the memory map.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Caltyp_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -274,6 +546,18 @@ static inline int32_t adrv9001_NvsPllMemMap_Caltyp_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific PLL calibration value from a device's memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific PLL instance to
+ * read from.
+ * @param value A pointer to a uint8_t variable where the retrieved calibration
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Caltyp_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -288,6 +572,18 @@ static inline int32_t adrv9001_NvsPllMemMap_Caltyp_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the backup reset state of the clock generator in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value that indicates the desired backup reset state.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenBackupReset_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -299,6 +595,18 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenBackupReset_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the clock generator backup reset status from the NVS PLL
+ * memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * generator backup reset status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenBackupReset_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -313,6 +621,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenBackupReset_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the clock generator divider and ORX power down state in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written,
+ * which is shifted to fit the field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenDivOrxPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -324,6 +645,18 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenDivOrxPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the clock generator division value from the NVS PLL memory
+ * map for a specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * generator division value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenDivOrxPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -338,6 +671,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenDivOrxPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the clock generator divider for the receive path in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the clock generator divider.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenDivRxPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -349,6 +695,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenDivRxPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the clock generator division value for the RX power down
+ * from the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * generator division value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenDivRxPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -363,6 +722,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenDivRxPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the clock generator divider for the transmit path in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the clock generator divider.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenDivTxPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -374,6 +746,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenDivTxPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the clock generator division value for the transmit path
+ * from the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * generator division value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenDivTxPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -388,6 +773,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenDivTxPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power-down state of the HSDIG clock output buffer in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value indicating the desired power-down state (0 or 1)
+ * for the output buffer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenHsdigclkOutbufPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -399,6 +797,18 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenHsdigclkOutbufPd_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the HSDIG clock output buffer power-down status
+ * from a specific register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenHsdigclkOutbufPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -413,6 +823,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenHsdigclkOutbufPd_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the digital clock selection for the HSDIG clock generator in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit integer representing the clock selection value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenHsdigclkSel_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -424,6 +847,18 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenHsdigclkSel_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the clock generator high-speed digital clock selection value
+ * from a specified register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * selection value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenHsdigclkSel_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -438,6 +873,18 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenHsdigclkSel_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the digital count for the clock generator in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A 16-bit unsigned integer representing the digital count value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenMcs2digCount_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint16_t value)
@@ -452,6 +899,18 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenMcs2digCount_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the digital count from the clock generator memory map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * digital count will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenMcs2digCount_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint16_t *value)
@@ -470,6 +929,18 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenMcs2digCount_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the output buffer power-down override for the ORX12 clock
+ * generator in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value that specifies the power-down override setting.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenOrx12OutbufPdOvrd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -481,6 +952,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenOrx12OutbufPdOvrd_Set(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenOrx12OutbufPdOvrd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -495,6 +979,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenOrx12OutbufPdOvrd_Get(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the output buffer power-down override selection for the ORX12
+ * clock generator in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A 8-bit unsigned integer representing the power-down override
+ * selection value.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenOrx12OutbufPdOvrdSel_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -506,6 +1003,18 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenOrx12OutbufPdOvrdSel_Set(void 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenOrx12OutbufPdOvrdSel_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -520,6 +1029,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenOrx12OutbufPdOvrdSel_Get(void 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the output buffer power-down override for the specified instance
+ * of the NVS PLL.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value that indicates the power-down override setting
+ * to be applied.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenOrx34OutbufPdOvrd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -531,6 +1053,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenOrx34OutbufPdOvrd_Set(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenOrx34OutbufPdOvrd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -545,6 +1080,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenOrx34OutbufPdOvrd_Get(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the output buffer power-down override selection for the
+ * `ClkgenOrx34` in the `NvsPll` memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfNvsPllMemMap_e` that
+ * specifies the instance of the `NvsPll` memory map.
+ * @param value An 8-bit unsigned integer that represents the power-down
+ * override selection value.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenOrx34OutbufPdOvrdSel_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -556,6 +1104,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenOrx34OutbufPdOvrdSel_Set(void 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenOrx34OutbufPdOvrdSel_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -570,6 +1131,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenOrx34OutbufPdOvrdSel_Get(void 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the clock generator reset source selection in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value representing the reset source selection to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenResetSrcSel_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -581,6 +1155,18 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenResetSrcSel_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the clock generator reset source selection value from a
+ * specified register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenResetSrcSel_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -595,6 +1181,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenResetSrcSel_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the output buffer power-down override for the RX12 clock
+ * generator in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value that indicates the power-down override setting
+ * to be applied.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenRx12OutbufPdOvrd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -606,6 +1205,18 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenRx12OutbufPdOvrd_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenRx12OutbufPdOvrd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -620,6 +1231,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenRx12OutbufPdOvrd_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power-down override selection for the RX12 output buffer in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value that specifies the power-down override
+ * selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenRx12OutbufPdOvrdSel_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -631,6 +1255,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenRx12OutbufPdOvrdSel_Set(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenRx12OutbufPdOvrdSel_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -645,6 +1282,18 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenRx12OutbufPdOvrdSel_Get(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the output buffer power-down override for the RX34 clock
+ * generator in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value that determines the power-down override setting.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenRx34OutbufPdOvrd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -656,6 +1305,18 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenRx34OutbufPdOvrd_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `ClkgenRx34OutbufPdOvrd` field from a
+ * specific register in the device.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * `NvsPllMemMap`.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenRx34OutbufPdOvrd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -670,6 +1331,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenRx34OutbufPdOvrd_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the output buffer power-down override selection for the RX34
+ * clock generator in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value that specifies the power-down override
+ * selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenRx34OutbufPdOvrdSel_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -681,6 +1355,18 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenRx34OutbufPdOvrdSel_Set(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenRx34OutbufPdOvrdSel_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -695,6 +1381,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenRx34OutbufPdOvrdSel_Get(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the sample divider for the ORx clock generator in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific NVS PLL memory
+ * map instance.
+ * @param value A 16-bit unsigned integer representing the value to be set for
+ * the sample divider.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the operations performed.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenSampleDivInitOrx_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint16_t value)
@@ -709,6 +1408,18 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenSampleDivInitOrx_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the clock generator sample divider value from the NVS PLL
+ * memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * sample divider value will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenSampleDivInitOrx_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint16_t *value)
@@ -727,6 +1438,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenSampleDivInitOrx_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the sample divider for the RX clock generator in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated type representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A 16-bit unsigned integer representing the value to be set for
+ * the sample divider.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the operations performed.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenSampleDivInitRx_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint16_t value)
@@ -741,6 +1465,18 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenSampleDivInitRx_Set(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the clock generator sample divider value from the specified
+ * PLL memory map instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL memory map
+ * instance.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * sample divider value will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if any read operation fails.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenSampleDivInitRx_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint16_t *value)
@@ -759,6 +1495,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenSampleDivInitRx_Get(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the clock generator sample divider for the transmit path in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated type indicating the specific instance of the
+ * NVS PLL memory map.
+ * @param value A 16-bit unsigned integer representing the value to be set for
+ * the clock generator sample divider.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenSampleDivInitTx_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint16_t value)
@@ -773,6 +1522,18 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenSampleDivInitTx_Set(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the clock generator sample divider value from the specified
+ * PLL memory map instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL memory map
+ * instance.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * sample divider value will be stored.
+ * @return Returns the status of the read operations, with *value containing the
+ * combined 16-bit sample divider value from two registers.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenSampleDivInitTx_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint16_t *value)
@@ -791,6 +1552,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenSampleDivInitTx_Get(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the sample divider selection for the ORx clock generator in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the sample divider
+ * selection value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenSampleDivSelOrx_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -802,6 +1576,18 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenSampleDivSelOrx_Set(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the sample divider selection value from the clock generator
+ * for the specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved sample
+ * divider selection value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenSampleDivSelOrx_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -816,6 +1602,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenSampleDivSelOrx_Get(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the sample divider selection for the RX clock generator in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit integer representing the value to be written to the
+ * sample divider selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenSampleDivSelRx_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -827,6 +1626,18 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenSampleDivSelRx_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the sample divider selection value from the clock generator
+ * for a specified instance of the NVS PLL.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL.
+ * @param value A pointer to a uint8_t variable where the retrieved sample
+ * divider selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenSampleDivSelRx_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -841,6 +1652,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenSampleDivSelRx_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the sample divider selection for the transmit clock generator in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the sample divider
+ * selection value.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenSampleDivSelTx_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -852,6 +1676,18 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenSampleDivSelTx_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the sample divider selection value from the clock generator
+ * for a specified PLL instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL instance to
+ * read from.
+ * @param value A pointer to a uint8_t variable where the retrieved sample
+ * divider value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenSampleDivSelTx_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -866,6 +1702,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenSampleDivSelTx_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the output buffer power-down state for the clock generator and
+ * serdes in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value indicating the desired power-down state (0 or
+ * 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenSerdesOutbufPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -877,6 +1726,18 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenSerdesOutbufPd_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the output buffer power-down status from the clock generator
+ * and SerDes PLL memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved power-down
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenSerdesOutbufPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -891,6 +1752,18 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenSerdesOutbufPd_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the clock generator sub-register for the ORx in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit value to be written to the specified register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenSubRxForOrx_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -902,6 +1775,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenSubRxForOrx_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific clock generator register value for the ORx
+ * subsystem from the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenSubRxForOrx_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -916,6 +1802,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenSubRxForOrx_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the clock generator synchronization divider selection in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the synchronization divider selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenSyncDivSel_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -927,6 +1826,18 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenSyncDivSel_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the clock generator synchronization divider selection value
+ * from a specified instance of the NVS PLL memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenSyncDivSel_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -941,6 +1852,18 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenSyncDivSel_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the synchronization clock output enable for the ADRV9001 PLL.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value that indicates the desired state of the
+ * synchronization clock output enable.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenSyncclkOutputEn_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -952,6 +1875,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenSyncclkOutputEn_Set(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the synchronization clock output enable status from a
+ * specific register of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock output
+ * enable status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenSyncclkOutputEn_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -966,6 +1902,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenSyncclkOutputEn_Get(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the output buffer power-down override for the specified instance
+ * of the clock generator.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value that indicates the power-down override state to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenTx12OutbufPdOvrd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -977,6 +1926,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenTx12OutbufPdOvrd_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenTx12OutbufPdOvrd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -991,6 +1953,18 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenTx12OutbufPdOvrd_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down override selection for the Tx12 output buffer in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value indicating the power down override selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenTx12OutbufPdOvrdSel_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -1002,6 +1976,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenTx12OutbufPdOvrdSel_Set(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `ClkgenTx12OutbufPdOvrdSel` field from a
+ * specific register in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenTx12OutbufPdOvrdSel_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1016,6 +2003,18 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenTx12OutbufPdOvrdSel_Get(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the output buffer power-down override for the Tx34 clock
+ * generator in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value that specifies the power-down override setting.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenTx34OutbufPdOvrd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -1027,6 +2026,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenTx34OutbufPdOvrd_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenTx34OutbufPdOvrd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1041,6 +2053,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenTx34OutbufPdOvrd_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the output buffer power-down override selection for the Tx34
+ * clock generator in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value representing the power-down override selection
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenTx34OutbufPdOvrdSel_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -1052,6 +2077,18 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenTx34OutbufPdOvrdSel_Set(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenTx34OutbufPdOvrdSel_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1066,6 +2103,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenTx34OutbufPdOvrdSel_Get(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the backup reset configuration for the clock generator in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value that indicates the desired state to set for the
+ * backup reset.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenUseBackupReset_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -1077,6 +2127,18 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenUseBackupReset_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the backup reset value from the clock generator register for
+ * a specified PLL instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL instance to
+ * access.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenUseBackupReset_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1091,6 +2153,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenUseBackupReset_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the clock generator configuration for the ADRV9001 device using
+ * the SERDES MCS.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value that specifies the configuration to be set in
+ * the clock generator.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenUseSerdesMcs_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -1102,6 +2177,18 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenUseSerdesMcs_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the clock generator configuration from the specified PLL
+ * memory map instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL memory map
+ * instance to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenUseSerdesMcs_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1116,6 +2203,18 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenUseSerdesMcs_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO selection for the clock generator in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the VCO selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenVcoSel_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -1127,6 +2226,18 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenVcoSel_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO selection value from the PLL memory map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved VCO
+ * selection value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenVcoSel_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1141,6 +2252,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenVcoSel_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the clock generator face division value in the ADRV9001 device's
+ * PLL memory map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific PLL memory map
+ * instance to be modified.
+ * @param value An 8-bit unsigned integer representing the division value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenXfaceDivInitOrx_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -1152,6 +2276,18 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenXfaceDivInitOrx_Set(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the clock generator interface divider value from the
+ * specified instance of the NVS PLL memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved divider
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenXfaceDivInitOrx_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1166,6 +2302,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenXfaceDivInitOrx_Get(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the clock generator face division value for the RX PLL in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the division value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenXfaceDivInitRx_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -1177,6 +2326,18 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenXfaceDivInitRx_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the clock generator interface divider value for the RX
+ * channel from a specified register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved divider
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenXfaceDivInitRx_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1191,6 +2352,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenXfaceDivInitRx_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the clock generator face division value for the transmit path in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the division value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenXfaceDivInitTx_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -1202,6 +2376,18 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenXfaceDivInitTx_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the clock generator face divider value from a specific
+ * register for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved divider
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenXfaceDivInitTx_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1216,6 +2402,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenXfaceDivInitTx_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the clock generator face division selection for the ORx in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the division selection
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenXfaceDivSelOrx_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -1227,6 +2426,18 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenXfaceDivSelOrx_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the clock generator face division selection value from the
+ * NVS PLL memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved division
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenXfaceDivSelOrx_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1241,6 +2452,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenXfaceDivSelOrx_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the clock generator face division selection for the RX PLL in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the division selection
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenXfaceDivSelRx_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -1252,6 +2476,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenXfaceDivSelRx_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the clock generator interface division selection value for
+ * the RX channel from the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved division
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenXfaceDivSelRx_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1266,6 +2503,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenXfaceDivSelRx_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the clock generator face division selection for the transmit path
+ * in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the division selection
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenXfaceDivSelTx_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -1277,6 +2527,18 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenXfaceDivSelTx_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the clock generator division selection value for the
+ * transmit path from the specified PLL memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL memory map
+ * instance.
+ * @param value A pointer to a uint8_t variable where the retrieved division
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ClkgenXfaceDivSelTx_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1291,6 +2553,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ClkgenXfaceDivSelTx_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the charge pump bias filter bypass value in the ADRV9001 PLL
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the charge pump bias filter bypass.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_CpBiasRfiltByp_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -1302,6 +2577,18 @@ static inline int32_t adrv9001_NvsPllMemMap_CpBiasRfiltByp_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `CpBiasRfiltByp` field from a specified PLL
+ * memory map instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL memory map
+ * instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_CpBiasRfiltByp_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1316,6 +2603,19 @@ static inline int32_t adrv9001_NvsPllMemMap_CpBiasRfiltByp_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the clock divide value for the CP calibration in the ADRV9001 PLL
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the clock divide value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the clock divide value setting operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_CpCalClkDivide_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -1327,6 +2627,18 @@ static inline int32_t adrv9001_NvsPllMemMap_CpCalClkDivide_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the clock divide value from a specific register for the NVS
+ * PLL.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL.
+ * @param value A pointer to a uint8_t variable where the retrieved clock divide
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_CpCalClkDivide_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1341,6 +2653,19 @@ static inline int32_t adrv9001_NvsPllMemMap_CpCalClkDivide_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the charge pump calibration enable value in the ADRV9001 PLL
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A uint8_t value that indicates the charge pump calibration
+ * enable state.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_CpCalEn_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -1352,6 +2677,17 @@ static inline int32_t adrv9001_NvsPllMemMap_CpCalEn_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the calibration enable status from the NVS PLL memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved calibration
+ * enable status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_CpCalEn_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1366,6 +2702,19 @@ static inline int32_t adrv9001_NvsPllMemMap_CpCalEn_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Initializes the charge pump calibration setting in the NVS PLL memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_CpCalInit_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -1377,6 +2726,18 @@ static inline int32_t adrv9001_NvsPllMemMap_CpCalInit_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the calibration value from a specific register for the NVS
+ * PLL memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved calibration
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_CpCalInit_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1392,6 +2753,19 @@ static inline int32_t adrv9001_NvsPllMemMap_CpCalInit_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the calibration validity status from a specific register of
+ * the `adrv9001` device.
+ *
+ * @param device A pointer to the device structure representing the `adrv9001`
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * `NvsPllMemMap`.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration validity status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_CpCalValid_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1406,6 +2780,19 @@ static inline int32_t adrv9001_NvsPllMemMap_CpCalValid_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the CP frequency calibration value in the NVS PLL memory map for
+ * a specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_CpFCal_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -1417,6 +2804,18 @@ static inline int32_t adrv9001_NvsPllMemMap_CpFCal_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the calibration value from a specific register of the PLL
+ * memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved calibration
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_CpFCal_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1431,6 +2830,18 @@ static inline int32_t adrv9001_NvsPllMemMap_CpFCal_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the calibration bits for the CP in the NVS PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the calibration bits.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_CpFCalBits_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -1442,6 +2853,19 @@ static inline int32_t adrv9001_NvsPllMemMap_CpFCalBits_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves calibration bits from a specific register in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved calibration
+ * bits will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_CpFCalBits_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1456,6 +2880,19 @@ static inline int32_t adrv9001_NvsPllMemMap_CpFCalBits_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS PLL memory map for the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the specified field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_CpI_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -1467,6 +2904,18 @@ static inline int32_t adrv9001_NvsPllMemMap_CpI_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_CpI_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1481,6 +2930,19 @@ static inline int32_t adrv9001_NvsPllMemMap_CpI_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the CP level detector power down state in the ADRV9001 PLL memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the power down state to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_CpLeveldetPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -1492,6 +2954,18 @@ static inline int32_t adrv9001_NvsPllMemMap_CpLeveldetPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the CP level detector power-down status from a specified
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_CpLeveldetPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1506,6 +2980,18 @@ static inline int32_t adrv9001_NvsPllMemMap_CpLeveldetPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the charge pump offset level in the ADRV9001 PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the charge pump offset
+ * level to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_CpOffsetLvl_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -1517,6 +3003,18 @@ static inline int32_t adrv9001_NvsPllMemMap_CpOffsetLvl_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the charge pump offset level from a specified PLL memory map
+ * instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL memory map
+ * instance.
+ * @param value A pointer to a uint8_t variable where the retrieved charge pump
+ * offset level will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_CpOffsetLvl_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1531,6 +3029,19 @@ static inline int32_t adrv9001_NvsPllMemMap_CpOffsetLvl_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the CP offset value in the NVS PLL memory map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the CP offset.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_CpOffsetOff_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -1542,6 +3053,18 @@ static inline int32_t adrv9001_NvsPllMemMap_CpOffsetOff_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the CP offset value from the NVS PLL memory map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific NVS PLL memory
+ * map instance.
+ * @param value A pointer to a uint8_t variable where the retrieved CP offset
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_CpOffsetOff_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1557,6 +3080,19 @@ static inline int32_t adrv9001_NvsPllMemMap_CpOffsetOff_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the high flag status from the CP overrange register of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved high flag
+ * status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_CpOverrangeHighFlag_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1572,6 +3108,18 @@ static inline int32_t adrv9001_NvsPllMemMap_CpOverrangeHighFlag_Get(void *device
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the high temperature overrange value from the PLL memory
+ * map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL instance to
+ * access.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_CpOverrangeHighTc_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1587,6 +3135,17 @@ static inline int32_t adrv9001_NvsPllMemMap_CpOverrangeHighTc_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the CP overrange low flag from the NVS PLL memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved flag value
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_CpOverrangeLowFlag_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1602,6 +3161,19 @@ static inline int32_t adrv9001_NvsPllMemMap_CpOverrangeLowFlag_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the low temperature control value from the CP overrange
+ * register of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved control
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_CpOverrangeLowTc_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1616,6 +3188,19 @@ static inline int32_t adrv9001_NvsPllMemMap_CpOverrangeLowTc_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the pump-up bias control value in the NVS PLL memory map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the bias control value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_CpPumpUpBiasCntrl_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -1627,6 +3212,19 @@ static inline int32_t adrv9001_NvsPllMemMap_CpPumpUpBiasCntrl_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the pump-up bias control value from a specified register in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved pump-up bias
+ * control value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_CpPumpUpBiasCntrl_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1641,6 +3239,18 @@ static inline int32_t adrv9001_NvsPllMemMap_CpPumpUpBiasCntrl_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets a value in the NVS PLL memory map for a specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the memory map.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_CpTest_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -1652,6 +3262,18 @@ static inline int32_t adrv9001_NvsPllMemMap_CpTest_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific value from a memory-mapped register for the NVS
+ * PLL.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_CpTest_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1666,6 +3288,19 @@ static inline int32_t adrv9001_NvsPllMemMap_CpTest_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the high flag for the CP voltage level in the ADRV9001 PLL memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the high flag.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_CpVlevelHighFlag_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -1677,6 +3312,18 @@ static inline int32_t adrv9001_NvsPllMemMap_CpVlevelHighFlag_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the high flag value from the NVS PLL memory map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved high flag
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_CpVlevelHighFlag_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1691,6 +3338,19 @@ static inline int32_t adrv9001_NvsPllMemMap_CpVlevelHighFlag_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the high temperature compensation voltage level in the ADRV9001
+ * PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the voltage level to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_CpVlevelHighTc_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -1702,6 +3362,19 @@ static inline int32_t adrv9001_NvsPllMemMap_CpVlevelHighTc_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the high temperature control voltage level from a specific
+ * register in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved voltage
+ * level will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_CpVlevelHighTc_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1716,6 +3389,19 @@ static inline int32_t adrv9001_NvsPllMemMap_CpVlevelHighTc_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the low flag for the CP voltage level in the ADRV9001 PLL memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the low flag.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_CpVlevelLowFlag_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -1727,6 +3413,18 @@ static inline int32_t adrv9001_NvsPllMemMap_CpVlevelLowFlag_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the low flag value from the NVS PLL memory map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved low flag
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_CpVlevelLowFlag_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1741,6 +3439,19 @@ static inline int32_t adrv9001_NvsPllMemMap_CpVlevelLowFlag_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the low temperature coefficient voltage level in the ADRV9001 PLL
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the voltage level to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_CpVlevelLowTc_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -1752,6 +3463,19 @@ static inline int32_t adrv9001_NvsPllMemMap_CpVlevelLowTc_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the low temperature compensation voltage level from a
+ * specific register in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved voltage
+ * level will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_CpVlevelLowTc_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1767,6 +3491,18 @@ static inline int32_t adrv9001_NvsPllMemMap_CpVlevelLowTc_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Cpend_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1781,6 +3517,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Cpend_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the C-step value in the NVS PLL memory map for a given device
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A 16-bit unsigned integer representing the C-step value to be
+ * set.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if any of the write operations fail.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Cstep_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint16_t value)
@@ -1795,6 +3544,18 @@ static inline int32_t adrv9001_NvsPllMemMap_Cstep_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the C-step value from the NVS PLL memory map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * C-step value will be stored.
+ * @return Returns the status of the read operations, where a value of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Cstep_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint16_t *value)
@@ -1813,6 +3574,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Cstep_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the CT step value in the NVS PLL memory map for a given device
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the memory map.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Ctstep_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -1824,6 +3598,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Ctstep_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the CT step value from a specific register in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved CT step
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Ctstep_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1838,6 +3625,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Ctstep_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the clock divider value for the direct modulation analog PLL in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the clock divider value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_DirectModAnalogClkdivValue_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -1849,6 +3649,18 @@ static inline int32_t adrv9001_NvsPllMemMap_DirectModAnalogClkdivValue_Set(void 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the clock divider value from a specific register for the
+ * Direct Modulation Analog PLL.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * divider value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_DirectModAnalogClkdivValue_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1864,6 +3676,19 @@ static inline int32_t adrv9001_NvsPllMemMap_DirectModAnalogClkdivValue_Get(void 
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_DirectModEmpty_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1878,6 +3703,19 @@ static inline int32_t adrv9001_NvsPllMemMap_DirectModEmpty_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the direct modulation enable field in the NVS PLL memory map for
+ * a specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value that indicates whether direct modulation is
+ * enabled (1) or disabled (0).
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_DirectModEnable_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -1889,6 +3727,18 @@ static inline int32_t adrv9001_NvsPllMemMap_DirectModEnable_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the direct modulation enable status from a specified PLL
+ * memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL memory map
+ * instance.
+ * @param value A pointer to a uint8_t variable where the retrieved modulation
+ * enable status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_DirectModEnable_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1903,6 +3753,19 @@ static inline int32_t adrv9001_NvsPllMemMap_DirectModEnable_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the direct modulation FIFO bypass configuration in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value that specifies the bypass configuration to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_DirectModFifoBypass_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -1914,6 +3777,18 @@ static inline int32_t adrv9001_NvsPllMemMap_DirectModFifoBypass_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_DirectModFifoBypass_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1928,6 +3803,19 @@ static inline int32_t adrv9001_NvsPllMemMap_DirectModFifoBypass_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the Direct Modulation FIFO Clear field in the ADRV9001 NVS PLL
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit integer that specifies the value to be written to the
+ * Direct Modulation FIFO Clear field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_DirectModFifoClr_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -1939,6 +3827,19 @@ static inline int32_t adrv9001_NvsPllMemMap_DirectModFifoClr_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value from a specific register in the ADRV9001 device
+ * and stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_DirectModFifoClr_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1953,6 +3854,19 @@ static inline int32_t adrv9001_NvsPllMemMap_DirectModFifoClr_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the direct modulation FIFO enable state in the ADRV9001 PLL
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A uint8_t value indicating the desired state to set for the
+ * direct modulation FIFO enable.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_DirectModFifoEnable_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -1964,6 +3878,18 @@ static inline int32_t adrv9001_NvsPllMemMap_DirectModFifoEnable_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the direct modulation FIFO enable status from a specified
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved FIFO enable
+ * status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_DirectModFifoEnable_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1979,6 +3905,19 @@ static inline int32_t adrv9001_NvsPllMemMap_DirectModFifoEnable_Get(void *device
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a device register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_DirectModFull_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -1993,6 +3932,19 @@ static inline int32_t adrv9001_NvsPllMemMap_DirectModFull_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the FIFO enable delay for direct modulation in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the delay value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_DirectModRdFifoEnableDelay_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -2004,6 +3956,18 @@ static inline int32_t adrv9001_NvsPllMemMap_DirectModRdFifoEnableDelay_Set(void 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the Direct Modulation Read FIFO Enable Delay value from a
+ * specified register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_DirectModRdFifoEnableDelay_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -2018,6 +3982,17 @@ static inline int32_t adrv9001_NvsPllMemMap_DirectModRdFifoEnableDelay_Get(void 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets a value in the NVS PLL memory map for a specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the memory map.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Dnl0_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -2029,6 +4004,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Dnl0_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Dnl0_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -2043,6 +4031,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Dnl0_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of a specific register in the NVS PLL memory map for
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Dnl1_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -2054,6 +4055,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Dnl1_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Dnl1_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -2068,6 +4082,17 @@ static inline int32_t adrv9001_NvsPllMemMap_Dnl1_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets a value in the NVS PLL memory map for a specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the memory map.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Dnl2_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -2079,6 +4104,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Dnl2_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map to access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Dnl2_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -2093,6 +4131,18 @@ static inline int32_t adrv9001_NvsPllMemMap_Dnl2_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets a value in the NVS PLL memory map for a specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the memory map.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Dnl3_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -2104,6 +4154,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Dnl3_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Dnl3_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -2118,6 +4181,18 @@ static inline int32_t adrv9001_NvsPllMemMap_Dnl3_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets a value in the NVS PLL memory map for a specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the memory map.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Dnl4_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -2129,6 +4204,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Dnl4_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map to access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Dnl4_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -2143,6 +4231,16 @@ static inline int32_t adrv9001_NvsPllMemMap_Dnl4_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets a value in the NVS PLL memory map for a specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer value to be written to the memory map.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Dnl5_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -2154,6 +4252,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Dnl5_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map to access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Dnl5_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -2168,6 +4279,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Dnl5_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets a specific register value in the NVS PLL memory map for a given
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Dnl6_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -2179,6 +4303,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Dnl6_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map to access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Dnl6_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -2193,6 +4330,17 @@ static inline int32_t adrv9001_NvsPllMemMap_Dnl6_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets a value in the NVS PLL memory map for a specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the memory map.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Dnl7_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -2204,6 +4352,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Dnl7_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Dnl7_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -2218,6 +4379,18 @@ static inline int32_t adrv9001_NvsPllMemMap_Dnl7_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets a specific value in the NVS PLL memory map for the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer value to be written to the memory map.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Dnl8_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -2229,6 +4402,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Dnl8_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific 8-bit value from a register in the ADRV9001
+ * device's PLL memory map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific PLL memory map
+ * instance to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Dnl8_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -2243,6 +4429,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Dnl8_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the digital non-linear offset value in the NVS PLL memory map for
+ * a specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the digital non-linear
+ * offset value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_DnlOffset_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -2254,6 +4453,19 @@ static inline int32_t adrv9001_NvsPllMemMap_DnlOffset_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the downlink offset value from a specified PLL memory map
+ * instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific PLL memory map
+ * instance to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved downlink
+ * offset value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_DnlOffset_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -2268,6 +4480,19 @@ static inline int32_t adrv9001_NvsPllMemMap_DnlOffset_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the `DtapsB0` value in the PLL memory map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the memory map.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_DtapsB0_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -2279,6 +4504,19 @@ static inline int32_t adrv9001_NvsPllMemMap_DtapsB0_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register from the `adrv9001` device
+ * and stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure representing the `adrv9001`
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a `uint8_t` where the retrieved register value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_DtapsB0_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -2293,6 +4531,19 @@ static inline int32_t adrv9001_NvsPllMemMap_DtapsB0_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the `DtapsB1` register in the `NvsPllMemMap` for a
+ * specified device instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type representing the specific instance of the
+ * `NvsPllMemMap`.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_DtapsB1_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -2304,6 +4555,19 @@ static inline int32_t adrv9001_NvsPllMemMap_DtapsB1_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register from the `adrv9001` device
+ * and stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure representing the `adrv9001`
+ * device.
+ * @param instance An enumerated type indicating the specific instance of the
+ * PLL memory map to read from.
+ * @param value A pointer to a `uint8_t` where the retrieved register value will
+ * be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_DtapsB1_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -2318,6 +4582,19 @@ static inline int32_t adrv9001_NvsPllMemMap_DtapsB1_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the `DtapsB2` register in the `NvsPllMemMap` for a
+ * specified device instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type representing the specific instance of the
+ * `NvsPllMemMap`.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_DtapsB2_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -2329,6 +4606,19 @@ static inline int32_t adrv9001_NvsPllMemMap_DtapsB2_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register from the `adrv9001` device
+ * and stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure representing the `adrv9001`
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_DtapsB2_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -2343,6 +4633,19 @@ static inline int32_t adrv9001_NvsPllMemMap_DtapsB2_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of a specific register in the PLL memory map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_DtapsB3_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -2354,6 +4657,19 @@ static inline int32_t adrv9001_NvsPllMemMap_DtapsB3_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_DtapsB3_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -2368,6 +4684,19 @@ static inline int32_t adrv9001_NvsPllMemMap_DtapsB3_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the maximum count enable for the NVS PLL memory map in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer that specifies the value to be written
+ * to the memory map.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_EndvcocalMaxcntEn_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -2379,6 +4708,17 @@ static inline int32_t adrv9001_NvsPllMemMap_EndvcocalMaxcntEn_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the maximum count enable value from the NVS PLL memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_EndvcocalMaxcntEn_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -2393,6 +4733,19 @@ static inline int32_t adrv9001_NvsPllMemMap_EndvcocalMaxcntEn_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the feedback clock advance value in the NVS PLL memory map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the feedback clock
+ * advance value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_FbClockAdv_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -2404,6 +4757,18 @@ static inline int32_t adrv9001_NvsPllMemMap_FbClockAdv_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the feedback clock advance value from a specific PLL memory
+ * map register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL instance to
+ * read from.
+ * @param value A pointer to a uint8_t variable where the retrieved feedback
+ * clock advance value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_FbClockAdv_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -2418,6 +4783,19 @@ static inline int32_t adrv9001_NvsPllMemMap_FbClockAdv_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the frequency calibration update bands for the specified PLL
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific PLL instance to
+ * be updated.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the PLL memory map.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_FcalSingleUpdBands_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -2429,6 +4807,19 @@ static inline int32_t adrv9001_NvsPllMemMap_FcalSingleUpdBands_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a device register and updates
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_FcalSingleUpdBands_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -2443,6 +4834,19 @@ static inline int32_t adrv9001_NvsPllMemMap_FcalSingleUpdBands_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the FDOVD value in the NVS PLL memory map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A 32-bit unsigned integer representing the value to be set in
+ * the memory map.
+ * @return Returns the status of the last write operation, where a non-zero
+ * value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Fdovd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint32_t value)
@@ -2460,6 +4864,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Fdovd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the FDOVD value from the NVS PLL memory map by reading
+ * multiple registers.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated type indicating the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved FDOVD
+ * value will be stored.
+ * @return Returns the status of the last read operation, which indicates
+ * success (0) or an error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Fdovd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint32_t *value)
@@ -2482,6 +4899,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Fdovd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the FDOVDM field in the NVS PLL memory map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the FDOVDM field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Fdovdm_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -2493,6 +4923,18 @@ static inline int32_t adrv9001_NvsPllMemMap_Fdovdm_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Fdovdm_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -2507,6 +4949,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Fdovdm_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the force lock value for the NVS PLL memory map in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value that indicates the force lock setting to be
+ * applied.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ForceLock_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -2518,6 +4973,18 @@ static inline int32_t adrv9001_NvsPllMemMap_ForceLock_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the forced lock status from the PLL memory map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL instance to
+ * read from.
+ * @param value A pointer to a uint8_t variable where the retrieved lock status
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ForceLock_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -2532,6 +4999,17 @@ static inline int32_t adrv9001_NvsPllMemMap_ForceLock_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO initialization ALC value in the ADRV9001 PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific PLL instance in
+ * the memory map.
+ * @param value An 8-bit unsigned integer representing the ALC value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ForceVcoInitAlcValue_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -2543,6 +5021,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ForceVcoInitAlcValue_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO initialization ALC value from a specific register in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved VCO
+ * initialization ALC value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ForceVcoInitAlcValue_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -2557,6 +5048,19 @@ static inline int32_t adrv9001_NvsPllMemMap_ForceVcoInitAlcValue_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the frequency calibration count read selection for the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the specified field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_FreqCalCntRdsel_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -2568,6 +5072,18 @@ static inline int32_t adrv9001_NvsPllMemMap_FreqCalCntRdsel_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Reads a specific field from a hardware register and stores the result
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the read value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_FreqCalCntRdsel_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -2582,6 +5098,18 @@ static inline int32_t adrv9001_NvsPllMemMap_FreqCalCntRdsel_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the frequency calibration maximum count in the NVS PLL memory
+ * map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A 32-bit unsigned integer representing the frequency calibration
+ * maximum count to be set.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_FreqCalMaxCnt_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint32_t value)
@@ -2599,6 +5127,18 @@ static inline int32_t adrv9001_NvsPllMemMap_FreqCalMaxCnt_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the maximum count for frequency calibration from the
+ * specified PLL memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL instance to
+ * read from.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * frequency calibration maximum count will be stored.
+ * @return Returns the status of the last read operation, indicating success (0)
+ * or an error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_FreqCalMaxCnt_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint32_t *value)
@@ -2621,6 +5161,19 @@ static inline int32_t adrv9001_NvsPllMemMap_FreqCalMaxCnt_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the frequency calibration value for a specified instance of the
+ * NVS PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the frequency calibration
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_FreqCalSingle_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -2632,6 +5185,19 @@ static inline int32_t adrv9001_NvsPllMemMap_FreqCalSingle_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a frequency calibration value from a specific register in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating the specific instance of the
+ * PLL memory map to access.
+ * @param value A pointer to a uint8_t variable where the retrieved frequency
+ * calibration value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_FreqCalSingle_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -2647,6 +5213,18 @@ static inline int32_t adrv9001_NvsPllMemMap_FreqCalSingle_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves frequency calibration count from the specified PLL memory
+ * map by reading multiple registers.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param instance An enumerated value representing the specific PLL instance to
+ * read from.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * frequency calibration count will be stored.
+ * @return Returns the status of the last register read operation, with the
+ * frequency calibration count stored in the provided value pointer.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_FreqCalcntRdbck_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint32_t *value)
@@ -2669,6 +5247,19 @@ static inline int32_t adrv9001_NvsPllMemMap_FreqCalcntRdbck_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the Icalwait field in the NVS PLL memory map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the Icalwait field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Icalwait_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -2680,6 +5271,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Icalwait_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the calibration wait value from a specific register in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved calibration
+ * wait value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Icalwait_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -2694,6 +5298,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Icalwait_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the bypass resistance value for the NVS PLL memory map in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the resistance value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_IdistBypassResExt_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -2705,6 +5322,19 @@ static inline int32_t adrv9001_NvsPllMemMap_IdistBypassResExt_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the bypass resistance value from a specific register in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved resistance
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_IdistBypassResExt_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -2719,6 +5349,19 @@ static inline int32_t adrv9001_NvsPllMemMap_IdistBypassResExt_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the bypass resistance integer value in the NVS PLL memory map for
+ * a specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the bypass resistance.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_IdistBypassResInt_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -2730,6 +5373,19 @@ static inline int32_t adrv9001_NvsPllMemMap_IdistBypassResInt_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the bypass resistance integer value from the NVS PLL memory
+ * map for a specified instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_IdistBypassResInt_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -2744,6 +5400,19 @@ static inline int32_t adrv9001_NvsPllMemMap_IdistBypassResInt_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the external power-down state for the `Idist` field in the PLL
+ * memory map of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfNvsPllMemMap_e` that
+ * specifies the PLL memory map instance.
+ * @param value A `uint8_t` value representing the desired power-down state to
+ * be set.
+ * @return Returns an `int32_t` status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_IdistExtPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -2755,6 +5424,18 @@ static inline int32_t adrv9001_NvsPllMemMap_IdistExtPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the external power-down status of the `Idist` field from the
+ * PLL memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_IdistExtPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -2769,6 +5450,19 @@ static inline int32_t adrv9001_NvsPllMemMap_IdistExtPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the internal digital isolator power-down state for a specified
+ * PLL instance.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific PLL instance to
+ * configure.
+ * @param value A uint8_t value indicating the power-down state to set (0 for
+ * active, 1 for power-down).
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_IdistIntPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -2780,6 +5474,19 @@ static inline int32_t adrv9001_NvsPllMemMap_IdistIntPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `IdistIntPd` field from a specific register
+ * in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_IdistIntPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -2794,6 +5501,19 @@ static inline int32_t adrv9001_NvsPllMemMap_IdistIntPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the inverse local oscillator value in the NVS PLL memory map for
+ * the specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the inverse local oscillator.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_InvLoI_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -2805,6 +5525,19 @@ static inline int32_t adrv9001_NvsPllMemMap_InvLoI_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a device register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_InvLoI_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -2819,6 +5552,19 @@ static inline int32_t adrv9001_NvsPllMemMap_InvLoI_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the inverse low Q value in the NVS PLL memory map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the inverse low Q.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_InvLoQ_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -2830,6 +5576,19 @@ static inline int32_t adrv9001_NvsPllMemMap_InvLoQ_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the inverted low Q value from the PLL memory map of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_InvLoQ_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -2844,6 +5603,19 @@ static inline int32_t adrv9001_NvsPllMemMap_InvLoQ_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the bypass configuration for the Low Frequency (LF) section of
+ * the PLL in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the PLL configuration.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LfBypassC1_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -2855,6 +5627,18 @@ static inline int32_t adrv9001_NvsPllMemMap_LfBypassC1_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LfBypassC1_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -2869,6 +5653,19 @@ static inline int32_t adrv9001_NvsPllMemMap_LfBypassC1_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the bypass configuration for the C2 loop filter in the NVS PLL
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the memory map.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LfBypassC2_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -2880,6 +5677,18 @@ static inline int32_t adrv9001_NvsPllMemMap_LfBypassC2_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LfBypassC2_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -2894,6 +5703,19 @@ static inline int32_t adrv9001_NvsPllMemMap_LfBypassC2_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the bypass register for the low-frequency phase-locked loop (PLL)
+ * in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the bypass register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LfBypassR1_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -2905,6 +5727,17 @@ static inline int32_t adrv9001_NvsPllMemMap_LfBypassR1_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the bypass register value from the NVS PLL memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LfBypassR1_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -2919,6 +5752,19 @@ static inline int32_t adrv9001_NvsPllMemMap_LfBypassR1_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the bypass value for the Low Frequency (LF) PLL in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the PLL bypass register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LfBypassR3_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -2930,6 +5776,18 @@ static inline int32_t adrv9001_NvsPllMemMap_LfBypassR3_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LfBypassR3_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -2944,6 +5802,19 @@ static inline int32_t adrv9001_NvsPllMemMap_LfBypassR3_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS PLL memory map for the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the specified field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LfC1_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -2955,6 +5826,18 @@ static inline int32_t adrv9001_NvsPllMemMap_LfC1_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LfC1_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -2969,6 +5852,19 @@ static inline int32_t adrv9001_NvsPllMemMap_LfC1_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS PLL memory map for the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the specified field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LfC2_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -2980,6 +5876,19 @@ static inline int32_t adrv9001_NvsPllMemMap_LfC2_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a device register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map to access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LfC2_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -2994,6 +5903,19 @@ static inline int32_t adrv9001_NvsPllMemMap_LfC2_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS PLL memory map for the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the specified field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LfC3_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -3005,6 +5927,18 @@ static inline int32_t adrv9001_NvsPllMemMap_LfC3_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a PLL memory map and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL memory map
+ * instance to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LfC3_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -3019,6 +5953,19 @@ static inline int32_t adrv9001_NvsPllMemMap_LfC3_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS PLL memory map for the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the specified field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LfR1_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -3030,6 +5977,19 @@ static inline int32_t adrv9001_NvsPllMemMap_LfR1_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LfR1_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -3044,6 +6004,18 @@ static inline int32_t adrv9001_NvsPllMemMap_LfR1_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS PLL memory map for the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit integer value to be written to the specified field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LfR3_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -3055,6 +6027,18 @@ static inline int32_t adrv9001_NvsPllMemMap_LfR3_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LfR3_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -3069,6 +6053,19 @@ static inline int32_t adrv9001_NvsPllMemMap_LfR3_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the large division value in the NVS PLL memory map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A 16-bit unsigned integer representing the large division value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LgDiv_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint16_t value)
@@ -3083,6 +6080,18 @@ static inline int32_t adrv9001_NvsPllMemMap_LgDiv_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the large division value from the PLL memory map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL instance to
+ * access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved large
+ * division value will be stored.
+ * @return Returns the status of the read operations, where a status of 0
+ * indicates success.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LgDiv_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint16_t *value)
@@ -3101,6 +6110,19 @@ static inline int32_t adrv9001_NvsPllMemMap_LgDiv_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the low phase detector filter offset for the specified instance
+ * in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the low phase detector filter offset.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Lo1OffsetLoPhaseDetFilter_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -3112,6 +6134,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Lo1OffsetLoPhaseDetFilter_Set(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the low phase detector filter value from a specific register
+ * in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved filter value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Lo1OffsetLoPhaseDetFilter_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -3126,6 +6161,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Lo1OffsetLoPhaseDetFilter_Get(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the low phase detector power down offset for the LO1 PLL in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the PLL offset.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Lo1OffsetLoPhaseDetPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -3137,6 +6185,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Lo1OffsetLoPhaseDetPd_Set(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the low phase detector value from a specific register in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved low phase
+ * detector value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Lo1OffsetLoPhaseDetPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -3151,6 +6212,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Lo1OffsetLoPhaseDetPd_Get(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the low phase detector filter offset for a specified instance in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the low phase detector filter offset.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Lo2OffsetLoPhaseDetFilter_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -3162,6 +6236,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Lo2OffsetLoPhaseDetFilter_Set(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the low phase detector filter value from a specific register
+ * in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved filter value
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Lo2OffsetLoPhaseDetFilter_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -3176,6 +6263,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Lo2OffsetLoPhaseDetFilter_Get(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the low phase detector power-down offset for the NVS PLL in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the memory map.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Lo2OffsetLoPhaseDetPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -3187,6 +6287,18 @@ static inline int32_t adrv9001_NvsPllMemMap_Lo2OffsetLoPhaseDetPd_Set(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the low phase detector power-down offset value from the PLL
+ * memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL instance to
+ * access.
+ * @param value A pointer to a uint8_t variable where the retrieved offset value
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Lo2OffsetLoPhaseDetPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -3201,6 +6313,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Lo2OffsetLoPhaseDetPd_Get(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the low synchronization reset bit in the NVS PLL memory map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value that indicates the desired state to set for the
+ * low synchronization reset bit.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LoSyncResetb_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -3212,6 +6337,19 @@ static inline int32_t adrv9001_NvsPllMemMap_LoSyncResetb_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `LoSyncResetb` field from the PLL memory
+ * map of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LoSyncResetb_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -3226,6 +6364,19 @@ static inline int32_t adrv9001_NvsPllMemMap_LoSyncResetb_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the low synchronization sampler flip-flops power down state in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value indicating the desired power down state for the
+ * flip-flops.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LoSyncSamplerFlopsPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -3237,6 +6388,18 @@ static inline int32_t adrv9001_NvsPllMemMap_LoSyncSamplerFlopsPd_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the low synchronization sampler flip-flops
+ * power-down status from a specified register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LoSyncSamplerFlopsPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -3251,6 +6414,19 @@ static inline int32_t adrv9001_NvsPllMemMap_LoSyncSamplerFlopsPd_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the low input buffer power down state for the low sync sampler in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value indicating the desired power down state (0 or 1)
+ * for the low input buffer.
+ * @return Returns the status of the write operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LoSyncSamplerLoInputBufPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -3262,6 +6438,19 @@ static inline int32_t adrv9001_NvsPllMemMap_LoSyncSamplerLoInputBufPd_Set(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the low input buffer power down status from a specific
+ * register of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved status will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LoSyncSamplerLoInputBufPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -3276,6 +6465,19 @@ static inline int32_t adrv9001_NvsPllMemMap_LoSyncSamplerLoInputBufPd_Get(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the lock detect reset bit in the NVS PLL memory map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value that indicates the state to set for the lock
+ * detect reset bit.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LockDetectResetb_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -3287,6 +6489,17 @@ static inline int32_t adrv9001_NvsPllMemMap_LockDetectResetb_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the lock detection reset value from the PLL memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL instance to
+ * read from.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LockDetectResetb_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -3301,6 +6514,19 @@ static inline int32_t adrv9001_NvsPllMemMap_LockDetectResetb_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the lock detection count in the NVS PLL memory map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the lock detection count.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LockdetCnt_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -3312,6 +6538,18 @@ static inline int32_t adrv9001_NvsPllMemMap_LockdetCnt_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the lock detection count from a specified PLL memory map
+ * instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL memory map
+ * instance.
+ * @param value A pointer to a uint8_t variable where the retrieved lock
+ * detection count will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LockdetCnt_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -3326,6 +6564,18 @@ static inline int32_t adrv9001_NvsPllMemMap_LockdetCnt_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the lock detection mode in the ADRV9001 PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the lock detection mode
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LockdetMode_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -3337,6 +6587,19 @@ static inline int32_t adrv9001_NvsPllMemMap_LockdetMode_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the lock detection mode value from a specific register of
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved lock
+ * detection mode value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LockdetMode_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -3351,6 +6614,19 @@ static inline int32_t adrv9001_NvsPllMemMap_LockdetMode_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the Logen divide mode in the NVS PLL memory map for the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the divide mode value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LogenDivideMode_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -3362,6 +6638,17 @@ static inline int32_t adrv9001_NvsPllMemMap_LogenDivideMode_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the Logen divide mode value from the NVS PLL memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved Logen divide
+ * mode value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LogenDivideMode_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -3376,6 +6663,19 @@ static inline int32_t adrv9001_NvsPllMemMap_LogenDivideMode_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the Logen input buffer power down state in the ADRV9001 PLL
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A uint8_t value indicating the desired power down state for the
+ * Logen input buffer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LogenInbufPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -3387,6 +6687,18 @@ static inline int32_t adrv9001_NvsPllMemMap_LogenInbufPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the Logen Inbuf Power Down status from the NVS PLL memory
+ * map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved status will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LogenInbufPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -3401,6 +6713,19 @@ static inline int32_t adrv9001_NvsPllMemMap_LogenInbufPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the Logarithmic Enable (Logen) power-down state in the NVS PLL
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value indicating the desired power-down state to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LogenPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -3412,6 +6737,17 @@ static inline int32_t adrv9001_NvsPllMemMap_LogenPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the Logen power-down status from the NVS PLL memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved Logen power-
+ * down status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LogenPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -3426,6 +6762,19 @@ static inline int32_t adrv9001_NvsPllMemMap_LogenPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the Logen Quad Divider Power Down state in the ADRV9001 PLL
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A uint8_t value that indicates the desired power down state for
+ * the Logen Quad Divider.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LogenQuadDivPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -3437,6 +6786,18 @@ static inline int32_t adrv9001_NvsPllMemMap_LogenQuadDivPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the Logen Quad Divider Power Down field from a
+ * specified register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LogenQuadDivPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -3451,6 +6812,19 @@ static inline int32_t adrv9001_NvsPllMemMap_LogenQuadDivPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the Logen reset state in the NVS PLL memory map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value indicating the desired state to set for the
+ * Logen reset.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LogenReset_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -3462,6 +6836,17 @@ static inline int32_t adrv9001_NvsPllMemMap_LogenReset_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the Logen reset status from the NVS PLL memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved Logen reset
+ * status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LogenReset_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -3476,6 +6861,19 @@ static inline int32_t adrv9001_NvsPllMemMap_LogenReset_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the high resistance value for the Logen VCO buffer in the
+ * ADRV9001 PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the Logen VCO buffer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LogenVcoBufHighR_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -3487,6 +6885,19 @@ static inline int32_t adrv9001_NvsPllMemMap_LogenVcoBufHighR_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the high byte value of the Logen VCO buffer from the
+ * specified PLL memory map.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved high byte
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_LogenVcoBufHighR_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -3501,6 +6912,19 @@ static inline int32_t adrv9001_NvsPllMemMap_LogenVcoBufHighR_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the synchronization enable value for the clock generator in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value that indicates the synchronization enable
+ * setting to be applied.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_McsClkgenSyncEnable_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -3512,6 +6936,19 @@ static inline int32_t adrv9001_NvsPllMemMap_McsClkgenSyncEnable_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the synchronization enable status from the clock generator
+ * register of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved
+ * synchronization enable status will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_McsClkgenSyncEnable_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -3526,6 +6963,19 @@ static inline int32_t adrv9001_NvsPllMemMap_McsClkgenSyncEnable_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the clock divider synchronization enable for the specified
+ * instance of the NVS PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value that indicates the synchronization enable
+ * setting to be applied.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_McsDeviceClkDividerSyncEnable_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -3537,6 +6987,19 @@ static inline int32_t adrv9001_NvsPllMemMap_McsDeviceClkDividerSyncEnable_Set(vo
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the synchronized clock divider value from a specific
+ * register of the `adrv9001` device.
+ *
+ * @param device A pointer to the device structure that represents the
+ * `adrv9001` device.
+ * @param instance An enumerated value representing the specific instance of the
+ * `NvsPllMemMap`.
+ * @param value A pointer to a `uint8_t` variable where the retrieved clock
+ * divider value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_McsDeviceClkDividerSyncEnable_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -3551,6 +7014,19 @@ static inline int32_t adrv9001_NvsPllMemMap_McsDeviceClkDividerSyncEnable_Get(vo
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the digital clock synchronization enable value in the ADRV9001
+ * NVS PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value that indicates the desired state for the digital
+ * clock synchronization enable.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_McsDigitalClockSyncEnable_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -3562,6 +7038,18 @@ static inline int32_t adrv9001_NvsPllMemMap_McsDigitalClockSyncEnable_Set(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the digital clock synchronization enable status from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock sync
+ * enable status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_McsDigitalClockSyncEnable_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -3576,6 +7064,19 @@ static inline int32_t adrv9001_NvsPllMemMap_McsDigitalClockSyncEnable_Get(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the MCS enable field in the NVS PLL memory map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value that indicates the state to set for the MCS
+ * enable field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_McsEnable_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -3587,6 +7088,19 @@ static inline int32_t adrv9001_NvsPllMemMap_McsEnable_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided variable.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param instance An enumerated value indicating the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_McsEnable_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -3601,6 +7115,19 @@ static inline int32_t adrv9001_NvsPllMemMap_McsEnable_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the SYSREF enable configuration for the JESD interface in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value indicating the desired SYSREF enable state (0 or
+ * 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_McsJesdSysrefEnable_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -3612,6 +7139,19 @@ static inline int32_t adrv9001_NvsPllMemMap_McsJesdSysrefEnable_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the SYSREF enable status from the JESD register of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved SYSREF
+ * enable status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_McsJesdSysrefEnable_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -3626,6 +7166,18 @@ static inline int32_t adrv9001_NvsPllMemMap_McsJesdSysrefEnable_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the pulse delay for the MCS in the NVS PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the pulse delay value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_McsPulseDelay_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -3637,6 +7189,19 @@ static inline int32_t adrv9001_NvsPllMemMap_McsPulseDelay_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the pulse delay value from a specific register in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved pulse delay
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_McsPulseDelay_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -3651,6 +7216,18 @@ static inline int32_t adrv9001_NvsPllMemMap_McsPulseDelay_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the pulse delay for the digital SerDes in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the pulse delay value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_McsPulseDelayDigSerdes_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -3662,6 +7239,19 @@ static inline int32_t adrv9001_NvsPllMemMap_McsPulseDelayDigSerdes_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the pulse delay value from the digital SerDes configuration
+ * of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved pulse delay
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_McsPulseDelayDigSerdes_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -3676,6 +7266,18 @@ static inline int32_t adrv9001_NvsPllMemMap_McsPulseDelayDigSerdes_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the pulse width for the digital SERDES in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the pulse width value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_McsPulseWidthDigSerdes_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -3687,6 +7289,19 @@ static inline int32_t adrv9001_NvsPllMemMap_McsPulseWidthDigSerdes_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the pulse width configuration from a specific register in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved pulse width
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_McsPulseWidthDigSerdes_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -3701,6 +7316,18 @@ static inline int32_t adrv9001_NvsPllMemMap_McsPulseWidthDigSerdes_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the `McsResetb` field in the `NvsPllMemMap` register for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * `NvsPllMemMap`.
+ * @param value An 8-bit value to be written to the `McsResetb` field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_McsResetb_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -3712,6 +7339,18 @@ static inline int32_t adrv9001_NvsPllMemMap_McsResetb_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `McsResetb` field from a specified instance
+ * of the NVS PLL memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_McsResetb_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -3726,6 +7365,19 @@ static inline int32_t adrv9001_NvsPllMemMap_McsResetb_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the synchronization enable value for the MCS SDM in the NVS PLL
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value that indicates the synchronization enable state
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_McsSdmSyncEnable_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -3737,6 +7389,18 @@ static inline int32_t adrv9001_NvsPllMemMap_McsSdmSyncEnable_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the SDM synchronization enable status from the NVS PLL
+ * memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved SDM sync
+ * enable status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_McsSdmSyncEnable_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -3751,6 +7415,19 @@ static inline int32_t adrv9001_NvsPllMemMap_McsSdmSyncEnable_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the alignment configuration for the MCS SerDes in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the alignment value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_McsSerdesAlign_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -3762,6 +7439,18 @@ static inline int32_t adrv9001_NvsPllMemMap_McsSerdesAlign_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the aligned value from the MCS SerDes register for the
+ * specified PLL instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL instance to
+ * access.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_McsSerdesAlign_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -3777,6 +7466,18 @@ static inline int32_t adrv9001_NvsPllMemMap_McsSerdesAlign_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the SPI status from a specific register in the NVS PLL
+ * memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved status value
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_McsSpiStatus_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -3791,6 +7492,18 @@ static inline int32_t adrv9001_NvsPllMemMap_McsSpiStatus_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the wait count for the NVS PLL memory map in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the wait count value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_McsWaitCount_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -3802,6 +7515,18 @@ static inline int32_t adrv9001_NvsPllMemMap_McsWaitCount_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the wait count value from a specific register in the NVS PLL
+ * memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved wait count
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_McsWaitCount_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -3816,6 +7541,19 @@ static inline int32_t adrv9001_NvsPllMemMap_McsWaitCount_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the PLL memory map for a specified instance by writing values to
+ * specific registers.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type representing the specific instance of the
+ * PLL memory map.
+ * @param value A 32-bit unsigned integer value to be written to the PLL memory
+ * map.
+ * @return Returns the status of the last write operation, indicating success
+ * (0) or failure (non-zero error code).
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Mod0_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint32_t value)
@@ -3833,6 +7571,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Mod0_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a 24-bit value from a specified PLL memory map by reading
+ * multiple registers.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific PLL memory map
+ * instance to access.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Mod0_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint32_t *value)
@@ -3855,6 +7606,18 @@ static inline int32_t adrv9001_NvsPllMemMap_Mod0_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the memory map for the NVS PLL module by writing specified values
+ * to specific registers.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A 32-bit unsigned integer value to be written to the memory map.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Mod1_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint32_t value)
@@ -3872,6 +7635,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Mod1_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a 24-bit value from a specific memory map for the NVS PLL
+ * module.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a 32-bit integer where the retrieved value will be
+ * stored.
+ * @return Returns the status of the last read operation, indicating success (0)
+ * or failure (non-zero). The retrieved 24-bit value is stored in the
+ * location pointed to by the `value` parameter.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Mod1_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint32_t *value)
@@ -3894,6 +7670,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Mod1_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the Mod2 configuration for the NVS PLL by writing to specific
+ * memory-mapped registers.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A 32-bit unsigned integer containing the value to be written to
+ * the PLL configuration registers.
+ * @return Returns the status of the last write operation, which indicates
+ * success (0) or an error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Mod2_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint32_t value)
@@ -3911,6 +7700,18 @@ static inline int32_t adrv9001_NvsPllMemMap_Mod2_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a 24-bit value from a specified PLL memory map by reading
+ * three consecutive registers.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL memory map
+ * instance.
+ * @param value A pointer to a 32-bit integer where the retrieved value will be
+ * stored.
+ * @return Returns the status of the last read operation, with `value`
+ * containing the combined 24-bit result from the three registers.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Mod2_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint32_t *value)
@@ -3934,6 +7735,18 @@ static inline int32_t adrv9001_NvsPllMemMap_Mod2_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Mpend_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -3948,6 +7761,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Mpend_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the number of dither bits in the PLL memory map for a specified
+ * device instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the number of dither bits
+ * to set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_NumDitherBits_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -3959,6 +7785,18 @@ static inline int32_t adrv9001_NvsPllMemMap_NumDitherBits_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the number of dither bits from the PLL memory map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL memory map
+ * instance.
+ * @param value A pointer to a uint8_t variable where the retrieved number of
+ * dither bits will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_NumDitherBits_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -3973,6 +7811,18 @@ static inline int32_t adrv9001_NvsPllMemMap_NumDitherBits_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the PFD clock edge configuration in the ADRV9001 PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit integer representing the desired clock edge
+ * configuration.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_PfdClockEdge_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -3984,6 +7834,18 @@ static inline int32_t adrv9001_NvsPllMemMap_PfdClockEdge_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the PFD clock edge configuration from a specified PLL memory
+ * map instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL memory map
+ * instance.
+ * @param value A pointer to a uint8_t variable where the retrieved clock edge
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_PfdClockEdge_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -3998,6 +7860,19 @@ static inline int32_t adrv9001_NvsPllMemMap_PfdClockEdge_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the PFD reset value in the NVS PLL memory map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit integer representing the value to set for the PFD
+ * reset.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_PfdResetb_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -4009,6 +7884,18 @@ static inline int32_t adrv9001_NvsPllMemMap_PfdResetb_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the PFD reset status from the PLL memory map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL instance to
+ * access.
+ * @param value A pointer to a uint8_t variable where the retrieved PFD reset
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_PfdResetb_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -4023,6 +7910,19 @@ static inline int32_t adrv9001_NvsPllMemMap_PfdResetb_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the Phase Frequency Detector (PFD) width in the NVS PLL memory
+ * map for a specified device instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the desired PFD width
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_PfdWidth_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -4034,6 +7934,18 @@ static inline int32_t adrv9001_NvsPllMemMap_PfdWidth_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the PFD width value from the PLL memory map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL instance to
+ * read from.
+ * @param value A pointer to a uint8_t variable where the retrieved PFD width
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_PfdWidth_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -4048,6 +7960,19 @@ static inline int32_t adrv9001_NvsPllMemMap_PfdWidth_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the phase adjustment value in the NVS PLL memory map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A 32-bit unsigned integer representing the phase adjustment
+ * value to be set.
+ * @return Returns the status of the last write operation, where a value of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Phadj_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint32_t value)
@@ -4065,6 +7990,20 @@ static inline int32_t adrv9001_NvsPllMemMap_Phadj_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a 24-bit value from specific registers of a device's PLL
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type indicating the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the last read operation, which indicates
+ * success (0) or failure (non-zero). The retrieved 24-bit value is
+ * stored in the location pointed to by the `value` parameter.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Phadj_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint32_t *value)
@@ -4088,6 +8027,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Phadj_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the phase difference value from the NVS PLL memory map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved phase
+ * difference value will be stored.
+ * @return Returns the status of the last read operation, with a value of 0
+ * indicating success and a non-zero value indicating an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Phdiff_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint32_t *value)
@@ -4111,6 +8063,20 @@ static inline int32_t adrv9001_NvsPllMemMap_Phdiff_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a 24-bit value from a specified memory map of the `adrv9001`
+ * device.
+ *
+ * @param device A pointer to the device structure representing the `adrv9001`
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a 32-bit integer where the retrieved value will be
+ * stored.
+ * @return Returns the status of the last read operation, indicating success (0)
+ * or failure (non-zero). The retrieved 24-bit value is stored in the
+ * location pointed to by `value`.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Poai_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint32_t *value)
@@ -4134,6 +8100,18 @@ static inline int32_t adrv9001_NvsPllMemMap_Poai_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a 24-bit value from a specific memory-mapped register for
+ * the PLL instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL instance to
+ * access.
+ * @param value A pointer to a 32-bit integer where the retrieved value will be
+ * stored.
+ * @return Returns the status of the last read operation, which indicates
+ * success (0) or an error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Poaq_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint32_t *value)
@@ -4156,6 +8134,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Poaq_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the prescaler power-down state in the NVS PLL memory map for a
+ * given device instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the prescaler power-down
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_PrescalerPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -4167,6 +8158,18 @@ static inline int32_t adrv9001_NvsPllMemMap_PrescalerPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the prescaler value from the NVS PLL memory map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved prescaler
+ * value will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_PrescalerPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -4181,6 +8184,19 @@ static inline int32_t adrv9001_NvsPllMemMap_PrescalerPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the precision bias for the NVS PLL memory map in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the precision bias value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_PrscBias_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -4192,6 +8208,19 @@ static inline int32_t adrv9001_NvsPllMemMap_PrscBias_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the bias value from the PLL memory map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved bias value
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_PrscBias_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -4207,6 +8236,19 @@ static inline int32_t adrv9001_NvsPllMemMap_PrscBias_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the status of the `Psbusy` field from a specific register in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Psbusy_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -4221,6 +8263,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Psbusy_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the PSEN field in the NVS PLL memory map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the PSEN field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Psen_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -4232,6 +8287,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Psen_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Psen_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -4246,6 +8314,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Psen_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the Qthr value in the NVS PLL memory map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the Qthr field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Qthr_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -4257,6 +8338,18 @@ static inline int32_t adrv9001_NvsPllMemMap_Qthr_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific value from a hardware register and stores it in
+ * the provided pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Qthr_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -4271,6 +8364,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Qthr_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the quick frequency calibration enable value in the ADRV9001 PLL
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A uint8_t value that indicates the enable state for quick
+ * frequency calibration.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_QuickFreqCalEn_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -4282,6 +8388,18 @@ static inline int32_t adrv9001_NvsPllMemMap_QuickFreqCalEn_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the quick frequency calibration enable status from a
+ * specified PLL memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL memory map
+ * instance.
+ * @param value A pointer to a uint8_t variable where the retrieved calibration
+ * enable status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_QuickFreqCalEn_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -4296,6 +8414,19 @@ static inline int32_t adrv9001_NvsPllMemMap_QuickFreqCalEn_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the quick frequency calibration threshold for the specified PLL
+ * instance in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific PLL instance to
+ * configure.
+ * @param value An 8-bit unsigned integer representing the threshold value to
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_QuickFreqCalThreshold_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -4307,6 +8438,18 @@ static inline int32_t adrv9001_NvsPllMemMap_QuickFreqCalThreshold_Set(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the quick frequency calibration threshold value from a
+ * specified PLL memory map instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL memory map
+ * instance.
+ * @param value A pointer to a uint8_t variable where the retrieved threshold
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_QuickFreqCalThreshold_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -4321,6 +8464,19 @@ static inline int32_t adrv9001_NvsPllMemMap_QuickFreqCalThreshold_Get(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the frequency tuning word for the NVS PLL memory map in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the frequency tuning word
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ReadEffectFtw_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -4332,6 +8488,18 @@ static inline int32_t adrv9001_NvsPllMemMap_ReadEffectFtw_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Reads the effect frequency tuning word from the NVS PLL memory map.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the read value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_ReadEffectFtw_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -4346,6 +8514,18 @@ static inline int32_t adrv9001_NvsPllMemMap_ReadEffectFtw_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the reference clock divide ratio in the ADRV9001 PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the divide ratio to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_RefClkDivideRatio_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -4357,6 +8537,18 @@ static inline int32_t adrv9001_NvsPllMemMap_RefClkDivideRatio_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the reference clock divide ratio from a specific PLL memory
+ * map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL instance to
+ * read from.
+ * @param value A pointer to a uint8_t variable where the retrieved divide ratio
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_RefClkDivideRatio_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -4371,6 +8563,19 @@ static inline int32_t adrv9001_NvsPllMemMap_RefClkDivideRatio_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the reference clock divider power-down state in the ADRV9001 PLL
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the reference clock divider power-down field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_RefClkDividerPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -4382,6 +8587,17 @@ static inline int32_t adrv9001_NvsPllMemMap_RefClkDividerPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the reference clock divider value from the PLL memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL memory map
+ * instance.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * divider value will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_RefClkDividerPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -4396,6 +8612,19 @@ static inline int32_t adrv9001_NvsPllMemMap_RefClkDividerPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the reference clock divider reset bit in the ADRV9001 PLL memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A uint8_t value that indicates the desired state to set for the
+ * reset bit.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_RefClkDividerResetb_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -4407,6 +8636,18 @@ static inline int32_t adrv9001_NvsPllMemMap_RefClkDividerResetb_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the reference clock divider reset value from a specified PLL
+ * memory map instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL memory map
+ * instance.
+ * @param value A pointer to a uint8_t variable where the retrieved reset value
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_RefClkDividerResetb_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -4421,6 +8662,18 @@ static inline int32_t adrv9001_NvsPllMemMap_RefClkDividerResetb_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the bias for the RF external low intermediate frequency amplifier
+ * in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the bias value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_RfExtloInAmpBias_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -4432,6 +8685,18 @@ static inline int32_t adrv9001_NvsPllMemMap_RfExtloInAmpBias_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the bias value for the RF external low intermediate
+ * frequency amplifier from a specific register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved bias value
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_RfExtloInAmpBias_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -4446,6 +8711,19 @@ static inline int32_t adrv9001_NvsPllMemMap_RfExtloInAmpBias_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF external local oscillator divide mode in the ADRV9001 PLL
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the divide mode.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_RfExtloInDivideMode_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -4457,6 +8735,18 @@ static inline int32_t adrv9001_NvsPllMemMap_RfExtloInDivideMode_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RF external local oscillator divide mode value from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_RfExtloInDivideMode_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -4471,6 +8761,19 @@ static inline int32_t adrv9001_NvsPllMemMap_RfExtloInDivideMode_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF external low-pass filter bypass configuration in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit value indicating the bypass configuration for the RF
+ * external low-pass filter.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_RfExtloInFiltByp_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -4482,6 +8785,19 @@ static inline int32_t adrv9001_NvsPllMemMap_RfExtloInFiltByp_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the filtered bypass value from a specific register in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_RfExtloInFiltByp_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -4496,6 +8812,18 @@ static inline int32_t adrv9001_NvsPllMemMap_RfExtloInFiltByp_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF external low input power down state in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value indicating the desired power down state.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_RfExtloInPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -4507,6 +8835,18 @@ static inline int32_t adrv9001_NvsPllMemMap_RfExtloInPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RF external low input power down status from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_RfExtloInPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -4521,6 +8861,19 @@ static inline int32_t adrv9001_NvsPllMemMap_RfExtloInPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF external low input swap configuration in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit integer representing the value to be written to the
+ * specified field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_RfExtloInSwapInputPn_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -4532,6 +8885,18 @@ static inline int32_t adrv9001_NvsPllMemMap_RfExtloInSwapInputPn_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_RfExtloInSwapInputPn_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -4546,6 +8911,19 @@ static inline int32_t adrv9001_NvsPllMemMap_RfExtloInSwapInputPn_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF external low output divider reset value in the ADRV9001
+ * PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the RF external low output divider reset.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_RfExtloOutDivReset_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -4557,6 +8935,18 @@ static inline int32_t adrv9001_NvsPllMemMap_RfExtloOutDivReset_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the reset value of the RF external low output divider from
+ * the NVS PLL memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_RfExtloOutDivReset_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -4571,6 +8961,19 @@ static inline int32_t adrv9001_NvsPllMemMap_RfExtloOutDivReset_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF external local oscillator output divide mode in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the divide mode value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_RfExtloOutDivideMode_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -4582,6 +8985,18 @@ static inline int32_t adrv9001_NvsPllMemMap_RfExtloOutDivideMode_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RF external local oscillator output divide mode from a
+ * specified register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved divide mode
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_RfExtloOutDivideMode_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -4596,6 +9011,19 @@ static inline int32_t adrv9001_NvsPllMemMap_RfExtloOutDivideMode_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power-down state of the RF external LO output in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value indicating the desired power-down state (0 or
+ * 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_RfExtloOutInbufPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -4607,6 +9035,18 @@ static inline int32_t adrv9001_NvsPllMemMap_RfExtloOutInbufPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_RfExtloOutInbufPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -4621,6 +9061,18 @@ static inline int32_t adrv9001_NvsPllMemMap_RfExtloOutInbufPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF external low output power down state in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value that indicates the desired power down state.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_RfExtloOutPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -4632,6 +9084,18 @@ static inline int32_t adrv9001_NvsPllMemMap_RfExtloOutPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RF external low output power down status from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_RfExtloOutPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -4646,6 +9110,18 @@ static inline int32_t adrv9001_NvsPllMemMap_RfExtloOutPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF LO buffer power down state in the ADRV9001 PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A uint8_t value indicating the desired power down state for the
+ * RF LO buffer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_RfLoBufPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -4657,6 +9133,18 @@ static inline int32_t adrv9001_NvsPllMemMap_RfLoBufPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RF LO buffer power down status from a specified PLL
+ * memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL memory map
+ * instance.
+ * @param value A pointer to a uint8_t variable where the retrieved buffer power
+ * down status will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_RfLoBufPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -4671,6 +9159,19 @@ static inline int32_t adrv9001_NvsPllMemMap_RfLoBufPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state of the Rx12 Lo1 input buffer in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value indicating the desired power down state (0 or
+ * 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Rx12Lo1InbufPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -4682,6 +9183,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Rx12Lo1InbufPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Rx12Lo1InbufPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -4696,6 +9210,18 @@ static inline int32_t adrv9001_NvsPllMemMap_Rx12Lo1InbufPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state of the Rx12 Lo2 input buffer in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value indicating the desired power down state.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Rx12Lo2InbufPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -4707,6 +9233,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Rx12Lo2InbufPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register from the device and stores
+ * it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Rx12Lo2InbufPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -4721,6 +9260,18 @@ static inline int32_t adrv9001_NvsPllMemMap_Rx12Lo2InbufPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power-down override for the Rx12 LoMux in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value that indicates the power-down state to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Rx12LomuxPdOverride_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -4732,6 +9283,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Rx12LomuxPdOverride_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the Rx12LomuxPdOverride field from a specific
+ * register in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Rx12LomuxPdOverride_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -4746,6 +9310,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Rx12LomuxPdOverride_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power-down override selection for the Rx12 LOMUX in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value that specifies the power-down override
+ * selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Rx12LomuxPdOverrideSel_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -4757,6 +9334,18 @@ static inline int32_t adrv9001_NvsPllMemMap_Rx12LomuxPdOverrideSel_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Rx12LomuxPdOverrideSel_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -4771,6 +9360,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Rx12LomuxPdOverrideSel_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS PLL memory map for the RX12 selection
+ * low register.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the specified field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Rx12SelLo2_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -4782,6 +9384,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Rx12SelLo2_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific value from a hardware register and stores it in
+ * the provided pointer.
+ *
+ * @param device A pointer to the device structure used for hardware
+ * communication.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Rx12SelLo2_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -4796,6 +9411,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Rx12SelLo2_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state of the Rx34Lo1 input buffer in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value indicating the desired power down state (0 or
+ * 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Rx34Lo1InbufPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -4807,6 +9435,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Rx34Lo1InbufPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided variable.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Rx34Lo1InbufPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -4821,6 +9462,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Rx34Lo1InbufPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the input buffer power down state for the Rx34 low band in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value indicating the desired power down state (0 or 1)
+ * for the input buffer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Rx34Lo2InbufPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -4832,6 +9486,18 @@ static inline int32_t adrv9001_NvsPllMemMap_Rx34Lo2InbufPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Rx34Lo2InbufPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -4846,6 +9512,18 @@ static inline int32_t adrv9001_NvsPllMemMap_Rx34Lo2InbufPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power-down override for the Rx34 LoMux in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value that indicates the power-down override setting.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Rx34LomuxPdOverride_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -4857,6 +9535,18 @@ static inline int32_t adrv9001_NvsPllMemMap_Rx34LomuxPdOverride_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the Rx34Lomux power-down override setting from
+ * a specific register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Rx34LomuxPdOverride_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -4871,6 +9561,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Rx34LomuxPdOverride_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power-down override selection for the Rx34 LoMux in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the memory map.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Rx34LomuxPdOverrideSel_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -4882,6 +9585,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Rx34LomuxPdOverrideSel_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Rx34LomuxPdOverrideSel_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -4896,6 +9612,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Rx34LomuxPdOverrideSel_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS PLL memory map for the RX34
+ * selection.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the memory map.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Rx34SelLo2_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -4907,6 +9636,18 @@ static inline int32_t adrv9001_NvsPllMemMap_Rx34SelLo2_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Rx34SelLo2_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -4921,6 +9662,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Rx34SelLo2_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS PLL memory map for the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the specified field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Sda_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -4932,6 +9686,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Sda_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Sda_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -4946,6 +9713,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Sda_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the SDM bypass configuration in the NVS PLL memory map for the
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit integer representing the value to be written to the
+ * memory map.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_SdmByp_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -4957,6 +9737,17 @@ static inline int32_t adrv9001_NvsPllMemMap_SdmByp_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the SDM bypass value from the NVS PLL memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved SDM bypass
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_SdmByp_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -4971,6 +9762,19 @@ static inline int32_t adrv9001_NvsPllMemMap_SdmByp_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the fractional part of the SDM (Sigma-Delta Modulator) in the PLL
+ * (Phase-Locked Loop) memory map for a given device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type representing the specific instance of the
+ * PLL memory map.
+ * @param value A 32-bit unsigned integer representing the value to be set in
+ * the SDM fractional register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_SdmFrac_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint32_t value)
@@ -4988,6 +9792,19 @@ static inline int32_t adrv9001_NvsPllMemMap_SdmFrac_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the fractional value from the SDM (Sigma-Delta Modulator)
+ * registers of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * fractional value will be stored.
+ * @return Returns the status of the read operations, where a status of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_SdmFrac_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint32_t *value)
@@ -5010,6 +9827,19 @@ static inline int32_t adrv9001_NvsPllMemMap_SdmFrac_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the SDM interrupt configuration in the NVS PLL memory map for a
+ * specified device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A 16-bit unsigned integer representing the value to be set in
+ * the SDM interrupt configuration.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if any of the write operations fail.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_SdmInt_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint16_t value)
@@ -5024,6 +9854,17 @@ static inline int32_t adrv9001_NvsPllMemMap_SdmInt_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the SDM interrupt value from the NVS PLL memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved SDM
+ * interrupt value will be stored.
+ * @return Returns the status of the last read operation, indicating success (0)
+ * or failure (non-zero).
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_SdmInt_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint16_t *value)
@@ -5042,6 +9883,19 @@ static inline int32_t adrv9001_NvsPllMemMap_SdmInt_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the SDM power down state in the NVS PLL memory map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value indicating the desired power down state to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_SdmPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -5053,6 +9907,17 @@ static inline int32_t adrv9001_NvsPllMemMap_SdmPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the SDM power-down status from the NVS PLL memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved SDM power-
+ * down status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_SdmPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -5067,6 +9932,19 @@ static inline int32_t adrv9001_NvsPllMemMap_SdmPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the SDM reset bit in the NVS PLL memory map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value that indicates the desired state to set for the
+ * SDM reset bit.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_SdmResetb_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -5078,6 +9956,18 @@ static inline int32_t adrv9001_NvsPllMemMap_SdmResetb_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the SDM reset status from a specified PLL memory map
+ * instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL memory map
+ * instance.
+ * @param value A pointer to a uint8_t variable where the retrieved SDM reset
+ * status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_SdmResetb_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -5092,6 +9982,19 @@ static inline int32_t adrv9001_NvsPllMemMap_SdmResetb_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets a specific spare field in the NVS PLL memory map for the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the specified field.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Spares_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -5103,6 +10006,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Spares_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific spare value from the PLL memory map of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Spares_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -5118,6 +10034,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Spares_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the synchronization lock status from a specific register of
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating the specific instance of the
+ * PLL memory map to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved
+ * synchronization lock status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_SynLock_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -5132,6 +10061,17 @@ static inline int32_t adrv9001_NvsPllMemMap_SynLock_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the synthesizer power down state in the ADRV9001 PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A uint8_t value indicating the desired power down state to set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_SynthPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -5143,6 +10083,18 @@ static inline int32_t adrv9001_NvsPllMemMap_SynthPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the synthesizer power-down status from the NVS PLL memory
+ * map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved synthesizer
+ * power-down status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_SynthPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -5157,6 +10109,19 @@ static inline int32_t adrv9001_NvsPllMemMap_SynthPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the TC force value in the NVS PLL memory map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the memory map.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Tcforce_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -5168,6 +10133,18 @@ static inline int32_t adrv9001_NvsPllMemMap_Tcforce_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Tcforce_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -5182,6 +10159,18 @@ static inline int32_t adrv9001_NvsPllMemMap_Tcforce_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the TCFORCEN field in the NVS PLL memory map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value to be written to the TCFORCEN field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Tcforcen_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -5193,6 +10182,18 @@ static inline int32_t adrv9001_NvsPllMemMap_Tcforcen_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Tcforcen_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -5207,6 +10208,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Tcforcen_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the TCIDAC value in the NVS PLL memory map for a given device
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A 16-bit unsigned integer representing the TCIDAC value to be
+ * set.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if any of the write operations fail.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Tcidac_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint16_t value)
@@ -5221,6 +10235,18 @@ static inline int32_t adrv9001_NvsPllMemMap_Tcidac_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the TCIDAC value from the NVS PLL memory map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * TCIDAC value will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the read operations failed.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Tcidac_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint16_t *value)
@@ -5239,6 +10265,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Tcidac_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the TCPOL field in the NVS PLL memory map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the TCPOL field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Tcpol_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -5250,6 +10289,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Tcpol_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a device register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Tcpol_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -5264,6 +10316,18 @@ static inline int32_t adrv9001_NvsPllMemMap_Tcpol_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the TCUPD initialization value in the ADRV9001 PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the memory map.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Tcupdinit_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -5275,6 +10339,18 @@ static inline int32_t adrv9001_NvsPllMemMap_Tcupdinit_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific value from a hardware register and stores it in
+ * the provided pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Tcupdinit_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -5289,6 +10365,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Tcupdinit_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS PLL memory map for the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the specified field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the field write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Tsprsc_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -5300,6 +10389,18 @@ static inline int32_t adrv9001_NvsPllMemMap_Tsprsc_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Tsprsc_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -5314,6 +10415,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Tsprsc_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the Tszero field in the NVS PLL memory map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the Tszero field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Tszero_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -5325,6 +10439,18 @@ static inline int32_t adrv9001_NvsPllMemMap_Tszero_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the `Tszero` value from the PLL memory map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL memory map
+ * instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved `Tszero`
+ * value will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Tszero_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -5339,6 +10465,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Tszero_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state of the Tx12Lo1 input buffer in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value indicating the desired power down state (0 or
+ * 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Tx12Lo1InbufPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -5350,6 +10489,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Tx12Lo1InbufPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Tx12Lo1InbufPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -5364,6 +10516,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Tx12Lo1InbufPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state of the Tx12 Lo2 input buffer in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value indicating the desired power down state (0 or
+ * 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Tx12Lo2InbufPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -5375,6 +10540,18 @@ static inline int32_t adrv9001_NvsPllMemMap_Tx12Lo2InbufPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Tx12Lo2InbufPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -5389,6 +10566,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Tx12Lo2InbufPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power-down override for the Tx12 LOMUX in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value indicating the power-down state to be set (0 or
+ * 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Tx12LomuxPdOverride_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -5400,6 +10590,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Tx12LomuxPdOverride_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the Tx12 LoMux power-down override setting from
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Tx12LomuxPdOverride_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -5414,6 +10617,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Tx12LomuxPdOverride_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power-down override selection for the Tx12 LoMUX in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value that determines the power-down override
+ * selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Tx12LomuxPdOverrideSel_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -5425,6 +10641,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Tx12LomuxPdOverrideSel_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Tx12LomuxPdOverrideSel_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -5439,6 +10668,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Tx12LomuxPdOverrideSel_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the Tx12SelLo2 field in the NVS PLL memory map for the specified
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the Tx12SelLo2 field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Tx12SelLo2_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -5450,6 +10692,18 @@ static inline int32_t adrv9001_NvsPllMemMap_Tx12SelLo2_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific value from a hardware register and stores it in
+ * the provided pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Tx12SelLo2_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -5464,6 +10718,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Tx12SelLo2_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state of the Tx34Lo1 input buffer in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value indicating the desired power down state (0 or
+ * 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Tx34Lo1InbufPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -5475,6 +10742,18 @@ static inline int32_t adrv9001_NvsPllMemMap_Tx34Lo1InbufPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific value from a hardware register and stores it in
+ * the provided pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Tx34Lo1InbufPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -5489,6 +10768,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Tx34Lo1InbufPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power-down state of the Tx34Lo2 input buffer in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value indicating the desired power-down state (0 or
+ * 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Tx34Lo2InbufPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -5500,6 +10792,18 @@ static inline int32_t adrv9001_NvsPllMemMap_Tx34Lo2InbufPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Tx34Lo2InbufPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -5514,6 +10818,18 @@ static inline int32_t adrv9001_NvsPllMemMap_Tx34Lo2InbufPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power-down override for the Tx34 LoMux in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value that indicates the power-down override setting.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Tx34LomuxPdOverride_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -5525,6 +10841,18 @@ static inline int32_t adrv9001_NvsPllMemMap_Tx34LomuxPdOverride_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the Tx34LomuxPdOverride field from the NVS PLL
+ * memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Tx34LomuxPdOverride_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -5539,6 +10867,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Tx34LomuxPdOverride_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power-down override selection for the Tx34 LoMux in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value that specifies the power-down override
+ * selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Tx34LomuxPdOverrideSel_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -5550,6 +10891,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Tx34LomuxPdOverrideSel_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Tx34LomuxPdOverrideSel_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -5564,6 +10918,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Tx34LomuxPdOverrideSel_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the Tx34SelLo2 field in the NVS PLL memory map for the specified
+ * device instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the Tx34SelLo2 field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Tx34SelLo2_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -5575,6 +10942,18 @@ static inline int32_t adrv9001_NvsPllMemMap_Tx34SelLo2_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific value from a hardware register and stores it in
+ * the provided pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Tx34SelLo2_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -5589,6 +10968,19 @@ static inline int32_t adrv9001_NvsPllMemMap_Tx34SelLo2_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO ALC calibration enable value in the ADRV9001 PLL memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A uint8_t value that indicates the calibration enable state to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoAlcCalEn_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -5600,6 +10992,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoAlcCalEn_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO ALC calibration enable status from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved calibration
+ * enable status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoAlcCalEn_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -5614,6 +11018,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoAlcCalEn_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO ALC power down value in the ADRV9001 PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the VCO ALC power down field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoAlcPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -5625,6 +11041,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoAlcPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO ALC power down status from a specified register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved VCO ALC
+ * power down status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoAlcPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -5639,6 +11067,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoAlcPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO bias DAC level shift for a specified instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be shifted
+ * and written to the device.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoBiasDacLvlShift2maPmosEn_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -5650,6 +11091,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoBiasDacLvlShift2maPmosEn_Set(void
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO bias DAC level shift for a specified instance from
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved VCO bias DAC
+ * level shift value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoBiasDacLvlShift2maPmosEn_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -5664,6 +11118,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoBiasDacLvlShift2maPmosEn_Get(void
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO bias power-down state in the ADRV9001 PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A uint8_t value indicating the desired power-down state for the
+ * VCO bias.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoBiasPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -5675,6 +11141,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoBiasPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO bias power-down status from a specified PLL memory
+ * map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL instance to
+ * read from.
+ * @param value A pointer to a uint8_t variable where the retrieved VCO bias
+ * power-down status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoBiasPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -5689,6 +11167,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoBiasPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO bias reference value in the ADRV9001 PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the VCO bias reference
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoBiasRef_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -5700,6 +11190,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoBiasRef_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO bias reference value from a specified PLL memory map
+ * instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL memory map
+ * instance.
+ * @param value A pointer to a uint8_t variable where the retrieved VCO bias
+ * reference value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoBiasRef_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -5714,6 +11216,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoBiasRef_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO bias startup value in the ADRV9001 PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the VCO bias startup
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoBiasStartup_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -5725,6 +11239,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoBiasStartup_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO bias startup value from a specific register in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved VCO bias
+ * startup value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoBiasStartup_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -5739,6 +11266,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoBiasStartup_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO bias TCF value in the ADRV9001 PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the VCO bias TCF value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoBiasTcf_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -5750,6 +11289,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoBiasTcf_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO bias TCF value from a specified PLL memory map
+ * instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL memory map
+ * instance.
+ * @param value A pointer to a uint8_t variable where the retrieved VCO bias TCF
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoBiasTcf_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -5764,6 +11315,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoBiasTcf_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power-down state of the VCO buffer in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value indicating the desired power-down state for the
+ * VCO buffer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoBufPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -5775,6 +11338,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoBufPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO buffer power-down status from a specified PLL memory
+ * map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved VCO buffer
+ * power-down status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoBufPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -5789,6 +11364,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoBufPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO bypass RFILT1 configuration in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the specified field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoBypRfilt1_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -5800,6 +11387,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoBypRfilt1_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO bypass filter value from the specified PLL memory
+ * map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL memory map
+ * instance.
+ * @param value A pointer to a uint8_t variable where the retrieved filter value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoBypRfilt1_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -5814,6 +11413,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoBypRfilt1_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO bypass RFILT2 configuration in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the specified field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoBypRfilt2_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -5825,6 +11436,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoBypRfilt2_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoBypRfilt2_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -5839,6 +11462,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoBypRfilt2_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO bypass bias register in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the VCO bypass bias register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoBypassBiasr_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -5850,6 +11485,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoBypassBiasr_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO bypass bias register value from the specified device
+ * instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoBypassBiasr_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -5864,6 +11512,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoBypassBiasr_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the clock divider value for the VCO calibration in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the clock divider value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoCalAlcClkDiv_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -5875,6 +11536,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoCalAlcClkDiv_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO calibration clock divider value from a specified
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * divider value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoCalAlcClkDiv_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -5889,6 +11562,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoCalAlcClkDiv_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO calibration allocation initialization wait value in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the VCO calibration allocation wait.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoCalAlcInitWait_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -5900,6 +11586,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoCalAlcInitWait_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO calibration value from a specific register in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved VCO
+ * calibration value will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoCalAlcInitWait_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -5914,6 +11613,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoCalAlcInitWait_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO calibration allocation step in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the VCO calibration allocation step.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoCalAlcStep_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -5925,6 +11636,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoCalAlcStep_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO calibration step value from a specified register in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved VCO
+ * calibration step value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoCalAlcStep_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -5939,6 +11663,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoCalAlcStep_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO calibration allocation wait value in the ADRV9001 PLL
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the VCO calibration allocation wait.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoCalAlcWait_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -5950,6 +11687,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoCalAlcWait_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO calibration ALCC wait value from a specified
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoCalAlcWait_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -5965,6 +11714,17 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoCalAlcWait_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO calibration busy status from a specified register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved VCO
+ * calibration busy status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoCalBusy_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -5979,6 +11739,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoCalBusy_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Initializes the VCO calibration settings in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer that specifies the value to be written
+ * for VCO calibration.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoCalInit_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -5990,6 +11762,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoCalInit_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO calibration value from a specific register in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved VCO
+ * calibration value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoCalInit_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6004,6 +11789,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoCalInit_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO calibration initialization delay in the ADRV9001 PLL
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the VCO calibration initialization delay.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoCalInitDel_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -6015,6 +11813,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoCalInitDel_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO calibration initialization delay value from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoCalInitDel_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6029,6 +11839,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoCalInitDel_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO calibration logic reset bit in the ADRV9001 PLL memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A uint8_t value that indicates the state to set for the VCO
+ * calibration logic reset bit.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoCalLogicResetb_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -6040,6 +11863,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoCalLogicResetb_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO calibration logic reset status from a specified
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoCalLogicResetb_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6054,6 +11889,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoCalLogicResetb_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO calibration offset in the ADRV9001 PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the calibration offset
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoCalOffset_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -6065,6 +11912,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoCalOffset_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO calibration offset from a specified PLL memory map
+ * instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL memory map
+ * instance.
+ * @param value A pointer to a uint8_t variable where the retrieved VCO
+ * calibration offset will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoCalOffset_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6079,6 +11938,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoCalOffset_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO calibration reference monitor value in the ADRV9001 PLL
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the VCO calibration reference monitor.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoCalRefMonitor_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -6090,6 +11962,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoCalRefMonitor_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO calibration reference monitor value from a specified
+ * instance of the NVS PLL memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved VCO
+ * calibration reference monitor value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoCalRefMonitor_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6104,6 +11988,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoCalRefMonitor_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO calibration reference TCF value in the ADRV9001 PLL
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the VCO calibration reference TCF.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoCalRefTcf_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -6115,6 +12012,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoCalRefTcf_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO calibration reference TCF value from a specified PLL
+ * memory map instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL memory map
+ * instance.
+ * @param value A pointer to a uint8_t variable where the retrieved TCF value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoCalRefTcf_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6129,6 +12038,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoCalRefTcf_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO calibration TCF PD value in the ADRV9001 PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the VCO calibration TCF PD.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoCalTcfPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -6140,6 +12061,17 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoCalTcfPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO calibration TCF PD value from a specified register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoCalTcfPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6154,6 +12086,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoCalTcfPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the coarse calibration enable value for the VCO in the ADRV9001
+ * PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A uint8_t value that indicates the coarse calibration enable
+ * setting.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoCoarseCalEn_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -6165,6 +12110,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoCoarseCalEn_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the coarse calibration enable status from the VCO PLL memory
+ * map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved calibration
+ * enable status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoCoarseCalEn_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6179,6 +12136,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoCoarseCalEn_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO compensation bypass bias register in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the bias register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoCompBypBiasr_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -6190,6 +12159,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoCompBypBiasr_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO compensation bypass bias register value from the
+ * specified device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoCompBypBiasr_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6205,6 +12187,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoCompBypBiasr_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO compensation output value from a specified PLL
+ * memory map instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL memory map
+ * instance.
+ * @param value A pointer to a uint8_t variable where the retrieved VCO
+ * compensation output will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoCompOut_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6219,6 +12213,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoCompOut_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO compensation power-down state in the ADRV9001 PLL memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit value indicating the power-down state to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoCompPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -6230,6 +12236,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoCompPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO compensation power-down status from a specific
+ * register in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved VCO
+ * compensation power-down status will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoCompPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6244,6 +12263,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoCompPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO core software disable state in the ADRV9001 PLL memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A uint8_t value indicating the desired state to set for the VCO
+ * core software disable.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoCoreSwDisable_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -6255,6 +12287,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoCoreSwDisable_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO core software disable status from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved VCO core
+ * disable status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoCoreSwDisable_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6269,6 +12313,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoCoreSwDisable_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO frequency adjustment value in the ADRV9001 PLL memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A 16-bit unsigned integer representing the VCO frequency
+ * adjustment value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoFAlc_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint16_t value)
@@ -6283,6 +12340,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoFAlc_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO frequency allocation value from the specified PLL
+ * memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL instance to
+ * access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved VCO
+ * frequency allocation value will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the read operations failed.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoFAlc_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint16_t *value)
@@ -6301,6 +12370,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoFAlc_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO frequency allocation enable field in the PLL memory map
+ * for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A uint8_t value that indicates whether to enable or disable the
+ * VCO frequency allocation.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoFAlcEn_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -6312,6 +12394,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoFAlcEn_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO fractional allocation enable status from a specific
+ * register in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved VCO
+ * fractional allocation enable status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoFAlcEn_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6326,6 +12421,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoFAlcEn_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the coarse band value for the VCO in the PLL memory map of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A 16-bit unsigned integer representing the coarse band value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoFCoarseBand_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint16_t value)
@@ -6340,6 +12448,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoFCoarseBand_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the coarse band value from the VCO configuration of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * coarse band value will be stored.
+ * @return Returns the status of the read operations, where a status of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoFCoarseBand_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint16_t *value)
@@ -6358,6 +12479,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoFCoarseBand_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the coarse band enable value for the VCO in the ADRV9001 PLL
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A uint8_t value that indicates the coarse band enable setting to
+ * be applied.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoFCoarseBandEn_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -6369,6 +12503,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoFCoarseBandEn_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the coarse band enable value from the VCO configuration of
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved coarse band
+ * enable value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoFCoarseBandEn_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6383,6 +12530,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoFCoarseBandEn_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO fine band value in the ADRV9001 PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the fine band value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoFFineBand_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -6394,6 +12553,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoFFineBand_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the fine band value from the VCO frequency register of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved fine band
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoFFineBand_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6408,6 +12580,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoFFineBand_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO fine band enable value in the ADRV9001 PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the VCO fine band enable.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoFFineBandEn_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -6419,6 +12603,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoFFineBandEn_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the fine band enable value from the VCOF register of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved fine band
+ * enable value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoFFineBandEn_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6433,6 +12630,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoFFineBandEn_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO fine band index enable value in the ADRV9001 PLL memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the VCO fine band index enable.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoFFineBandIndexEn_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -6444,6 +12654,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoFFineBandIndexEn_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO fine band index enable value from a specified
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoFFineBandIndexEn_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6458,6 +12680,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoFFineBandIndexEn_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO fine calibration enable field in the ADRV9001 PLL memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit value to be written to the VCO fine calibration enable
+ * field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoFineCalEn_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -6469,6 +12704,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoFineCalEn_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO fine calibration enable value from a specified
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoFineCalEn_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6483,6 +12730,17 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoFineCalEn_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO initialization ALC value in the ADRV9001 PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the ALC value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoInitAlcValue_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -6494,6 +12752,17 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoInitAlcValue_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO initialization ALC value from a specified register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved ALC value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoInitAlcValue_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6508,6 +12777,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoInitAlcValue_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO LDO bypass configuration in the ADRV9001 PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit integer representing the value to be written to the
+ * memory map.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoLdoBypass_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -6519,6 +12800,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoLdoBypass_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO LDO bypass setting from the specified PLL memory
+ * map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved VCO LDO
+ * bypass value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoLdoBypass_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6533,6 +12826,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoLdoBypass_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the thermal shutdown configuration for the VCO LDO in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A uint8_t value that indicates the desired state for the thermal
+ * shutdown configuration.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoLdoDisThermalShutdown_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -6544,6 +12850,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoLdoDisThermalShutdown_Set(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO LDO disable thermal shutdown status from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved status will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoLdoDisThermalShutdown_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6558,6 +12876,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoLdoDisThermalShutdown_Get(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO LDO filter bypass configuration in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value indicating the desired bypass configuration for
+ * the VCO LDO filter.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoLdoFilterBypass_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -6569,6 +12899,17 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoLdoFilterBypass_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO LDO filter bypass setting from a specified register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved filter
+ * bypass value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoLdoFilterBypass_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6583,6 +12924,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoLdoFilterBypass_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO LDO current limit increment in the ADRV9001 PLL memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the new current limit
+ * increment value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoLdoIlimitInc_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -6594,6 +12948,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoLdoIlimitInc_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO LDO current limit increment value from a specified
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoLdoIlimitInc_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6608,6 +12974,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoLdoIlimitInc_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power-down state of the VCO LDO in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A uint8_t value indicating the desired power-down state (0 or
+ * 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoLdoPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -6619,6 +12997,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoLdoPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO LDO power-down status from a specified register in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved VCO LDO
+ * power-down status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoLdoPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6634,6 +13025,17 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoLdoPd_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO LDO status from a specified PLL memory map instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL memory map
+ * instance.
+ * @param value A pointer to a uint8_t variable where the retrieved VCO LDO
+ * status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoLdoStatus_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6648,6 +13050,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoLdoStatus_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the thermal shutdown configuration for the VCO LDO in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A uint8_t value that specifies the thermal shutdown
+ * configuration to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoLdoThermalShutdown0c_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -6659,6 +13074,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoLdoThermalShutdown0c_Set(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the thermal shutdown status of the VCO LDO from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved thermal
+ * shutdown status will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoLdoThermalShutdown0c_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6673,6 +13101,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoLdoThermalShutdown0c_Get(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO LDO output selection in the ADRV9001 PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the desired output
+ * selection value.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoLdoVoutSel_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -6684,6 +13124,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoLdoVoutSel_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO LDO output selection value from a specific register
+ * in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved VCO LDO
+ * output selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoLdoVoutSel_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6698,6 +13151,17 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoLdoVoutSel_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO LDO VOUT trim value in the ADRV9001 PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the trim value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoLdoVoutTrim_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -6709,6 +13173,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoLdoVoutTrim_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO LDO output trim value from a specified register in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved trim value
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoLdoVoutTrim_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6723,6 +13200,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoLdoVoutTrim_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO output level in the ADRV9001 PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the desired VCO output
+ * level.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoOutLvl_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -6734,6 +13223,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoOutLvl_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO output level from a specified PLL memory map
+ * instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL memory map
+ * instance.
+ * @param value A pointer to a uint8_t variable where the retrieved VCO output
+ * level will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoOutLvl_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6748,6 +13249,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoOutLvl_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO power down state in the ADRV9001 PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A uint8_t value indicating the desired power down state for the
+ * VCO.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -6759,6 +13272,17 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO power down status from a specified PLL memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL instance to
+ * read from.
+ * @param value A pointer to a uint8_t variable where the retrieved VCO power
+ * down status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6773,6 +13297,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the LDO level for the VCO peak detector in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the desired LDO level to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoPeakDetLdoLvl_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -6784,6 +13320,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoPeakDetLdoLvl_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the LDO level for the VCO peak detector from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved LDO level
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoPeakDetLdoLvl_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6798,6 +13346,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoPeakDetLdoLvl_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO peak detector power down value in the ADRV9001 PLL memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A uint8_t value that indicates the power down state to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoPeakDetPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -6809,6 +13369,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoPeakDetPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO peak detector power down status from a specified
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoPeakDetPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6823,6 +13395,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoPeakDetPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO PTAT bias Rcal value in the ADRV9001 PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the memory map.
+ * @return Returns the status of the write operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoPtatBiasRcal_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -6834,6 +13418,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoPtatBiasRcal_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO PTAT bias RCAL value from a specified register and
+ * stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoPtatBiasRcal_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6848,6 +13444,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoPtatBiasRcal_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO PTAT power-down state in the ADRV9001 PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A uint8_t value indicating the desired power-down state for the
+ * VCO PTAT.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoPtatPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -6859,6 +13467,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoPtatPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO PTAT power-down status from a specified PLL memory
+ * map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL memory map
+ * instance.
+ * @param value A pointer to a uint8_t variable where the retrieved VCO PTAT
+ * power-down status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoPtatPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6873,6 +13493,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoPtatPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the startup leakage value for the VCO PTAT in the ADRV9001 PLL
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the leakage value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoPtatStartupLeakb_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -6884,6 +13517,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoPtatStartupLeakb_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO PTAT startup leakage value from a specified
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoPtatStartupLeakb_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6898,6 +13543,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoPtatStartupLeakb_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO temperature calibration reset bit in the ADRV9001 PLL
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A uint8_t value that indicates the desired state to set for the
+ * reset bit.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoTcCalResetb_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -6909,6 +13567,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoTcCalResetb_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO temperature calibration reset value from a specified
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoTcCalResetb_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6923,6 +13594,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoTcCalResetb_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO TC IDAC bypass bias filter value in the ADRV9001 PLL
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the VCO TC IDAC bypass bias filter.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoTcIdacBypBiasFilt_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -6934,6 +13618,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoTcIdacBypBiasFilt_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoTcIdacBypBiasFilt_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6948,6 +13644,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoTcIdacBypBiasFilt_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO TC IDAC scale LSB in the ADRV9001 PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the memory map.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoTcIdacScaleLsb_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -6959,6 +13667,17 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoTcIdacScaleLsb_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO TC IDAC scale LSB value from a specified register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved scale LSB
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoTcIdacScaleLsb_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6973,6 +13692,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoTcIdacScaleLsb_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO TC mirror IOUT value in the ADRV9001 PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the VCO TC mirror IOUT.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoTcMirrorIout_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -6984,6 +13715,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoTcMirrorIout_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO temperature compensation mirror output value from a
+ * specified PLL memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL memory map
+ * instance.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoTcMirrorIout_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -6998,6 +13741,17 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoTcMirrorIout_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO TC PD field in the ADRV9001 PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A uint8_t value to be written to the VCO TC PD field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoTcPd_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -7009,6 +13763,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoTcPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO temperature coefficient power-down status from a
+ * specified PLL memory map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoTcPd_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -7023,6 +13789,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoTcPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO TC RFILT1 selection in the ADRV9001 PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the memory map.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoTcRfilt1Sel_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -7034,6 +13812,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoTcRfilt1Sel_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoTcRfilt1Sel_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -7048,6 +13838,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoTcRfilt1Sel_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO TC RFILT2 selection value in the ADRV9001 PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the VCO TC RFILT2 selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoTcRfilt2Sel_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -7059,6 +13861,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoTcRfilt2Sel_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoTcRfilt2Sel_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -7073,6 +13887,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoTcRfilt2Sel_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO temperature compensation tracking enable value in the
+ * ADRV9001 PLL memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A uint8_t value that indicates whether to enable or disable the
+ * VCO temperature compensation tracking.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoTcTrackingEn_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -7084,6 +13911,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoTcTrackingEn_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO temperature compensation tracking enable status from
+ * a specified register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoTcTrackingEn_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -7098,6 +13937,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoTcTrackingEn_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO temperature compensation wait value in the ADRV9001 PLL
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the VCO temperature compensation wait.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoTcWait_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -7109,6 +13961,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoTcWait_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO temperature compensation wait value from a specified
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoTcWait_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -7123,6 +13987,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoTcWait_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO variable in the NVS PLL memory map for a specified device
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the VCO variable.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoVar_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -7134,6 +14011,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoVar_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO variable value from the PLL memory map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL instance to
+ * read from.
+ * @param value A pointer to a uint8_t variable where the retrieved VCO variable
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoVar_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -7148,6 +14037,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoVar_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VCO variable temperature coefficient in the ADRV9001 PLL
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the VCO variable temperature coefficient.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoVarTc_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -7159,6 +14061,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoVarTc_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VCO variable temperature coefficient from a specified
+ * PLL memory map instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL memory map
+ * instance.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcoVarTc_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -7173,6 +14087,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcoVarTc_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the maximum count band enable value in the NVS PLL memory map for
+ * the specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the maximum count band enable.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcocalMaxcntbandEn_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -7184,6 +14111,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VcocalMaxcntbandEn_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the maximum count band enable value from the PLL memory map
+ * for a specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL memory map
+ * instance.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VcocalMaxcntbandEn_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -7198,6 +14137,19 @@ static inline int32_t adrv9001_NvsPllMemMap_VcocalMaxcntbandEn_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the VtForce field in the NVS PLL memory map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type representing the specific instance of the
+ * NVS PLL memory map.
+ * @param value An 8-bit unsigned integer that specifies the value to be written
+ * to the VtForce field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VtForce_Set(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t value)
@@ -7209,6 +14161,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VtForce_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * PLL memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_VtForce_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint8_t *value)
@@ -7224,6 +14188,18 @@ static inline int32_t adrv9001_NvsPllMemMap_VtForce_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a 24-bit value from a specified PLL memory map instance by
+ * reading three registers.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific PLL memory map
+ * instance to read from.
+ * @param value A pointer to a 32-bit integer where the retrieved value will be
+ * stored.
+ * @return Returns the status of the last read operation, which indicates
+ * success (0) or failure (non-zero).
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsPllMemMap_Wpa_Get(void *device,
     adrv9001_BfNvsPllMemMap_e instance,
     uint32_t *value)

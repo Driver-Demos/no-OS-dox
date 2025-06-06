@@ -13,18 +13,54 @@
 
 #include "adrv9001_bf_hal.h"
 
+/***************************************************************************//**
+ * @brief The `adrv9001_BfNvsRegmapTxb_e` is an enumeration that defines
+ * constants for accessing specific core register maps in the ADRV9001
+ * device, specifically for the TXB1 and TXB2 components. Each enumerator
+ * is associated with a unique hexadecimal value that corresponds to a
+ * particular register map address, facilitating the configuration and
+ * control of these components within the device.
+ *
+ * @param ADRV9001_BF_TXB1_CORE Represents the core register map for TXB1 with a
+ * hexadecimal value of 0x800.
+ * @param ADRV9001_BF_TXB2_CORE Represents the core register map for TXB2 with a
+ * hexadecimal value of 0xc00.
+ ******************************************************************************/
 typedef enum adrv9001_BfNvsRegmapTxb_e
 {
     ADRV9001_BF_TXB1_CORE    =   0x800,
     ADRV9001_BF_TXB2_CORE    =   0xc00
 } adrv9001_BfNvsRegmapTxb_e;
 
+/***************************************************************************//**
+ * @brief The `nvsRegmapTxbInstances` is a static constant array of type
+ * `adrv9001_BfNvsRegmapTxb_e`, which is an enumeration. It contains two
+ * elements: `ADRV9001_BF_TXB1_CORE` and `ADRV9001_BF_TXB2_CORE`. This
+ * array is likely used to represent specific instances or configurations
+ * of the TXB core in the ADRV9001 device.
+ *
+ * @details This variable is used to store and provide access to specific TXB
+ * core instances for the ADRV9001 device.
+ ******************************************************************************/
 static const adrv9001_BfNvsRegmapTxb_e nvsRegmapTxbInstances[] = {
     ADRV9001_BF_TXB1_CORE,
     ADRV9001_BF_TXB2_CORE
 };
 
 
+/***************************************************************************//**
+ * @brief Retrieves an intermediate value from the NVS register map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the last read operation, which indicates
+ * success (0) or failure (non-zero). The retrieved intermediate value
+ * is stored in the location pointed to by the value parameter.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_ClgcCcCnt0IntermVal_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint32_t *const value)
@@ -48,6 +84,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_ClgcCcCnt0IntermVal_Get(void *const 
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the intermediate value of the `ClgcCcImagAcc0` register by
+ * reading multiple registers and combining their values.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a 64-bit integer where the combined register values
+ * will be stored.
+ * @return Returns the status of the last read operation, which indicates
+ * success (0) or failure (non-zero). The combined value of the
+ * registers is stored in the location pointed to by `value`.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_ClgcCcImagAcc0IntermVal_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint64_t *const value)
@@ -90,9 +139,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_ClgcCcImagAcc0IntermVal_Get(void *co
     return status;
 }
 
-/**
- * (B0 New) 1: invert, 0: do not invert
- */
+/***************************************************************************//**
+ * @brief Sets the CLGC CC Invert Xi configuration in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that specifies the desired setting for the CLGC
+ * CC Invert Xi.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_ClgcCcInvertXi_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -104,9 +162,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_ClgcCcInvertXi_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New) 1: invert, 0: do not invert
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_ClgcCcInvertXi_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -121,9 +188,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_ClgcCcInvertXi_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New) 1: invert, 0: do not invert
- */
+/***************************************************************************//**
+ * @brief Sets the `ClgcCcInvertXq` field in the ADRV9001 register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map to modify.
+ * @param value A uint8_t value to be written to the specified field, which is
+ * shifted to align with the register's bit field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_ClgcCcInvertXq_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -135,9 +211,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_ClgcCcInvertXq_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New) 1: invert, 0: do not invert
- */
+/***************************************************************************//**
+ * @brief Retrieves the inverted XQ value from the specified register of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_ClgcCcInvertXq_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -152,9 +238,17 @@ static inline int32_t adrv9001_NvsRegmapTxb_ClgcCcInvertXq_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New) 1: invert, 0: do not invert
- */
+/***************************************************************************//**
+ * @brief Sets the CLGC CC Invert YI configuration in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that specifies the configuration to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_ClgcCcInvertYi_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -166,9 +260,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_ClgcCcInvertYi_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New) 1: invert, 0: do not invert
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_ClgcCcInvertYi_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -183,9 +286,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_ClgcCcInvertYi_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New) 1: invert, 0: do not invert
- */
+/***************************************************************************//**
+ * @brief Sets the CLGC CC Invert YQ configuration in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that specifies the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_ClgcCcInvertYq_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -197,9 +309,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_ClgcCcInvertYq_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New) 1: invert, 0: do not invert
- */
+/***************************************************************************//**
+ * @brief Retrieves the inverted YQ value from a specific register in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_ClgcCcInvertYq_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -215,6 +337,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_ClgcCcInvertYq_Get(void *const devic
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a 32-bit value from a series of registers by reading four
+ * consecutive registers and combining their values.
+ *
+ * @param device A pointer to the device context used for register access.
+ * @param instance An enumeration value representing the specific instance of
+ * the register map.
+ * @param value A pointer to a 32-bit unsigned integer where the combined
+ * register values will be stored.
+ * @return Returns the status of the last register read operation, with the
+ * combined 32-bit value stored in the location pointed to by value.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_ClgcCcOutI0_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint32_t *const value)
@@ -242,6 +376,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_ClgcCcOutI0_Get(void *const device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a 32-bit value from a series of registers by reading them
+ * sequentially and combining their values.
+ *
+ * @param device A pointer to the device context used for register access.
+ * @param instance An enumeration value that specifies the base address for the
+ * register access.
+ * @param value A pointer to a 32-bit unsigned integer where the combined
+ * register values will be stored.
+ * @return Returns the status of the last register read operation, where a value
+ * of 0 indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_ClgcCcOutI1_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint32_t *const value)
@@ -269,6 +415,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_ClgcCcOutI1_Get(void *const device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a 32-bit value from a series of registers by reading them
+ * sequentially.
+ *
+ * @param device A pointer to the device context used for register access.
+ * @param instance An enumeration value representing the specific instance of
+ * the register map.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the last register read operation, where a
+ * status of 0 indicates success.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_ClgcCcOutI2_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint32_t *const value)
@@ -296,6 +454,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_ClgcCcOutI2_Get(void *const device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a 32-bit value from a series of registers by reading them
+ * sequentially.
+ *
+ * @param device A pointer to the device context used for register access.
+ * @param instance An enumeration value representing the specific instance of
+ * the register map.
+ * @param value A pointer to a 32-bit integer where the retrieved value will be
+ * stored.
+ * @return Returns the status of the last register read operation, where a
+ * status of 0 indicates success.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_ClgcCcOutI3_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint32_t *const value)
@@ -323,6 +493,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_ClgcCcOutI3_Get(void *const device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a 32-bit value from a series of registers by reading them
+ * sequentially.
+ *
+ * @param device A pointer to the device context used for register access.
+ * @param instance An enumeration value representing the specific instance of
+ * the register map.
+ * @param value A pointer to a 32-bit integer where the retrieved value will be
+ * stored.
+ * @return Returns the status of the last register read operation, where a value
+ * of 0 indicates success.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_ClgcCcOutQ0_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint32_t *const value)
@@ -350,6 +532,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_ClgcCcOutQ0_Get(void *const device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a 32-bit value from a series of registers by reading them
+ * sequentially.
+ *
+ * @param device A pointer to the device context used for register access.
+ * @param instance An enumeration value representing the specific instance of
+ * the register map.
+ * @param value A pointer to a 32-bit integer where the retrieved value will be
+ * stored.
+ * @return Returns the status of the last register read operation, with a value
+ * of 0 indicating success.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_ClgcCcOutQ1_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint32_t *const value)
@@ -377,6 +571,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_ClgcCcOutQ1_Get(void *const device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a 32-bit value from a series of registers by reading them
+ * sequentially.
+ *
+ * @param device A pointer to the device context used for register access.
+ * @param instance An enumeration value representing the specific instance of
+ * the register map.
+ * @param value A pointer to a 32-bit integer where the retrieved value will be
+ * stored.
+ * @return Returns the status of the last register read operation, with the
+ * output value containing the combined 32-bit result from the four
+ * registers.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_ClgcCcOutQ2_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint32_t *const value)
@@ -404,6 +611,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_ClgcCcOutQ2_Get(void *const device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a 32-bit value from a series of registers by reading them
+ * sequentially.
+ *
+ * @param device A pointer to the device context used for register access.
+ * @param instance An enumeration value representing the specific instance of
+ * the register map.
+ * @param value A pointer to a 32-bit integer where the retrieved value will be
+ * stored.
+ * @return Returns the status of the last register read operation, with the
+ * 32-bit value being constructed in the provided pointer.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_ClgcCcOutQ3_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint32_t *const value)
@@ -431,6 +650,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_ClgcCcOutQ3_Get(void *const device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves an intermediate value from a series of registers for a
+ * specified instance in the ADRV9001 device.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a 64-bit integer where the retrieved value will be
+ * stored.
+ * @return Returns the status of the last read operation, indicating success (0)
+ * or failure (non-zero). The retrieved intermediate value is stored in
+ * the location pointed to by the value parameter.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_ClgcCcRealAcc0IntermVal_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint64_t *const value)
@@ -474,6 +706,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_ClgcCcRealAcc0IntermVal_Get(void *co
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves an intermediate value from a series of registers for a
+ * specified instance in the ADRV9001 device.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a 64-bit integer where the retrieved value will be
+ * stored.
+ * @return Returns the status of the read operations, where a value of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_ClgcPmAcc0IntermVal_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint64_t *const value)
@@ -516,9 +760,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_ClgcPmAcc0IntermVal_Get(void *const 
     return status;
 }
 
-/**
- * (C0 New) 0: A0/B0 behavior = add N samples between thresholds, 1: C0 behavior = add on the samples within the I_spi_pm_TL_inst and I_spi_pm_TU_inst thresholds
- */
+/***************************************************************************//**
+ * @brief Sets the accumulation mode for the CLGC PM in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value A uint8_t value representing the desired accumulation mode to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_ClgcPmAccumMode_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -530,9 +783,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_ClgcPmAccumMode_Set(void *const devi
     return status;
 }
 
-/**
- * (C0 New) 0: A0/B0 behavior = add N samples between thresholds, 1: C0 behavior = add on the samples within the I_spi_pm_TL_inst and I_spi_pm_TU_inst thresholds
- */
+/***************************************************************************//**
+ * @brief Retrieves the accumulated mode value from a specific register for a
+ * given instance of the device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_ClgcPmAccumMode_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -548,6 +811,20 @@ static inline int32_t adrv9001_NvsRegmapTxb_ClgcPmAccumMode_Get(void *const devi
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves an intermediate value from the ADRV9001 device's register
+ * map by reading multiple registers.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated type indicating the specific instance of the
+ * register map to access.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the last read operation, indicating success (0)
+ * or failure (non-zero). The retrieved intermediate value is stored in
+ * the variable pointed to by `value`.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_ClgcPmCnt0IntermVal_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint32_t *const value)
@@ -570,9 +847,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_ClgcPmCnt0IntermVal_Get(void *const 
     return status;
 }
 
-/**
- * (C0 New) 2'b00: no store, 2'b01: store on falling edge of pm_enable (default=A0/B0 mode), 2'b10: store on ACC_done, 2'b11: store on falling edge of pm_enable or ACC_done
- */
+/***************************************************************************//**
+ * @brief Sets the intermediate store mode for the CLGC PM register in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that specifies the mode to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_ClgcPmIntermStoreMode_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -584,9 +870,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_ClgcPmIntermStoreMode_Set(void *cons
     return status;
 }
 
-/**
- * (C0 New) 2'b00: no store, 2'b01: store on falling edge of pm_enable (default=A0/B0 mode), 2'b10: store on ACC_done, 2'b11: store on falling edge of pm_enable or ACC_done
- */
+/***************************************************************************//**
+ * @brief Retrieves the intermediate store mode value from a specific register
+ * for a given instance.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_ClgcPmIntermStoreMode_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -602,6 +897,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_ClgcPmIntermStoreMode_Get(void *cons
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a specific power exponent value from a register for a given
+ * instance of the device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map to access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_ClgcPmPowExp0_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -617,6 +925,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_ClgcPmPowExp0_Get(void *const device
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a specific power exponent value from a register for a given
+ * instance of the device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map to access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_ClgcPmPowExp1_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -632,6 +953,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_ClgcPmPowExp1_Get(void *const device
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_ClgcPmPowExp2_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -647,6 +980,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_ClgcPmPowExp2_Get(void *const device
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a specific power exponent value from a register for a given
+ * instance of the device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map to access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_ClgcPmPowExp3_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -662,6 +1008,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_ClgcPmPowExp3_Get(void *const device
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a 16-bit value from two consecutive registers for a
+ * specified instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device context used for register access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if any read operation fails.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_ClgcPmPowMan0_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint16_t *const value)
@@ -681,6 +1039,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_ClgcPmPowMan0_Get(void *const device
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a 16-bit value from two consecutive registers for a
+ * specified instance of the device.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the last register read operation, where a value
+ * of 0 indicates success.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_ClgcPmPowMan1_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint16_t *const value)
@@ -700,6 +1070,20 @@ static inline int32_t adrv9001_NvsRegmapTxb_ClgcPmPowMan1_Get(void *const device
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a 16-bit value from two consecutive registers in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the ADRV9001.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the last read operation, indicating success (0)
+ * or failure (non-zero). The retrieved 16-bit value is stored in the
+ * location pointed to by the value parameter.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_ClgcPmPowMan2_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint16_t *const value)
@@ -719,6 +1103,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_ClgcPmPowMan2_Get(void *const device
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a 16-bit value from two consecutive registers in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumeration value representing the specific instance of
+ * the register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the last register read operation, where a value
+ * of 0 indicates success.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_ClgcPmPowMan3_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint16_t *const value)
@@ -738,6 +1135,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_ClgcPmPowMan3_Get(void *const device
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the PM status output from the NVS register map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * status value will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the read operations fail.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_ClgcPmStatusOut_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint16_t *const value)
@@ -757,6 +1166,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_ClgcPmStatusOut_Get(void *const devi
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a 24-bit value from a specific register map by reading three
+ * consecutive registers.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the last read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_GanPaCcCnt0IntermVal_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint32_t *const value)
@@ -780,6 +1201,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_GanPaCcCnt0IntermVal_Get(void *const
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves an intermediate value from the ADRV9001 device by reading
+ * multiple registers and combining their values.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * ADRV9001 hardware.
+ * @param instance An enumerated type indicating the specific instance of the
+ * NVS register map to access.
+ * @param value A pointer to a 64-bit integer where the combined register values
+ * will be stored.
+ * @return Returns the status of the last register read operation, with a value
+ * of 0 indicating success and a non-zero value indicating an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_GanPaCcImagAcc0IntermVal_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint64_t *const value)
@@ -822,9 +1256,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_GanPaCcImagAcc0IntermVal_Get(void *c
     return status;
 }
 
-/**
- * (B0 New) 1: invert, 0: do not invert
- */
+/***************************************************************************//**
+ * @brief Sets the gain control parameter for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_GanPaCcInvertXi_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -836,9 +1279,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_GanPaCcInvertXi_Set(void *const devi
     return status;
 }
 
-/**
- * (B0 New) 1: invert, 0: do not invert
- */
+/***************************************************************************//**
+ * @brief Retrieves the inverted gain control value from a specific register for
+ * a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_GanPaCcInvertXi_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -853,9 +1305,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_GanPaCcInvertXi_Get(void *const devi
     return status;
 }
 
-/**
- * (B0 New) 1: invert, 0: do not invert
- */
+/***************************************************************************//**
+ * @brief Sets the gain control parameter for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_GanPaCcInvertXq_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -867,9 +1328,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_GanPaCcInvertXq_Set(void *const devi
     return status;
 }
 
-/**
- * (B0 New) 1: invert, 0: do not invert
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific bit field value from a register and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_GanPaCcInvertXq_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -884,9 +1354,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_GanPaCcInvertXq_Get(void *const devi
     return status;
 }
 
-/**
- * (B0 New) 1: invert, 0: do not invert
- */
+/***************************************************************************//**
+ * @brief Sets the gain control parameter for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_GanPaCcInvertYi_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -898,9 +1377,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_GanPaCcInvertYi_Set(void *const devi
     return status;
 }
 
-/**
- * (B0 New) 1: invert, 0: do not invert
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a register and stores it
+ * in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_GanPaCcInvertYi_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -915,9 +1403,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_GanPaCcInvertYi_Get(void *const devi
     return status;
 }
 
-/**
- * (B0 New) 1: invert, 0: do not invert
- */
+/***************************************************************************//**
+ * @brief Sets the gain control parameter for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_GanPaCcInvertYq_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -929,9 +1426,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_GanPaCcInvertYq_Set(void *const devi
     return status;
 }
 
-/**
- * (B0 New) 1: invert, 0: do not invert
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a register and stores it
+ * in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_GanPaCcInvertYq_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -947,6 +1453,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_GanPaCcInvertYq_Get(void *const devi
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a 32-bit value from a series of registers by reading them
+ * sequentially.
+ *
+ * @param device A pointer to the device context used for register access.
+ * @param instance An enumeration value representing the specific instance of
+ * the register map.
+ * @param value A pointer to a 32-bit integer where the retrieved value will be
+ * stored.
+ * @return Returns the status of the last register read operation, with the
+ * output value containing the combined results of the four register
+ * reads.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_GanPaCcOutI0_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint32_t *const value)
@@ -974,6 +1493,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_GanPaCcOutI0_Get(void *const device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a 32-bit value from a series of registers for a specified
+ * instance of the device.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param instance An enumeration value representing the specific instance of
+ * the NVS register map.
+ * @param value A pointer to a 32-bit integer where the retrieved value will be
+ * stored.
+ * @return Returns the status of the last register read operation, with a value
+ * of 0 indicating success.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_GanPaCcOutI1_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint32_t *const value)
@@ -1001,6 +1532,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_GanPaCcOutI1_Get(void *const device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a 32-bit value from a series of registers by reading them
+ * sequentially.
+ *
+ * @param device A pointer to the device context used for register access.
+ * @param instance An enumeration value representing the specific instance of
+ * the register map.
+ * @param value A pointer to a 32-bit integer where the retrieved value will be
+ * stored.
+ * @return Returns the status of the last register read operation, with a value
+ * of 0 indicating success.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_GanPaCcOutI2_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint32_t *const value)
@@ -1028,6 +1571,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_GanPaCcOutI2_Get(void *const device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a 32-bit value from a series of registers by reading four
+ * consecutive register values and combining them.
+ *
+ * @param device A pointer to the device context used for register access.
+ * @param instance An enumeration value representing the specific instance of
+ * the register map.
+ * @param value A pointer to a 32-bit integer where the combined register values
+ * will be stored.
+ * @return Returns the status of the last register read operation, where a value
+ * of 0 indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_GanPaCcOutI3_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint32_t *const value)
@@ -1055,6 +1610,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_GanPaCcOutI3_Get(void *const device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a 32-bit value from a series of registers by reading them
+ * sequentially.
+ *
+ * @param device A pointer to the device context used for register access.
+ * @param instance An enumeration value representing the specific instance of
+ * the register map.
+ * @param value A pointer to a 32-bit integer where the retrieved value will be
+ * stored.
+ * @return Returns the status of the last register read operation, where a
+ * status of 0 indicates success.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_GanPaCcOutQ0_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint32_t *const value)
@@ -1082,6 +1649,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_GanPaCcOutQ0_Get(void *const device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a 32-bit value from a series of registers by reading them
+ * sequentially.
+ *
+ * @param device A pointer to the device context used for register access.
+ * @param instance An enumeration value representing the specific instance of
+ * the register map.
+ * @param value A pointer to a 32-bit integer where the retrieved value will be
+ * stored.
+ * @return Returns the status of the last register read operation, with the
+ * output value containing the combined results of the four register
+ * reads.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_GanPaCcOutQ1_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint32_t *const value)
@@ -1109,6 +1689,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_GanPaCcOutQ1_Get(void *const device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a 32-bit value from a series of registers by reading four
+ * consecutive registers and combining their values.
+ *
+ * @param device A pointer to the device context used for register access.
+ * @param instance An enumeration value representing the specific instance of
+ * the register map.
+ * @param value A pointer to a 32-bit integer where the combined register values
+ * will be stored.
+ * @return Returns the status of the last register read operation, with the
+ * combined 32-bit value stored in the location pointed to by the value
+ * parameter.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_GanPaCcOutQ2_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint32_t *const value)
@@ -1136,6 +1729,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_GanPaCcOutQ2_Get(void *const device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a 32-bit value from a series of registers by reading four
+ * consecutive register values and combining them.
+ *
+ * @param device A pointer to the device context used for register access.
+ * @param instance An enumeration value representing the specific instance of
+ * the register map.
+ * @param value A pointer to a 32-bit integer where the combined register values
+ * will be stored.
+ * @return Returns the status of the last register read operation, where a
+ * status of zero indicates success.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_GanPaCcOutQ3_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint32_t *const value)
@@ -1163,6 +1768,22 @@ static inline int32_t adrv9001_NvsRegmapTxb_GanPaCcOutQ3_Get(void *const device,
 }
 
 
+/***************************************************************************//**
+ * @brief The function `adrv9001_NvsRegmapTxb_GanPaCcRealAcc0IntermVal_Get`
+ * reads multiple registers from a device and combines their values into
+ * a single 64-bit output.
+ *
+ * @param device A pointer to the device context from which the registers will
+ * be read.
+ * @param instance An enumeration value that specifies the instance of the
+ * register map to be accessed.
+ * @param value A pointer to a 64-bit integer where the combined register values
+ * will be stored.
+ * @return The function returns an integer status code indicating success (0) or
+ * failure (non-zero) of the read operations, while the combined
+ * register values are stored in the location pointed to by the 'value'
+ * parameter.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_GanPaCcRealAcc0IntermVal_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint64_t *const value)
@@ -1206,6 +1827,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_GanPaCcRealAcc0IntermVal_Get(void *c
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves an intermediate value from a series of registers for a given
+ * instance in the ADRV9001 device.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a 64-bit integer where the retrieved value will be
+ * stored.
+ * @return Returns the status of the last read operation, which indicates
+ * success (0) or failure (non-zero). The retrieved intermediate value
+ * is stored in the location pointed to by the value parameter.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_GanPaPmAcc0IntermVal_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint64_t *const value)
@@ -1248,9 +1882,17 @@ static inline int32_t adrv9001_NvsRegmapTxb_GanPaPmAcc0IntermVal_Get(void *const
     return status;
 }
 
-/**
- * (C0 New) 0: A0/B0 behavior = add N samples between thresholds, 1: C0 behavior = add on the samples within the I_spi_pm_TL_inst and I_spi_pm_TU_inst thresholds
- */
+/***************************************************************************//**
+ * @brief Sets the Gain Control mode for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value representing the Gain Control mode to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_GanPaPmAccumMode_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -1262,9 +1904,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_GanPaPmAccumMode_Set(void *const dev
     return status;
 }
 
-/**
- * (C0 New) 0: A0/B0 behavior = add N samples between thresholds, 1: C0 behavior = add on the samples within the I_spi_pm_TL_inst and I_spi_pm_TU_inst thresholds
- */
+/***************************************************************************//**
+ * @brief Retrieves the gain amplifier power amplifier accumulation mode value
+ * from a specific register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_GanPaPmAccumMode_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -1280,6 +1931,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_GanPaPmAccumMode_Get(void *const dev
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a 24-bit value from a specific register map for a given
+ * instance of the device.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the last read operation, with the output value
+ * containing the combined 24-bit result from the registers.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_GanPaPmCnt0IntermVal_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint32_t *const value)
@@ -1302,9 +1965,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_GanPaPmCnt0IntermVal_Get(void *const
     return status;
 }
 
-/**
- * (C0 New) 2'b00: no store, 2'b01: store on falling edge of pm_enable (default=A0/B0 mode), 2'b10: store on ACC_done, 2'b11: store on falling edge of pm_enable or ACC_done
- */
+/***************************************************************************//**
+ * @brief Sets the intermediate store mode for the gain control of the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value A uint8_t value that specifies the desired state to be set in
+ * the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_GanPaPmIntermStoreMode_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -1316,9 +1989,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_GanPaPmIntermStoreMode_Set(void *con
     return status;
 }
 
-/**
- * (C0 New) 2'b00: no store, 2'b01: store on falling edge of pm_enable (default=A0/B0 mode), 2'b10: store on ACC_done, 2'b11: store on falling edge of pm_enable or ACC_done
- */
+/***************************************************************************//**
+ * @brief Retrieves the intermediate store mode value for the gain control of
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_GanPaPmIntermStoreMode_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -1334,6 +2017,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_GanPaPmIntermStoreMode_Get(void *con
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_GanPaPmPowExp0_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -1349,6 +2045,17 @@ static inline int32_t adrv9001_NvsRegmapTxb_GanPaPmPowExp0_Get(void *const devic
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the power amplifier gain setting from a specific register.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_GanPaPmPowExp1_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -1364,6 +2071,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_GanPaPmPowExp1_Get(void *const devic
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated type indicating the specific instance of the
+ * register map to access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_GanPaPmPowExp2_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -1379,6 +2099,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_GanPaPmPowExp2_Get(void *const devic
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_GanPaPmPowExp3_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -1394,6 +2127,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_GanPaPmPowExp3_Get(void *const devic
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the power management value from the specified register of
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the read operations, where a status of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_GanPaPmPowMan0_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint16_t *const value)
@@ -1413,6 +2159,20 @@ static inline int32_t adrv9001_NvsRegmapTxb_GanPaPmPowMan0_Get(void *const devic
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the power management value from the specified register of
+ * the device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the last register read operation, with the
+ * retrieved power management value stored in the location pointed to by
+ * `value`.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_GanPaPmPowMan1_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint16_t *const value)
@@ -1432,6 +2192,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_GanPaPmPowMan1_Get(void *const devic
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the power management value from the specified register of
+ * the device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the register read operations fail.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_GanPaPmPowMan2_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint16_t *const value)
@@ -1451,6 +2224,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_GanPaPmPowMan2_Get(void *const devic
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a 16-bit value from two consecutive registers for a
+ * specified instance of the device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated type indicating the specific instance of the
+ * register map to access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the read operations, where a value of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_GanPaPmPowMan3_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint16_t *const value)
@@ -1470,6 +2256,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_GanPaPmPowMan3_Get(void *const devic
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the gain and power management status from the ADRV9001
+ * device's register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated type indicating the specific instance of the
+ * register map to access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * status value will be stored.
+ * @return Returns the status of the read operations, where a value of zero
+ * indicates success.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_GanPaPmStatusOut_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint16_t *const value)
@@ -1489,9 +2288,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_GanPaPmStatusOut_Get(void *const dev
 }
 
 
-/**
- * (C0 New) TX1=DMA0, TX2=DMA1   :   3-bit Encoded Status of DMA. 000: Idle, 100: Done (without Error), 101: Done With Error, 110: Active, 111: Wait for Next
- */
+/***************************************************************************//**
+ * @brief Retrieves the DMA status from a specific register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved DMA status
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_GeneralDmaStatus_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -1506,9 +2314,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_GeneralDmaStatus_Get(void *const dev
     return status;
 }
 
-/**
- * (C0 New) Select the edge check for the early strobe detection: 0=Early Strobe flag is generated when strobe is sampled by the rising edge of the clock (A0,B0 compliant), 1=Early Strobe flag is generated when strobe is sampled by the falling edge of the clock
- */
+/***************************************************************************//**
+ * @brief Sets the early strobe detection selection for the LSSI TX in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the LSSI TX.
+ * @param value A uint8_t value that specifies the early strobe detection
+ * selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_LssiTxEarlyStrobeDetectionSel_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -1520,9 +2338,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_LssiTxEarlyStrobeDetectionSel_Set(vo
     return status;
 }
 
-/**
- * (C0 New) Select the edge check for the early strobe detection: 0=Early Strobe flag is generated when strobe is sampled by the rising edge of the clock (A0,B0 compliant), 1=Early Strobe flag is generated when strobe is sampled by the falling edge of the clock
- */
+/***************************************************************************//**
+ * @brief Retrieves the early strobe detection selection value from a specific
+ * register for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_LssiTxEarlyStrobeDetectionSel_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -1537,9 +2365,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_LssiTxEarlyStrobeDetectionSel_Get(vo
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable field for the OTX1 algorithm group 10 in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value A uint8_t value that indicates the desired state of the clock
+ * enable field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup10ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -1551,9 +2389,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup10ClkEn_Set(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status for the OTX1 algorithm group 10 from
+ * the specified device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup10ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -1568,9 +2416,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup10ClkEn_Get(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable configuration for the OTX1 algorithm group 11 in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value A uint8_t value representing the clock enable configuration to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup11ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -1582,9 +2440,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup11ClkEn_Set(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status from a specific register for the
+ * OTX1 algorithm group 11.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup11ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -1599,9 +2466,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup11ClkEn_Get(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable field for the OTX1 algorithm group 1 in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value A uint8_t value indicating the desired state (enabled or
+ * disabled) for the clock.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup1ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -1613,9 +2490,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup1ClkEn_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status for the OTX1 algorithm group 1 from
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup1ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -1630,9 +2517,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup1ClkEn_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable configuration for the OTX1 algorithm group 2 in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value A uint8_t value representing the clock enable configuration to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup2ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -1644,9 +2541,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup2ClkEn_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status for the OTX1 algorithm group 2 from
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup2ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -1661,9 +2568,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup2ClkEn_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock selection for the OTX1 algorithm group 2 in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value An 8-bit unsigned integer representing the clock selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup2ClkSel_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -1675,9 +2592,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup2ClkSel_Set(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific clock selection value from a register for a given
+ * instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup2ClkSel_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -1692,9 +2619,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup2ClkSel_Get(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable configuration for the OTX1 algorithm group 3 in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value A uint8_t value that indicates the clock enable configuration to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup3ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -1706,9 +2643,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup3ClkEn_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status for the OTX1 algorithm group 3 from
+ * the specified device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup3ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -1723,9 +2670,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup3ClkEn_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock selection for the OTX1 algorithm group 3 in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value An 8-bit unsigned integer representing the clock selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup3ClkSel_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -1737,9 +2694,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup3ClkSel_Set(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific clock selection value from a register for a given
+ * instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup3ClkSel_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -1754,9 +2721,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup3ClkSel_Get(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable configuration for the OTX1 algorithm group 4 in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value An 8-bit unsigned integer representing the clock enable value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup4ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -1768,9 +2745,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup4ClkEn_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status for the OTX1 algorithm group 4 from
+ * the specified device.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup4ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -1785,9 +2771,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup4ClkEn_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock selection for the OTX1 algorithm group 4 in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value An 8-bit unsigned integer representing the clock selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup4ClkSel_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -1799,9 +2795,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup4ClkSel_Set(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific clock selection value from a register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup4ClkSel_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -1816,9 +2822,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup4ClkSel_Get(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable configuration for the OTX1 algorithm group 5 in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value A uint8_t value representing the clock enable configuration to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup5ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -1830,9 +2846,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup5ClkEn_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status for the OTX1 algorithm group 5 from
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup5ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -1847,9 +2873,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup5ClkEn_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock selection for the OTX1 algorithm group 5 in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value An 8-bit unsigned integer representing the clock selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup5ClkSel_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -1861,9 +2897,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup5ClkSel_Set(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific clock selection value from a register for a given
+ * instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * selection value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup5ClkSel_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -1878,9 +2924,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup5ClkSel_Get(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable configuration for the OTX1 algorithm group 6 in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value A uint8_t value that specifies the clock enable configuration to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup6ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -1892,9 +2948,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup6ClkEn_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status for the OTX1 algorithm group 6 from
+ * the specified device.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup6ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -1909,9 +2974,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup6ClkEn_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock selection for the OTX1 algorithm group 6 in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value An 8-bit unsigned integer representing the clock selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup6ClkSel_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -1923,9 +2998,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup6ClkSel_Set(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock selection value from a specific register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the ADRV9001.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup6ClkSel_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -1940,9 +3025,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup6ClkSel_Get(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable configuration for the OTX1 algorithm group 7 in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value A uint8_t value that specifies the clock enable configuration to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup7ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -1954,9 +3049,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup7ClkEn_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status for the OTX1 algorithm group 7 from
+ * the specified device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup7ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -1971,9 +3076,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup7ClkEn_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock selection for the OTX1 algorithm group 7 in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value An 8-bit unsigned integer representing the clock selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup7ClkSel_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -1985,9 +3100,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup7ClkSel_Set(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock selection value from a specific register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup7ClkSel_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -2002,9 +3127,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup7ClkSel_Get(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable configuration for the OTX1 algorithm group 8 in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value An 8-bit unsigned integer representing the clock enable value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup8ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -2016,9 +3151,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup8ClkEn_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status for the OTX1 algorithm group 8 from
+ * the specified device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup8ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -2033,9 +3178,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup8ClkEn_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock selection for the OTX1 algorithm group 8 in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value An 8-bit unsigned integer representing the clock selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup8ClkSel_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -2047,9 +3202,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup8ClkSel_Set(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock selection value from a specific register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * selection value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup8ClkSel_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -2064,9 +3229,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup8ClkSel_Get(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable field for the OTX1 algorithm group 9 in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value A uint8_t value that indicates the desired state (enabled or
+ * disabled) for the clock.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup9ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -2078,9 +3253,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup9ClkEn_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status from a specific register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup9ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -2095,9 +3280,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup9ClkEn_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock selection for the OTX1 algorithm group 9 in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value An 8-bit unsigned integer representing the clock selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup9ClkSel_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -2109,9 +3304,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup9ClkSel_Set(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific clock selection value from a register for a given
+ * instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * selection value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup9ClkSel_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -2126,9 +3331,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1AlgGroup9ClkSel_Get(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the CSIS clock enable field in the ADRV9001 NVS register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that indicates the desired state of the CSIS
+ * clock enable (0 or 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1CssiClkEnable_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -2140,9 +3354,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1CssiClkEnable_Set(void *const de
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the OTX1 CSSI clock enable register for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1CssiClkEnable_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -2157,9 +3380,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1CssiClkEnable_Get(void *const de
     return status;
 }
 
-/**
- * (B0 New) Extended to 16 bits
- */
+/***************************************************************************//**
+ * @brief Sets the clock generator division value for the specified instance in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A 16-bit unsigned integer representing the division value to be
+ * set.
+ * @return Returns the status of the last write operation, indicating success
+ * (0) or failure (non-zero error code).
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1CssiClkgenDivValue_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint16_t value)
@@ -2174,9 +3407,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1CssiClkgenDivValue_Set(void *con
     return status;
 }
 
-/**
- * (B0 New) Extended to 16 bits
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock generator division value from the specified
+ * register of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * division value will be stored.
+ * @return Returns the status of the last read operation, indicating success (0)
+ * or failure (non-zero).
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1CssiClkgenDivValue_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint16_t *const value)
@@ -2195,9 +3438,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1CssiClkgenDivValue_Get(void *con
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the DUC enable field in the NVS register map for the specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that indicates the enable/disable state for the
+ * DUC.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpDucEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -2209,9 +3462,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpDucEn_Set(void *const device,
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpDucEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -2226,9 +3488,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpDucEn_Get(void *const device,
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the NVS register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt212En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -2240,9 +3512,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt212En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt212En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -2257,9 +3538,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt212En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the NVS register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map to be modified.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the specified field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the field write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt214En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -2271,9 +3562,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt214En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt214En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -2288,9 +3588,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt214En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the OTX1 DP interrupt enable register for a specified instance in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that specifies the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt216En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -2302,9 +3612,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt216En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt216En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -2319,9 +3638,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt216En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the NVS register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt218En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -2333,9 +3662,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt218En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt218En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -2350,9 +3688,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt218En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the NVS register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value to be written to the specified field in the
+ * register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt220En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -2364,9 +3712,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt220En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt220En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -2381,9 +3738,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt220En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the ADRV9001 register map for the OTX1 DP
+ * interrupt.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt2221En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -2395,9 +3762,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt2221En_Set(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt2221En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -2412,9 +3788,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt2221En_Get(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the NVS register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value to be written to the specified field in the
+ * register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt222En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -2426,9 +3812,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt222En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt222En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -2443,9 +3838,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt222En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the NVS register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt224En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -2457,9 +3862,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt224En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt224En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -2474,9 +3888,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt224En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the NVS register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt226En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -2488,9 +3912,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt226En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt226En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -2505,9 +3938,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt226En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the NVS register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt228En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -2519,9 +3962,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt228En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt228En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -2536,9 +3988,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt228En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the OTX1 DP interrupt enable register for a specified instance in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that indicates the enable/disable state of the
+ * interrupt.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt230En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -2550,9 +4012,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt230En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt230En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -2567,9 +4038,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt230En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the NVS register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value to be written to the specified field in the
+ * register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt236En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -2581,9 +4062,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt236En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt236En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -2598,9 +4088,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt236En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the NVS register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt238En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -2612,9 +4112,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt238En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific bit field value from a hardware register and
+ * stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt238En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -2629,9 +4139,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt238En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the NVS register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt28En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -2643,9 +4163,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt28En_Set(void *const device
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt28En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -2660,9 +4189,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt28En_Get(void *const device
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the NVS register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map to be modified.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the specified field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the field write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt310En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -2674,9 +4213,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt310En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt310En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -2691,9 +4239,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt310En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the NVS register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt340En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -2705,9 +4263,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt340En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt340En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -2722,9 +4289,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt340En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the ADRV9001 NVS register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt3441En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -2736,9 +4312,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt3441En_Set(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt3441En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -2753,9 +4338,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpInt3441En_Get(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the I/Q demodulator enable field in the ADRV9001 register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map to be modified.
+ * @param value A uint8_t value that indicates the enable state for the I/Q
+ * demodulator.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpIqdmEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -2767,9 +4361,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpIqdmEn_Set(void *const device,
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a register and stores it
+ * in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpIqdmEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -2784,9 +4387,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpIqdmEn_Get(void *const device,
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the modem mode for the specified instance in the ADRV9001 NVS
+ * register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map to be modified.
+ * @param value An 8-bit unsigned integer representing the new modem mode value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpModemMode_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -2798,9 +4411,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpModemMode_Set(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the modem mode value from a specific register for the given
+ * instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved modem mode
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpModemMode_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -2815,9 +4437,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpModemMode_Get(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the modem mode divider value in the ADRV9001 device's register
+ * map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A 16-bit unsigned integer representing the divider value to be
+ * set.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if any operation fails.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpModemModeDivValue_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint16_t value)
@@ -2832,9 +4464,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpModemModeDivValue_Set(void *co
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the modem mode division value from the specified register of
+ * the device.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * division value will be stored.
+ * @return Returns the status of the read operations, with the retrieved modem
+ * mode division value stored in the provided pointer.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpModemModeDivValue_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint16_t *const value)
@@ -2853,9 +4494,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpModemModeDivValue_Get(void *co
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the `Otx1DpSinc242En` field in the NVS register map for a
+ * specified instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map to be modified.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the specified field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpSinc242En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -2867,9 +4518,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpSinc242En_Set(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a device register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device context from which the register value
+ * will be read.
+ * @param instance An enumerated value indicating which instance of the register
+ * map to access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpSinc242En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -2884,9 +4545,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpSinc242En_Get(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the `Otx1DpSinc344En` field in the NVS register map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpSinc344En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -2898,9 +4568,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpSinc344En_Set(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpSinc344En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -2915,9 +4594,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpSinc344En_Get(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the SPI interface clock enable bit for a specified instance in
+ * the ADRV9001 NVS register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map to be modified.
+ * @param value A uint8_t value that indicates the desired state (enabled or
+ * disabled) of the SPI interface clock.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation to the register.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpSpiIntfClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -2929,9 +4618,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpSpiIntfClkEn_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the SPI interface clock enable status from a specific
+ * register for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpSpiIntfClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -2946,9 +4644,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpSpiIntfClkEn_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the division factor for the OTX1 DP TSCIC32 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the division factor to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpTscic32DivFactor_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -2960,9 +4668,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpTscic32DivFactor_Set(void *con
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the 8-bit value from a specific register and stores it in
+ * the provided pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpTscic32DivFactor_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -2977,9 +4694,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpTscic32DivFactor_Get(void *con
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS register map for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns the status of the write operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpTscic32En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -2991,9 +4717,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpTscic32En_Set(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpTscic32En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -3008,9 +4743,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpTscic32En_Get(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the frequency deviation mapping for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpTxFreqDevMapper47En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -3022,9 +4766,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpTxFreqDevMapper47En_Set(void *
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific frequency deviation value from a hardware
+ * register.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param instance An enumerated value indicating the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved frequency
+ * deviation value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpTxFreqDevMapper47En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -3039,9 +4793,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpTxFreqDevMapper47En_Get(void *
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the division factor for the OTX1 digital preprocessor in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the division factor to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpTxPreproc2DivFactor_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -3053,9 +4817,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpTxPreproc2DivFactor_Set(void *
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpTxPreproc2DivFactor_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -3070,9 +4843,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpTxPreproc2DivFactor_Get(void *
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the Tx preprocessor 2 enable field in the ADRV9001 register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that indicates the enable/disable state for the
+ * Tx preprocessor.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpTxPreproc2En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -3084,9 +4866,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpTxPreproc2En_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpTxPreproc2En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -3101,9 +4892,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpTxPreproc2En_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the ADRV9001 register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map to be modified.
+ * @param value A uint8_t value that will be written to the specified field in
+ * the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpTxRound46En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -3115,9 +4915,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpTxRound46En_Set(void *const de
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided variable.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpTxRound46En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -3132,9 +4941,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpTxRound46En_Get(void *const de
     return status;
 }
 
-/**
- * (C0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the SDM clock enable field in the ADRV9001 register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map to be modified.
+ * @param value A uint8_t value that indicates the desired state of the SDM
+ * clock enable field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpTxdacSdmClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -3146,9 +4964,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpTxdacSdmClkEn_Set(void *const 
     return status;
 }
 
-/**
- * (C0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the SDM clock enable status from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpTxdacSdmClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -3163,9 +4990,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1DpTxdacSdmClkEn_Get(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the LSSI clock enable configuration for a specified instance in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that indicates the desired state of the LSSI
+ * clock enable.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1LssiClkEnable_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -3177,9 +5014,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1LssiClkEnable_Set(void *const de
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the LSSI clock enable status from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1LssiClkEnable_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -3194,9 +5040,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1LssiClkEnable_Get(void *const de
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the LSSI clock generator division value in the ADRV9001 device's
+ * register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A 16-bit unsigned integer representing the division value to be
+ * set.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1LssiClkgenDivValue_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint16_t value)
@@ -3211,9 +5067,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1LssiClkgenDivValue_Set(void *con
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the LSSI clock generator division value from the ADRV9001
+ * device's register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * division value will be stored.
+ * @return Returns the status of the read operations, where a status of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1LssiClkgenDivValue_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint16_t *const value)
@@ -3232,9 +5098,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1LssiClkgenDivValue_Get(void *con
     return status;
 }
 
-/**
- * (B0 New) LVDS SSI data destiantion Clock div value for Decimation/Interpolation of the SSI interface
- */
+/***************************************************************************//**
+ * @brief Sets the clock divider value for the LSSI data destination in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A 16-bit unsigned integer representing the clock divider value
+ * to be set.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1LssiDataDestClkDivValue_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint16_t value)
@@ -3249,9 +5125,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1LssiDataDestClkDivValue_Set(void
     return status;
 }
 
-/**
- * (B0 New) LVDS SSI data destiantion Clock div value for Decimation/Interpolation of the SSI interface
- */
+/***************************************************************************//**
+ * @brief Retrieves the LSSI data destination clock divider value from the
+ * ADRV9001 device's register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved clock
+ * divider value will be stored.
+ * @return Returns the status of the last register read operation, where a
+ * status of 0 indicates success.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1LssiDataDestClkDivValue_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint16_t *const value)
@@ -3270,9 +5156,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1LssiDataDestClkDivValue_Get(void
     return status;
 }
 
-/**
- * (B0 New) 0: data destination clock inherit from datapath, 1: data destimation clock inherit from DivN from clk1105
- */
+/***************************************************************************//**
+ * @brief Sets the clock selection for the LSSI data destination in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value representing the clock selection to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1LssiDataDestClkSel_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -3284,9 +5179,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1LssiDataDestClkSel_Set(void *con
     return status;
 }
 
-/**
- * (B0 New) 0: data destination clock inherit from datapath, 1: data destimation clock inherit from DivN from clk1105
- */
+/***************************************************************************//**
+ * @brief Retrieves the LSSI data destination clock selection value from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * selection value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1LssiDataDestClkSel_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -3301,9 +5205,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1LssiDataDestClkSel_Get(void *con
     return status;
 }
 
-/**
- * (B0 New) 0: Divider 1/N selected, 1: Divider 1/4.5 selected
- */
+/***************************************************************************//**
+ * @brief Sets the PFIR configuration for the ADRV9001 device by writing a
+ * specified value to a specific register.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1Pfir4xDiv4p5_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -3315,9 +5229,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1Pfir4xDiv4p5_Set(void *const dev
     return status;
 }
 
-/**
- * (B0 New) 0: Divider 1/N selected, 1: Divider 1/4.5 selected
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated type indicating the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1Pfir4xDiv4p5_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -3332,9 +5256,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1Pfir4xDiv4p5_Get(void *const dev
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the PFIR 4x division value in the ADRV9001 device's register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A 16-bit unsigned integer representing the PFIR 4x division
+ * value to be set.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1Pfir4xDivValue_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint16_t value)
@@ -3349,9 +5282,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1Pfir4xDivValue_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the PFIR 4x division value from the specified register of
+ * the device.
+ *
+ * @param device A pointer to the device context used for register access.
+ * @param instance An enumeration value representing the specific instance of
+ * the register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved PFIR
+ * 4x division value will be stored.
+ * @return Returns the status of the last register read operation, where a value
+ * of 0 indicates success.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1Pfir4xDivValue_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint16_t *const value)
@@ -3370,9 +5312,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1Pfir4xDivValue_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the PFIR I enable field in the ADRV9001 register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map to be modified.
+ * @param value A uint8_t value that indicates the enable state to be set for
+ * the PFIR I.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1PfirIEnable_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -3384,9 +5335,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1PfirIEnable_Set(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the PFIR I Enable value from a specific register for the
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1PfirIEnable_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -3401,9 +5361,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1PfirIEnable_Get(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the PFIR Q enable configuration for the specified instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value indicating the PFIR Q enable setting to be
+ * applied.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1PfirQEnable_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -3415,9 +5385,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1PfirQEnable_Set(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the PFIR Q enable status from the specified register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1PfirQEnable_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -3432,9 +5411,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1PfirQEnable_Get(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the PFIR XISel Force configuration for a specified instance in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1PfirXISelForce_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -3446,9 +5435,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1PfirXISelForce_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the PFIR XISel force value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1PfirXISelForce_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -3463,9 +5461,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1PfirXISelForce_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the PFIR X I selection force value in the ADRV9001 device's
+ * register.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the force value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1PfirXISelForceValue_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -3477,9 +5485,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1PfirXISelForceValue_Set(void *co
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the PFIR X I selection force value from a specific register
+ * for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1PfirXISelForceValue_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -3494,9 +5511,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1PfirXISelForceValue_Get(void *co
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the PFIR XQ selection force value in the ADRV9001 device's
+ * register.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1PfirXQSelForce_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -3508,9 +5535,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1PfirXQSelForce_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1PfirXQSelForce_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -3525,9 +5561,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1PfirXQSelForce_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the PFIR XQ selection force value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the force value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1PfirXQSelForceValue_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -3539,9 +5584,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1PfirXQSelForceValue_Set(void *co
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the PFIR XQ selection force value from a specific register
+ * for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1PfirXQSelForceValue_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -3556,9 +5610,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1PfirXQSelForceValue_Get(void *co
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the global clock enable reset for the OTX1 profile in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the OTX1 profile.
+ * @param value A uint8_t value that indicates the desired state (enabled or
+ * disabled) for the global clock.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1ProfileDpGlobalClkEnableReset_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -3570,9 +5634,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1ProfileDpGlobalClkEnableReset_Se
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register related to the global clock
+ * enable reset for the OTX1 profile.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1ProfileDpGlobalClkEnableReset_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -3587,9 +5660,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1ProfileDpGlobalClkEnableReset_Ge
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the SSI global clock enable/reset field in the ADRV9001 NVS
+ * register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that indicates the desired state for the SSI
+ * global clock enable/reset.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1ProfileSsiGlobalClkEnableReset_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -3601,9 +5684,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1ProfileSsiGlobalClkEnableReset_S
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the SSI global clock enable reset value from a specific
+ * register for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx1ProfileSsiGlobalClkEnableReset_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -3618,9 +5710,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx1ProfileSsiGlobalClkEnableReset_G
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable field for the OTX2 algorithm group 10 in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value A uint8_t value that indicates the desired state of the clock
+ * enable field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup10ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -3632,9 +5734,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup10ClkEn_Set(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status from a specific register for a given
+ * instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup10ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -3649,9 +5761,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup10ClkEn_Get(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable configuration for the OTX2 algorithm group 11 in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value A uint8_t value that specifies the clock enable configuration to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup11ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -3663,9 +5785,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup11ClkEn_Set(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status from a specific register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup11ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -3680,9 +5812,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup11ClkEn_Get(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable field for the specified instance in the ADRV9001
+ * NVS register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that indicates the desired state of the clock
+ * enable field (0 or 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup1ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -3694,9 +5836,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup1ClkEn_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status for the OTX2 algorithm group 1 from
+ * the specified device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup1ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -3711,9 +5863,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup1ClkEn_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable field for the specified instance in the ADRV9001
+ * NVS register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map to be modified.
+ * @param value A uint8_t value that indicates the desired state of the clock
+ * enable field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup2ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -3725,9 +5887,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup2ClkEn_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific bit field value from a hardware register and
+ * stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup2ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -3742,9 +5913,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup2ClkEn_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock selection for the OTX2 algorithm group in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value An 8-bit unsigned integer representing the clock selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup2ClkSel_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -3756,9 +5937,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup2ClkSel_Set(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific clock selection value from a register for a given
+ * instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup2ClkSel_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -3773,9 +5964,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup2ClkSel_Get(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable configuration for the OTX2 algorithm group 3 in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value A uint8_t value that specifies the clock enable configuration to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup3ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -3787,9 +5988,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup3ClkEn_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status for the OTX2 algorithm group 3 from
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup3ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -3804,9 +6015,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup3ClkEn_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock selection for the OTX2 algorithm group 3 in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value An 8-bit unsigned integer representing the clock selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup3ClkSel_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -3818,9 +6039,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup3ClkSel_Set(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific clock selection value from a register for a given
+ * instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup3ClkSel_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -3835,9 +6066,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup3ClkSel_Get(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable configuration for the OTX2 algorithm group 4 in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value An 8-bit unsigned integer representing the clock enable value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup4ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -3849,9 +6090,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup4ClkEn_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status from a specific register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup4ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -3866,9 +6117,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup4ClkEn_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock selection for the OTX2 algorithm group 4 in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value An 8-bit unsigned integer representing the clock selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup4ClkSel_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -3880,9 +6141,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup4ClkSel_Set(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific clock selection value from a register for a given
+ * instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup4ClkSel_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -3897,9 +6168,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup4ClkSel_Get(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable configuration for the OTX2 algorithm group 5 in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value A uint8_t value that specifies the clock enable configuration to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup5ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -3911,9 +6192,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup5ClkEn_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status for the OTX2 algorithm group 5 from
+ * the specified device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup5ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -3928,9 +6219,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup5ClkEn_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock selection for the OTX2 algorithm group 5 in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value An 8-bit unsigned integer representing the clock selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup5ClkSel_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -3942,9 +6243,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup5ClkSel_Set(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific clock selection value from a register for a given
+ * instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup5ClkSel_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -3959,9 +6270,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup5ClkSel_Get(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable configuration for the OTX2 algorithm group 6 in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value A uint8_t value that specifies the clock enable configuration to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup6ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -3973,9 +6294,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup6ClkEn_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status from a specific register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup6ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -3990,9 +6321,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup6ClkEn_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock selection for the OTX2 algorithm group 6 in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value An 8-bit unsigned integer representing the clock selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup6ClkSel_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -4004,9 +6345,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup6ClkSel_Set(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock selection value from a specific register for a
+ * given instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup6ClkSel_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -4021,9 +6372,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup6ClkSel_Get(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable configuration for the OTX2 algorithm group 7 in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value A uint8_t value that specifies the clock enable configuration to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup7ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -4035,9 +6396,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup7ClkEn_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status from a specific register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup7ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -4052,9 +6423,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup7ClkEn_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock selection for the OTX2 algorithm group 7 in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value An 8-bit unsigned integer representing the clock selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup7ClkSel_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -4066,9 +6447,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup7ClkSel_Set(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific clock selection value from a register for a given
+ * instance of the device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup7ClkSel_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -4083,9 +6474,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup7ClkSel_Get(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable configuration for the OTX2 algorithm group 8 in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value A uint8_t value that specifies the clock enable configuration to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup8ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -4097,9 +6498,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup8ClkEn_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status from a specific register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup8ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -4114,9 +6525,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup8ClkEn_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock selection for the OTX2 algorithm group 8 in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value An 8-bit unsigned integer representing the clock selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup8ClkSel_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -4128,9 +6549,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup8ClkSel_Set(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock selection value from a specific register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup8ClkSel_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -4145,9 +6576,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup8ClkSel_Get(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable state for a specific algorithm group in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value A uint8_t value indicating the clock enable state to be set (0
+ * or 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup9ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -4159,9 +6600,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup9ClkEn_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status from a specific register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup9ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -4176,9 +6627,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup9ClkEn_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock selection for the OTX2 algorithm group 9 in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value An 8-bit unsigned integer representing the clock selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup9ClkSel_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -4190,9 +6651,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup9ClkSel_Set(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific clock selection value from a register for a given
+ * instance of the device.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup9ClkSel_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -4207,9 +6677,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2AlgGroup9ClkSel_Get(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the OTX2 CSSI clock enable field in the ADRV9001 NVS register
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map to be modified.
+ * @param value A uint8_t value that indicates the desired state (enabled or
+ * disabled) for the OTX2 CSSI clock.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2CssiClkEnable_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -4221,9 +6701,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2CssiClkEnable_Set(void *const de
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status from a specific register for the
+ * `Otx2Cssi` instance.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * `NvsRegmapTxb`.
+ * @param value A pointer to a `uint8_t` where the retrieved clock enable status
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2CssiClkEnable_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -4238,9 +6727,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2CssiClkEnable_Get(void *const de
     return status;
 }
 
-/**
- * (B0 New) Extended to 16 bits
- */
+/***************************************************************************//**
+ * @brief Sets the clock generator division value for the specified instance in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A 16-bit unsigned integer representing the division value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2CssiClkgenDivValue_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint16_t value)
@@ -4255,9 +6754,20 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2CssiClkgenDivValue_Set(void *con
     return status;
 }
 
-/**
- * (B0 New) Extended to 16 bits
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock generator division value from the ADRV9001
+ * device's register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved clock
+ * division value will be stored.
+ * @return Returns the status of the last read operation, indicating success (0)
+ * or failure (non-zero). The retrieved clock division value is stored
+ * in the variable pointed to by `value`.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2CssiClkgenDivValue_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint16_t *const value)
@@ -4276,9 +6786,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2CssiClkgenDivValue_Get(void *con
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the DUC enable field in the NVS register map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that indicates the enable/disable state for the
+ * DUC.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpDucEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -4290,9 +6810,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpDucEn_Set(void *const device,
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpDucEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -4307,9 +6836,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpDucEn_Get(void *const device,
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the NVS register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt212En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -4321,9 +6860,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt212En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt212En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -4338,9 +6886,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt212En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS register map for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt214En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -4352,9 +6909,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt214En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt214En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -4369,9 +6935,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt214En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the OTX2 DP interrupt enable register for a specified instance in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A 8-bit unsigned integer that specifies the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt216En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -4383,9 +6959,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt216En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt216En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -4400,9 +6985,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt216En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the NVS register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns the status of the write operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt218En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -4414,9 +7009,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt218En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt218En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -4431,9 +7035,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt218En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the NVS register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value to be written to the specified field in the
+ * register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt220En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -4445,9 +7059,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt220En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt220En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -4462,9 +7085,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt220En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the OTX2 DP interrupt enable field in the ADRV9001 NVS register
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that indicates the desired state of the
+ * interrupt enable field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt2221En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -4476,9 +7109,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt2221En_Set(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt2221En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -4493,9 +7135,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt2221En_Get(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the NVS register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value to be written to the specified field in the
+ * register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt222En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -4507,9 +7159,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt222En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific bit field value from a hardware register and
+ * stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt222En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -4524,9 +7186,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt222En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the NVS register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map to be modified.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the specified field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt224En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -4538,9 +7210,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt224En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt224En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -4555,9 +7236,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt224En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the NVS register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt226En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -4569,9 +7260,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt226En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt226En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -4586,9 +7287,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt226En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the NVS register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt228En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -4600,9 +7311,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt228En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt228En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -4617,9 +7337,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt228En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the OTX2 DP interrupt enable register for a specified instance in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that indicates the enable/disable state for the
+ * interrupt.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt230En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -4631,9 +7361,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt230En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt230En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -4648,9 +7387,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt230En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the NVS register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map to be modified.
+ * @param value A uint8_t value to be written to the specified field in the
+ * register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt236En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -4662,9 +7411,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt236En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific bit field value from a hardware register and
+ * stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt236En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -4679,9 +7437,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt236En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the NVS register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value to be written to the specified field in the
+ * register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt238En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -4693,9 +7461,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt238En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific bit field value from a register and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt238En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -4710,9 +7487,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt238En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the NVS register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt28En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -4724,9 +7511,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt28En_Set(void *const device
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value indicating which instance of the register
+ * map to access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt28En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -4741,9 +7537,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt28En_Get(void *const device
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the NVS register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt310En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -4755,9 +7561,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt310En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt310En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -4772,9 +7587,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt310En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the NVS register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated type indicating the specific instance of the
+ * NVS register map to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the specified field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt340En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -4786,9 +7611,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt340En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt340En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -4803,9 +7637,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt340En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS register map for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt3441En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -4817,9 +7660,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt3441En_Set(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt3441En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -4834,9 +7686,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpInt3441En_Get(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of the `Otx2DpIqdmEn` field in the NVS register map for
+ * a specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpIqdmEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -4848,9 +7710,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpIqdmEn_Set(void *const device,
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific bit field value from a hardware register and
+ * stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpIqdmEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -4865,9 +7736,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpIqdmEn_Get(void *const device,
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the modem mode for the specified instance in the ADRV9001 NVS
+ * register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map to be modified.
+ * @param value An 8-bit unsigned integer representing the new modem mode value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpModemMode_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -4879,9 +7760,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpModemMode_Set(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the modem mode value from a specific register in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved modem mode
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpModemMode_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -4896,9 +7787,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpModemMode_Get(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the modem mode divider value in the ADRV9001 device's NVS
+ * register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A 16-bit unsigned integer representing the divider value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpModemModeDivValue_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint16_t value)
@@ -4913,9 +7814,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpModemModeDivValue_Set(void *co
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the modem mode division value from the specified register of
+ * the device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumeration value representing the specific instance of
+ * the register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * division value will be stored.
+ * @return Returns the status of the read operations, where a status of 0
+ * indicates success.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpModemModeDivValue_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint16_t *const value)
@@ -4934,9 +7845,17 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpModemModeDivValue_Get(void *co
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the `Otx2DpSinc242En` field in the NVS register map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit value to be written to the specified field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpSinc242En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -4948,9 +7867,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpSinc242En_Set(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpSinc242En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -4965,9 +7893,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpSinc242En_Get(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the `Otx2DpSinc344En` field in the NVS register map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpSinc344En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -4979,9 +7916,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpSinc344En_Set(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a device register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device context from which the register value
+ * will be read.
+ * @param instance An enumerated value indicating which instance of the register
+ * map to access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpSinc344En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -4996,9 +7943,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpSinc344En_Get(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the SPI interface clock enable field in the ADRV9001 NVS register
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that indicates the desired state of the clock
+ * enable field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpSpiIntfClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -5010,9 +7967,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpSpiIntfClkEn_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the SPI interface clock enable status from a specific
+ * register for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpSpiIntfClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -5027,9 +7993,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpSpiIntfClkEn_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the division factor for the OTX2 DP TSCIC32 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map to be modified.
+ * @param value An 8-bit unsigned integer representing the division factor to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpTscic32DivFactor_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -5041,9 +8017,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpTscic32DivFactor_Set(void *con
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific 8-bit value from a hardware register and stores
+ * it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpTscic32DivFactor_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -5058,9 +8043,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpTscic32DivFactor_Get(void *con
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS register map for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map to be modified.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the specified field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the field write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpTscic32En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -5072,9 +8066,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpTscic32En_Set(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumeration value indicating the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpTscic32En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -5089,9 +8092,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpTscic32En_Get(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the frequency deviation mapping for the `Otx2Dp` transmitter in
+ * the `adrv9001` device.
+ *
+ * @param device A pointer to the device structure that represents the
+ * `adrv9001` hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * `NvsRegmapTxb` register.
+ * @param value An 8-bit unsigned integer representing the frequency deviation
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpTxFreqDevMapper47En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -5103,9 +8116,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpTxFreqDevMapper47En_Set(void *
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific frequency deviation value from a register and
+ * stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumeration value representing the specific instance of
+ * the register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpTxFreqDevMapper47En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -5120,9 +8142,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpTxFreqDevMapper47En_Get(void *
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the division factor for the OTX2 DP TX preprocessor in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the division factor to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpTxPreproc2DivFactor_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -5134,9 +8166,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpTxPreproc2DivFactor_Set(void *
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific divisor factor from a register for a given
+ * instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved divisor
+ * factor will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpTxPreproc2DivFactor_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -5151,9 +8193,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpTxPreproc2DivFactor_Get(void *
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the Tx preprocessor enable field in the ADRV9001 NVS register
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that indicates the enable/disable state for the
+ * Tx preprocessor.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpTxPreproc2En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -5165,9 +8217,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpTxPreproc2En_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpTxPreproc2En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -5182,9 +8243,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpTxPreproc2En_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the `Otx2DpTxRound46En` field in the NVS register map for the
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value to be written to the register, which is shifted
+ * to fit the field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpTxRound46En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -5196,9 +8267,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpTxRound46En_Set(void *const de
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpTxRound46En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -5213,9 +8293,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpTxRound46En_Get(void *const de
     return status;
 }
 
-/**
- * (C0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the SDM clock enable field in the ADRV9001 register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map to be modified.
+ * @param value A uint8_t value that indicates the desired state of the SDM
+ * clock enable field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpTxdacSdmClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -5227,9 +8316,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpTxdacSdmClkEn_Set(void *const 
     return status;
 }
 
-/**
- * (C0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the SDM clock enable status from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpTxdacSdmClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -5244,9 +8342,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2DpTxdacSdmClkEn_Get(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the LSSI clock enable configuration for a specified instance in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map to be modified.
+ * @param value A uint8_t value that indicates the desired state of the LSSI
+ * clock enable.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2LssiClkEnable_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -5258,9 +8366,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2LssiClkEnable_Set(void *const de
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the LSSI clock enable status from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2LssiClkEnable_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -5275,9 +8392,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2LssiClkEnable_Get(void *const de
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the LSSI clock generator division value in the ADRV9001 device's
+ * register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A 16-bit unsigned integer representing the division value to be
+ * set.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2LssiClkgenDivValue_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint16_t value)
@@ -5292,9 +8419,20 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2LssiClkgenDivValue_Set(void *con
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the LSSI clock generator division value from the ADRV9001
+ * device's register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved clock
+ * generator division value will be stored.
+ * @return Returns the status of the last read operation, indicating success (0)
+ * or failure (non-zero). The retrieved clock generator division value
+ * is stored in the variable pointed to by value.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2LssiClkgenDivValue_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint16_t *const value)
@@ -5313,9 +8451,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2LssiClkgenDivValue_Get(void *con
     return status;
 }
 
-/**
- * (B0 New) LVDS SSI data destiantion Clock div value for Decimation/Interpolation of the SSI interface
- */
+/***************************************************************************//**
+ * @brief Sets the clock divider value for the LSSI data destination in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A 16-bit unsigned integer representing the clock divider value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2LssiDataDestClkDivValue_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint16_t value)
@@ -5330,9 +8478,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2LssiDataDestClkDivValue_Set(void
     return status;
 }
 
-/**
- * (B0 New) LVDS SSI data destiantion Clock div value for Decimation/Interpolation of the SSI interface
- */
+/***************************************************************************//**
+ * @brief Retrieves the LSSI data destination clock divider value from a
+ * specified register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved clock
+ * divider value will be stored.
+ * @return Returns the status of the last register read operation, indicating
+ * success (0) or an error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2LssiDataDestClkDivValue_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint16_t *const value)
@@ -5351,9 +8508,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2LssiDataDestClkDivValue_Get(void
     return status;
 }
 
-/**
- * (B0 New) 0: data destination clock inherit from datapath, 1: data destimation clock inherit from DivN from clk1105
- */
+/***************************************************************************//**
+ * @brief Sets the clock selection for the LSSI data destination in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the clock selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2LssiDataDestClkSel_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -5365,9 +8532,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2LssiDataDestClkSel_Set(void *con
     return status;
 }
 
-/**
- * (B0 New) 0: data destination clock inherit from datapath, 1: data destimation clock inherit from DivN from clk1105
- */
+/***************************************************************************//**
+ * @brief Retrieves the LSSI data destination clock selection value from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * selection value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2LssiDataDestClkSel_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -5382,9 +8558,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2LssiDataDestClkSel_Get(void *con
     return status;
 }
 
-/**
- * (B0 New) 0: Divider 1/N selected, 1: Divider 1/4.5 selected
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS register map for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2Pfir4xDiv4p5_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -5396,9 +8581,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2Pfir4xDiv4p5_Set(void *const dev
     return status;
 }
 
-/**
- * (B0 New) 0: Divider 1/N selected, 1: Divider 1/4.5 selected
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumeration value indicating which instance of the
+ * register map to access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2Pfir4xDiv4p5_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -5413,9 +8608,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2Pfir4xDiv4p5_Get(void *const dev
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the PFIR 4x division value in the ADRV9001 device's register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A 16-bit unsigned integer representing the PFIR 4x division
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2Pfir4xDivValue_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint16_t value)
@@ -5430,9 +8634,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2Pfir4xDivValue_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a 16-bit value from two consecutive registers for a
+ * specified instance of the device.
+ *
+ * @param device A pointer to the device context used for register access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the register read operations, with `*value`
+ * containing the combined 16-bit value from the two registers if
+ * successful.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2Pfir4xDivValue_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint16_t *const value)
@@ -5451,9 +8665,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2Pfir4xDivValue_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the PFIR I enable field in the ADRV9001 NVS register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that indicates the enable/disable state for the
+ * PFIR I.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2PfirIEnable_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -5465,9 +8688,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2PfirIEnable_Set(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the PFIR I Enable value from a specific register for a given
+ * instance of the device.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2PfirIEnable_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -5482,9 +8714,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2PfirIEnable_Get(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the PFIR Q enable configuration for a specified instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that indicates the enable/disable state for the
+ * PFIR Q.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2PfirQEnable_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -5496,9 +8738,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2PfirQEnable_Set(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the PFIR Q enable status from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2PfirQEnable_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -5513,9 +8764,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2PfirQEnable_Get(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the PFIR XISel force value in the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2PfirXISelForce_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -5527,9 +8787,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2PfirXISelForce_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the PFIR X input selection force value from a specific
+ * register for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2PfirXISelForce_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -5544,9 +8813,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2PfirXISelForce_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the PFIR X input selection force value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the force value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2PfirXISelForceValue_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -5558,9 +8836,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2PfirXISelForceValue_Set(void *co
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the PFIR X I selection force value from a specific register
+ * for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2PfirXISelForceValue_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -5575,9 +8862,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2PfirXISelForceValue_Get(void *co
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the PFIR XQ selection force value in the ADRV9001 device's
+ * register.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2PfirXQSelForce_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -5589,9 +8886,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2PfirXQSelForce_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2PfirXQSelForce_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -5606,9 +8912,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2PfirXQSelForce_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the PFIR XQ selection force value in the ADRV9001 device's
+ * register.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the force value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2PfirXQSelForceValue_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -5620,9 +8936,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2PfirXQSelForceValue_Set(void *co
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the PFIR XQ selection force value from a specific register
+ * for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved force value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2PfirXQSelForceValue_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -5637,9 +8962,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2PfirXQSelForceValue_Get(void *co
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the global clock enable reset for the specified OTX2 profile in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the OTX2 profile.
+ * @param value A uint8_t value indicating the desired state for the global
+ * clock enable reset.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2ProfileDpGlobalClkEnableReset_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -5651,9 +8986,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2ProfileDpGlobalClkEnableReset_Se
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register related to the global clock
+ * enable reset for the OTX2 profile.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2ProfileDpGlobalClkEnableReset_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -5668,9 +9012,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2ProfileDpGlobalClkEnableReset_Ge
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the SSI global clock enable/reset field in the ADRV9001 NVS
+ * register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that indicates the desired state for the SSI
+ * global clock enable/reset field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2ProfileSsiGlobalClkEnableReset_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -5682,9 +9036,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2ProfileSsiGlobalClkEnableReset_S
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the SSI global clock enable reset value from a specific
+ * register for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx2ProfileSsiGlobalClkEnableReset_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -5699,9 +9062,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx2ProfileSsiGlobalClkEnableReset_G
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable field for the OTX3 algorithm group 10 in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value A uint8_t value that indicates the desired state of the clock
+ * enable field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup10ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -5713,9 +9086,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup10ClkEn_Set(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status for the OTX3 algorithm group 10 from
+ * the specified device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup10ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -5730,9 +9113,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup10ClkEn_Get(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable configuration for the OTX3 algorithm group 11 in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value A uint8_t value representing the clock enable configuration to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup11ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -5744,9 +9137,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup11ClkEn_Set(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status for the OTX3 algorithm group 11 from
+ * the device's register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup11ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -5761,9 +9163,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup11ClkEn_Get(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable field for the OTX3 algorithm group 1 in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value A uint8_t value indicating the desired state (enabled or
+ * disabled) for the clock.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup1ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -5775,9 +9187,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup1ClkEn_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status for the OTX3 algorithm group 1 from
+ * the specified device.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup1ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -5792,9 +9213,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup1ClkEn_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable configuration for the OTX3 algorithm group 2 in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value A uint8_t value representing the clock enable configuration to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup2ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -5806,9 +9237,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup2ClkEn_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status for the OTX3 algorithm group 2 from
+ * the specified device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup2ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -5823,9 +9264,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup2ClkEn_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock selection for the OTX3 algorithm group 2 in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value An 8-bit unsigned integer representing the clock selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup2ClkSel_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -5837,9 +9288,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup2ClkSel_Set(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific clock selection value from a register for a given
+ * instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup2ClkSel_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -5854,9 +9315,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup2ClkSel_Get(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable configuration for the OTX3 algorithm group 3 in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value A uint8_t value that specifies the clock enable configuration to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup3ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -5868,9 +9339,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup3ClkEn_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific clock enable value from a register for a given
+ * instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup3ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -5885,9 +9366,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup3ClkEn_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock selection for the OTX3 algorithm group 3 in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value An 8-bit unsigned integer representing the clock selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup3ClkSel_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -5899,9 +9390,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup3ClkSel_Set(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific clock selection value from a register for a given
+ * instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup3ClkSel_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -5916,9 +9417,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup3ClkSel_Get(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable configuration for the OTX3 algorithm group 4 in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value A uint8_t value that specifies the clock enable configuration to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup4ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -5930,9 +9441,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup4ClkEn_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status for the OTX3 algorithm group 4 from
+ * the specified device.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup4ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -5947,9 +9467,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup4ClkEn_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock selection for the OTX3 algorithm group 4 in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value An 8-bit unsigned integer representing the clock selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup4ClkSel_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -5961,9 +9491,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup4ClkSel_Set(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock selection value for the OTX3 algorithm group 4
+ * from the specified device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup4ClkSel_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -5978,9 +9518,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup4ClkSel_Get(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable configuration for the OTX3 algorithm group 5 in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value A uint8_t value that specifies the clock enable configuration to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup5ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -5992,9 +9542,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup5ClkEn_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status for the OTX3 algorithm group 5 from
+ * the device's register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup5ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -6009,9 +9568,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup5ClkEn_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock selection for the OTX3 algorithm group 5 in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value An 8-bit unsigned integer representing the clock selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup5ClkSel_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -6023,9 +9592,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup5ClkSel_Set(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock selection value for the OTX3 algorithm group 5
+ * from the specified device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumeration value representing the specific instance of
+ * the NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup5ClkSel_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -6040,9 +9619,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup5ClkSel_Get(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable configuration for the OTX3 algorithm group 6 in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value A uint8_t value representing the clock enable configuration to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup6ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -6054,9 +9643,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup6ClkEn_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status for the OTX3 algorithm group 6 from
+ * the specified device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup6ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -6071,9 +9670,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup6ClkEn_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock selection for the OTX3 algorithm group 6 in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value An 8-bit unsigned integer representing the clock selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup6ClkSel_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -6085,9 +9694,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup6ClkSel_Set(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock selection value from a specific register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup6ClkSel_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -6102,9 +9721,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup6ClkSel_Get(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable configuration for the OTX3 algorithm group 7 in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value A uint8_t value that specifies the clock enable configuration to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup7ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -6116,9 +9745,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup7ClkEn_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status for the OTX3 algorithm group 7 from
+ * the specified device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup7ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -6133,9 +9772,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup7ClkEn_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock selection for the OTX3 algorithm group 7 in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value An 8-bit unsigned integer representing the clock selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup7ClkSel_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -6147,9 +9796,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup7ClkSel_Set(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock selection value for the OTX3 algorithm group 7
+ * from the specified device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup7ClkSel_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -6164,9 +9823,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup7ClkSel_Get(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable configuration for the OTX3 algorithm group 8 in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value A uint8_t value representing the clock enable configuration to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup8ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -6178,9 +9847,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup8ClkEn_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status for the OTX3 algorithm group 8 from
+ * the specified device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup8ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -6195,9 +9874,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup8ClkEn_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock selection for the OTX3 algorithm group 8 in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the OTX3 algorithm.
+ * @param value An 8-bit unsigned integer representing the clock selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup8ClkSel_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -6209,9 +9898,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup8ClkSel_Set(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock selection value from a specific register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup8ClkSel_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -6226,9 +9925,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup8ClkSel_Get(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable state for the OTX3 algorithm group 9 in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value A uint8_t value indicating the desired clock enable state (0 or
+ * 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup9ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -6240,9 +9949,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup9ClkEn_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status for the OTX3 algorithm group 9 from
+ * the specified device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup9ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -6257,9 +9976,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup9ClkEn_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock selection for the OTX3 algorithm group 9 in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TXB.
+ * @param value An 8-bit unsigned integer representing the clock selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup9ClkSel_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -6271,9 +10000,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup9ClkSel_Set(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock selection value from a specific register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * selection value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup9ClkSel_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -6288,9 +10027,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3AlgGroup9ClkSel_Get(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the CS SI clock enable field in the ADRV9001 NVS register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that indicates the desired state of the CS SI
+ * clock enable (0 or 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3CssiClkEnable_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -6302,9 +10050,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3CssiClkEnable_Set(void *const de
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the OTX3 CSSI clock enable register from the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3CssiClkEnable_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -6319,9 +10077,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3CssiClkEnable_Get(void *const de
     return status;
 }
 
-/**
- * (B0 New) Extended to 16 bits
- */
+/***************************************************************************//**
+ * @brief Sets the clock generator division value for the specified instance in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A 16-bit unsigned integer representing the division value to be
+ * set.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3CssiClkgenDivValue_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint16_t value)
@@ -6336,9 +10104,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3CssiClkgenDivValue_Set(void *con
     return status;
 }
 
-/**
- * (B0 New) Extended to 16 bits
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock generator division value from the specified
+ * register of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved clock
+ * division value will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3CssiClkgenDivValue_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint16_t *const value)
@@ -6357,9 +10135,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3CssiClkgenDivValue_Get(void *con
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the DUC enable field in the NVS register map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that indicates the enable/disable state for the
+ * DUC.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpDucEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -6371,9 +10159,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpDucEn_Set(void *const device,
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpDucEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -6388,9 +10185,17 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpDucEn_Get(void *const device,
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the ADRV9001 NVS register map.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt212En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -6402,9 +10207,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt212En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt212En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -6419,9 +10233,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt212En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS register map for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt214En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -6433,9 +10256,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt214En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t where the retrieved register value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt214En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -6450,9 +10282,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt214En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS register map for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt216En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -6464,9 +10305,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt216En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt216En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -6481,9 +10331,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt216En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the NVS register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt218En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -6495,9 +10355,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt218En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt218En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -6512,9 +10381,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt218En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the NVS register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value to be written to the specified field in the
+ * register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt220En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -6526,9 +10405,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt220En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt220En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -6543,9 +10431,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt220En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS register map for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt2221En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -6557,9 +10454,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt2221En_Set(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt2221En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -6574,9 +10480,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt2221En_Get(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the NVS register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt222En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -6588,9 +10504,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt222En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific bit field value from a hardware register and
+ * stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt222En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -6605,9 +10530,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt222En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the NVS register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt224En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -6619,9 +10554,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt224En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt224En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -6636,9 +10580,17 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt224En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the ADRV9001 NVS register map.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt226En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -6650,9 +10602,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt226En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt226En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -6667,9 +10628,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt226En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the NVS register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt228En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -6681,9 +10652,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt228En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt228En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -6698,9 +10678,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt228En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS register map for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt230En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -6712,9 +10701,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt230En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt230En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -6729,9 +10727,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt230En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS register map for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value to be written to the specified field in the
+ * register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt236En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -6743,9 +10750,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt236En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt236En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -6760,9 +10776,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt236En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the NVS register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt238En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -6774,9 +10800,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt238En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt238En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -6791,9 +10826,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt238En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the ADRV9001 NVS register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the specified field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the field write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt28En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -6805,9 +10849,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt28En_Set(void *const device
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt28En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -6822,9 +10875,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt28En_Get(void *const device
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the ADRV9001 NVS register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt310En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -6836,9 +10898,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt310En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt310En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -6853,9 +10924,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt310En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the NVS register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt340En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -6867,9 +10948,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt340En_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt340En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -6884,9 +10974,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt340En_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS register map for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt3441En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -6898,9 +10997,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt3441En_Set(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt3441En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -6915,9 +11023,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpInt3441En_Get(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the NVS register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpIqdmEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -6929,9 +11047,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpIqdmEn_Set(void *const device,
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpIqdmEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -6946,9 +11073,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpIqdmEn_Get(void *const device,
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the modem mode for the specified instance in the ADRV9001 NVS
+ * register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the modem mode value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpModemMode_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -6960,9 +11097,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpModemMode_Set(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the modem mode value from a specific register in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved modem mode
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpModemMode_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -6977,9 +11124,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpModemMode_Get(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the modem mode divider value in the ADRV9001 device's register
+ * map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A 16-bit unsigned integer representing the divider value to be
+ * set.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if any operation fails.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpModemModeDivValue_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint16_t value)
@@ -6994,9 +11151,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpModemModeDivValue_Set(void *co
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the modem mode division value from the specified register
+ * map.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * division value will be stored.
+ * @return Returns the status of the read operations, where a status of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpModemModeDivValue_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint16_t *const value)
@@ -7015,9 +11181,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpModemModeDivValue_Get(void *co
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the Sinc filter enable state for a specified instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map to be modified.
+ * @param value A uint8_t value representing the state to set for the Sinc
+ * filter (enabled or disabled).
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpSinc242En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -7029,9 +11205,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpSinc242En_Set(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpSinc242En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -7046,9 +11231,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpSinc242En_Get(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the `Otx3DpSinc344En` field in the `NvsRegmapTxb` register for a
+ * specified instance.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * `NvsRegmapTxb` register.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpSinc344En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -7060,9 +11254,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpSinc344En_Set(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpSinc344En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -7077,9 +11280,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpSinc344En_Get(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the SPI interface clock enable bit for a specified instance in
+ * the ADRV9001 NVS register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that indicates the desired state of the clock
+ * enable bit (0 or 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpSpiIntfClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -7091,9 +11304,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpSpiIntfClkEn_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the SPI interface clock enable status from a specific
+ * register for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpSpiIntfClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -7108,9 +11330,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpSpiIntfClkEn_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the division factor for the `Otx3DpTscic32` register in the
+ * `adrv9001` device.
+ *
+ * @param device A pointer to the device structure that represents the
+ * `adrv9001` device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value An 8-bit unsigned integer representing the division factor to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpTscic32DivFactor_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -7122,9 +11354,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpTscic32DivFactor_Set(void *con
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific 8-bit value from a hardware register and stores
+ * it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpTscic32DivFactor_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -7139,9 +11380,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpTscic32DivFactor_Get(void *con
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS register map for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpTscic32En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -7153,9 +11403,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpTscic32En_Set(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpTscic32En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -7170,9 +11430,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpTscic32En_Get(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the frequency deviation mapping for the specified instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the frequency deviation.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpTxFreqDevMapper47En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -7184,9 +11454,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpTxFreqDevMapper47En_Set(void *
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific frequency deviation value from a register and
+ * stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumeration value representing the specific instance of
+ * the register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpTxFreqDevMapper47En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -7201,9 +11480,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpTxFreqDevMapper47En_Get(void *
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the division factor for the TX preprocessor in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the division factor to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpTxPreproc2DivFactor_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -7215,9 +11504,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpTxPreproc2DivFactor_Set(void *
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific 8-bit value from a register and stores it in the
+ * provided pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpTxPreproc2DivFactor_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -7232,9 +11530,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpTxPreproc2DivFactor_Get(void *
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the Tx preprocessor 2 enable field in the ADRV9001 NVS register
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map to be modified.
+ * @param value A uint8_t value that indicates the enable/disable state for the
+ * Tx preprocessor.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpTxPreproc2En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -7246,9 +11554,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpTxPreproc2En_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpTxPreproc2En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -7263,9 +11580,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpTxPreproc2En_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the NVS register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value to be written to the specified field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpTxRound46En_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -7277,9 +11603,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpTxRound46En_Set(void *const de
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpTxRound46En_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -7294,9 +11629,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpTxRound46En_Get(void *const de
     return status;
 }
 
-/**
- * (C0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the SDM clock enable field in the ADRV9001 register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A uint8_t value that indicates the desired state to set for the
+ * SDM clock enable field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpTxdacSdmClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -7308,9 +11652,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpTxdacSdmClkEn_Set(void *const 
     return status;
 }
 
-/**
- * (C0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the SDM clock enable value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpTxdacSdmClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -7325,9 +11678,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3DpTxdacSdmClkEn_Get(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the LSSI clock enable configuration for a specified instance in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that indicates the desired state of the LSSI
+ * clock enable.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3LssiClkEnable_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -7339,9 +11702,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3LssiClkEnable_Set(void *const de
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the LSSI clock enable status from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3LssiClkEnable_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -7356,9 +11728,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3LssiClkEnable_Get(void *const de
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the LSSI clock generator division value in the ADRV9001 device's
+ * register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A 16-bit unsigned integer representing the division value to be
+ * set.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3LssiClkgenDivValue_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint16_t value)
@@ -7373,9 +11755,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3LssiClkgenDivValue_Set(void *con
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the LSSI clock generator division value from the ADRV9001
+ * device's register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved clock
+ * generator division value will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the register read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3LssiClkgenDivValue_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint16_t *const value)
@@ -7394,9 +11786,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3LssiClkgenDivValue_Get(void *con
     return status;
 }
 
-/**
- * (B0 New) LVDS SSI data destiantion Clock div value for Decimation/Interpolation of the SSI interface
- */
+/***************************************************************************//**
+ * @brief Sets the clock divider value for the LSSI data destination in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A 16-bit unsigned integer representing the clock divider value
+ * to be set.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3LssiDataDestClkDivValue_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint16_t value)
@@ -7411,9 +11813,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3LssiDataDestClkDivValue_Set(void
     return status;
 }
 
-/**
- * (B0 New) LVDS SSI data destiantion Clock div value for Decimation/Interpolation of the SSI interface
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock division value for the LSSI data destination from
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved clock
+ * division value will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the register read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3LssiDataDestClkDivValue_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint16_t *const value)
@@ -7432,9 +11844,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3LssiDataDestClkDivValue_Get(void
     return status;
 }
 
-/**
- * (B0 New) 0: data destination clock inherit from datapath, 1: data destimation clock inherit from DivN from clk1105
- */
+/***************************************************************************//**
+ * @brief Sets the clock selection for the LSSI data destination in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the clock selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3LssiDataDestClkSel_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -7446,9 +11868,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3LssiDataDestClkSel_Set(void *con
     return status;
 }
 
-/**
- * (B0 New) 0: data destination clock inherit from datapath, 1: data destimation clock inherit from DivN from clk1105
- */
+/***************************************************************************//**
+ * @brief Retrieves the LSSI data destination clock selection value from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3LssiDataDestClkSel_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -7463,9 +11894,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3LssiDataDestClkSel_Get(void *con
     return status;
 }
 
-/**
- * (B0 New) 0: Divider 1/N selected, 1: Divider 1/4.5 selected
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the ADRV9001 device's register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to be modified.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the specified register field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3Pfir4xDiv4p5_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -7477,9 +11917,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3Pfir4xDiv4p5_Set(void *const dev
     return status;
 }
 
-/**
- * (B0 New) 0: Divider 1/N selected, 1: Divider 1/4.5 selected
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated type indicating the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3Pfir4xDiv4p5_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -7494,9 +11944,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3Pfir4xDiv4p5_Get(void *const dev
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the 4x division value for the OTX3 PFIR in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A 16-bit unsigned integer representing the division value to be
+ * set.
+ * @return Returns the status of the last write operation, indicating success
+ * (0) or failure (non-zero error code).
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3Pfir4xDivValue_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint16_t value)
@@ -7511,9 +11970,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3Pfir4xDivValue_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a 16-bit value from two consecutive registers for a
+ * specified instance of the device.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the last register read operation, where a value
+ * of 0 indicates success.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3Pfir4xDivValue_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint16_t *const value)
@@ -7532,9 +12000,17 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3Pfir4xDivValue_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the PFIR I enable field in the ADRV9001 register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A uint8_t value that indicates the enable state for the PFIR I.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3PfirIEnable_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -7546,9 +12022,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3PfirIEnable_Set(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the PFIR I Enable value from a specific register for a given
+ * instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved PFIR I
+ * Enable value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3PfirIEnable_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -7563,9 +12049,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3PfirIEnable_Get(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the PFIR Q enable configuration for a specified instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map to be modified.
+ * @param value A uint8_t value representing the PFIR Q enable setting to be
+ * applied.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3PfirQEnable_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -7577,9 +12073,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3PfirQEnable_Set(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the PFIR Q enable status from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3PfirQEnable_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -7594,9 +12099,17 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3PfirQEnable_Get(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the PFIR X input selection force value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value representing the force selection to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3PfirXISelForce_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -7608,9 +12121,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3PfirXISelForce_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3PfirXISelForce_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -7625,9 +12147,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3PfirXISelForce_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the PFIR X I selection force value in the ADRV9001 device's
+ * register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3PfirXISelForceValue_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -7639,9 +12171,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3PfirXISelForceValue_Set(void *co
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the PFIR XISel force value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3PfirXISelForceValue_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -7656,9 +12197,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3PfirXISelForceValue_Get(void *co
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the PFIR XQ selection force value in the ADRV9001 device's
+ * register.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3PfirXQSelForce_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -7670,9 +12221,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3PfirXQSelForce_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3PfirXQSelForce_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -7687,9 +12247,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3PfirXQSelForce_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the forced value for the `Otx3PfirXQSel` field in the
+ * `NvsRegmapTxb` register.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * `NvsRegmapTxb` register.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3PfirXQSelForceValue_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -7701,9 +12271,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3PfirXQSelForceValue_Set(void *co
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the PFIR XQ selection force value from a specific register
+ * for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3PfirXQSelForceValue_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -7718,9 +12297,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3PfirXQSelForceValue_Get(void *co
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the global clock enable reset for the OTX3 profile in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the OTX3 profile.
+ * @param value A uint8_t value that indicates the desired state (enable or
+ * disable) for the global clock.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3ProfileDpGlobalClkEnableReset_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -7732,9 +12321,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3ProfileDpGlobalClkEnableReset_Se
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3ProfileDpGlobalClkEnableReset_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -7749,9 +12347,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3ProfileDpGlobalClkEnableReset_Ge
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the SSI global clock enable reset for a specified instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that indicates the desired state for the SSI
+ * global clock enable reset.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3ProfileSsiGlobalClkEnableReset_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -7763,9 +12371,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3ProfileSsiGlobalClkEnableReset_S
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the SSI global clock enable reset value from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_Otx3ProfileSsiGlobalClkEnableReset_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -7780,9 +12397,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_Otx3ProfileSsiGlobalClkEnableReset_G
     return status;
 }
 
-/**
- * (B0 New) 0: TX profile selected, 1: OTX1/OTX2/OTX3 profile selected
- */
+/***************************************************************************//**
+ * @brief Sets the output profile selection for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_OtxProfileSel_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -7794,9 +12420,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_OtxProfileSel_Set(void *const device
     return status;
 }
 
-/**
- * (B0 New) 0: TX profile selected, 1: OTX1/OTX2/OTX3 profile selected
- */
+/***************************************************************************//**
+ * @brief Retrieves the output profile selection value from the NVS register map
+ * for a specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved profile
+ * selection value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_OtxProfileSel_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -7811,9 +12446,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_OtxProfileSel_Get(void *const device
     return status;
 }
 
-/**
- * (B0 New) 0: OTX1 selected, 1: OTX2_selected, 2: OTX3_selected, 3: OTX3_selected
- */
+/***************************************************************************//**
+ * @brief Sets the output selection for the transmit block in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map transmit block.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the output selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_OtxSel_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -7825,9 +12470,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_OtxSel_Set(void *const device,
     return status;
 }
 
-/**
- * (B0 New) 0: OTX1 selected, 1: OTX2_selected, 2: OTX3_selected, 3: OTX3_selected
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_OtxSel_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -7842,9 +12496,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_OtxSel_Get(void *const device,
     return status;
 }
 
-/**
- * (B0 New) 0: TX profile selected, 1: OTX1/OTX2/OTX3 profile selected
- */
+/***************************************************************************//**
+ * @brief Sets the SSI profile selection for a specified instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value representing the SSI profile selection to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_OtxSsiProfileSel_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -7856,9 +12520,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_OtxSsiProfileSel_Set(void *const dev
     return status;
 }
 
-/**
- * (B0 New) 0: TX profile selected, 1: OTX1/OTX2/OTX3 profile selected
- */
+/***************************************************************************//**
+ * @brief Retrieves the SSI profile selection value from the ADRV9001 device's
+ * register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_OtxSsiProfileSel_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -7873,9 +12547,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_OtxSsiProfileSel_Get(void *const dev
     return status;
 }
 
-/**
- * (B0 New) 0: OTX1 selected, 1: OTX2_selected, 2: OTX3_selected, 3: OTX3_selected
- */
+/***************************************************************************//**
+ * @brief Sets the SSI selection for the specified instance in the ADRV9001 NVS
+ * register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_OtxSsiSel_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -7887,9 +12571,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_OtxSsiSel_Set(void *const device,
     return status;
 }
 
-/**
- * (B0 New) 0: OTX1 selected, 1: OTX2_selected, 2: OTX3_selected, 3: OTX3_selected
- */
+/***************************************************************************//**
+ * @brief Retrieves the SSI selection value from a specific register for the
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved SSI
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_OtxSsiSel_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -7904,9 +12597,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_OtxSsiSel_Get(void *const device,
     return status;
 }
 
-/**
- * (C0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the Qeclol register update request force value in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value to be written to the register, representing the
+ * force update request.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_QeclolRegupdReqForce_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -7918,9 +12621,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_QeclolRegupdReqForce_Set(void *const
     return status;
 }
 
-/**
- * (C0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_QeclolRegupdReqForce_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -7935,9 +12647,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_QeclolRegupdReqForce_Get(void *const
     return status;
 }
 
-/**
- * (C0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the FIFO reset mask for the Tx algorithm or group 11 clock gain
+ * in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the Tx algorithm.
+ * @param value A uint8_t value that specifies the desired state for the FIFO
+ * reset mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgArmOrGroup11ClkGainFifoResetbMask_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -7949,9 +12671,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgArmOrGroup11ClkGainFifoResetbMa
     return status;
 }
 
-/**
- * (C0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock gain FIFO reset mask value from a specific
+ * register for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgArmOrGroup11ClkGainFifoResetbMask_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -7966,9 +12697,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgArmOrGroup11ClkGainFifoResetbMa
     return status;
 }
 
-/**
- * (C0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock reset mask for the specified instance in the ADRV9001
+ * NVS register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that indicates the desired state to set for the
+ * clock reset mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgArmOrGroup11ClkResetbMask_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -7980,9 +12721,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgArmOrGroup11ClkResetbMask_Set(v
     return status;
 }
 
-/**
- * (C0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the masked value of the Tx Algorithm Arm or Group 11 Clock
+ * Reset register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgArmOrGroup11ClkResetbMask_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -7997,9 +12747,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgArmOrGroup11ClkResetbMask_Get(v
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock selection for the Tx Algorithm Arm or Group 11 in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the Tx Algorithm.
+ * @param value A uint8_t value representing the clock selection to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgArmOrGroup11ClkSel_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -8011,9 +12770,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgArmOrGroup11ClkSel_Set(void *co
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock selection value from a specific register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * selection value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgArmOrGroup11ClkSel_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -8028,9 +12797,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgArmOrGroup11ClkSel_Get(void *co
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable field for the Tx Algorithm Group 11 in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the Tx Algorithm.
+ * @param value A uint8_t value that indicates the desired state of the clock
+ * enable field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11CgClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -8042,9 +12821,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11CgClkEn_Set(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status from a specific register for a given
+ * instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11CgClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -8059,9 +12848,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11CgClkEn_Get(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock reset mask for the specified instance in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that specifies the new clock reset mask to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11CgClkResetbMask_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -8073,9 +12872,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11CgClkResetbMask_Set(void
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific masked value from a register for the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11CgClkResetbMask_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -8090,9 +12899,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11CgClkResetbMask_Get(void
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock reset mask for the Tx Algorithm Group 11 in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the Tx Algorithm.
+ * @param value A uint8_t value representing the clock reset mask to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11ClkResetbMask_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -8104,9 +12922,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11ClkResetbMask_Set(void *
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock reset mask value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11ClkResetbMask_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -8121,9 +12948,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11ClkResetbMask_Get(void *
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the GDC pre-clock enable configuration for a specified instance
+ * in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that indicates the enable/disable state for the
+ * GDC pre-clock.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11GdcPreClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -8135,9 +12972,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11GdcPreClkEn_Set(void *co
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11GdcPreClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -8152,9 +12999,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11GdcPreClkEn_Get(void *co
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the GDC pre-clock reset mask for a specified instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that specifies the mask to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11GdcPreClkResetbMask_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -8166,9 +13022,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11GdcPreClkResetbMask_Set(
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific masked value from a register for the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11GdcPreClkResetbMask_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -8183,9 +13049,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11GdcPreClkResetbMask_Get(
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the LOLB clock enable field in the ADRV9001 register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A uint8_t value that indicates the desired state to set for the
+ * LOLB clock enable field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11LolbClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -8197,9 +13072,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11LolbClkEn_Set(void *cons
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the `LolbClkEn` field from a specific register
+ * in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11LolbClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -8214,9 +13099,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11LolbClkEn_Get(void *cons
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the `LolbClkResetbMask` field in the `TxAlgGroup11` register of
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11LolbClkResetbMask_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -8228,9 +13123,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11LolbClkResetbMask_Set(vo
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific masked value from a register for the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11LolbClkResetbMask_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -8245,9 +13150,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11LolbClkResetbMask_Get(vo
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable configuration for the Tx Algorithm Group 11 in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value representing the clock enable configuration to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11Mc21ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -8259,9 +13174,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11Mc21ClkEn_Set(void *cons
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status from a specific register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11Mc21ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -8276,9 +13201,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11Mc21ClkEn_Get(void *cons
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the PA protection clock enable field in the ADRV9001 register
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A uint8_t value that indicates the desired state of the PA
+ * protection clock enable (0 or 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11PaProtClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -8290,9 +13225,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11PaProtClkEn_Set(void *co
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register related to the PA
+ * protection clock enable setting.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value indicating the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11PaProtClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -8307,9 +13251,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11PaProtClkEn_Get(void *co
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the PA protection clock reset mask in the ADRV9001 device's
+ * register.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A uint8_t value that specifies the mask to be set for the PA
+ * protection clock reset.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11PaProtClkResetbMask_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -8321,9 +13275,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11PaProtClkResetbMask_Set(
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11PaProtClkResetbMask_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -8338,9 +13301,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11PaProtClkResetbMask_Get(
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the serial clock enable field in the ADRV9001 register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A uint8_t value that indicates the desired state of the serial
+ * clock enable.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11SrlClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -8352,9 +13324,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11SrlClkEn_Set(void *const
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the serial clock enable value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11SrlClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -8369,9 +13350,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11SrlClkEn_Get(void *const
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the serial clock reset mask for a specified instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11SrlClkResetbMask_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -8383,9 +13374,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11SrlClkResetbMask_Set(voi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register field from the device and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11SrlClkResetbMask_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -8400,9 +13400,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11SrlClkResetbMask_Get(voi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the transmit attenuation path clock enable for a specific
+ * instance in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A uint8_t value that specifies the clock enable setting to be
+ * written.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11TxAttenDpathClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -8414,9 +13424,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11TxAttenDpathClkEn_Set(vo
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11TxAttenDpathClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -8431,9 +13450,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11TxAttenDpathClkEn_Get(vo
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the Tx Attenuation Path Clock Reset Mask for a specified instance
+ * in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that specifies the new setting for the Tx
+ * Attenuation Path Clock Reset Mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11TxAttenDpathClkResetbMask_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -8445,9 +13474,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11TxAttenDpathClkResetbMas
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific bit field value from a hardware register and
+ * stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11TxAttenDpathClkResetbMask_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -8462,9 +13501,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11TxAttenDpathClkResetbMas
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the TXBB clock enable field in the ADRV9001 register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A uint8_t value that indicates the desired state of the TXBB
+ * clock enable field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11TxbbfClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -8476,9 +13524,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11TxbbfClkEn_Set(void *con
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register field and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11TxbbfClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -8493,9 +13550,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11TxbbfClkEn_Get(void *con
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the TXBB clock reset value in the ADRV9001 device's register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11TxbbfClkReset_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -8507,9 +13573,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11TxbbfClkReset_Set(void *
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the TXBB clock reset value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock reset
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11TxbbfClkReset_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -8524,9 +13599,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11TxbbfClkReset_Get(void *
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the TXBBF clock reset mask in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that specifies the mask to be set for the TXBBF
+ * clock reset.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11TxbbfClkResetbMask_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -8538,9 +13622,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11TxbbfClkResetbMask_Set(v
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11TxbbfClkResetbMask_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -8555,9 +13649,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup11TxbbfClkResetbMask_Get(v
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the FIFO 2 clock enable field in the ADRV9001 register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A uint8_t value that indicates the desired state of the FIFO 2
+ * clock enable.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup1Fifo2ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -8569,9 +13672,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup1Fifo2ClkEn_Set(void *cons
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status from a specific register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup1Fifo2ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -8586,9 +13699,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup1Fifo2ClkEn_Get(void *cons
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the gain and power amplifier clock enable field in the ADRV9001
+ * register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map to be modified.
+ * @param value A uint8_t value that indicates the desired state (enabled or
+ * disabled) for the gain and power amplifier clock.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup1GanPaClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -8600,9 +13723,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup1GanPaClkEn_Set(void *cons
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup1GanPaClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -8617,9 +13749,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup1GanPaClkEn_Get(void *cons
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the PA reset mask for a specified instance in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that specifies the PA reset mask to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup1GanPaResetbMask_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -8631,9 +13772,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup1GanPaResetbMask_Set(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup1GanPaResetbMask_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -8648,9 +13798,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup1GanPaResetbMask_Get(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable field for the Tx Algorithm Group 1 in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that indicates the clock enable setting to be
+ * written.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup1Intp2ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -8662,9 +13822,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup1Intp2ClkEn_Set(void *cons
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status from a specific register for the
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup1Intp2ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -8679,9 +13848,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup1Intp2ClkEn_Get(void *cons
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the NCO2 clock enable field in the ADRV9001 register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that specifies the clock enable setting to be
+ * written.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup1Nco2ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -8693,9 +13871,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup1Nco2ClkEn_Set(void *const
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the NCO2 clock enable status from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup1Nco2ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -8710,9 +13897,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup1Nco2ClkEn_Get(void *const
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the PFIR2 clock enable field in the ADRV9001 register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A uint8_t value that indicates the desired state to set for the
+ * PFIR2 clock enable.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup1Pfir2ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -8724,9 +13920,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup1Pfir2ClkEn_Set(void *cons
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the PFIR2 clock enable status from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup1Pfir2ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -8741,9 +13946,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup1Pfir2ClkEn_Get(void *cons
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock reset mask for the specified transmit algorithm group
+ * in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the transmit algorithm.
+ * @param value A uint8_t value that specifies the clock reset mask to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup2ClkResetbMask_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -8755,9 +13969,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup2ClkResetbMask_Set(void *c
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock reset mask value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup2ClkResetbMask_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -8772,9 +13995,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup2ClkResetbMask_Get(void *c
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the top clock enable bit for the Tx algorithm group 3 DPD in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the Tx algorithm.
+ * @param value A uint8_t value indicating the desired state (enabled or
+ * disabled) of the top clock.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup3DpdTopClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -8786,9 +14019,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup3DpdTopClkEn_Set(void *con
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup3DpdTopClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -8803,9 +14045,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup3DpdTopClkEn_Get(void *con
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the mask for the `TxAlgGroup3DpdTopClkResetb` field in the
+ * ADRV9001 register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map to be modified.
+ * @param value A 8-bit unsigned integer that specifies the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup3DpdTopClkResetbMask_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -8817,9 +14069,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup3DpdTopClkResetbMask_Set(v
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific masked value from a register for a given instance
+ * of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup3DpdTopClkResetbMask_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -8834,9 +14096,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup3DpdTopClkResetbMask_Get(v
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the FIFO 1 clock enable field in the ADRV9001 register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A uint8_t value that indicates the desired state of the FIFO 1
+ * clock enable (0 or 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup3Fifo1ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -8848,9 +14119,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup3Fifo1ClkEn_Set(void *cons
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status for the FIFO1 in the transmit
+ * algorithm group 3 of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup3Fifo1ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -8865,9 +14146,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup3Fifo1ClkEn_Get(void *cons
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable field for the Tx Algorithm Group 3 Interpolator
+ * 1 in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the Tx Algorithm.
+ * @param value A uint8_t value that indicates the desired state to set for the
+ * clock enable field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup3Intp1ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -8879,9 +14170,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup3Intp1ClkEn_Set(void *cons
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided variable.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup3Intp1ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -8896,9 +14197,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup3Intp1ClkEn_Get(void *cons
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the low clock enable configuration for the Tx Algorithm Group 3
+ * in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the Tx Algorithm.
+ * @param value A uint8_t value that specifies the low clock enable setting to
+ * be written.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup3LolClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -8910,9 +14221,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup3LolClkEn_Set(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register field from the device and
+ * stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup3LolClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -8927,9 +14248,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup3LolClkEn_Get(void *const 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable configuration for the Tx Algorithm Group 3 in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the Tx Algorithm.
+ * @param value A uint8_t value that indicates the clock enable configuration to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup3Mc13ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -8941,9 +14272,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup3Mc13ClkEn_Set(void *const
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific clock enable value from a register for a given
+ * instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup3Mc13ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -8958,9 +14299,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup3Mc13ClkEn_Get(void *const
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the NCO1 clock enable field in the TX algorithm group 3 register
+ * of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TX algorithm.
+ * @param value A uint8_t value that indicates the clock enable state to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup3Nco1ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -8972,9 +14322,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup3Nco1ClkEn_Set(void *const
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the NCO1 clock enable status from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup3Nco1ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -8989,9 +14348,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup3Nco1ClkEn_Get(void *const
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable configuration for the PFIR1 in the TX algorithm
+ * group 3 of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TX algorithm.
+ * @param value A uint8_t value that indicates the clock enable configuration to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup3Pfir1ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -9003,9 +14372,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup3Pfir1ClkEn_Set(void *cons
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status for the PFIR1 configuration in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup3Pfir1ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -9020,9 +14399,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup3Pfir1ClkEn_Get(void *cons
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the correction clock enable field in the ADRV9001 register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map to be modified.
+ * @param value A uint8_t value that indicates the desired state of the
+ * correction clock enable field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup4CorrClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -9034,9 +14422,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup4CorrClkEn_Set(void *const
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register field and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup4CorrClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -9051,9 +14448,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup4CorrClkEn_Get(void *const
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock reset mask for the Tx algorithm group 4 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the Tx algorithm.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the clock reset mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup4CorrClkResetbMask_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -9065,9 +14472,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup4CorrClkResetbMask_Set(voi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup4CorrClkResetbMask_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -9082,9 +14498,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup4CorrClkResetbMask_Get(voi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the FIFO 0 clock enable bit in the ADRV9001 register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A uint8_t value that indicates the desired state of the FIFO 0
+ * clock enable bit.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup4Fifo0ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -9096,9 +14521,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup4Fifo0ClkEn_Set(void *cons
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status for the FIFO 0 in the Tx algorithm
+ * group 4 of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup4Fifo0ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -9113,9 +14548,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup4Fifo0ClkEn_Get(void *cons
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable field for the Tx Algorithm Group 4 Interrupt 0
+ * in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the Tx Algorithm.
+ * @param value A uint8_t value that indicates the desired state of the clock
+ * enable field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup4Intp0ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -9127,9 +14572,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup4Intp0ClkEn_Set(void *cons
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status for the Tx Algorithm Group 4
+ * Interpolation 0 from the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup4Intp0ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -9144,9 +14599,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup4Intp0ClkEn_Get(void *cons
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the NCO0 clock enable field in the ADRV9001 register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A uint8_t value that indicates the desired state for the NCO0
+ * clock enable field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup4Nco0ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -9158,9 +14622,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup4Nco0ClkEn_Set(void *const
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the NCO0 clock enable status from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup4Nco0ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -9175,9 +14648,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup4Nco0ClkEn_Get(void *const
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock enable field for the PFIR0 in the Tx Algorithm Group 4
+ * of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the Tx Algorithm.
+ * @param value A uint8_t value that indicates the clock enable state to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup4Pfir0ClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -9189,9 +14671,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup4Pfir0ClkEn_Set(void *cons
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock enable status for the PFIR0 configuration in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup4Pfir0ClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -9206,9 +14698,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup4Pfir0ClkEn_Get(void *cons
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the Twin FIR Clock Enable field in the ADRV9001 register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A uint8_t value that indicates the desired state to set for the
+ * Twin FIR Clock Enable.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup4TwinfirClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -9220,9 +14721,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup4TwinfirClkEn_Set(void *co
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register field from the device and
+ * stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup4TwinfirClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -9237,9 +14748,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup4TwinfirClkEn_Get(void *co
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock reset mask for the Tx Algorithm Group 5 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the Tx Algorithm.
+ * @param value A uint8_t value that specifies the mask to be set for the clock
+ * reset.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup5ClkResetbMask_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -9251,9 +14772,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup5ClkResetbMask_Set(void *c
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup5ClkResetbMask_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -9268,9 +14798,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup5ClkResetbMask_Get(void *c
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock reset mask for the Tx Algorithm Group 7 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the Tx algorithm.
+ * @param value A uint8_t value that specifies the mask to be set for the clock
+ * reset.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup7ClkResetbMask_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -9282,9 +14822,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup7ClkResetbMask_Set(void *c
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup7ClkResetbMask_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -9299,9 +14848,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup7ClkResetbMask_Get(void *c
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock reset mask for the specified instance in the ADRV9001
+ * NVS register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that specifies the clock reset mask to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup8ClkResetbMask_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -9313,9 +14871,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup8ClkResetbMask_Set(void *c
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific masked value from a register for the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup8ClkResetbMask_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -9330,9 +14898,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup8ClkResetbMask_Get(void *c
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the clock reset mask for the Tx Algorithm Group 9 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the Tx Algorithm.
+ * @param value A uint8_t value that specifies the clock reset mask to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup9ClkResetbMask_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -9344,9 +14921,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup9ClkResetbMask_Set(void *c
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock reset mask value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup9ClkResetbMask_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -9361,9 +14947,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgGroup9ClkResetbMask_Get(void *c
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the NCO0 free clock enable field in the ADRV9001 register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A uint8_t value that indicates the desired state (enabled or
+ * disabled) for the NCO0 free clock.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgNco0FreeClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -9375,9 +14970,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgNco0FreeClkEn_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the NCO0 free clock enable field from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgNco0FreeClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -9392,9 +14996,17 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgNco0FreeClkEn_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the NCO0 free reset value in the ADRV9001 device's register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value to be written to the NCO0 free reset field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgNco0FreeReset_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -9406,9 +15018,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgNco0FreeReset_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the NCO0 free reset value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgNco0FreeReset_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -9423,9 +15044,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgNco0FreeReset_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the NCO1 free clock enable field in the ADRV9001 register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that indicates the desired state to set for the
+ * NCO1 free clock enable.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgNco1FreeClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -9437,9 +15067,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgNco1FreeClkEn_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the NCO1 free clock enable field from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgNco1FreeClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -9454,9 +15093,17 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgNco1FreeClkEn_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the NCO1 free reset value in the ADRV9001 device's register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that specifies the reset state to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgNco1FreeReset_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -9468,9 +15115,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgNco1FreeReset_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the NCO1 free reset value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgNco1FreeReset_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -9485,9 +15141,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgNco1FreeReset_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the NCO2 free clock enable field in the ADRV9001 register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that indicates the desired state to set for the
+ * NCO2 free clock enable.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgNco2FreeClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -9499,9 +15164,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgNco2FreeClkEn_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgNco2FreeClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -9516,9 +15190,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgNco2FreeClkEn_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the NCO2 free reset value in the ADRV9001 device's register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgNco2FreeReset_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -9530,9 +15213,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgNco2FreeReset_Set(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the NCO2 free reset value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAlgNco2FreeReset_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -9547,9 +15239,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAlgNco2FreeReset_Get(void *const d
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the transmit attenuation value in the SRAM for a specified
+ * instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * transmit attenuation table.
+ * @param value An 8-bit unsigned integer representing the attenuation value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAttenTableSramNapRetPsd_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -9561,9 +15263,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAttenTableSramNapRetPsd_Set(void *
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the transmit attenuation value from a specific register in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating the specific instance of the
+ * register map to access.
+ * @param value A pointer to a uint8_t variable where the retrieved attenuation
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxAttenTableSramNapRetPsd_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -9578,9 +15290,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxAttenTableSramNapRetPsd_Get(void *
     return status;
 }
 
-/**
- * (C0 New) This bit is to bypass the delta computation on the I_lo_offset_i/q_sdat, i.e., just take values directly out of table.
- */
+/***************************************************************************//**
+ * @brief Sets the bypass delta compensation value in the ADRV9001 transceiver's
+ * register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * transceiver.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxBypassDeltaComp_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -9592,9 +15314,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxBypassDeltaComp_Set(void *const de
     return status;
 }
 
-/**
- * (C0 New) This bit is to bypass the delta computation on the I_lo_offset_i/q_sdat, i.e., just take values directly out of table.
- */
+/***************************************************************************//**
+ * @brief Retrieves the bypass delta compensation value from a specific register
+ * for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxBypassDeltaComp_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -9609,9 +15340,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxBypassDeltaComp_Get(void *const de
     return status;
 }
 
-/**
- * (B0 New) 0: data destination clock inherit from Divider, 1: data destination clock inherit from datapath preproc clock
- */
+/***************************************************************************//**
+ * @brief Sets the clock selection for the CSSI data destination in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value representing the clock selection to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxCssiDataDestClkSel_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -9623,9 +15363,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxCssiDataDestClkSel_Set(void *const
     return status;
 }
 
-/**
- * (B0 New) 0: data destination clock inherit from Divider, 1: data destination clock inherit from datapath preproc clock
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock selection data from a specific register for a
+ * given instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * selection data will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxCssiDataDestClkSel_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -9640,9 +15390,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxCssiDataDestClkSel_Get(void *const
     return status;
 }
 
-/**
- * (B0 New) Clear the CSSI Fifo for variable strobe mode only
- */
+/***************************************************************************//**
+ * @brief Sets the variable strobe clear field in the TX CSSI FIFO register for
+ * the specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value to be written to the variable strobe clear
+ * field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxCssiFifoVariableStrobeClear_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -9654,9 +15414,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxCssiFifoVariableStrobeClear_Set(vo
     return status;
 }
 
-/**
- * (B0 New) Clear the CSSI Fifo for variable strobe mode only
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register from the device and stores
+ * it in the provided variable.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated type indicating the specific instance of the
+ * register map to access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxCssiFifoVariableStrobeClear_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -9672,9 +15442,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxCssiFifoVariableStrobeClear_Get(vo
 }
 
 
-/**
- * (B0 New) Fifo Status for variable strobe mode
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a register and stores it
+ * in a provided variable.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxCssiFifoVariableStrobeEmpty_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -9690,9 +15469,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxCssiFifoVariableStrobeEmpty_Get(vo
 }
 
 
-/**
- * (B0 New) Fifo Status for variable strobe mode
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific value from a hardware register and stores it in a
+ * provided variable.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxCssiFifoVariableStrobeFull_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -9707,9 +15495,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxCssiFifoVariableStrobeFull_Get(voi
     return status;
 }
 
-/**
- * (B0 New) Enable the Mask of the strobe according to lssi_rx_mask_strobe_value
- */
+/***************************************************************************//**
+ * @brief Sets the CSSI mask strobe enable value in the ADRV9001 device's
+ * register.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that indicates the strobe enable setting to be
+ * written to the register.
+ * @return Returns the status of the write operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxCssiMaskStrobeEnable_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -9721,9 +15519,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxCssiMaskStrobeEnable_Set(void *con
     return status;
 }
 
-/**
- * (B0 New) Enable the Mask of the strobe according to lssi_rx_mask_strobe_value
- */
+/***************************************************************************//**
+ * @brief Retrieves the strobe enable mask value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved mask value
+ * will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxCssiMaskStrobeEnable_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -9738,9 +15545,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxCssiMaskStrobeEnable_Get(void *con
     return status;
 }
 
-/**
- * (B0 New) N-1 Strobe over N will be masked (Used for SSI interpolation mode only)
- */
+/***************************************************************************//**
+ * @brief Sets the strobe value for the TX CSSI mask in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the strobe value to be
+ * set.
+ * @return Returns the status of the register write operation, indicating
+ * success or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxCssiMaskStrobeValue_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -9752,9 +15568,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxCssiMaskStrobeValue_Set(void *cons
     return status;
 }
 
-/**
- * (B0 New) N-1 Strobe over N will be masked (Used for SSI interpolation mode only)
- */
+/***************************************************************************//**
+ * @brief Retrieves the strobe value from a specific register for a given
+ * instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved strobe value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxCssiMaskStrobeValue_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -9769,9 +15595,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxCssiMaskStrobeValue_Get(void *cons
     return status;
 }
 
-/**
- * (B0 New) Enable Variable Strobe mode in CSSI TX interface
- */
+/***************************************************************************//**
+ * @brief Sets the variable strobe mode enable value in the ADRV9001 register
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A uint8_t value that indicates the strobe mode enable setting to
+ * be written.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxCssiVariableStrobeModeEnable_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -9783,9 +15619,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxCssiVariableStrobeModeEnable_Set(v
     return status;
 }
 
-/**
- * (B0 New) Enable Variable Strobe mode in CSSI TX interface
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the CSSI variable strobe mode enable setting
+ * from a specific register.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxCssiVariableStrobeModeEnable_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -9800,9 +15645,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxCssiVariableStrobeModeEnable_Get(v
     return status;
 }
 
-/**
- * (C0 New) Reset mask for freq_dev_mapper_47 clock domain
- */
+/***************************************************************************//**
+ * @brief Sets the Tx frequency deviation mapper clock reset mask in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value to be written to the clock reset mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpFreqDevMapper47ClkResetbMask_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -9814,9 +15668,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpFreqDevMapper47ClkResetbMask_Set
     return status;
 }
 
-/**
- * (C0 New) Reset mask for freq_dev_mapper_47 clock domain
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpFreqDevMapper47ClkResetbMask_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -9831,9 +15694,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpFreqDevMapper47ClkResetbMask_Get
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the TxDpIqdmInClkResetbMask field in the ADRV9001 register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map to be modified.
+ * @param value A uint8_t value that will be written to the
+ * TxDpIqdmInClkResetbMask field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpIqdmInClkResetbMask_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -9845,9 +15717,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpIqdmInClkResetbMask_Set(void *co
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpIqdmInClkResetbMask_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -9862,9 +15743,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpIqdmInClkResetbMask_Get(void *co
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the NCO clock reset mask in the ADRV9001 device's TXDP IQDM
+ * register.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that specifies the new setting for the NCO clock
+ * reset mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpIqdmNcoClkResetbMask_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -9876,9 +15767,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpIqdmNcoClkResetbMask_Set(void *c
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the NCO clock reset mask value from a specific register for
+ * a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpIqdmNcoClkResetbMask_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -9893,9 +15793,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpIqdmNcoClkResetbMask_Get(void *c
     return status;
 }
 
-/**
- * (C0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the SDM clock enable field in the TX DAC register of the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that indicates whether to enable (1) or disable
+ * (0) the SDM clock.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpTxdacSdmClkEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -9907,9 +15817,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpTxdacSdmClkEn_Set(void *const de
     return status;
 }
 
-/**
- * (C0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the SDM clock enable status from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpTxdacSdmClkEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -9924,9 +15843,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpTxdacSdmClkEn_Get(void *const de
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the DPD accumulator SRAM nap retention PSD value in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdAcc0SramNapRetPsd_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -9938,9 +15867,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdAcc0SramNapRetPsd_Set(void *con
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value indicating the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdAcc0SramNapRetPsd_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -9955,9 +15893,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdAcc0SramNapRetPsd_Get(void *con
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the DPD accumulator SRAM nap retention PSD value in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdAcc1SramNapRetPsd_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -9969,9 +15917,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdAcc1SramNapRetPsd_Set(void *con
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdAcc1SramNapRetPsd_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -9986,9 +15943,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdAcc1SramNapRetPsd_Get(void *con
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the DPD (Digital Pre-Distortion) accumulator value in the SRAM
+ * for a specified instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the DPD accumulator.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdAcc2SramNapRetPsd_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -10000,9 +15967,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdAcc2SramNapRetPsd_Set(void *con
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdAcc2SramNapRetPsd_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -10017,9 +15993,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdAcc2SramNapRetPsd_Get(void *con
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the DPD accumulator SRAM nap retention PSD value in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdAcc3SramNapRetPsd_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -10031,9 +16017,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdAcc3SramNapRetPsd_Set(void *con
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdAcc3SramNapRetPsd_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -10048,9 +16043,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdAcc3SramNapRetPsd_Get(void *con
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS register map for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdCrossaccSram0NapRetPsd_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -10062,9 +16066,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdCrossaccSram0NapRetPsd_Set(void
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdCrossaccSram0NapRetPsd_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -10079,9 +16093,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdCrossaccSram0NapRetPsd_Get(void
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS register map for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt1Lut0SramNapRetPsd_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -10093,9 +16116,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt1Lut0SramNapRetPsd_Set(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt1Lut0SramNapRetPsd_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -10110,9 +16142,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt1Lut0SramNapRetPsd_Get(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS register map for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns the status of the write operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt1Lut1SramNapRetPsd_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -10124,9 +16165,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt1Lut1SramNapRetPsd_Set(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt1Lut1SramNapRetPsd_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -10141,9 +16192,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt1Lut1SramNapRetPsd_Get(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS register map for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt1Lut2SramNapRetPsd_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -10155,9 +16215,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt1Lut2SramNapRetPsd_Set(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt1Lut2SramNapRetPsd_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -10172,9 +16242,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt1Lut2SramNapRetPsd_Get(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS register map for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt1Lut3SramNapRetPsd_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -10186,9 +16265,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt1Lut3SramNapRetPsd_Set(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific value from a hardware register and stores it in
+ * the provided pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt1Lut3SramNapRetPsd_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -10203,9 +16291,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt1Lut3SramNapRetPsd_Get(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS register map for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt1Lut4SramNapRetPsd_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -10217,9 +16314,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt1Lut4SramNapRetPsd_Set(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt1Lut4SramNapRetPsd_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -10234,9 +16341,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt1Lut4SramNapRetPsd_Get(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS register map for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt1Lut5SramNapRetPsd_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -10248,9 +16364,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt1Lut5SramNapRetPsd_Set(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific value from a register and stores it in the
+ * provided pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt1Lut5SramNapRetPsd_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -10265,9 +16390,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt1Lut5SramNapRetPsd_Get(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS register map for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt1Lut6SramNapRetPsd_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -10279,9 +16413,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt1Lut6SramNapRetPsd_Set(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt1Lut6SramNapRetPsd_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -10296,9 +16439,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt1Lut6SramNapRetPsd_Get(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS register map for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt1Lut7SramNapRetPsd_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -10310,9 +16462,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt1Lut7SramNapRetPsd_Set(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific value from a register in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the ADRV9001.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt1Lut7SramNapRetPsd_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -10327,9 +16488,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt1Lut7SramNapRetPsd_Get(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS register map for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt1Lut8SramNapRetPsd_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -10341,9 +16511,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt1Lut8SramNapRetPsd_Set(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt1Lut8SramNapRetPsd_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -10358,9 +16538,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt1Lut8SramNapRetPsd_Get(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS register map for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that contains the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt2Lut0SramNapRetPsd_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -10372,9 +16561,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt2Lut0SramNapRetPsd_Set(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt2Lut0SramNapRetPsd_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -10389,9 +16587,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt2Lut0SramNapRetPsd_Get(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS register map for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt2Lut1SramNapRetPsd_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -10403,9 +16610,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt2Lut1SramNapRetPsd_Set(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific value from a hardware register and stores it in
+ * the provided pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt2Lut1SramNapRetPsd_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -10420,9 +16636,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt2Lut1SramNapRetPsd_Get(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS register map for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt2Lut2SramNapRetPsd_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -10434,9 +16659,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt2Lut2SramNapRetPsd_Set(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumeration value representing the specific instance of
+ * the register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt2Lut2SramNapRetPsd_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -10451,9 +16685,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt2Lut2SramNapRetPsd_Get(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS register map for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt2Lut3SramNapRetPsd_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -10465,9 +16708,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt2Lut3SramNapRetPsd_Set(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific value from a register in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt2Lut3SramNapRetPsd_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -10482,9 +16734,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt2Lut3SramNapRetPsd_Get(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS register map for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt2Lut4SramNapRetPsd_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -10496,9 +16757,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt2Lut4SramNapRetPsd_Set(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt2Lut4SramNapRetPsd_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -10513,9 +16783,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt2Lut4SramNapRetPsd_Get(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS register map for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt2Lut5SramNapRetPsd_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -10527,9 +16806,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt2Lut5SramNapRetPsd_Set(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific value from a register and stores it in the
+ * provided pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt2Lut5SramNapRetPsd_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -10544,9 +16832,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt2Lut5SramNapRetPsd_Get(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS register map for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt2Lut6SramNapRetPsd_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -10558,9 +16855,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt2Lut6SramNapRetPsd_Set(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt2Lut6SramNapRetPsd_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -10575,9 +16881,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt2Lut6SramNapRetPsd_Get(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS register map for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt2Lut7SramNapRetPsd_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -10589,9 +16904,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt2Lut7SramNapRetPsd_Set(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt2Lut7SramNapRetPsd_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -10606,9 +16931,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt2Lut7SramNapRetPsd_Get(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS register map for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt2Lut8SramNapRetPsd_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -10620,9 +16954,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt2Lut8SramNapRetPsd_Set(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific value from a hardware register and stores it in a
+ * provided variable.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt2Lut8SramNapRetPsd_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -10637,9 +16980,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdExt2Lut8SramNapRetPsd_Get(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS register map for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdTxsbufSram0NapRetPsd_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -10651,9 +17003,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdTxsbufSram0NapRetPsd_Set(void *
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdTxsbufSram0NapRetPsd_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -10668,9 +17030,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdTxsbufSram0NapRetPsd_Get(void *
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS register map for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdTxsbufSram1NapRetPsd_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -10682,9 +17053,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdTxsbufSram1NapRetPsd_Set(void *
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxDpdTxsbufSram1NapRetPsd_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -10699,9 +17079,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxDpdTxsbufSram1NapRetPsd_Get(void *
     return status;
 }
 
-/**
- * (B0 New) LVDS SSI data destiantion Clock div value for Decimation/Interpolation of the SSI interface
- */
+/***************************************************************************//**
+ * @brief Sets the clock divider value for the LSSI data destination in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A 16-bit unsigned integer representing the clock divider value
+ * to be set.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the register write operations fail.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxLssiDataDestClkDivValue_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint16_t value)
@@ -10716,9 +17106,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxLssiDataDestClkDivValue_Set(void *
     return status;
 }
 
-/**
- * (B0 New) LVDS SSI data destiantion Clock div value for Decimation/Interpolation of the SSI interface
- */
+/***************************************************************************//**
+ * @brief Retrieves the LSSI data destination clock divider value from the
+ * ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved clock
+ * divider value will be stored.
+ * @return Returns the status of the read operations, where a value of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxLssiDataDestClkDivValue_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint16_t *const value)
@@ -10737,9 +17137,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxLssiDataDestClkDivValue_Get(void *
     return status;
 }
 
-/**
- * (B0 New) 0: data destination clock inherit from datapath, 1: data destimation clock inherit from DivN from clk1105
- */
+/***************************************************************************//**
+ * @brief Sets the clock selection for the LSSI data destination in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value representing the clock selection to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxLssiDataDestClkSel_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -10751,9 +17160,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxLssiDataDestClkSel_Set(void *const
     return status;
 }
 
-/**
- * (B0 New) 0: data destination clock inherit from datapath, 1: data destimation clock inherit from DivN from clk1105
- */
+/***************************************************************************//**
+ * @brief Retrieves the LSSI data destination clock selection value from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * selection value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxLssiDataDestClkSel_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -10768,9 +17186,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxLssiDataDestClkSel_Get(void *const
     return status;
 }
 
-/**
- * (B0 New) 0: In DEBUG mode, destination clock inherit from Divider, 1: in DEBUG mode, destination clock inherit from Datapath Preproc clock
- */
+/***************************************************************************//**
+ * @brief Sets the LSSI data destination debug mode clock selection in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxLssiDataDestDbgModeClkSel_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -10782,9 +17210,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxLssiDataDestDbgModeClkSel_Set(void
     return status;
 }
 
-/**
- * (B0 New) 0: In DEBUG mode, destination clock inherit from Divider, 1: in DEBUG mode, destination clock inherit from Datapath Preproc clock
- */
+/***************************************************************************//**
+ * @brief Retrieves the LSSI data destination debug mode clock selection value
+ * from a specific register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxLssiDataDestDbgModeClkSel_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -10800,9 +17237,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxLssiDataDestDbgModeClkSel_Get(void
 }
 
 
-/**
- * (B0 New) LSSI TX Fifo Empty Flag. Cleared on Read
- */
+/***************************************************************************//**
+ * @brief Retrieves the LSSI FIFO empty status from a specific register in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating the specific instance of the
+ * register map to access.
+ * @param value A pointer to a uint8_t variable where the retrieved FIFO empty
+ * status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxLssiFifoEmpty_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -10818,9 +17265,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxLssiFifoEmpty_Get(void *const devi
 }
 
 
-/**
- * (B0 New) LSSI TX Fifo Full Flag. Cleared on Read
- */
+/***************************************************************************//**
+ * @brief Retrieves the Tx LSSI FIFO Full status from a specific register and
+ * stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved FIFO Full
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxLssiFifoFull_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -10835,9 +17291,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxLssiFifoFull_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New) Enable the Mask of the strobe according to lssi_rx_mask_strobe_value
- */
+/***************************************************************************//**
+ * @brief Sets the LSSI mask strobe enable value in the ADRV9001 device's
+ * register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A uint8_t value to be written to the register, indicating the
+ * LSSI mask strobe enable state.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxLssiMaskStrobeEnable_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -10849,9 +17315,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxLssiMaskStrobeEnable_Set(void *con
     return status;
 }
 
-/**
- * (B0 New) Enable the Mask of the strobe according to lssi_rx_mask_strobe_value
- */
+/***************************************************************************//**
+ * @brief Retrieves the LSSI mask strobe enable value from a specific register
+ * for a given device instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxLssiMaskStrobeEnable_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -10866,9 +17342,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxLssiMaskStrobeEnable_Get(void *con
     return status;
 }
 
-/**
- * (B0 New) N-1 Strobe over N will be masked (Used for SSI interpolation mode only)
- */
+/***************************************************************************//**
+ * @brief Sets the LSSI mask strobe value in the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxLssiMaskStrobeValue_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -10880,9 +17365,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxLssiMaskStrobeValue_Set(void *cons
     return status;
 }
 
-/**
- * (B0 New) N-1 Strobe over N will be masked (Used for SSI interpolation mode only)
- */
+/***************************************************************************//**
+ * @brief Retrieves the LSSI mask strobe value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device context used for register access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved strobe value
+ * will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxLssiMaskStrobeValue_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -10897,9 +17391,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxLssiMaskStrobeValue_Get(void *cons
     return status;
 }
 
-/**
- * (B0 New) Enable Variable Strobe mode in LSSI TX interface
- */
+/***************************************************************************//**
+ * @brief Sets the LSSI variable strobe mode enable value in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that indicates the desired state for the LSSI
+ * variable strobe mode.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxLssiVariableStrobeModeEnable_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -10911,9 +17415,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxLssiVariableStrobeModeEnable_Set(v
     return status;
 }
 
-/**
- * (B0 New) Enable Variable Strobe mode in LSSI TX interface
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the LSSI variable strobe mode enable from a
+ * specific register.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxLssiVariableStrobeModeEnable_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -10928,9 +17441,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxLssiVariableStrobeModeEnable_Get(v
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the 12-bit NCO DC offset value in the ADRV9001 device's register
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A 32-bit unsigned integer representing the value to be set,
+ * which contains the NCO DC offset.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxNco12DcI_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint32_t value)
@@ -10948,9 +17471,20 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxNco12DcI_Set(void *const device,
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a 24-bit value from specific registers of a device by
+ * reading three consecutive registers.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumeration value that specifies the instance of the
+ * register map to access.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns a status code indicating success (0) or failure (non-zero) of
+ * the read operations, while the retrieved 24-bit value is stored in
+ * the location pointed to by the 'value' argument.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxNco12DcI_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint32_t *const value)
@@ -10973,9 +17507,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxNco12DcI_Get(void *const device,
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the 12-bit NCO DC offset value in the ADRV9001 device's register
+ * map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated type indicating the specific instance of the
+ * register map to be modified.
+ * @param value A 32-bit unsigned integer representing the NCO DC offset value
+ * to be set.
+ * @return Returns the status of the last write operation, indicating success
+ * (0) or an error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxNco12DcQ_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint32_t value)
@@ -10993,9 +17537,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxNco12DcQ_Set(void *const device,
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a 24-bit value from a specific register map for the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the last read operation, with the 24-bit value
+ * stored in the provided pointer.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxNco12DcQ_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint32_t *const value)
@@ -11018,9 +17572,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxNco12DcQ_Get(void *const device,
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the NCO12 DC update value in the ADRV9001 device's register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxNco12DcUpdate_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -11032,9 +17595,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxNco12DcUpdate_Set(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the 12-bit NCO DC update value from a specific register for
+ * a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxNco12DcUpdate_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -11049,9 +17621,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxNco12DcUpdate_Get(void *const devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the 12-bit phase offset word for the transmitter NCO in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the transmitter.
+ * @param value A 16-bit unsigned integer representing the phase offset value to
+ * be set.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxNco12PhaseOffsetWord_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint16_t value)
@@ -11066,9 +17648,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxNco12PhaseOffsetWord_Set(void *con
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the 12-bit phase offset word from the NCO register for a
+ * specified instance.
+ *
+ * @param device A pointer to the device context used for register access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NCO register.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved phase
+ * offset word will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the register reads fail.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxNco12PhaseOffsetWord_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint16_t *const value)
@@ -11087,9 +17678,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxNco12PhaseOffsetWord_Get(void *con
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the NCO1 DC I value in the ADRV9001 device's register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A 32-bit unsigned integer representing the value to be set in
+ * the NCO1 DC I register.
+ * @return Returns the status of the last write operation, which indicates
+ * success (0) or an error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxNco1DcI_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint32_t value)
@@ -11107,9 +17707,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxNco1DcI_Set(void *const device,
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the NCO1 DC I value from the specified device instance and
+ * stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type indicating the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved NCO1
+ * DC I value will be stored.
+ * @return Returns the status of the last read operation, where a value of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxNco1DcI_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint32_t *const value)
@@ -11132,9 +17742,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxNco1DcI_Get(void *const device,
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the NCO1 DC Q value in the ADRV9001 device's register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A 32-bit unsigned integer representing the value to be set in
+ * the NCO1 DC Q register.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxNco1DcQ_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint32_t value)
@@ -11152,9 +17771,17 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxNco1DcQ_Set(void *const device,
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the NCO1 DC Q value from the specified device register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved NCO1
+ * DC Q value will be stored.
+ * @return Returns the status of the last read operation, which indicates
+ * success (0) or failure (non-zero).
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxNco1DcQ_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint32_t *const value)
@@ -11177,9 +17804,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxNco1DcQ_Get(void *const device,
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the NCO1 DC update value in the ADRV9001 device's register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the NCO1 DC update.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxNco1DcUpdate_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -11191,9 +17827,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxNco1DcUpdate_Set(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the DC update value from a specific register for the given
+ * instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved DC update
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxNco1DcUpdate_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -11208,9 +17854,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxNco1DcUpdate_Get(void *const devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the NCO1 phase offset word in the ADRV9001 device's register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A 16-bit unsigned integer representing the phase offset value to
+ * be set.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxNco1PhaseOffsetWord_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint16_t value)
@@ -11225,9 +17880,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxNco1PhaseOffsetWord_Set(void *cons
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the NCO1 phase offset word from the specified register of
+ * the device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated type indicating the specific instance of the
+ * register map to access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved phase
+ * offset value will be stored.
+ * @return Returns the status of the last register read operation, indicating
+ * success (0) or an error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxNco1PhaseOffsetWord_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint16_t *const value)
@@ -11246,9 +17911,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxNco1PhaseOffsetWord_Get(void *cons
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the PFIR X input selection force value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the PFIR X input selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxPfirXISelForce_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -11260,9 +17934,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxPfirXISelForce_Set(void *const dev
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the PFIR X input selection force value from a specific
+ * register for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxPfirXISelForce_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -11277,9 +17960,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxPfirXISelForce_Get(void *const dev
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the PFIR X I selection force value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the force value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxPfirXISelForceValue_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -11291,9 +17983,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxPfirXISelForceValue_Set(void *cons
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the PFIR X input selection force value from a specific
+ * register for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved force value
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxPfirXISelForceValue_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -11308,9 +18009,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxPfirXISelForceValue_Get(void *cons
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the PFIR XQ selection force value in the ADRV9001 device's
+ * register.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxPfirXQSelForce_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -11322,9 +18033,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxPfirXQSelForce_Set(void *const dev
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the PFIR XQ selection force value from a specific register
+ * for a given device instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved PFIR XQ
+ * selection force value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxPfirXQSelForce_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -11339,9 +18060,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxPfirXQSelForce_Get(void *const dev
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the PFIR XQ selection force value in the ADRV9001 device's
+ * register.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the force value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxPfirXQSelForceValue_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -11353,9 +18084,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxPfirXQSelForceValue_Set(void *cons
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the PFIR XQ selection force value from a specific register
+ * for a given device instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved force value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxPfirXQSelForceValue_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -11370,9 +18111,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxPfirXQSelForceValue_Get(void *cons
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the ADRV9001 register map for the Tx QEC FIFO
+ * SRAM 0 NAP A Ret PSD.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxQecFifoSram0NapARetPsd_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -11384,9 +18135,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxQecFifoSram0NapARetPsd_Set(void *c
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxQecFifoSram0NapARetPsd_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -11401,9 +18161,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxQecFifoSram0NapARetPsd_Get(void *c
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS register map for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxQecFifoSram0NapBRetPsd_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -11415,9 +18184,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxQecFifoSram0NapBRetPsd_Set(void *c
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxQecFifoSram0NapBRetPsd_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -11432,9 +18211,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxQecFifoSram0NapBRetPsd_Get(void *c
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the ADRV9001 register map for the Tx QEC FIFO
+ * SRAM.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxQecFifoSram1NapARetPsd_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -11446,9 +18235,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxQecFifoSram1NapARetPsd_Set(void *c
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumeration value representing the specific instance of
+ * the register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxQecFifoSram1NapARetPsd_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -11463,9 +18262,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxQecFifoSram1NapARetPsd_Get(void *c
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS register map for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxQecFifoSram1NapBRetPsd_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -11477,9 +18285,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxQecFifoSram1NapBRetPsd_Set(void *c
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific value from a register and stores it in the
+ * provided pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxQecFifoSram1NapBRetPsd_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -11494,9 +18311,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxQecFifoSram1NapBRetPsd_Get(void *c
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS register map for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxQecFifoSram2NapARetPsd_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -11508,9 +18334,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxQecFifoSram2NapARetPsd_Set(void *c
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxQecFifoSram2NapARetPsd_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -11525,9 +18361,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxQecFifoSram2NapARetPsd_Get(void *c
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS register map for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxQecFifoSram2NapBRetPsd_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -11539,9 +18384,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxQecFifoSram2NapBRetPsd_Set(void *c
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxQecFifoSram2NapBRetPsd_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -11556,9 +18410,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxQecFifoSram2NapBRetPsd_Get(void *c
     return status;
 }
 
-/**
- * (C0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the `TxQeclolActlooffUpdEn` field in the ADRV9001 register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value An 8-bit unsigned integer that specifies the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxQeclolActlooffUpdEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -11570,9 +18433,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxQeclolActlooffUpdEn_Set(void *cons
     return status;
 }
 
-/**
- * (C0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxQeclolActlooffUpdEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -11587,9 +18459,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxQeclolActlooffUpdEn_Get(void *cons
     return status;
 }
 
-/**
- * (C0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the update enable field in the NVS register map for the specified
+ * instance.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that indicates the update enable state to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxQeclolGcUpdEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -11601,9 +18482,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxQeclolGcUpdEn_Set(void *const devi
     return status;
 }
 
-/**
- * (C0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a device register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumeration value that specifies which instance of the
+ * register map to access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxQeclolGcUpdEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -11618,9 +18509,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxQeclolGcUpdEn_Get(void *const devi
     return status;
 }
 
-/**
- * (C0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the update enable field for the TxQeclolGd1 register in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that indicates the update enable state to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxQeclolGd1UpdEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -11632,9 +18533,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxQeclolGd1UpdEn_Set(void *const dev
     return status;
 }
 
-/**
- * (C0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxQeclolGd1UpdEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -11649,9 +18559,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxQeclolGd1UpdEn_Get(void *const dev
     return status;
 }
 
-/**
- * (C0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the update enable field in the TxQeclolGd2 register of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value to be written to the register, indicating the
+ * update enable state.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxQeclolGd2UpdEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -11663,9 +18583,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxQeclolGd2UpdEn_Set(void *const dev
     return status;
 }
 
-/**
- * (C0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a device register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device context from which the register value
+ * will be read.
+ * @param instance An enumerated type indicating the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxQeclolGd2UpdEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -11680,9 +18610,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxQeclolGd2UpdEn_Get(void *const dev
     return status;
 }
 
-/**
- * (C0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the update enable value for the TxQeclol Lodel in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the TxQeclol Lodel.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxQeclolLodelUpdEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -11694,9 +18634,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxQeclolLodelUpdEn_Set(void *const d
     return status;
 }
 
-/**
- * (C0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxQeclolLodelUpdEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -11711,9 +18660,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxQeclolLodelUpdEn_Get(void *const d
     return status;
 }
 
-/**
- * (C0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the update enable value for the TxQeclolLooff register in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that specifies the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxQeclolLooffUpdEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -11725,9 +18684,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxQeclolLooffUpdEn_Set(void *const d
     return status;
 }
 
-/**
- * (C0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a device register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxQeclolLooffUpdEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -11742,9 +18711,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxQeclolLooffUpdEn_Get(void *const d
     return status;
 }
 
-/**
- * (C0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the TxQeclolPc update enable field in the ADRV9001 register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A uint8_t value that indicates the enable/disable state for the
+ * TxQeclolPc update.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxQeclolPcUpdEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -11756,9 +18734,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxQeclolPcUpdEn_Set(void *const devi
     return status;
 }
 
-/**
- * (C0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxQeclolPcUpdEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -11773,9 +18760,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxQeclolPcUpdEn_Get(void *const devi
     return status;
 }
 
-/**
- * (C0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the TxQeclolPsUpdEn field in the NVS register map for the
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxQeclolPsUpdEn_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -11787,9 +18784,18 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxQeclolPsUpdEn_Set(void *const devi
     return status;
 }
 
-/**
- * (C0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a hardware register and
+ * stores it in the provided pointer.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxQeclolPsUpdEn_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -11804,9 +18810,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxQeclolPsUpdEn_Get(void *const devi
     return status;
 }
 
-/**
- * (C0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the SDM clear value in the TXDAC register map for the specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * TXDAC register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the SDM clear field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxdacSdmClear_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -11818,9 +18834,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxdacSdmClear_Set(void *const device
     return status;
 }
 
-/**
- * (C0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the SDM clear value from the TXDAC register of the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved SDM clear
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxdacSdmClear_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)
@@ -11835,9 +18861,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxdacSdmClear_Get(void *const device
     return status;
 }
 
-/**
- * (C0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the SDM enable field in the TXDAC register of the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value indicating the SDM enable state to be set (0 or
+ * 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxdacSdmEnable_Set(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     const uint8_t value)
@@ -11849,9 +18885,19 @@ static inline int32_t adrv9001_NvsRegmapTxb_TxdacSdmEnable_Set(void *const devic
     return status;
 }
 
-/**
- * (C0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the SDM enable status from the TXDAC register of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved SDM enable
+ * status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapTxb_TxdacSdmEnable_Get(void *const device,
     adrv9001_BfNvsRegmapTxb_e instance,
     uint8_t *const value)

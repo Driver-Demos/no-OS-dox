@@ -31,7 +31,32 @@
 #define BITP_ITEM_ID   (0u)
 #define BITM_ITEM_ID   (0x1Fu)
 
-/*! Enum used to categorize the object IDs into groups */
+/***************************************************************************//**
+ * @brief The `objectGroupId_e` is an enumeration that categorizes object IDs
+ * into distinct groups based on their functionality and access
+ * permissions. Each enumerator represents a specific group of objects,
+ * such as initialization calibration algorithms, tracking calibration
+ * algorithms, or system objects. The enumeration is designed to use 3
+ * bits in the object ID for the group ID, allowing for a maximum of 8
+ * groups. This structure helps in organizing and managing different
+ * types of objects within a system, ensuring that they are accessed and
+ * utilized appropriately according to their group classification.
+ *
+ * @param OBJ_GROUP_ID_NOT_USED Represents a group ID that is not used.
+ * @param OBJ_GROUP_ID_IC Represents the group ID for initialization calibration
+ * algorithm objects.
+ * @param OBJ_GROUP_ID_TC Represents the group ID for tracking calibration
+ * algorithm objects.
+ * @param OBJ_GROUP_ID_GO Represents the group ID for objects that can only be
+ * accessed by GET command.
+ * @param OBJ_GROUP_ID_GS Represents the group ID for objects that can be
+ * accessed by GET and SET commands.
+ * @param OBJ_GROUP_ID_CFG Represents the group ID for objects that can be
+ * accessed by GET or SET command with OBJID_GS_CONFIG
+ * target ID.
+ * @param OBJ_GROUP_ID_DRV Represents the group ID for driver objects.
+ * @param OBJ_GROUP_ID_SYS Represents the group ID for system objects.
+ ******************************************************************************/
 typedef enum {
     OBJ_GROUP_ID_NOT_USED = 0x0, /*!< NOT USED */
     OBJ_GROUP_ID_IC       = 0x1, /*!< Group for init cal algorithm objects */
@@ -53,14 +78,390 @@ typedef enum {
 #define GET_ITEMID_FROM_OBJID(objId)    (((uint8_t)(objId) & BITM_ITEM_ID) >> BITP_ITEM_ID)
    
 
-/*! Object ID is a unique number that is used to identify the object. The object 
-   can be an init algorithm, a tracking algorithm, a system sub-module, a driver
-   module etc. It is used by the mailbox as command argument, and also as part 
-   of error code to help identify where the error comes from. 
-   
-   The Object ID is an 8-bit number, where the MSB 3-bit used as group ID and 
-   the LSB 5-bit used as item ID within the group. 
-*/   
+/***************************************************************************//**
+ * @brief The `objectId_e` is an enumeration that defines a comprehensive set of
+ * object IDs used within a system to uniquely identify various
+ * components such as initialization algorithms, tracking algorithms,
+ * system sub-modules, and driver modules. Each object ID is an 8-bit
+ * number, where the most significant 3 bits represent the group ID and
+ * the least significant 5 bits represent the item ID within that group.
+ * This structure is crucial for categorizing and managing different
+ * system components, facilitating command arguments in mailboxes, and
+ * aiding in error code identification. The enumeration includes object
+ * IDs for initial calibration, tracking calibration, system operations,
+ * and driver functionalities, each associated with specific tasks or
+ * configurations within the system.
+ *
+ * @param OBJID_NOT_USED Represents an unused object ID with a value of 0x0UL.
+ * @param OBJID_IC_TX_QEC Object ID for TX QEC Initial Calibration, generated
+ * with OBJ_GROUP_ID_IC and item ID 0x0u.
+ * @param OBJID_IC_TX_LOL Object ID for TX LOL Initial Calibration, generated
+ * with OBJ_GROUP_ID_IC and item ID 0x1u.
+ * @param OBJID_IC_TX_LBPD Object ID for TX Loopback Path Delay Initial
+ * Calibration, generated with OBJ_GROUP_ID_IC and item
+ * ID 0x2u.
+ * @param OBJID_IC_TX_DCC Object ID for TX External LO Duty Cycle Correction
+ * Initial Calibration, generated with OBJ_GROUP_ID_IC
+ * and item ID 0x3u.
+ * @param OBJID_IC_TX_BBAF Object ID for TX BBAF Initial Calibration, generated
+ * with OBJ_GROUP_ID_IC and item ID 0x4u.
+ * @param OBJID_IC_TX_BBAF_GD Object ID for TX BBAF Gain Delay Initial
+ * Calibration, generated with OBJ_GROUP_ID_IC and
+ * item ID 0x5u.
+ * @param OBJID_IC_TX_ATTD Object ID for TX Attenuation Delay Initial
+ * Calibration, generated with OBJ_GROUP_ID_IC and item
+ * ID 0x6u.
+ * @param OBJID_IC_TX_DAC Object ID for TX DAC Initial Calibration, generated
+ * with OBJ_GROUP_ID_IC and item ID 0x7u.
+ * @param OBJID_IC_TX_PATH_DELAY Object ID for TX Path Delay Initial
+ * Calibration, generated with OBJ_GROUP_ID_IC and
+ * item ID 0x8u.
+ * @param OBJID_IC_RX_HPADC_RC Object ID for RX HP ADC Initial Calibration,
+ * generated with OBJ_GROUP_ID_IC and item ID 0x9u.
+ * @param OBJID_IC_RX_HPADC_FLASH Object ID for RX HP ADC Flash Initial
+ * Calibration, generated with OBJ_GROUP_ID_IC
+ * and item ID 0xAu.
+ * @param OBJID_IC_RX_HPADC_DAC Object ID for RX HP ADC DAC Initial Calibration,
+ * generated with OBJ_GROUP_ID_IC and item ID 0xBu.
+ * @param OBJID_IC_RX_DCC Object ID for RX Duty Cycle Correction Initial
+ * Calibration for External LO, generated with
+ * OBJ_GROUP_ID_IC and item ID 0xCu.
+ * @param OBJID_IC_RX_LPADC Object ID for RX LP ADC Initial Calibration,
+ * generated with OBJ_GROUP_ID_IC and item ID 0xDu.
+ * @param OBJID_IC_RX_TIA_CUTOFF Object ID for RX TIA Cutoff Initial
+ * Calibration, generated with OBJ_GROUP_ID_IC and
+ * item ID 0xEu.
+ * @param OBJID_IC_RX_TIA_FINE Object ID for RX TIA Fine Initial Calibration,
+ * generated with OBJ_GROUP_ID_IC and item ID 0xFu.
+ * @param OBJID_IC_RX_TCAL Object ID for RX T-Cal Initial Calibration, generated
+ * with OBJ_GROUP_ID_IC and item ID 0x10u.
+ * @param OBJID_IC_RX_FIIC Object ID for RX FIIC Initial Calibration, generated
+ * with OBJ_GROUP_ID_IC and item ID 0x11u.
+ * @param OBJID_IC_RX_ILB_LOD Object ID for RX Internal Loopback LO Delay
+ * Initial Calibration, generated with
+ * OBJ_GROUP_ID_IC and item ID 0x12u.
+ * @param OBJID_IC_RX_RFDC_OFFSET Object ID for RX RFDC Initial Calibration,
+ * generated with OBJ_GROUP_ID_IC and item ID
+ * 0x13u.
+ * @param OBJID_IC_RX_GPD Object ID for RX Gain Path Delay Initial Calibration,
+ * generated with OBJ_GROUP_ID_IC and item ID 0x14u.
+ * @param OBJID_IC_RX_DMR_PD Object ID for DMR Path Delay One-Time Initial
+ * Calibration, generated with OBJ_GROUP_ID_IC and
+ * item ID 0x15u.
+ * @param OBJID_IC_PLL Object ID for PLL Initial Calibration, generated with
+ * OBJ_GROUP_ID_IC and item ID 0x16u.
+ * @param OBJID_IC_AUXPLL Object ID for AUX PLL Initial Calibration, generated
+ * with OBJ_GROUP_ID_IC and item ID 0x17u.
+ * @param OBJID_TC_TX_QEC Object ID for TX QEC Tracking Calibration, generated
+ * with OBJ_GROUP_ID_TC and item ID 0x0u.
+ * @param OBJID_TC_TX_LOL Object ID for TX LOL Tracking Calibration, generated
+ * with OBJ_GROUP_ID_TC and item ID 0x1u.
+ * @param OBJID_TC_TX_LBPD Object ID for TX Loopback Path Delay Tracking
+ * Calibration, generated with OBJ_GROUP_ID_TC and item
+ * ID 0x2u.
+ * @param OBJID_TC_TX_PAC Object ID for TX PA Correction Tracking Calibration,
+ * generated with OBJ_GROUP_ID_TC and item ID 0x3u.
+ * @param OBJID_TC_TX_DPD Object ID for TX DPD Tracking Calibration, generated
+ * with OBJ_GROUP_ID_TC and item ID 0x4u.
+ * @param OBJID_TC_TX_CLGC Object ID for TX Close Loop Gain Control Tracking
+ * Calibration, generated with OBJ_GROUP_ID_TC and item
+ * ID 0x5u.
+ * @param OBJID_TC_TX_RSV1 Object ID for reserved TX tracking calibration,
+ * generated with OBJ_GROUP_ID_TC and item ID 0x6u.
+ * @param OBJID_TC_TX_RSV2 Object ID for reserved TX tracking calibration,
+ * generated with OBJ_GROUP_ID_TC and item ID 0x7u.
+ * @param OBJID_TC_RX_HD2 Object ID for RX HD2 Tracking Calibration, generated
+ * with OBJ_GROUP_ID_TC and item ID 0x8u.
+ * @param OBJID_TC_RX_WBPOLY Object ID for RX Wideband Poly Tracking
+ * Calibration, generated with OBJ_GROUP_ID_TC and
+ * item ID 0x9u.
+ * @param OBJID_TC_RX_RSV1 Object ID for reserved RX tracking calibration,
+ * generated with OBJ_GROUP_ID_TC and item ID 0xAu.
+ * @param OBJID_TC_RX_RSV2 Object ID for reserved RX tracking calibration,
+ * generated with OBJ_GROUP_ID_TC and item ID 0xBu.
+ * @param OBJID_TC_ORX_WBPOLY Object ID for ORX Wideband Poly Tracking
+ * Calibration, generated with OBJ_GROUP_ID_TC and
+ * item ID 0xCu.
+ * @param OBJID_TC_ORX_RSV1 Object ID for reserved RX tracking calibration,
+ * generated with OBJ_GROUP_ID_TC and item ID 0xDu.
+ * @param OBJID_TC_ORX_RSV2 Object ID for reserved RX tracking calibration,
+ * generated with OBJ_GROUP_ID_TC and item ID 0xEu.
+ * @param OBJID_TC_ELB_WBPOLY Object ID for ELB Wideband Poly Tracking
+ * Calibration, generated with OBJ_GROUP_ID_TC and
+ * item ID 0xFu.
+ * @param OBJID_TC_ELB_RSV1 Object ID for reserved RX tracking calibration,
+ * generated with OBJ_GROUP_ID_TC and item ID 0x10u.
+ * @param OBJID_TC_ELB_RSV2 Object ID for reserved RX tracking calibration,
+ * generated with OBJ_GROUP_ID_TC and item ID 0x11u.
+ * @param OBJID_TC_HW_RSV1 Object ID for RFDC HW tracing algorithm, generated
+ * with OBJ_GROUP_ID_TC and item ID 0x12u.
+ * @param OBJID_TC_HW_RX_BBDC Object ID for RFDC HW tracing algorithm, generated
+ * with OBJ_GROUP_ID_TC and item ID 0x13u.
+ * @param OBJID_TC_HW_RX_RFDC Object ID for RFDC HW tracing algorithm, generated
+ * with OBJ_GROUP_ID_TC and item ID 0x14u.
+ * @param OBJID_TC_HW_RX_FIC Object ID for NBFIC HW tracing algorithm, generated
+ * with OBJ_GROUP_ID_TC and item ID 0x15u.
+ * @param OBJID_TC_HW_RX_AGC Object ID for AGC HW tracing algorithm, generated
+ * with OBJ_GROUP_ID_TC and item ID 0x16u.
+ * @param OBJID_TC_HW_RX_RSSI Object ID for RSSI HW tracing algorithm, generated
+ * with OBJ_GROUP_ID_TC and item ID 0x17u.
+ * @param OBJID_GO_TEMP_SENSOR Object ID for temperature sensor, generated with
+ * OBJ_GROUP_ID_GO and item ID 0x0u.
+ * @param OBJID_GO_RSSI Object ID for RSSI, generated with OBJ_GROUP_ID_GO and
+ * item ID 0x1u.
+ * @param OBJID_GO_RSSI_XCORR Object ID for RSSI/cross-correlator, generated
+ * with OBJ_GROUP_ID_GO and item ID 0x2u.
+ * @param OBJID_GO_CAL_STATUS Object ID for Calibration Status, generated with
+ * OBJ_GROUP_ID_GO and item ID 0x3u.
+ * @param OBJID_GO_RUN_INIT_STATUS Object ID for run initial calibration status,
+ * generated with OBJ_GROUP_ID_GO and item ID
+ * 0x4u.
+ * @param OBJID_GO_INIT_CAL_DONE Object ID for Initial Calibration done,
+ * generated with OBJ_GROUP_ID_GO and item ID
+ * 0x5u.
+ * @param OBJID_GO_TX_PATH_DELAY_READ Object ID for reading TX path delay,
+ * generated with OBJ_GROUP_ID_GO and item ID
+ * 0x6u.
+ * @param OBJID_GO_RX_PATH_DELAY_READ Object ID for reading RX path delay,
+ * generated with OBJ_GROUP_ID_GO and item ID
+ * 0x7u.
+ * @param OBJID_GO_GET_POWER_SAVING_CONFIG Object ID for reading power saving
+ * configuration, generated with
+ * OBJ_GROUP_ID_GO and item ID 0x8u.
+ * @param OBJID_GO_GET_MONITOR_CONFIG Object ID for reading Monitor Mode
+ * configuration, generated with
+ * OBJ_GROUP_ID_GO and item ID 0x9u.
+ * @param OBJID_GO_ILB_ELB_DIFF_MEASUREMENT Object ID for reading ILB-ELB path
+ * delay measurements, generated with
+ * OBJ_GROUP_ID_GO and item ID 0xAu.
+ * @param OBJID_GO_GET_CURRENT_ADC_TYPE Object ID for getting the type of the
+ * current ADC being used, generated with
+ * OBJ_GROUP_ID_GO and item ID 0xBu.
+ * @param OBJID_GO_GET_FH_HOP_TABLE_SELECT Object ID for getting the current hop
+ * table selection, generated with
+ * OBJ_GROUP_ID_GO and item ID 0xCu.
+ * @param OBJID_GO_GET_FH_HOP_TABLE Object ID for getting a hop table, generated
+ * with OBJ_GROUP_ID_GO and item ID 0xDu.
+ * @param OBJID_GO_GET_FREQ_HOP_FRAME_INFO Object ID for getting hop frame
+ * information, generated with
+ * OBJ_GROUP_ID_GO and item ID 0xEu.
+ * @param OBJID_GO_CARRIER_FREQUENCY_OF_PREVIOUS_INITCAL Object ID for getting
+ * carrier frequency of
+ * previous initial
+ * calibration, generated
+ * with OBJ_GROUP_ID_GO
+ * and item ID 0xFu.
+ * @param OBJID_GS_GPIO_CTRL Object ID for GPIO control, generated with
+ * OBJ_GROUP_ID_GS and item ID 0x0u.
+ * @param OBJID_GS_ORX_TX_CTRL Object ID for ORX TX select, generated with
+ * OBJ_GROUP_ID_GS and item ID 0x1u.
+ * @param OBJID_GS_TX_ATTEN Object ID for TX attenuation, generated with
+ * OBJ_GROUP_ID_GS and item ID 0x2u.
+ * @param OBJID_GS_CHANNEL_CARRIER_FREQUENCY Object ID for Channel carrier
+ * frequency, generated with
+ * OBJ_GROUP_ID_GS and item ID 0x3u.
+ * @param OBJID_GS_PERFORM_ADC_SWITCH Object ID for requesting ADC switching,
+ * generated with OBJ_GROUP_ID_GS and item ID
+ * 0x4u.
+ * @param OBJID_GS_EXT_PATH_DELAY Object ID for external path delay, generated
+ * with OBJ_GROUP_ID_GS and item ID 0x5u.
+ * @param OBJID_GS_TRACKCALS_CTRL Tracking calibrations control commands,
+ * generated with OBJ_GROUP_ID_GS and item ID
+ * 0x6u.
+ * @param OBJID_GS_TRACKCALS_PENDING Tracking calibrations pending, generated
+ * with OBJ_GROUP_ID_GS and item ID 0x7u.
+ * @param OBJID_GS_TRACKCALS_ENABLE Tracking calibrations enable/disable,
+ * generated with OBJ_GROUP_ID_GS and item ID
+ * 0x8u.
+ * @param OBJID_GS_ARM_FORCE_EXCEPTION ARM force exception, generated with
+ * OBJ_GROUP_ID_GS and item ID 0x9u.
+ * @param OBJID_GS_PARITY_ERROR_CHECK Enable or Disable parity error checking,
+ * generated with OBJ_GROUP_ID_GS and item ID
+ * 0xAu.
+ * @param OBJID_GS_PLL_LOOPFILTER Object ID for PLL loop filter, generated with
+ * OBJ_GROUP_ID_GS and item ID 0xBu.
+ * @param OBJID_GS_DEBUG_LOOPFILTER Used to debug the Loopfilter algorithm,
+ * generated with OBJ_GROUP_ID_GS and item ID
+ * 0xCu.
+ * @param OBJID_GS_DEVICE_PROFILE Set device profile, generated with
+ * OBJ_GROUP_ID_GS and item ID 0xDu.
+ * @param OBJID_GS_BBDC_ENABLE Disable or enable BBDC on the ORX channel,
+ * generated with OBJ_GROUP_ID_GS and item ID 0xEu.
+ * @param OBJID_GS_CONFIG Config a data structure, generated with
+ * OBJ_GROUP_ID_GS and item ID 0xFu.
+ * @param OBJID_GS_SRL_CONTROL Slew Rate Limiter control, generated with
+ * OBJ_GROUP_ID_GS and item ID 0x10u.
+ * @param OBJID_GS_SLICER_CONTROL Slicer Control, generated with OBJ_GROUP_ID_GS
+ * and item ID 0x11u.
+ * @param OBJID_GS_SLICER_GAIN Slicer Gain, generated with OBJ_GROUP_ID_GS and
+ * item ID 0x12u.
+ * @param OBJID_GS_SYSTEM_CONFIG Set system config, generated with
+ * OBJ_GROUP_ID_GS and item ID 0x13u.
+ * @param OBJID_GS_CLOCK_ENABLE Enable/Disable clock, generated with
+ * OBJ_GROUP_ID_GS and item ID 0x14u.
+ * @param OBJID_GS_RAM_DRIVE_AND_CAPTURE_CONFIG Configure RAM data drive and
+ * capture, generated with
+ * OBJ_GROUP_ID_GS and item ID
+ * 0x15u.
+ * @param OBJID_GS_RAM_DRIVE_AND_CAPTURE_START Start/stop RAM data drive and
+ * capture, generated with
+ * OBJ_GROUP_ID_GS and item ID
+ * 0x16u.
+ * @param OBJID_GS_BBDC_TEST_DISABLE Force BBDC on or off at any profile, for
+ * testing use only, generated with
+ * OBJ_GROUP_ID_GS and item ID 0x17u.
+ * @param OBJID_GS_RX_FREQ_CORRECTION Rx frequency correction, generated with
+ * OBJ_GROUP_ID_GS and item ID 0x18u.
+ * @param OBJID_GS_INTERNAL_DEBUG Internal debug commands, generated with
+ * OBJ_GROUP_ID_GS and item ID 0x19u.
+ * @param OBJID_GS_DYNAMIC_PROFILE Preload dynamic components of device profile,
+ * generated with OBJ_GROUP_ID_GS and item ID
+ * 0x1Au.
+ * @param OBJID_GS_FREQ_HOP_CONFIGURE Frequency Hopping commands, generated with
+ * OBJ_GROUP_ID_GS and item ID 0x1Bu.
+ * @param OBJID_GS_TDD_TIMING_PARAMS Set TDD Timing parameters, generated with
+ * OBJ_GROUP_ID_GS and item ID 0x1Cu.
+ * @param OBJID_GS_LOID Set LO ID command parameters, generated with
+ * OBJ_GROUP_ID_GS and item ID 0x1Du.
+ * @param OBJID_CFG_A0 Object ID for configuration A0, generated with
+ * OBJ_GROUP_ID_CFG and item ID 0x0u.
+ * @param OBJID_CFG_RADIO_EVENT Object ID for Radio events module, generated
+ * with OBJ_GROUP_ID_CFG and item ID 0x1u.
+ * @param OBJID_CFG_INITIAL_CALS Object ID for Initial Calibration framework
+ * configuration, generated with OBJ_GROUP_ID_CFG
+ * and item ID 0x2u.
+ * @param OBJID_CFG_CAL_SCHEDULER Object ID for Calibration scheduler, generated
+ * with OBJ_GROUP_ID_CFG and item ID 0x3u.
+ * @param OBJID_CFG_HM Object ID for HM Timer Control, generated with
+ * OBJ_GROUP_ID_CFG and item ID 0x4u.
+ * @param OBJID_CFG_PARITY_ERROR_CHECK Configurable objects for memory refresh,
+ * generated with OBJ_GROUP_ID_CFG and item
+ * ID 0x5u.
+ * @param OBJID_CFG_ADC_SWITCHING Object ID for ADC switching configuration,
+ * generated with OBJ_GROUP_ID_CFG and item ID
+ * 0x6u.
+ * @param OBJID_CFG_TRACKING_CALS Set tracking calibration framework
+ * configuration, generated with OBJ_GROUP_ID_CFG
+ * and item ID 0x7u.
+ * @param OBJID_CFG_DPD_LUT_INITIALIZATION LUT Initialization GET/SET, generated
+ * with OBJ_GROUP_ID_CFG and item ID
+ * 0x8u.
+ * @param OBJID_CFG_DPD_FH_REGIONS Configure the DPD Model based on external
+ * algorithm, generated with OBJ_GROUP_ID_CFG
+ * and item ID 0x9u.
+ * @param OBJID_CFG_BBDC Configure BBDC Parameters, generated with
+ * OBJ_GROUP_ID_CFG and item ID 0xAu.
+ * @param OBJID_CFG_TELEM Configure the telemetry logging for short or long
+ * term, generated with OBJ_GROUP_ID_CFG and item ID
+ * 0xBu.
+ * @param OBJID_CFG_DPD_PRE_INIT_CAL Configure DPD before initial calibrations,
+ * generated with OBJ_GROUP_ID_CFG and item ID
+ * 0xCu.
+ * @param OBJID_CFG_MONITOR_RSSI Configure RSSI settings used in monitor mode,
+ * generated with OBJ_GROUP_ID_CFG and item ID
+ * 0xDu.
+ * @param OBJID_CFG_MONITOR_DMR_SEARCH Configure DMR search settings used in
+ * monitor mode, generated with
+ * OBJ_GROUP_ID_CFG and item ID 0xEu.
+ * @param OBJID_CFG_LSSI_PADS_WHEN_NOT_USED Configure LSSI pads option when LSSI
+ * is not in use, generated with
+ * OBJ_GROUP_ID_CFG and item ID 0xFu.
+ * @param OBJID_CFG_TX_INTERNAL_TONE_GENERATION Configure TX internal tone
+ * generation, generated with
+ * OBJ_GROUP_ID_CFG and item ID
+ * 0x10u.
+ * @param OBJID_CFG_PLL_CONFIG Configure PLL, generated with OBJ_GROUP_ID_CFG
+ * and item ID 0x11u.
+ * @param OBJID_CFG_RX_PORT_SWITCHING Configure RX port switching, generated
+ * with OBJ_GROUP_ID_CFG and item ID 0x12u.
+ * @param OBJID_CFG_GPIO_DEBUG_IN_STREAM Configure GPIO debug in stream,
+ * generated with OBJ_GROUP_ID_CFG and
+ * item ID 0x13u.
+ * @param OBJID_CFG_CLK_PLL_TYPE Configure clock PLL type, generated with
+ * OBJ_GROUP_ID_CFG and item ID 0x14u.
+ * @param OBJID_CFG_RX_GAIN_OVER_SSI Configure RX slicer gain or AGC gain, and
+ * gain index delay for 32-bit SSI, generated
+ * with OBJ_GROUP_ID_CFG and item ID 0x15u.
+ * @param OBJID_CFG_SPI_MASTER_CONFIG Configure SPI master to perform read/write
+ * transaction with slave device, generated
+ * with OBJ_GROUP_ID_CFG and item ID 0x16u.
+ * @param OBJID_CFG_REFERENCE_TIMER_CONFIG Configure Reference Timer, generated
+ * with OBJ_GROUP_ID_CFG and item ID
+ * 0x17u.
+ * @param OBJID_CFG_REFERENCE_TIMER_START Start Reference Timer, generated with
+ * OBJ_GROUP_ID_CFG and item ID 0x18u.
+ * @param OBJID_DRV_NCO Object ID for NCO driver, generated with
+ * OBJ_GROUP_ID_DRV and item ID 0x0u.
+ * @param OBJID_DRV_STREAM Object ID for Stream driver, generated with
+ * OBJ_GROUP_ID_DRV and item ID 0x1u.
+ * @param OBJID_DRV_PFIR Object ID for PFIR driver, generated with
+ * OBJ_GROUP_ID_DRV and item ID 0x2u.
+ * @param OBJID_DRV_SSI Object ID for SSI driver, generated with
+ * OBJ_GROUP_ID_DRV and item ID 0x3u.
+ * @param OBJID_DRV_RXGAIN Object ID for Rx Gain driver, generated with
+ * OBJ_GROUP_ID_DRV and item ID 0x4u.
+ * @param OBJID_DRV_RXQECHW Object ID for RxQEC driver, generated with
+ * OBJ_GROUP_ID_DRV and item ID 0x5u.
+ * @param OBJID_DRV_TXATTEN Object ID for TX ATTEN driver, generated with
+ * OBJ_GROUP_ID_DRV and item ID 0x6u.
+ * @param OBJID_DRV_TXQEC Object ID for TxQEC driver, generated with
+ * OBJ_GROUP_ID_DRV and item ID 0x7u.
+ * @param OBJID_DRV_DATAPATH Object ID for Datapath driver, generated with
+ * OBJ_GROUP_ID_DRV and item ID 0x8u.
+ * @param OBJID_DRV_PLL Object ID for PLL driver, generated with
+ * OBJ_GROUP_ID_DRV and item ID 0x9u.
+ * @param OBJID_DRV_LOGEN Object ID for Logen driver, generated with
+ * OBJ_GROUP_ID_DRV and item ID 0xAu.
+ * @param OBJID_DRV_SCCG Object ID for SCCG driver, generated with
+ * OBJ_GROUP_ID_DRV and item ID 0xBu.
+ * @param OBJID_DRV_BBDC Object ID for BBDC driver, generated with
+ * OBJ_GROUP_ID_DRV and item ID 0xCu.
+ * @param OBJID_DRV_DMA Object ID for DMA driver, generated with
+ * OBJ_GROUP_ID_DRV and item ID 0xDu.
+ * @param OBJID_DRV_LDO Object ID for LDO driver, generated with
+ * OBJ_GROUP_ID_DRV and item ID 0xEu.
+ * @param OBJID_DRV_TX_PD Object ID for TX Predistorter Calibration, generated
+ * with OBJ_GROUP_ID_DRV and item ID 0xFu.
+ * @param OBJID_DRV_RAM_DRIVE_CAPTURE Object ID for RAM Drive/Capture driver,
+ * generated with OBJ_GROUP_ID_DRV and item
+ * ID 0x10u.
+ * @param OBJID_DRV_MEM_POWER_CTRL Object ID for Memory power control driver,
+ * generated with OBJ_GROUP_ID_DRV and item ID
+ * 0x11u.
+ * @param OBJID_DRV_EFUSE Object ID for Efuse driver, generated with
+ * OBJ_GROUP_ID_DRV and item ID 0x12u.
+ * @param OBJID_SYS_BOOTUP Object ID for System bootup, generated with
+ * OBJ_GROUP_ID_SYS and item ID 0x0u.
+ * @param OBJID_SYS_INIT_CAL Object ID for System initial calibration wrapper,
+ * generated with OBJ_GROUP_ID_SYS and item ID 0x1u.
+ * @param OBJID_SYS_TRACKING_CAL Object ID for System tracking calibration
+ * wrapper, generated with OBJ_GROUP_ID_SYS and
+ * item ID 0x2u.
+ * @param OBJID_SYS_CAL_FRAMEWORK Object ID for System calibration task
+ * framework, generated with OBJ_GROUP_ID_SYS and
+ * item ID 0x3u.
+ * @param OBJID_SYS_CONTROL_TASK Object ID for System control task, generated
+ * with OBJ_GROUP_ID_SYS and item ID 0x4u.
+ * @param OBJID_SYS_MAILBOX Object ID for System mailbox, generated with
+ * OBJ_GROUP_ID_SYS and item ID 0x5u.
+ * @param OBJID_SYS_SCHEDULER Object ID for System scheduler, generated with
+ * OBJ_GROUP_ID_SYS and item ID 0x6u.
+ * @param OBJID_SYS_CHANNEL Object ID for System channel module, generated with
+ * OBJ_GROUP_ID_SYS and item ID 0x7u.
+ * @param OBJID_SYS_RESOURCE_MANAGER Object ID for System resource manager,
+ * generated with OBJ_GROUP_ID_SYS and item ID
+ * 0x8u.
+ * @param OBJID_SYS_POWER_SAVING_MANAGER Object ID for System power saving
+ * manager, generated with
+ * OBJ_GROUP_ID_SYS and item ID 0x9u.
+ * @param OBJID_SYS_MONITOR_MODE Object ID for System monitor mode, generated
+ * with OBJ_GROUP_ID_SYS and item ID 0xAu.
+ * @param OBJID_SYS_FREQUENCY_HOPPING Object ID for System frequency hopping,
+ * generated with OBJ_GROUP_ID_SYS and item
+ * ID 0xBu.
+ * @param OBJID_SYS_MISC Object ID for Miscellaneous system object, generated
+ * with OBJ_GROUP_ID_SYS and item ID 0x1Fu.
+ ******************************************************************************/
 typedef enum
 {
     /* The reason to skip 0 is: 

@@ -27,16 +27,25 @@
 extern "C" {
 #endif
 
-/**
- * \brief Configure ADRV9001 LDOs
+/***************************************************************************//**
+ * @brief This function sets up the power management configuration for the
+ * ADRV9001 device by adjusting the Low Dropout Regulators (LDOs)
+ * according to the specified settings. It must be called when all
+ * channels are in the STANDBY state to ensure proper configuration. The
+ * function modifies the device's power management settings based on the
+ * provided parameters and returns a status code indicating success or
+ * the necessary action to recover from an error.
  *
- * \pre All channels must be in STANDBY state
- *
- * \param[in] adrv9001		            Context variable - Pointer to the ADRV9001 device settings data structure
- * \param[in] powerManagementSettings   Desired power management settings
- *
- * \returns A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required action to recover
- */
+ * @param adrv9001 A pointer to the ADRV9001 device settings data structure.
+ * This must not be null and should be properly initialized
+ * before calling the function. The caller retains ownership.
+ * @param powerManagementSettings A pointer to the desired power management
+ * settings structure. This must not be null and
+ * should contain valid LDO configuration data.
+ * The caller retains ownership.
+ * @return Returns an integer code indicating success (ADI_COMMON_ACT_NO_ACTION)
+ * or the required action to recover from an error.
+ ******************************************************************************/
 int32_t adi_adrv9001_powermanagement_Configure(adi_adrv9001_Device_t *adrv9001, 
                                                adi_adrv9001_PowerManagementSettings_t *powerManagementSettings);
 

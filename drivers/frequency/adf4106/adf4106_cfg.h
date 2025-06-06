@@ -36,6 +36,18 @@
 #ifndef __ADF4106_CFG_H__
 #define __ADF4106_CFG_H__
 
+/***************************************************************************//**
+ * @brief The `adf4106_st` is a global variable of type `struct
+ * adf4106_settings_t` that holds configuration settings for the ADF4106
+ * frequency synthesizer. It includes parameters such as input frequency,
+ * phase frequency detector (PFD) max frequency, reference counter, and
+ * various control settings for the synthesizer's operation. These
+ * settings are used to initialize and control the behavior of the
+ * ADF4106 device.
+ *
+ * @details This variable is used to configure the ADF4106 frequency synthesizer
+ * with specific operational parameters during initialization.
+ ******************************************************************************/
 struct adf4106_settings_t adf4106_st = {
 	10000000,                       // RFIN is 10Mhz
 	200000,                         // User defined PFD max frequency

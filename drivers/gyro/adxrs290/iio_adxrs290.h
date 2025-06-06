@@ -37,7 +37,28 @@
 #include "iio_types.h"
 #include "iio_trigger.h"
 
+/***************************************************************************//**
+ * @brief The `adxrs290_iio_descriptor` is a global variable of type `struct
+ * iio_device` that represents the IIO (Industrial I/O) device descriptor
+ * for the ADXRS290 gyroscope sensor. This descriptor is used to define
+ * the characteristics and capabilities of the ADXRS290 sensor within the
+ * IIO framework, facilitating its integration and interaction with the
+ * IIO subsystem.
+ *
+ * @details This variable is used to interface the ADXRS290 gyroscope sensor
+ * with the IIO subsystem, allowing for data acquisition and control.
+ ******************************************************************************/
 extern struct iio_device adxrs290_iio_descriptor;
+/***************************************************************************//**
+ * @brief The variable `adxrs290_iio_trig_desc` is a global variable of type
+ * `struct iio_trigger`. It is declared as an external variable,
+ * indicating that its definition is located in another source file. This
+ * structure is likely used to manage and configure trigger events for
+ * the ADXRS290 device within the IIO (Industrial I/O) framework.
+ *
+ * @details This variable is used to handle trigger events for the ADXRS290
+ * sensor in the IIO subsystem.
+ ******************************************************************************/
 extern struct iio_trigger adxrs290_iio_trig_desc;
 
 #endif

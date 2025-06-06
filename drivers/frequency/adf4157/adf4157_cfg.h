@@ -42,7 +42,16 @@
 
 /******************************************************************************/
 /************************ Constants Definitions *******************************/
-/******************************************************************************/
+/***************************************************************************//**
+ * @brief The `adf4157_pdata_lpc` is a static instance of the
+ * `adf4157_platform_data` structure, which is used to configure the
+ * ADF4157 frequency synthesizer. It contains parameters such as the
+ * input clock frequency (`clkin`), reference doubler and divider
+ * settings, and user-defined register settings for the synthesizer.
+ *
+ * @details This variable is used to initialize and configure the ADF4157 device
+ * with specific settings for operation.
+ ******************************************************************************/
 static struct adf4157_platform_data adf4157_pdata_lpc = {
 	10000000,                   //clkin
 	0,                          //ref_doubler_en

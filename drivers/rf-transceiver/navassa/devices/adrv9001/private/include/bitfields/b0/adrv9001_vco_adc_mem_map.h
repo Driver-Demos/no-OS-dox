@@ -13,21 +13,53 @@
 
 #include "adrv9001_bf_hal.h"
 
+/***************************************************************************//**
+ * @brief The `adrv9001_BfVcoAdcMemMap_e` is an enumeration that defines
+ * specific memory map addresses for controlling the low power modes of
+ * the RX1 and RX2 ADCs in the ADRV9001 device. These enumerated values
+ * are used to access and manipulate the bit fields associated with the
+ * VCO ADC memory map, allowing for configuration and control of the
+ * ADC's operational modes.
+ *
+ * @param ADRV9001_BF_RX1_ADC_LP Represents the memory map address for RX1 ADC
+ * low power mode.
+ * @param ADRV9001_BF_RX2_ADC_LP Represents the memory map address for RX2 ADC
+ * low power mode.
+ ******************************************************************************/
 typedef enum adrv9001_BfVcoAdcMemMap_e
 {
     ADRV9001_BF_RX1_ADC_LP    =   0x3c00,
     ADRV9001_BF_RX2_ADC_LP    =   0x3e00
 } adrv9001_BfVcoAdcMemMap_e;
 
+/***************************************************************************//**
+ * @brief The `vcoAdcMemMapInstances` is a static constant array of type
+ * `adrv9001_BfVcoAdcMemMap_e`, which is an enumeration representing
+ * specific memory map instances for VCO ADCs. This array contains two
+ * elements: `ADRV9001_BF_RX1_ADC_LP` and `ADRV9001_BF_RX2_ADC_LP`, which
+ * correspond to specific bitfield addresses for RX1 and RX2 ADC low-pass
+ * filters.
+ *
+ * @details This array is used to define and access specific VCO ADC memory map
+ * instances for configuration and control within the ADRV9001 device.
+ ******************************************************************************/
 static const adrv9001_BfVcoAdcMemMap_e vcoAdcMemMapInstances[] = {
     ADRV9001_BF_RX1_ADC_LP,
     ADRV9001_BF_RX2_ADC_LP
 };
 
 
-/**
- * acc0 data from the analog. changes every clock cycle.
- */
+/***************************************************************************//**
+ * @brief Retrieves the accumulated data from the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure representing the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to access.
+ * @param value A pointer to a `uint16_t` where the retrieved accumulated data
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero). The accumulated data is stored in the `value` pointer.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_Acc0Data_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint16_t *value)
@@ -47,9 +79,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_Acc0Data_Get(void *device,
 }
 
 
-/**
- * acc1 data from analog. changes every clock cycle.
- */
+/***************************************************************************//**
+ * @brief Retrieves the accumulated data from the VCO ADC's Acc1 register.
+ *
+ * @param device A pointer to the device structure representing the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a uint16_t variable where the retrieved accumulated
+ * data will be stored.
+ * @return Returns an integer status code indicating success or failure of the
+ * read operations, and updates the *value pointer with the accumulated
+ * data from the ADC.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_Acc1Data_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint16_t *value)
@@ -68,9 +109,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_Acc1Data_Get(void *device,
     return status;
 }
 
-/**
- * cal center
- */
+/***************************************************************************//**
+ * @brief Sets the calibration center value for the VCO ADC.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A 16-bit unsigned integer representing the calibration center
+ * value to be set.
+ * @return Returns the status of the last write operation, indicating success
+ * (0) or an error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_Bcalcenter_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint16_t value)
@@ -85,9 +134,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_Bcalcenter_Set(void *device,
     return status;
 }
 
-/**
- * cal center
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration center value from the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint16_t` where the retrieved calibration center
+ * value will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero). The retrieved calibration center value is stored in the
+ * variable pointed to by `value`.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_Bcalcenter_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint16_t *value)
@@ -106,9 +164,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_Bcalcenter_Get(void *device,
     return status;
 }
 
-/**
- * bcap adjustment
- */
+/***************************************************************************//**
+ * @brief Sets the `Bcap` value in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the `Bcap`.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_Bcap_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -120,9 +186,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_Bcap_Set(void *device,
     return status;
 }
 
-/**
- * bcap adjustment
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the `bcap` adjustment from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved `bcap`
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_Bcap_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -137,9 +212,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_Bcap_Get(void *device,
     return status;
 }
 
-/**
- * samples to accumulate for bcenter cal --0x0 corresponds to 16*8 samples, 0x1 is 64*8, 0x2 is 128*8, 0x3 is 256*8, 0x4 is 512*8
- */
+/***************************************************************************//**
+ * @brief Sets the accumulation count value for the bcenter calibration in the
+ * VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the count value to be set
+ * for accumulation.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_BcenterAccCntVal_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -151,9 +235,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_BcenterAccCntVal_Set(void *device,
     return status;
 }
 
-/**
- * samples to accumulate for bcenter cal --0x0 corresponds to 16*8 samples, 0x1 is 64*8, 0x2 is 128*8, 0x3 is 256*8, 0x4 is 512*8
- */
+/***************************************************************************//**
+ * @brief Retrieves the accumulated count value for the VCO ADC center
+ * calibration.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved count value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_BcenterAccCntVal_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -168,9 +261,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_BcenterAccCntVal_Get(void *device,
     return status;
 }
 
-/**
- * setting this to 1 decreases the mu for bcenter adaptation. this should never need to be used. if used, value of 1 corresponds to 2^-13
- */
+/***************************************************************************//**
+ * @brief Sets the adaptation decrease value for the VCO ADC's center frequency
+ * calibration.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A uint8_t value that indicates the decrease in adaptation, where
+ * a value of 1 corresponds to a specific adjustment.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_BcenterAdaptDecrease_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -182,9 +284,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_BcenterAdaptDecrease_Set(void *devic
     return status;
 }
 
-/**
- * setting this to 1 decreases the mu for bcenter adaptation. this should never need to be used. if used, value of 1 corresponds to 2^-13
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the adaptation decrease setting for the VCO
+ * ADC.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to access.
+ * @param value A pointer to a `uint8_t` where the retrieved value will be
+ * stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_BcenterAdaptDecrease_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -199,9 +310,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_BcenterAdaptDecrease_Get(void *devic
     return status;
 }
 
-/**
- * setting this to 1 increases mu by a factor of 8. we should never need to use this.
- */
+/***************************************************************************//**
+ * @brief Sets the adaptation factor for the VCO ADC by increasing the mu value.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A uint8_t value that indicates the amount to increase the
+ * adaptation factor.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_BcenterAdaptIncrease_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -213,9 +332,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_BcenterAdaptIncrease_Set(void *devic
     return status;
 }
 
-/**
- * setting this to 1 increases mu by a factor of 8. we should never need to use this.
- */
+/***************************************************************************//**
+ * @brief Retrieves the adaptation increase value for the VCO ADC.
+ *
+ * @param device A pointer to the device structure representing the VCO ADC.
+ * @param instance An enumerated type indicating the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_BcenterAdaptIncrease_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -230,9 +357,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_BcenterAdaptIncrease_Get(void *devic
     return status;
 }
 
-/**
- * setting this to 1 changes number of bcenter steps from 32 to 16
- */
+/***************************************************************************//**
+ * @brief Sets the number of adaptation steps for the VCO ADC's bcenter
+ * calibration.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A uint8_t value that specifies the number of adaptation steps to
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_BcenterAdaptSteps_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -244,9 +380,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_BcenterAdaptSteps_Set(void *device,
     return status;
 }
 
-/**
- * setting this to 1 changes number of bcenter steps from 32 to 16
- */
+/***************************************************************************//**
+ * @brief Retrieves the adaptation steps setting for the VCO ADC.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved adaptation
+ * steps value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_BcenterAdaptSteps_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -261,9 +405,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_BcenterAdaptSteps_Get(void *device,
     return status;
 }
 
-/**
- * enable bcenter cal
- */
+/***************************************************************************//**
+ * @brief Sets the enable state for the bcenter calibration.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A uint8_t value that indicates whether to enable (1) or disable
+ * (0) the bcenter calibration.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_BcenterCalEn_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -275,9 +428,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_BcenterCalEn_Set(void *device,
     return status;
 }
 
-/**
- * enable bcenter cal
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the 'Bcenter Calibration Enable' bit from the
+ * VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure representing the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_BcenterCalEn_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -292,9 +454,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_BcenterCalEn_Get(void *device,
     return status;
 }
 
-/**
- * initial value for bcenter (out of reset initial bcenter value is 10'h0 -- this control allows us to load in different bcenter initial value once we are out of reset)
- */
+/***************************************************************************//**
+ * @brief Sets the initial value for the bcenter calibration.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to operate on.
+ * @param value A 16-bit unsigned integer representing the initial value to set
+ * for the bcenter calibration.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_BcenterInitVal_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint16_t value)
@@ -309,9 +480,19 @@ static inline int32_t adrv9001_VcoAdcMemMap_BcenterInitVal_Set(void *device,
     return status;
 }
 
-/**
- * initial value for bcenter (out of reset initial bcenter value is 10'h0 -- this control allows us to load in different bcenter initial value once we are out of reset)
- */
+/***************************************************************************//**
+ * @brief Retrieves the initial value for the bcenter calibration from the VCO
+ * ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint16_t` variable where the retrieved initial
+ * bcenter value will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero). The initial bcenter value is stored in the variable
+ * pointed to by `value`.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_BcenterInitVal_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint16_t *value)
@@ -330,9 +511,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_BcenterInitVal_Get(void *device,
     return status;
 }
 
-/**
- * setting this to anything other than 0 scales adaptation coefficient. This only takes effect when bcenter_adapt_decrease is set to 1.
- */
+/***************************************************************************//**
+ * @brief Sets the scale shift for the bcenter adaptation coefficient in the VCO
+ * ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the scale shift value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_BcenterScaleShift_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -344,9 +534,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_BcenterScaleShift_Set(void *device,
     return status;
 }
 
-/**
- * setting this to anything other than 0 scales adaptation coefficient. This only takes effect when bcenter_adapt_decrease is set to 1.
- */
+/***************************************************************************//**
+ * @brief Retrieves the scaled shift value for the VCO ADC center adjustment.
+ *
+ * @param device A pointer to the device structure representing the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` where the retrieved value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_BcenterScaleShift_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -361,9 +559,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_BcenterScaleShift_Get(void *device,
     return status;
 }
 
-/**
- * setting this to "1" loads bcenter_start_init_val as initial bcenter value prior to bcenter cal
- */
+/***************************************************************************//**
+ * @brief Sets the initial value for the bcenter before calibration.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map is being accessed.
+ * @param value An 8-bit unsigned integer representing the initial value to be
+ * set for the bcenter.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_BcenterStartInitVal_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -375,9 +582,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_BcenterStartInitVal_Set(void *device
     return status;
 }
 
-/**
- * setting this to "1" loads bcenter_start_init_val as initial bcenter value prior to bcenter cal
- */
+/***************************************************************************//**
+ * @brief Retrieves the initial value for the bcenter calibration from the VCO
+ * ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to access.
+ * @param value A pointer to a `uint8_t` where the retrieved initial bcenter
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_BcenterStartInitVal_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -393,9 +609,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_BcenterStartInitVal_Get(void *device
 }
 
 
-/**
- * bcenter value
- */
+/***************************************************************************//**
+ * @brief Retrieves the `Bcenter` value from the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint16_t` variable where the retrieved `Bcenter`
+ * value will be stored.
+ * @return Returns an integer status code indicating success or failure of the
+ * read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_BcenterValue_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint16_t *value)
@@ -414,9 +639,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_BcenterValue_Get(void *device,
     return status;
 }
 
-/**
- * bdither DAC1
- */
+/***************************************************************************//**
+ * @brief Sets the value of the bdith DAC1 in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the bdith DAC1.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_Bdithdac1_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -428,9 +662,19 @@ static inline int32_t adrv9001_VcoAdcMemMap_Bdithdac1_Set(void *device,
     return status;
 }
 
-/**
- * bdither DAC1
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the bdith DAC1 from the specified device
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_Bdithdac1_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -445,9 +689,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_Bdithdac1_Get(void *device,
     return status;
 }
 
-/**
- * bdither DAC2
- */
+/***************************************************************************//**
+ * @brief Sets the value of the bdith DAC2 in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the bdith DAC2.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_Bdithdac2_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -459,9 +711,19 @@ static inline int32_t adrv9001_VcoAdcMemMap_Bdithdac2_Set(void *device,
     return status;
 }
 
-/**
- * bdither DAC2
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the bdith DAC2 register from the specified VCO
+ * ADC memory map instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_Bdithdac2_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -476,9 +738,16 @@ static inline int32_t adrv9001_VcoAdcMemMap_Bdithdac2_Get(void *device,
     return status;
 }
 
-/**
- * bgain adjustment
- */
+/***************************************************************************//**
+ * @brief Sets the `bgain` value in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the gain value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_Bgain_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -490,9 +759,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_Bgain_Set(void *device,
     return status;
 }
 
-/**
- * bgain adjustment
- */
+/***************************************************************************//**
+ * @brief Retrieves the `bgain` adjustment value from the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved `bgain`
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_Bgain_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -507,9 +784,19 @@ static inline int32_t adrv9001_VcoAdcMemMap_Bgain_Get(void *device,
     return status;
 }
 
-/**
- * disable vcoadc bias low-pass filter.  Used for faster startup from power down.
- */
+/***************************************************************************//**
+ * @brief Disables the low-pass filter for the VCO ADC bias to enable faster
+ * startup from power down.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A `uint8_t` value that indicates whether to disable (1) or
+ * enable (0) the low-pass filter.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_BiasDisLpf_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -521,9 +808,19 @@ static inline int32_t adrv9001_VcoAdcMemMap_BiasDisLpf_Set(void *device,
     return status;
 }
 
-/**
- * disable vcoadc bias low-pass filter.  Used for faster startup from power down.
- */
+/***************************************************************************//**
+ * @brief Retrieves the bias disable low-pass filter setting for the VCO ADC
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfVcoAdcMemMap_e` that
+ * specifies which instance of the VCO ADC memory map to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_BiasDisLpf_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -538,9 +835,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_BiasDisLpf_Get(void *device,
     return status;
 }
 
-/**
- * vti amp current 1
- */
+/***************************************************************************//**
+ * @brief Sets the VCO ADC current for a specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific VCO ADC memory
+ * map instance.
+ * @param value An 8-bit unsigned integer representing the current value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_Bvtiamp1_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -552,9 +858,19 @@ static inline int32_t adrv9001_VcoAdcMemMap_Bvtiamp1_Set(void *device,
     return status;
 }
 
-/**
- * vti amp current 1
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the VCO ADC bias current from a specified
+ * register.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value that specifies which instance of the VCO
+ * ADC memory map to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_Bvtiamp1_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -569,9 +885,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_Bvtiamp1_Get(void *device,
     return status;
 }
 
-/**
- * vti amp current 2
- */
+/***************************************************************************//**
+ * @brief Sets the VCO ADC bias current for the specified instance.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the bias current value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_Bvtiamp2_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -583,9 +907,19 @@ static inline int32_t adrv9001_VcoAdcMemMap_Bvtiamp2_Set(void *device,
     return status;
 }
 
-/**
- * vti amp current 2
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the VCO ADC bias current setting from the
+ * specified device instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_Bvtiamp2_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -600,9 +934,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_Bvtiamp2_Get(void *device,
     return status;
 }
 
-/**
- * vti input common mode level
- */
+/***************************************************************************//**
+ * @brief Sets the VTI input common mode level for the VCO ADC.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the common mode level to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_Bvtiampcm_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -614,9 +956,19 @@ static inline int32_t adrv9001_VcoAdcMemMap_Bvtiampcm_Set(void *device,
     return status;
 }
 
-/**
- * vti input common mode level
- */
+/***************************************************************************//**
+ * @brief Retrieves the common mode level for the VTI amplifier from the
+ * specified device instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfVcoAdcMemMap_e` that
+ * specifies which instance of the VCO ADC memory map to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved common
+ * mode level will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_Bvtiampcm_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -631,9 +983,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_Bvtiampcm_Get(void *device,
     return status;
 }
 
-/**
- * vti amp mirror current
- */
+/***************************************************************************//**
+ * @brief Sets the VCO ADC mirror current for a specified instance.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the value to set for the
+ * mirror current.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_Bvtiamps_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -645,9 +1005,19 @@ static inline int32_t adrv9001_VcoAdcMemMap_Bvtiamps_Set(void *device,
     return status;
 }
 
-/**
- * vti amp mirror current
- */
+/***************************************************************************//**
+ * @brief Retrieves the VCO ADC mirror current value from the specified device
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved mirror
+ * current value will be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_Bvtiamps_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -662,9 +1032,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_Bvtiamps_Get(void *device,
     return status;
 }
 
-/**
- * bvti center
- */
+/***************************************************************************//**
+ * @brief Sets the VCO ADC center value in the memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A 16-bit unsigned integer representing the value to set for the
+ * VCO ADC center.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_Bvticenter_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint16_t value)
@@ -679,9 +1057,19 @@ static inline int32_t adrv9001_VcoAdcMemMap_Bvticenter_Set(void *device,
     return status;
 }
 
-/**
- * bvti center
- */
+/***************************************************************************//**
+ * @brief The `adrv9001_VcoAdcMemMap_Bvticenter_Get` function retrieves the BVTI
+ * center value from the specified VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint16_t` variable where the retrieved BVTI
+ * center value will be stored.
+ * @return The function returns an integer status code indicating success (0) or
+ * an error code if the read operations failed.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_Bvticenter_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint16_t *value)
@@ -700,9 +1088,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_Bvticenter_Get(void *device,
     return status;
 }
 
-/**
- * vti shift current
- */
+/***************************************************************************//**
+ * @brief Sets the VCO ADC shift current value in the memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A 16-bit unsigned integer representing the shift current value
+ * to be set.
+ * @return Returns the status of the last write operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_Bvtishift_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint16_t value)
@@ -717,9 +1113,19 @@ static inline int32_t adrv9001_VcoAdcMemMap_Bvtishift_Set(void *device,
     return status;
 }
 
-/**
- * vti shift current
- */
+/***************************************************************************//**
+ * @brief Retrieves the VCO ADC shift current value from the specified memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint16_t` variable where the retrieved shift
+ * current value will be stored.
+ * @return Returns an integer status code indicating success or failure of the
+ * read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_Bvtishift_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint16_t *value)
@@ -738,9 +1144,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_Bvtishift_Get(void *device,
     return status;
 }
 
-/**
- * vco adc is calibrated every 2^(cal_duty_cycle+14+8) clock cycles
- */
+/***************************************************************************//**
+ * @brief Sets the calibration duty cycle for the VCO ADC.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the duty cycle value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_CalDutyCycle_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -752,9 +1166,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_CalDutyCycle_Set(void *device,
     return status;
 }
 
-/**
- * vco adc is calibrated every 2^(cal_duty_cycle+14+8) clock cycles
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration duty cycle value for the VCO ADC.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to access.
+ * @param value A pointer to a `uint8_t` where the retrieved duty cycle value
+ * will be stored.
+ * @return Returns an integer status code indicating success or failure of the
+ * read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_CalDutyCycle_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -769,9 +1191,16 @@ static inline int32_t adrv9001_VcoAdcMemMap_CalDutyCycle_Get(void *device,
     return status;
 }
 
-/**
- * force cal
- */
+/***************************************************************************//**
+ * @brief Sets the calibration force value for the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A uint8_t value that specifies the calibration force to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_CalForce_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -783,9 +1212,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_CalForce_Set(void *device,
     return status;
 }
 
-/**
- * force cal
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration force value from the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration force value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_CalForce_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -800,9 +1237,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_CalForce_Get(void *device,
     return status;
 }
 
-/**
- * control for calibration modes: 2'b0 -- foreground cal 2'b1 -- duty cycle background cal (re-runs every cal_duty_cycle clock (fs) samples), otherwise continuous background cal.
- */
+/***************************************************************************//**
+ * @brief Sets the calibration frequency control mode for the VCO ADC.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A uint8_t value that specifies the calibration frequency control
+ * mode.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_CalFreqControl_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -814,9 +1260,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_CalFreqControl_Set(void *device,
     return status;
 }
 
-/**
- * control for calibration modes: 2'b0 -- foreground cal 2'b1 -- duty cycle background cal (re-runs every cal_duty_cycle clock (fs) samples), otherwise continuous background cal.
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration frequency control setting from the VCO ADC
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_CalFreqControl_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -831,9 +1286,16 @@ static inline int32_t adrv9001_VcoAdcMemMap_CalFreqControl_Get(void *device,
     return status;
 }
 
-/**
- * reset cal, active high
- */
+/***************************************************************************//**
+ * @brief Sets the calibration reset for the VCO ADC.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A uint8_t value that indicates the reset state (active high).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_CalRst_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -845,9 +1307,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_CalRst_Set(void *device,
     return status;
 }
 
-/**
- * reset cal, active high
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration reset status of the VCO ADC.
+ *
+ * @param device A pointer to the device structure representing the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration reset status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_CalRst_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -862,9 +1332,16 @@ static inline int32_t adrv9001_VcoAdcMemMap_CalRst_Get(void *device,
     return status;
 }
 
-/**
- * calibration sequence load mode, set to 0
- */
+/***************************************************************************//**
+ * @brief Sets the calibration sequence load mode for the VCO ADC.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A uint8_t value that sets the calibration sequence load mode.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_CalRz_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -876,9 +1353,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_CalRz_Set(void *device,
     return status;
 }
 
-/**
- * calibration sequence load mode, set to 0
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration sequence load mode for the VCO ADC.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_CalRz_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -893,9 +1378,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_CalRz_Get(void *device,
     return status;
 }
 
-/**
- * calibration DAC shift clock divide rate (00=div-by-2, 01=div-by-4, 1x=div-by-8)
- */
+/***************************************************************************//**
+ * @brief Sets the calibration DAC shift clock divide rate.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the clock shift value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_Clkshift_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -907,9 +1401,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_Clkshift_Set(void *device,
     return status;
 }
 
-/**
- * calibration DAC shift clock divide rate (00=div-by-2, 01=div-by-4, 1x=div-by-8)
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock shift value from the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved clock
+ * shift value will be stored.
+ * @return Returns an integer status code indicating success or failure of the
+ * read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_Clkshift_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -924,9 +1427,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_Clkshift_Get(void *device,
     return status;
 }
 
-/**
- * In kgain calculation, one of the codes used is 128 and the other code used is 128+dacval_kgain
- */
+/***************************************************************************//**
+ * @brief Sets the DAC value for kgain adjustment in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the DAC value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_DacvalKgain_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -938,9 +1449,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_DacvalKgain_Set(void *device,
     return status;
 }
 
-/**
- * In kgain calculation, one of the codes used is 128 and the other code used is 128+dacval_kgain
- */
+/***************************************************************************//**
+ * @brief Retrieves the DAC value for kgain from the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure representing the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` where the retrieved DAC value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_DacvalKgain_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -955,9 +1474,16 @@ static inline int32_t adrv9001_VcoAdcMemMap_DacvalKgain_Get(void *device,
     return status;
 }
 
-/**
- * resets all digital blocks except memory map - self clearing
- */
+/***************************************************************************//**
+ * @brief Sets the digital calibration reset for the VCO ADC.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A uint8_t value that indicates the reset state (active high).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_DigCalRst_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -969,9 +1495,19 @@ static inline int32_t adrv9001_VcoAdcMemMap_DigCalRst_Set(void *device,
     return status;
 }
 
-/**
- * resets all digital blocks except memory map - self clearing
- */
+/***************************************************************************//**
+ * @brief Retrieves the digital calibration reset status from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_DigCalRst_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -986,9 +1522,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_DigCalRst_Get(void *device,
     return status;
 }
 
-/**
- * disable bias amplifier
- */
+/***************************************************************************//**
+ * @brief Sets the disable bias amplifier configuration for the VCO ADC.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A uint8_t value that indicates whether to disable (1) or enable
+ * (0) the bias amplifier.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_DisBiasAmp_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -1000,9 +1545,19 @@ static inline int32_t adrv9001_VcoAdcMemMap_DisBiasAmp_Set(void *device,
     return status;
 }
 
-/**
- * disable bias amplifier
- */
+/***************************************************************************//**
+ * @brief Retrieves the disabled bias amplifier status from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_DisBiasAmp_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -1017,9 +1572,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_DisBiasAmp_Get(void *device,
     return status;
 }
 
-/**
- * disable slope-based over-range correction
- */
+/***************************************************************************//**
+ * @brief Sets the disable over-range correction (ORC) value for the VCO ADC.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfVcoAdcMemMap_e` that
+ * specifies the instance of the VCO ADC memory map.
+ * @param value A `uint8_t` value that indicates whether to enable or disable
+ * the over-range correction (0 to disable, 1 to enable).
+ * @return Returns an `int32_t` status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_DisOrc_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -1031,9 +1595,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_DisOrc_Set(void *device,
     return status;
 }
 
-/**
- * disable slope-based over-range correction
- */
+/***************************************************************************//**
+ * @brief Retrieves the disabled over-range correction (ORC) status from the VCO
+ * ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the ORC status will be
+ * stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_DisOrc_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -1048,9 +1621,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_DisOrc_Get(void *device,
     return status;
 }
 
-/**
- * dither auto disable, active high
- */
+/***************************************************************************//**
+ * @brief Sets the dither auto disable feature for the VCO ADC.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A uint8_t value indicating whether to enable (0) or disable (1)
+ * the dither auto feature.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_DithDisAuto_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -1062,9 +1643,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_DithDisAuto_Set(void *device,
     return status;
 }
 
-/**
- * dither auto disable, active high
- */
+/***************************************************************************//**
+ * @brief Retrieves the dither disable auto setting from the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_DithDisAuto_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -1079,9 +1669,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_DithDisAuto_Get(void *device,
     return status;
 }
 
-/**
- * dither clock divide
- */
+/***************************************************************************//**
+ * @brief Sets the dither clock divide value in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the dither clock divide
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_DithDiv_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -1093,9 +1691,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_DithDiv_Set(void *device,
     return status;
 }
 
-/**
- * dither clock divide
- */
+/***************************************************************************//**
+ * @brief Retrieves the dither clock divide value from the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved dither
+ * divide value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_DithDiv_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -1110,9 +1717,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_DithDiv_Get(void *device,
     return status;
 }
 
-/**
- * dither mode
- */
+/***************************************************************************//**
+ * @brief Sets the dither mode for the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the dither mode to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_DithMode_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -1124,9 +1739,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_DithMode_Set(void *device,
     return status;
 }
 
-/**
- * dither mode
- */
+/***************************************************************************//**
+ * @brief Retrieves the dither mode setting from the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved dither
+ * mode value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_DithMode_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -1141,9 +1765,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_DithMode_Get(void *device,
     return status;
 }
 
-/**
- * reset dither clock gen, active high
- */
+/***************************************************************************//**
+ * @brief Sets the reset state of the dither clock generator for the VCO ADC.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A uint8_t value that indicates the reset state to be set (active
+ * high).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_DithRstClkgen_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -1155,9 +1787,19 @@ static inline int32_t adrv9001_VcoAdcMemMap_DithRstClkgen_Set(void *device,
     return status;
 }
 
-/**
- * reset dither clock gen, active high
- */
+/***************************************************************************//**
+ * @brief Retrieves the reset state of the dither clock generator for the VCO
+ * ADC.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_DithRstClkgen_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -1172,9 +1814,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_DithRstClkgen_Get(void *device,
     return status;
 }
 
-/**
- * reset dither dac, active high
- */
+/***************************************************************************//**
+ * @brief Sets the reset state of the dither DAC in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A uint8_t value that indicates the reset state to be set for the
+ * dither DAC.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_DithRstDac_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -1186,9 +1837,19 @@ static inline int32_t adrv9001_VcoAdcMemMap_DithRstDac_Set(void *device,
     return status;
 }
 
-/**
- * reset dither dac, active high
- */
+/***************************************************************************//**
+ * @brief Retrieves the reset state of the dither DAC for a specified VCO ADC
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific VCO ADC
+ * instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved dither DAC
+ * reset state will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_DithRstDac_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -1203,9 +1864,16 @@ static inline int32_t adrv9001_VcoAdcMemMap_DithRstDac_Get(void *device,
     return status;
 }
 
-/**
- * reset dither lfsr, active high
- */
+/***************************************************************************//**
+ * @brief Sets the reset state of the dither LFSR in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A uint8_t value that indicates the reset state to be set.
+ * @return Returns the status of the write operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_DithRstLfsr_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -1217,9 +1885,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_DithRstLfsr_Set(void *device,
     return status;
 }
 
-/**
- * reset dither lfsr, active high
- */
+/***************************************************************************//**
+ * @brief Retrieves the reset state of the dither LFSR for the VCO ADC.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_DithRstLfsr_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -1235,9 +1911,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_DithRstLfsr_Get(void *device,
 }
 
 
-/**
- * read only bit that indicates bcenter cal is completed
- */
+/***************************************************************************//**
+ * @brief Retrieves the status of the VCO ADC's center calibration completion.
+ *
+ * @param device A pointer to the device structure representing the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the result will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_DoneBcenterCal_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -1253,9 +1937,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_DoneBcenterCal_Get(void *device,
 }
 
 
-/**
- * read bit only indicating kgain cal is done.
- */
+/***************************************************************************//**
+ * @brief Retrieves the status of the kgain calibration completion from the VCO
+ * ADC memory map.
+ *
+ * @param device A pointer to the device structure representing the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to access.
+ * @param value A pointer to a `uint8_t` variable where the result of the read
+ * operation will be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_DoneKgainCal_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -1271,9 +1964,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_DoneKgainCal_Get(void *device,
 }
 
 
-/**
- * read only bit indicating ramp cal is complete
- */
+/***************************************************************************//**
+ * @brief Retrieves the status of the ramp calibration completion for the VCO
+ * ADC.
+ *
+ * @param device A pointer to the device structure representing the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a uint8_t variable where the result of the read
+ * operation will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_DoneRampCal_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -1288,9 +1990,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_DoneRampCal_Get(void *device,
     return status;
 }
 
-/**
- * enable additional two signal channels for 3dB noise improvement
- */
+/***************************************************************************//**
+ * @brief Sets the VCO ADC memory map enable for additional signal channels.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A uint8_t value that indicates whether to enable or disable the
+ * additional signal channels.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_En34_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -1302,9 +2012,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_En34_Set(void *device,
     return status;
 }
 
-/**
- * enable additional two signal channels for 3dB noise improvement
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_En34_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -1319,9 +2037,19 @@ static inline int32_t adrv9001_VcoAdcMemMap_En34_Get(void *device,
     return status;
 }
 
-/**
- * enable channel i adc clock, set to 0 for power-down
- */
+/***************************************************************************//**
+ * @brief Sets the ADC clock enable state for channel I in the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A uint8_t value that indicates whether to enable (1) or disable
+ * (0) the ADC clock.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_EnAdcclkI_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -1333,9 +2061,19 @@ static inline int32_t adrv9001_VcoAdcMemMap_EnAdcclkI_Set(void *device,
     return status;
 }
 
-/**
- * enable channel i adc clock, set to 0 for power-down
- */
+/***************************************************************************//**
+ * @brief Retrieves the ADC clock enable status for channel I from the VCO ADC
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved ADC clock
+ * enable status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_EnAdcclkI_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -1350,9 +2088,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_EnAdcclkI_Get(void *device,
     return status;
 }
 
-/**
- * enable channel q adc clock, set to 0 for power-down
- */
+/***************************************************************************//**
+ * @brief Sets the ADC clock for channel Q in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A uint8_t value that indicates whether to enable or disable the
+ * ADC clock for channel Q.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_EnAdcclkQ_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -1364,9 +2111,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_EnAdcclkQ_Set(void *device,
     return status;
 }
 
-/**
- * enable channel q adc clock, set to 0 for power-down
- */
+/***************************************************************************//**
+ * @brief Retrieves the ADC clock enable status for the Q channel.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved ADC clock
+ * enable status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_EnAdcclkQ_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -1381,9 +2137,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_EnAdcclkQ_Get(void *device,
     return status;
 }
 
-/**
- * enable for adc bias block, set to 0 for power-down
- */
+/***************************************************************************//**
+ * @brief Sets the bias enable state for the VCO ADC.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A uint8_t value indicating the desired state to enable (1) or
+ * disable (0) the bias.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_EnBias_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -1395,9 +2159,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_EnBias_Set(void *device,
     return status;
 }
 
-/**
- * enable for adc bias block, set to 0 for power-down
- */
+/***************************************************************************//**
+ * @brief Retrieves the bias enable status for the VCO ADC.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved bias enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_EnBias_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -1412,9 +2184,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_EnBias_Get(void *device,
     return status;
 }
 
-/**
- * enable calibration analog blocks, set to 0 for power-down
- */
+/***************************************************************************//**
+ * @brief Sets the calibration analog blocks for the VCO ADC.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to modify.
+ * @param value A uint8_t value that indicates whether to enable (1) or disable
+ * (0) the calibration analog blocks.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_EnCalAna_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -1426,9 +2206,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_EnCalAna_Set(void *device,
     return status;
 }
 
-/**
- * enable calibration analog blocks, set to 0 for power-down
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration analog enable status from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_EnCalAna_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -1443,9 +2232,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_EnCalAna_Get(void *device,
     return status;
 }
 
-/**
- * enable calibration clock and digital blocks, set to 0 for power-down
- */
+/***************************************************************************//**
+ * @brief Sets the calibration clock enable bit in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A uint8_t value that indicates whether to enable (1) or disable
+ * (0) the calibration clock.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_EnCalClk_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -1457,9 +2254,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_EnCalClk_Set(void *device,
     return status;
 }
 
-/**
- * enable calibration clock and digital blocks, set to 0 for power-down
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration clock enable status from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure representing the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_EnCalClk_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -1474,9 +2280,19 @@ static inline int32_t adrv9001_VcoAdcMemMap_EnCalClk_Get(void *device,
     return status;
 }
 
-/**
- * enable channel i analog front end, set to 0 for power-down
- */
+/***************************************************************************//**
+ * @brief Sets the enable state for the VTI analog front end of the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A uint8_t value indicating the enable state (1 to enable, 0 to
+ * disable).
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_EnVtiI_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -1488,9 +2304,19 @@ static inline int32_t adrv9001_VcoAdcMemMap_EnVtiI_Set(void *device,
     return status;
 }
 
-/**
- * enable channel i analog front end, set to 0 for power-down
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the VCO ADC memory map for the specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type indicating which VCO ADC memory map
+ * instance to access.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_EnVtiI_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -1505,9 +2331,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_EnVtiI_Get(void *device,
     return status;
 }
 
-/**
- * enable channel q analog front end, set to 0 for power-down
- */
+/***************************************************************************//**
+ * @brief Sets the VCO ADC memory map for the VTI Q channel.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A uint8_t value to be written to the memory map.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_EnVtiQ_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -1519,9 +2353,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_EnVtiQ_Set(void *device,
     return status;
 }
 
-/**
- * enable channel q analog front end, set to 0 for power-down
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the VCO ADC memory map for the VTI Q channel.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_EnVtiQ_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -1536,9 +2379,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_EnVtiQ_Get(void *device,
     return status;
 }
 
-/**
- * clock enable for the VCO ADC digital
- */
+/***************************************************************************//**
+ * @brief Enables or disables the clock for the VCO ADC.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A uint8_t value indicating whether to enable (1) or disable (0)
+ * the clock.
+ * @return Returns an integer status code indicating the success or failure of
+ * the clock enable operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_EnableClock_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -1550,9 +2401,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_EnableClock_Set(void *device,
     return status;
 }
 
-/**
- * clock enable for the VCO ADC digital
- */
+/***************************************************************************//**
+ * @brief Retrieves the current state of the clock enable for the VCO ADC.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock enable
+ * state will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_EnableClock_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -1567,9 +2426,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_EnableClock_Get(void *device,
     return status;
 }
 
-/**
- * set this to 1 if we want to force a dac level.
- */
+/***************************************************************************//**
+ * @brief Sets the DAC level for the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the DAC level to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_ForceDacLevel_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -1581,9 +2448,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_ForceDacLevel_Set(void *device,
     return status;
 }
 
-/**
- * set this to 1 if we want to force a dac level.
- */
+/***************************************************************************//**
+ * @brief Retrieves the forced DAC level from the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved DAC level
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_ForceDacLevel_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -1598,9 +2474,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_ForceDacLevel_Get(void *device,
     return status;
 }
 
-/**
- * set this to 1 in order to force dac level.
- */
+/***************************************************************************//**
+ * @brief Sets the DAC level enable for the VCO ADC.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A uint8_t value that indicates whether to enable (1) or disable
+ * (0) the DAC level.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_ForceDacLevelEn_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -1612,9 +2497,19 @@ static inline int32_t adrv9001_VcoAdcMemMap_ForceDacLevelEn_Set(void *device,
     return status;
 }
 
-/**
- * set this to 1 in order to force dac level.
- */
+/***************************************************************************//**
+ * @brief Retrieves the forced DAC level enable status from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_ForceDacLevelEn_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -1629,9 +2524,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_ForceDacLevelEn_Get(void *device,
     return status;
 }
 
-/**
- * use over-range correction counter method 2
- */
+/***************************************************************************//**
+ * @brief Sets the over-range correction method 1 for the VCO ADC.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A uint8_t value that indicates whether to enable or disable the
+ * over-range correction.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_ForceOrc1_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -1643,9 +2546,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_ForceOrc1_Set(void *device,
     return status;
 }
 
-/**
- * use over-range correction counter method 2
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the over-range correction setting for the VCO
+ * ADC.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_ForceOrc1_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -1660,9 +2572,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_ForceOrc1_Get(void *device,
     return status;
 }
 
-/**
- * use over-range correction counter method 2
- */
+/***************************************************************************//**
+ * @brief Sets the over-range correction method 2 for the VCO ADC.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A uint8_t value that indicates whether to enable or disable the
+ * over-range correction method.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_ForceOrc2_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -1674,9 +2594,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_ForceOrc2_Set(void *device,
     return status;
 }
 
-/**
- * use over-range correction counter method 2
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the over-range correction method 2 from the VCO
+ * ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_ForceOrc2_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -1691,9 +2620,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_ForceOrc2_Get(void *device,
     return status;
 }
 
-/**
- * value of gain_bcenter that multiplies accumulated value for bcenter calculation. Can range from 1/64 to (2^7-1)/2^4 (how these bits are interpreted by hardware depends on gain_range bits in bcenter_cal register.
- */
+/***************************************************************************//**
+ * @brief Sets the gain value for the bcenter calculation in the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to modify.
+ * @param value An 8-bit unsigned integer representing the gain value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_GainBcenter_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -1705,9 +2642,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_GainBcenter_Set(void *device,
     return status;
 }
 
-/**
- * value of gain_bcenter that multiplies accumulated value for bcenter calculation. Can range from 1/64 to (2^7-1)/2^4 (how these bits are interpreted by hardware depends on gain_range bits in bcenter_cal register.
- */
+/***************************************************************************//**
+ * @brief Retrieves the gain value for the `GainBcenter` setting from the VCO
+ * ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved gain value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_GainBcenter_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -1722,9 +2668,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_GainBcenter_Get(void *device,
     return status;
 }
 
-/**
- * instead of computing kgain value, enter it via regmap. the format is 4.17
- */
+/***************************************************************************//**
+ * @brief Sets the gain value for the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A 32-bit unsigned integer representing the gain value to be set.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero).
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_GainValue_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint32_t value)
@@ -1742,9 +2696,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_GainValue_Set(void *device,
     return status;
 }
 
-/**
- * instead of computing kgain value, enter it via regmap. the format is 4.17
- */
+/***************************************************************************//**
+ * @brief Retrieves the gain value from the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint32_t` variable where the retrieved gain
+ * value will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_GainValue_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint32_t *value)
@@ -1767,9 +2729,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_GainValue_Get(void *device,
     return status;
 }
 
-/**
- * set this to 1 in order to use kgain value from the regmap.
- */
+/***************************************************************************//**
+ * @brief Sets the gain value register map enable for the VCO ADC.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A uint8_t value that indicates whether to enable (1) or disable
+ * (0) the gain value register map.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_GainValueRegmapEn_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -1781,9 +2751,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_GainValueRegmapEn_Set(void *device,
     return status;
 }
 
-/**
- * set this to 1 in order to use kgain value from the regmap.
- */
+/***************************************************************************//**
+ * @brief Retrieves the gain value register map enable status for the VCO ADC.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved gain value
+ * register map enable status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_GainValueRegmapEn_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -1798,9 +2776,19 @@ static inline int32_t adrv9001_VcoAdcMemMap_GainValueRegmapEn_Get(void *device,
     return status;
 }
 
-/**
- * samples to accumulate for kgain cal -- entry 0x0 is 16*8 samples, 0x1 is 32*8, 0x2 is 64*8, 0x3 is 128*8, 0x4 is 256*8, 0x5 is 512*8, 0x6 is 1024*8, 0x7 is 2048*8.
- */
+/***************************************************************************//**
+ * @brief Sets the accumulation count value for kgain calibration in the VCO ADC
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the number of samples to
+ * accumulate for kgain calibration.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_KgainAccCntVal_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -1812,9 +2800,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_KgainAccCntVal_Set(void *device,
     return status;
 }
 
-/**
- * samples to accumulate for kgain cal -- entry 0x0 is 16*8 samples, 0x1 is 32*8, 0x2 is 64*8, 0x3 is 128*8, 0x4 is 256*8, 0x5 is 512*8, 0x6 is 1024*8, 0x7 is 2048*8.
- */
+/***************************************************************************//**
+ * @brief Retrieves the accumulated count value for kgain calibration from the
+ * VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure representing the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved count
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_KgainAccCntVal_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -1829,9 +2826,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_KgainAccCntVal_Get(void *device,
     return status;
 }
 
-/**
- * enable kgain cal
- */
+/***************************************************************************//**
+ * @brief Sets the K-gain calibration enable bit in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A uint8_t value that indicates whether to enable (1) or disable
+ * (0) the K-gain calibration.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_KgainCalEn_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -1843,9 +2849,19 @@ static inline int32_t adrv9001_VcoAdcMemMap_KgainCalEn_Set(void *device,
     return status;
 }
 
-/**
- * enable kgain cal
- */
+/***************************************************************************//**
+ * @brief Retrieves the K-gain calibration enable status from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved K-gain
+ * calibration enable status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_KgainCalEn_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -1860,9 +2876,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_KgainCalEn_Get(void *device,
     return status;
 }
 
-/**
- * this is kgain value from Gerry's matlab code that is used as a constant for ramp calculation. it is (1/16)*(1/vmax)*(1/Kvti)*2^13. Enter this floating point value as 21 bit value with 9 integer bits and 12 subLSB bits.
- */
+/***************************************************************************//**
+ * @brief Sets the kgain value for the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure representing the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A 32-bit unsigned integer representing the kgain value to be
+ * set.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero).
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_KgainVal_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint32_t value)
@@ -1880,9 +2904,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_KgainVal_Set(void *device,
     return status;
 }
 
-/**
- * this is kgain value from Gerry's matlab code that is used as a constant for ramp calculation. it is (1/16)*(1/vmax)*(1/Kvti)*2^13. Enter this floating point value as 21 bit value with 9 integer bits and 12 subLSB bits.
- */
+/***************************************************************************//**
+ * @brief Retrieves the `kgain` value from the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to access.
+ * @param value A pointer to a `uint32_t` where the retrieved `kgain` value will
+ * be stored.
+ * @return Returns an integer status code indicating success or failure of the
+ * operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_KgainVal_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint32_t *value)
@@ -1905,9 +2937,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_KgainVal_Get(void *device,
     return status;
 }
 
-/**
- * lut coefficients 128x16 bits
- */
+/***************************************************************************//**
+ * @brief Sets LUT data for the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to access.
+ * @param regInstance An index specifying which register instance to write to
+ * within the LUT.
+ * @param value The 8-bit value to be written to the specified LUT register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_LutData_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint32_t regInstance,
@@ -1920,9 +2961,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_LutData_Set(void *device,
     return status;
 }
 
-/**
- * lut coefficients 128x16 bits
- */
+/***************************************************************************//**
+ * @brief Retrieves LUT data from the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating the specific VCO ADC instance.
+ * @param regInstance An unsigned integer representing the specific register
+ * instance to read from.
+ * @param value A pointer to a uint8_t where the retrieved LUT data will be
+ * stored.
+ * @return Returns an integer status code indicating success or failure of the
+ * read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_LutData_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint32_t regInstance,
@@ -1938,9 +2988,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_LutData_Get(void *device,
     return status;
 }
 
-/**
- * enable LUT clock gate, active high
- */
+/***************************************************************************//**
+ * @brief Sets the clock gate enable for the LUT in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A uint8_t value that indicates whether to enable (1) or disable
+ * (0) the clock gate.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_LutEnClkgate_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -1952,9 +3010,19 @@ static inline int32_t adrv9001_VcoAdcMemMap_LutEnClkgate_Set(void *device,
     return status;
 }
 
-/**
- * enable LUT clock gate, active high
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock gate enable status for the LUT in the VCO ADC
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved clock gate
+ * status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_LutEnClkgate_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -1969,9 +3037,16 @@ static inline int32_t adrv9001_VcoAdcMemMap_LutEnClkgate_Get(void *device,
     return status;
 }
 
-/**
- * LUT load edge
- */
+/***************************************************************************//**
+ * @brief Sets the LUT load edge for the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A uint8_t value that specifies the load edge setting.
+ * @return Returns the status of the write operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_LutLoadedge_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -1983,9 +3058,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_LutLoadedge_Set(void *device,
     return status;
 }
 
-/**
- * LUT load edge
- */
+/***************************************************************************//**
+ * @brief Retrieves the LUT load edge value from the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved LUT load
+ * edge value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_LutLoadedge_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -2001,9 +3085,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_LutLoadedge_Get(void *device,
 }
 
 
-/**
- * this bit will flag high if we are trying to write to the lut regmap when matrix_data_en is high
- */
+/***************************************************************************//**
+ * @brief Retrieves the status of LUT register access validity for the VCO ADC.
+ *
+ * @param device A pointer to the device structure representing the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the result will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_LutRegmapAccessInvalid_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -2018,9 +3110,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_LutRegmapAccessInvalid_Get(void *dev
     return status;
 }
 
-/**
- * reset lut, active high
- */
+/***************************************************************************//**
+ * @brief Sets the reset state of the LUT in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A uint8_t value indicating the reset state to be set (active
+ * high).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_LutRst_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -2032,9 +3132,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_LutRst_Set(void *device,
     return status;
 }
 
-/**
- * reset lut, active high
- */
+/***************************************************************************//**
+ * @brief Retrieves the reset state of the LUT in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved LUT reset
+ * state will be stored.
+ * @return Returns an integer status code indicating success or failure of the
+ * read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_LutRst_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -2049,9 +3158,19 @@ static inline int32_t adrv9001_VcoAdcMemMap_LutRst_Get(void *device,
     return status;
 }
 
-/**
- * enable writes to lut regmap from the dig accum block
- */
+/***************************************************************************//**
+ * @brief Enables or disables writes to the LUT register map from the digital
+ * accumulator block.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A uint8_t value that indicates whether to enable (1) or disable
+ * (0) the writes to the LUT register map.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_MatrixDataEn_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -2063,9 +3182,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_MatrixDataEn_Set(void *device,
     return status;
 }
 
-/**
- * enable writes to lut regmap from the dig accum block
- */
+/***************************************************************************//**
+ * @brief Retrieves the matrix data enable status from the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure representing the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_MatrixDataEn_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -2080,9 +3207,16 @@ static inline int32_t adrv9001_VcoAdcMemMap_MatrixDataEn_Get(void *device,
     return status;
 }
 
-/**
- * output enables for clocks
- */
+/***************************************************************************//**
+ * @brief Sets the output control for the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A uint8_t value that specifies the output control settings.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_OutCtrl_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -2094,9 +3228,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_OutCtrl_Set(void *device,
     return status;
 }
 
-/**
- * output enables for clocks
- */
+/***************************************************************************//**
+ * @brief Retrieves the output control settings for the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved output
+ * control value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_OutCtrl_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -2111,9 +3253,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_OutCtrl_Get(void *device,
     return status;
 }
 
-/**
- * disable demux output, active high
- */
+/***************************************************************************//**
+ * @brief Sets the output disable for the demultiplexer in the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to modify.
+ * @param value A uint8_t value that indicates whether to disable the demux
+ * output (1) or not (0).
+ * @return Returns the status of the write operation, indicating success (0) or
+ * an error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_OutDisDemux_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -2125,9 +3276,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_OutDisDemux_Set(void *device,
     return status;
 }
 
-/**
- * disable demux output, active high
- */
+/***************************************************************************//**
+ * @brief Retrieves the output disable demultiplexer status from the VCO ADC
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_OutDisDemux_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -2142,9 +3302,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_OutDisDemux_Get(void *device,
     return status;
 }
 
-/**
- * disable over-range, active high
- */
+/***************************************************************************//**
+ * @brief Sets the over-range disable bit in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to modify.
+ * @param value A uint8_t value that indicates whether to disable (1) or enable
+ * (0) the over-range feature.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_OvrDis_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -2156,9 +3324,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_OvrDis_Set(void *device,
     return status;
 }
 
-/**
- * disable over-range, active high
- */
+/***************************************************************************//**
+ * @brief Retrieves the over-range disable status from the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved over-range
+ * disable status will be stored.
+ * @return Returns the status of the read operation, where a non-zero value
+ * indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_OvrDis_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -2173,9 +3350,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_OvrDis_Get(void *device,
     return status;
 }
 
-/**
- * reset over-range, active high
- */
+/***************************************************************************//**
+ * @brief Sets the over-range reset state for the VCO ADC.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A uint8_t value indicating the desired over-range reset state (0
+ * or 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_OvrRst_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -2187,9 +3372,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_OvrRst_Set(void *device,
     return status;
 }
 
-/**
- * reset over-range, active high
- */
+/***************************************************************************//**
+ * @brief Retrieves the over-range reset status from the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the read value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_OvrRst_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -2204,9 +3398,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_OvrRst_Get(void *device,
     return status;
 }
 
-/**
- * number of wait cycles for powerup (these are clk cycles with respect to fs/8 clock). The number of clock cycles is 1 <<< this reg entry -- so it can be 1,2,4,8,16 up to 32768
- */
+/***************************************************************************//**
+ * @brief Sets the number of wait cycles for power-up in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to configure.
+ * @param value An 8-bit unsigned integer representing the number of wait
+ * cycles, which can be a power of two.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_PwrupWaitClk_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -2218,9 +3420,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_PwrupWaitClk_Set(void *device,
     return status;
 }
 
-/**
- * number of wait cycles for powerup (these are clk cycles with respect to fs/8 clock). The number of clock cycles is 1 <<< this reg entry -- so it can be 1,2,4,8,16 up to 32768
- */
+/***************************************************************************//**
+ * @brief Retrieves the power-up wait clock value from the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved wait clock
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_PwrupWaitClk_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -2235,9 +3446,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_PwrupWaitClk_Get(void *device,
     return status;
 }
 
-/**
- * samples to accumulate for ramp cal. 0x0 is 16*8, 0x1 is 64*8, 0x2 is 128*8, 0x3 is 256*8, 0x4 is 512*8, 0x5 is 1024*8, 0x6 is 2048*8, 0x7 is 4096*8
- */
+/***************************************************************************//**
+ * @brief Sets the ramp accumulation count value for the VCO ADC.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the ramp accumulation
+ * count value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_RampAccCntVal_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -2249,9 +3468,19 @@ static inline int32_t adrv9001_VcoAdcMemMap_RampAccCntVal_Set(void *device,
     return status;
 }
 
-/**
- * samples to accumulate for ramp cal. 0x0 is 16*8, 0x1 is 64*8, 0x2 is 128*8, 0x3 is 256*8, 0x4 is 512*8, 0x5 is 1024*8, 0x6 is 2048*8, 0x7 is 4096*8
- */
+/***************************************************************************//**
+ * @brief Retrieves the ramp accumulation count value from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved ramp
+ * accumulation count value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_RampAccCntVal_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -2266,9 +3495,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_RampAccCntVal_Get(void *device,
     return status;
 }
 
-/**
- * enable ramp cal
- */
+/***************************************************************************//**
+ * @brief Sets the ramp calibration enable bit in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A uint8_t value that indicates whether to enable (1) or disable
+ * (0) the ramp calibration.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_RampCalEn_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -2280,9 +3518,19 @@ static inline int32_t adrv9001_VcoAdcMemMap_RampCalEn_Set(void *device,
     return status;
 }
 
-/**
- * enable ramp cal
- */
+/***************************************************************************//**
+ * @brief The `adrv9001_VcoAdcMemMap_RampCalEn_Get` function retrieves the ramp
+ * calibration enable status from a specified device instance.
+ *
+ * @param device A pointer to the device context from which the ramp calibration
+ * enable status is to be read.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved ramp
+ * calibration enable status will be stored.
+ * @return The function returns an integer status code indicating the success or
+ * failure of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_RampCalEn_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -2297,9 +3545,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_RampCalEn_Get(void *device,
     return status;
 }
 
-/**
- * calibration DAC bit shift value (00=shift-by-4, 01=shift-b- 8, 1x=shift-by-16)
- */
+/***************************************************************************//**
+ * @brief Sets the calibration DAC bit shift value for the VCO ADC.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the shift value to be
+ * set.
+ * @return Returns an integer status code indicating success or failure of the
+ * operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_Regshift_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -2311,9 +3567,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_Regshift_Set(void *device,
     return status;
 }
 
-/**
- * calibration DAC bit shift value (00=shift-by-4, 01=shift-b- 8, 1x=shift-by-16)
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration DAC bit shift value from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved shift value
+ * will be stored.
+ * @return Returns an integer status code indicating success or failure of the
+ * read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_Regshift_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -2328,9 +3593,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_Regshift_Get(void *device,
     return status;
 }
 
-/**
- * reset cal, active high
- */
+/***************************************************************************//**
+ * @brief Sets the reset calibration state for the VCO ADC.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A uint8_t value that indicates the reset calibration state
+ * (active high).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_RstCal_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -2342,9 +3615,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_RstCal_Set(void *device,
     return status;
 }
 
-/**
- * reset cal, active high
- */
+/***************************************************************************//**
+ * @brief Retrieves the reset calibration status of the VCO ADC.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the read value will be
+ * stored.
+ * @return Returns an integer status code indicating success or failure of the
+ * read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_RstCal_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -2359,9 +3640,16 @@ static inline int32_t adrv9001_VcoAdcMemMap_RstCal_Get(void *device,
     return status;
 }
 
-/**
- * adc reset mode, set to 0
- */
+/***************************************************************************//**
+ * @brief Sets the ADC reset mode for the specified VCO ADC instance.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific VCO ADC
+ * instance.
+ * @param value A uint8_t value that sets the reset mode for the ADC.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SelRst_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -2373,9 +3661,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SelRst_Set(void *device,
     return status;
 }
 
-/**
- * adc reset mode, set to 0
- */
+/***************************************************************************//**
+ * @brief Retrieves the reset mode of the ADC from the specified memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved reset mode
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SelRst_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -2390,9 +3687,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SelRst_Get(void *device,
     return status;
 }
 
-/**
- * reset adc when LP ADC enters deep saturation
- */
+/***************************************************************************//**
+ * @brief Sets the short selection for the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A uint8_t value that indicates the short selection state to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SelShort_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -2404,9 +3709,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SelShort_Set(void *device,
     return status;
 }
 
-/**
- * reset adc when LP ADC enters deep saturation
- */
+/***************************************************************************//**
+ * @brief Retrieves the short selection status of the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SelShort_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -2421,6 +3734,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SelShort_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the spare register 017 in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map is being accessed.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the spare register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg017_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -2432,6 +3756,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg017_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of `SpareReg017` from the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to access.
+ * @param value A pointer to a `uint8_t` where the retrieved register value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg017_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -2446,6 +3781,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg017_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the spare register 025 in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer value to be written to the spare
+ * register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg025_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -2457,6 +3803,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg025_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the spare register 025 from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to access.
+ * @param value A pointer to a `uint8_t` where the retrieved register value will
+ * be stored.
+ * @return Returns an integer status code indicating success or failure of the
+ * read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg025_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -2471,6 +3829,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg025_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of `SpareReg026` in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg026_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -2482,6 +3851,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg026_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the spare register 026 from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to access.
+ * @param value A pointer to a `uint8_t` where the retrieved register value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg026_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -2496,6 +3877,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg026_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of `SpareReg027` in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg027_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -2507,6 +3899,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg027_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the spare register 027 from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to access.
+ * @param value A pointer to a `uint8_t` where the retrieved register value will
+ * be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg027_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -2521,6 +3925,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg027_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the spare register 036 in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg036_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -2532,6 +3947,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg036_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the spare register 036 from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to access.
+ * @param value A pointer to a `uint8_t` where the retrieved register value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg036_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -2546,6 +3973,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg036_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the spare register 037 in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg037_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -2557,6 +3995,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg037_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the spare register 037 from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg037_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -2571,6 +4021,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg037_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the spare register 045 in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg045_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -2582,6 +4043,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg045_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the spare register 045 from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg045_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -2596,6 +4069,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg045_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the spare register 046 in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map is being accessed.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the spare register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg046_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -2607,6 +4091,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg046_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the spare register 046 from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg046_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -2621,6 +4117,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg046_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the spare register 047 in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the spare register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg047_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -2632,6 +4139,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg047_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the spare register 047 from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg047_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -2646,6 +4165,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg047_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the spare register 050 in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg050_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -2657,6 +4187,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg050_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the spare register 050 from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg050_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -2671,6 +4213,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg050_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the spare register 051 in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map is being accessed.
+ * @param value An 8-bit unsigned integer value to be written to the spare
+ * register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg051_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -2682,6 +4235,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg051_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the spare register 051 from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to access.
+ * @param value A pointer to a `uint8_t` where the retrieved register value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg051_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -2696,6 +4261,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg051_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the spare register 052 in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map is being accessed.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the spare register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg052_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -2707,6 +4283,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg052_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the spare register 052 from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure representing the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, where a non-zero value
+ * indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg052_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -2721,6 +4309,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg052_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of `SpareReg053` in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to `SpareReg053`.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg053_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -2732,6 +4331,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg053_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the spare register 053 from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to access.
+ * @param value A pointer to a `uint8_t` where the retrieved register value will
+ * be stored.
+ * @return Returns the status of the read operation, where a value of 0
+ * indicates success.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg053_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -2746,6 +4357,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg053_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the spare register 054 in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map is being accessed.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the spare register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg054_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -2757,6 +4379,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg054_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the spare register 054 from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to access.
+ * @param value A pointer to a `uint8_t` where the retrieved register value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg054_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -2771,6 +4405,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg054_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the spare register 055 in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the spare register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg055_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -2782,6 +4427,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg055_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the spare register 055 from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to access.
+ * @param value A pointer to a `uint8_t` where the retrieved register value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg055_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -2796,6 +4453,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg055_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the spare register 056 in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map is being accessed.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the spare register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg056_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -2807,6 +4475,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg056_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the spare register 056 from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerator indicating which instance of the VCO ADC memory
+ * map to access.
+ * @param value A pointer to a `uint8_t` where the retrieved register value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg056_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -2821,6 +4501,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg056_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the spare register 057 in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure representing the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the spare register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg057_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -2832,6 +4523,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg057_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the spare register 057 from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure representing the VCO ADC.
+ * @param instance An enumerated type indicating the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` where the retrieved register value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg057_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -2846,6 +4549,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg057_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the spare register 063 in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the spare register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg063_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -2857,6 +4571,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg063_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the spare register 063 from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg063_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -2871,6 +4597,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg063_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the spare register 067 in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg067_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -2882,6 +4619,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg067_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the spare register 067 from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to access.
+ * @param value A pointer to a `uint8_t` where the retrieved register value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg067_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -2896,6 +4645,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg067_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the spare register 076 in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg076_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -2907,6 +4667,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg076_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the spare register 076 from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg076_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -2921,6 +4693,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg076_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the spare register 077 in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg077_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -2932,6 +4715,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg077_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the spare register 077 from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg077_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -2946,6 +4741,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg077_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the `SpareReg0B3` register in the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0B3_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -2957,6 +4764,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0B3_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `SpareReg0B3` register from the VCO ADC
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to access.
+ * @param value A pointer to a `uint8_t` where the retrieved register value will
+ * be stored.
+ * @return Returns an integer status code indicating success or failure of the
+ * read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0B3_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -2971,6 +4790,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0B3_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the `SpareReg0B4` register in the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map is being accessed.
+ * @param value An 8-bit unsigned integer value to be written to the
+ * `SpareReg0B4` register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0B4_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -2982,6 +4813,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0B4_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the spare register 0B4 from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0B4_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -2996,6 +4839,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0B4_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the `SpareReg0B5` register in the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0B5_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -3007,6 +4862,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0B5_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `SpareReg0B5` register from the VCO ADC
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` where the retrieved register value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0B5_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -3021,6 +4888,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0B5_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the `SpareReg0B6` register in the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0B6_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -3032,6 +4911,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0B6_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `SpareReg0B6` register from the VCO ADC
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0B6_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -3046,6 +4937,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0B6_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the `SpareReg0B7` register in the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map is being accessed.
+ * @param value The 8-bit value to be written to the `SpareReg0B7` register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0B7_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -3057,6 +4959,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0B7_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `SpareReg0B7` register from the VCO ADC
+ * memory map.
+ *
+ * @param device A pointer to the device structure representing the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to access.
+ * @param value A pointer to a `uint8_t` where the retrieved register value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0B7_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -3071,6 +4985,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0B7_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the `SpareReg0C0` register in the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating the specific instance of the
+ * VCO ADC memory map.
+ * @param value A `uint8_t` value to be written to the `SpareReg0C0` register.
+ * @return Returns an `int32_t` status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0C0_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -3082,6 +5007,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0C0_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief The `adrv9001_VcoAdcMemMap_SpareReg0C0_Get` function retrieves the
+ * value of a specific spare register from the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure representing the VCO ADC.
+ * @param instance An enumerated type indicating the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` where the retrieved register value will
+ * be stored.
+ * @return The function returns an integer status code indicating the success or
+ * failure of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0C0_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -3096,6 +5033,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0C0_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the `SpareReg0C1` register in the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer value to be written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0C1_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -3107,6 +5055,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0C1_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `SpareReg0C1` register from the VCO ADC
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0C1_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -3121,6 +5081,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0C1_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the `SpareReg0C2` register in the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating the specific instance of the
+ * VCO ADC memory map.
+ * @param value The 8-bit value to be written to the `SpareReg0C2` register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0C2_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -3132,6 +5103,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0C2_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `SpareReg0C2` register from the VCO ADC
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0C2_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -3146,6 +5129,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0C2_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the `SpareReg0C3` register in the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer value to be written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0C3_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -3157,6 +5151,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0C3_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `SpareReg0C3` register from the VCO ADC
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to access.
+ * @param value A pointer to a `uint8_t` where the retrieved register value will
+ * be stored.
+ * @return Returns an integer status code indicating success or failure of the
+ * read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0C3_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -3171,6 +5177,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0C3_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the `SpareReg0C4` register in the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map is being accessed.
+ * @param value An 8-bit unsigned integer value to be written to the
+ * `SpareReg0C4` register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0C4_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -3182,6 +5200,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0C4_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `SpareReg0C4` register from the VCO ADC
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0C4_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -3196,6 +5226,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0C4_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the `SpareReg0C5` register in the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map is being accessed.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0C5_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -3207,6 +5249,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0C5_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `SpareReg0C5` register from the VCO ADC
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to access.
+ * @param value A pointer to a `uint8_t` where the retrieved register value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0C5_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -3221,6 +5275,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0C5_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the `SpareReg0C6` register in the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer value to be written to the
+ * `SpareReg0C6` register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0C6_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -3232,6 +5298,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0C6_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `SpareReg0C6` register from the VCO ADC
+ * memory map.
+ *
+ * @param device A pointer to the device structure representing the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0C6_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -3246,6 +5324,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0C6_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the `SpareReg0C7` register in the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer value to be written to the
+ * `SpareReg0C7` register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0C7_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -3257,6 +5347,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0C7_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `SpareReg0C7` register from the VCO ADC
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0C7_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -3271,6 +5373,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg0C7_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the spare register 123 in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the spare register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg123_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -3282,6 +5395,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg123_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the spare register 123 from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg123_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -3296,6 +5421,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg123_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the spare register 124 in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer value to be written to the spare
+ * register 124.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg124_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -3307,6 +5443,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg124_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the spare register 124 from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure representing the VCO ADC.
+ * @param instance An enumerated type indicating the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` where the retrieved register value will
+ * be stored.
+ * @return Returns an integer status code indicating success or failure of the
+ * read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg124_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -3321,6 +5469,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg124_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the spare register 125 in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map is being accessed.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the spare register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg125_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -3332,6 +5491,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg125_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the spare register 125 from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to access.
+ * @param value A pointer to a `uint8_t` where the retrieved register value will
+ * be stored.
+ * @return Returns an integer status code indicating success or failure of the
+ * read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg125_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -3346,6 +5517,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg125_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of `SpareReg126` in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to `SpareReg126`.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg126_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -3357,6 +5539,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg126_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of `SpareReg126` from the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerator of type `adrv9001_BfVcoAdcMemMap_e` that
+ * specifies the instance of the VCO ADC.
+ * @param value A pointer to a `uint8_t` where the retrieved register value will
+ * be stored.
+ * @return Returns an `int32_t` status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg126_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -3371,6 +5564,16 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg126_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of `SpareReg127` in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer value to be written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg127_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -3382,6 +5585,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg127_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the spare register 127 from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg127_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -3396,6 +5611,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg127_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the spare register 143 in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg143_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -3407,6 +5633,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg143_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the spare register 143 from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure representing the VCO ADC.
+ * @param instance An enumerated type indicating the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` where the retrieved register value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg143_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -3421,6 +5659,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg143_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the spare register 144 in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg144_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -3432,6 +5681,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg144_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the spare register 144 from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to access.
+ * @param value A pointer to a `uint8_t` where the retrieved register value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg144_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -3446,6 +5707,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg144_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the spare register 145 in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map is being accessed.
+ * @param value An 8-bit unsigned integer value to be written to the spare
+ * register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg145_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -3457,6 +5729,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg145_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the spare register 145 from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg145_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -3471,6 +5755,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg145_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of `SpareReg146` in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to `SpareReg146`.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg146_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -3482,6 +5777,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg146_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the spare register 146 from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to access.
+ * @param value A pointer to a `uint8_t` where the retrieved register value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg146_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -3496,6 +5803,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg146_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the spare register 147 in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the spare register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg147_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -3507,6 +5825,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg147_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the spare register 147 from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg147_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -3521,6 +5851,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg147_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of `SpareReg157` in the VCO ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg157_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -3532,6 +5873,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg157_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the spare register 157 from the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpareReg157_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -3546,9 +5899,16 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpareReg157_Get(void *device,
     return status;
 }
 
-/**
- * load lut data from lut regmap into the LUT
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the VCO ADC memory map via SPI.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value An 8-bit value to be written to the specified field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpiLoad_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -3560,9 +5920,19 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpiLoad_Set(void *device,
     return status;
 }
 
-/**
- * load lut data from lut regmap into the LUT
- */
+/***************************************************************************//**
+ * @brief Retrieves the value from a specific SPI register related to the VCO
+ * ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type indicating which instance of the VCO ADC
+ * memory map to access.
+ * @param value A pointer to a `uint8_t` where the retrieved register value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_SpiLoad_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -3578,9 +5948,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_SpiLoad_Get(void *device,
 }
 
 
-/**
- * state of vco_fsm
- */
+/***************************************************************************//**
+ * @brief Retrieves the VCO ADC state from the memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved state
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_VState_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -3595,9 +5974,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_VState_Get(void *device,
     return status;
 }
 
-/**
- * disable vti shift, active high
- */
+/***************************************************************************//**
+ * @brief Sets the VCO ADC VTI disable shift value.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A uint8_t value that indicates whether to disable the VTI shift
+ * (1) or not (0).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_VtiDisShift_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -3609,9 +5997,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_VtiDisShift_Set(void *device,
     return status;
 }
 
-/**
- * disable vti shift, active high
- */
+/***************************************************************************//**
+ * @brief Retrieves the VCO ADC memory map VTI disable shift value.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_VtiDisShift_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -3626,9 +6023,17 @@ static inline int32_t adrv9001_VcoAdcMemMap_VtiDisShift_Get(void *device,
     return status;
 }
 
-/**
- * force vti, active high
- */
+/***************************************************************************//**
+ * @brief Sets the VCO ADC VTI force value in the memory map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A 8-bit unsigned integer representing the value to be set for
+ * the VTI force.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_VtiForce_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -3640,9 +6045,19 @@ static inline int32_t adrv9001_VcoAdcMemMap_VtiForce_Set(void *device,
     return status;
 }
 
-/**
- * force vti, active high
- */
+/***************************************************************************//**
+ * @brief Retrieves the forced VCO ADC value from the specified memory map
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific VCO ADC memory
+ * map instance.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_VtiForce_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)
@@ -3657,9 +6072,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_VtiForce_Get(void *device,
     return status;
 }
 
-/**
- * short vti, active high
- */
+/***************************************************************************//**
+ * @brief Sets a short VTI (Voltage-to-Current) adjustment in the VCO ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A uint8_t value that indicates the short VTI setting to be
+ * applied.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_VtiShort_Set(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t value)
@@ -3671,9 +6095,18 @@ static inline int32_t adrv9001_VcoAdcMemMap_VtiShort_Set(void *device,
     return status;
 }
 
-/**
- * short vti, active high
- */
+/***************************************************************************//**
+ * @brief Retrieves a short value from the VCO ADC memory map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the VCO ADC.
+ * @param instance An enumerated value representing the specific instance of the
+ * VCO ADC memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_VcoAdcMemMap_VtiShort_Get(void *device,
     adrv9001_BfVcoAdcMemMap_e instance,
     uint8_t *value)

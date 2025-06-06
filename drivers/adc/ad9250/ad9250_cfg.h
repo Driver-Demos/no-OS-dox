@@ -40,7 +40,16 @@
 
 /*****************************************************************************/
 /************************ Variables Declarations *****************************/
-/*****************************************************************************/
+/***************************************************************************//**
+ * @brief The `ad9250_pdata_lpc` is a global variable of type `struct
+ * ad9250_platform_data` that holds configuration settings for the AD9250
+ * device. It includes parameters such as external power-down mode, clock
+ * settings, ADC reference voltage, and a name identifier. This structure
+ * is used to initialize and configure the AD9250 device for operation.
+ *
+ * @details This variable is used to store and provide configuration data for
+ * initializing the AD9250 device.
+ ******************************************************************************/
 struct ad9250_platform_data ad9250_pdata_lpc = {
 	0,	// extrnPDWNmode
 	1,	// enClkDCS
@@ -52,6 +61,20 @@ struct ad9250_platform_data ad9250_pdata_lpc = {
 	"ad9250-lpc" //name
 };
 
+/***************************************************************************//**
+ * @brief The `ad9250_jesd204b_interface` is a global variable of type `struct
+ * ad9250_jesd204b_cfg` that holds configuration settings for the
+ * JESD204B interface of the AD9250 device. This structure includes
+ * various fields such as `jtxInStandBy`, `cmlLevel`, `quickCfgOption`,
+ * and others, which are used to configure the JESD204B interface
+ * parameters like subclass, scrambling, and lane assignments. The values
+ * assigned to these fields determine the operational characteristics of
+ * the JESD204B interface.
+ *
+ * @details This variable is used to configure the JESD204B interface settings
+ * for the AD9250 device, affecting its data transmission and reception
+ * behavior.
+ ******************************************************************************/
 struct ad9250_jesd204b_cfg ad9250_jesd204b_interface = {
 	0,	// jtxInStandBy
 	3,	// cmlLevel
@@ -78,6 +101,18 @@ struct ad9250_jesd204b_cfg ad9250_jesd204b_interface = {
 	1,	// lane1Assign
 };
 
+/***************************************************************************//**
+ * @brief The `ad9250_fast_detect` is a global variable of type `struct
+ * ad9250_fast_detect_cfg` that is used to configure the fast detect
+ * feature of the AD9250 device. It contains several fields, such as
+ * `enFd`, `pinFunction`, `forcePins`, `pinForceValue`, `fdUpperTresh`,
+ * `fdLowerTresh`, and `dfDwellTime`, all initialized to zero, which
+ * likely represent various configuration parameters for the fast detect
+ * functionality.
+ *
+ * @details This variable is used to store configuration settings for the fast
+ * detect feature of the AD9250 device.
+ ******************************************************************************/
 struct ad9250_fast_detect_cfg ad9250_fast_detect = {
 	0,	// enFd
 	0,	// pinFunction

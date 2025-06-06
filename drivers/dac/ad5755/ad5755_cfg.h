@@ -34,6 +34,18 @@
 #ifndef __AD5755_CFG_H__
 #define __AD5755_CFG_H__
 
+/***************************************************************************//**
+ * @brief The `AD5755_st` is a global variable of type `struct ad5755_setup`
+ * that holds configuration settings for the AD5755 device. It includes
+ * fields for device address bits, packet error checking, power-on
+ * conditions, status read, current limit settings, and DC-DC converter
+ * settings. The structure is initialized with specific values to
+ * configure the AD5755 device for operation.
+ *
+ * @details This variable is used to store and manage the configuration settings
+ * for the AD5755 device, ensuring it operates with the desired
+ * parameters.
+ ******************************************************************************/
 struct ad5755_setup AD5755_st = {
 	0,                          //DUT_AD0
 	0,                          //DUT_AD1

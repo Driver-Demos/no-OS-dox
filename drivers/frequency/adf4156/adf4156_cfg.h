@@ -42,7 +42,18 @@
 
 /******************************************************************************/
 /************************ Constants Definitions *******************************/
-/******************************************************************************/
+/***************************************************************************//**
+ * @brief The `adf4156_pdata_lpc` is a static structure of type
+ * `adf4156_platform_data` that holds configuration parameters for the
+ * ADF4156 frequency synthesizer. It includes settings such as the input
+ * clock frequency (`clkin`), channel spacing, reference doubler enable,
+ * reference divide-by-2 enable, and various user settings for the
+ * synthesizer's registers. These parameters are crucial for the proper
+ * initialization and operation of the ADF4156 device.
+ *
+ * @details This variable is used to configure the ADF4156 frequency synthesizer
+ * with specific operational parameters.
+ ******************************************************************************/
 static struct adf4156_platform_data adf4156_pdata_lpc = {
 	10000000,                   //clkin in Hz
 	20000,                      //channel_spacing in Hz

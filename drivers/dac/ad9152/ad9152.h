@@ -1331,6 +1331,26 @@
 /*************************** Types Declarations *******************************/
 /******************************************************************************/
 
+/***************************************************************************//**
+ * @brief The `ad9152_init_param` structure is used to initialize the AD9152
+ * device, a high-speed digital-to-analog converter. It contains
+ * parameters for configuring the SPI interface, device-specific settings
+ * such as sample data, interpolation factor, PRBS type, and the lane
+ * rate for data transmission. This structure is essential for setting up
+ * the device to operate according to the desired specifications and
+ * communication protocols.
+ *
+ * @param spi_init This member is a structure that holds the initialization
+ * parameters for the SPI interface.
+ * @param stpl_samples This is a 2x4 array of 32-bit unsigned integers used for
+ * storing sample data related to the device.
+ * @param interpolation This 32-bit unsigned integer specifies the interpolation
+ * factor for the device.
+ * @param prbs_type This 32-bit unsigned integer defines the type of PRBS
+ * (Pseudo-Random Binary Sequence) used.
+ * @param lane_rate_kbps This 32-bit unsigned integer specifies the lane rate in
+ * kilobits per second.
+ ******************************************************************************/
 struct ad9152_init_param {
 	/* SPI */
 	struct no_os_spi_init_param	spi_init;
@@ -1341,6 +1361,17 @@ struct ad9152_init_param {
 	uint32_t lane_rate_kbps;
 };
 
+/***************************************************************************//**
+ * @brief The `ad9152_dev` structure is a simple data structure used to
+ * represent an AD9152 device in the context of its SPI communication. It
+ * contains a single member, `spi_desc`, which is a pointer to a SPI
+ * descriptor. This structure is primarily used to facilitate SPI
+ * operations with the AD9152 device, allowing for initialization,
+ * reading, and writing of registers through SPI communication.
+ *
+ * @param spi_desc A pointer to a no_os_spi_desc structure, representing the SPI
+ * descriptor for the device.
+ ******************************************************************************/
 struct ad9152_dev {
 	/* SPI */
 	struct no_os_spi_desc *spi_desc;
@@ -1350,19 +1381,152 @@ struct ad9152_dev {
 /************************ Functions Declarations ******************************/
 /******************************************************************************/
 
+/***************************************************************************//**
+ * @brief This function is used to read a value from a specified register of the
+ * AD9152 device using SPI communication. It requires a valid device
+ * structure that has been properly initialized with SPI settings. The
+ * function reads the register value and stores it in the provided memory
+ * location. It is essential to ensure that the device is correctly set
+ * up and that the register address is within the valid range for the
+ * AD9152. The function returns an error code if the SPI communication
+ * fails.
+ *
+ * @param dev A pointer to an ad9152_dev structure representing the device. This
+ * must be initialized and must not be null. The caller retains
+ * ownership.
+ * @param reg_addr A 16-bit unsigned integer specifying the register address to
+ * read from. It should be within the valid range of the AD9152
+ * register map.
+ * @param reg_data A pointer to an 8-bit unsigned integer where the read
+ * register value will be stored. This must not be null, and the
+ * caller is responsible for providing a valid memory location.
+ * @return Returns an int32_t error code indicating the success or failure of
+ * the SPI read operation. A non-zero value indicates an error.
+ ******************************************************************************/
 int32_t ad9152_spi_read(struct ad9152_dev *dev,
 			uint16_t reg_addr,
 			uint8_t *reg_data);
+/***************************************************************************//**
+ * @brief This function is used to write a single byte of data to a specific
+ * register of the AD9152 device using the SPI interface. It is typically
+ * called when there is a need to configure or modify the settings of the
+ * AD9152 device. The function requires a valid device structure that has
+ * been properly initialized with an SPI descriptor. The register address
+ * and data to be written must be specified. The function returns an
+ * integer status code indicating the success or failure of the
+ * operation.
+ *
+ * @param dev A pointer to an ad9152_dev structure representing the device. This
+ * must be initialized and must not be null. The caller retains
+ * ownership.
+ * @param reg_addr A 16-bit unsigned integer specifying the address of the
+ * register to write to. Valid register addresses are determined
+ * by the AD9152 device specifications.
+ * @param reg_data An 8-bit unsigned integer representing the data to be written
+ * to the specified register.
+ * @return Returns an int32_t status code, where 0 indicates success and a
+ * negative value indicates an error.
+ ******************************************************************************/
 int32_t ad9152_spi_write(struct ad9152_dev *dev,
 			 uint16_t reg_addr,
 			 uint8_t reg_data);
+/***************************************************************************//**
+ * @brief This function sets up the AD9152 device by initializing the necessary
+ * hardware interfaces and configuring the device registers according to
+ * the provided initialization parameters. It must be called before any
+ * other operations on the AD9152 device. The function allocates memory
+ * for the device structure and performs a series of register writes to
+ * configure the device. It checks for a valid chip ID and ensures the
+ * PLL is locked before completing the setup. If any step fails, the
+ * function returns an error code and the device is not initialized.
+ *
+ * @param device A pointer to a pointer of type `struct ad9152_dev`. This will
+ * be allocated and initialized by the function. The caller must
+ * ensure this pointer is valid and will receive ownership of the
+ * allocated memory.
+ * @param init_param A structure of type `struct ad9152_init_param` containing
+ * initialization parameters for the device. This includes SPI
+ * initialization parameters and device-specific settings. The
+ * caller must ensure this structure is properly populated
+ * before calling the function.
+ * @return Returns 0 on success, or a negative error code if initialization
+ * fails. On success, the `device` pointer is updated to point to the
+ * initialized device structure.
+ ******************************************************************************/
 int32_t ad9152_setup(struct ad9152_dev **device,
 		     struct ad9152_init_param init_param);
+/***************************************************************************//**
+ * @brief Use this function to perform a Pseudo-Random Binary Sequence (PRBS)
+ * test on the AD9152 device's datapath to verify data integrity. This
+ * function should be called when the device is properly initialized and
+ * configured. It checks for synchronization and errors in the I and Q
+ * channels. If the interpolation parameter is set to 1, the function
+ * returns immediately without performing the test. The function outputs
+ * error messages to the console if synchronization or channel errors are
+ * detected.
+ *
+ * @param dev A pointer to an initialized ad9152_dev structure representing the
+ * device. Must not be null.
+ * @param init_param A structure containing initialization parameters for the
+ * AD9152, including interpolation and PRBS type. The
+ * interpolation field must not be 1 for the test to proceed.
+ * @return Returns 0 on success, or -1 if synchronization or channel errors are
+ * detected during the test.
+ ******************************************************************************/
 int32_t ad9152_datapath_prbs_test(struct ad9152_dev *dev,
 				  struct ad9152_init_param init_param);
+/***************************************************************************//**
+ * @brief Use this function to conduct a short pattern test on the AD9152 device
+ * to verify its data integrity. This function should be called when you
+ * need to ensure that the device is correctly processing data patterns.
+ * It requires a valid device structure and initialization parameters.
+ * The function iterates over two DACs and four samples, writing and
+ * reading data to verify the pattern. It reports any mismatches found
+ * during the test. Ensure the device is properly initialized before
+ * calling this function.
+ *
+ * @param dev A pointer to an ad9152_dev structure representing the device. Must
+ * not be null. The caller retains ownership.
+ * @param init_param An ad9152_init_param structure containing initialization
+ * parameters, including the short pattern samples. The
+ * structure must be properly initialized before calling the
+ * function.
+ * @return Returns 0 on success. Prints a message if a pattern mismatch is
+ * detected.
+ ******************************************************************************/
 int32_t ad9152_short_pattern_test(struct ad9152_dev *dev,
 				  struct ad9152_init_param init_param);
+/***************************************************************************//**
+ * @brief Use this function to verify the synchronization status of the AD9152
+ * device's JESD lanes. It checks multiple synchronization flags and
+ * reports any discrepancies. This function should be called after the
+ * device has been initialized and configured to ensure that the JESD
+ * lanes are properly synchronized. It is important for maintaining data
+ * integrity in high-speed data transmission applications.
+ *
+ * @param dev A pointer to an initialized ad9152_dev structure representing the
+ * device. Must not be null. The function will read from this device
+ * to check its status.
+ * @return Returns 0 if all JESD lanes are synchronized correctly, or -1 if any
+ * synchronization issue is detected.
+ ******************************************************************************/
 int32_t ad9152_status(struct ad9152_dev *dev);
+/***************************************************************************//**
+ * @brief Use this function to properly clean up and release resources
+ * associated with an AD9152 device instance when it is no longer needed.
+ * This function should be called to ensure that any allocated resources
+ * are freed and that the device is properly shut down. It is important
+ * to call this function to prevent resource leaks in your application.
+ *
+ * @param dev A pointer to the ad9152_dev structure representing the device
+ * instance to be removed. This pointer must not be null, and the
+ * caller is responsible for ensuring that the device has been
+ * properly initialized before calling this function. If the pointer
+ * is invalid, the behavior is undefined.
+ * @return Returns an int32_t value indicating the success or failure of the
+ * operation. A return value of 0 indicates success, while a negative
+ * value indicates an error occurred during the removal process.
+ ******************************************************************************/
 int32_t ad9152_remove(struct ad9152_dev *dev);
 
 #endif

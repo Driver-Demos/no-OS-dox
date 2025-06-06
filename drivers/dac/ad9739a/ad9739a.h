@@ -210,15 +210,36 @@
 /************************ Types Definitions ***********************************/
 /******************************************************************************/
 
+/***************************************************************************//**
+ * @brief The `ad9739a_dev` structure is a simple data structure used to
+ * encapsulate the SPI descriptor necessary for communication with the
+ * AD9739A device. It serves as a container for the SPI interface,
+ * allowing functions to interact with the device through SPI
+ * communication. This structure is essential for initializing and
+ * managing the SPI connection to the AD9739A, which is a high-speed
+ * digital-to-analog converter (DAC).
+ *
+ * @param spi_desc A pointer to a no_os_spi_desc structure, representing the SPI
+ * descriptor for communication.
+ ******************************************************************************/
 struct ad9739a_dev {
 	/* SPI */
 	struct no_os_spi_desc *spi_desc;
 };
 
-/**
- * @struct ad9739a_init_param
- * @brief Driver Initialization parameters.
- */
+/***************************************************************************//**
+ * @brief The `ad9739a_init_param` structure is used to define the
+ * initialization parameters for the AD9739A device driver. It includes
+ * SPI initialization parameters, offsets for the differential clock
+ * signals DACCLK_P and DACCLK_N, and the full-scale current setting for
+ * the DAC. This structure is essential for configuring the device to
+ * operate correctly with the desired settings.
+ *
+ * @param spi_init SPI Initialization parameters.
+ * @param common_mode_voltage_dacclk_p Magnitude of the offset for the DACCLK_P.
+ * @param common_mode_voltage_dacclk_n Magnitude of the offset for the DACCLK_N.
+ * @param full_scale_current Full-scale current.
+ ******************************************************************************/
 struct ad9739a_init_param {
 	/** SPI Initialization parameters */
 	struct no_os_spi_init_param	spi_init;
@@ -234,31 +255,172 @@ struct ad9739a_init_param {
 /************************ Functions Declarations ******************************/
 /******************************************************************************/
 
-/*! Writes a value to the selected register. */
+/***************************************************************************//**
+ * @brief This function is used to write a specific value to a designated
+ * register within the AD9739A device. It is essential for configuring
+ * the device's operational parameters. The function should be called
+ * when a register needs to be updated with a new value. It requires a
+ * valid device structure that has been properly initialized. The
+ * function communicates with the device over SPI, and the caller should
+ * ensure that the SPI interface is correctly set up before invoking this
+ * function. The function returns an integer status code indicating the
+ * success or failure of the write operation.
+ *
+ * @param dev A pointer to an ad9739a_dev structure representing the device.
+ * Must not be null and should be properly initialized before calling
+ * this function.
+ * @param register_address The address of the register to which the value will
+ * be written. It is a 7-bit value, and the function
+ * will mask it to ensure it fits within this range.
+ * @param register_value The value to be written to the specified register. It
+ * is an 8-bit value.
+ * @return Returns an int32_t status code. A value of 0 typically indicates
+ * success, while a negative value indicates an error occurred during
+ * the write operation.
+ ******************************************************************************/
 int32_t ad9739a_write(struct ad9739a_dev *dev,
 		      uint8_t register_address,
 		      uint8_t register_value);
-/*! Reads the value of the selected register. */
+/***************************************************************************//**
+ * @brief Use this function to retrieve the current value stored in a specific
+ * register of the AD9739A device. It is essential to ensure that the
+ * device has been properly initialized and configured before calling
+ * this function. The function communicates with the device over SPI to
+ * perform the read operation. The caller must provide a valid device
+ * structure and a pointer to store the read value. This function returns
+ * an error code if the read operation fails.
+ *
+ * @param dev A pointer to an initialized ad9739a_dev structure representing the
+ * device. Must not be null.
+ * @param register_address The address of the register to read from. Must be a
+ * valid register address as defined by the device.
+ * @param register_value A pointer to a uint8_t where the read register value
+ * will be stored. Must not be null.
+ * @return Returns an int32_t error code indicating the success or failure of
+ * the read operation. The read value is stored in the location pointed
+ * to by register_value if successful.
+ ******************************************************************************/
 int32_t ad9739a_read(struct ad9739a_dev *dev,
 		     uint8_t register_address,
 		     uint8_t *register_value);
-/*! Resets the device. */
+/***************************************************************************//**
+ * @brief Use this function to reset the AD9739A device to its default SPI
+ * register values. This is typically done to ensure the device is in a
+ * known state before configuration or after an error condition. The
+ * function must be called with a valid device structure that has been
+ * properly initialized. It performs a software reset by writing to the
+ * device's mode register and then clears the reset bit. If the reset
+ * operation fails, the function returns an error code.
+ *
+ * @param dev A pointer to an initialized ad9739a_dev structure representing the
+ * device. Must not be null. The function will return an error if the
+ * device is not properly initialized or if communication with the
+ * device fails.
+ * @return Returns 0 on success or a negative error code if the reset operation
+ * fails.
+ ******************************************************************************/
 int32_t ad9739a_reset(struct ad9739a_dev *dev);
-/*! Powers down LVDS interface and TxDAC. */
+/***************************************************************************//**
+ * @brief This function is used to control the power state of the AD9739A device
+ * by writing a power configuration to the power down register. It should
+ * be called when there is a need to change the power settings of the
+ * device, such as powering down certain components to save energy. If
+ * the provided power configuration is invalid, the function will instead
+ * return the current power down register value. This function requires a
+ * valid device structure and should be used after the device has been
+ * properly initialized.
+ *
+ * @param dev A pointer to an ad9739a_dev structure representing the device.
+ * Must not be null. The caller retains ownership.
+ * @param pwr_config A uint8_t value representing the power configuration to be
+ * written to the device. Valid configurations must not set
+ * bits 7, 6, 3, or 2. If these bits are set, the function
+ * will return the current power down register value instead
+ * of writing.
+ * @return Returns an int32_t value. If a valid power configuration is provided,
+ * it returns the result of the write operation. If the configuration is
+ * invalid, it returns the current power down register value.
+ ******************************************************************************/
 int32_t ad9739a_power_down(struct ad9739a_dev *dev,
 			   uint8_t pwr_config);
 /*! Sets the normal baseband mode or mix-mode. */
 int32_t ad9739a_operation_mode(struct ad9739a_dev *dev,
 			       uint8_t mode);
-/*! Sets the full-scale output current for the DAC.  */
+/***************************************************************************//**
+ * @brief This function configures the full-scale output current of the AD9739A
+ * DAC based on the provided current value. It should be used when there
+ * is a need to adjust the DAC's output current to a specific level
+ * within the valid range. The function can also be used to put the DAC
+ * into a sleep mode by setting the current value to zero. It is
+ * important to ensure that the device is properly initialized before
+ * calling this function. The function handles values outside the valid
+ * range by returning the current full-scale setting without making
+ * changes.
+ *
+ * @param dev A pointer to an initialized ad9739a_dev structure representing the
+ * device. Must not be null.
+ * @param fs_val The desired full-scale current value in mA. Valid range is 8.7
+ * to 31.7 mA, or 0 to put the DAC into sleep mode. Values outside
+ * this range will result in the function returning the current
+ * full-scale setting without modification.
+ * @return Returns the actual full-scale current set, or a negative error code
+ * if a write operation fails.
+ ******************************************************************************/
 float ad9739a_dac_fs_current(struct ad9739a_dev *dev,
 			     float fs_val);
-/*! Delay for a number of fdata clock cycles. */
+/***************************************************************************//**
+ * @brief This function introduces a delay in the program execution based on the
+ * number of DAC clock cycles specified by the user. It is useful in
+ * timing-sensitive applications where precise delays are required. The
+ * function calculates the delay in microseconds and adjusts it slightly
+ * to ensure accuracy. It should be used when a delay corresponding to a
+ * specific number of DAC cycles is needed, and it assumes that the FDATA
+ * constant is defined and represents the DAC clock frequency.
+ *
+ * @param cycles The number of DAC clock cycles to delay. It must be a non-
+ * negative integer. The function does not handle invalid values
+ * explicitly, so the caller must ensure the input is valid.
+ * @return Returns 0 after the delay is completed. The function does not modify
+ * any input parameters or produce any other output.
+ ******************************************************************************/
 int32_t delay_fdata_cycles(uint32_t cycles);
-/*! Initializes the AD9739A. */
+/***************************************************************************//**
+ * @brief This function sets up the AD9739A device by initializing it with the
+ * provided parameters and configuring it for operation. It must be
+ * called before any other operations on the device to ensure proper
+ * setup. The function allocates memory for the device structure and
+ * initializes the SPI interface. It also verifies the device ID to
+ * ensure the correct device is being configured. If the initialization
+ * is successful, the device is ready for use; otherwise, an error code
+ * is returned. The caller is responsible for freeing the allocated
+ * resources using `ad9739a_remove` when the device is no longer needed.
+ *
+ * @param device A pointer to a pointer of type `struct ad9739a_dev`. This will
+ * be allocated and initialized by the function. Must not be null.
+ * @param init_param A structure of type `ad9739a_init_param` containing
+ * initialization parameters such as SPI settings, common mode
+ * voltages, and full-scale current. All fields must be
+ * properly set before calling the function.
+ * @return Returns 0 on success or a negative error code on failure. On success,
+ * `device` is set to point to the initialized device structure.
+ ******************************************************************************/
 int32_t ad9739a_setup(struct ad9739a_dev **device,
 		      struct ad9739a_init_param init_param);
-/*! Free the resources allocated by ad9739a_setup(). */
+/***************************************************************************//**
+ * @brief Use this function to release all resources associated with an AD9739A
+ * device instance when it is no longer needed. This function should be
+ * called after the device is no longer in use to ensure proper cleanup
+ * and to prevent resource leaks. It is important to ensure that the
+ * device pointer provided is valid and was previously initialized using
+ * the appropriate setup function.
+ *
+ * @param dev A pointer to an ad9739a_dev structure representing the device to
+ * be removed. This pointer must not be null and should point to a
+ * valid device instance that was previously initialized.
+ * @return Returns an integer status code from the underlying SPI removal
+ * operation, where 0 typically indicates success and a negative value
+ * indicates an error.
+ ******************************************************************************/
 int32_t ad9739a_remove(struct ad9739a_dev *dev);
 
 #endif /* __AD9739A_H__ */

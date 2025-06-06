@@ -15,6 +15,19 @@
 
 
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA C1 configuration in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be modified.
+ * @param value A 16-bit unsigned integer containing the value to be written to
+ * the control register.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if any operation fails.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl0_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -29,6 +42,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl0_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `RxtiaC1Ctrl0` register from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to read.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the read operation, where a value of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl0_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -47,6 +73,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl0_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA C1 configuration in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be modified.
+ * @param value A 16-bit unsigned integer containing the value to be written to
+ * the control register.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the operation fails.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl1_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -61,6 +100,20 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl1_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the RXTIA C1 control register from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to read.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero). The retrieved value is stored in the location pointed to
+ * by the 'value' parameter.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl1_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -79,6 +132,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl1_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA C1 configuration in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be modified.
+ * @param value A 16-bit unsigned integer containing the value to be written to
+ * the control register.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl2_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -93,6 +159,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl2_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the RXTIA C1 control register 2 from the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl2_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -111,6 +190,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl2_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA C1 configuration in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to be modified.
+ * @param value A 16-bit unsigned integer containing the value to be written to
+ * the register.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the operations performed.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl3_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -125,6 +217,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl3_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the RXTIA C1 control register 3 from the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the read operations fail.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl3_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -143,6 +248,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl3_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA C1 configuration in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be modified.
+ * @param value A 16-bit unsigned integer containing the value to be written to
+ * the control register.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the operations failed.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl4_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -157,6 +275,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl4_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `RxtiaC1Ctrl4` register from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to read.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * register value will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the read operation fails.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl4_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -175,6 +306,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl4_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for RXTIA C1 configuration in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be modified.
+ * @param value A 16-bit unsigned integer representing the value to be written
+ * to the control register.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the write operations fail.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl5_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -189,6 +333,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl5_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `RxtiaC1Ctrl5` register from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to read.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl5_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -207,6 +364,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl5_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA C1 configuration in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be modified.
+ * @param value A 16-bit unsigned integer representing the value to be written
+ * to the control register.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the write operations fail.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl6_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -221,6 +391,20 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl6_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `RxtiaC1Ctrl6` register from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to read.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * register value will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero). The retrieved value is stored in the location pointed to
+ * by the `value` parameter.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl6_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -239,6 +423,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl6_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for RXTIA C1 Control 7 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be modified.
+ * @param value A 16-bit unsigned integer representing the value to be written
+ * to the control register.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the write operations failed.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl7_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -253,6 +450,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl7_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `RxtiaC1Ctrl7` register from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to read.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * register value will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl7_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -271,6 +481,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl7_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA C1 configuration in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to be modified.
+ * @param value A 16-bit unsigned integer value to be written to the control
+ * register.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl8_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -285,6 +508,20 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl8_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the RXTIA C1 control register 8 from the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero). The retrieved value is stored in the location pointed to
+ * by the 'value' parameter.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl8_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -303,6 +540,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl8_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for RXTIA C1 Control 9 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be modified.
+ * @param value A 16-bit unsigned integer containing the value to be written to
+ * the control register.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl9_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -317,6 +567,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl9_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `RxtiaC1Ctrl9` register from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to read.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * register value will be stored.
+ * @return Returns the status of the read operation, which is zero on success or
+ * a negative error code on failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl9_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -335,6 +598,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1Ctrl9_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA C1F control 0 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be modified.
+ * @param value A 16-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if any operation fails.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl0_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -349,6 +625,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl0_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the RXTIA C1F control register for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl0_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -367,6 +656,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl0_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA C1F control 1 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to be modified.
+ * @param value A 16-bit unsigned integer value to be written to the control
+ * register.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if any operation fails.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl1_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -381,6 +683,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl1_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `RxtiaC1fCtrl1` register from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to read.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * register value will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the read operation fails.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl1_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -399,6 +714,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl1_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA C1F control 2 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be modified.
+ * @param value A 16-bit unsigned integer representing the value to be written
+ * to the control register.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the write operations fail.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl2_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -413,6 +741,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl2_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `RxtiaC1fCtrl2` register from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to read.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * register value will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the read operation failed.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl2_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -431,6 +772,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl2_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA C1F control 3 field in the
+ * ADRV9001 analog RXB memory map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be modified.
+ * @param value A 16-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if any operation fails.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl3_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -445,6 +799,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl3_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the RXTIA C1F control register 3 from the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to read.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the read operation fails.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl3_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -463,6 +830,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl3_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA C1F control 4 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be modified.
+ * @param value A 16-bit unsigned integer value to be written to the control
+ * register.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the operations performed.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl4_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -477,6 +857,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl4_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the RXTIA C1F Control 4 register from the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to read.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * register value will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl4_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -495,6 +888,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl4_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA C1F control 5 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be modified.
+ * @param value A 16-bit unsigned integer value to be written to the control
+ * register.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the operations performed.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl5_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -509,6 +915,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl5_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the RXTIA C1F control register 5 from the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the read operations fail.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl5_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -527,6 +946,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl5_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA C1F control 6 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be modified.
+ * @param value A 16-bit unsigned integer value to be written to the control
+ * register.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl6_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -541,6 +973,18 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl6_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the RXTIA C1F Control 6 register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl6_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -559,6 +1003,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl6_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA C1F control 7 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be modified.
+ * @param value A 16-bit unsigned integer representing the value to be written
+ * to the control register.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if any operation fails.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl7_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -573,6 +1030,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl7_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the RXTIA C1F control register 7 from the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to read from.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the read operation fails.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl7_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -591,6 +1061,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl7_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA C1F control 8 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be modified.
+ * @param value A 16-bit unsigned integer representing the value to be written
+ * to the control register.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl8_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -605,6 +1088,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl8_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the RXTIA C1F control register from the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the read operation, which is zero on success or
+ * a negative error code on failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl8_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -623,6 +1119,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl8_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA C1F control 9 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be modified.
+ * @param value A 16-bit unsigned integer representing the value to be set in
+ * the control register.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if any operation fails.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl9_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -637,6 +1146,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl9_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the RXTIA control register 9 from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl9_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -655,6 +1177,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC1fCtrl9_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA C2 control 0 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be modified.
+ * @param value A 16-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if any operation fails.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl0_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -669,6 +1204,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl0_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the RXTIA C2 control register 0 from the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl0_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -687,6 +1235,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl0_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA C2 configuration in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to be modified.
+ * @param value A 16-bit unsigned integer representing the value to be written
+ * to the control register.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the operations performed.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl1_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -701,6 +1262,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl1_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the RXTIA C2 control register for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the read operations fail.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl1_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -719,6 +1293,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl1_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA C2 configuration in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to be modified.
+ * @param value A 16-bit unsigned integer representing the value to be set in
+ * the control register.
+ * @return Returns 0 on success, or a negative error code if any of the write
+ * operations fail.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl2_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -733,6 +1320,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl2_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `RxtiaC2Ctrl2` register from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * register value will be stored.
+ * @return Returns the status of the read operation, which is 0 for success or a
+ * negative error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl2_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -751,6 +1351,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl2_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA C2 Control 3 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An instance identifier for the register being accessed,
+ * allowing for multiple instances.
+ * @param value A 16-bit value to be written to the control register, with the
+ * upper 8 bits affecting specific fields.
+ * @return Returns a status code indicating success (0) or an error code if any
+ * operation fails.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl3_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -765,6 +1378,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl3_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `RxtiaC2Ctrl3` register from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to read.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * register value will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl3_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -783,6 +1409,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl3_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA C2 Control 4 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to be modified.
+ * @param value A 16-bit unsigned integer value to be written to the control
+ * register.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl4_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -797,6 +1436,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl4_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `RxtiaC2Ctrl4` register from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * register value will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the read operation fails.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl4_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -815,6 +1467,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl4_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA C2 Control 5 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to be modified.
+ * @param value A 16-bit unsigned integer value to be written to the control
+ * register.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl5_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -829,6 +1494,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl5_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `RxtiaC2Ctrl5` register from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to read.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * register value will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl5_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -847,6 +1525,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl5_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA C2 configuration in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to be modified.
+ * @param value A 16-bit unsigned integer value to be written to the control
+ * register.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl6_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -861,6 +1552,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl6_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `RxtiaC2Ctrl6` register from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to read.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * register value will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the read operations failed.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl6_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -879,6 +1583,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl6_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA C2 control 7 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be modified.
+ * @param value A 16-bit unsigned integer value to be written to the control
+ * register.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the operations performed.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl7_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -893,6 +1610,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl7_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the RXTIA C2 control register 7 from the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl7_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -911,6 +1641,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl7_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA C2 configuration in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be modified.
+ * @param value A 16-bit unsigned integer containing the value to be set in the
+ * control register.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if any operation fails.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl8_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -925,6 +1668,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl8_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the RXTIA C2 control register 8 from the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation, with 0 indicating success.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl8_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -943,6 +1699,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl8_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA C2 configuration in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be modified.
+ * @param value A 16-bit unsigned integer representing the value to be written
+ * to the control register.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the operations performed.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl9_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -957,6 +1726,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl9_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `RxtiaC2Ctrl9` register from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to read.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * register value will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the read operations failed.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl9_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -975,6 +1757,18 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2Ctrl9_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA C2F control 0 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An instance identifier for the register, allowing access
+ * to multiple instances.
+ * @param value A 16-bit value to be written to the control register.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero).
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl0_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -989,6 +1783,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl0_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the RXTIA C2F control register for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the read operation, which is 0 for success or a
+ * negative error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl0_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -1007,6 +1814,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl0_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA C2F control 1 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to be modified.
+ * @param value A 16-bit unsigned integer value to be written to the control
+ * register.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl1_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -1021,6 +1841,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl1_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the RXTIA C2F control register for a specified
+ * instance of the device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the read operations failed.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl1_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -1039,6 +1872,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl1_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA C2F control 2 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be modified.
+ * @param value A 16-bit unsigned integer value to be written to the control
+ * register.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the write operations fail.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl2_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -1053,6 +1899,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl2_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the RXTIA C2F control register from the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl2_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -1071,6 +1930,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl2_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA C2F control 3 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be accessed.
+ * @param value A 16-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl3_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -1085,6 +1957,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl3_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `RxtiaC2fCtrl3` register from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl3_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -1103,6 +1988,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl3_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA C2F control 4 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be modified.
+ * @param value A 16-bit unsigned integer value to be written to the control
+ * register.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if any operation fails.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl4_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -1117,6 +2015,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl4_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the RXTIA C2F control 4 register from the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the read operation fails.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl4_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -1135,6 +2046,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl4_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA C2F control 5 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be accessed.
+ * @param value A 16-bit unsigned integer representing the value to be written
+ * to the control register.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if any operation fails.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl5_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -1149,6 +2073,18 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl5_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the RXTIA C2F control 5 register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to read.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl5_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -1167,6 +2103,18 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl5_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA C2F control 6 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An instance identifier for the register, allowing access
+ * to multiple instances.
+ * @param value A 16-bit value to be written to the control register.
+ * @return Returns the status of the last operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl6_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -1181,6 +2129,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl6_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `RxtiaC2fCtrl6` register from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to read.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns a status code indicating success (0) or an error code if the
+ * read operations fail.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl6_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -1199,6 +2160,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl6_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA C2F control 0 of the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to be modified.
+ * @param value A 16-bit unsigned integer value to be written to the control
+ * register.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the write operations fail.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl7_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -1213,6 +2187,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl7_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the RXTIA C2F control register 7 from the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to read from.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl7_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -1231,6 +2218,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl7_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RXTIA C2F control register for a specified instance of the
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param regInstance An unsigned integer representing the specific instance of
+ * the register to be modified.
+ * @param value A 16-bit unsigned integer value to be written to the control
+ * register.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl8_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -1245,6 +2245,20 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl8_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the RXTIA C2F control register for a specified
+ * instance of the device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to read.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero). The retrieved value is stored in the location pointed to
+ * by the 'value' parameter.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl8_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -1263,6 +2277,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl8_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA C2F control 0 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be modified.
+ * @param value A 16-bit unsigned integer representing the value to be set in
+ * the control register.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl9_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -1277,6 +2304,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl9_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the RXTIA C2F control register for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the read operations fail.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl9_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -1295,6 +2335,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaC2fCtrl9_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA R2 component of the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to be modified.
+ * @param value A 16-bit unsigned integer value to be written to the control
+ * register.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl0_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -1309,6 +2362,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl0_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `RxtiaR2Ctrl0` register from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns a status code indicating success or failure of the read
+ * operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl0_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -1327,6 +2393,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl0_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA R2 configuration in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be modified.
+ * @param value A 16-bit unsigned integer containing the value to be written to
+ * the control register.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl1_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -1341,6 +2420,18 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl1_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the control register value for the RXTIA R2 configuration.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the read operations failed.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl1_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -1359,6 +2450,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl1_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA R2 component of the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to be modified.
+ * @param value A 16-bit unsigned integer value to be written to the control
+ * register.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the operations performed.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl2_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -1373,6 +2477,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl2_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the RXTIA R2 control register 2 from the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An instance identifier for the register, used to access
+ * the correct register instance.
+ * @param value A pointer to a `uint16_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the read operation failed.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl2_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -1391,6 +2508,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl2_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA R2 configuration in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be modified.
+ * @param value A 16-bit unsigned integer representing the value to be written
+ * to the control register.
+ * @return Returns the status of the write operations, where a non-zero value
+ * indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl3_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -1405,6 +2535,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl3_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `RxtiaR2Ctrl3` register from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to read.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * register value will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl3_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -1423,6 +2566,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl3_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA R2 component in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to be modified.
+ * @param value A 16-bit unsigned integer value to be written to the control
+ * register.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl4_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -1437,6 +2593,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl4_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the RXTIA R2 control register 4 from the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the read operation fails.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl4_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -1455,6 +2624,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl4_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA R2 configuration in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be modified.
+ * @param value A 16-bit unsigned integer representing the value to be written
+ * to the control register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl5_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -1469,6 +2651,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl5_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `RxtiaR2Ctrl5` register from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to read.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * register value will be stored.
+ * @return Returns a status code indicating success (0) or an error code if the
+ * read operation failed.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl5_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -1487,6 +2682,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl5_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA R2 component in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be modified.
+ * @param value A 16-bit unsigned integer containing the value to be written to
+ * the control register.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the operations failed.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl6_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -1501,6 +2709,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl6_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the RXTIA R2 control register 6 from the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the read operation failed.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl6_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -1519,6 +2740,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl6_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA R2 component of the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be modified.
+ * @param value A 16-bit unsigned integer value to be written to the control
+ * register.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the operations performed.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl7_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -1533,6 +2767,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl7_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `RxtiaR2Ctrl7` register from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to read.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * register value will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the read operation fails.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl7_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -1551,6 +2798,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl7_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA R2 configuration in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be modified.
+ * @param value A 16-bit unsigned integer representing the value to be written
+ * to the control register.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if any operation fails.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl8_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -1565,6 +2825,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl8_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the RXTIA R2 control register from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to read.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the read operation failed.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl8_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -1583,6 +2856,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl8_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control register for the RXTIA R2 configuration in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be modified.
+ * @param value A 16-bit unsigned integer containing the value to be written to
+ * the control register.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if any operation fails.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl9_Set(void *device,
     uint32_t regInstance,
     uint16_t value)
@@ -1597,6 +2883,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl9_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the RXTIA control register 9 from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the read operation, which is 0 for success or a
+ * negative error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl9_Get(void *device,
     uint32_t regInstance,
     uint16_t *value)
@@ -1615,6 +2914,18 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaR2Ctrl9_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RXTIA scaling value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be modified.
+ * @param value An 8-bit unsigned integer representing the scaling value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling0_Set(void *device,
     uint32_t regInstance,
     uint8_t value)
@@ -1626,6 +2937,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling0_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the scaling value for the RXTIA from the analog RXB memory
+ * map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to read from.
+ * @param value A pointer to an 8-bit unsigned integer where the retrieved
+ * scaling value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling0_Get(void *device,
     uint32_t regInstance,
     uint8_t *value)
@@ -1640,6 +2964,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling0_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RXTIA scaling value for a specified register instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the specific
+ * register instance to be modified.
+ * @param value An 8-bit unsigned integer representing the scaling value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling1_Set(void *device,
     uint32_t regInstance,
     uint8_t value)
@@ -1651,6 +2988,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling1_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the scaling value for the RXTIA (Receive Transmitter
+ * Intermediate Amplifier) from the specified register.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to access.
+ * @param value A pointer to an 8-bit unsigned integer where the retrieved
+ * scaling value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling1_Get(void *device,
     uint32_t regInstance,
     uint8_t *value)
@@ -1665,6 +3015,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling1_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RXTIA scaling value for a specified register instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the specific
+ * register instance to be modified.
+ * @param value An 8-bit unsigned integer representing the scaling value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling2_Set(void *device,
     uint32_t regInstance,
     uint8_t value)
@@ -1676,6 +3039,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling2_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the scaling value for the RXTIA setting from the specified
+ * register.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to access.
+ * @param value A pointer to a byte where the retrieved scaling value will be
+ * stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling2_Get(void *device,
     uint32_t regInstance,
     uint8_t *value)
@@ -1690,6 +3066,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling2_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the scaling value for the RXTIA (Receive Transmitter Intermediate
+ * Amplifier) in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be modified.
+ * @param value An 8-bit unsigned integer representing the scaling value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling3_Set(void *device,
     uint32_t regInstance,
     uint8_t value)
@@ -1701,6 +3090,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling3_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the scaling value for the RXTIA from the analog RXB memory
+ * map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to access.
+ * @param value A pointer to an 8-bit unsigned integer where the retrieved
+ * scaling value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling3_Get(void *device,
     uint32_t regInstance,
     uint8_t *value)
@@ -1715,6 +3117,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling3_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RXTIA scaling value for a specified register instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the specific
+ * register instance to be modified.
+ * @param value An 8-bit unsigned integer representing the scaling value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling4_Set(void *device,
     uint32_t regInstance,
     uint8_t value)
@@ -1726,6 +3141,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling4_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the scaling value for the RXTIA setting from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to access.
+ * @param value A pointer to an 8-bit unsigned integer where the retrieved
+ * scaling value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling4_Get(void *device,
     uint32_t regInstance,
     uint8_t *value)
@@ -1740,6 +3168,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling4_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RXTIA scaling value for a specified register instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the specific
+ * register instance to be modified.
+ * @param value An 8-bit unsigned integer representing the scaling value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling5_Set(void *device,
     uint32_t regInstance,
     uint8_t value)
@@ -1751,6 +3192,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling5_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the scaling value for the RXTIA from the analog RXB memory
+ * map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to access.
+ * @param value A pointer to an 8-bit unsigned integer where the retrieved
+ * scaling value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling5_Get(void *device,
     uint32_t regInstance,
     uint8_t *value)
@@ -1765,6 +3219,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling5_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RXTIA scaling value for a specified register instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the specific
+ * register instance to be modified.
+ * @param value An 8-bit unsigned integer representing the scaling value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling6_Set(void *device,
     uint32_t regInstance,
     uint8_t value)
@@ -1776,6 +3243,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling6_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the scaling value for the RXTIA setting from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to read from.
+ * @param value A pointer to an 8-bit unsigned integer where the retrieved
+ * scaling value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling6_Get(void *device,
     uint32_t regInstance,
     uint8_t *value)
@@ -1790,6 +3270,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling6_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RXTIA scaling value for a specified register instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the specific
+ * register instance to be modified.
+ * @param value An 8-bit unsigned integer representing the scaling value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling7_Set(void *device,
     uint32_t regInstance,
     uint8_t value)
@@ -1801,6 +3294,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling7_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the scaling value for the RXTIA from the analog RXB memory
+ * map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to access.
+ * @param value A pointer to an 8-bit unsigned integer where the retrieved
+ * scaling value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling7_Get(void *device,
     uint32_t regInstance,
     uint8_t *value)
@@ -1815,6 +3321,18 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling7_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RXTIA scaling value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be modified.
+ * @param value An 8-bit unsigned integer representing the scaling value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling8_Set(void *device,
     uint32_t regInstance,
     uint8_t value)
@@ -1826,6 +3344,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling8_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the scaling value for the RXTIA (Receive Transmitter
+ * Intermediate Amplifier) from the specified register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to read from.
+ * @param value A pointer to an 8-bit unsigned integer where the retrieved
+ * scaling value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling8_Get(void *device,
     uint32_t regInstance,
     uint8_t *value)
@@ -1840,6 +3371,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling8_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RXTIA scaling value for a specified register instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the specific
+ * register instance to be modified.
+ * @param value An 8-bit unsigned integer representing the scaling value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling9_Set(void *device,
     uint32_t regInstance,
     uint8_t value)
@@ -1851,6 +3395,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling9_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the scaling value for the RXTIA setting from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to access.
+ * @param value A pointer to an 8-bit unsigned integer where the retrieved
+ * scaling value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling9_Get(void *device,
     uint32_t regInstance,
     uint8_t *value)
@@ -1865,6 +3422,18 @@ static inline int32_t adrv9001_AnalogRxbMemMap_RxtiaScaling9_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the `Selcc0` field in the analog RXB memory map.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the `Selcc0` field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selcc0_Set(void *device,
     uint32_t regInstance,
     uint8_t value)
@@ -1876,6 +3445,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selcc0_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `Selcc0` register from the analog RXB
+ * memory map.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to access.
+ * @param value A pointer to an 8-bit unsigned integer where the retrieved
+ * register value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selcc0_Get(void *device,
     uint32_t regInstance,
     uint8_t *value)
@@ -1890,6 +3472,18 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selcc0_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the `Selcc1` register in the analog RXB memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to be accessed.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the `Selcc1` register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selcc1_Set(void *device,
     uint32_t regInstance,
     uint8_t value)
@@ -1901,6 +3495,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selcc1_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `Selcc1` register from the analog RXB
+ * memory map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to access.
+ * @param value A pointer to a `uint8_t` where the retrieved register value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selcc1_Get(void *device,
     uint32_t regInstance,
     uint8_t *value)
@@ -1915,6 +3522,18 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selcc1_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the `Selcc2` field in the analog RXB memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be accessed.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the `Selcc2` field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selcc2_Set(void *device,
     uint32_t regInstance,
     uint8_t value)
@@ -1926,6 +3545,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selcc2_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the SELCC2 register from the analog RXB memory
+ * map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to access.
+ * @param value A pointer to an 8-bit unsigned integer where the retrieved
+ * register value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selcc2_Get(void *device,
     uint32_t regInstance,
     uint8_t *value)
@@ -1940,6 +3572,17 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selcc2_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the `Selcc3` register in the analog RXB memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param regInstance An instance identifier for the register, used to access
+ * the correct register in a multi-instance context.
+ * @param value The value to be written to the `Selcc3` register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selcc3_Set(void *device,
     uint32_t regInstance,
     uint8_t value)
@@ -1951,6 +3594,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selcc3_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `Selcc3` register from the analog RXB
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to access.
+ * @param value A pointer to a byte where the retrieved register value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selcc3_Get(void *device,
     uint32_t regInstance,
     uint8_t *value)
@@ -1965,6 +3621,18 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selcc3_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the `Selcc4` register in the analog RXB memory map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to be accessed.
+ * @param value An 8-bit unsigned integer value to be written to the `Selcc4`
+ * register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selcc4_Set(void *device,
     uint32_t regInstance,
     uint8_t value)
@@ -1976,6 +3644,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selcc4_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `Selcc4` register from the analog RXB
+ * memory map.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selcc4_Get(void *device,
     uint32_t regInstance,
     uint8_t *value)
@@ -1990,6 +3671,18 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selcc4_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the `Selcc5` register in the analog RXB memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to be accessed.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selcc5_Set(void *device,
     uint32_t regInstance,
     uint8_t value)
@@ -2001,6 +3694,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selcc5_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the SELCC5 register from the analog RXB memory
+ * map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selcc5_Get(void *device,
     uint32_t regInstance,
     uint8_t *value)
@@ -2015,6 +3721,18 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selcc5_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the `Selcc6` register in the analog RXB memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be accessed.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the `Selcc6` register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selcc6_Set(void *device,
     uint32_t regInstance,
     uint8_t value)
@@ -2026,6 +3744,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selcc6_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the SELCC6 register from the analog RXB memory
+ * map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selcc6_Get(void *device,
     uint32_t regInstance,
     uint8_t *value)
@@ -2040,6 +3771,18 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selcc6_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the `Selcc7` register in the analog RXB memory map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the `Selcc7` register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selcc7_Set(void *device,
     uint32_t regInstance,
     uint8_t value)
@@ -2051,6 +3794,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selcc7_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the SELCC7 register from the analog RXB memory
+ * map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selcc7_Get(void *device,
     uint32_t regInstance,
     uint8_t *value)
@@ -2065,6 +3821,18 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selcc7_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the `Selcc8` field in the analog RXB memory map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be modified.
+ * @param value An 8-bit unsigned integer representing the value to set for the
+ * `Selcc8` field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selcc8_Set(void *device,
     uint32_t regInstance,
     uint8_t value)
@@ -2076,6 +3844,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selcc8_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `Selcc8` register from the analog RXB
+ * memory map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to access.
+ * @param value A pointer to an 8-bit unsigned integer where the retrieved
+ * register value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selcc8_Get(void *device,
     uint32_t regInstance,
     uint8_t *value)
@@ -2090,6 +3871,18 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selcc8_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the `Selcc9` field in the analog RXB memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to be modified.
+ * @param value An 8-bit unsigned integer value to be written to the `Selcc9`
+ * field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selcc9_Set(void *device,
     uint32_t regInstance,
     uint8_t value)
@@ -2101,6 +3894,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selcc9_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `Selcc9` register from the analog RXB
+ * memory map.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to access.
+ * @param value A pointer to a byte where the retrieved register value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selcc9_Get(void *device,
     uint32_t regInstance,
     uint8_t *value)
@@ -2115,6 +3921,18 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selcc9_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the `Selrz0` register in the analog RXB memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to be accessed.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selrz0_Set(void *device,
     uint32_t regInstance,
     uint8_t value)
@@ -2126,6 +3944,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selrz0_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `Selrz0` register from the analog RXB
+ * memory map.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to access.
+ * @param value A pointer to a `uint8_t` where the retrieved register value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selrz0_Get(void *device,
     uint32_t regInstance,
     uint8_t *value)
@@ -2140,6 +3971,18 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selrz0_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the `Selrz1` field in the analog RXB memory map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the `Selrz1` field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selrz1_Set(void *device,
     uint32_t regInstance,
     uint8_t value)
@@ -2151,6 +3994,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selrz1_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `Selrz1` register from the analog RXB
+ * memory map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to access.
+ * @param value A pointer to a `uint8_t` where the retrieved register value will
+ * be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selrz1_Get(void *device,
     uint32_t regInstance,
     uint8_t *value)
@@ -2165,6 +4021,18 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selrz1_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the `Selrz2` register in the analog RXB memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the `Selrz2` register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selrz2_Set(void *device,
     uint32_t regInstance,
     uint8_t value)
@@ -2176,6 +4044,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selrz2_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `Selrz2` register from the analog RXB
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to access.
+ * @param value A pointer to a byte where the retrieved register value will be
+ * stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selrz2_Get(void *device,
     uint32_t regInstance,
     uint8_t *value)
@@ -2190,6 +4071,18 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selrz2_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the `Selrz3` register in the analog RXB memory map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to be accessed.
+ * @param value An 8-bit unsigned integer value to be written to the `Selrz3`
+ * register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selrz3_Set(void *device,
     uint32_t regInstance,
     uint8_t value)
@@ -2201,6 +4094,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selrz3_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `Selrz3` register from the analog RXB
+ * memory map.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to access.
+ * @param value A pointer to a byte where the retrieved register value will be
+ * stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selrz3_Get(void *device,
     uint32_t regInstance,
     uint8_t *value)
@@ -2215,6 +4121,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selrz3_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of a specific register in the analog RXB memory map for
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selrz4_Set(void *device,
     uint32_t regInstance,
     uint8_t value)
@@ -2226,6 +4145,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selrz4_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `Selrz4` register from the analog RXB
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to access.
+ * @param value A pointer to a byte where the retrieved register value will be
+ * stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selrz4_Get(void *device,
     uint32_t regInstance,
     uint8_t *value)
@@ -2240,6 +4172,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selrz4_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of a specific register in the analog RXB memory map for
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selrz5_Set(void *device,
     uint32_t regInstance,
     uint8_t value)
@@ -2251,6 +4196,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selrz5_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `Selrz5` register from the analog RXB
+ * memory map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to access.
+ * @param value A pointer to a byte where the retrieved register value will be
+ * stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selrz5_Get(void *device,
     uint32_t regInstance,
     uint8_t *value)
@@ -2265,6 +4223,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selrz5_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of a specific register in the analog RXB memory map for
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selrz6_Set(void *device,
     uint32_t regInstance,
     uint8_t value)
@@ -2276,6 +4247,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selrz6_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register from the analog RXB memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to access.
+ * @param value A pointer to a byte where the retrieved register value will be
+ * stored.
+ * @return Returns an integer status code indicating success or failure of the
+ * read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selrz6_Get(void *device,
     uint32_t regInstance,
     uint8_t *value)
@@ -2290,6 +4274,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selrz6_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of a specific register in the analog RXB memory map for
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selrz7_Set(void *device,
     uint32_t regInstance,
     uint8_t value)
@@ -2301,6 +4298,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selrz7_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register from the analog RXB memory
+ * map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned 32-bit integer representing the instance of
+ * the register to access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selrz7_Get(void *device,
     uint32_t regInstance,
     uint8_t *value)
@@ -2315,6 +4325,18 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selrz7_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of a specific register in the analog RXB memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param regInstance An unsigned integer representing the instance of the
+ * register to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selrz8_Set(void *device,
     uint32_t regInstance,
     uint8_t value)
@@ -2326,6 +4348,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selrz8_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register from the analog RXB memory
+ * map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the specific instance of
+ * the register to access.
+ * @param value A pointer to a byte where the retrieved register value will be
+ * stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selrz8_Get(void *device,
     uint32_t regInstance,
     uint8_t *value)
@@ -2340,6 +4375,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selrz8_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of a specific register in the analog RXB memory map for
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param regInstance An unsigned integer representing the specific register
+ * instance to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the specified register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selrz9_Set(void *device,
     uint32_t regInstance,
     uint8_t value)
@@ -2351,6 +4399,19 @@ static inline int32_t adrv9001_AnalogRxbMemMap_Selrz9_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register from the analog RXB memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param regInstance An unsigned integer representing the specific instance of
+ * the register to access.
+ * @param value A pointer to a byte where the retrieved register value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxbMemMap_Selrz9_Get(void *device,
     uint32_t regInstance,
     uint8_t *value)

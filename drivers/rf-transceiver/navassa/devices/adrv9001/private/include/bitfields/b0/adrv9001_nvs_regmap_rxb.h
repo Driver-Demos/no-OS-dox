@@ -13,23 +13,53 @@
 
 #include "adrv9001_bf_hal.h"
 
+/***************************************************************************//**
+ * @brief The `adrv9001_BfNvsRegmapRxb_e` is an enumeration that defines
+ * constants for accessing specific core register maps associated with
+ * RXB1 and RXB2 in the ADRV9001 device. Each enumerator is assigned a
+ * unique hexadecimal value that corresponds to a specific register map
+ * address, facilitating the configuration and control of the device's
+ * receiver blocks.
+ *
+ * @param ADRV9001_BF_RXB1_CORE Represents the core register map for RXB1 with a
+ * hexadecimal value of 0x1000.
+ * @param ADRV9001_BF_RXB2_CORE Represents the core register map for RXB2 with a
+ * hexadecimal value of 0x1400.
+ ******************************************************************************/
 typedef enum adrv9001_BfNvsRegmapRxb_e
 {
     ADRV9001_BF_RXB1_CORE    =   0x1000,
     ADRV9001_BF_RXB2_CORE    =   0x1400
 } adrv9001_BfNvsRegmapRxb_e;
 
+/***************************************************************************//**
+ * @brief The `nvsRegmapRxbInstances` is a static constant array of type
+ * `adrv9001_BfNvsRegmapRxb_e`, which is an enumeration. It contains two
+ * elements, `ADRV9001_BF_RXB1_CORE` and `ADRV9001_BF_RXB2_CORE`,
+ * representing specific instances of the NVS register map for RXB
+ * components in the ADRV9001 device.
+ *
+ * @details This array is used to reference specific RXB core instances in the
+ * ADRV9001 device's NVS register map.
+ ******************************************************************************/
 static const adrv9001_BfNvsRegmapRxb_e nvsRegmapRxbInstances[] = {
     ADRV9001_BF_RXB1_CORE,
     ADRV9001_BF_RXB2_CORE
 };
 
 
-/**
- * TIA control readback for Ch1. Bit[0] is TIA gain and bit [1] is ADC gain.
-
- * If "read_gain_table" is set, the value is read back from the gain table corresponding to the "gt_addr". If "read_gain_table" is clear,the value is the current gain being used.
- */
+/***************************************************************************//**
+ * @brief Retrieves the ADC control register value from the specified instance
+ * of the device.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific ADC instance to
+ * read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AdcControl_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -44,9 +74,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AdcControl_Get(void *device,
     return status;
 }
 
-/**
- * This setting overrides the delayed update feature for setting Rx1 ADC gain. Setting this field allows new values of Rx1 ADC gains to be effective as soon as they are output from the gain table. This setting may cause spurious overloads on the ADC until gains to all block before the ADC (Rx1 FE, Rx1 TIA) have settled.
- */
+/***************************************************************************//**
+ * @brief Sets the ADC valid override value in the NVS register map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A 8-bit unsigned integer representing the value to be set for
+ * the ADC valid override.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AdcValidOverride_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -58,9 +98,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AdcValidOverride_Set(void *device,
     return status;
 }
 
-/**
- * This setting overrides the delayed update feature for setting Rx1 ADC gain. Setting this field allows new values of Rx1 ADC gains to be effective as soon as they are output from the gain table. This setting may cause spurious overloads on the ADC until gains to all block before the ADC (Rx1 FE, Rx1 TIA) have settled.
- */
+/***************************************************************************//**
+ * @brief Retrieves the ADC valid override value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * ADC.
+ * @param value A pointer to a uint8_t variable where the retrieved ADC valid
+ * override value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AdcValidOverride_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -75,6 +124,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AdcValidOverride_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the second high counter value in the ADRV9001 NVS register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the second high counter.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_Adcovrg2ndHighCounter_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -86,6 +147,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_Adcovrg2ndHighCounter_Set(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the second high counter value from the ADRV9001 register
+ * map.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param instance An enumeration value representing the specific instance of
+ * the register map.
+ * @param value A pointer to a uint8_t variable where the retrieved counter
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_Adcovrg2ndHighCounter_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -100,9 +173,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_Adcovrg2ndHighCounter_Get(void *devi
     return status;
 }
 
-/**
- * This counter configures the number of times the ADC High Overrange threshold is triggered within one gain update interval before a gain change is mandated by the gain control loop. This register can take any value from 1 through 255. If the ADC high overrange threshold is triggered N times where N is the value configured in this register, a gain change can either occur immediately (agc_change_gain_if_adcovrg_high) or when the agc_gain_update_counter expires or in hybrid mode when a pulse is seen on the corresponding GPIO pin.
- */
+/***************************************************************************//**
+ * @brief Sets the ADC high overflow exceeded counter in the ADRV9001 device's
+ * register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcAdcHighOvrgExceededCounter_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -114,9 +197,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcAdcHighOvrgExceededCounter_Set(vo
     return status;
 }
 
-/**
- * This counter configures the number of times the ADC High Overrange threshold is triggered within one gain update interval before a gain change is mandated by the gain control loop. This register can take any value from 1 through 255. If the ADC high overrange threshold is triggered N times where N is the value configured in this register, a gain change can either occur immediately (agc_change_gain_if_adcovrg_high) or when the agc_gain_update_counter expires or in hybrid mode when a pulse is seen on the corresponding GPIO pin.
- */
+/***************************************************************************//**
+ * @brief Retrieves the ADC high overflow exceeded counter value from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved counter
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcAdcHighOvrgExceededCounter_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -131,11 +223,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcAdcHighOvrgExceededCounter_Get(vo
     return status;
 }
 
-/**
- * This register can take any value from 1 through 255. If the ADC Low Overrange threshold is triggered N times where N is the value configured in this register, a flag is set indicating a HIGH on ADC low overrange trigger. Consequently, at the termination of the agc_gain_update_counter, or in hybrid mode when a pulse is seen on the corresponding GPIO pin, if a gain increment is slated to occur based on power thresholds, and if agc_low_ths_prevent_gain_inc is 1, then the gain increment does not occur. If agc_peak_threshold_gain_control_mode is enabled and the flag is NOT set, the gain will increment.
-
- * When in multiple time constants in AGC loop mode, the flag is used to determine gain increments for the 3rd update interval. For details on using this field, see description in agc_enable_fast_recovery_loop.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC ADC low overflow exceeded counter in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcAdcLowOvrgExceededCounter_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -147,11 +246,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcAdcLowOvrgExceededCounter_Set(voi
     return status;
 }
 
-/**
- * This register can take any value from 1 through 255. If the ADC Low Overrange threshold is triggered N times where N is the value configured in this register, a flag is set indicating a HIGH on ADC low overrange trigger. Consequently, at the termination of the agc_gain_update_counter, or in hybrid mode when a pulse is seen on the corresponding GPIO pin, if a gain increment is slated to occur based on power thresholds, and if agc_low_ths_prevent_gain_inc is 1, then the gain increment does not occur. If agc_peak_threshold_gain_control_mode is enabled and the flag is NOT set, the gain will increment.
-
- * When in multiple time constants in AGC loop mode, the flag is used to determine gain increments for the 3rd update interval. For details on using this field, see description in agc_enable_fast_recovery_loop.
- */
+/***************************************************************************//**
+ * @brief Retrieves the ADC low overflow exceeded counter value from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved counter
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcAdcLowOvrgExceededCounter_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -166,9 +272,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcAdcLowOvrgExceededCounter_Get(voi
     return status;
 }
 
-/**
- * (B0 New) Number of gain steps to adjust agc_gain_index by a ADC Overload Reset condition.
- */
+/***************************************************************************//**
+ * @brief Sets the gain step for the ADC reset in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the gain step value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcAdcResetGainStep_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -180,9 +295,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcAdcResetGainStep_Set(void *device
     return status;
 }
 
-/**
- * (B0 New) Number of gain steps to adjust agc_gain_index by a ADC Overload Reset condition.
- */
+/***************************************************************************//**
+ * @brief Retrieves the ADC gain step value from a specific register for a given
+ * instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved gain step
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcAdcResetGainStep_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -197,9 +321,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcAdcResetGainStep_Get(void *device
     return status;
 }
 
-/**
- * This counter configures the number of times the ADC IP3 Overrange threshold is triggered within one gain update interval before a gain change is mandated by the gain control loop. This register can take any value from 1 through 255. If the ADC high overrange threshold is triggered N times where N is the value configured in this register, and agc_enable_ip3_optimization_threshold is enabled, a gain change occurs immediately based on the current gain index and the agc_optimal_ip3_index. See description for agc_enable_ip3_optimization_threshold regarding the Two-threshold AGC loop mode.
- */
+/***************************************************************************//**
+ * @brief Sets the high counter value for the AGC ADC overrange in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcAdcovrgIp3HighCounter_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -211,9 +345,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcAdcovrgIp3HighCounter_Set(void *d
     return status;
 }
 
-/**
- * This counter configures the number of times the ADC IP3 Overrange threshold is triggered within one gain update interval before a gain change is mandated by the gain control loop. This register can take any value from 1 through 255. If the ADC high overrange threshold is triggered N times where N is the value configured in this register, and agc_enable_ip3_optimization_threshold is enabled, a gain change occurs immediately based on the current gain index and the agc_optimal_ip3_index. See description for agc_enable_ip3_optimization_threshold regarding the Two-threshold AGC loop mode.
- */
+/***************************************************************************//**
+ * @brief Retrieves the high counter value from the AGC ADC overrange register
+ * for a specified instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved high counter
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcAdcovrgIp3HighCounter_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -228,9 +372,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcAdcovrgIp3HighCounter_Get(void *d
     return status;
 }
 
-/**
- * This register can take any value from 1 through 255. If the ADC Low Overrange interval 0 threshold is triggered N times where N is the value configured in this register, a flag is set indicating a HIGH on ADC low overrange interval 0 trigger. This flag is used to determine gain increments for the 1st update interval in multiple time constants in AGC loop mode. For details on using this field, see description in agc_enable_fast_recovery_loop.
- */
+/***************************************************************************//**
+ * @brief Sets the low interrupt counter value for the AGC ADC overrange in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the low interrupt counter.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcAdcovrgLowInt0Counter_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -242,9 +396,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcAdcovrgLowInt0Counter_Set(void *d
     return status;
 }
 
-/**
- * This register can take any value from 1 through 255. If the ADC Low Overrange interval 0 threshold is triggered N times where N is the value configured in this register, a flag is set indicating a HIGH on ADC low overrange interval 0 trigger. This flag is used to determine gain increments for the 1st update interval in multiple time constants in AGC loop mode. For details on using this field, see description in agc_enable_fast_recovery_loop.
- */
+/***************************************************************************//**
+ * @brief Retrieves the low interrupt counter value from the AGC ADC overrange
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved counter
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcAdcovrgLowInt0Counter_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -259,9 +422,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcAdcovrgLowInt0Counter_Get(void *d
     return status;
 }
 
-/**
- * This register can take any value from 1 through 255. If the ADC Low Overrange interval 1 threshold is triggered N times where N is the value configured in this register, a flag is set indicating a HIGH on ADC low overrange interval 1 trigger. This flag is used to determine gain increments for the 2nd update interval in multiple time constants in AGC loop mode. For details on using this field, see description in agc_enable_fast_recovery_loop.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC ADC overrange low interrupt 1 counter value in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value An 8-bit integer representing the value to be set for the AGC
+ * ADC overrange low interrupt 1 counter.
+ * @return Returns the status of the register write operation, indicating
+ * success or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcAdcovrgLowInt1Counter_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -273,9 +446,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcAdcovrgLowInt1Counter_Set(void *d
     return status;
 }
 
-/**
- * This register can take any value from 1 through 255. If the ADC Low Overrange interval 1 threshold is triggered N times where N is the value configured in this register, a flag is set indicating a HIGH on ADC low overrange interval 1 trigger. This flag is used to determine gain increments for the 2nd update interval in multiple time constants in AGC loop mode. For details on using this field, see description in agc_enable_fast_recovery_loop.
- */
+/***************************************************************************//**
+ * @brief Retrieves the low interrupt counter value from the AGC register for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC register.
+ * @param value A pointer to a uint8_t variable where the retrieved counter
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcAdcovrgLowInt1Counter_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -290,6 +472,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcAdcovrgLowInt1Counter_Get(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the low frequency error mitigation mode for the AGC APD in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the low frequency error mitigation mode.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcApdLowFreqErrorMitigationMode_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -301,6 +496,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcApdLowFreqErrorMitigationMode_Set
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the low frequency error mitigation mode value from the AGC
+ * APD register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC APD register.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcApdLowFreqErrorMitigationMode_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -315,9 +522,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcApdLowFreqErrorMitigationMode_Get
     return status;
 }
 
-/**
- * This register is applicable to all the automatic gain control modes (AGC fast attack, AGC slow loop and AGC Hybrid mode). When this register is set to a non-zero value, the Rx1 AGC state machine is not enabled as soon as RXON goes high. The AGC state machine is held inactive for the duration of the value in this register. Each LSB in this register corresponds to a delay of 1s (determined by reference_clock_cycles).
- */
+/***************************************************************************//**
+ * @brief Sets the AGC attack delay value in the NVS register map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the AGC attack delay
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcAttackDelay_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -329,9 +546,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcAttackDelay_Set(void *device,
     return status;
 }
 
-/**
- * This register is applicable to all the automatic gain control modes (AGC fast attack, AGC slow loop and AGC Hybrid mode). When this register is set to a non-zero value, the Rx1 AGC state machine is not enabled as soon as RXON goes high. The AGC state machine is held inactive for the duration of the value in this register. Each LSB in this register corresponds to a delay of 1s (determined by reference_clock_cycles).
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC attack delay value from a specified register for a
+ * given device instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC register.
+ * @param value A pointer to a uint8_t variable where the retrieved AGC attack
+ * delay value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcAttackDelay_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -346,9 +572,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcAttackDelay_Get(void *device,
     return status;
 }
 
-/**
- * When agc_enable_gain_freeze is enabled and the agc_enable_auto_gain_lock mode is selected, the fast attack AGC for Rx1 freezes gain after an amount of time determined by this register (and reference_clock_cycles  reference clock cycles per s).
- */
+/***************************************************************************//**
+ * @brief Sets the AGC auto gain lock delay for a specified instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the delay value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcAutoGainLockDelay_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -360,9 +596,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcAutoGainLockDelay_Set(void *devic
     return status;
 }
 
-/**
- * When agc_enable_gain_freeze is enabled and the agc_enable_auto_gain_lock mode is selected, the fast attack AGC for Rx1 freezes gain after an amount of time determined by this register (and reference_clock_cycles  reference clock cycles per s).
- */
+/***************************************************************************//**
+ * @brief Retrieves the Auto Gain Control (AGC) lock delay value from a
+ * specified register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcAutoGainLockDelay_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -377,6 +622,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcAutoGainLockDelay_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the AGC BBDC current mode in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the AGC BBDC current mode.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcCurrentMode_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -388,6 +645,17 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcCurrentMode_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the AGC BBDC current mode value from a specific register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC BBDC.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcCurrentMode_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -402,9 +670,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcCurrentMode_Get(void *device,
     return status;
 }
 
-/**
- * These bits determine the initial decimation of the input signal to the DC offset block before accumulation. The number of samples decimated is calculated as 2^i where i" is the decimate value. The maximum value that can be programmed is 21.
- */
+/***************************************************************************//**
+ * @brief Sets the decimation value for the AGC BBDC in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the decimation value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcDecimate_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -416,9 +693,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcDecimate_Set(void *device,
     return status;
 }
 
-/**
- * These bits determine the initial decimation of the input signal to the DC offset block before accumulation. The number of samples decimated is calculated as 2^i where i" is the decimate value. The maximum value that can be programmed is 21.
- */
+/***************************************************************************//**
+ * @brief Retrieves the decimation value from a specific register for the AGC
+ * BBDC in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved decimation
+ * value will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcDecimate_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -433,6 +720,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcDecimate_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the AGC BBDC force round path configuration in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value A uint8_t value that specifies the configuration to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcForceRoundPath_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -444,6 +743,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcForceRoundPath_Set(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the AGC BBDC force round path value from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcForceRoundPath_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -458,6 +769,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcForceRoundPath_Get(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the AGC BBDC force round path select value in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the AGC BBDC force round path select.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcForceRoundPathSelect_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -469,6 +793,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcForceRoundPathSelect_Set(void
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the AGC BBDC force round path select value from a specified
+ * register.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC BBDC.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcForceRoundPathSelect_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -483,9 +819,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcForceRoundPathSelect_Get(void
     return status;
 }
 
-/**
- * When "bbdc_load_acc" is set, the value in "bbdc_load_acc_i" and "bbdc_load_acc_q" registers are loaded in the digital DC offset accumulators for the I and Qpath. Once "bbdc_load_acc" is cleared, tracking continues from this loaded value. [0] - Ch1, [1] - Ch2.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC BBDC load accumulator value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the AGC BBDC load accumulator.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcLoadAcc_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -497,9 +842,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcLoadAcc_Set(void *device,
     return status;
 }
 
-/**
- * When "bbdc_load_acc" is set, the value in "bbdc_load_acc_i" and "bbdc_load_acc_q" registers are loaded in the digital DC offset accumulators for the I and Qpath. Once "bbdc_load_acc" is cleared, tracking continues from this loaded value. [0] - Ch1, [1] - Ch2.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC BBDC load accumulator value from a specified
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcLoadAcc_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -514,13 +868,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcLoadAcc_Get(void *device,
     return status;
 }
 
-/**
- * When "bbdc_load_acc" is set, the value in this register is loaded
-
- * in the digital DC offset accumulator for the I path. Once "bbdc_load_acc" is
-
- * cleared, tracking continues from this loaded value.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC BBDC load accumulator I value in the ADRV9001 device's
+ * register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A 32-bit unsigned integer representing the value to be set in
+ * the registers.
+ * @return Returns the status of the last write operation, indicating success
+ * (0) or an error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcLoadAccI_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t value)
@@ -538,13 +898,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcLoadAccI_Set(void *device,
     return status;
 }
 
-/**
- * When "bbdc_load_acc" is set, the value in this register is loaded
-
- * in the digital DC offset accumulator for the I path. Once "bbdc_load_acc" is
-
- * cleared, tracking continues from this loaded value.
- */
+/***************************************************************************//**
+ * @brief Retrieves the accumulated I value from the AGC BBDC register map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC BBDC register map.
+ * @param value A pointer to a 32-bit unsigned integer where the accumulated I
+ * value will be stored.
+ * @return Returns the status of the last read operation, indicating success (0)
+ * or failure (non-zero). The accumulated I value is stored in the
+ * location pointed to by the value parameter.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcLoadAccI_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -567,13 +933,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcLoadAccI_Get(void *device,
     return status;
 }
 
-/**
- * When "bbdc_load_acc" is set, the value in this register is loaded
-
- * in the digital DC offset accumulator for the Q path. Once "bbdc_load_acc" is
-
- * cleared, tracking continues from this loaded value.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC BBDC load accumulator Q value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A 32-bit unsigned integer representing the value to be set in
+ * the AGC BBDC load accumulator Q.
+ * @return Returns the status of the last write operation, indicating success
+ * (0) or an error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcLoadAccQ_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t value)
@@ -591,13 +962,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcLoadAccQ_Set(void *device,
     return status;
 }
 
-/**
- * When "bbdc_load_acc" is set, the value in this register is loaded
-
- * in the digital DC offset accumulator for the Q path. Once "bbdc_load_acc" is
-
- * cleared, tracking continues from this loaded value.
- */
+/***************************************************************************//**
+ * @brief Retrieves the accumulated Q value from the AGC BBDC register map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC BBDC register map.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved Q
+ * value will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcLoadAccQ_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -620,9 +996,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcLoadAccQ_Get(void *device,
     return status;
 }
 
-/**
- * This register controls the loop gain of the DC offset loop. The maximum value that can be programmed is 31.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC BBDC M shift value in the ADRV9001 register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcMShift_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -634,9 +1019,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcMShift_Set(void *device,
     return status;
 }
 
-/**
- * This register controls the loop gain of the DC offset loop. The maximum value that can be programmed is 31.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC BBDC M shift value from a specified register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC register.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcMShift_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -651,9 +1045,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcMShift_Get(void *device,
     return status;
 }
 
-/**
- * DEBUG BIT. Pause BBDC manually.
- */
+/***************************************************************************//**
+ * @brief Sets the manual pause state for the AGC BBDC in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value A uint8_t value indicating the desired manual pause state (0 or
+ * 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcManualPause_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -665,9 +1068,17 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcManualPause_Set(void *device,
     return status;
 }
 
-/**
- * DEBUG BIT. Pause BBDC manually.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC BBDC manual pause status from a specified register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC BBDC.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcManualPause_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -682,9 +1093,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcManualPause_Get(void *device,
     return status;
 }
 
-/**
- * DEBUG BIT. Load accumulator with the last value stored in the LUT.
- */
+/***************************************************************************//**
+ * @brief Sets the manual restore accumulator value for the AGC BBDC in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the manual restore accumulator.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcManualRestoreAcc_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -696,9 +1117,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcManualRestoreAcc_Set(void *de
     return status;
 }
 
-/**
- * DEBUG BIT. Load accumulator with the last value stored in the LUT.
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcManualRestoreAcc_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -713,11 +1143,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcManualRestoreAcc_Get(void *de
     return status;
 }
 
-/**
- * When this bit is set, the BBDC offset words going to the datapath
-
- * are masked (set to 0).
- */
+/***************************************************************************//**
+ * @brief Sets the AGC BBDC mask output in the NVS register map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that specifies the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcMaskOutput_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -729,11 +1167,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcMaskOutput_Set(void *device,
     return status;
 }
 
-/**
- * When this bit is set, the BBDC offset words going to the datapath
-
- * are masked (set to 0).
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC BBDC mask output value from a specific register for
+ * a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC BBDC.
+ * @param value A pointer to a uint8_t variable where the retrieved mask output
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcMaskOutput_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -748,9 +1193,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcMaskOutput_Get(void *device,
     return status;
 }
 
-/**
- * When "bbdc_multiplier_enable" is set, the output of the decimate block gets multiplied by the value of this register before being accumulated.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC BBDC multiplier value in the ADRV9001 device's RXB
+ * register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value An 8-bit unsigned integer representing the multiplier value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcMultiplier_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -762,9 +1217,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcMultiplier_Set(void *device,
     return status;
 }
 
-/**
- * When "bbdc_multiplier_enable" is set, the output of the decimate block gets multiplied by the value of this register before being accumulated.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC BBDC multiplier value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC BBDC multiplier.
+ * @param value A pointer to a uint8_t variable where the retrieved multiplier
+ * value will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcMultiplier_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -779,9 +1243,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcMultiplier_Get(void *device,
     return status;
 }
 
-/**
- * Dc Offset Multiplier Enable
- */
+/***************************************************************************//**
+ * @brief Sets the AGC BBDC multiplier enable value in the ADRV9001 device's
+ * register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that indicates the multiplier enable setting to
+ * be written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcMultiplierEnable_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -793,9 +1267,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcMultiplierEnable_Set(void *de
     return status;
 }
 
-/**
- * Dc Offset Multiplier Enable
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC BBDC multiplier enable value from a specified
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value indicating the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved multiplier
+ * enable value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcMultiplierEnable_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -810,9 +1293,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcMultiplierEnable_Get(void *de
     return status;
 }
 
-/**
- * When this bit is set, the accumulator as well as decimate block are frozen. They retain the last values that were stored in the registers before the pause signal was set. The Rx1 channel DC offset correction word is also frozen to its last value and is not updated any further. When the pause bit is cleared, the tracking resumes from its previous state. If it is required to have zero DC correction word when paused, set the mask bits to do so.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC BBDC pause state in the ADRV9001 device's RXB register
+ * map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value A uint8_t value indicating the pause state to be set (0 or 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcPause_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -824,9 +1316,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcPause_Set(void *device,
     return status;
 }
 
-/**
- * When this bit is set, the accumulator as well as decimate block are frozen. They retain the last values that were stored in the registers before the pause signal was set. The Rx1 channel DC offset correction word is also frozen to its last value and is not updated any further. When the pause bit is cleared, the tracking resumes from its previous state. If it is required to have zero DC correction word when paused, set the mask bits to do so.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC BBDC pause status from a specific register for a
+ * given device instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcPause_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -841,9 +1342,17 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcPause_Get(void *device,
     return status;
 }
 
-/**
- * Setting this bit resets the internal accumulator whenever a gain change occurs.  This action restarts the DC offset correction process from zero.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC BBDC reset state at gain change for a specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value A uint8_t value that indicates the reset state to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcResetAtGainchange_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -855,9 +1364,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcResetAtGainchange_Set(void *d
     return status;
 }
 
-/**
- * Setting this bit resets the internal accumulator whenever a gain change occurs.  This action restarts the DC offset correction process from zero.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC BBDC reset status at gain change from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcResetAtGainchange_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -872,6 +1390,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcResetAtGainchange_Get(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the AGC BBDC track input I register values for a specified
+ * instance in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A 32-bit unsigned integer containing the value to be written to
+ * the registers.
+ * @return Returns the status of the last write operation, indicating success
+ * (0) or an error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcTrackInputI_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t value)
@@ -889,6 +1420,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcTrackInputI_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the AGC BBDC track input I value from the specified device
+ * instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the last read operation, indicating success (0)
+ * or failure (non-zero).
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcTrackInputI_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -911,6 +1455,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcTrackInputI_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the AGC BBDC track input Q register values for a specified
+ * instance of the device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A 32-bit unsigned integer containing the value to be set in the
+ * AGC BBDC track input Q registers.
+ * @return Returns the status of the last write operation, where a value of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcTrackInputQ_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t value)
@@ -928,6 +1485,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcTrackInputQ_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a 24-bit value from a specific register map for the AGC BBDC
+ * track input Q.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the last read operation, indicating success (0)
+ * or failure (non-zero). The retrieved 24-bit value is stored in the
+ * location pointed to by the 'value' parameter.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcTrackInputQ_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -950,9 +1520,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcTrackInputQ_Get(void *device,
     return status;
 }
 
-/**
- * Enable Digital Dc Offset Tracking Ch1
- */
+/***************************************************************************//**
+ * @brief Sets the AGC BBDC tracking enable value in the ADRV9001 device's
+ * register.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value A uint8_t value that indicates the enable/disable state for AGC
+ * BBDC tracking.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcTrackingEnable_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -964,9 +1544,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcTrackingEnable_Set(void *devi
     return status;
 }
 
-/**
- * Enable Digital Dc Offset Tracking Ch1
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC BBDC tracking enable status from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcTrackingEnable_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -982,6 +1571,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcTrackingEnable_Get(void *devi
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the AGC BBDC tracking information from the specified device
+ * instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the read operations, where a value of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcTrackingISpi_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -1005,6 +1607,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcTrackingISpi_Get(void *device
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the AGC BBDC tracking value from the specified device
+ * instance.
+ *
+ * @param device A pointer to the device structure used for communication.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the read operations, with the `value` pointer
+ * containing the combined 24-bit result from the three register reads.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcTrackingQSpi_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -1027,6 +1641,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcTrackingQSpi_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Updates the SPI readback value for the AGC BBDC in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the SPI readback update operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcUpdateSpiReadback_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -1038,6 +1665,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcUpdateSpiReadback_Set(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the SPI readback value for the AGC BBDC register from the
+ * specified device.
+ *
+ * @param device A pointer to the device structure used for communication.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC BBDC register.
+ * @param value A pointer to a uint8_t variable where the readback value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcUpdateSpiReadback_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -1052,9 +1691,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcUpdateSpiReadback_Get(void *d
     return status;
 }
 
-/**
- * Set this self-clearing bit to update the registers that are available for digital DC offset readback.
- */
+/***************************************************************************//**
+ * @brief Sets the tracking word for the AGC BBDC in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the tracking word.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcUpdateTrackingWord_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -1066,9 +1714,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcUpdateTrackingWord_Set(void *
     return status;
 }
 
-/**
- * Set this self-clearing bit to update the registers that are available for digital DC offset readback.
- */
+/***************************************************************************//**
+ * @brief Retrieves the tracking word from a specific register for the AGC BBDC
+ * in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved tracking
+ * word will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcUpdateTrackingWord_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -1083,9 +1741,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcBbdcUpdateTrackingWord_Get(void *
     return status;
 }
 
-/**
- * Setting this bit enables immediate gain change if the ADC high threshold is exceeded (see description in agc_adc_high_ovrg_exceeded_counter).
- */
+/***************************************************************************//**
+ * @brief Sets the AGC gain value in the NVS register map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the gain value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcChangeGainIfAdcovrgHigh_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -1097,9 +1764,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcChangeGainIfAdcovrgHigh_Set(void 
     return status;
 }
 
-/**
- * Setting this bit enables immediate gain change if the ADC high threshold is exceeded (see description in agc_adc_high_ovrg_exceeded_counter).
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC gain value from a specific register for a given
+ * instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved gain value
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcChangeGainIfAdcovrgHigh_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -1114,9 +1790,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcChangeGainIfAdcovrgHigh_Get(void 
     return status;
 }
 
-/**
- * Setting this bit enables immediate gain change if the blocker high threshold is exceeded (see description in agc_ulb_threshold_exceeded_counter).
- */
+/***************************************************************************//**
+ * @brief Sets the AGC gain threshold in the RXB register map for the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value An 8-bit unsigned integer representing the gain value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcChangeGainIfUlbthHigh_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -1128,9 +1813,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcChangeGainIfUlbthHigh_Set(void *d
     return status;
 }
 
-/**
- * Setting this bit enables immediate gain change if the blocker high threshold is exceeded (see description in agc_ulb_threshold_exceeded_counter).
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC gain value from a specific register for a given
+ * instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC register.
+ * @param value A pointer to a uint8_t variable where the retrieved gain value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcChangeGainIfUlbthHigh_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -1145,9 +1839,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcChangeGainIfUlbthHigh_Get(void *d
     return status;
 }
 
-/**
- * This configures the decrement in gain index that should be applied when the decrement gain pin (in MGC pin control mode) is pulsed high and none of the peak detector signals have triggered. If any combination of the peak detector signals are high, then the gain step that corresponds to that combination of peak detector signals is used as the decrement step size.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC decrement gain step size in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the decrement gain step
+ * size to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcDecrGainStepSize_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -1159,9 +1862,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcDecrGainStepSize_Set(void *device
     return status;
 }
 
-/**
- * This configures the decrement in gain index that should be applied when the decrement gain pin (in MGC pin control mode) is pulsed high and none of the peak detector signals have triggered. If any combination of the peak detector signals are high, then the gain step that corresponds to that combination of peak detector signals is used as the decrement step size.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC decrement gain step size from a specific register
+ * for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC register.
+ * @param value A pointer to a uint8_t variable where the retrieved gain step
+ * size will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcDecrGainStepSize_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -1176,6 +1888,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcDecrGainStepSize_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the AGC delay counter base rate for a specified instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the AGC delay counter base rate.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcDelayCounterBaseRate_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -1187,6 +1912,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcDelayCounterBaseRate_Set(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the AGC delay counter base rate from a specified register
+ * and stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcDelayCounterBaseRate_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -1202,9 +1939,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcDelayCounterBaseRate_Get(void *de
 }
 
 
-/**
- * When high, this bit indicates a saturation occurred in the Rx1 digital gain block. Even a single saturation occurrence will make this bit go high and stay high. When this bit is read back by the BBP, the bit will be reset to 0.
- */
+/***************************************************************************//**
+ * @brief Retrieves the digital saturation status from the AGC register of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved saturation
+ * status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcDigSat_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -1219,9 +1966,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcDigSat_Get(void *device,
     return status;
 }
 
-/**
- * This counter configures the number of times the Digital Saturation threshold is triggered within one gain update interval before a gain change is mandated by the gain control loop. This register can take any value from 1 through 255. If the Digital saturation threshold is triggered N times where N is the value configured in this register, a gain change can occur when the agc_gain_update_counter expires or in hybrid mode when a pulse is seen on the corresponding GPIO pin .
- */
+/***************************************************************************//**
+ * @brief Sets the AGC digital saturation exceeded counter in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns the status of the register write operation, indicating
+ * success or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcDigSaturationExceededCounter_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -1233,9 +1990,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcDigSaturationExceededCounter_Set(
     return status;
 }
 
-/**
- * This counter configures the number of times the Digital Saturation threshold is triggered within one gain update interval before a gain change is mandated by the gain control loop. This register can take any value from 1 through 255. If the Digital saturation threshold is triggered N times where N is the value configured in this register, a gain change can occur when the agc_gain_update_counter expires or in hybrid mode when a pulse is seen on the corresponding GPIO pin .
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC digital saturation exceeded counter value from a
+ * specified register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved counter
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcDigSaturationExceededCounter_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -1250,13 +2017,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcDigSaturationExceededCounter_Get(
     return status;
 }
 
-/**
- * This register performs two functions (based on gain control mode used):
-
- * AGC Fast Attack Loop: The gain control loop reduces the gain by the specified number of indices when either UL blocker triggers or the ADC High Ovrg block triggers or the ADC Low Ovrg triggers requesting a gain change. The gain index in that case is reduced by the value specified in this register.
-
- * AGC Slow Loop: In this mode, when the Digital Saturation triggers a programmable number of times (agc_dig_saturation_exceeded_counter) above its configured threshold, the slow loop will decrement gain at the termination of the gain update counter. The value entered into this register should be the number of index values that the gain should be reduced by when a gain step change needs to be made due to Digital Saturation triggering. The digital saturation has a separate trigger than ADC or HB3 overload because this check for saturation is after the digital gain has been applied. It is possible that the signal exceeds FS after digital gain but not at the ADC output.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC digital saturation gain step for a specified instance in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the gain step value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcDigsatGainStep_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -1268,13 +2041,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcDigsatGainStep_Set(void *device,
     return status;
 }
 
-/**
- * This register performs two functions (based on gain control mode used):
-
- * AGC Fast Attack Loop: The gain control loop reduces the gain by the specified number of indices when either UL blocker triggers or the ADC High Ovrg block triggers or the ADC Low Ovrg triggers requesting a gain change. The gain index in that case is reduced by the value specified in this register.
-
- * AGC Slow Loop: In this mode, when the Digital Saturation triggers a programmable number of times (agc_dig_saturation_exceeded_counter) above its configured threshold, the slow loop will decrement gain at the termination of the gain update counter. The value entered into this register should be the number of index values that the gain should be reduced by when a gain step change needs to be made due to Digital Saturation triggering. The digital saturation has a separate trigger than ADC or HB3 overload because this check for saturation is after the digital gain has been applied. It is possible that the signal exceeds FS after digital gain but not at the ADC output.
- */
+/***************************************************************************//**
+ * @brief Retrieves the digital saturation gain step value from a specific
+ * register for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved gain step
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcDigsatGainStep_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -1289,9 +2067,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcDigsatGainStep_Get(void *device,
     return status;
 }
 
-/**
- * Enable AGC operation for dualband receiver
- */
+/***************************************************************************//**
+ * @brief Sets the AGC dual-band enable field in the NVS register map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that indicates the enable/disable state for the
+ * AGC dual-band.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandEnable_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -1303,9 +2091,17 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandEnable_Set(void *device,
     return status;
 }
 
-/**
- * Enable AGC operation for dualband receiver
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC dual-band enable status from a specific register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value indicating the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandEnable_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -1320,9 +2116,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandEnable_Get(void *device,
     return status;
 }
 
-/**
- * Rx1 AGC dual band operation - Indicates the gain table index above which the AGC prioritizes increasing gain through external LNA control over the Front-end gain
- */
+/***************************************************************************//**
+ * @brief Sets the lower index value for the AGC dual-band external table in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC dual-band external table.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandExtTableLowerIndex_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -1334,9 +2140,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandExtTableLowerIndex_Set(vo
     return status;
 }
 
-/**
- * Rx1 AGC dual band operation - Indicates the gain table index above which the AGC prioritizes increasing gain through external LNA control over the Front-end gain
- */
+/***************************************************************************//**
+ * @brief Retrieves the lower index value from the AGC dual-band extended table
+ * for a specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC dual-band extended table.
+ * @param value A pointer to a uint8_t variable where the retrieved lower index
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandExtTableLowerIndex_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -1351,9 +2166,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandExtTableLowerIndex_Get(vo
     return status;
 }
 
-/**
- * Rx1 AGC dual band operation - Indicates the gain table index below which the AGC prioritizes decreasing gain through external LNA control over the Front-end gain
- */
+/***************************************************************************//**
+ * @brief Sets the upper index value for the AGC dual-band external table in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC dual-band external table.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandExtTableUpperIndex_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -1365,9 +2190,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandExtTableUpperIndex_Set(vo
     return status;
 }
 
-/**
- * Rx1 AGC dual band operation - Indicates the gain table index below which the AGC prioritizes decreasing gain through external LNA control over the Front-end gain
- */
+/***************************************************************************//**
+ * @brief Retrieves the upper index value from the AGC dual-band extended table
+ * for a specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC dual-band register.
+ * @param value A pointer to a uint8_t variable where the retrieved upper index
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandExtTableUpperIndex_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -1382,9 +2216,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandExtTableUpperIndex_Get(vo
     return status;
 }
 
-/**
- * AGC dualband mode - High threshold for band A or band B power above which the LNA index is decreased. Value is in 0.5db
- */
+/***************************************************************************//**
+ * @brief Sets the high LNA threshold for the AGC dual-band receiver in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * receiver register.
+ * @param value An 8-bit unsigned integer representing the threshold value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandHighLnaThreshold_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -1396,9 +2240,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandHighLnaThreshold_Set(void
     return status;
 }
 
-/**
- * AGC dualband mode - High threshold for band A or band B power above which the LNA index is decreased. Value is in 0.5db
- */
+/***************************************************************************//**
+ * @brief Retrieves the high LNA threshold value from the AGC dual-band register
+ * for a specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC dual-band register.
+ * @param value A pointer to a uint8_t variable where the retrieved threshold
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandHighLnaThreshold_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -1413,9 +2266,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandHighLnaThreshold_Get(void
     return status;
 }
 
-/**
- * This select the index for the Rx1 Band A external LNA gain table when agc_ext_index_override is enabled.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC dual-band index for Band A in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for RXB.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the AGC dual-band index.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandIndexBandA_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -1427,9 +2289,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandIndexBandA_Set(void *devi
     return status;
 }
 
-/**
- * This select the index for the Rx1 Band A external LNA gain table when agc_ext_index_override is enabled.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC dual-band index for Band A from a specified device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC register.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandIndexBandA_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -1444,9 +2315,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandIndexBandA_Get(void *devi
     return status;
 }
 
-/**
- * Override the index to the External LNA gain table. Use values from agc_rx<1/2>_ext_index_band_<a/b> to control the index to the gain table.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC dual-band index override value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the AGC dual-band index override.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandIndexOverride_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -1458,9 +2338,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandIndexOverride_Set(void *d
     return status;
 }
 
-/**
- * Override the index to the External LNA gain table. Use values from agc_rx<1/2>_ext_index_band_<a/b> to control the index to the gain table.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC dual-band index override value from a specified
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandIndexOverride_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -1475,9 +2364,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandIndexOverride_Get(void *d
     return status;
 }
 
-/**
- * AGC dualband mode - Margin to compare Band A power versus Band B power ( for Pwr_A > Pwr_B + margin, and Pwr_B > Pwr_A + margin checks). The margin is used to compare the powers of the bands if LNA of one band needs to be changed so that powers of the bands match. Value is in 0.5db resolution.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC dual-band LNA step value in the ADRV9001 device's
+ * register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandLnaStep_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -1489,9 +2388,17 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandLnaStep_Set(void *device,
     return status;
 }
 
-/**
- * AGC dualband mode - Margin to compare Band A power versus Band B power ( for Pwr_A > Pwr_B + margin, and Pwr_B > Pwr_A + margin checks). The margin is used to compare the powers of the bands if LNA of one band needs to be changed so that powers of the bands match. Value is in 0.5db resolution.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC dual-band LNA step value from a specified register.
+ *
+ * @param device A pointer to the device context used for register access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandLnaStep_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -1506,9 +2413,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandLnaStep_Get(void *device,
     return status;
 }
 
-/**
- * AGC dualband mode - Low threshold for band A or band B power below which the LNA index is increased. Value is in 0.5db
- */
+/***************************************************************************//**
+ * @brief Sets the low LNA threshold for the AGC dual-band in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the threshold value to be
+ * set.
+ * @return Returns the status of the register write operation, indicating
+ * success or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandLowLnaThreshold_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -1520,9 +2437,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandLowLnaThreshold_Set(void 
     return status;
 }
 
-/**
- * AGC dualband mode - Low threshold for band A or band B power below which the LNA index is increased. Value is in 0.5db
- */
+/***************************************************************************//**
+ * @brief Retrieves the low LNA threshold value from the AGC dual-band register
+ * for a specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC dual-band register.
+ * @param value A pointer to a uint8_t variable where the retrieved low LNA
+ * threshold value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandLowLnaThreshold_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -1537,9 +2463,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandLowLnaThreshold_Get(void 
     return status;
 }
 
-/**
- * This select the maximum possible index for the Rx1 Band A and Band B external LNA gain table control from the AGC
- */
+/***************************************************************************//**
+ * @brief Sets the maximum index for the AGC dual-band in the ADRV9001 device's
+ * RXB register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value An 8-bit unsigned integer representing the maximum index value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandMaxIndex_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -1551,9 +2487,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandMaxIndex_Set(void *device
     return status;
 }
 
-/**
- * This select the maximum possible index for the Rx1 Band A and Band B external LNA gain table control from the AGC
- */
+/***************************************************************************//**
+ * @brief Retrieves the maximum index value from the AGC dual-band register for
+ * a specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC dual-band register.
+ * @param value A pointer to a uint8_t variable where the retrieved maximum
+ * index value will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandMaxIndex_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -1568,9 +2513,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandMaxIndex_Get(void *device
     return status;
 }
 
-/**
- * AGC dualband mode - Margin for comparing total power against power of individual bands. If Pwr_tot > Pwr_A + Pwr_B +margin, the signal contains other components than A or B, and AGC should behave like a single band system. margin is in 0.5db steps.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC dual-band power margin for a specified instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB (Receive Baseband) register map.
+ * @param value An 8-bit unsigned integer representing the power margin value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandPwrMargin_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -1582,9 +2537,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandPwrMargin_Set(void *devic
     return status;
 }
 
-/**
- * AGC dualband mode - Margin for comparing total power against power of individual bands. If Pwr_tot > Pwr_A + Pwr_B +margin, the signal contains other components than A or B, and AGC should behave like a single band system. margin is in 0.5db steps.
- */
+/***************************************************************************//**
+ * @brief Retrieves the power margin value from a specific register for the AGC
+ * dual-band in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved power margin
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandPwrMargin_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -1599,9 +2564,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcDualbandPwrMargin_Get(void *devic
     return status;
 }
 
-/**
- * Setting this bit enables the automatic gain locking feature of the AGC. Clearing this bit requires the AGC to be manually locked by the user.
- */
+/***************************************************************************//**
+ * @brief Sets the auto gain lock configuration for a specified instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A uint8_t value indicating the desired state for the auto gain
+ * lock.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableAutoGainLock_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -1613,9 +2588,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableAutoGainLock_Set(void *devi
     return status;
 }
 
-/**
- * Setting this bit enables the automatic gain locking feature of the AGC. Clearing this bit requires the AGC to be manually locked by the user.
- */
+/***************************************************************************//**
+ * @brief Retrieves the auto gain lock status from a specific register for a
+ * given instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved auto gain
+ * lock status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableAutoGainLock_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -1630,9 +2615,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableAutoGainLock_Get(void *devi
     return status;
 }
 
-/**
- * Setting this bit enables detection and correction of digital saturation overloads.
- */
+/***************************************************************************//**
+ * @brief Sets the digital saturation override for the AGC in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value A uint8_t value that indicates the desired state for the digital
+ * saturation override.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableDigsatOvrg_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -1644,9 +2639,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableDigsatOvrg_Set(void *device
     return status;
 }
 
-/**
- * Setting this bit enables detection and correction of digital saturation overloads.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC digital saturation override setting from a specified
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableDigsatOvrg_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -1661,49 +2665,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableDigsatOvrg_Get(void *device
     return status;
 }
 
-/**
- * The multiple time constants in AGC loop allow for fast attack and fast recovery back to max gain for radar applications. For MC-GSM, this should also help in quick recovery of gain to alleviate degradation to a minimal number of time slots of the GSM signal.
-
- * This mode for AGC operations requires the following:
-
- *     - I^2 + Q^2 calculation on a sample basis (dec_overload_power_mode = 1) from decimated overload data detector (agc_adc_ovrg_sel = 1, enable_dec_overload = 1)
-
- *     - Common offset for peak/power thresholds across all thresholds (dec_threshold_config)
-
- *     - Single over-range level peak/power threshold: One peak required to trigger gain reduction (dec_overload_threshold_count = 1) within over-range window (dec_overload_duration_count). With agc_change_gain_if_adcovrg_high, the AGC can decrease gain rapidly if over-range.
-
- *     - Three under-range level peak/power thresholds (decimated_data_overload_int0_lower_threshold, decimated_data_overload_int1_lower_threshold, dec_overload_lower_threshold). Each one of these under-range peak thresholds is associated with one of the three update intervals, one of three threshold counters, and one of the three gain steps.
-
- *         - 1st update interval (agc_urange_interval0) is an 16-bit count value (at the AGC clock rate)
-
- *         - 1st counter (agc_adcovrg_low_int0_counter) counts the number of overloads within the 1st update interval.
-
- *         - 1st gain step (agc_ovrg_low_int0_gain_step) determines the gain increment if the overloads do not exceed the 1st counter within the 1st update interval
-
- *         - 2nd update interval is a multiple of the 1st update interval and a 6-bit agc_urange_interval1_mult.
-
- *         - 2nd counter (agc_adcovrg_low_int1_counter) counts the number of overloads within the 2nd update interval.
-
- *         - 2nd gain step (agc_ovrg_low_int1_gain_step) determines the gain increment if the overloads do not exceed the 2nd counter within the 2nd update interval
-
- *         - 3rd update interval is a multiple of 2nd update interval and a 6-bit agc_urange_interval2_mult
-
- *         - 3rd counter (agc_adc_low_ovrg_exceeded_counter) counts the number of overloads within the 2nd update interval.
-
- *         - 3rd gain step (agc_ovrg_low_gain_step) determines the gain increment if the overloads do not exceed the 2nd counter within the 2nd update interval
-
- *         - To allow the counters to correlate closer to the IQ sample rate, a 2-bit agc_mult_clk_rate_comp allows the 1st update interval to be multiplied by either 1, 2 or 4 to effectively allow for count duration to run at the IQ sample rate.
-
- *     - The priority for gain change when the update intervals occur is
-
- *         - Check if over-range flag was set, else
-
- *         - Check if flag was set for underrange update interval0, else
-
- *         - Check if flag was set for underrange update interval1, else
-
- *         - Check if flag was set for underrange update interval2
- */
+/***************************************************************************//**
+ * @brief Sets the AGC fast recovery loop enable state in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value indicating the desired state to set for the AGC
+ * fast recovery loop.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableFastRecoveryLoop_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -1715,49 +2688,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableFastRecoveryLoop_Set(void *
     return status;
 }
 
-/**
- * The multiple time constants in AGC loop allow for fast attack and fast recovery back to max gain for radar applications. For MC-GSM, this should also help in quick recovery of gain to alleviate degradation to a minimal number of time slots of the GSM signal.
-
- * This mode for AGC operations requires the following:
-
- *     - I^2 + Q^2 calculation on a sample basis (dec_overload_power_mode = 1) from decimated overload data detector (agc_adc_ovrg_sel = 1, enable_dec_overload = 1)
-
- *     - Common offset for peak/power thresholds across all thresholds (dec_threshold_config)
-
- *     - Single over-range level peak/power threshold: One peak required to trigger gain reduction (dec_overload_threshold_count = 1) within over-range window (dec_overload_duration_count). With agc_change_gain_if_adcovrg_high, the AGC can decrease gain rapidly if over-range.
-
- *     - Three under-range level peak/power thresholds (decimated_data_overload_int0_lower_threshold, decimated_data_overload_int1_lower_threshold, dec_overload_lower_threshold). Each one of these under-range peak thresholds is associated with one of the three update intervals, one of three threshold counters, and one of the three gain steps.
-
- *         - 1st update interval (agc_urange_interval0) is an 16-bit count value (at the AGC clock rate)
-
- *         - 1st counter (agc_adcovrg_low_int0_counter) counts the number of overloads within the 1st update interval.
-
- *         - 1st gain step (agc_ovrg_low_int0_gain_step) determines the gain increment if the overloads do not exceed the 1st counter within the 1st update interval
-
- *         - 2nd update interval is a multiple of the 1st update interval and a 6-bit agc_urange_interval1_mult.
-
- *         - 2nd counter (agc_adcovrg_low_int1_counter) counts the number of overloads within the 2nd update interval.
-
- *         - 2nd gain step (agc_ovrg_low_int1_gain_step) determines the gain increment if the overloads do not exceed the 2nd counter within the 2nd update interval
-
- *         - 3rd update interval is a multiple of 2nd update interval and a 6-bit agc_urange_interval2_mult
-
- *         - 3rd counter (agc_adc_low_ovrg_exceeded_counter) counts the number of overloads within the 2nd update interval.
-
- *         - 3rd gain step (agc_ovrg_low_gain_step) determines the gain increment if the overloads do not exceed the 2nd counter within the 2nd update interval
-
- *         - To allow the counters to correlate closer to the IQ sample rate, a 2-bit agc_mult_clk_rate_comp allows the 1st update interval to be multiplied by either 1, 2 or 4 to effectively allow for count duration to run at the IQ sample rate.
-
- *     - The priority for gain change when the update intervals occur is
-
- *         - Check if over-range flag was set, else
-
- *         - Check if flag was set for underrange update interval0, else
-
- *         - Check if flag was set for underrange update interval1, else
-
- *         - Check if flag was set for underrange update interval2
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC fast recovery loop enable status from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableFastRecoveryLoop_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -1772,9 +2714,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableFastRecoveryLoop_Get(void *
     return status;
 }
 
-/**
- * Setting this bit enables the use of the GPIO pin to control hybrid mode operation.  If hybrid mode is used, this bit should be set.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC enable gain change with pin control for a specified
+ * instance in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the gain change value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableGainChangeWithPinControl_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -1786,9 +2738,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableGainChangeWithPinControl_Se
     return status;
 }
 
-/**
- * Setting this bit enables the use of the GPIO pin to control hybrid mode operation.  If hybrid mode is used, this bit should be set.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC enable gain change value from a specific register
+ * for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC register.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableGainChangeWithPinControl_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -1803,9 +2764,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableGainChangeWithPinControl_Ge
     return status;
 }
 
-/**
- * Setting this bit enables automatic/manual gain freeze of the AGC. In automatic gain freeze, the AGC can be stopped after a certain period of time. In manual freeze mode, the user asserts a GPIO to freeze the AGC.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC enable gain freeze configuration in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value A uint8_t value that indicates the gain freeze setting to be
+ * applied.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableGainFreeze_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -1817,9 +2787,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableGainFreeze_Set(void *device
     return status;
 }
 
-/**
- * Setting this bit enables automatic/manual gain freeze of the AGC. In automatic gain freeze, the AGC can be stopped after a certain period of time. In manual freeze mode, the user asserts a GPIO to freeze the AGC.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC Enable Gain Freeze value from a specific register
+ * for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC register.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableGainFreeze_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -1834,9 +2813,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableGainFreeze_Get(void *device
     return status;
 }
 
-/**
- * Setting this bit causes agc_rx1_gain_index and agc_rx2_gain_index registers to be updated with the latest value when they are written to (with some dummy data). The value can be read back after this. Clearing this bit will allow the value to be read back without writing to the register, but the user should be careful not to read back the value when it is changing.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC enable gain index in the NVS register map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the gain index value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableGainIndexUpdate_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -1848,9 +2837,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableGainIndexUpdate_Set(void *d
     return status;
 }
 
-/**
- * Setting this bit causes agc_rx1_gain_index and agc_rx2_gain_index registers to be updated with the latest value when they are written to (with some dummy data). The value can be read back after this. Clearing this bit will allow the value to be read back without writing to the register, but the user should be careful not to read back the value when it is changing.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC enable gain index from a specific register and
+ * updates the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC register.
+ * @param value A pointer to a uint8_t variable where the retrieved gain index
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableGainIndexUpdate_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -1865,11 +2863,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableGainIndexUpdate_Get(void *d
     return status;
 }
 
-/**
- * This enables the two-threshold AGC loop mode. The two-threshold AGC loop can work as follows. It will have the first threshold (programmable - agc_optimal_ip3_index) at -17dBFS. When a signal exceeds -17dBFS, the gain is reduced by ~5dB (this improves IIP3 but only results in a 0.5dB degradation in NF). If FE attenuation is greater than 5dB below min attenuation, then this threshold does not reduce the gain further.
-
- * Therefore, if (gain_index  = max_gain) and (gain_index   (max_gain -5dB)), then the threshold is active. otherwise it is not.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC Enable IP3 Optimization Threshold for a specified
+ * instance in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the threshold value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableIp3OptimizationThreshold_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -1881,11 +2887,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableIp3OptimizationThreshold_Se
     return status;
 }
 
-/**
- * This enables the two-threshold AGC loop mode. The two-threshold AGC loop can work as follows. It will have the first threshold (programmable - agc_optimal_ip3_index) at -17dBFS. When a signal exceeds -17dBFS, the gain is reduced by ~5dB (this improves IIP3 but only results in a 0.5dB degradation in NF). If FE attenuation is greater than 5dB below min attenuation, then this threshold does not reduce the gain further.
-
- * Therefore, if (gain_index  = max_gain) and (gain_index   (max_gain -5dB)), then the threshold is active. otherwise it is not.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC Enable IP3 Optimization Threshold value from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved threshold
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableIp3OptimizationThreshold_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -1900,9 +2913,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableIp3OptimizationThreshold_Ge
     return status;
 }
 
-/**
- * When exiting an AGC gain lock, setting this bit enables the gain to be set to the max gain or to the optimize gain if opt max gain when agc_opt_max_gain_when_enlost is set.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC enable reset to maximum gain in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer that specifies the value to be written
+ * to the AGC enable reset.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableResetToMaxgain_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -1914,9 +2936,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableResetToMaxgain_Set(void *de
     return status;
 }
 
-/**
- * When exiting an AGC gain lock, setting this bit enables the gain to be set to the max gain or to the optimize gain if opt max gain when agc_opt_max_gain_when_enlost is set.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC enable reset to max gain value from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableResetToMaxgain_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -1931,9 +2962,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableResetToMaxgain_Get(void *de
     return status;
 }
 
-/**
- * Setting this bit enables the gain to be set to the AGC gain lock index at the end of the previous burst when exiting Rx mode.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC gain value in the RXB register map for the specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value An 8-bit unsigned integer representing the gain value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableSetGain_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -1945,9 +2985,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableSetGain_Set(void *device,
     return status;
 }
 
-/**
- * Setting this bit enables the gain to be set to the AGC gain lock index at the end of the previous burst when exiting Rx mode.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC gain value from a specific register for a given
+ * instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved gain value
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableSetGain_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -1962,9 +3012,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableSetGain_Get(void *device,
     return status;
 }
 
-/**
- * Setting this bit enables the gain to be set to the AGC gain lock index at the end of the previous burst when exiting the gain lock state.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC gain freeze exit value in the ADRV9001 device's RXB
+ * register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific RXB instance to
+ * configure.
+ * @param value An 8-bit unsigned integer representing the gain value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableSetGainWGainFreezeExit_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -1976,9 +3035,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableSetGainWGainFreezeExit_Set(
     return status;
 }
 
-/**
- * Setting this bit enables the gain to be set to the AGC gain lock index at the end of the previous burst when exiting the gain lock state.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC gain value from a specific register for a given
+ * instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved gain value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableSetGainWGainFreezeExit_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -1993,9 +3062,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableSetGainWGainFreezeExit_Get(
     return status;
 }
 
-/**
- * This enables the agc_gain_update_counter to be sync to the time-slot boundary. After setting the field to 1, set the corresponding GPIO high to re-sync the agc_gain_update_counter to the GPIO pulse (dee agc_gain_update_counter for more details).
- */
+/***************************************************************************//**
+ * @brief Sets the AGC enable sync pulse for the gain counter in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value A uint8_t value that indicates the desired state (enabled or
+ * disabled) for the AGC sync pulse.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableSyncPulseForGainCounter_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -2007,9 +3086,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableSyncPulseForGainCounter_Set
     return status;
 }
 
-/**
- * This enables the agc_gain_update_counter to be sync to the time-slot boundary. After setting the field to 1, set the corresponding GPIO high to re-sync the agc_gain_update_counter to the GPIO pulse (dee agc_gain_update_counter for more details).
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC enable sync pulse value for the gain counter from a
+ * specified register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableSyncPulseForGainCounter_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -2024,9 +3112,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcEnableSyncPulseForGainCounter_Get
     return status;
 }
 
-/**
- * Applies to the Fast AGC.  The AGC will move from state 1 to state 2 only if no overloads occur for the time specified in this register.  AGC clock clocks the counter.  Resolution is 1 AGC clock cycle/LSB.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC energy detect count in the ADRV9001 device's RXB NVS
+ * register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the AGC energy detect count.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcEnergyDetectCount_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -2038,9 +3136,17 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcEnergyDetectCount_Set(void *devic
     return status;
 }
 
-/**
- * Applies to the Fast AGC.  The AGC will move from state 1 to state 2 only if no overloads occur for the time specified in this register.  AGC clock clocks the counter.  Resolution is 1 AGC clock cycle/LSB.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC energy detect count from a specified register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value indicating the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcEnergyDetectCount_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -2055,9 +3161,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcEnergyDetectCount_Get(void *devic
     return status;
 }
 
-/**
- * Setting this bit enables exiting from gain lock when signal energy is lost.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC energy lost freeze value in the ADRV9001 device's RXB
+ * register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value An 8-bit integer representing the value to be set for the AGC
+ * energy lost freeze.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcEnergyLostFreeze_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -2069,9 +3185,17 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcEnergyLostFreeze_Set(void *device
     return status;
 }
 
-/**
- * Setting this bit enables exiting from gain lock when signal energy is lost.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC energy lost freeze value from a specified register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value indicating the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcEnergyLostFreeze_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -2086,9 +3210,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcEnergyLostFreeze_Get(void *device
     return status;
 }
 
-/**
- * Applies to the Fast AGC.  After gain lock, the AGC measures the signal power and uses it as a comparison value.  If a later power result is lower than the original value by an amount equal to or greater than this threshold, a counter starts running at the AGC clock rate.  If the counter exceeds twice the value of the agc_gainlock_exit_count, the gain may unlock depending on the AGC configuration bits.  Resolution is 1dB/LSB.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC energy lost threshold in the ADRV9001 device's RXB NVS
+ * register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register.
+ * @param value An 8-bit unsigned integer representing the threshold value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcEnergyLostThreshold_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -2100,9 +3234,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcEnergyLostThreshold_Set(void *dev
     return status;
 }
 
-/**
- * Applies to the Fast AGC.  After gain lock, the AGC measures the signal power and uses it as a comparison value.  If a later power result is lower than the original value by an amount equal to or greater than this threshold, a counter starts running at the AGC clock rate.  If the counter exceeds twice the value of the agc_gainlock_exit_count, the gain may unlock depending on the AGC configuration bits.  Resolution is 1dB/LSB.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC energy lost threshold value from a specified
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value indicating the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved threshold
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcEnergyLostThreshold_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -2117,9 +3260,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcEnergyLostThreshold_Get(void *dev
     return status;
 }
 
-/**
- * Applies to both Slow and Fast AGC.  Before measuring power, the device waits for the RX signal path to settle.  This register holds the settling delay factor that is multiplied by 2 to produce the settling delay.  AGC clock clocks the counter.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC fast attack settling delay in the ADRV9001 device's RXB
+ * register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the AGC fast attack settling delay.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcFastAttackSettlingDelay_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -2131,9 +3284,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcFastAttackSettlingDelay_Set(void 
     return status;
 }
 
-/**
- * Applies to both Slow and Fast AGC.  Before measuring power, the device waits for the RX signal path to settle.  This register holds the settling delay factor that is multiplied by 2 to produce the settling delay.  AGC clock clocks the counter.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC fast attack settling delay value from a specified
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcFastAttackSettlingDelay_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -2149,21 +3311,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcFastAttackSettlingDelay_Get(void 
 }
 
 
-/**
- * This field is read back only.  If the fast attack AGC loop is enabled (agc_rx1_setup), this register indicates the current state of the state machine according to the following options:
-
- * 000	Reset peak detectors
-
- * 001	Settling delay state (wait for the gain transients to flush out of the Rx datapath)
-
- * 010	Slow measurement state (a power measurement is performed to determine power level of input signal)
-
- * 011	Gain change state (gain is changed based on the power measurement made in the previous state)
-
- * 101	Gain lock state
-
- * 110	Recovery from overload state
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC fast attack state from a specified register and
+ * stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC fast attack state.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcFastAttackState_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -2178,9 +3337,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcFastAttackState_Get(void *device,
     return status;
 }
 
-/**
- * Applies to the Fast AGC.  These bits set the threshold for the number of allowable overloads.  If this value is exceeded, the AGC algorithm will restart.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC final overrange count in the ADRV9001 device's register
+ * map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcFinalOverrangeCount_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -2192,9 +3361,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcFinalOverrangeCount_Set(void *dev
     return status;
 }
 
-/**
- * Applies to the Fast AGC.  These bits set the threshold for the number of allowable overloads.  If this value is exceeded, the AGC algorithm will restart.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC final overrange count from a specific register in
+ * the device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved overrange
+ * count will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcFinalOverrangeCount_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -2209,9 +3388,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcFinalOverrangeCount_Get(void *dev
     return status;
 }
 
-/**
- * Setting this bit enables overloads to be controlled solely by agc_ovrg_freeze in all states of the AGC. When disabled, the overloads are always observed if the AGC gain in not locked, and by agc_ovrg_freeze when locked.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC force freeze value in the ADRV9001 NVS register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the AGC force freeze.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcForceFreeze_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -2223,9 +3411,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcForceFreeze_Set(void *device,
     return status;
 }
 
-/**
- * Setting this bit enables overloads to be controlled solely by agc_ovrg_freeze in all states of the AGC. When disabled, the overloads are always observed if the AGC gain in not locked, and by agc_ovrg_freeze when locked.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC force freeze value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC register.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcForceFreeze_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -2240,9 +3437,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcForceFreeze_Get(void *device,
     return status;
 }
 
-/**
- * Setting this bit forces the analog peak detector from channel 1 to a value of 0.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC Force Power Down Reset value in the ADRV9001 device's RXB
+ * NVS register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcForcePdReset_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -2254,9 +3461,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcForcePdReset_Set(void *device,
     return status;
 }
 
-/**
- * Setting this bit forces the analog peak detector from channel 1 to a value of 0.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC Force Power Down Reset value from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcForcePdReset_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -2271,9 +3487,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcForcePdReset_Get(void *device,
     return status;
 }
 
-/**
- * This field configures the number of gain indexes to reduce the gain by when overloads (UL blocker / ADC high / digital saturation) have been exceeded while the AGC is settling to the AGC locked gain.
- */
+/***************************************************************************//**
+ * @brief Sets the final settling step of the AGC full gain in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcFullGainFinalSettlingStep_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -2285,9 +3511,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcFullGainFinalSettlingStep_Set(voi
     return status;
 }
 
-/**
- * This field configures the number of gain indexes to reduce the gain by when overloads (UL blocker / ADC high / digital saturation) have been exceeded while the AGC is settling to the AGC locked gain.
- */
+/***************************************************************************//**
+ * @brief Retrieves the final settling step of the AGC full gain from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcFullGainFinalSettlingStep_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -2302,9 +3537,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcFullGainFinalSettlingStep_Get(voi
     return status;
 }
 
-/**
- * In slow loop mode, this bit can be used to synchronize the agc_gain_update_counter to a time-slot boundary if agc_enable_sync_pulse_for_gain_counter is enabled. In hybrid mode, the bit can be used to cause a gain change in the AGC if agc_enable_gain_change_with_pin_control is enabled.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC gain change synchronization update for a specified
+ * instance in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the new AGC gain value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcGainChangeSyncUpdate_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -2316,9 +3561,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcGainChangeSyncUpdate_Set(void *de
     return status;
 }
 
-/**
- * In slow loop mode, this bit can be used to synchronize the agc_gain_update_counter to a time-slot boundary if agc_enable_sync_pulse_for_gain_counter is enabled. In hybrid mode, the bit can be used to cause a gain change in the AGC if agc_enable_gain_change_with_pin_control is enabled.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC gain change synchronization update value from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcGainChangeSyncUpdate_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -2333,15 +3587,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcGainChangeSyncUpdate_Get(void *de
     return status;
 }
 
-/**
- * This register is read back only. When read back in Rx mode, it indicates the gain index selected by either the AGC loops or in manual gain mode, the index selected by the BBP for Rx1 at that time. The number of rows in the programmable gain table is 256 (0 through 255). The default gain table has valid entries from index 255 through index 236. When agc_enable_gain_index_update is set, the register must be written to (with some dummy data) before reading. The write latches the current index into the register. When the bit is not set, the register can be read from (without a write to it), but the user must ensure that that index is not being read while it is changing.
-
- * 
-
- *  In the Rx AGC `increment gain on peak threshold only' mode, when the LL blocker triggers a programmable number of times above its configured threshold (see 0x482, LL blocker exceeded counter), the slow loop will increment gain at the termination of the gain update counter. The value entered into this register should be the number of index values that the gain should be increased by when a gain step change needs to be made due to LL blocker triggering.
-
- *  Rx1 AGC gain index
- */
+/***************************************************************************//**
+ * @brief Sets the AGC gain index in the NVS register map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the AGC gain index to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcGainIndex_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -2353,15 +3610,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcGainIndex_Set(void *device,
     return status;
 }
 
-/**
- * This register is read back only. When read back in Rx mode, it indicates the gain index selected by either the AGC loops or in manual gain mode, the index selected by the BBP for Rx1 at that time. The number of rows in the programmable gain table is 256 (0 through 255). The default gain table has valid entries from index 255 through index 236. When agc_enable_gain_index_update is set, the register must be written to (with some dummy data) before reading. The write latches the current index into the register. When the bit is not set, the register can be read from (without a write to it), but the user must ensure that that index is not being read while it is changing.
-
- * 
-
- *  In the Rx AGC `increment gain on peak threshold only' mode, when the LL blocker triggers a programmable number of times above its configured threshold (see 0x482, LL blocker exceeded counter), the slow loop will increment gain at the termination of the gain update counter. The value entered into this register should be the number of index values that the gain should be increased by when a gain step change needs to be made due to LL blocker triggering.
-
- *  Rx1 AGC gain index
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC gain index from a specified register for a given
+ * device instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved AGC gain
+ * index will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcGainIndex_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -2377,9 +3638,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcGainIndex_Get(void *device,
 }
 
 
-/**
- * This bit indicates that the gain control loop in Rx1 has locked the gain and no changes will occur to the gain unless very specific conditions are met. This bit is applicable to the AGC fast attack loop only.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC gain lock status from a specific register for a
+ * given device instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved AGC gain
+ * lock status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcGainLock_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -2394,9 +3664,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcGainLock_Get(void *device,
     return status;
 }
 
-/**
- * This field indicates the step size of the gain table in 0.25dB resolution.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC gain table step size in the ADRV9001 device's RXB NVS
+ * register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB NVS register map.
+ * @param value An 8-bit unsigned integer representing the step size value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcGainTableStepSize_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -2408,9 +3688,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcGainTableStepSize_Set(void *devic
     return status;
 }
 
-/**
- * This field indicates the step size of the gain table in 0.25dB resolution.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC gain table step size from a specified register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC gain table.
+ * @param value A pointer to a uint8_t variable where the retrieved step size
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcGainTableStepSize_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -2425,9 +3714,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcGainTableStepSize_Get(void *devic
     return status;
 }
 
-/**
- * It is only enabled in Slow AGC mode. Gain change can only occur on the termination of this counter, if agc_change_gain_if_ulbth_high or agc_change_gain_if_adcovrg_high are not set. When this counter expires, the overload and power based threshold conditions are evaluated for the Rx enabled, and a gain change is then performed (or not). This counter runs at the AGC rate and can be configured to run at an update rate commensurate with a timeslot (or multiple timeslots).  To sync this counter to the time-slot boundary, set agc_enable_sync_pulse_for_gain_counter to 1, and then set the corresponding GPIO high to re-sync the counter to the GPIO pulse. The total gain update duration is the sum of agc_slow_loop_settling_delay and the agc_gain_update_counter value.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC gain update counter in the NVS register map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A 32-bit unsigned integer representing the value to be set in
+ * the AGC gain update counter.
+ * @return Returns the status of the last write operation, where a value of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcGainUpdateCounter_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t value)
@@ -2445,9 +3744,20 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcGainUpdateCounter_Set(void *devic
     return status;
 }
 
-/**
- * It is only enabled in Slow AGC mode. Gain change can only occur on the termination of this counter, if agc_change_gain_if_ulbth_high or agc_change_gain_if_adcovrg_high are not set. When this counter expires, the overload and power based threshold conditions are evaluated for the Rx enabled, and a gain change is then performed (or not). This counter runs at the AGC rate and can be configured to run at an update rate commensurate with a timeslot (or multiple timeslots).  To sync this counter to the time-slot boundary, set agc_enable_sync_pulse_for_gain_counter to 1, and then set the corresponding GPIO high to re-sync the counter to the GPIO pulse. The total gain update duration is the sum of agc_slow_loop_settling_delay and the agc_gain_update_counter value.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC gain update counter value from the specified device
+ * instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated type indicating the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * counter value will be stored.
+ * @return Returns the status of the last read operation, which indicates
+ * success (0) or failure (non-zero). The retrieved AGC gain update
+ * counter value is stored in the variable pointed to by `value`.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcGainUpdateCounter_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -2470,9 +3780,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcGainUpdateCounter_Get(void *devic
     return status;
 }
 
-/**
- * These bits contain the threshold used by agc_energy_lost_threshold and agc_stronger_signal_threshold to determine at what point gain should unlock when in Fast AGC mode.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC gain lock exit count in the ADRV9001 device's RXB
+ * register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the AGC gain lock exit count.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcGainlockExitCount_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -2484,9 +3804,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcGainlockExitCount_Set(void *devic
     return status;
 }
 
-/**
- * These bits contain the threshold used by agc_energy_lost_threshold and agc_stronger_signal_threshold to determine at what point gain should unlock when in Fast AGC mode.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC gain lock exit count from a specific register for a
+ * given device instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC gain lock.
+ * @param value A pointer to a uint8_t variable where the retrieved exit count
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcGainlockExitCount_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -2501,9 +3830,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcGainlockExitCount_Get(void *devic
     return status;
 }
 
-/**
- * This bit causes the gain update counter (during slow loop / hybrid / manual using counters) to halt when the agc freeze is set ( by agc_rx<1/2>_slowloop_freeze_enable / GPIO / HSCP )
- */
+/***************************************************************************//**
+ * @brief Sets the AGC halt gain update counter on freeze for a specified
+ * instance of the device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the AGC halt gain update counter.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcHaltGainUpdateCounterOnFreeze_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -2515,9 +3854,17 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcHaltGainUpdateCounterOnFreeze_Set
     return status;
 }
 
-/**
- * This bit causes the gain update counter (during slow loop / hybrid / manual using counters) to halt when the agc freeze is set ( by agc_rx<1/2>_slowloop_freeze_enable / GPIO / HSCP )
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC halt gain update counter from a specific register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcHaltGainUpdateCounterOnFreeze_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -2532,9 +3879,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcHaltGainUpdateCounterOnFreeze_Get
     return status;
 }
 
-/**
- * This sets the change (increase) in gain index that is applied when the increment gain pin  (in MGC pin control mode) is pulsed.  A high pulse on the corresponding GPIO in pin control mode will increment the gain by the value in this register.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC increment gain step size in the ADRV9001 device's RXB
+ * register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value An 8-bit unsigned integer representing the gain step size to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcIncrGainStepSize_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -2546,9 +3903,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcIncrGainStepSize_Set(void *device
     return status;
 }
 
-/**
- * This sets the change (increase) in gain index that is applied when the increment gain pin  (in MGC pin control mode) is pulsed.  A high pulse on the corresponding GPIO in pin control mode will increment the gain by the value in this register.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC increment gain step size from a specific register
+ * for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved gain step
+ * size will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcIncrGainStepSize_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -2564,6 +3930,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcIncrGainStepSize_Get(void *device
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the last gain index from the AGC register for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC register.
+ * @param value A pointer to a uint8_t variable where the retrieved gain index
+ * will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcLastGainIndex_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -2578,9 +3957,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcLastGainIndex_Get(void *device,
     return status;
 }
 
-/**
- * Setting this bit allows LL blocker to freeze any gain increase.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC LL Blocker Freezes Gain Increment value in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the AGC LL Blocker Freezes Gain Increment.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcLlBlockerFreezesGainIncr_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -2592,9 +3981,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcLlBlockerFreezesGainIncr_Set(void
     return status;
 }
 
-/**
- * Setting this bit allows LL blocker to freeze any gain increase.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC LL Blocker Freezes Gain Increment value from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcLlBlockerFreezesGainIncr_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -2609,9 +4007,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcLlBlockerFreezesGainIncr_Get(void
     return status;
 }
 
-/**
- * In the Rx AGC `increment gain on peak threshold only' mode, when the LL blocker triggers a programmable number of times above its configured threshold (agc_llb_threshold_exceeded_counter), the slow loop will increment gain at the termination of the gain update counter. The value entered into this register should be the number of index values that the gain should be increased by when a gain step change needs to be made due to LL blocker triggering.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC LLB gain step for a specified instance in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the gain step value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcLlbGainStep_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -2623,9 +4031,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcLlbGainStep_Set(void *device,
     return status;
 }
 
-/**
- * In the Rx AGC `increment gain on peak threshold only' mode, when the LL blocker triggers a programmable number of times above its configured threshold (agc_llb_threshold_exceeded_counter), the slow loop will increment gain at the termination of the gain update counter. The value entered into this register should be the number of index values that the gain should be increased by when a gain step change needs to be made due to LL blocker triggering.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC LLB gain step value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC LLB gain step.
+ * @param value A pointer to a uint8_t variable where the retrieved gain step
+ * value will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcLlbGainStep_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -2640,9 +4057,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcLlbGainStep_Get(void *device,
     return status;
 }
 
-/**
- * This register can take any value from 1 through 255. If the LL blocker threshold is triggered N times where N is the value configured in this register, a flag is set indicating a HIGH on LL Blocker trigger. Consequently, at the termination of the agc_gain_update_counter, or in hybrid mode when a pulse is seen on the corresponding GPIO pin,  if a gain increment is slated to occur based on power thresholds, and if agc_low_ths_prevent_gain_inc is 1, then no increment in gain will occur. If agc_peak_threshold_gain_control_mode is enabled, then the gain would increment if this flag is NOT set.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC LLB threshold exceeded counter for a specified instance
+ * in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcLlbThresholdExceededCounter_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -2654,9 +4081,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcLlbThresholdExceededCounter_Set(v
     return status;
 }
 
-/**
- * This register can take any value from 1 through 255. If the LL blocker threshold is triggered N times where N is the value configured in this register, a flag is set indicating a HIGH on LL Blocker trigger. Consequently, at the termination of the agc_gain_update_counter, or in hybrid mode when a pulse is seen on the corresponding GPIO pin,  if a gain increment is slated to occur based on power thresholds, and if agc_low_ths_prevent_gain_inc is 1, then no increment in gain will occur. If agc_peak_threshold_gain_control_mode is enabled, then the gain would increment if this flag is NOT set.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC LLB threshold exceeded counter value from a
+ * specified register.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param instance An enumeration value indicating the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved counter
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcLlbThresholdExceededCounter_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -2671,13 +4107,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcLlbThresholdExceededCounter_Get(v
     return status;
 }
 
-/**
- * This register performs two functions (based on gain control mode used):
-
- * AGC Fast Attack Loop: This register allows the user to configure the power level at which the signal should be held after gain lock. The value in this register is specified as a (negative sign implied)dB value below full scale. Therefore, for an LTE signal with PAR = 10dB, and leaving a 4dB margin for signal variation, the AGC lock level should be written to 0x0E. This gain control closed loop algorithm will attempt to achieve this average power level for the signal during gain lock.
-
- * AGC Slow Loop: In this mode, there exist four thresholds. There are two inner thresholds and two outer thresholds as shown below. The value in this register specifies the inner High threshold in (negative sign implied) dBFS. If the average power of the signal goes above this level during normal RXON operation, the gain control loop will attempt to correct this situation by reducing the gain. The gain can only be reduced when the gain update counter expires. The gain in this case will be reduced by the value in agc_upper_0_threshold_exceeded_gain_step.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC lock level in the NVS register map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the AGC lock level to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the AGC lock level setting operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcLockLevel_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -2689,13 +4131,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcLockLevel_Set(void *device,
     return status;
 }
 
-/**
- * This register performs two functions (based on gain control mode used):
-
- * AGC Fast Attack Loop: This register allows the user to configure the power level at which the signal should be held after gain lock. The value in this register is specified as a (negative sign implied)dB value below full scale. Therefore, for an LTE signal with PAR = 10dB, and leaving a 4dB margin for signal variation, the AGC lock level should be written to 0x0E. This gain control closed loop algorithm will attempt to achieve this average power level for the signal during gain lock.
-
- * AGC Slow Loop: In this mode, there exist four thresholds. There are two inner thresholds and two outer thresholds as shown below. The value in this register specifies the inner High threshold in (negative sign implied) dBFS. If the average power of the signal goes above this level during normal RXON operation, the gain control loop will attempt to correct this situation by reducing the gain. The gain can only be reduced when the gain update counter expires. The gain in this case will be reduced by the value in agc_upper_0_threshold_exceeded_gain_step.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC lock level from a specific register for a given
+ * instance of the device.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC lock level to read.
+ * @param value A pointer to a uint8_t variable where the retrieved AGC lock
+ * level will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcLockLevel_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -2710,9 +4157,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcLockLevel_Get(void *device,
     return status;
 }
 
-/**
- * Setting this bit prevents the gain index from incrementing under certain conditions. Gain will not increment when the power thresholds indicate a gain increment is required, but either the LL blocker thresholds or the ADC Low Ovrg thresholds are triggered. If 0, then the ADC Low Ovrg and LL blocker threshold triggering are a dont-care.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC low threshold prevent gain increment value in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the AGC low threshold.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcLowThsPreventGainInc_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -2724,9 +4181,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcLowThsPreventGainInc_Set(void *de
     return status;
 }
 
-/**
- * Setting this bit prevents the gain index from incrementing under certain conditions. Gain will not increment when the power thresholds indicate a gain increment is required, but either the LL blocker thresholds or the ADC Low Ovrg thresholds are triggered. If 0, then the ADC Low Ovrg and LL blocker threshold triggering are a dont-care.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC low threshold prevent gain increment value from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcLowThsPreventGainInc_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -2741,9 +4207,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcLowThsPreventGainInc_Get(void *de
     return status;
 }
 
-/**
- * This register, along with agc_lock_level, agc_lower_1_threshold and agc_lower_0_threshold, set the slow attack thresholds as in the figure.  No gain changes occur if the signal power remains between the inner thresholds.  If the signal power is higher than the upper threshold or lower than the lower threshold, the gain changes appropriately.  Field agc_low_ths_prevent_gain_inc prevents gain increases.  Gain changes occur when the agc_gain_update_counter expires (or when the GPIO transitions high if agc_enable_gain_change_with_pin_control is set).  Specified in dBFS.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC lower threshold value in the RXB NVS register map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB NVS register map.
+ * @param value An 8-bit unsigned integer representing the threshold value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcLower0Threshold_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -2755,9 +4231,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcLower0Threshold_Set(void *device,
     return status;
 }
 
-/**
- * This register, along with agc_lock_level, agc_lower_1_threshold and agc_lower_0_threshold, set the slow attack thresholds as in the figure.  No gain changes occur if the signal power remains between the inner thresholds.  If the signal power is higher than the upper threshold or lower than the lower threshold, the gain changes appropriately.  Field agc_low_ths_prevent_gain_inc prevents gain increases.  Gain changes occur when the agc_gain_update_counter expires (or when the GPIO transitions high if agc_enable_gain_change_with_pin_control is set).  Specified in dBFS.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC lower threshold value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved threshold
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcLower0Threshold_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -2772,9 +4258,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcLower0Threshold_Get(void *device,
     return status;
 }
 
-/**
- * This counter configures the number of gain indexes to increase the gain by when the inner low power threshold has been exceeded. This step is taken only at th termination of the gain update count. The value in this register specifies the number of indexes to increase the gain when this threshold is exceeded.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC lower threshold exceeded gain step in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the gain step value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcLower0ThresholdExceededGainStep_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -2786,9 +4282,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcLower0ThresholdExceededGainStep_S
     return status;
 }
 
-/**
- * This counter configures the number of gain indexes to increase the gain by when the inner low power threshold has been exceeded. This step is taken only at th termination of the gain update count. The value in this register specifies the number of indexes to increase the gain when this threshold is exceeded.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC lower threshold exceeded gain step value from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value indicating the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved gain step
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcLower0ThresholdExceededGainStep_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -2803,11 +4308,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcLower0ThresholdExceededGainStep_G
     return status;
 }
 
-/**
- * This specifies the difference between outer and inner low thresholds in dB.See description in agc_lower_0_threshold for details on power threshold modes. 
-
- * Outer Low Power Threshold Offset = Outer Low Power threshold  Inner Low Power threshold (in dB).
- */
+/***************************************************************************//**
+ * @brief Sets the AGC lower 1 threshold value in the ADRV9001 device's RXB NVS
+ * register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value An 8-bit unsigned integer representing the threshold value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcLower1Threshold_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -2819,11 +4332,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcLower1Threshold_Set(void *device,
     return status;
 }
 
-/**
- * This specifies the difference between outer and inner low thresholds in dB.See description in agc_lower_0_threshold for details on power threshold modes. 
-
- * Outer Low Power Threshold Offset = Outer Low Power threshold  Inner Low Power threshold (in dB).
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC lower 1 threshold value from a specific register for
+ * a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC register.
+ * @param value A pointer to a uint8_t variable where the retrieved threshold
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcLower1Threshold_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -2838,9 +4358,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcLower1Threshold_Get(void *device,
     return status;
 }
 
-/**
- * This counter configures the number of gain indexes to increase the gain by when the outer low power threshold has been exceeded. This step is taken only at th termination of the gain update count. The value in this register specifies the number of indexes to increase the gain when this threshold is exceeded.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC lower 1 threshold exceeded gain step in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the gain step value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcLower1ThresholdExceededGainStep_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -2852,9 +4382,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcLower1ThresholdExceededGainStep_S
     return status;
 }
 
-/**
- * This counter configures the number of gain indexes to increase the gain by when the outer low power threshold has been exceeded. This step is taken only at th termination of the gain update count. The value in this register specifies the number of indexes to increase the gain when this threshold is exceeded.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC lower 1 threshold exceeded gain step value from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcLower1ThresholdExceededGainStep_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -2869,9 +4408,17 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcLower1ThresholdExceededGainStep_G
     return status;
 }
 
-/**
- * When SPI control mode is enabled (agc_rx1_manual_gain_pin_control = 0), this register allows the user to directly index the programmable Rx gain table for channel 1. The default gain table can take values between 0xEB and 0xFF, even though every index is accessible from 0x00 to 0xFF. When the index is written to this register, the analog FE gain is changed within 2 clkADC/16 cycles. The digital gain is updated after the count value for digital gain delay reaches 0.
- */
+/***************************************************************************//**
+ * @brief Sets the manual gain index for the AGC in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the gain index to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcManualGainIndex_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -2883,9 +4430,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcManualGainIndex_Set(void *device,
     return status;
 }
 
-/**
- * When SPI control mode is enabled (agc_rx1_manual_gain_pin_control = 0), this register allows the user to directly index the programmable Rx gain table for channel 1. The default gain table can take values between 0xEB and 0xFF, even though every index is accessible from 0x00 to 0xFF. When the index is written to this register, the analog FE gain is changed within 2 clkADC/16 cycles. The digital gain is updated after the count value for digital gain delay reaches 0.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC manual gain index from a specified register for a
+ * given device instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved gain index
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcManualGainIndex_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -2900,9 +4456,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcManualGainIndex_Get(void *device,
     return status;
 }
 
-/**
- * When SPI control mode is enabled (agc_rx1_manual_gain_pin_control = 0), this register allows the user to directly index the programmable Rx gain table for channel 1. The default gain table can take values between 0xEB and 0xFF, even though every index is accessible from 0x00 to 0xFF. When the index is written to this register, the analog FE gain is changed within 2 clkADC/16 cycles. The digital gain is updated after the count value for digital gain delay reaches 0.
- */
+/***************************************************************************//**
+ * @brief Sets the manual gain index for the AGC in the RXB register map of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value An 8-bit unsigned integer representing the manual gain index to
+ * be set.
+ * @return Returns the status of the register write operation, indicating
+ * success or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcManualGainIndexB_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -2914,9 +4480,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcManualGainIndexB_Set(void *device
     return status;
 }
 
-/**
- * When SPI control mode is enabled (agc_rx1_manual_gain_pin_control = 0), this register allows the user to directly index the programmable Rx gain table for channel 1. The default gain table can take values between 0xEB and 0xFF, even though every index is accessible from 0x00 to 0xFF. When the index is written to this register, the analog FE gain is changed within 2 clkADC/16 cycles. The digital gain is updated after the count value for digital gain delay reaches 0.
- */
+/***************************************************************************//**
+ * @brief Retrieves the manual gain index from a specific register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the ADRV9001.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved gain index
+ * will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcManualGainIndexB_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -2931,6 +4507,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcManualGainIndexB_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the manual gain index for the AGC in the RXB register map of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value An 8-bit unsigned integer representing the gain index value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcManualGainIndexElb_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -2942,6 +4531,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcManualGainIndexElb_Set(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the AGC manual gain index from a specified register and
+ * stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved gain index
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcManualGainIndexElb_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -2956,6 +4557,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcManualGainIndexElb_Get(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the manual gain index for the AGC in the RXB register map of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value An 8-bit unsigned integer representing the gain index value to
+ * be set.
+ * @return Returns an integer status code indicating the result of the register
+ * write operation, where 0 typically indicates success.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcManualGainIndexElbB_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -2967,6 +4581,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcManualGainIndexElbB_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the manual gain index from a specific register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the ADRV9001.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved gain index
+ * will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcManualGainIndexElbB_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -2981,6 +4608,17 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcManualGainIndexElbB_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the manual gain index for the ORX AGC in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the gain index to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcManualGainIndexOrx_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -2992,6 +4630,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcManualGainIndexOrx_Set(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the AGC manual gain index from a specified register for the
+ * ORX instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved gain index
+ * will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcManualGainIndexOrx_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -3006,6 +4656,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcManualGainIndexOrx_Get(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the manual gain index for the ORxB channel in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the gain index to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcManualGainIndexOrxB_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -3017,6 +4679,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcManualGainIndexOrxB_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the manual gain index for the ORxB channel from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value A pointer to a uint8_t variable where the retrieved gain index
+ * will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcManualGainIndexOrxB_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -3031,9 +4706,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcManualGainIndexOrxB_Get(void *dev
     return status;
 }
 
-/**
- * If this bit is set, pin control mode is enabled on channel 1.  If this bit is clear, then SPI control mode is enabled.
- */
+/***************************************************************************//**
+ * @brief Sets the manual gain control pin for the AGC in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the manual gain control pin.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcManualGainPinControl_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -3045,9 +4729,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcManualGainPinControl_Set(void *de
     return status;
 }
 
-/**
- * If this bit is set, pin control mode is enabled on channel 1.  If this bit is clear, then SPI control mode is enabled.
- */
+/***************************************************************************//**
+ * @brief Retrieves the manual gain pin control value from a specific register
+ * for the given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcManualGainPinControl_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -3062,9 +4755,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcManualGainPinControl_Get(void *de
     return status;
 }
 
-/**
- * This configures the maximum gain index in the programmable gain table that can be used by the various gain control modes. The maximum gain index register value is the maximum index that can be used by the pin control Manual Gain control mode. The direct SPI control mode is not limited by this register. For the default table, this value should be 0xFF.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC maximum gain index for a specified instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the maximum gain index to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcMaximumGainIndex_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -3076,9 +4779,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcMaximumGainIndex_Set(void *device
     return status;
 }
 
-/**
- * This configures the maximum gain index in the programmable gain table that can be used by the various gain control modes. The maximum gain index register value is the maximum index that can be used by the pin control Manual Gain control mode. The direct SPI control mode is not limited by this register. For the default table, this value should be 0xFF.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC maximum gain index from a specified register for a
+ * given device instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved maximum gain
+ * index will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcMaximumGainIndex_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -3093,9 +4806,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcMaximumGainIndex_Get(void *device
     return status;
 }
 
-/**
- * This register puts a limit on the lowest index that the gain control algorithms can use.  For the default table, this value should be 0xEC.  The minimum gain index register value is the minium index that can be used by the pin control manual gain control mode.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC minimum gain index in the ADRV9001 device's RXB register
+ * map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value An 8-bit unsigned integer representing the gain index value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcMinimumGainIndex_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -3107,9 +4830,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcMinimumGainIndex_Set(void *device
     return status;
 }
 
-/**
- * This register puts a limit on the lowest index that the gain control algorithms can use.  For the default table, this value should be 0xEC.  The minimum gain index register value is the minium index that can be used by the pin control manual gain control mode.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC minimum gain index from a specified register and
+ * stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved gain index
+ * will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcMinimumGainIndex_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -3124,17 +4856,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcMinimumGainIndex_Get(void *device
     return status;
 }
 
-/**
- * This field allows the 1st update interval to be multiplied by either 1, 2, or 4 to effectively allow for count duration to run at the IQ sample rate. For details on using this field, see description in agc_enable_fast_recovery_loop.
-
- * 00      1
-
- * 01      2
-
- * 10      4
-
- * 11      8
- */
+/***************************************************************************//**
+ * @brief Sets the AGC Multiplier Clock Rate Compensation value in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the AGC Multiplier Clock Rate Compensation.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcMultClkRateComp_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -3146,17 +4880,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcMultClkRateComp_Set(void *device,
     return status;
 }
 
-/**
- * This field allows the 1st update interval to be multiplied by either 1, 2, or 4 to effectively allow for count duration to run at the IQ sample rate. For details on using this field, see description in agc_enable_fast_recovery_loop.
-
- * 00      1
-
- * 01      2
-
- * 10      4
-
- * 11      8
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC Multiplier Clock Rate Compensation value from a
+ * specified register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcMultClkRateComp_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -3171,9 +4906,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcMultClkRateComp_Get(void *device,
     return status;
 }
 
-/**
- * Programmable gain index to jump to if current gain index is more than this index. See agc_enable_ip3_optimization_threshold for details on two-threshold AGC loop mode
- */
+/***************************************************************************//**
+ * @brief Sets the AGC multitone IP3 index in the NVS register map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcMultitoneIp3Index_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -3185,9 +4929,17 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcMultitoneIp3Index_Set(void *devic
     return status;
 }
 
-/**
- * Programmable gain index to jump to if current gain index is more than this index. See agc_enable_ip3_optimization_threshold for details on two-threshold AGC loop mode
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC multitone IP3 index value from a specific register.
+ *
+ * @param device A pointer to the device context used for register access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcMultitoneIp3Index_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -3202,9 +4954,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcMultitoneIp3Index_Get(void *devic
     return status;
 }
 
-/**
- * When this bit is set to 1, a gain increment due to under-range will only occur as long as the new gain is not greater than the ip3_index. If the new gain is greater than ip3_index, the gain is set to ip3_index and no gain increment occurs.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC no unreg gain increment at maximum IP3 for a specified
+ * instance in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcNoUnrgGainIncAtMaxIp3_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -3216,9 +4978,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcNoUnrgGainIncAtMaxIp3_Set(void *d
     return status;
 }
 
-/**
- * When this bit is set to 1, a gain increment due to under-range will only occur as long as the new gain is not greater than the ip3_index. If the new gain is greater than ip3_index, the gain is set to ip3_index and no gain increment occurs.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC no unreg gain increment at maximum IP3 from a
+ * specified register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcNoUnrgGainIncAtMaxIp3_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -3233,9 +5004,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcNoUnrgGainIncAtMaxIp3_Get(void *d
     return status;
 }
 
-/**
- * When signal energy is lost, setting this bit enables the gain to be set to the AGC gain lock index at the end of the previous burst plus the optimize max gain threshold than reverting the AGC gain to the max gain index. Disabling this bit causes the AGC to go to max gain index when signal energy is lost.
- */
+/***************************************************************************//**
+ * @brief Sets the maximum gain value for the AGC (Automatic Gain Control) in
+ * the RXB (Receiver Baseband) register map of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value An 8-bit unsigned integer representing the maximum gain value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcOptMaxGainWhenEnlost_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -3247,9 +5028,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcOptMaxGainWhenEnlost_Set(void *de
     return status;
 }
 
-/**
- * When signal energy is lost, setting this bit enables the gain to be set to the AGC gain lock index at the end of the previous burst plus the optimize max gain threshold than reverting the AGC gain to the max gain index. Disabling this bit causes the AGC to go to max gain index when signal energy is lost.
- */
+/***************************************************************************//**
+ * @brief Retrieves the maximum gain value from a specific register for the AGC
+ * option when the ENLOST condition is met.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved maximum gain
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcOptMaxGainWhenEnlost_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -3264,9 +5054,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcOptMaxGainWhenEnlost_Get(void *de
     return status;
 }
 
-/**
- * Setting this bit enables the gain to be set to the AGC gain lock index at the end of the previous burst plus the optimize max gain threshold rather than reverting the AGC gain to the max gain index when exiting Rx mode.
- */
+/***************************************************************************//**
+ * @brief Sets the maximum gain for the AGC optimization in the RXB register map
+ * of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific RXB instance to
+ * configure.
+ * @param value An 8-bit unsigned integer representing the maximum gain value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcOptimMaxGain_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -3278,9 +5078,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcOptimMaxGain_Set(void *device,
     return status;
 }
 
-/**
- * Setting this bit enables the gain to be set to the AGC gain lock index at the end of the previous burst plus the optimize max gain threshold rather than reverting the AGC gain to the max gain index when exiting Rx mode.
- */
+/***************************************************************************//**
+ * @brief Retrieves the maximum gain value from the AGC register for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC register.
+ * @param value A pointer to a uint8_t variable where the retrieved maximum gain
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcOptimMaxGain_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -3295,9 +5104,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcOptimMaxGain_Get(void *device,
     return status;
 }
 
-/**
- * Programmable gain index to jump to if current gain index is more than this index. See agc_enable_ip3_optimization_threshold for details on two-threshold AGC loop mode
- */
+/***************************************************************************//**
+ * @brief Sets the AGC optimal IP3 index in the NVS register map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the AGC optimal IP3 index.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcOptimalIp3Index_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -3309,9 +5127,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcOptimalIp3Index_Set(void *device,
     return status;
 }
 
-/**
- * Programmable gain index to jump to if current gain index is more than this index. See agc_enable_ip3_optimization_threshold for details on two-threshold AGC loop mode
- */
+/***************************************************************************//**
+ * @brief Retrieves the optimal IP3 index from a specific register for a given
+ * instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved optimal IP3
+ * index will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcOptimalIp3Index_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -3326,9 +5154,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcOptimalIp3Index_Get(void *device,
     return status;
 }
 
-/**
- * This field indicates the number of gain indexes to increase the gain by when the optimize gain is used ( agc_optim_max_gain, agc_opt_max_gain_when_enlost, or agc_enable_reset_to_maxgain)
- */
+/***************************************************************************//**
+ * @brief Sets the maximum gain threshold for the AGC optimization in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the maximum gain
+ * threshold value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcOptimizeMaxGainThreshold_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -3340,9 +5178,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcOptimizeMaxGainThreshold_Set(void
     return status;
 }
 
-/**
- * This field indicates the number of gain indexes to increase the gain by when the optimize gain is used ( agc_optim_max_gain, agc_opt_max_gain_when_enlost, or agc_enable_reset_to_maxgain)
- */
+/***************************************************************************//**
+ * @brief Retrieves the maximum gain threshold value from a specific register
+ * for the AGC optimization.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcOptimizeMaxGainThreshold_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -3357,9 +5204,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcOptimizeMaxGainThreshold_Get(void
     return status;
 }
 
-/**
- * Setting this bit enables exiting from gain lock when overloads (UL blocker / ADC high / digital saturation) are detected.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC override freeze state in the ADRV9001 device's RXB
+ * register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific RXB instance to
+ * modify.
+ * @param value A uint8_t value indicating the desired AGC override freeze
+ * state.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcOvrgFreeze_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -3371,9 +5228,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcOvrgFreeze_Set(void *device,
     return status;
 }
 
-/**
- * Setting this bit enables exiting from gain lock when overloads (UL blocker / ADC high / digital saturation) are detected.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC override freeze value from a specified register for
+ * a given device instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcOvrgFreeze_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -3388,13 +5255,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcOvrgFreeze_Get(void *device,
     return status;
 }
 
-/**
- * This register performs two functions (based on gain control mode used):
-
- * AGC Fast Attack Loop: The gain control loop reduces the gain by the specified number of indices when either UL blocker triggers or the ADC High Ovrg block triggers requesting a gain change. The gain index in that case is reduced by the value specified in this register.
-
- * AGC Slow Loop: In this mode, when the ADC High Overrange triggers a programmable number of times (agc_adc_high_ovrg_exceeded_counter), ADC Ovrg Count Threshold) above its configured threshold, the slow loop will decrement gain either immediately (agc_change_gain_if_ulbth_high) or at the termination of the gain update counter. The value entered into this register should be the number of index values that the gain should be reduced by when a gain step change needs to be made due to ADC High Ovrg triggering.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC override high gain step value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the AGC override high gain step.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcOvrgHighGainStep_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -3406,13 +5278,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcOvrgHighGainStep_Set(void *device
     return status;
 }
 
-/**
- * This register performs two functions (based on gain control mode used):
-
- * AGC Fast Attack Loop: The gain control loop reduces the gain by the specified number of indices when either UL blocker triggers or the ADC High Ovrg block triggers requesting a gain change. The gain index in that case is reduced by the value specified in this register.
-
- * AGC Slow Loop: In this mode, when the ADC High Overrange triggers a programmable number of times (agc_adc_high_ovrg_exceeded_counter), ADC Ovrg Count Threshold) above its configured threshold, the slow loop will decrement gain either immediately (agc_change_gain_if_ulbth_high) or at the termination of the gain update counter. The value entered into this register should be the number of index values that the gain should be reduced by when a gain step change needs to be made due to ADC High Ovrg triggering.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC override high gain step value from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcOvrgHighGainStep_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -3427,11 +5304,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcOvrgHighGainStep_Get(void *device
     return status;
 }
 
-/**
- * In the Rx AGC `increment gain on peak threshold only' mode, when the ADC Low Overrange triggers a programmable number of times above its configured threshold (agc_adc_low_ovrg_exceeded_counter), the slow loop will increment gain at the termination of the gain update counter. The value entered into this register should be the number of index values that the gain should be increased by when a gain step change needs to be made due to ADC Low Ovrg triggering.
-
- * When in multiple time constants in AGC loop mode, the value entered into this register should be the number of index values that the gain should be increased by when a gain step change needs to be made due to ADC Low Ovrg interval 2 triggering for the 3rd update interval. For details on using this field in this mode, see description in agc_enable_fast_recovery_loop.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC override low gain step value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the low gain step value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcOvrgLowGainStep_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -3443,11 +5327,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcOvrgLowGainStep_Set(void *device,
     return status;
 }
 
-/**
- * In the Rx AGC `increment gain on peak threshold only' mode, when the ADC Low Overrange triggers a programmable number of times above its configured threshold (agc_adc_low_ovrg_exceeded_counter), the slow loop will increment gain at the termination of the gain update counter. The value entered into this register should be the number of index values that the gain should be increased by when a gain step change needs to be made due to ADC Low Ovrg triggering.
-
- * When in multiple time constants in AGC loop mode, the value entered into this register should be the number of index values that the gain should be increased by when a gain step change needs to be made due to ADC Low Ovrg interval 2 triggering for the 3rd update interval. For details on using this field in this mode, see description in agc_enable_fast_recovery_loop.
- */
+/***************************************************************************//**
+ * @brief Retrieves the low gain step value from the AGC override register for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC override register.
+ * @param value A pointer to a uint8_t variable where the retrieved low gain
+ * step value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcOvrgLowGainStep_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -3462,9 +5353,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcOvrgLowGainStep_Get(void *device,
     return status;
 }
 
-/**
- * In multiple time constants in AGC loop mode, When the ADC Low Overrange interval 0 triggers a programmable number of times above its configured threshold (agc_adcovrg_low_int0_counter), the slow loop will increment gain at the termination of the 1st update interval. The value entered into this register should be the number of index values that the gain should be increased by when a gain step change needs to be made due to ADC Low Ovrg interval 0 triggering. For details on using this field, see description in agc_enable_fast_recovery_loop.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC override low gain step value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the gain step value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcOvrgLowInt0GainStep_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -3476,9 +5376,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcOvrgLowInt0GainStep_Set(void *dev
     return status;
 }
 
-/**
- * In multiple time constants in AGC loop mode, When the ADC Low Overrange interval 0 triggers a programmable number of times above its configured threshold (agc_adcovrg_low_int0_counter), the slow loop will increment gain at the termination of the 1st update interval. The value entered into this register should be the number of index values that the gain should be increased by when a gain step change needs to be made due to ADC Low Ovrg interval 0 triggering. For details on using this field, see description in agc_enable_fast_recovery_loop.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC override low gain step value from a specific
+ * register for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved gain step
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcOvrgLowInt0GainStep_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -3493,9 +5402,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcOvrgLowInt0GainStep_Get(void *dev
     return status;
 }
 
-/**
- * In multiple time constants in AGC loop mode, When the ADC Low Overrange interval 1 triggers a programmable number of times above its configured threshold (agc_adcovrg_low_int1_counter), the slow loop will increment gain at the termination of the 2nd update interval. The value entered into this register should be the number of index values that the gain should be increased by when a gain step change needs to be made due to ADC Low Ovrg interval 1 triggering. For details on using this field, see description in agc_enable_fast_recovery_loop.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC override low gain step value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the gain step value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcOvrgLowInt1GainStep_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -3507,9 +5425,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcOvrgLowInt1GainStep_Set(void *dev
     return status;
 }
 
-/**
- * In multiple time constants in AGC loop mode, When the ADC Low Overrange interval 1 triggers a programmable number of times above its configured threshold (agc_adcovrg_low_int1_counter), the slow loop will increment gain at the termination of the 2nd update interval. The value entered into this register should be the number of index values that the gain should be increased by when a gain step change needs to be made due to ADC Low Ovrg interval 1 triggering. For details on using this field, see description in agc_enable_fast_recovery_loop.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC override low gain step value from a specific
+ * register for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved gain step
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcOvrgLowInt1GainStep_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -3524,9 +5451,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcOvrgLowInt1GainStep_Get(void *dev
     return status;
 }
 
-/**
- * These bits determine how long the resets for the ADC overrange detectors are asserted.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC override reset high count in the ADRV9001 device's
+ * register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcOvrgResetpdHighCount_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -3538,9 +5475,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcOvrgResetpdHighCount_Set(void *de
     return status;
 }
 
-/**
- * These bits determine how long the resets for the ADC overrange detectors are asserted.
- */
+/***************************************************************************//**
+ * @brief Retrieves the high count value of the AGC over-reset from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved high count
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcOvrgResetpdHighCount_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -3555,9 +5502,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcOvrgResetpdHighCount_Get(void *de
     return status;
 }
 
-/**
- * This AGC mode enables gain change based only on the signal peak threshold over-ranges. Power based AGC changes are disabled. ULB high over-range, AGC high over-range and digital saturation cause gain to decrease, while ULB low under-range and AGC low under-range cause gain to increase.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC peak threshold gain control mode for a specified instance
+ * in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB (Receive Baseband) register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the AGC peak threshold gain control mode.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcPeakThresholdGainControlMode_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -3569,9 +5526,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcPeakThresholdGainControlMode_Set(
     return status;
 }
 
-/**
- * This AGC mode enables gain change based only on the signal peak threshold over-ranges. Power based AGC changes are disabled. ULB high over-range, AGC high over-range and digital saturation cause gain to decrease, while ULB low under-range and AGC low under-range cause gain to increase.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC peak threshold gain control mode from a specified
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC peak threshold gain control.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcPeakThresholdGainControlMode_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -3586,9 +5552,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcPeakThresholdGainControlMode_Get(
     return status;
 }
 
-/**
- * These bits configure the duration (in AGC clock cycles) that the gain control algorithms wait before enabling regular operation of the peak detectors.  These include the analog peak detector, ADC overrange detector and HB2 output peak detectors. If digital gain saturation is enabled, then the peak wait time needs to be increased to account for the location of the digital saturation block in the RX chain (after the PFIR).
- */
+/***************************************************************************//**
+ * @brief Sets the AGC peak wait time in the NVS register map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the AGC peak wait time to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcPeakWaitTime_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -3600,9 +5576,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcPeakWaitTime_Set(void *device,
     return status;
 }
 
-/**
- * These bits configure the duration (in AGC clock cycles) that the gain control algorithms wait before enabling regular operation of the peak detectors.  These include the analog peak detector, ADC overrange detector and HB2 output peak detectors. If digital gain saturation is enabled, then the peak wait time needs to be increased to account for the location of the digital saturation block in the RX chain (after the PFIR).
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC peak wait time value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved AGC peak
+ * wait time will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcPeakWaitTime_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -3617,9 +5602,17 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcPeakWaitTime_Get(void *device,
     return status;
 }
 
-/**
- * Enabling the setting resets all agc over/underrange counters in the Rx1 (ULB counters, LLB counters, ADC high, ADC low, digsat, IP3).
- */
+/***************************************************************************//**
+ * @brief Sets the AGC reset counters in the ADRV9001 device's RXB register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value An 8-bit integer value to be written to the AGC reset counters.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcResetCounters_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -3631,9 +5624,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcResetCounters_Set(void *device,
     return status;
 }
 
-/**
- * Enabling the setting resets all agc over/underrange counters in the Rx1 (ULB counters, LLB counters, ADC high, ADC low, digsat, IP3).
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC reset counters from a specified register and stores
+ * the value.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value indicating the specific instance of the
+ * AGC reset counters.
+ * @param value A pointer to a uint8_t variable where the retrieved counter
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcResetCounters_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -3648,9 +5650,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcResetCounters_Get(void *device,
     return status;
 }
 
-/**
- * This bit when written to 1 resets the AGC slow loop state machine to state 0 (and to max gain) when the Rx Enable is taken low. If 0, then the slow loop maintains its state when the Rx Enable is taken low and continues from its current value when Rx enable is back high.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC reset on RXON for a specified instance in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that indicates the desired state to set for the
+ * AGC reset.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcResetOnRxon_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -3662,9 +5674,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcResetOnRxon_Set(void *device,
     return status;
 }
 
-/**
- * This bit when written to 1 resets the AGC slow loop state machine to state 0 (and to max gain) when the Rx Enable is taken low. If 0, then the slow loop maintains its state when the Rx Enable is taken low and continues from its current value when Rx enable is back high.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC reset status from a specific register for a given
+ * instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcResetOnRxon_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -3679,6 +5700,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcResetOnRxon_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the AGC reset on RXON gain index for a specified instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns the status of the register write operation, indicating
+ * success or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcResetOnRxonGainIndex_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -3690,6 +5724,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcResetOnRxonGainIndex_Set(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the AGC reset value from a specific register for a given
+ * instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcResetOnRxonGainIndex_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -3704,23 +5750,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcResetOnRxonGainIndex_Get(void *de
     return status;
 }
 
-/**
- * These bits configure the gain control algorithm that is used on channel 1. The option are as follows: 
-
- *         Gain Control Mode                       Application
-
- *         -----------------                       -----------
-
- * 00      Manual Gain Mode Operation              FDD and TDD modes (but much slower
-
- *        (SPI control or pin control modes)       than the internal AGC loops)
-
- * 01      Fast Attack AGC Mode                    TDD mode
-
- * 10      Slow Loop AGC Mode                      FDD, TDD modes
-
- * 11      Hybrid AGC Mode                         FDD, TDD modes
- */
+/***************************************************************************//**
+ * @brief Sets the AGC (Automatic Gain Control) configuration for a specified
+ * instance in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for RXB.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the AGC setup register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcSetup_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -3732,23 +5774,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcSetup_Set(void *device,
     return status;
 }
 
-/**
- * These bits configure the gain control algorithm that is used on channel 1. The option are as follows: 
-
- *         Gain Control Mode                       Application
-
- *         -----------------                       -----------
-
- * 00      Manual Gain Mode Operation              FDD and TDD modes (but much slower
-
- *        (SPI control or pin control modes)       than the internal AGC loops)
-
- * 01      Fast Attack AGC Mode                    TDD mode
-
- * 10      Slow Loop AGC Mode                      FDD, TDD modes
-
- * 11      Hybrid AGC Mode                         FDD, TDD modes
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC setup value from a specific register for a given
+ * instance of the device.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC setup.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcSetup_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -3763,9 +5800,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcSetup_Get(void *device,
     return status;
 }
 
-/**
- * This register is specified in AGC clock cycles. The power measurement and all overload blocks are disabled for this duration after a gain change to allow the gain transients to flow through the Rx path before start of any measurements.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC slow loop settling delay in the ADRV9001 device's RXB
+ * register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value An 8-bit unsigned integer representing the settling delay value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcSlowLoopSettlingDelay_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -3777,9 +5824,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcSlowLoopSettlingDelay_Set(void *d
     return status;
 }
 
-/**
- * This register is specified in AGC clock cycles. The power measurement and all overload blocks are disabled for this duration after a gain change to allow the gain transients to flow through the Rx path before start of any measurements.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC slow loop settling delay value from a specific
+ * register.
+ *
+ * @param device A pointer to the device context used for register access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved settling
+ * delay value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcSlowLoopSettlingDelay_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -3795,17 +5851,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcSlowLoopSettlingDelay_Get(void *d
 }
 
 
-/**
- * This field is read back only. If the slow AGC loop is enabled (agc_rx1_setup), this register indicates the current state of the state machine according to the settings below. This register should only be read back in RXON mode.
-
- * 00	Reset state of state machine
-
- * 01	Perform power measurements on signal
-
- * 10	Change gain based on power measurements and power thresholds defined by the BBP
-
- * 11	Clear all peak detectors
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC slow loop state from a specified register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC slow loop state.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcSlowLoopState_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -3820,9 +5877,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcSlowLoopState_Get(void *device,
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the AGC slow loop fast gain change block enable value in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcSlowloopFastGainChangeBlockEnable_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -3834,9 +5901,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcSlowloopFastGainChangeBlockEnable
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC slow loop fast gain change block enable status from
+ * a specified register.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC slow loop fast gain change block.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcSlowloopFastGainChangeBlockEnable_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -3851,9 +5927,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcSlowloopFastGainChangeBlockEnable
     return status;
 }
 
-/**
- * If this bit is written to 1, the Rx1 AGC state machine disregards all inputs into the AGC. It also stops updating the gain words. Effectively, the AGC state machine is frozen in this mode. This mode can be used for a TDD system when the device is used as a receiver in the BTS. If the ADC is enabled during a DL period, there will be no signal input at the ADC input. At this time, the gain should not increment because no signal is seen. This bit allows the AGC to stop gain ranging of the input signal.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC slow loop freeze enable state in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value indicating the desired state to set for the AGC
+ * slow loop freeze.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcSlowloopFreezeEnable_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -3865,9 +5950,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcSlowloopFreezeEnable_Set(void *de
     return status;
 }
 
-/**
- * If this bit is written to 1, the Rx1 AGC state machine disregards all inputs into the AGC. It also stops updating the gain words. Effectively, the AGC state machine is frozen in this mode. This mode can be used for a TDD system when the device is used as a receiver in the BTS. If the ADC is enabled during a DL period, there will be no signal input at the ADC input. At this time, the gain should not increment because no signal is seen. This bit allows the AGC to stop gain ranging of the input signal.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC slow loop freeze enable status from a specified
+ * register.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcSlowloopFreezeEnable_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -3882,9 +5976,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcSlowloopFreezeEnable_Get(void *de
     return status;
 }
 
-/**
- * Setting this bit resets all state machines within the gain control block to state 0 and maximum gain (for slow, fast attack, and hybrid AGC loops).
- */
+/***************************************************************************//**
+ * @brief Sets the AGC soft reset value in the RXB register map of the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the AGC soft reset field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcSoftReset_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -3896,9 +6000,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcSoftReset_Set(void *device,
     return status;
 }
 
-/**
- * Setting this bit resets all state machines within the gain control block to state 0 and maximum gain (for slow, fast attack, and hybrid AGC loops).
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC soft reset value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcSoftReset_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -3913,9 +6026,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcSoftReset_Get(void *device,
     return status;
 }
 
-/**
- * Setting this bit enables exit from gain lock when signal energy increases.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC strong signal freeze value in the ADRV9001 NVS register
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the AGC strong signal freeze.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcStrongSignalFreeze_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -3927,9 +6050,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcStrongSignalFreeze_Set(void *devi
     return status;
 }
 
-/**
- * Setting this bit enables exit from gain lock when signal energy increases.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC strong signal freeze value from a specified
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcStrongSignalFreeze_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -3944,9 +6076,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcStrongSignalFreeze_Get(void *devi
     return status;
 }
 
-/**
- * Applies to the Fast AGC.  After gain lock, the AGC measures the signal power and uses it as a comparison value.  If a later power result is higher than the original value by an amount equal to or greater than this threshold, a counter starts running at the AGC clock rate.  If the counter exceeds twice the value of agc_gainlock_exit_count, the gain may unlock depending on the AGC configuration bits.  Resolution is 1dB/LSB.
- */
+/***************************************************************************//**
+ * @brief Sets the stronger signal threshold for the AGC in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the threshold value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcStrongerSignalThreshold_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -3958,9 +6099,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcStrongerSignalThreshold_Set(void 
     return status;
 }
 
-/**
- * Applies to the Fast AGC.  After gain lock, the AGC measures the signal power and uses it as a comparison value.  If a later power result is higher than the original value by an amount equal to or greater than this threshold, a counter starts running at the AGC clock rate.  If the counter exceeds twice the value of agc_gainlock_exit_count, the gain may unlock depending on the AGC configuration bits.  Resolution is 1dB/LSB.
- */
+/***************************************************************************//**
+ * @brief Retrieves the stronger signal threshold value from the AGC register
+ * for a specified instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved threshold
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcStrongerSignalThreshold_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -3975,21 +6126,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcStrongerSignalThreshold_Get(void 
     return status;
 }
 
-/**
- * Combined with agc_rx1_ul_sig_power_meas_duration, these fields allow power detection of data for a specific slice of the gain update counter period as follows:
-
- *         - Gain update counter expires
-
- *         - A counter counts till agc_rx1_ul_sig_power_meas_delay
-
- *         - Power measurement starts
-
- *         - A counter counts till agc_rx1_ul_sig_power_meas_duration
-
- *         - Power measurement stops, and the last value of measured power during this time is used by AGC when the gain update counter expires the next time.
-
- * A value of 0 causes the power measuremt to start as soon as the gain counter expires.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC UL signal power measurement delay in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value A 16-bit unsigned integer representing the delay value to be
+ * set.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcUlSigPowerMeasDelay_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t value)
@@ -4004,21 +6152,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcUlSigPowerMeasDelay_Set(void *dev
     return status;
 }
 
-/**
- * Combined with agc_rx1_ul_sig_power_meas_duration, these fields allow power detection of data for a specific slice of the gain update counter period as follows:
-
- *         - Gain update counter expires
-
- *         - A counter counts till agc_rx1_ul_sig_power_meas_delay
-
- *         - Power measurement starts
-
- *         - A counter counts till agc_rx1_ul_sig_power_meas_duration
-
- *         - Power measurement stops, and the last value of measured power during this time is used by AGC when the gain update counter expires the next time.
-
- * A value of 0 causes the power measuremt to start as soon as the gain counter expires.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC UL signal power measurement delay from a specified
+ * register map.
+ *
+ * @param device A pointer to the device context used for register access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * measurement delay will be stored.
+ * @return Returns the status of the read operations, where a value of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcUlSigPowerMeasDelay_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t *value)
@@ -4037,21 +6182,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcUlSigPowerMeasDelay_Get(void *dev
     return status;
 }
 
-/**
- * Combined with agc_rx1_ul_sig_power_meas_delay, these fields allow power detection of data for a specific slice of the gain update counter period as follows:
-
- *         - Gain update counter expires
-
- *         - A counter counts till agc_rx1_ul_sig_power_meas_delay
-
- *         - Power measurement starts
-
- *         - A counter counts till agc_rx1_ul_sig_power_meas_duration
-
- *         - Power measurement stops, and the last value of measured power during this time is used by AGC when the gain update counter expires the next time.
-
- * A value of 0 causes the power measurement to run until the next gain update counter expiry.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC UL signal power measurement duration in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A 16-bit unsigned integer representing the duration value to be
+ * set.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcUlSigPowerMeasDuration_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t value)
@@ -4066,21 +6209,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcUlSigPowerMeasDuration_Set(void *
     return status;
 }
 
-/**
- * Combined with agc_rx1_ul_sig_power_meas_delay, these fields allow power detection of data for a specific slice of the gain update counter period as follows:
-
- *         - Gain update counter expires
-
- *         - A counter counts till agc_rx1_ul_sig_power_meas_delay
-
- *         - Power measurement starts
-
- *         - A counter counts till agc_rx1_ul_sig_power_meas_duration
-
- *         - Power measurement stops, and the last value of measured power during this time is used by AGC when the gain update counter expires the next time.
-
- * A value of 0 causes the power measurement to run until the next gain update counter expiry.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC UL signal power measurement duration from the
+ * specified register map.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated type indicating the specific instance of the
+ * register map to access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * measurement duration will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the register read operations fail.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcUlSigPowerMeasDuration_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t *value)
@@ -4099,13 +6240,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcUlSigPowerMeasDuration_Get(void *
     return status;
 }
 
-/**
- * This register performs two functions (based on gain control mode used):
-
- * AGC Fast Attack Loop: The gain control loop reduces the gain by the specified number of indices when both UL blocker triggers and the ADC High Ovrg block triggers simultaneously. The gain index in that case is reduced by the value specified in this register.
-
- * AGC Slow Loop: In this mode, when the UL blocker triggers a programmable number of times (upper_level_blocker_threshold) above its configured threshold, the slow loop will decrement gain either immediately (agc_change_gain_if_ulbth_high) or at the termination of the gain update counter. The value entered into this register should be the number of index values that the gain should be reduced by when a gain step change needs to be made due to UL Blocker triggering.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC ULB gain step for a specified instance in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the gain step value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcUlbGainStep_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -4117,13 +6264,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcUlbGainStep_Set(void *device,
     return status;
 }
 
-/**
- * This register performs two functions (based on gain control mode used):
-
- * AGC Fast Attack Loop: The gain control loop reduces the gain by the specified number of indices when both UL blocker triggers and the ADC High Ovrg block triggers simultaneously. The gain index in that case is reduced by the value specified in this register.
-
- * AGC Slow Loop: In this mode, when the UL blocker triggers a programmable number of times (upper_level_blocker_threshold) above its configured threshold, the slow loop will decrement gain either immediately (agc_change_gain_if_ulbth_high) or at the termination of the gain update counter. The value entered into this register should be the number of index values that the gain should be reduced by when a gain step change needs to be made due to UL Blocker triggering.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC ULB gain step value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC register.
+ * @param value A pointer to a uint8_t variable where the retrieved gain step
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcUlbGainStep_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -4138,9 +6290,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcUlbGainStep_Get(void *device,
     return status;
 }
 
-/**
- * This counter configures the number of times the UL blocker threshold is triggered within one gain update interval before a gain change is mandated by the gain control loop. This register can take any value from 1 through 255. If the UL blocker threshold is triggered N times where N is the value configured in this register, a gain change can either occur immediately (agc_change_gain_if_ulbth_high)  or when the agc_gain_update_counter expires or in hybrid mode when a pulse is seen on the corresponding GPIO pin .
- */
+/***************************************************************************//**
+ * @brief Sets the AGC ULB threshold exceeded counter in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns the status of the register write operation, indicating
+ * success or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcUlbThresholdExceededCounter_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -4152,9 +6313,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcUlbThresholdExceededCounter_Set(v
     return status;
 }
 
-/**
- * This counter configures the number of times the UL blocker threshold is triggered within one gain update interval before a gain change is mandated by the gain control loop. This register can take any value from 1 through 255. If the UL blocker threshold is triggered N times where N is the value configured in this register, a gain change can either occur immediately (agc_change_gain_if_ulbth_high)  or when the agc_gain_update_counter expires or in hybrid mode when a pulse is seen on the corresponding GPIO pin .
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC ULB threshold exceeded counter value from a
+ * specified register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved counter
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcUlbThresholdExceededCounter_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -4169,9 +6339,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcUlbThresholdExceededCounter_Get(v
     return status;
 }
 
-/**
- * Setting this bit enables the AGC lock level index for a burst to be recorded even when the AGC gain is locked so that the AGC can set the gain to this value if it exits gain lock.
- */
+/***************************************************************************//**
+ * @brief Sets the gain lock level during a burst for the specified AGC
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific AGC instance to
+ * be updated.
+ * @param value An 8-bit unsigned integer representing the gain lock level to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcUpdateSetgainLockLevelDuringBurst_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -4183,9 +6363,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcUpdateSetgainLockLevelDuringBurst
     return status;
 }
 
-/**
- * Setting this bit enables the AGC lock level index for a burst to be recorded even when the AGC gain is locked so that the AGC can set the gain to this value if it exits gain lock.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC gain lock level during burst mode from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC register.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcUpdateSetgainLockLevelDuringBurst_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -4200,9 +6389,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcUpdateSetgainLockLevelDuringBurst
     return status;
 }
 
-/**
- * This counter configures the number of gain indexes to reduce the gain by when the inner upper threshold has been exceeded. This step is taken only at the termination of the gain update count. The value in this register specifies the number of indexes by which to reduce the gain.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC upper threshold exceeded gain step for a specified
+ * instance in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the gain step value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcUpper0ThresholdExceededGainStep_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -4214,9 +6413,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcUpper0ThresholdExceededGainStep_S
     return status;
 }
 
-/**
- * This counter configures the number of gain indexes to reduce the gain by when the inner upper threshold has been exceeded. This step is taken only at the termination of the gain update count. The value in this register specifies the number of indexes by which to reduce the gain.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC upper threshold exceeded gain step value from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved gain step
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcUpper0ThresholdExceededGainStep_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -4231,11 +6439,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcUpper0ThresholdExceededGainStep_G
     return status;
 }
 
-/**
- * This specifies the difference between outer and inner high thresholds in dB. See description in agc_lower_0_threshold for details on power threshold modes.
-
- * Outer High Power Threshold Offset = Outer High Power threshold  Inner High Power threshold (in dB).
- */
+/***************************************************************************//**
+ * @brief Sets the AGC upper threshold value in the NVS register map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the threshold value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcUpper1Threshold_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -4247,11 +6463,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcUpper1Threshold_Set(void *device,
     return status;
 }
 
-/**
- * This specifies the difference between outer and inner high thresholds in dB. See description in agc_lower_0_threshold for details on power threshold modes.
-
- * Outer High Power Threshold Offset = Outer High Power threshold  Inner High Power threshold (in dB).
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC Upper 1 Threshold value from a specified register
+ * for a given device instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved threshold
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcUpper1Threshold_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -4266,9 +6490,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcUpper1Threshold_Get(void *device,
     return status;
 }
 
-/**
- * This counter configures the number of gain indexes to reduce the gain by when the outer high power threshold has been exceeded. This step is taken only at th termination of the gain update count. The value in this register specifies the number of indexes to reduce the gain by when this threshold has been exceeded. This condition is only evaluated at the termination of the gain update counter.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC upper 1 threshold exceeded gain step in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the gain step value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcUpper1ThresholdExceededGainStep_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -4280,9 +6514,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcUpper1ThresholdExceededGainStep_S
     return status;
 }
 
-/**
- * This counter configures the number of gain indexes to reduce the gain by when the outer high power threshold has been exceeded. This step is taken only at th termination of the gain update count. The value in this register specifies the number of indexes to reduce the gain by when this threshold has been exceeded. This condition is only evaluated at the termination of the gain update counter.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC upper 1 threshold exceeded gain step value from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC register.
+ * @param value A pointer to a uint8_t variable where the retrieved gain step
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcUpper1ThresholdExceededGainStep_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -4297,9 +6540,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcUpper1ThresholdExceededGainStep_G
     return status;
 }
 
-/**
- * Applies to Fast AGC.  These bits set the maximum gain index increase that the AGC can use for the lock level adjustment.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC upper limit on gain increase for a specified lock level
+ * in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the AGC upper limit.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcUpperLimitOnGainIncreaseForLockLevel_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -4311,9 +6564,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcUpperLimitOnGainIncreaseForLockLe
     return status;
 }
 
-/**
- * Applies to Fast AGC.  These bits set the maximum gain index increase that the AGC can use for the lock level adjustment.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC upper limit on gain increase for a specified lock
+ * level from a device register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * AGC register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcUpperLimitOnGainIncreaseForLockLevel_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -4328,9 +6591,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcUpperLimitOnGainIncreaseForLockLe
     return status;
 }
 
-/**
- * This field the 1st update interval for the multiple time constant in AGC loop mode. For details on using this field, see description in agc_enable_fast_recovery_loop.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC URANGE interval for a specified instance in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A 16-bit unsigned integer representing the value to be set in
+ * the AGC URANGE interval.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcUrangeInterval0_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t value)
@@ -4345,9 +6618,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcUrangeInterval0_Set(void *device,
     return status;
 }
 
-/**
- * This field the 1st update interval for the multiple time constant in AGC loop mode. For details on using this field, see description in agc_enable_fast_recovery_loop.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC URANGE interval value from the specified register
+ * map instance.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param instance An enumeration value representing the specific instance of
+ * the register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the register read operations fail.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcUrangeInterval0_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t *value)
@@ -4366,9 +6648,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcUrangeInterval0_Get(void *device,
     return status;
 }
 
-/**
- * This field, sets the 2nd update interval for the multiple time constant in AGC loop mode. For details on using this field, see description in agc_enable_fast_recovery_loop.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC URANGE interval 1 multiplier in the ADRV9001 device's
+ * register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value An 8-bit unsigned integer representing the multiplier value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcUrangeInterval1Mult_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -4380,9 +6672,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcUrangeInterval1Mult_Set(void *dev
     return status;
 }
 
-/**
- * This field, sets the 2nd update interval for the multiple time constant in AGC loop mode. For details on using this field, see description in agc_enable_fast_recovery_loop.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC URANGE interval 1 multiplier value from a specified
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcUrangeInterval1Mult_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -4397,9 +6698,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcUrangeInterval1Mult_Get(void *dev
     return status;
 }
 
-/**
- * This field, sets the 3rd update interval for the multiple time constant in AGC loop mode. For details on using this field, see description in agc_enable_fast_recovery_loop.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC URange interval multiplier in the ADRV9001 device's
+ * register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcUrangeInterval2Mult_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -4411,9 +6722,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcUrangeInterval2Mult_Set(void *dev
     return status;
 }
 
-/**
- * This field, sets the 3rd update interval for the multiple time constant in AGC loop mode. For details on using this field, see description in agc_enable_fast_recovery_loop.
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcUrangeInterval2Mult_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -4428,9 +6749,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcUrangeInterval2Mult_Get(void *dev
     return status;
 }
 
-/**
- * Setting this bit enables using the blocker, ADC, and digital saturation over-range counters in Rx1 when in manual gain control mode.  The overrange signals can be observed by the user through the GPIO to control the AGC in this mode.
- */
+/***************************************************************************//**
+ * @brief Sets the AGC use counters for MGC in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that specifies the setting to be applied to the
+ * AGC use counters.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcUseCountersForMgc_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -4442,9 +6772,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcUseCountersForMgc_Set(void *devic
     return status;
 }
 
-/**
- * Setting this bit enables using the blocker, ADC, and digital saturation over-range counters in Rx1 when in manual gain control mode.  The overrange signals can be observed by the user through the GPIO to control the AGC in this mode.
- */
+/***************************************************************************//**
+ * @brief Retrieves the AGC use counters for MGC from a specific register and
+ * stores the result in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_AgcUseCountersForMgc_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -4459,6 +6798,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_AgcUseCountersForMgc_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the high source select for the RXB APD in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_ApdHighSrcSelect_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -4470,6 +6821,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_ApdHighSrcSelect_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the high source selection value from the RXB APD register
+ * map for a specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value A pointer to a uint8_t variable where the retrieved high source
+ * selection value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_ApdHighSrcSelect_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -4484,6 +6847,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_ApdHighSrcSelect_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the low source selection for the RXB APD in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for RXB.
+ * @param value An 8-bit integer representing the value to be written to the
+ * register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_ApdLowSrcSelect_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -4495,6 +6870,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_ApdLowSrcSelect_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the low source select value from the RXB APD register map
+ * for a specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_ApdLowSrcSelect_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -4510,6 +6897,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_ApdLowSrcSelect_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the slicer position value from a specific register for a
+ * given instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value A pointer to a uint8_t variable where the retrieved slicer
+ * position value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BandASlicerPosition_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -4524,9 +6924,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_BandASlicerPosition_Get(void *device
     return status;
 }
 
-/**
- * These bits determine the initial decimation of the input signal to the DC offset block before accumulation. The number of samples decimated is calculated as 2^i where i" is the decimate value. The maximum value that can be programmed is 21.
- */
+/***************************************************************************//**
+ * @brief Sets the decimation value for the BBDC in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the decimation value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcDecimate_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -4538,9 +6947,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcDecimate_Set(void *device,
     return status;
 }
 
-/**
- * These bits determine the initial decimation of the input signal to the DC offset block before accumulation. The number of samples decimated is calculated as 2^i where i" is the decimate value. The maximum value that can be programmed is 21.
- */
+/***************************************************************************//**
+ * @brief Retrieves the decimation value from a specific register for the given
+ * instance of the device.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved decimation
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcDecimate_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -4555,9 +6973,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcDecimate_Get(void *device,
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the decimation value for the BBDC ELB in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the decimation value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcElbDecimate_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -4569,9 +6996,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcElbDecimate_Set(void *device,
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcElbDecimate_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -4586,9 +7023,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcElbDecimate_Get(void *device,
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets a specific field in the NVS register map for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcElbMShift_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -4600,9 +7046,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcElbMShift_Set(void *device,
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcElbMShift_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -4617,9 +7072,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcElbMShift_Get(void *device,
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the BBDC ELB multiplier value in the ADRV9001 NVS register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the multiplier value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcElbMultiplier_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -4631,9 +7095,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcElbMultiplier_Set(void *device,
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the BBDC ELB multiplier value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved multiplier
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcElbMultiplier_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -4648,9 +7121,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcElbMultiplier_Get(void *device,
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the BBDC ELB multiplier enable field in the ADRV9001 NVS register
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that indicates the desired state to set for the
+ * BBDC ELB multiplier enable.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcElbMultiplierEnable_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -4662,9 +7145,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcElbMultiplierEnable_Set(void *de
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the BBDC ELB multiplier enable value from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcElbMultiplierEnable_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -4679,9 +7171,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcElbMultiplierEnable_Get(void *de
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the BBDC ELB pause configuration in the ADRV9001 device's NVS
+ * register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcElbPause_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -4693,9 +7195,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcElbPause_Set(void *device,
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a hardware register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcElbPause_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -4710,9 +7221,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcElbPause_Get(void *device,
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the BBDC ELB tracking enable field in the NVS register map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value indicating the desired state to set for the BBDC
+ * ELB tracking enable.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcElbTrackingEnable_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -4724,9 +7245,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcElbTrackingEnable_Set(void *devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the ELB tracking enable status from a specific register for
+ * a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcElbTrackingEnable_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -4741,9 +7271,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcElbTrackingEnable_Get(void *devi
     return status;
 }
 
-/**
- * TO BE REMOVED??
- */
+/***************************************************************************//**
+ * @brief Sets the BBDC force round path configuration in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer that specifies the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcForceRoundPath_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -4755,9 +7294,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcForceRoundPath_Set(void *device,
     return status;
 }
 
-/**
- * TO BE REMOVED??
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcForceRoundPath_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -4772,9 +7320,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcForceRoundPath_Get(void *device,
     return status;
 }
 
-/**
- * TO BE REMOVED??
- */
+/***************************************************************************//**
+ * @brief Sets the BBDC force round path select value in the ADRV9001 NVS
+ * register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcForceRoundPathSelect_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -4786,9 +7344,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcForceRoundPathSelect_Set(void *d
     return status;
 }
 
-/**
- * TO BE REMOVED??
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a register and stores it
+ * in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcForceRoundPathSelect_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -4803,9 +7370,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcForceRoundPathSelect_Get(void *d
     return status;
 }
 
-/**
- * When "bbdc_load_acc" is set, the value in "bbdc_load_acc_i" and "bbdc_load_acc_q" registers are loaded in the digital DC offset accumulators for the I and Qpath. Once "bbdc_load_acc" is cleared, tracking continues from this loaded value. [0] - Ch1, [1] - Ch2.
- */
+/***************************************************************************//**
+ * @brief Sets the load accumulator value for a specified instance in the
+ * ADRV9001 NVS register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the load accumulator.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcLoadAcc_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -4817,9 +7394,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcLoadAcc_Set(void *device,
     return status;
 }
 
-/**
- * When "bbdc_load_acc" is set, the value in "bbdc_load_acc_i" and "bbdc_load_acc_q" registers are loaded in the digital DC offset accumulators for the I and Qpath. Once "bbdc_load_acc" is cleared, tracking continues from this loaded value. [0] - Ch1, [1] - Ch2.
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcLoadAcc_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -4834,13 +7421,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcLoadAcc_Get(void *device,
     return status;
 }
 
-/**
- * When "bbdc_load_acc" is set, the value in this register is loaded
-
- * in the digital DC offset accumulator for the I path. Once "bbdc_load_acc" is
-
- * cleared, tracking continues from this loaded value.
- */
+/***************************************************************************//**
+ * @brief Sets the load accumulation value for the BBDC register in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A 32-bit unsigned integer representing the value to be set in
+ * the BBDC load accumulation registers.
+ * @return Returns the status of the last write operation, indicating success
+ * (0) or an error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcLoadAccI_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t value)
@@ -4858,13 +7451,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcLoadAccI_Set(void *device,
     return status;
 }
 
-/**
- * When "bbdc_load_acc" is set, the value in this register is loaded
-
- * in the digital DC offset accumulator for the I path. Once "bbdc_load_acc" is
-
- * cleared, tracking continues from this loaded value.
- */
+/***************************************************************************//**
+ * @brief Retrieves the accumulated I value from the BBDC load register of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a 32-bit unsigned integer where the accumulated I
+ * value will be stored.
+ * @return Returns the status of the read operations, where a value of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcLoadAccI_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -4887,13 +7486,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcLoadAccI_Get(void *device,
     return status;
 }
 
-/**
- * When "bbdc_load_acc" is set, the value in this register is loaded
-
- * in the digital DC offset accumulator for the Q path. Once "bbdc_load_acc" is
-
- * cleared, tracking continues from this loaded value.
- */
+/***************************************************************************//**
+ * @brief Sets the BBDC load accumulator value in the ADRV9001 device's NVS
+ * register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A 32-bit unsigned integer representing the value to be loaded
+ * into the accumulator.
+ * @return Returns the status of the last write operation, indicating success
+ * (0) or failure (non-zero error code).
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcLoadAccQ_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t value)
@@ -4911,13 +7516,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcLoadAccQ_Set(void *device,
     return status;
 }
 
-/**
- * When "bbdc_load_acc" is set, the value in this register is loaded
-
- * in the digital DC offset accumulator for the Q path. Once "bbdc_load_acc" is
-
- * cleared, tracking continues from this loaded value.
- */
+/***************************************************************************//**
+ * @brief Retrieves and accumulates a 24-bit value from specific registers of a
+ * device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a 32-bit unsigned integer where the accumulated
+ * value will be stored.
+ * @return Returns the status of the last read operation, indicating success (0)
+ * or failure (non-zero).
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcLoadAccQ_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -4940,6 +7551,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcLoadAccQ_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the decimation value for the BBDC loopback in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the decimation value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcLoopbackDecimate_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -4951,6 +7575,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcLoopbackDecimate_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the decimation value from a specific register for the BBDC
+ * loopback in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved decimation
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcLoopbackDecimate_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -4965,6 +7601,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcLoopbackDecimate_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the BBDC loopback M shift value in the ADRV9001 device's RXB
+ * register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the BBDC loopback M shift.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcLoopbackMShift_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -4976,6 +7625,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcLoopbackMShift_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the loopback M shift value from a specific register for the
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcLoopbackMShift_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -4990,6 +7651,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcLoopbackMShift_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the loopback multiplier for the BBDC in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the loopback multiplier
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcLoopbackMultiplier_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -5001,6 +7674,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcLoopbackMultiplier_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the loopback multiplier value from a specific register for a
+ * given instance of the device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map to access.
+ * @param value A pointer to a uint8_t variable where the retrieved loopback
+ * multiplier value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcLoopbackMultiplier_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -5015,6 +7701,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcLoopbackMultiplier_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the loopback multiplier enable value in the ADRV9001 NVS register
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the loopback multiplier.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcLoopbackMultiplierEnable_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -5026,6 +7725,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcLoopbackMultiplierEnable_Set(voi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the loopback multiplier enable value from a specific
+ * register for the given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcLoopbackMultiplierEnable_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -5040,6 +7751,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcLoopbackMultiplierEnable_Get(voi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the loopback pause configuration for the specified instance of
+ * the ADRV9001 NVS register map.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that indicates the loopback pause setting to be
+ * applied.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcLoopbackPause_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -5051,6 +7774,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcLoopbackPause_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the loopback pause value from a specific register for the
+ * given instance of the device.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved loopback
+ * pause value will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcLoopbackPause_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -5065,6 +7800,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcLoopbackPause_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the loopback tracking enable state for a specified instance in
+ * the ADRV9001 NVS register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value indicating the desired state to set for loopback
+ * tracking (0 or 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcLoopbackTrackingEnable_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -5076,6 +7824,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcLoopbackTrackingEnable_Set(void 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the loopback tracking enable status from a specific register
+ * for the given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved loopback
+ * tracking enable status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcLoopbackTrackingEnable_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -5090,9 +7850,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcLoopbackTrackingEnable_Get(void 
     return status;
 }
 
-/**
- * This register controls the loop gain of the DC offset loop. The maximum value that can be programmed is 31.
- */
+/***************************************************************************//**
+ * @brief Sets the BBDC M shift value in the RXB register map for the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcMShift_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -5104,9 +7874,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcMShift_Set(void *device,
     return status;
 }
 
-/**
- * This register controls the loop gain of the DC offset loop. The maximum value that can be programmed is 31.
- */
+/***************************************************************************//**
+ * @brief Retrieves the BBDC M-Shift value from a specific register in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcMShift_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -5121,9 +7901,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcMShift_Get(void *device,
     return status;
 }
 
-/**
- * DEBUG BIT. Pause BBDC manually.
- */
+/***************************************************************************//**
+ * @brief Sets the manual pause state for the BBDC in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value A uint8_t value indicating the manual pause state to be set (0
+ * or 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcManualPause_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -5135,9 +7924,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcManualPause_Set(void *device,
     return status;
 }
 
-/**
- * DEBUG BIT. Pause BBDC manually.
- */
+/***************************************************************************//**
+ * @brief Retrieves the manual pause status from a specific register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcManualPause_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -5152,9 +7950,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcManualPause_Get(void *device,
     return status;
 }
 
-/**
- * DEBUG BIT. Load accumulator with the last value stored in the LUT.
- */
+/***************************************************************************//**
+ * @brief Sets the manual restore accumulator value for a specified instance in
+ * the ADRV9001 NVS register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the manual restore accumulator.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcManualRestoreAcc_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -5166,9 +7974,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcManualRestoreAcc_Set(void *devic
     return status;
 }
 
-/**
- * DEBUG BIT. Load accumulator with the last value stored in the LUT.
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map to access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcManualRestoreAcc_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -5183,11 +8001,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcManualRestoreAcc_Get(void *devic
     return status;
 }
 
-/**
- * When this bit is set, the BBDC offset words going to the datapath
-
- * are masked (set to 0).
- */
+/***************************************************************************//**
+ * @brief Sets the BBDC mask output for a specified instance in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the BBDC mask output.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcMaskOutput_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -5199,11 +8025,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcMaskOutput_Set(void *device,
     return status;
 }
 
-/**
- * When this bit is set, the BBDC offset words going to the datapath
-
- * are masked (set to 0).
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific masked output value from a register for a given
+ * instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved masked
+ * output value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcMaskOutput_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -5218,9 +8052,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcMaskOutput_Get(void *device,
     return status;
 }
 
-/**
- * When "bbdc_multiplier_enable" is set, the output of the decimate block gets multiplied by the value of this register before being accumulated.
- */
+/***************************************************************************//**
+ * @brief Sets the BBDC multiplier value in the NVS register map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the multiplier value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcMultiplier_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -5232,9 +8076,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcMultiplier_Set(void *device,
     return status;
 }
 
-/**
- * When "bbdc_multiplier_enable" is set, the output of the decimate block gets multiplied by the value of this register before being accumulated.
- */
+/***************************************************************************//**
+ * @brief Retrieves the BBDC multiplier value from a specific register for a
+ * given instance of the device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved multiplier
+ * value will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcMultiplier_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -5249,9 +8103,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcMultiplier_Get(void *device,
     return status;
 }
 
-/**
- * Dc Offset Multiplier Enable
- */
+/***************************************************************************//**
+ * @brief Sets the BBDC multiplier enable field in the NVS register map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit integer representing the value to be written to the
+ * BBDC multiplier enable field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcMultiplierEnable_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -5263,9 +8127,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcMultiplierEnable_Set(void *devic
     return status;
 }
 
-/**
- * Dc Offset Multiplier Enable
- */
+/***************************************************************************//**
+ * @brief Retrieves the BBDC multiplier enable value from a specific register
+ * for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved multiplier
+ * enable value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcMultiplierEnable_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -5280,6 +8153,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcMultiplierEnable_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the decimation value for the BBDC ORX in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the BBDC ORX.
+ * @param value An 8-bit unsigned integer representing the decimation value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcOrxDecimate_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -5291,6 +8176,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcOrxDecimate_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the decimation value from a specific register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcOrxDecimate_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -5305,6 +8203,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcOrxDecimate_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the BBDC ORX M shift value in the ADRV9001 NVS register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be shifted
+ * and set in the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcOrxMShift_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -5316,6 +8226,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcOrxMShift_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcOrxMShift_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -5330,6 +8252,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcOrxMShift_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the multiplier value for the BBDC ORX in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the multiplier value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcOrxMultiplier_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -5341,6 +8275,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcOrxMultiplier_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the BBDC ORX multiplier value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * BBDC ORX multiplier.
+ * @param value A pointer to a uint8_t variable where the retrieved multiplier
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcOrxMultiplier_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -5355,6 +8301,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcOrxMultiplier_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the multiplier enable for the BBDC ORX in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value A 8-bit unsigned integer that specifies the multiplier enable
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcOrxMultiplierEnable_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -5366,6 +8324,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcOrxMultiplierEnable_Set(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the multiplier enable value from a specific register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved multiplier
+ * enable value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcOrxMultiplierEnable_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -5380,6 +8351,17 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcOrxMultiplierEnable_Get(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the pause state for the BBDC ORX in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value A uint8_t value indicating the pause state to be set (0 or 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcOrxPause_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -5391,6 +8373,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcOrxPause_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register from the device and stores
+ * it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcOrxPause_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -5405,6 +8400,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcOrxPause_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the tracking enable value for the BBDC ORX in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the BBDC ORX.
+ * @param value A uint8_t value that indicates the tracking enable state to be
+ * set (0 or 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcOrxTrackingEnable_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -5416,6 +8424,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcOrxTrackingEnable_Set(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the tracking enable status from a specific register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved tracking
+ * enable status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcOrxTrackingEnable_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -5430,9 +8451,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcOrxTrackingEnable_Get(void *devi
     return status;
 }
 
-/**
- * When this bit is set, the accumulator as well as decimate block are frozen. They retain the last values that were stored in the registers before the pause signal was set. The Rx1 channel DC offset correction word is also frozen to its last value and is not updated any further. When the pause bit is cleared, the tracking resumes from its previous state. If it is required to have zero DC correction word when paused, set the mask bits to do so.
- */
+/***************************************************************************//**
+ * @brief Sets the BBDC pause state in the ADRV9001 device's RXB register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value A uint8_t value indicating the desired pause state to be set (0
+ * or 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcPause_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -5444,9 +8474,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcPause_Set(void *device,
     return status;
 }
 
-/**
- * When this bit is set, the accumulator as well as decimate block are frozen. They retain the last values that were stored in the registers before the pause signal was set. The Rx1 channel DC offset correction word is also frozen to its last value and is not updated any further. When the pause bit is cleared, the tracking resumes from its previous state. If it is required to have zero DC correction word when paused, set the mask bits to do so.
- */
+/***************************************************************************//**
+ * @brief Retrieves the BBDC pause status from a specific register for a given
+ * instance of the device.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcPause_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -5461,9 +8500,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcPause_Get(void *device,
     return status;
 }
 
-/**
- * Enable Digital Dc Offset Tracking Ch1
- */
+/***************************************************************************//**
+ * @brief Sets the BBDC tracking enable state in the ADRV9001 device's RXB NVS
+ * register.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific RXB instance to
+ * configure.
+ * @param value A uint8_t value indicating the desired state for BBDC tracking
+ * enable (0 or 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcTrackingEnable_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -5475,9 +8524,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcTrackingEnable_Set(void *device,
     return status;
 }
 
-/**
- * Enable Digital Dc Offset Tracking Ch1
- */
+/***************************************************************************//**
+ * @brief Retrieves the BBDC tracking enable status from a specific register for
+ * the given device instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcTrackingEnable_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -5492,9 +8550,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcTrackingEnable_Get(void *device,
     return status;
 }
 
-/**
- * Setting this bit resets the internal accumulator whenever a gain change occurs.  This action restarts the DC offset correction process from zero.
- */
+/***************************************************************************//**
+ * @brief Sets the BBDC tracking reset accumulator on gain change for a
+ * specified instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value A uint8_t value that indicates the new state to set for the BBDC
+ * tracking reset.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcTrackingResetAccOnGainChange_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -5506,9 +8574,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcTrackingResetAccOnGainChange_Set
     return status;
 }
 
-/**
- * Setting this bit resets the internal accumulator whenever a gain change occurs.  This action restarts the DC offset correction process from zero.
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register related to BBDC tracking
+ * reset on gain change from the device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcTrackingResetAccOnGainChange_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -5523,9 +8601,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcTrackingResetAccOnGainChange_Get
     return status;
 }
 
-/**
- * Set this self-clearing bit to update the registers that are available for digital DC offset readback.
- */
+/***************************************************************************//**
+ * @brief Sets the tracking word for the BBDC in the ADRV9001 device's NVS
+ * register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the BBDC.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the tracking word.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcUpdateTrackingWord_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -5537,9 +8625,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcUpdateTrackingWord_Set(void *dev
     return status;
 }
 
-/**
- * Set this self-clearing bit to update the registers that are available for digital DC offset readback.
- */
+/***************************************************************************//**
+ * @brief Retrieves the tracking word from a specific register for the given
+ * instance of the device.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved tracking
+ * word will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_BbdcUpdateTrackingWord_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -5554,9 +8651,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_BbdcUpdateTrackingWord_Get(void *dev
     return status;
 }
 
-/**
- * (B0 New) 0: CSSI data source clock for DEBUG mode inherit from datapath NBDEM stage, 1: CSSI data source clock for DEBUG mode inherit from DivN from clk1105
- */
+/***************************************************************************//**
+ * @brief Sets the debug mode clock selection for the RX data source in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RX data source.
+ * @param value An 8-bit unsigned integer representing the clock selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_CssiRxDataSourceDbgModeClkSel_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -5568,9 +8675,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_CssiRxDataSourceDbgModeClkSel_Set(vo
     return status;
 }
 
-/**
- * (B0 New) 0: CSSI data source clock for DEBUG mode inherit from datapath NBDEM stage, 1: CSSI data source clock for DEBUG mode inherit from DivN from clk1105
- */
+/***************************************************************************//**
+ * @brief Retrieves the debug mode clock selection value from a specific
+ * register for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * selection value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_CssiRxDataSourceDbgModeClkSel_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -5585,9 +8701,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_CssiRxDataSourceDbgModeClkSel_Get(vo
     return status;
 }
 
-/**
- * (B0 New) Enable the Mask of the strobe according to cssi_rx_mask_strobe_value
- */
+/***************************************************************************//**
+ * @brief Sets the mask strobe enable for a specified instance in the ADRV9001
+ * NVS register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that indicates the mask strobe enable state to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_CssiRxMaskStrobeEnable_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -5599,9 +8725,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_CssiRxMaskStrobeEnable_Set(void *dev
     return status;
 }
 
-/**
- * (B0 New) Enable the Mask of the strobe according to cssi_rx_mask_strobe_value
- */
+/***************************************************************************//**
+ * @brief Retrieves the strobe enable mask value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved mask value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_CssiRxMaskStrobeEnable_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -5616,9 +8751,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_CssiRxMaskStrobeEnable_Get(void *dev
     return status;
 }
 
-/**
- * (B0 New) N-1 Strobe over N will be masked (Used for SSI interpolation mode only)
- */
+/***************************************************************************//**
+ * @brief Sets the strobe value for the CSSI RX mask in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the strobe value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_CssiRxMaskStrobeValue_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -5630,9 +8774,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_CssiRxMaskStrobeValue_Set(void *devi
     return status;
 }
 
-/**
- * (B0 New) N-1 Strobe over N will be masked (Used for SSI interpolation mode only)
- */
+/***************************************************************************//**
+ * @brief Retrieves the strobe value from a specific register for a given
+ * instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved strobe value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_CssiRxMaskStrobeValue_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -5648,9 +8802,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_CssiRxMaskStrobeValue_Get(void *devi
 }
 
 
-/**
- * This register contains the readback value of the current Rx1 gain index. If "read gain table" is set, the value is "gt_addr" . If clear, the value is the gain index currently in use on the Rx1 channel.
- */
+/***************************************************************************//**
+ * @brief Retrieves the current gain index from a specific register for a given
+ * instance of the device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved gain index
+ * will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_CurrentGainIndex_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -5665,17 +8829,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_CurrentGainIndex_Get(void *device,
     return status;
 }
 
-/**
- * (B0 New) SPI toggled bit to capture the slicer gain shift value calculated by rssi_pm or by number-of-sign-bits. If the SPI toggle occurs before rssi_pm or number-sign-bits completes the SPI toggle is placed on a queue. Upon completion of rssi_pm or number-sign-bits the slicer gain is captured and the queue is cleared 
-
- *  1 = capture slicer gain
-
- * 0 = no capture
-
- * 
-
- * Note: If by number-sign-bits and the slicer gain completed, the SPI toggle initiates a new slicer gain by sign-bits calculation.
- */
+/***************************************************************************//**
+ * @brief Sets the valid shift value for the DC signal processing output in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the shift value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgDpDoutShiftValid_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -5687,17 +8853,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgDpDoutShiftValid_Set(void *devic
     return status;
 }
 
-/**
- * (B0 New) SPI toggled bit to capture the slicer gain shift value calculated by rssi_pm or by number-of-sign-bits. If the SPI toggle occurs before rssi_pm or number-sign-bits completes the SPI toggle is placed on a queue. Upon completion of rssi_pm or number-sign-bits the slicer gain is captured and the queue is cleared 
-
- *  1 = capture slicer gain
-
- * 0 = no capture
-
- * 
-
- * Note: If by number-sign-bits and the slicer gain completed, the SPI toggle initiates a new slicer gain by sign-bits calculation.
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register field and shifts it into a
+ * provided variable.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved and shifted
+ * register value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgDpDoutShiftValid_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -5712,6 +8879,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgDpDoutShiftValid_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the DC offset shift value in the RXB register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value An 8-bit unsigned integer representing the shift value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgDpOutShift_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -5723,6 +8903,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgDpOutShift_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the DCSG DP output shift value from a specific register for
+ * a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgDpOutShift_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -5737,13 +8929,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgDpOutShift_Get(void *device,
     return status;
 }
 
-/**
- * (B0 New) Masking bit to enable or disable the slicer gain to be captured by the falling edge of rxon (delay enable). This only applies when slicer gain is generated by rssi_pm or numder-of-sign-bits
-
- * 1 = slicer gain captured on falling edge rxon
-
- * 0 = slicer gain not captured on falling edge rxon
- */
+/***************************************************************************//**
+ * @brief Sets the falling RXON mask for a specified instance in the ADRV9001
+ * NVS register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that specifies the mask to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgFallingRxonMask_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -5755,13 +8952,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgFallingRxonMask_Set(void *device
     return status;
 }
 
-/**
- * (B0 New) Masking bit to enable or disable the slicer gain to be captured by the falling edge of rxon (delay enable). This only applies when slicer gain is generated by rssi_pm or numder-of-sign-bits
-
- * 1 = slicer gain captured on falling edge rxon
-
- * 0 = slicer gain not captured on falling edge rxon
- */
+/***************************************************************************//**
+ * @brief Retrieves the DCSG falling RXON mask value from a specific register
+ * for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved mask value
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgFallingRxonMask_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -5776,6 +8978,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgFallingRxonMask_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the DC gain mode for a specified instance in the ADRV9001 NVS
+ * register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the DC gain mode field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgMode_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -5787,6 +9002,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgMode_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the DCSG mode value from a specific register for a given
+ * instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved DCSG mode
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgMode_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -5801,6 +9029,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgMode_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the DC offset for the RXB in the ADRV9001 device's register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific RXB instance to
+ * configure.
+ * @param value An 8-bit unsigned integer representing the DC offset value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgNsbOffset_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -5812,6 +9052,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgNsbOffset_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the DC offset value from a specific register for a given
+ * instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved DC offset
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgNsbOffset_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -5826,6 +9079,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgNsbOffset_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the DC offset for the RXB NSBS register in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register.
+ * @param value A 16-bit unsigned integer representing the value to be set in
+ * the register.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if any operation fails.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgNsbs_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t value)
@@ -5840,6 +9105,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgNsbs_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a 16-bit value from specific registers of a device based on
+ * the provided instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumeration value representing the specific instance of
+ * the register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the last read operation, with the 16-bit value
+ * stored in the location pointed to by `value`.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgNsbs_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t *value)
@@ -5858,6 +9135,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgNsbs_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the DC offset delay value in the RXB register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific RXB instance to
+ * configure.
+ * @param value An 8-bit unsigned integer representing the delay value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgNsbsDly_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -5869,6 +9159,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgNsbsDly_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the DCSG NSBS delay value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgNsbsDly_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -5883,6 +9185,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgNsbsDly_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the average exponential value for the DC signal gain in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmTLAvgExp_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -5894,6 +9209,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmTLAvgExp_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the average exponential value from a specific register for a
+ * given instance of the device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map to access.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmTLAvgExp_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -5908,6 +9236,17 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmTLAvgExp_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the DC offset average manual value in the ADRV9001 register map.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A 16-bit unsigned integer representing the value to be set in
+ * the register.
+ * @return Returns the status of the last write operation, indicating success
+ * (0) or failure (non-zero error code).
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmTLAvgMan_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t value)
@@ -5922,6 +9261,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmTLAvgMan_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the average value from two registers and stores it in the
+ * provided pointer.
+ *
+ * @param device A pointer to the device context used for register access.
+ * @param instance An enumeration value representing the specific instance of
+ * the register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * average value will be stored.
+ * @return Returns the status of the last register read operation, which
+ * indicates success or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmTLAvgMan_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t *value)
@@ -5940,6 +9291,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmTLAvgMan_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the average exponential value for the DC signal gain in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmTUAvgExp_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -5951,6 +9315,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmTUAvgExp_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the average expected value from a specific register for a
+ * given instance of the device.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmTUAvgExp_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -5965,6 +9341,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmTUAvgExp_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the average manual value for the DC signal gain in the RXB
+ * register map of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value A 16-bit unsigned integer representing the value to be set in
+ * the register.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmTUAvgMan_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t value)
@@ -5979,6 +9368,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmTUAvgMan_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the average value from a specific register in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the register read fails.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmTUAvgMan_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t *value)
@@ -5998,6 +9400,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmTUAvgMan_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a series of register values from a device and stores them in
+ * a provided array.
+ *
+ * @param device A pointer to the device context from which register values are
+ * to be read.
+ * @param instance An enumeration value that specifies the instance of the
+ * register map to access.
+ * @param value A pointer to a 2D array where the retrieved register values will
+ * be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmAcc0IntermVal_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t (*value)[10])
@@ -6047,6 +9462,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmAcc0IntermVal_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the DCSG PM accumulator number in the ADRV9001 device's register
+ * map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A 32-bit unsigned integer representing the value to be set in
+ * the DCSG PM accumulator.
+ * @return Returns the status of the last write operation, where a value of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmAcc0Num_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t value)
@@ -6064,6 +9492,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmAcc0Num_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the DCSG PM accumulator value from the specified register
+ * map instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumeration value representing the specific instance of
+ * the register map.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * accumulator value will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmAcc0Num_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -6086,6 +9526,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmAcc0Num_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the DC signal processing accumulator value in the ADRV9001
+ * device's register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A 32-bit unsigned integer representing the value to be set in
+ * the accumulator.
+ * @return Returns the status of the last write operation, indicating success
+ * (0) or failure (non-zero error code).
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmAcc0NumB_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t value)
@@ -6103,6 +9556,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmAcc0NumB_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a 24-bit value from a specific register map for a given
+ * instance of the device.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the last read operation, which indicates
+ * success (0) or an error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmAcc0NumB_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -6125,6 +9590,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmAcc0NumB_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the DC signal processing accumulator number of reciprocal values
+ * in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A 32-bit unsigned integer containing the value to be set in the
+ * registers.
+ * @return Returns the status of the last write operation, indicating success
+ * (0) or failure (non-zero).
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmAcc0NumRecip_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t value)
@@ -6142,6 +9620,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmAcc0NumRecip_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `DcsgPmAcc0NumRecip` register by reading
+ * three consecutive registers and combining their values.
+ *
+ * @param device A pointer to the device context used for register access.
+ * @param instance An enumeration value representing the specific instance of
+ * the register map.
+ * @param value A pointer to a 32-bit unsigned integer where the combined
+ * register value will be stored.
+ * @return Returns the status of the last register read operation, with the
+ * combined value of the three registers stored in the location pointed
+ * to by `value`.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmAcc0NumRecip_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -6164,6 +9655,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmAcc0NumRecip_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the DC signal processing accumulator register values for a
+ * specified instance in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A 32-bit unsigned integer containing the value to be split and
+ * written to the registers.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmAcc0NumRecipB_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t value)
@@ -6181,6 +9685,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmAcc0NumRecipB_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a 24-bit value from three consecutive registers for a
+ * specified instance of the `adrv9001` device.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param instance An enumeration value representing the specific instance of
+ * the `adrv9001` device.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the last register read operation, where a value
+ * of 0 indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmAcc0NumRecipB_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -6203,6 +9719,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmAcc0NumRecipB_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the DCSG PM accumulator clear field in the ADRV9001 NVS register
+ * map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit value to be written to the DCSG PM accumulator clear
+ * field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmAccClear_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -6214,6 +9742,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmAccClear_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the DCSG PM accumulator value from a specific register and
+ * stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmAccClear_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -6228,6 +9768,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmAccClear_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the DCSG PM clear mode for a specified instance in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmClearMode_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -6239,6 +9792,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmClearMode_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the DCSG PM clear mode value from a specified register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmClearMode_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -6254,6 +9819,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmClearMode_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the intermediate value of the DCSG PM count from the
+ * specified device and instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the last read operation, indicating success (0)
+ * or an error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmCnt0IntermVal_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -6276,6 +9854,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmCnt0IntermVal_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the DC gain selection for the RXB in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific RXB instance to
+ * configure.
+ * @param value An 8-bit unsigned integer representing the value to set for the
+ * DC gain selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmDsel_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -6287,6 +9877,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmDsel_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the DCSG PM DSEL value from a specific register for a given
+ * instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmDsel_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -6301,6 +9903,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmDsel_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the DCSG PM mode for a specified instance in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the DCSG PM mode.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmMode_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -6312,6 +9926,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmMode_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the DCSG PM mode value from a specific register for a given
+ * instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmMode_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -6327,6 +9953,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmMode_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the power exponent value from a specific register for a
+ * given instance of the device.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved power
+ * exponent value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmPowExp0_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -6342,6 +9980,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmPowExp0_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the power management value from the DCSG register map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumeration value representing the specific instance of
+ * the register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the last register read operation, where a value
+ * of 0 indicates success.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmPowMan0_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t *value)
@@ -6360,6 +10010,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmPowMan0_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the read strobe value for the DCSG PM register in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the read strobe.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmReadStrobe_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -6371,6 +10034,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmReadStrobe_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the DCSG PM read strobe value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmReadStrobe_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -6386,6 +10061,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmReadStrobe_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the DCSG PM status output from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved status value
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmStatusOut_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -6400,6 +10087,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgPmStatusOut_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the DC gain shift value in the RXB NVS register map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB NVS register map.
+ * @param value An 8-bit unsigned integer representing the DC gain shift value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgShift_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -6411,6 +10111,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgShift_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the DC offset shift value from a specific register for a
+ * given instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved DC offset
+ * shift value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgShift_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -6425,17 +10138,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgShift_Get(void *device,
     return status;
 }
 
-/**
- * (B0 New) Slicer gain shift right ceiling. Define the maximum shift right that can occur. Ceiling range is 9 to 0.
-
- * 4’h0 : shift right celing = 0
-
- * 4’h1 : shift right ceiling =1
-
- * …
-
- * 4’h9 : shift right ceiling = 9
- */
+/***************************************************************************//**
+ * @brief Sets the DC gain shift ceiling value in the ADRV9001 register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the DC gain shift ceiling.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgShiftCeiling_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -6447,17 +10161,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgShiftCeiling_Set(void *device,
     return status;
 }
 
-/**
- * (B0 New) Slicer gain shift right ceiling. Define the maximum shift right that can occur. Ceiling range is 9 to 0.
-
- * 4’h0 : shift right celing = 0
-
- * 4’h1 : shift right ceiling =1
-
- * …
-
- * 4’h9 : shift right ceiling = 9
- */
+/***************************************************************************//**
+ * @brief Retrieves the DCSG shift ceiling value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgShiftCeiling_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -6472,31 +10187,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgShiftCeiling_Get(void *device,
     return status;
 }
 
-/**
- * (B0 New) Slicer gain shift floor for range from +9 to -5, Bit-4 defines the minimum shift right value when=0 and the maximum shift left value when=1. Bits[3:0] define either the minimum shift right value or the maximum shift left value.
-
- * 
-
- * Bit-4 = 1: bits[3:0] define maximum shift left value.
-
- * Bits[3:0] define shift value.
-
- * {0, 4;h9} : minimum shift right = 9
-
- * {0, 4’h8} : minimum shift right = 8
-
- * …
-
- * {0, 4’h0} : minimum shift right = 0
-
- * 
-
- * {1, 4’h1} : maximum shift left = 1
-
- * …
-
- * {1, 4’h5} : maximum shift left = 5
- */
+/***************************************************************************//**
+ * @brief Sets the DC shift floor value in the RXB NVS register map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the DC shift floor.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgShiftFloor_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -6508,31 +10211,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgShiftFloor_Set(void *device,
     return status;
 }
 
-/**
- * (B0 New) Slicer gain shift floor for range from +9 to -5, Bit-4 defines the minimum shift right value when=0 and the maximum shift left value when=1. Bits[3:0] define either the minimum shift right value or the maximum shift left value.
-
- * 
-
- * Bit-4 = 1: bits[3:0] define maximum shift left value.
-
- * Bits[3:0] define shift value.
-
- * {0, 4;h9} : minimum shift right = 9
-
- * {0, 4’h8} : minimum shift right = 8
-
- * …
-
- * {0, 4’h0} : minimum shift right = 0
-
- * 
-
- * {1, 4’h1} : maximum shift left = 1
-
- * …
-
- * {1, 4’h5} : maximum shift left = 5
- */
+/***************************************************************************//**
+ * @brief Retrieves the DC offset shift floor value from a specific register for
+ * a given instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgShiftFloor_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -6547,9 +10238,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgShiftFloor_Get(void *device,
     return status;
 }
 
-/**
- * (B0 New)The slicer shift left value when forced by SPI. Range shift left 0 to 5
- */
+/***************************************************************************//**
+ * @brief Sets the DC gain shift left value in the RXB register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value An 8-bit unsigned integer representing the value to be shifted
+ * and set in the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgShiftLeft_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -6561,9 +10262,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgShiftLeft_Set(void *device,
     return status;
 }
 
-/**
- * (B0 New)The slicer shift left value when forced by SPI. Range shift left 0 to 5
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a device register and
+ * shifts it left by 8 bits.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated type indicating the specific instance of the
+ * register map to read from.
+ * @param value A pointer to a uint8_t variable where the shifted value will be
+ * stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgShiftLeft_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -6578,13 +10289,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgShiftLeft_Get(void *device,
     return status;
 }
 
-/**
- * (B0 New) Enable slicer gain from number sign bits or rssi_pm power measurement to shift left when number sign bits greater than 10
-
- * 0 = shift left not enabled (supports Navassa_A0 backwards compatibility)
-
- * 1 = shift left enabled (slicer gain can shift left or right based on sign-bits or power level)
- */
+/***************************************************************************//**
+ * @brief Sets the DCSG shift left enable field in the RXB register map for the
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value An 8-bit unsigned integer that specifies the value to be written
+ * to the DCSG shift left enable field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgShiftLeftEn_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -6596,13 +10313,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgShiftLeftEn_Set(void *device,
     return status;
 }
 
-/**
- * (B0 New) Enable slicer gain from number sign bits or rssi_pm power measurement to shift left when number sign bits greater than 10
-
- * 0 = shift left not enabled (supports Navassa_A0 backwards compatibility)
-
- * 1 = shift left enabled (slicer gain can shift left or right based on sign-bits or power level)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the DCSG shift left enable field from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgShiftLeftEn_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -6617,13 +10339,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgShiftLeftEn_Get(void *device,
     return status;
 }
 
-/**
- * (B0 New) SPI select to shift slicer gain left or right when slicer gain being forced by SPI.
-
- * 0 = shift right
-
- * 1 = shift left
- */
+/***************************************************************************//**
+ * @brief Sets the DCSG shift left selection value in the ADRV9001 NVS register
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be shifted
+ * and set in the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgShiftLeftSel_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -6635,13 +10363,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgShiftLeftSel_Set(void *device,
     return status;
 }
 
-/**
- * (B0 New) SPI select to shift slicer gain left or right when slicer gain being forced by SPI.
-
- * 0 = shift right
-
- * 1 = shift left
- */
+/***************************************************************************//**
+ * @brief Retrieves the DCSG shift left selection value from a specific register
+ * for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgShiftLeftSel_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -6657,6 +10390,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgShiftLeftSel_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the output shift value from the DCSG slicer register for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved output shift
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgSlicerDpOutShift_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -6672,9 +10417,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgSlicerDpOutShift_Get(void *devic
 }
 
 
-/**
- * (B0 New) The slicer gain shift left value being used for digital gain compensation, calculated by rssi_pm, number-sign-bits or forced by SPI.
- */
+/***************************************************************************//**
+ * @brief Retrieves and shifts left the value of a specific register for the
+ * DCSG slicer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register.
+ * @param value A pointer to a uint8_t variable where the shifted register value
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgSlicerDpOutShiftLeft_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -6690,9 +10444,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgSlicerDpOutShiftLeft_Get(void *d
 }
 
 
-/**
- * (B0 New) Number of sign bits measured to derive slicer gain.
- */
+/***************************************************************************//**
+ * @brief Retrieves the measured value of the DCSG slicer NSBS from a specified
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the measured value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DcsgSlicerNsbsMeasured_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -6707,9 +10470,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DcsgSlicerNsbsMeasured_Get(void *dev
     return status;
 }
 
-/**
- * This register contains the decimated power readback value for the Ch1 Rx datapath.  Resolution is 0.25dB. This register must be written (any value) to generate a strobe that will latch the value to be read back.
- */
+/***************************************************************************//**
+ * @brief Sets the decibel power level for a specified instance in the ADRV9001
+ * NVS register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map to modify.
+ * @param value An 8-bit unsigned integer representing the power level to set,
+ * which will be shifted before writing.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DecPower_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -6721,9 +10494,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DecPower_Set(void *device,
     return status;
 }
 
-/**
- * This register contains the decimated power readback value for the Ch1 Rx datapath.  Resolution is 0.25dB. This register must be written (any value) to generate a strobe that will latch the value to be read back.
- */
+/***************************************************************************//**
+ * @brief Retrieves the decibel power value from a specific register for a given
+ * instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved power value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DecPower_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -6738,9 +10521,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DecPower_Get(void *device,
     return status;
 }
 
-/**
- * When this bit is set 0, digital gain will not be added in the dec power calculation.
- */
+/***************************************************************************//**
+ * @brief Sets the digital gain for the RXB dec power in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific RXB instance to
+ * configure.
+ * @param value An 8-bit unsigned integer representing the digital gain value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DecPowerAddDigGain_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -6752,9 +10544,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DecPowerAddDigGain_Set(void *device,
     return status;
 }
 
-/**
- * When this bit is set 0, digital gain will not be added in the dec power calculation.
- */
+/***************************************************************************//**
+ * @brief Retrieves the digital gain value from a specific register for a given
+ * instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved digital gain
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DecPowerAddDigGain_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -6769,9 +10571,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DecPowerAddDigGain_Get(void *device,
     return status;
 }
 
-/**
- * Controls how the decimated power measurement is trigged. When set to 1, the AGC starts the power measurement. When 0, the decimated power measurement is trigged from SPI by setting "dec_power_enable_meas" register.
- */
+/***************************************************************************//**
+ * @brief Sets the power enable configuration for the RXB by writing to a
+ * specific field in the device's register map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DecPowerEnSpiOrAgcSelect_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -6783,9 +10595,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DecPowerEnSpiOrAgcSelect_Set(void *d
     return status;
 }
 
-/**
- * Controls how the decimated power measurement is trigged. When set to 1, the AGC starts the power measurement. When 0, the decimated power measurement is trigged from SPI by setting "dec_power_enable_meas" register.
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register from the device and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated type indicating the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DecPowerEnSpiOrAgcSelect_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -6800,9 +10621,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DecPowerEnSpiOrAgcSelect_Get(void *d
     return status;
 }
 
-/**
- * If this bit is set, the Rx power measurement block is enabled. If the manual mode for gain control is enabled, the power measurement starts measuring as soon as this bit is set. If in one of the AGC modes, the start of power measurement depends on the current state of the state machine. This bit needs to be set for correct operation of the automatic gain control state machine.  The duration of the measurement can be configured by writing to "dec_power_measurement_duration".
- */
+/***************************************************************************//**
+ * @brief Sets the enable measurement power configuration for a specified
+ * instance in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value A uint8_t value representing the power measurement enable
+ * configuration to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DecPowerEnableMeas_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -6814,9 +10645,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DecPowerEnableMeas_Set(void *device,
     return status;
 }
 
-/**
- * If this bit is set, the Rx power measurement block is enabled. If the manual mode for gain control is enabled, the power measurement starts measuring as soon as this bit is set. If in one of the AGC modes, the start of power measurement depends on the current state of the state machine. This bit needs to be set for correct operation of the automatic gain control state machine.  The duration of the measurement can be configured by writing to "dec_power_measurement_duration".
- */
+/***************************************************************************//**
+ * @brief Retrieves the measurement enable status from a specific register for
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved measurement
+ * enable status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DecPowerEnableMeas_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -6831,9 +10672,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DecPowerEnableMeas_Get(void *device,
     return status;
 }
 
-/**
- * 00: RFIR, 01: HB1, 10: HB2, 11:HB2
- */
+/***************************************************************************//**
+ * @brief Sets the power input selection for a specified instance in the
+ * ADRV9001 NVS register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the power input selection
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DecPowerInputSelect_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -6845,9 +10696,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DecPowerInputSelect_Set(void *device
     return status;
 }
 
-/**
- * 00: RFIR, 01: HB1, 10: HB2, 11:HB2
- */
+/***************************************************************************//**
+ * @brief Retrieves the power input selection value from a specific register for
+ * a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DecPowerInputSelect_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -6862,9 +10722,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DecPowerInputSelect_Get(void *device
     return status;
 }
 
-/**
- * When set, the linear power is latched for readback. This bit must be set before reading linear power for proper readback operation. Auto clear.
- */
+/***************************************************************************//**
+ * @brief Sets the linear power latch for the specified instance in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the power level to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DecPowerLatchLinearPower_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -6876,9 +10746,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DecPowerLatchLinearPower_Set(void *d
     return status;
 }
 
-/**
- * When set, the linear power is latched for readback. This bit must be set before reading linear power for proper readback operation. Auto clear.
- */
+/***************************************************************************//**
+ * @brief Retrieves the linear power value from a specific register of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved power value
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DecPowerLatchLinearPower_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -6894,9 +10774,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DecPowerLatchLinearPower_Get(void *d
 }
 
 
-/**
- * This is the linear decimated power (not log power). In order to readback,set "dec_power_latch_linear_power" to latch the power. By default, this register reads power from Ch1. Set "dec_power_read_ch2_linear_power" to read power from Ch2.
- */
+/***************************************************************************//**
+ * @brief Retrieves the linear power value from the specified device instance by
+ * reading multiple registers.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * linear power value will be stored.
+ * @return Returns the status of the last read operation, with the linear power
+ * value stored in the provided pointer.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DecPowerLinearPower_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -6919,9 +10809,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DecPowerLinearPower_Get(void *device
     return status;
 }
 
-/**
- * When this bit is set, the dynamic range of the power measurement increases from 40dB to ~60dB (that is, all signal levels from 0dBFS to -60dBFS are accurately detected.
- */
+/***************************************************************************//**
+ * @brief Sets the decibel power logarithm shift value in the ADRV9001 NVS
+ * register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be shifted
+ * and set in the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DecPowerLogShift_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -6933,9 +10833,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DecPowerLogShift_Set(void *device,
     return status;
 }
 
-/**
- * When this bit is set, the dynamic range of the power measurement increases from 40dB to ~60dB (that is, all signal levels from 0dBFS to -60dBFS are accurately detected.
- */
+/***************************************************************************//**
+ * @brief Retrieves the decibel power logarithm shift value from a specific
+ * register for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DecPowerLogShift_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -6950,11 +10859,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DecPowerLogShift_Get(void *device,
     return status;
 }
 
-/**
- * These bits contain the power measurement duration used by the decimated power block. The power measurement duration in Rx sample periods is determined using the following equation:
-
- * dec power meas duration = 8 x 2^DPMD,  where DPMD  3:0   are the contents of these register bits.
- */
+/***************************************************************************//**
+ * @brief Sets the duration for power measurement in the ADRV9001 device's RXB
+ * register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value An 8-bit unsigned integer representing the duration value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DecPowerMeasurementDuration_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -6966,11 +10883,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DecPowerMeasurementDuration_Set(void
     return status;
 }
 
-/**
- * These bits contain the power measurement duration used by the decimated power block. The power measurement duration in Rx sample periods is determined using the following equation:
-
- * dec power meas duration = 8 x 2^DPMD,  where DPMD  3:0   are the contents of these register bits.
- */
+/***************************************************************************//**
+ * @brief Retrieves the power measurement duration from a specific register for
+ * a given instance of the device.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DecPowerMeasurementDuration_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -6985,9 +10909,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DecPowerMeasurementDuration_Get(void
     return status;
 }
 
-/**
- * These bits contain the power measurement duration used for decimated power when AGC is in `state 5'. The power measurement duration in Rx sample periods is determined using the following equation: dec power meas duration = 8 x 2^DPS5MD, where DPS5MD  3:0   are the contents of these register bits.
- */
+/***************************************************************************//**
+ * @brief Sets the measurement duration for power state 5 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the measurement duration
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DecPowerState5MeasurementDuration_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -6999,9 +10933,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DecPowerState5MeasurementDuration_Se
     return status;
 }
 
-/**
- * These bits contain the power measurement duration used for decimated power when AGC is in `state 5'. The power measurement duration in Rx sample periods is determined using the following equation: dec power meas duration = 8 x 2^DPS5MD, where DPS5MD  3:0   are the contents of these register bits.
- */
+/***************************************************************************//**
+ * @brief Retrieves the measurement duration value from a specific register for
+ * a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved measurement
+ * duration will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DecPowerState5MeasurementDuration_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -7016,9 +10959,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DecPowerState5MeasurementDuration_Ge
     return status;
 }
 
-/**
- * This register determines the number of cycles to wait between successive decimated power measurements. The number of cycles in Rx sample clocks are determined by: wait duration = dec_power_wait_delay * 32.
- */
+/***************************************************************************//**
+ * @brief Sets the wait delay for the RXB dec power in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific RXB instance to
+ * configure.
+ * @param value An 8-bit unsigned integer representing the wait delay value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DecPowerWaitDelay_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -7030,9 +10982,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DecPowerWaitDelay_Set(void *device,
     return status;
 }
 
-/**
- * This register determines the number of cycles to wait between successive decimated power measurements. The number of cycles in Rx sample clocks are determined by: wait duration = dec_power_wait_delay * 32.
- */
+/***************************************************************************//**
+ * @brief Retrieves the power wait delay value from a specific register for a
+ * given instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DecPowerWaitDelay_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -7047,9 +11008,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DecPowerWaitDelay_Get(void *device,
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the secondary upper threshold for decimated data overload in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A 16-bit unsigned integer representing the threshold value to be
+ * set.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DecimatedDataOverloadSecondaryUpperThreshold_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t value)
@@ -7064,9 +11035,20 @@ static inline int32_t adrv9001_NvsRegmapRxb_DecimatedDataOverloadSecondaryUpperT
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the decimated data overload secondary upper threshold value
+ * from a specified device instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type indicating the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * threshold value will be stored.
+ * @return Returns the status of the read operations, with the retrieved
+ * decimated data overload secondary upper threshold value stored in the
+ * provided pointer.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DecimatedDataOverloadSecondaryUpperThreshold_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t *value)
@@ -7085,6 +11067,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DecimatedDataOverloadSecondaryUpperT
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the field value for a specific instance in the NVS register map
+ * of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value to be written to the specified field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformFpEn_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -7096,6 +11090,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformFpEn_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformFpEn_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -7110,6 +11116,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformFpEn_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the exponent bits in the RXB register map for the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific RXB instance to
+ * modify.
+ * @param value An 8-bit unsigned integer representing the value to set for the
+ * exponent bits.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformFpExponentBits_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -7121,6 +11140,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformFpExponentBits_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the exponent bits from a specific register for a given
+ * instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved exponent
+ * bits will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformFpExponentBits_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -7135,6 +11167,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformFpExponentBits_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the floating-point data format for a specified instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map to be modified.
+ * @param value An 8-bit unsigned integer representing the floating-point data
+ * format value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformFpFloatDataFormat_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -7146,6 +11191,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformFpFloatDataFormat_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific floating-point data format value from a register
+ * for a given instance of the device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map to access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformFpFloatDataFormat_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -7160,6 +11218,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformFpFloatDataFormat_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the 'Hide Leading Ones' configuration for a specified instance in
+ * the ADRV9001 NVS register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map to be modified.
+ * @param value An 8-bit unsigned integer that specifies the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformFpHideLeadingOnes_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -7171,6 +11242,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformFpHideLeadingOnes_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a device register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformFpHideLeadingOnes_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -7185,6 +11269,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformFpHideLeadingOnes_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the attenuation value for the RXB data form in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific RXB instance to
+ * configure.
+ * @param value An 8-bit unsigned integer representing the attenuation value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformFpIntDataAtten_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -7196,6 +11293,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformFpIntDataAtten_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the attenuation value from a specific register for a given
+ * instance of the device.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved attenuation
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformFpIntDataAtten_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -7210,6 +11319,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformFpIntDataAtten_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of a specific field in the NVS register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value to be written to the specified field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformFpNanEncEn_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -7221,6 +11342,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformFpNanEncEn_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformFpNanEncEn_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -7235,6 +11368,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformFpNanEncEn_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the floating-point rounding mode in the ADRV9001 NVS register
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the rounding mode to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformFpRoundMode_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -7246,6 +11392,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformFpRoundMode_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the floating-point rounding mode from a specific register
+ * for a given instance of the device.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved rounding
+ * mode will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformFpRoundMode_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -7260,6 +11418,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformFpRoundMode_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the integer data format for a specified instance in the ADRV9001
+ * NVS register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformIntDataFormat_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -7271,6 +11442,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformIntDataFormat_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the integer data format from a specific register of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformIntDataFormat_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -7285,6 +11469,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformIntDataFormat_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the integer data resolution for a specified instance in the
+ * ADRV9001 NVS register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map to be modified.
+ * @param value An 8-bit unsigned integer representing the new data resolution
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformIntDataResolution_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -7296,6 +11493,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformIntDataResolution_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the integer data resolution from a specific register of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved resolution
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformIntDataResolution_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -7310,6 +11520,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformIntDataResolution_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the embedded slicer configuration in the ADRV9001 device's
+ * register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value An 8-bit integer representing the value to be written to the
+ * register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformIntEmbedSlicer_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -7321,6 +11544,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformIntEmbedSlicer_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformIntEmbedSlicer_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -7335,6 +11571,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformIntEmbedSlicer_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the embedded slicer number in the RXB NVS register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value An 8-bit unsigned integer representing the slicer number to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformIntEmbedSlicerNumber_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -7346,6 +11595,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformIntEmbedSlicerNumber_Set(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the embedded slicer number from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved slicer
+ * number will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformIntEmbedSlicerNumber_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -7360,6 +11621,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformIntEmbedSlicerNumber_Get(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the embedded slicer position in the RXB NVS register map for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value An 8-bit unsigned integer representing the slicer position to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformIntEmbedSlicerPos_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -7371,6 +11645,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformIntEmbedSlicerPos_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the embedded slicer position value from a specific register
+ * for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved slicer
+ * position value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformIntEmbedSlicerPos_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -7385,6 +11671,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformIntEmbedSlicerPos_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the even parity configuration for a specified RXB instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific RXB instance to
+ * configure.
+ * @param value An 8-bit integer representing the parity value to set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformIntEvenParity_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -7396,6 +11694,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformIntEvenParity_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the even parity value from a specific register for a given
+ * instance of the device.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved even parity
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformIntEvenParity_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -7410,6 +11720,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformIntEvenParity_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the parity support configuration for a specified instance of the
+ * RXB register map in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value An 8-bit integer representing the parity support value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformIntParitySupport_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -7421,6 +11744,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformIntParitySupport_Set(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the parity support value from a specific register for a
+ * given instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved parity
+ * support value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformIntParitySupport_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -7435,6 +11771,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformIntParitySupport_Get(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the inverted RX I value in the NVS register map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the inverted RX I.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformInvertRxI_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -7446,6 +11795,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformInvertRxI_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the inverted RX I value from a specific register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformInvertRxI_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -7460,6 +11822,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformInvertRxI_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the inverted RXQ configuration in the ADRV9001 device's register
+ * map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformInvertRxQ_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -7471,6 +11846,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformInvertRxQ_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves and inverts the RXQ value from a specific register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value A pointer to a uint8_t variable where the retrieved RXQ value
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformInvertRxQ_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -7485,6 +11873,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformInvertRxQ_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RX output mask for a specified instance in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RX block.
+ * @param value An 8-bit unsigned integer representing the mask value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformMaskRxOutput_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -7496,6 +11896,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformMaskRxOutput_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the masked RX output value from a specific register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RX block.
+ * @param value A pointer to a uint8_t variable where the retrieved masked RX
+ * output value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformMaskRxOutput_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -7510,6 +11923,17 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformMaskRxOutput_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RX monitor format I0 configuration in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RX monitor register.
+ * @param value An 8-bit value to be written to the RX monitor format register.
+ * @return Returns the status of the write operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformRxMonFormatI0_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -7521,6 +11945,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformRxMonFormatI0_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and formats it
+ * into a 16-bit value.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the formatted register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformRxMonFormatI0_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -7535,6 +11972,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformRxMonFormatI0_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RX monitor format I1 configuration in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RX monitor register.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformRxMonFormatI1_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -7546,6 +11995,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformRxMonFormatI1_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and formats it
+ * into a 16-bit value.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the formatted register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformRxMonFormatI1_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -7560,6 +12022,17 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformRxMonFormatI1_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RX monitor format I2 configuration in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RX monitor register.
+ * @param value An 8-bit value to be written to the RX monitor format register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformRxMonFormatI2_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -7571,6 +12044,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformRxMonFormatI2_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and formats it
+ * into a two-byte value.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the formatted register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformRxMonFormatI2_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -7585,6 +12071,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformRxMonFormatI2_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RX monitor format for a specified instance in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RX monitor format.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the RX monitor format.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformRxMonFormatQ0_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -7596,6 +12095,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformRxMonFormatQ0_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and formats it
+ * into a 16-bit value.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the formatted register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformRxMonFormatQ0_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -7610,6 +12121,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformRxMonFormatQ0_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RX monitor format for a specified instance in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RX monitor format.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the RX monitor format.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformRxMonFormatQ1_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -7621,6 +12145,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformRxMonFormatQ1_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and formats it
+ * into a 16-bit value.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the formatted register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformRxMonFormatQ1_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -7635,6 +12172,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformRxMonFormatQ1_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RX monitor format for a specified instance in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RX monitor format.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the RX monitor format.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformRxMonFormatQ2_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -7646,6 +12196,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformRxMonFormatQ2_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and formats it
+ * into a 16-bit value.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the formatted register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DformRxMonFormatQ2_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -7661,9 +12224,20 @@ static inline int32_t adrv9001_NvsRegmapRxb_DformRxMonFormatQ2_Get(void *device,
 }
 
 
-/**
- * Current digital DC offset words being used in the Rx datapath. Before reading this register, it is required to write "bbdc_update_tracking_word" to latch the readback data. By default, Ch1 words are available for readback. To read Ch2 words, "bbdc_readback_ch_select" must be set.
- */
+/***************************************************************************//**
+ * @brief Retrieves the digital DC offset tracking correction word I from the
+ * specified device instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * correction word will be stored.
+ * @return Returns the status of the read operations, with the retrieved digital
+ * DC offset tracking correction word I stored in the variable pointed
+ * to by 'value'.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DigitalDcOffsetTrackingCorrectionWordI_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -7687,9 +12261,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DigitalDcOffsetTrackingCorrectionWor
 }
 
 
-/**
- * Current digital DC offset words being used in the Rx datapath. Before reading this register, it is required to write "bbdc_update_tracking_word" to latch the readback data. By default, Ch1 words are available for readback. To read Ch2 words, "bbdc_readback_ch_select" must be set.
- */
+/***************************************************************************//**
+ * @brief Retrieves the digital DC offset tracking correction word Q from the
+ * specified device instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * correction word will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if any read operation fails.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DigitalDcOffsetTrackingCorrectionWordQ_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -7713,11 +12297,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DigitalDcOffsetTrackingCorrectionWor
 }
 
 
-/**
- * This register contains the readback value of the Ch1 digital gain. 
-
- * If "read_gain_table" is set, the value is read back from the gain table corresponding to the "gt_addr". If "read_gain_table" is clear,the value is the current gain being used.
- */
+/***************************************************************************//**
+ * @brief Retrieves the digital gain value from the RXB register map of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific RXB instance to
+ * read from.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * digital gain value will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DigitalGain_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t *value)
@@ -7736,6 +12328,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DigitalGain_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the digital phase delay for a specified instance in the ADRV9001
+ * register map.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value An 8-bit unsigned integer representing the digital phase delay
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DigitalPhaseDelay_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -7747,6 +12351,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DigitalPhaseDelay_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the digital phase delay value from a specific register for a
+ * given instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * receiver block.
+ * @param value A pointer to a uint8_t variable where the retrieved digital
+ * phase delay value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DigitalPhaseDelay_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -7762,11 +12379,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DigitalPhaseDelay_Get(void *device,
 }
 
 
-/**
- * This register contains the readback value of the Ch1 Rx external control for band A. 
-
- * If "read_gain_table" is set, the value is read back from the gain table corresponding to the "gt_addr". If "read_gain_table" is clear,the value is the current gain being used.
- */
+/***************************************************************************//**
+ * @brief Retrieves the dual-band control value for Band A from the specified
+ * device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DualbandControlBandA_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -7782,11 +12407,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_DualbandControlBandA_Get(void *devic
 }
 
 
-/**
- * Readback value of Ch1 Rx external gain for band A.
-
- * If "read_gain_table" is set, the value is read back from the gain table corresponding to the "gt_addr". If "read_gain_table" is clear,the value is the current gain being used.
- */
+/***************************************************************************//**
+ * @brief Retrieves the dual-band gain value for Band A from the NVS register
+ * map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved gain value
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_DualbandGainBandA_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -7801,9 +12433,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_DualbandGainBandA_Get(void *device,
     return status;
 }
 
-/**
- * initializes the counter that needs to count down to 0 before the fe_gain is changed. this counter needs to run when a new fe_gain word is obtained from the gain table and the external lna gain is decremented. this new word triggers start of the fe_gain_delay counter. if the counter is currently running , then the counter gets re-initialized to the FE_gain_delay value and the new fe_gain is applied when the counter actually expires.
- */
+/***************************************************************************//**
+ * @brief Sets the external LNA synchronization mode for a specified instance in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value A uint8_t value indicating the desired state for the external
+ * LNA synchronization mode.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_EnableExtLnaSyncMode_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -7815,9 +12457,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_EnableExtLnaSyncMode_Set(void *devic
     return status;
 }
 
-/**
- * initializes the counter that needs to count down to 0 before the fe_gain is changed. this counter needs to run when a new fe_gain word is obtained from the gain table and the external lna gain is decremented. this new word triggers start of the fe_gain_delay counter. if the counter is currently running , then the counter gets re-initialized to the FE_gain_delay value and the new fe_gain is applied when the counter actually expires.
- */
+/***************************************************************************//**
+ * @brief Retrieves the external LNA synchronization mode setting from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_EnableExtLnaSyncMode_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -7833,11 +12484,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_EnableExtLnaSyncMode_Get(void *devic
 }
 
 
-/**
- * This register contains the readback value of the Ch1 external control.
-
- * If "read_gain_table" is set, the value is read back from the gain table corresponding to the "gt_addr". If "read_gain_table" is clear,the value is the current gain being used.
- */
+/***************************************************************************//**
+ * @brief Retrieves the external control register value for a specified instance
+ * of the ADRV9001 NVS register map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_ExtControl_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -7852,6 +12510,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_ExtControl_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the external LNA settling delay for a specified instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the settling delay value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_ExtLnaSettlingDelay_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -7863,6 +12534,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_ExtLnaSettlingDelay_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the settling delay value for the external LNA from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved settling
+ * delay value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_ExtLnaSettlingDelay_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -7877,9 +12561,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_ExtLnaSettlingDelay_Get(void *device
     return status;
 }
 
-/**
- * initializes the counter that needs to count down to 0 before the fe_gain is changed. this counter needs to run when a new fe_gain word is obtained from the gain table and the external lna gain is decremented. this new word triggers start of the fe_gain_delay counter. if the counter is currently running , then the counter gets re-initialized to the FE_gain_delay value and the new fe_gain is applied when the counter actually expires.
- */
+/***************************************************************************//**
+ * @brief Sets the gain delay decrement value in the RXB register map of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific RXB instance to
+ * configure.
+ * @param value A 16-bit unsigned integer representing the gain delay decrement
+ * value to be set.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_FeGainDelayDecr_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t value)
@@ -7894,9 +12588,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_FeGainDelayDecr_Set(void *device,
     return status;
 }
 
-/**
- * initializes the counter that needs to count down to 0 before the fe_gain is changed. this counter needs to run when a new fe_gain word is obtained from the gain table and the external lna gain is decremented. this new word triggers start of the fe_gain_delay counter. if the counter is currently running , then the counter gets re-initialized to the FE_gain_delay value and the new fe_gain is applied when the counter actually expires.
- */
+/***************************************************************************//**
+ * @brief Retrieves the gain delay decrement value from the specified register
+ * of the device.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_FeGainDelayDecr_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t *value)
@@ -7915,9 +12618,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_FeGainDelayDecr_Get(void *device,
     return status;
 }
 
-/**
- * initializes the counter that needs to count down to 0 before the fe_gain is changed. this counter needs to run when a new fe_gain word is obtained from the gain table and the external lna gain is incremeneted. this new word triggers start of the fe_gain_delay counter. if the counter is currently running , then the counter gets re-initialized to the FE_gain_delay value and the new fe_gain is applied when the counter actually expires.
- */
+/***************************************************************************//**
+ * @brief Sets the gain delay increment for a specified instance in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A 16-bit unsigned integer representing the value to be set for
+ * the gain delay increment.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_FeGainDelayIncr_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t value)
@@ -7932,9 +12645,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_FeGainDelayIncr_Set(void *device,
     return status;
 }
 
-/**
- * initializes the counter that needs to count down to 0 before the fe_gain is changed. this counter needs to run when a new fe_gain word is obtained from the gain table and the external lna gain is incremeneted. this new word triggers start of the fe_gain_delay counter. if the counter is currently running , then the counter gets re-initialized to the FE_gain_delay value and the new fe_gain is applied when the counter actually expires.
- */
+/***************************************************************************//**
+ * @brief Retrieves the gain delay increment value from the specified register
+ * map instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved gain
+ * delay increment value will be stored.
+ * @return Returns the status of the read operations, where a value of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_FeGainDelayIncr_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t *value)
@@ -7953,9 +12675,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_FeGainDelayIncr_Get(void *device,
     return status;
 }
 
-/**
- * When set, the the TIA control value in the gain table is ignored and the value from "gt_tia_control" register is used instead.
- */
+/***************************************************************************//**
+ * @brief Sets the ADC control value in the NVS register map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the ADC control.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_ForceAdcControl_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -7967,9 +12699,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_ForceAdcControl_Set(void *device,
     return status;
 }
 
-/**
- * When set, the the TIA control value in the gain table is ignored and the value from "gt_tia_control" register is used instead.
- */
+/***************************************************************************//**
+ * @brief Retrieves the ADC control value from a specific register for a given
+ * instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * ADC control.
+ * @param value A pointer to a uint8_t variable where the retrieved ADC control
+ * value will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_ForceAdcControl_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -7984,9 +12725,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_ForceAdcControl_Get(void *device,
     return status;
 }
 
-/**
- * When set, the the digital gain value in the gain table is ignored and the value from "gt_digital_gain" register is used instead.
- */
+/***************************************************************************//**
+ * @brief Sets the digital gain for a specified instance of the RXB register map
+ * in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific RXB instance to
+ * configure.
+ * @param value An 8-bit unsigned integer representing the digital gain value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_ForceDigitalGain_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -7998,9 +12749,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_ForceDigitalGain_Set(void *device,
     return status;
 }
 
-/**
- * When set, the the digital gain value in the gain table is ignored and the value from "gt_digital_gain" register is used instead.
- */
+/***************************************************************************//**
+ * @brief Retrieves the digital gain value from a specific register for a given
+ * instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved digital gain
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_ForceDigitalGain_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -8015,9 +12776,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_ForceDigitalGain_Get(void *device,
     return status;
 }
 
-/**
- * When set, the dualband gain control and gain values in the gain table are ignored and the value from "gt_dualband_control_band_a"  and "gt_dualband_gain_band_a" registers are used instead.
- */
+/***************************************************************************//**
+ * @brief Sets the dual-band control and gain for Band A in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_ForceDualbandControlAndGainBandA_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -8029,9 +12799,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_ForceDualbandControlAndGainBandA_Set
     return status;
 }
 
-/**
- * When set, the dualband gain control and gain values in the gain table are ignored and the value from "gt_dualband_control_band_a"  and "gt_dualband_gain_band_a" registers are used instead.
- */
+/***************************************************************************//**
+ * @brief Retrieves the dual-band control and gain settings for Band A from the
+ * specified device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_ForceDualbandControlAndGainBandA_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -8046,9 +12826,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_ForceDualbandControlAndGainBandA_Get
     return status;
 }
 
-/**
- * When set, the the ext control value in the gain table is ignored and the value from "gt_ext_control" register is used instead.
- */
+/***************************************************************************//**
+ * @brief Sets the external control value for a specified instance in the
+ * ADRV9001 NVS register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_ForceExtControl_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -8060,9 +12850,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_ForceExtControl_Set(void *device,
     return status;
 }
 
-/**
- * When set, the the ext control value in the gain table is ignored and the value from "gt_ext_control" register is used instead.
- */
+/***************************************************************************//**
+ * @brief Retrieves the external control value from a specific register for a
+ * given instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_ForceExtControl_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -8077,9 +12877,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_ForceExtControl_Get(void *device,
     return status;
 }
 
-/**
- * When set, the the phase offset value in the gain table is ignored and the value from "gt_phase_offset" register is used instead.
- */
+/***************************************************************************//**
+ * @brief Sets the phase offset for a specified instance in the ADRV9001 NVS
+ * register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for which the phase offset is being set.
+ * @param value An 8-bit unsigned integer representing the phase offset value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_ForcePhaseOffset_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -8091,9 +12901,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_ForcePhaseOffset_Set(void *device,
     return status;
 }
 
-/**
- * When set, the the phase offset value in the gain table is ignored and the value from "gt_phase_offset" register is used instead.
- */
+/***************************************************************************//**
+ * @brief Retrieves the forced phase offset value from the RXB register map for
+ * a specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific RXB instance to
+ * read from.
+ * @param value A pointer to a uint8_t variable where the retrieved phase offset
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_ForcePhaseOffset_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -8108,9 +12927,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_ForcePhaseOffset_Get(void *device,
     return status;
 }
 
-/**
- * When set, the the Rx front end gain value in the gain table is ignored and the value from "gt_rx_front_end_gain" register is used instead.
- */
+/***************************************************************************//**
+ * @brief Sets the forced RX front-end gain for a specified instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific RX instance to
+ * configure.
+ * @param value An 8-bit unsigned integer representing the gain value to set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_ForceRxFeGain_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -8122,9 +12950,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_ForceRxFeGain_Set(void *device,
     return status;
 }
 
-/**
- * When set, the the Rx front end gain value in the gain table is ignored and the value from "gt_rx_front_end_gain" register is used instead.
- */
+/***************************************************************************//**
+ * @brief Retrieves the front-end gain value from a specific register for a
+ * given instance of the device.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved gain value
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_ForceRxFeGain_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -8139,9 +12976,17 @@ static inline int32_t adrv9001_NvsRegmapRxb_ForceRxFeGain_Get(void *device,
     return status;
 }
 
-/**
- * When set, the the TIA control value in the gain table is ignored and the value from "gt_tia_control" register is used instead.
- */
+/***************************************************************************//**
+ * @brief Sets the TIA control value in the RXB register map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific RXB instance to
+ * configure.
+ * @param value An 8-bit integer representing the TIA control value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_ForceTiaControl_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -8153,9 +12998,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_ForceTiaControl_Set(void *device,
     return status;
 }
 
-/**
- * When set, the the TIA control value in the gain table is ignored and the value from "gt_tia_control" register is used instead.
- */
+/***************************************************************************//**
+ * @brief Retrieves the TIA control value from a specific register for a given
+ * instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value A pointer to a uint8_t variable where the retrieved TIA control
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_ForceTiaControl_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -8170,6 +13024,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_ForceTiaControl_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the frequency hopping force selection in the ADRV9001 device's
+ * RXB register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific RXB instance to
+ * configure.
+ * @param value A uint8_t value that specifies the frequency hopping selection
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_FreqHopForceSel_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -8181,6 +13048,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_FreqHopForceSel_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the frequency hopping force selection value from a specific
+ * register for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved frequency
+ * hopping value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_FreqHopForceSel_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -8195,9 +13074,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_FreqHopForceSel_Get(void *device,
     return status;
 }
 
-/**
- * This register allows a user to configure the duration of the high pulse generated when the gain on either the Rx1 or Rx2 channel is changed. The gain change pulse is generated when the gain on the respective channel is changed, either in automatic gain control mode or manual control. The pulse appears on the control out ports when the gain changes for either channel increases or decreases. The duration of the pulse is defined by this register, where one LSB corresponds to a single ADC divide-by-16 clock cycle.
- */
+/***************************************************************************//**
+ * @brief Sets the gain change pulse duration for a specified instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for RXB.
+ * @param value An 8-bit unsigned integer representing the gain change pulse
+ * duration to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GainChangePulseDuration_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -8209,9 +13098,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_GainChangePulseDuration_Set(void *de
     return status;
 }
 
-/**
- * This register allows a user to configure the duration of the high pulse generated when the gain on either the Rx1 or Rx2 channel is changed. The gain change pulse is generated when the gain on the respective channel is changed, either in automatic gain control mode or manual control. The pulse appears on the control out ports when the gain changes for either channel increases or decreases. The duration of the pulse is defined by this register, where one LSB corresponds to a single ADC divide-by-16 clock cycle.
- */
+/***************************************************************************//**
+ * @brief Retrieves the gain change pulse duration from a specific register for
+ * a given instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved gain change
+ * pulse duration will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GainChangePulseDuration_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -8226,6 +13125,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_GainChangePulseDuration_Get(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the minimum write interval for the gain FIFO in the RXB register
+ * map of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value A 16-bit unsigned integer representing the minimum write
+ * interval to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GainFifoMinWrIntvl_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t value)
@@ -8240,6 +13152,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_GainFifoMinWrIntvl_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the minimum write interval for the gain FIFO from the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * minimum write interval will be stored.
+ * @return Returns the status of the read operations, where a status of 0
+ * indicates success.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GainFifoMinWrIntvl_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t *value)
@@ -8258,15 +13183,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_GainFifoMinWrIntvl_Get(void *device,
     return status;
 }
 
-/**
- * This sets the initial analog attenuation for Tx1/Tx2 gain delay calibrations, and the intial Rx Fe Gain for the Rx1/Rx2 gain delay calibrations
-
- * HP Atten = Gain Delay Cal Analog Gain 1[5:0]
-
- * LO Sel = Gain Delay Cal Analog Gain 1[7:6]
-
- * Fe Gain = Gain Delay Cal Analog Gain 1[5:0]
- */
+/***************************************************************************//**
+ * @brief Sets the analog gain value for the RXB GDCal register in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register.
+ * @param value An 8-bit unsigned integer representing the gain value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GdcalAnaGain1_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -8278,15 +13206,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_GdcalAnaGain1_Set(void *device,
     return status;
 }
 
-/**
- * This sets the initial analog attenuation for Tx1/Tx2 gain delay calibrations, and the intial Rx Fe Gain for the Rx1/Rx2 gain delay calibrations
-
- * HP Atten = Gain Delay Cal Analog Gain 1[5:0]
-
- * LO Sel = Gain Delay Cal Analog Gain 1[7:6]
-
- * Fe Gain = Gain Delay Cal Analog Gain 1[5:0]
- */
+/***************************************************************************//**
+ * @brief Retrieves the analog gain value from a specific register for the given
+ * instance of the device.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved gain value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GdcalAnaGain1_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -8301,15 +13232,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_GdcalAnaGain1_Get(void *device,
     return status;
 }
 
-/**
- * This register sets the final analog attenuation for Tx1/Tx2 gain delay calibrations, and the final Rx Fe Gain for the Rx1/Rx2 gain delay calibrations.
-
- * HP Atten = Gain Delay Cal Analog Gain 2[5:0]
-
- * LO Sel = Gain Delay Cal Analog Gain 2[7:6]
-
- * Fe Gain = Gain Delay Cal Analog Gain 2[5:0]
- */
+/***************************************************************************//**
+ * @brief Sets the analog gain value for the RXB GDCal register in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register.
+ * @param value An 8-bit unsigned integer representing the gain value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GdcalAnaGain2_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -8321,15 +13255,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_GdcalAnaGain2_Set(void *device,
     return status;
 }
 
-/**
- * This register sets the final analog attenuation for Tx1/Tx2 gain delay calibrations, and the final Rx Fe Gain for the Rx1/Rx2 gain delay calibrations.
-
- * HP Atten = Gain Delay Cal Analog Gain 2[5:0]
-
- * LO Sel = Gain Delay Cal Analog Gain 2[7:6]
-
- * Fe Gain = Gain Delay Cal Analog Gain 2[5:0]
- */
+/***************************************************************************//**
+ * @brief Retrieves the analog gain value from a specific register for a given
+ * instance of the device.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved gain value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GdcalAnaGain2_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -8344,11 +13281,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_GdcalAnaGain2_Get(void *device,
     return status;
 }
 
-/**
- * This register sets the initial digital attenuation for Tx1/Tx2 gain delay calibrations. 
-
- * Tx attenuation = Gain delay cal digital gain 1[6:0]
- */
+/***************************************************************************//**
+ * @brief Sets the digital gain value for the RXB GDCal register in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register.
+ * @param value An 8-bit unsigned integer representing the digital gain value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GdcalDigGain1_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -8360,11 +13305,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_GdcalDigGain1_Set(void *device,
     return status;
 }
 
-/**
- * This register sets the initial digital attenuation for Tx1/Tx2 gain delay calibrations. 
-
- * Tx attenuation = Gain delay cal digital gain 1[6:0]
- */
+/***************************************************************************//**
+ * @brief Retrieves the digital gain value from a specific register for the
+ * given instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved digital gain
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GdcalDigGain1_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -8379,11 +13332,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_GdcalDigGain1_Get(void *device,
     return status;
 }
 
-/**
- * This register sets the final digital attenuation for Tx1/Tx2 gain delay calibrations. 
-
- * Tx attenuation = Gain delay cal digital gain 2[6:0]
- */
+/***************************************************************************//**
+ * @brief Sets the digital gain value for the RXB GDCal register in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register.
+ * @param value An 8-bit unsigned integer representing the digital gain value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GdcalDigGain2_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -8395,11 +13356,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_GdcalDigGain2_Set(void *device,
     return status;
 }
 
-/**
- * This register sets the final digital attenuation for Tx1/Tx2 gain delay calibrations. 
-
- * Tx attenuation = Gain delay cal digital gain 2[6:0]
- */
+/***************************************************************************//**
+ * @brief Retrieves the digital gain value from a specific register for a given
+ * instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved digital gain
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GdcalDigGain2_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -8414,9 +13383,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_GdcalDigGain2_Get(void *device,
     return status;
 }
 
-/**
- * This register sets the flush period of the gain delay calibration. The gain delay calibration data peak detectors are disabled during this period.
- */
+/***************************************************************************//**
+ * @brief Sets the GDCal flush period in the NVS register map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the flush period value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GdcalFlushPeriod_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -8428,9 +13406,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_GdcalFlushPeriod_Set(void *device,
     return status;
 }
 
-/**
- * This register sets the flush period of the gain delay calibration. The gain delay calibration data peak detectors are disabled during this period.
- */
+/***************************************************************************//**
+ * @brief Retrieves the GDCal flush period value from a specified register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved GDCal flush
+ * period value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GdcalFlushPeriod_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -8445,6 +13432,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_GdcalFlushPeriod_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the gain calibration input selection for a specified instance in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the gain calibration input selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GdcalInSel_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -8456,6 +13456,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_GdcalInSel_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GdcalInSel_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -8470,9 +13482,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_GdcalInSel_Get(void *device,
     return status;
 }
 
-/**
- * Enables peak power detection I^2+Q^2 (=1) instead of I / Q peaks (=0) being compared against a threshold.
- */
+/***************************************************************************//**
+ * @brief Sets the GDCal power threshold in the NVS register map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the power threshold value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GdcalPowerThreshold_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -8484,9 +13506,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_GdcalPowerThreshold_Set(void *device
     return status;
 }
 
-/**
- * Enables peak power detection I^2+Q^2 (=1) instead of I / Q peaks (=0) being compared against a threshold.
- */
+/***************************************************************************//**
+ * @brief Retrieves the GDCal power threshold value from a specific register for
+ * a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved power
+ * threshold value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GdcalPowerThreshold_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -8501,41 +13532,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_GdcalPowerThreshold_Get(void *device
     return status;
 }
 
-/**
- * This bit starts Rx gain delay calibration. 
-
- * Setup:
-
- *     - Enable loopback mode from Tx1 to Rx1
-
- *     - Enable Tx1 NCO
-
- *     - Rx analog gain delay calibration
-
- *         o FE_GAIN = gdcal_ana_gain 1/2 
-
- *         o The data peak with gdcal_ana_gain1 should be below threshold
-
- *         o The data peak with gdcal_ana_gain2 should be above threshold
-
- *         o Digital attenuation should be minimum
-
- *  The calibration works as follows:
-
- *     1. FE_GAIN = gdcal_ana_gain1
-
- *     2. Wait for gdcal_flush_period
-
- *     3. FE_GAIN = gdcal_ana_gain2
-
- *     4. Start counter
-
- *     5. Wait for threshold to be met, incrementing counter
-
- *     6. When threshold is met, rx1_gdcal_ana_dig_delay = counter value.
-
- *     7. The bit is cleared when the calibration completes.
- */
+/***************************************************************************//**
+ * @brief Sets the RX calibration value in the ADRV9001 device's register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GdcalStartRxCal_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -8547,41 +13555,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_GdcalStartRxCal_Set(void *device,
     return status;
 }
 
-/**
- * This bit starts Rx gain delay calibration. 
-
- * Setup:
-
- *     - Enable loopback mode from Tx1 to Rx1
-
- *     - Enable Tx1 NCO
-
- *     - Rx analog gain delay calibration
-
- *         o FE_GAIN = gdcal_ana_gain 1/2 
-
- *         o The data peak with gdcal_ana_gain1 should be below threshold
-
- *         o The data peak with gdcal_ana_gain2 should be above threshold
-
- *         o Digital attenuation should be minimum
-
- *  The calibration works as follows:
-
- *     1. FE_GAIN = gdcal_ana_gain1
-
- *     2. Wait for gdcal_flush_period
-
- *     3. FE_GAIN = gdcal_ana_gain2
-
- *     4. Start counter
-
- *     5. Wait for threshold to be met, incrementing counter
-
- *     6. When threshold is met, rx1_gdcal_ana_dig_delay = counter value.
-
- *     7. The bit is cleared when the calibration completes.
- */
+/***************************************************************************//**
+ * @brief Retrieves the RX calibration value from a specific register for the
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RX calibration.
+ * @param value A pointer to a uint8_t variable where the retrieved calibration
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GdcalStartRxCal_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -8596,6 +13581,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_GdcalStartRxCal_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the transmit calibration start value in the ADRV9001 NVS register
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that indicates the calibration start value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GdcalStartTxCal_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -8607,6 +13605,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_GdcalStartTxCal_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the TX calibration value from a specific register for the
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved calibration
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GdcalStartTxCal_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -8622,9 +13632,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_GdcalStartTxCal_Get(void *device,
 }
 
 
-/**
- * number of samples that need to exceed threshold for gain delay cal, before threshold exceeded is asserted
- */
+/***************************************************************************//**
+ * @brief Retrieves the GDCal state readback value from a specific register for
+ * a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the readback value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GdcalStateReadback_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -8639,9 +13658,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_GdcalStateReadback_Get(void *device,
     return status;
 }
 
-/**
- * This register sets the peak detector threshold for the gain delay cal. For lower power inputs this value can be scaled down with gdcal_threshold_shift to get better resolution for the peak detect
- */
+/***************************************************************************//**
+ * @brief Sets the GDCal threshold for a specified instance in the ADRV9001 NVS
+ * register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A 16-bit unsigned integer representing the GDCal threshold value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GdcalThreshold_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t value)
@@ -8656,9 +13685,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_GdcalThreshold_Set(void *device,
     return status;
 }
 
-/**
- * This register sets the peak detector threshold for the gain delay cal. For lower power inputs this value can be scaled down with gdcal_threshold_shift to get better resolution for the peak detect
- */
+/***************************************************************************//**
+ * @brief Retrieves the GDCal threshold value from the NVS register map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved GDCal
+ * threshold value will be stored.
+ * @return Returns the status of the read operations, where a status of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GdcalThreshold_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t *value)
@@ -8677,9 +13715,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_GdcalThreshold_Get(void *device,
     return status;
 }
 
-/**
- * These bits can be used to shift the gain delay cal threshold to compare against lower power signals.
- */
+/***************************************************************************//**
+ * @brief Sets the GDCal threshold shift value in the NVS register map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the threshold shift value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GdcalThresholdShift_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -8691,9 +13739,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_GdcalThresholdShift_Set(void *device
     return status;
 }
 
-/**
- * These bits can be used to shift the gain delay cal threshold to compare against lower power signals.
- */
+/***************************************************************************//**
+ * @brief Retrieves the GDCal threshold shift value from a specific register for
+ * a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved GDCal
+ * threshold shift value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GdcalThresholdShift_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -8709,6 +13766,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_GdcalThresholdShift_Get(void *device
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the digital delay value from the RXB GDCal register map for
+ * a specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB GDCal register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * digital delay value will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the read operations failed.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GdcalTxAnaDigDelay_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t *value)
@@ -8728,6 +13797,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_GdcalTxAnaDigDelay_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the GDCal TX state from a specific register and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved GDCal TX
+ * state will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GdcalTxState_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -8742,9 +13823,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_GdcalTxState_Get(void *device,
     return status;
 }
 
-/**
- * number of samples that need to exceed threshold for gain delay cal, before threshold exceeded is asserted
- */
+/***************************************************************************//**
+ * @brief Sets the GDCal window size in the NVS register map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the GDCal window size to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GdcalWindowSize_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -8756,9 +13847,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_GdcalWindowSize_Set(void *device,
     return status;
 }
 
-/**
- * number of samples that need to exceed threshold for gain delay cal, before threshold exceeded is asserted
- */
+/***************************************************************************//**
+ * @brief Retrieves the GDCal window size from a specific register for a given
+ * instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved GDCal window
+ * size will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GdcalWindowSize_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -8773,9 +13874,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_GdcalWindowSize_Get(void *device,
     return status;
 }
 
-/**
- * TIA control gain that is to be programmed in the gain table. Bit [0] is the TIA gain and bit [1] is the ADC gain.
- */
+/***************************************************************************//**
+ * @brief Sets the ADC control value in the NVS register map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the ADC control register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GtAdcControl_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -8787,9 +13898,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_GtAdcControl_Set(void *device,
     return status;
 }
 
-/**
- * TIA control gain that is to be programmed in the gain table. Bit [0] is the TIA gain and bit [1] is the ADC gain.
- */
+/***************************************************************************//**
+ * @brief Retrieves the ADC control value from a specific register for a given
+ * instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved ADC control
+ * value will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GtAdcControl_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -8804,9 +13924,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_GtAdcControl_Get(void *device,
     return status;
 }
 
-/**
- * Digital gain that is to be programmed in the gain table.
- */
+/***************************************************************************//**
+ * @brief Sets the digital gain for the RXB in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific RXB instance to
+ * configure.
+ * @param value A 16-bit unsigned integer representing the digital gain value to
+ * be set.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GtDigitalGain_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t value)
@@ -8821,9 +13950,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_GtDigitalGain_Set(void *device,
     return status;
 }
 
-/**
- * Digital gain that is to be programmed in the gain table.
- */
+/***************************************************************************//**
+ * @brief Retrieves the digital gain value from the RXB register map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific RXB instance to
+ * read from.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * digital gain value will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the read operations fail.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GtDigitalGain_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t *value)
@@ -8842,6 +13980,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_GtDigitalGain_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets a value in the NVS register map for the dual-band A configuration
+ * of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific NVS register
+ * instance to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the specified register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GtDualbandA_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -8853,6 +14004,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_GtDualbandA_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GtDualbandA_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -8867,9 +14031,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_GtDualbandA_Get(void *device,
     return status;
 }
 
-/**
- * Dualband external control gain that is to be programmed in the gain table.
- */
+/***************************************************************************//**
+ * @brief Sets the dual-band control value in the NVS register map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the dual-band control register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GtDualbandControl_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -8881,9 +14055,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_GtDualbandControl_Set(void *device,
     return status;
 }
 
-/**
- * Dualband external control gain that is to be programmed in the gain table.
- */
+/***************************************************************************//**
+ * @brief Retrieves the dual-band control register value from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GtDualbandControl_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -8898,9 +14082,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_GtDualbandControl_Get(void *device,
     return status;
 }
 
-/**
- * Force value for band A dualband external control
- */
+/***************************************************************************//**
+ * @brief Sets the dual-band control for Band A in the ADRV9001 device's
+ * register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GtDualbandControlBandA_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -8912,9 +14106,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_GtDualbandControlBandA_Set(void *dev
     return status;
 }
 
-/**
- * Force value for band A dualband external control
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register for dual-band control in
+ * the A band of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GtDualbandControlBandA_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -8929,9 +14133,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_GtDualbandControlBandA_Get(void *dev
     return status;
 }
 
-/**
- * Dualband external gain that corresponds to the external control word. This information is used for RSSI, gain compensation etc. Resolution of 0.5db
- */
+/***************************************************************************//**
+ * @brief Sets the dual-band gain for a specified instance in the ADRV9001 NVS
+ * register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for which the gain is being set.
+ * @param value An 8-bit unsigned integer representing the gain value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GtDualbandGain_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -8943,9 +14156,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_GtDualbandGain_Set(void *device,
     return status;
 }
 
-/**
- * Dualband external gain that corresponds to the external control word. This information is used for RSSI, gain compensation etc. Resolution of 0.5db
- */
+/***************************************************************************//**
+ * @brief Retrieves the dual-band gain value from the RXB register map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value A pointer to a uint8_t variable where the retrieved gain value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GtDualbandGain_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -8960,9 +14182,17 @@ static inline int32_t adrv9001_NvsRegmapRxb_GtDualbandGain_Get(void *device,
     return status;
 }
 
-/**
- * Force value for dualband band A external gain
- */
+/***************************************************************************//**
+ * @brief Sets the dual-band gain for Band A in the ADRV9001 NVS register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the gain value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GtDualbandGainBandA_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -8974,9 +14204,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_GtDualbandGainBandA_Set(void *device
     return status;
 }
 
-/**
- * Force value for dualband band A external gain
- */
+/***************************************************************************//**
+ * @brief Retrieves the dual-band gain value for Band A from the specified
+ * device's register.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumeration value that specifies the instance of the
+ * register map to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved gain value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GtDualbandGainBandA_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -8991,9 +14231,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_GtDualbandGainBandA_Get(void *device
     return status;
 }
 
-/**
- * External control gain that is to be programmed in the gain table.
- */
+/***************************************************************************//**
+ * @brief Sets the external control value for a specified instance in the
+ * ADRV9001 NVS register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the specified instance.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GtExtControl_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -9005,9 +14255,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_GtExtControl_Set(void *device,
     return status;
 }
 
-/**
- * External control gain that is to be programmed in the gain table.
- */
+/***************************************************************************//**
+ * @brief Retrieves the external control value from a specific register for a
+ * given instance of the `adrv9001` device.
+ *
+ * @param device A pointer to the device structure that represents the
+ * `adrv9001` device.
+ * @param instance An enumerated value representing the specific instance of the
+ * `adrv9001` register map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GtExtControl_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -9022,9 +14282,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_GtExtControl_Get(void *device,
     return status;
 }
 
-/**
- * Phase offset that is programmed in the gain table.
- */
+/***************************************************************************//**
+ * @brief Sets the phase offset for a specified receiver instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific receiver
+ * instance to configure.
+ * @param value A 16-bit integer representing the phase offset value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GtPhaseOffset_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t value)
@@ -9039,9 +14308,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_GtPhaseOffset_Set(void *device,
     return status;
 }
 
-/**
- * Phase offset that is programmed in the gain table.
- */
+/***************************************************************************//**
+ * @brief Retrieves the phase offset value from the RXB register map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific RXB instance
+ * from which to read the phase offset.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved phase
+ * offset value will be stored.
+ * @return Returns the status of the read operations, with the phase offset
+ * value stored in the provided pointer.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GtPhaseOffset_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t *value)
@@ -9060,9 +14339,17 @@ static inline int32_t adrv9001_NvsRegmapRxb_GtPhaseOffset_Get(void *device,
     return status;
 }
 
-/**
- * Front end gain that is to be programmed in the gain table.
- */
+/***************************************************************************//**
+ * @brief Sets the gain value for the RX front-end in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific RX instance to
+ * configure.
+ * @param value An 8-bit unsigned integer representing the gain value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GtRxFeGain_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -9074,9 +14361,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_GtRxFeGain_Set(void *device,
     return status;
 }
 
-/**
- * Front end gain that is to be programmed in the gain table.
- */
+/***************************************************************************//**
+ * @brief Retrieves the gain value from a specific register for the RX front-end
+ * of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating the specific instance of the
+ * RX block.
+ * @param value A pointer to a uint8_t variable where the retrieved gain value
+ * will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GtRxFeGain_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -9091,9 +14388,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_GtRxFeGain_Get(void *device,
     return status;
 }
 
-/**
- * TIA control gain that is to be programmed in the gain table. Bit [0] is the TIA gain and bit [1] is the ADC gain.
- */
+/***************************************************************************//**
+ * @brief Sets the TIA control value in the RXB NVS register map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the TIA control field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GtTiaControl_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -9105,9 +14412,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_GtTiaControl_Set(void *device,
     return status;
 }
 
-/**
- * TIA control gain that is to be programmed in the gain table. Bit [0] is the TIA gain and bit [1] is the ADC gain.
- */
+/***************************************************************************//**
+ * @brief Retrieves the TIA control value from the specified register of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved TIA control
+ * value will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GtTiaControl_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -9122,9 +14439,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_GtTiaControl_Get(void *device,
     return status;
 }
 
-/**
- * this bit flags uncorrectable ecc errors in the gaintable ram. W1C
- */
+/***************************************************************************//**
+ * @brief Sets the uncorrectable parity error configuration in the ADRV9001
+ * device's RXB register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific RXB instance to
+ * configure.
+ * @param value A uint8_t value indicating the desired state for the
+ * uncorrectable parity error.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GtUncorrectableParityError_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -9136,9 +14463,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_GtUncorrectableParityError_Set(void 
     return status;
 }
 
-/**
- * this bit flags uncorrectable ecc errors in the gaintable ram. W1C
- */
+/***************************************************************************//**
+ * @brief Retrieves the uncorrectable parity error status from a specific
+ * register for a given device instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GtUncorrectableParityError_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -9154,9 +14491,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_GtUncorrectableParityError_Get(void 
 }
 
 
-/**
- * (B0 New) Gain Table Address captured where the ECC error occurred.
- */
+/***************************************************************************//**
+ * @brief Retrieves the uncorrectable parity error address from a specific
+ * register for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GtUncorrectableParityErrorAddr_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -9171,13 +14517,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_GtUncorrectableParityErrorAddr_Get(v
     return status;
 }
 
-/**
- * (B0 New) Clear the capture register for the AGC gain table parity error address. This is a self-clearing register.
-
- * 1= clear ECC address capture address
-
- * 0 = no operation
- */
+/***************************************************************************//**
+ * @brief Sets the uncorrectable parity error address clear value in the
+ * ADRV9001 NVS register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A 8-bit unsigned integer that represents the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GtUncorrectableParityErrorAddrClear_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -9189,13 +14541,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_GtUncorrectableParityErrorAddrClear_
     return status;
 }
 
-/**
- * (B0 New) Clear the capture register for the AGC gain table parity error address. This is a self-clearing register.
-
- * 1= clear ECC address capture address
-
- * 0 = no operation
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register related to uncorrectable
+ * parity error address clear from the device.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated type indicating the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_GtUncorrectableParityErrorAddrClear_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -9210,6 +14567,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_GtUncorrectableParityErrorAddrClear_
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the high source selection for the RxB HB2 register in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for RxB.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_Hb2HighSrcSelect_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -9221,6 +14591,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_Hb2HighSrcSelect_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the high source selection value from the NVS register map
+ * for a specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved high source
+ * selection value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_Hb2HighSrcSelect_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -9235,6 +14617,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_Hb2HighSrcSelect_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the low source select for the Hb2 register in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_Hb2LowSrcSelect_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -9246,6 +14641,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_Hb2LowSrcSelect_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the low source select value from the specified register of
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_Hb2LowSrcSelect_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -9260,6 +14668,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_Hb2LowSrcSelect_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the low inversion state of the APD in the RXB register map for
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value A uint8_t value that indicates the desired inversion state to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_InvertApdLow_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -9271,6 +14692,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_InvertApdLow_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the inverted APD low value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_InvertApdLow_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -9285,9 +14718,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_InvertApdLow_Get(void *device,
     return status;
 }
 
-/**
- * (B0 New) Div ratio of the LVDS SSI data source clock from clk1105
- */
+/***************************************************************************//**
+ * @brief Sets the clock divider value for the LSSI ORX1 data source in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A 16-bit unsigned integer representing the clock divider value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_LssiOrx1DataSourceClkDivValue_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t value)
@@ -9302,9 +14745,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_LssiOrx1DataSourceClkDivValue_Set(vo
     return status;
 }
 
-/**
- * (B0 New) Div ratio of the LVDS SSI data source clock from clk1105
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock divider value from the LSSI ORX1 data source
+ * register for a specified instance.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved clock
+ * divider value will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_LssiOrx1DataSourceClkDivValue_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t *value)
@@ -9323,9 +14775,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_LssiOrx1DataSourceClkDivValue_Get(vo
     return status;
 }
 
-/**
- * (B0 New) 0: LSSI data source clock inherit from datapath, 1: LSSI data source clock inherite from DivN from clk1105
- */
+/***************************************************************************//**
+ * @brief Sets the clock selection for the LSSI ORX1 data source in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the clock selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_LssiOrx1DataSourceClkSel_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -9337,9 +14799,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_LssiOrx1DataSourceClkSel_Set(void *d
     return status;
 }
 
-/**
- * (B0 New) 0: LSSI data source clock inherit from datapath, 1: LSSI data source clock inherite from DivN from clk1105
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock selection value from a specific register for the
+ * LSSI ORX1 data source.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * selection value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_LssiOrx1DataSourceClkSel_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -9354,9 +14825,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_LssiOrx1DataSourceClkSel_Get(void *d
     return status;
 }
 
-/**
- * (B0 New) Div ratio of the LVDS SSI data source clock from clk1105
- */
+/***************************************************************************//**
+ * @brief Sets the clock divider value for the LSSI ORX2 data source in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A 16-bit unsigned integer representing the clock divider value
+ * to be set.
+ * @return Returns the status of the last write operation, indicating success
+ * (0) or an error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_LssiOrx2DataSourceClkDivValue_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t value)
@@ -9371,9 +14852,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_LssiOrx2DataSourceClkDivValue_Set(vo
     return status;
 }
 
-/**
- * (B0 New) Div ratio of the LVDS SSI data source clock from clk1105
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock divider value from the LSSI ORX2 data source
+ * register for a specified instance.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved clock
+ * divider value will be stored.
+ * @return Returns the status of the last register read operation, which
+ * indicates success (0) or failure (non-zero). The output value
+ * contains the combined clock divider value from the two registers.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_LssiOrx2DataSourceClkDivValue_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t *value)
@@ -9392,9 +14883,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_LssiOrx2DataSourceClkDivValue_Get(vo
     return status;
 }
 
-/**
- * (B0 New) 0: LSSI data source clock inherit from datapath, 1: LSSI data source clock inherite from DivN from clk1105
- */
+/***************************************************************************//**
+ * @brief Sets the clock selection for the LSSI ORX2 data source in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value A 8-bit unsigned integer representing the clock selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_LssiOrx2DataSourceClkSel_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -9406,9 +14907,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_LssiOrx2DataSourceClkSel_Set(void *d
     return status;
 }
 
-/**
- * (B0 New) 0: LSSI data source clock inherit from datapath, 1: LSSI data source clock inherite from DivN from clk1105
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock selection value from a specific register for the
+ * LSSI ORX2 data source.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * selection value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_LssiOrx2DataSourceClkSel_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -9423,9 +14933,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_LssiOrx2DataSourceClkSel_Get(void *d
     return status;
 }
 
-/**
- * (B0 New) Div ratio of the LVDS SSI data source clock from clk1105
- */
+/***************************************************************************//**
+ * @brief Sets the clock divider value for the LSSI ORX3 data source in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A 16-bit unsigned integer representing the clock divider value
+ * to be set.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_LssiOrx3DataSourceClkDivValue_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t value)
@@ -9440,9 +14960,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_LssiOrx3DataSourceClkDivValue_Set(vo
     return status;
 }
 
-/**
- * (B0 New) Div ratio of the LVDS SSI data source clock from clk1105
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock divider value from the LSSI ORX3 data source
+ * register for a specified instance.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved clock
+ * divider value will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the register read operations fail.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_LssiOrx3DataSourceClkDivValue_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t *value)
@@ -9461,9 +14990,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_LssiOrx3DataSourceClkDivValue_Get(vo
     return status;
 }
 
-/**
- * (B0 New) 0: LSSI data source clock inherit from datapath, 1: LSSI data source clock inherite from DivN from clk1105
- */
+/***************************************************************************//**
+ * @brief Sets the clock selection for the LSSI ORX3 data source in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the clock selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_LssiOrx3DataSourceClkSel_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -9475,9 +15014,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_LssiOrx3DataSourceClkSel_Set(void *d
     return status;
 }
 
-/**
- * (B0 New) 0: LSSI data source clock inherit from datapath, 1: LSSI data source clock inherite from DivN from clk1105
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock selection value from a specific register for the
+ * LSSI ORX3 data source.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_LssiOrx3DataSourceClkSel_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -9492,9 +15040,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_LssiOrx3DataSourceClkSel_Get(void *d
     return status;
 }
 
-/**
- * (B0 New) Div ratio of the LVDS SSI data source clock from clk1105
- */
+/***************************************************************************//**
+ * @brief Sets the clock divider value for the LSSI RX data source in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A 16-bit unsigned integer representing the clock divider value
+ * to be set.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_LssiRxDataSourceClkDivValue_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t value)
@@ -9509,9 +15067,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_LssiRxDataSourceClkDivValue_Set(void
     return status;
 }
 
-/**
- * (B0 New) Div ratio of the LVDS SSI data source clock from clk1105
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock divider value from the LSSI RX data source
+ * register for a specified instance.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param instance An enumerated value representing the specific instance of the
+ * LSSI RX data source.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved clock
+ * divider value will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if any read operation fails.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_LssiRxDataSourceClkDivValue_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t *value)
@@ -9530,9 +15097,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_LssiRxDataSourceClkDivValue_Get(void
     return status;
 }
 
-/**
- * (B0 New) 0: LSSI data source clock inherit from datapath, 1: LSSI data source clock inherit from DivN from clk1105
- */
+/***************************************************************************//**
+ * @brief Sets the clock selection for the LSSI RX data source in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value representing the clock selection to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_LssiRxDataSourceClkSel_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -9544,9 +15120,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_LssiRxDataSourceClkSel_Set(void *dev
     return status;
 }
 
-/**
- * (B0 New) 0: LSSI data source clock inherit from datapath, 1: LSSI data source clock inherit from DivN from clk1105
- */
+/***************************************************************************//**
+ * @brief Retrieves the clock selection value from a specific register for the
+ * LSSI RX data source.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_LssiRxDataSourceClkSel_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -9561,9 +15146,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_LssiRxDataSourceClkSel_Get(void *dev
     return status;
 }
 
-/**
- * (B0 New) 0: LSSI data source clock for DEBUG mode inherit from datapath, 1: LSSI data source clock for DEBUG mode inherit from DivN from clk1105
- */
+/***************************************************************************//**
+ * @brief Sets the debug mode clock selection for the LSSI RX data source in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the clock selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_LssiRxDataSourceDbgModeClkSel_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -9575,9 +15170,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_LssiRxDataSourceDbgModeClkSel_Set(vo
     return status;
 }
 
-/**
- * (B0 New) 0: LSSI data source clock for DEBUG mode inherit from datapath, 1: LSSI data source clock for DEBUG mode inherit from DivN from clk1105
- */
+/***************************************************************************//**
+ * @brief Retrieves the debug mode clock selection value from a specific
+ * register for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * selection value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_LssiRxDataSourceDbgModeClkSel_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -9592,9 +15196,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_LssiRxDataSourceDbgModeClkSel_Get(vo
     return status;
 }
 
-/**
- * (B0 New) Enable the Mask of the strobe according to lssi_rx_mask_strobe_value
- */
+/***************************************************************************//**
+ * @brief Sets the LSSI RX mask strobe enable value in the ADRV9001 device's
+ * register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map to be modified.
+ * @param value A uint8_t value that indicates the mask strobe enable setting to
+ * be applied.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_LssiRxMaskStrobeEnable_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -9606,9 +15220,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_LssiRxMaskStrobeEnable_Set(void *dev
     return status;
 }
 
-/**
- * (B0 New) Enable the Mask of the strobe according to lssi_rx_mask_strobe_value
- */
+/***************************************************************************//**
+ * @brief Retrieves the LSSI RX mask strobe enable value from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_LssiRxMaskStrobeEnable_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -9623,9 +15246,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_LssiRxMaskStrobeEnable_Get(void *dev
     return status;
 }
 
-/**
- * (B0 New) N-1 Strobe over N will be masked (Used for SSI interpolation mode only)
- */
+/***************************************************************************//**
+ * @brief Sets the LSSI RX mask strobe value in the ADRV9001 device's register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value An 8-bit unsigned integer representing the strobe value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_LssiRxMaskStrobeValue_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -9637,9 +15269,17 @@ static inline int32_t adrv9001_NvsRegmapRxb_LssiRxMaskStrobeValue_Set(void *devi
     return status;
 }
 
-/**
- * (B0 New) N-1 Strobe over N will be masked (Used for SSI interpolation mode only)
- */
+/***************************************************************************//**
+ * @brief Retrieves the LSSI RX mask strobe value from a specified register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_LssiRxMaskStrobeValue_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -9654,9 +15294,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_LssiRxMaskStrobeValue_Get(void *devi
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the reset mask for the NBDem counter 1 clock in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A 8-bit unsigned integer that specifies the value to be written
+ * to the reset mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_NbdemCounter1ClkResetbMask_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -9668,9 +15318,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_NbdemCounter1ClkResetbMask_Set(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register field and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_NbdemCounter1ClkResetbMask_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -9685,9 +15344,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_NbdemCounter1ClkResetbMask_Get(void 
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the NCO 50 MHz clock reset mask in the ADRV9001 device's RXB
+ * register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register.
+ * @param value An 8-bit value to be written to the NCO 50 MHz clock reset mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_NbdemNco50ClkResetbMask_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -9699,9 +15367,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_NbdemNco50ClkResetbMask_Set(void *de
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the NCO 50 MHz clock reset mask value from a specific
+ * register for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_NbdemNco50ClkResetbMask_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -9716,9 +15393,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_NbdemNco50ClkResetbMask_Get(void *de
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the reset mask for the NBDem resampler clock in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value A 8-bit unsigned integer that specifies the value to be written
+ * to the reset mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_NbdemResamplerClkResetbMask_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -9730,9 +15417,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_NbdemResamplerClkResetbMask_Set(void
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_NbdemResamplerClkResetbMask_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -9747,9 +15443,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_NbdemResamplerClkResetbMask_Get(void
     return status;
 }
 
-/**
- * (B0 New) force ORX1 PFIR_X source selection 0: from datapath, 1: from SPI
- */
+/***************************************************************************//**
+ * @brief Sets the PFIR X selection force for the specified ORX1 instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific ORX1 instance
+ * to configure.
+ * @param value An 8-bit unsigned integer representing the value to set for the
+ * PFIR X selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_Orx1PfirXSelForce_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -9761,9 +15467,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_Orx1PfirXSelForce_Set(void *device,
     return status;
 }
 
-/**
- * (B0 New) force ORX1 PFIR_X source selection 0: from datapath, 1: from SPI
- */
+/***************************************************************************//**
+ * @brief Retrieves the PFIR X selection force value from a specific register
+ * for the given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_Orx1PfirXSelForce_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -9778,9 +15493,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_Orx1PfirXSelForce_Get(void *device,
     return status;
 }
 
-/**
- * (B0 New) Select RX_PFIR_X_SEL (0:1x, 1:2x, 2:4x, 3:4x)
- */
+/***************************************************************************//**
+ * @brief Sets the PFIR X selection value for the specified ORX1 instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific ORX1 instance
+ * to configure.
+ * @param value An 8-bit unsigned integer representing the PFIR X selection
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_Orx1PfirXSelValue_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -9792,9 +15517,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_Orx1PfirXSelValue_Set(void *device,
     return status;
 }
 
-/**
- * (B0 New) Select RX_PFIR_X_SEL (0:1x, 1:2x, 2:4x, 3:4x)
- */
+/***************************************************************************//**
+ * @brief Retrieves the PFIR X selection value from a specific register for the
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved PFIR X
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_Orx1PfirXSelValue_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -9809,9 +15543,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_Orx1PfirXSelValue_Get(void *device,
     return status;
 }
 
-/**
- * (B0 New) force ORX2 PFIR_X source selection 0: from datapath, 1: from SPI
- */
+/***************************************************************************//**
+ * @brief Sets the PFIR X selection force value for a specified instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the PFIR X selection force.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_Orx2PfirXSelForce_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -9823,9 +15567,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_Orx2PfirXSelForce_Set(void *device,
     return status;
 }
 
-/**
- * (B0 New) force ORX2 PFIR_X source selection 0: from datapath, 1: from SPI
- */
+/***************************************************************************//**
+ * @brief Retrieves the PFIR X selection force value from a specific register
+ * for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_Orx2PfirXSelForce_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -9840,9 +15593,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_Orx2PfirXSelForce_Get(void *device,
     return status;
 }
 
-/**
- * (B0 New) Select RX_PFIR_X_SEL (0:1x, 1:2x, 2:4x, 3:4x)
- */
+/***************************************************************************//**
+ * @brief Sets the PFIR X selection value for the specified ORX2 instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific ORX2 instance
+ * to configure.
+ * @param value An 8-bit integer representing the PFIR X selection value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_Orx2PfirXSelValue_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -9854,9 +15617,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_Orx2PfirXSelValue_Set(void *device,
     return status;
 }
 
-/**
- * (B0 New) Select RX_PFIR_X_SEL (0:1x, 1:2x, 2:4x, 3:4x)
- */
+/***************************************************************************//**
+ * @brief Retrieves the PFIR X selection value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved PFIR X
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_Orx2PfirXSelValue_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -9871,9 +15643,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_Orx2PfirXSelValue_Get(void *device,
     return status;
 }
 
-/**
- * (B0 New) force ORX3 PFIR_X source selection 0: from datapath, 1: from SPI
- */
+/***************************************************************************//**
+ * @brief Sets the PFIR X selection force value for a specified instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the PFIR X selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_Orx3PfirXSelForce_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -9885,9 +15667,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_Orx3PfirXSelForce_Set(void *device,
     return status;
 }
 
-/**
- * (B0 New) force ORX3 PFIR_X source selection 0: from datapath, 1: from SPI
- */
+/***************************************************************************//**
+ * @brief Retrieves the PFIR X selection force value from a specific register
+ * for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_Orx3PfirXSelForce_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -9902,9 +15693,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_Orx3PfirXSelForce_Get(void *device,
     return status;
 }
 
-/**
- * (B0 New) Select RX_PFIR_X_SEL (0:1x, 1:2x, 2:4x, 3:4x)
- */
+/***************************************************************************//**
+ * @brief Sets the PFIR X selection value for the specified ORX3 instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific ORX3 instance
+ * to configure.
+ * @param value An 8-bit unsigned integer representing the PFIR X selection
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_Orx3PfirXSelValue_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -9916,9 +15717,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_Orx3PfirXSelValue_Set(void *device,
     return status;
 }
 
-/**
- * (B0 New) Select RX_PFIR_X_SEL (0:1x, 1:2x, 2:4x, 3:4x)
- */
+/***************************************************************************//**
+ * @brief Retrieves the PFIR X selection value from the specified register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved PFIR X
+ * selection value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_Orx3PfirXSelValue_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -9933,9 +15743,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_Orx3PfirXSelValue_Get(void *device,
     return status;
 }
 
-/**
- * Ericsson Parallel Control Attenuator mode
- */
+/***************************************************************************//**
+ * @brief Sets the PCA gain control mode for a specified instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to set for the
+ * PCA gain control mode.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_PcaGainControlMode_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -9947,9 +15767,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_PcaGainControlMode_Set(void *device,
     return status;
 }
 
-/**
- * Ericsson Parallel Control Attenuator mode
- */
+/***************************************************************************//**
+ * @brief Retrieves the PCA gain control mode from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved PCA gain
+ * control mode will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_PcaGainControlMode_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -9964,9 +15793,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_PcaGainControlMode_Get(void *device,
     return status;
 }
 
-/**
- * This 8-bit register selects the gain index based on target gain required. Can be varied for temperature compensation of gain (this is a shadow register and will only update front end attenuator on Talise when “Update Manual Mode Registers” is written to 1).
- */
+/***************************************************************************//**
+ * @brief Sets the PCA gain index offset in the NVS register map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the PCA gain index offset
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_PcaGainIndexOffset_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -9978,9 +15816,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_PcaGainIndexOffset_Set(void *device,
     return status;
 }
 
-/**
- * This 8-bit register selects the gain index based on target gain required. Can be varied for temperature compensation of gain (this is a shadow register and will only update front end attenuator on Talise when “Update Manual Mode Registers” is written to 1).
- */
+/***************************************************************************//**
+ * @brief Retrieves the PCA gain index offset from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved PCA gain
+ * index offset will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_PcaGainIndexOffset_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -9995,9 +15843,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_PcaGainIndexOffset_Get(void *device,
     return status;
 }
 
-/**
- * This 5-bit register allows the user to configure the number of indices to jump by for every change in the LSB of the GPIO inputs. This register is also a shadow register and will only update internal digital logic when “Update Manual Mode Registers” is written to 1.
- */
+/***************************************************************************//**
+ * @brief Sets the PCA gain step for a specified instance in the ADRV9001 NVS
+ * register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the gain step value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_PcaGainStep_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -10009,9 +15867,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_PcaGainStep_Set(void *device,
     return status;
 }
 
-/**
- * This 5-bit register allows the user to configure the number of indices to jump by for every change in the LSB of the GPIO inputs. This register is also a shadow register and will only update internal digital logic when “Update Manual Mode Registers” is written to 1.
- */
+/***************************************************************************//**
+ * @brief Retrieves the PCA gain step value from a specific register for a given
+ * instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved PCA gain
+ * step value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_PcaGainStep_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -10026,9 +15893,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_PcaGainStep_Get(void *device,
     return status;
 }
 
-/**
- * This bit is a self-clearing bit. When written to 1, this bit will update the gain index offset and the gain step which will in turn update the GPIO selected gain. The front end attenuator will be updated at this time. This bit is provided for real time update of the gain offset due to temp compensation, or other reasons.
- */
+/***************************************************************************//**
+ * @brief Sets the manual gain mode for the PCA in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for the RXB.
+ * @param value An 8-bit unsigned integer representing the gain mode value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_PcaUpdateManualGainMode_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -10040,9 +15916,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_PcaUpdateManualGainMode_Set(void *de
     return status;
 }
 
-/**
- * This bit is a self-clearing bit. When written to 1, this bit will update the gain index offset and the gain step which will in turn update the GPIO selected gain. The front end attenuator will be updated at this time. This bit is provided for real time update of the gain offset due to temp compensation, or other reasons.
- */
+/***************************************************************************//**
+ * @brief Retrieves the manual gain mode value from a specific register for a
+ * given instance of the device.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved manual gain
+ * mode value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_PcaUpdateManualGainMode_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -10058,11 +15943,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_PcaUpdateManualGainMode_Get(void *de
 }
 
 
-/**
- * This register contains the readback value of the Ch1 phase offset. 
-
- * If "read_gain_table" is set, the value is read back from the gain table corresponding to the "gt_addr". If "read_gain_table" is clear,the value is the current gain being used.
- */
+/***************************************************************************//**
+ * @brief Retrieves the phase offset value from the RXB register map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific RXB instance
+ * from which to read the phase offset.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved phase
+ * offset value will be stored.
+ * @return Returns the status of the last read operation, indicating success (0)
+ * or failure (non-zero).
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_PhaseOffset_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t *value)
@@ -10081,9 +15974,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_PhaseOffset_Get(void *device,
     return status;
 }
 
-/**
- * When set, readback values are from the gain table. When clear, readback values are the current values being used in the datapath.
- */
+/***************************************************************************//**
+ * @brief Sets the gain table value for a specified instance in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * gain table to be modified.
+ * @param value An 8-bit unsigned integer representing the gain value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_ReadGainTable_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -10095,9 +15997,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_ReadGainTable_Set(void *device,
     return status;
 }
 
-/**
- * When set, readback values are from the gain table. When clear, readback values are the current values being used in the datapath.
- */
+/***************************************************************************//**
+ * @brief This function reads a gain value from a specific register in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB gain table.
+ * @param value A pointer to a uint8_t variable where the read gain value will
+ * be stored.
+ * @return The function returns an integer status code indicating the success or
+ * failure of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_ReadGainTable_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -10112,6 +16024,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_ReadGainTable_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets a shadow register value for a specified instance in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the shadow register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RegLoadShadow_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -10123,6 +16048,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RegLoadShadow_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the shadow register value for a specified instance of the
+ * RXB register map.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific RXB register
+ * instance.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RegLoadShadow_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -10137,6 +16074,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RegLoadShadow_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the reset value for the RX gain index in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RX block.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the reset on RX gain index.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_ResetOnRxonGainIndex_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -10148,6 +16097,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_ResetOnRxonGainIndex_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the reset value for the RX gain index from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RX block.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_ResetOnRxonGainIndex_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -10162,6 +16123,17 @@ static inline int32_t adrv9001_NvsRegmapRxb_ResetOnRxonGainIndex_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC ADC reset mask in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC ADC.
+ * @param value A uint8_t value that specifies the reset mask to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcAdcRstMask_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -10173,6 +16145,17 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcAdcRstMask_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC ADC reset mask value from a specified register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC ADC.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcAdcRstMask_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -10187,6 +16170,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcAdcRstMask_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC ADC overload mask in the ADRV9001 device's register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the overload mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcAdcovrldmask_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -10198,6 +16193,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcAdcovrldmask_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the ADC overload mask value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC.
+ * @param value A pointer to a uint8_t variable where the retrieved ADC overload
+ * mask value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcAdcovrldmask_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -10212,6 +16219,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcAdcovrldmask_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC calibration start value in the ADRV9001 device's NVS
+ * register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the calibration start
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcCalStart_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -10223,6 +16243,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcCalStart_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC calibration start value from a specific register
+ * for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC calibration.
+ * @param value A pointer to a uint8_t variable where the retrieved calibration
+ * start value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcCalStart_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -10238,6 +16270,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcCalStart_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC correction data for the I channel from the
+ * specified device instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC correction register.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * correction data will be stored.
+ * @return Returns the status of the last read operation, where a zero indicates
+ * success and a non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcCorrDinI_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -10261,6 +16306,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcCorrDinI_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC correction data from the specified register map
+ * instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * correction data will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcCorrDinQ_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -10284,6 +16341,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcCorrDinQ_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC correction output I value from the specified device
+ * instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC correction output.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the last read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcCorrDoutI_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -10307,6 +16377,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcCorrDoutI_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC correction output value from the specified device
+ * instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC correction output.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the last read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcCorrDoutQ_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -10329,6 +16412,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcCorrDoutQ_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC correction write disable field in the ADRV9001 register
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC correction register.
+ * @param value A uint8_t value that indicates whether to enable (1) or disable
+ * (0) the RFDC correction write.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcCorrWrDisable_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -10340,6 +16436,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcCorrWrDisable_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC correction write disable status from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC correction register.
+ * @param value A pointer to a uint8_t variable where the retrieved status will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcCorrWrDisable_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -10355,6 +16463,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcCorrWrDisable_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC control state from a specific register and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC control state.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcCtrlState_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -10370,6 +16490,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcCtrlState_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a 24-bit value from a series of registers for a specified
+ * instance of the device.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the last register read operation, with the
+ * output value containing the combined 24-bit result from the three
+ * registers.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcDcestDoutI_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -10393,6 +16526,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcDcestDoutI_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a 24-bit value from a specific register map by reading three
+ * consecutive registers.
+ *
+ * @param device A pointer to the device context used for register access.
+ * @param instance An enumeration value indicating the specific instance of the
+ * register map.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the last read operation, where a status of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcDcestDoutQ_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -10415,6 +16560,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcDcestDoutQ_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC decimation selection for a specified instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC decimation selection.
+ * @param value An 8-bit unsigned integer representing the decimation selection
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcDecSel_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -10426,6 +16584,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcDecSel_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC decimation selection value from a specific register
+ * for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC decimation selection.
+ * @param value A pointer to a uint8_t variable where the retrieved decimation
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcDecSel_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -10441,6 +16611,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcDecSel_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC ELPBCK correction output for the IA channel from
+ * the specified device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC to access.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * correction output will be stored.
+ * @return Returns the status of the last read operation, indicating success (0)
+ * or failure (non-zero).
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcElpbckCorrDoutIa_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -10464,6 +16647,20 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcElpbckCorrDoutIa_Get(void *devic
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a 24-bit value from a specific register map for the RFDC
+ * Elpbck correction output I/Q.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated type indicating the specific instance of the
+ * RFDC register map.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns a status code indicating the success or failure of the read
+ * operations, while the retrieved 24-bit value is stored in the
+ * location pointed to by `value`.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcElpbckCorrDoutIb_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -10487,6 +16684,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcElpbckCorrDoutIb_Get(void *devic
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a 24-bit value from a specific register map for the RFDC
+ * Elpbck correction output.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated type indicating the specific instance of the
+ * register map.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the last read operation, with the output value
+ * containing the combined 24-bit result from the three register reads.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcElpbckCorrDoutQa_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -10510,6 +16720,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcElpbckCorrDoutQa_Get(void *devic
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC ELPBCK correction output value from the specified
+ * device instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC to access.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns a status code indicating success (0) or failure (non-zero) of
+ * the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcElpbckCorrDoutQb_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -10532,6 +16755,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcElpbckCorrDoutQb_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC ELPBCK correction value for a specified instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC to configure.
+ * @param value A 32-bit unsigned integer representing the correction value to
+ * be set.
+ * @return Returns the status of the last write operation, indicating success
+ * (0) or an error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcElpbckCorrIa_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t value)
@@ -10549,6 +16785,20 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcElpbckCorrIa_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC ELPBCK correction I value from the specified device
+ * instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC to access.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * correction value will be stored.
+ * @return Returns the status of the last read operation, indicating success (0)
+ * or failure (non-zero). The retrieved correction value is stored in
+ * the variable pointed to by `value`.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcElpbckCorrIa_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -10571,6 +16821,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcElpbckCorrIa_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC ELBCK correction I/Q values in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC configuration.
+ * @param value A 32-bit unsigned integer containing the correction values to be
+ * set, split into three parts.
+ * @return Returns the status of the last write operation, indicating success
+ * (0) or an error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcElpbckCorrIb_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t value)
@@ -10588,6 +16850,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcElpbckCorrIb_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC ELPBCK correction I value from the specified device
+ * instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC to access.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * correction value will be stored.
+ * @return Returns the status of the read operations, where a status of zero
+ * indicates success and a non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcElpbckCorrIb_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -10610,6 +16885,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcElpbckCorrIb_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC ELPBCK correction QA value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC register map.
+ * @param value A 32-bit unsigned integer containing the value to be set, which
+ * is divided into three parts for different registers.
+ * @return Returns the status of the last write operation, indicating success
+ * (0) or an error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcElpbckCorrQa_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t value)
@@ -10627,6 +16914,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcElpbckCorrQa_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC Elpbck correction QA value from the specified
+ * device instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC to access.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcElpbckCorrQa_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -10649,6 +16949,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcElpbckCorrQa_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC Elpbck correction value for a specified instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC Elpbck correction.
+ * @param value A 32-bit unsigned integer representing the correction value to
+ * be set.
+ * @return Returns the status of the last write operation, indicating success
+ * (0) or an error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcElpbckCorrQb_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t value)
@@ -10666,6 +16979,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcElpbckCorrQb_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC Elpbck correction value from the specified device
+ * instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC to access.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * correction value will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcElpbckCorrQb_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -10688,6 +17014,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcElpbckCorrQb_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC estimation bit selection in the ADRV9001 device's
+ * register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcEstBitselect_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -10699,6 +17038,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcEstBitselect_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC estimation bit selection value from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC estimation.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcEstBitselect_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -10713,6 +17064,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcEstBitselect_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC estimation bit selection in the NVS register map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcEstBitselectLoid_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -10724,6 +17088,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcEstBitselectLoid_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific bit field value from a register and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcEstBitselectLoid_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -10739,6 +17115,17 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcEstBitselectLoid_Get(void *devic
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC estimation done status from a specific register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumeration value indicating the specific instance of the
+ * RFDC.
+ * @param value A pointer to a uint8_t variable where the retrieved status will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcEstDone_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -10753,6 +17140,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcEstDone_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC FE gain selection in the ADRV9001 device's NVS register
+ * map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the gain selection value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcFegainSel_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -10764,6 +17164,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcFegainSel_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC FE gain selection value from a specific register
+ * for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC.
+ * @param value A pointer to a uint8_t variable where the retrieved gain
+ * selection value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcFegainSel_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -10778,6 +17190,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcFegainSel_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC FFH mode in the ADRV9001 device's NVS register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the RFDC FFH mode.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcFfhMode_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -10789,6 +17213,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcFfhMode_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC FFH mode value from a specific register for a given
+ * instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcFfhMode_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -10803,6 +17239,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcFfhMode_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC force AHB A register value for a specified instance of
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC register.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcForceAhbA_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -10814,6 +17263,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcForceAhbA_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcForceAhbA_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -10828,6 +17290,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcForceAhbA_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC force AHB B register value for a specified instance in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC register.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcForceAhbB_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -10839,6 +17314,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcForceAhbB_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific field value from a register and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcForceAhbB_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -10853,6 +17340,17 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcForceAhbB_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC force FS bit selection in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC register map.
+ * @param value A uint8_t value that specifies the bit selection to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcForceFsBitsel_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -10864,6 +17362,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcForceFsBitsel_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC Force FS Bit Selection value from a specified
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC register.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcForceFsBitsel_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -10878,6 +17388,17 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcForceFsBitsel_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC IDAC value in the ADRV9001 device's register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC register map.
+ * @param value An 8-bit unsigned integer representing the IDAC value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcForceIdac_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -10889,6 +17410,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcForceIdac_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC IDAC value from a specific register for a given
+ * instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC.
+ * @param value A pointer to a uint8_t variable where the retrieved IDAC value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcForceIdac_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -10903,6 +17436,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcForceIdac_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC forget factor in the NVS register map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A 16-bit unsigned integer representing the value to be set for
+ * the RFDC forget factor.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcForgetFac_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t value)
@@ -10917,6 +17463,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcForgetFac_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC forget factor value from the specified device
+ * instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC whose forget factor is being retrieved.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * forget factor value will be stored.
+ * @return Returns the status of the read operations, where a status of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcForgetFac_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t *value)
@@ -10935,6 +17494,17 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcForgetFac_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC freeze state in the ADRV9001 device's NVS register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value indicating the freeze state to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcFreeze_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -10946,6 +17516,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcFreeze_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC freeze status from a specific register for a given
+ * instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC.
+ * @param value A pointer to a uint8_t variable where the retrieved freeze
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcFreeze_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -10960,6 +17542,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcFreeze_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC frequency select bits in the NVS register map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the RFDC frequency select bits.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcFsBitsel_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -10971,6 +17566,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcFsBitsel_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC frequency select bits from a specific register for
+ * a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcFsBitsel_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -10985,6 +17592,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcFsBitsel_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC frequency select bits in the NVS register map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcFsBitselB_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -10996,6 +17616,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcFsBitselB_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC frequency select bits from a specific register for
+ * a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumeration value representing the specific instance of
+ * the RFDC.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcFsBitselB_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -11011,6 +17643,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcFsBitselB_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the RF Digital Converter gain control value from a specified
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value indicating the specific instance of the
+ * RF Digital Converter.
+ * @param value A pointer to a uint8_t variable where the retrieved gain control
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcGainctrl_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -11026,6 +17670,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcGainctrl_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the RF Digital Converter (RFDC) gain index from a specified
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC.
+ * @param value A pointer to a uint8_t variable where the retrieved gain index
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcGainindex_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -11040,6 +17696,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcGainindex_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC gain index offset in the NVS register map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the gain index offset to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcGtIndexOffset_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -11051,6 +17720,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcGtIndexOffset_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC gain index offset from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcGtIndexOffset_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -11065,6 +17746,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcGtIndexOffset_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC calibration value in the ADRV9001 device's NVS register
+ * map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcIcal_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -11076,6 +17770,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcIcal_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC calibration value from a specified register for a
+ * given device instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC calibration register.
+ * @param value A pointer to a uint8_t variable where the retrieved calibration
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcIcal_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -11090,6 +17796,17 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcIcal_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC ICAL bypass configuration in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC configuration.
+ * @param value A uint8_t value indicating the bypass setting to be applied.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcIcalBypass_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -11101,6 +17818,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcIcalBypass_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC ICAL bypass value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcIcalBypass_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -11115,6 +17844,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcIcalBypass_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC Ical index selection in the ADRV9001 device's NVS
+ * register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the RFDC Ical index selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcIcalIndexSel_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -11126,6 +17868,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcIcalIndexSel_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC Ical index selection value from a specific register
+ * for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcIcalIndexSel_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -11141,6 +17895,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcIcalIndexSel_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the RF Digital-to-Analog Converter (IDAC) value from the
+ * specified instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RF Digital-to-Analog Converter.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved IDAC
+ * value will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcIdacI_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t *value)
@@ -11159,6 +17926,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcIdacI_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RF Digital-to-Analog Converter (IDAC) I forced value in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A 16-bit unsigned integer representing the value to be set for
+ * the IDAC I forced.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcIdacIForced_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t value)
@@ -11173,6 +17953,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcIdacIForced_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RF Digital-to-Analog Converter (IDAC) I forced value
+ * from the specified instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC to access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved IDAC
+ * I forced value will be stored.
+ * @return Returns the status of the read operations, where a status of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcIdacIForced_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t *value)
@@ -11191,6 +17984,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcIdacIForced_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the forced value for the RFDC IDAC I register in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC register map.
+ * @param value A 16-bit unsigned integer representing the value to be set in
+ * the RFDC IDAC I register.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcIdacIForcedB_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t value)
@@ -11205,6 +18011,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcIdacIForcedB_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC IDAC I forced B value from the specified device
+ * instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC to access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcIdacIForcedB_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t *value)
@@ -11224,6 +18043,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcIdacIForcedB_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the RF Digital-to-Analog Converter (IDAC) value from the
+ * specified instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC IDAC to access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved IDAC
+ * value will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcIdacQ_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t *value)
@@ -11242,6 +18074,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcIdacQ_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the forced value for the RFDC IDAC Q channel in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC.
+ * @param value A 16-bit unsigned integer representing the value to be set for
+ * the RFDC IDAC Q channel.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcIdacQForced_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t value)
@@ -11256,6 +18101,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcIdacQForced_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the forced IDAC value for the RF digital-to-analog converter
+ * from the specified device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RF digital-to-analog converter.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved IDAC
+ * value will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcIdacQForced_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t *value)
@@ -11274,6 +18132,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcIdacQForced_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the forced value for the RF Digital-to-Analog Converter (IDAC) of
+ * a specified instance in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RF Digital-to-Analog Converter.
+ * @param value A 16-bit unsigned integer representing the value to be set for
+ * the IDAC.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcIdacQForcedB_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t value)
@@ -11288,6 +18159,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcIdacQForcedB_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the forced value of the RF Digital-to-Analog Converter
+ * (IDAC) for a specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns the status of the read operations, where a value of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcIdacQForcedB_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t *value)
@@ -11307,6 +18190,20 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcIdacQForcedB_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC IIR correction value from the specified device
+ * instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC to access.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * correction value will be stored.
+ * @return Returns the status of the last read operation, indicating success (0)
+ * or failure (non-zero). The retrieved RFDC IIR correction value is
+ * stored in the variable pointed to by `value`.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcIirCorrI_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -11330,6 +18227,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcIirCorrI_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC IIR correction value from the specified instance of
+ * the device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC whose correction value is being retrieved.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * correction value will be stored.
+ * @return Returns the status of the last read operation, indicating success (0)
+ * or an error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcIirCorrQ_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -11352,6 +18262,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcIirCorrQ_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC index offset in the NVS register map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the RFDC index offset.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcIndexOffset_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -11363,6 +18285,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcIndexOffset_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC index offset value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC for which the offset is being retrieved.
+ * @param value A pointer to a uint8_t variable where the retrieved RFDC index
+ * offset value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcIndexOffset_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -11377,6 +18312,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcIndexOffset_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC index selection in the NVS register map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the RFDC index selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcIndexSel_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -11388,6 +18336,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcIndexSel_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC index selection value from a specific register for
+ * a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcIndexSel_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -11403,6 +18363,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcIndexSel_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC initialization status from a specific register for
+ * a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcInitDone_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -11417,13 +18389,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcInitDone_Get(void *device,
     return status;
 }
 
-/**
- * (B0 New) Invert I channel spectrum sent to idac_i. The 21-bit DC correction after the mux [rx, orx, ilb, elb] is 2s complemented.
-
- * 0 = no invert
-
- * 1 = invert I channel spectrum
- */
+/***************************************************************************//**
+ * @brief Sets the RFDC I spectrum inversion configuration for a specified
+ * instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC configuration.
+ * @param value A uint8_t value indicating the desired inversion state (0 or 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcInvertISpectrum_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -11435,13 +18412,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcInvertISpectrum_Set(void *device
     return status;
 }
 
-/**
- * (B0 New) Invert I channel spectrum sent to idac_i. The 21-bit DC correction after the mux [rx, orx, ilb, elb] is 2s complemented.
-
- * 0 = no invert
-
- * 1 = invert I channel spectrum
- */
+/***************************************************************************//**
+ * @brief Retrieves the RFDC I spectrum inversion setting from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcInvertISpectrum_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -11456,13 +18438,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcInvertISpectrum_Get(void *device
     return status;
 }
 
-/**
- * (B0 New) Invert Q channel spectrum sent to idac_q. The 21-bit DC correction after the mux [rx, orx, ilb, elb] is 2s complemented.
-
- * 0 = no invert
-
- * 1 = invert Q channel spectrum
- */
+/***************************************************************************//**
+ * @brief Sets the RFDC Invert Q Spectrum configuration for a specified instance
+ * of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC configuration.
+ * @param value A uint8_t value indicating the desired configuration for the
+ * RFDC Invert Q Spectrum.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcInvertQSpectrum_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -11474,13 +18462,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcInvertQSpectrum_Set(void *device
     return status;
 }
 
-/**
- * (B0 New) Invert Q channel spectrum sent to idac_q. The 21-bit DC correction after the mux [rx, orx, ilb, elb] is 2s complemented.
-
- * 0 = no invert
-
- * 1 = invert Q channel spectrum
- */
+/***************************************************************************//**
+ * @brief Retrieves the RFDC Invert Q Spectrum value from a specified register.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC register.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcInvertQSpectrum_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -11495,6 +18488,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcInvertQSpectrum_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC LOID enable field in the NVS register map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that indicates the enable/disable state for the
+ * RFDC LOID.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcLoidEn_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -11506,6 +18512,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcLoidEn_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC LOID enable status from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcLoidEn_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -11521,6 +18539,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcLoidEn_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC LOID FIFO status from the specified device
+ * instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumeration value representing the specific instance of
+ * the RFDC.
+ * @param value A pointer to a 16-bit unsigned integer where the FIFO status
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcLoidFifoStatus_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t *value)
@@ -11539,6 +18570,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcLoidFifoStatus_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC LOID interval in the NVS register map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the RFDC LOID interval.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcLoidIntvl_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -11550,6 +18594,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcLoidIntvl_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC LOID interval value from a specific register and
+ * stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC register.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcLoidIntvl_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -11565,6 +18621,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcLoidIntvl_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcLoidLog0_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -11580,6 +18649,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcLoidLog0_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumeration value that specifies which instance of the
+ * register map to access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcLoidLog1_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -11595,6 +18677,17 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcLoidLog1_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC LOID log2 value from a specified register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC.
+ * @param value A pointer to a uint8_t variable where the retrieved log2 value
+ * will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcLoidLog2_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -11610,6 +18703,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcLoidLog2_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcLoidLog3_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -11625,6 +18731,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcLoidLog3_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcLoidLog4_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -11640,6 +18759,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcLoidLog4_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumeration value representing the specific instance of
+ * the register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcLoidLog5_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -11655,6 +18787,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcLoidLog5_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcLoidLog6_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -11670,6 +18815,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcLoidLog6_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcLoidLog7_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -11684,6 +18842,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcLoidLog7_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC LOID threshold value in the NVS register map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the threshold value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcLoidLthld_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -11695,6 +18866,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcLoidLthld_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC LO ID threshold value from a specific register for
+ * a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC.
+ * @param value A pointer to a uint8_t variable where the retrieved threshold
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcLoidLthld_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -11709,6 +18892,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcLoidLthld_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC LOID UTHLD value in the ADRV9001 device's register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcLoidUthld_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -11720,6 +18915,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcLoidUthld_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC LOID UTHLD value from a specified register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC register.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcLoidUthld_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -11735,6 +18942,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcLoidUthld_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC LPBCK correction output value for a specified
+ * instance from the device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC to access.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * correction output value will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcLpbckCorrDoutIa_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -11758,6 +18978,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcLpbckCorrDoutIa_Get(void *device
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC LPBCK correction output for the specified instance
+ * by reading multiple registers.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC to access.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * correction output will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcLpbckCorrDoutIb_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -11781,6 +19014,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcLpbckCorrDoutIb_Get(void *device
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC LPBCK correction output value from the specified
+ * device instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC to access.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * correction output value will be stored.
+ * @return Returns the status of the read operations, where a value of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcLpbckCorrDoutQa_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -11804,6 +19050,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcLpbckCorrDoutQa_Get(void *device
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC LPBCK correction output value from the specified
+ * device instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC to access.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * correction output value will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcLpbckCorrDoutQb_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -11826,6 +19085,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcLpbckCorrDoutQb_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC LPBCK correction I value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC register map.
+ * @param value A 32-bit unsigned integer containing the value to be set, which
+ * is split into three parts for different registers.
+ * @return Returns the status of the last write operation, indicating success
+ * (0) or an error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcLpbckCorrIa_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t value)
@@ -11843,6 +19114,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcLpbckCorrIa_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC LPBCK correction I value from the specified device
+ * instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC to access.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * correction value will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcLpbckCorrIa_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -11865,6 +19149,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcLpbckCorrIa_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC LPBCK correction I/Q value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC register map.
+ * @param value A 32-bit unsigned integer containing the correction value to be
+ * set.
+ * @return Returns the status of the last write operation, indicating success
+ * (0) or an error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcLpbckCorrIb_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t value)
@@ -11882,6 +19178,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcLpbckCorrIb_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC LPBCK correction I value from the specified device
+ * instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC to access.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * correction value will be stored.
+ * @return Returns the status of the last read operation, indicating success (0)
+ * or an error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcLpbckCorrIb_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -11904,6 +19213,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcLpbckCorrIb_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC LPBCK correction QA value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC register map.
+ * @param value A 32-bit unsigned integer representing the correction value to
+ * be set.
+ * @return Returns the status of the last write operation, indicating success
+ * (0) or an error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcLpbckCorrQa_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t value)
@@ -11921,6 +19242,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcLpbckCorrQa_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC LPBCK correction QA value from the specified device
+ * instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC to access.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcLpbckCorrQa_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -11943,6 +19277,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcLpbckCorrQa_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC LPBCK correction value in the ADRV9001 device's register
+ * map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC register map.
+ * @param value A 32-bit unsigned integer containing the correction value to be
+ * set.
+ * @return Returns the status of the last write operation, indicating success
+ * (0) or an error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcLpbckCorrQb_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t value)
@@ -11960,6 +19307,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcLpbckCorrQb_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC LPBCK correction value from the specified device
+ * instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC to access.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * correction value will be stored.
+ * @return Returns the status of the last read operation, indicating success (0)
+ * or an error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcLpbckCorrQb_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -11982,6 +19342,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcLpbckCorrQb_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC threshold value in the NVS register map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the threshold value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcLthld_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -11993,6 +19366,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcLthld_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC threshold value from a specific register for a
+ * given instance of the device.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC register map.
+ * @param value A pointer to a uint8_t variable where the retrieved threshold
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcLthld_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -12007,6 +19393,17 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcLthld_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the maximum gain index for the RFDC in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC.
+ * @param value An 8-bit unsigned integer representing the gain index to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcMaxGainindx_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -12018,6 +19415,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcMaxGainindx_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the maximum gain index from the RFDC register for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC register.
+ * @param value A pointer to a uint8_t variable where the retrieved maximum gain
+ * index will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcMaxGainindx_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -12032,6 +19441,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcMaxGainindx_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC memory reset field in the ADRV9001 register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map to be modified.
+ * @param value An 8-bit unsigned integer that specifies the value to be written
+ * to the RFDC memory reset field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcMemrst_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -12043,6 +19464,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcMemrst_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC memory reset value from a specified register for a
+ * given device instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcMemrst_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -12057,6 +19491,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcMemrst_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the minimum gain index for the RF digital converter in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RF digital converter.
+ * @param value An 8-bit unsigned integer representing the gain index value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcMinGainindx_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -12068,6 +19515,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcMinGainindx_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the minimum gain index from the RFDC register for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC register.
+ * @param value A pointer to a uint8_t variable where the retrieved minimum gain
+ * index will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcMinGainindx_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -12082,6 +19541,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcMinGainindx_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC threshold value in the NVS register map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the threshold value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcMthld_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -12093,6 +19565,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcMthld_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC threshold value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC.
+ * @param value A pointer to a uint8_t variable where the retrieved threshold
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcMthld_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -12107,6 +19591,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcMthld_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC threshold value in the ADRV9001 device's register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC threshold register.
+ * @param value An 8-bit unsigned integer representing the threshold value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcNthld_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -12118,6 +19614,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcNthld_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC threshold value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC.
+ * @param value A pointer to a uint8_t variable where the retrieved threshold
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcNthld_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -12132,6 +19640,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcNthld_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC operational mode in the ADRV9001 device's register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC register map.
+ * @param value An 8-bit unsigned integer representing the operational mode to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcOpmode_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -12143,6 +19663,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcOpmode_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC operational mode from a specific register for a
+ * given device instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC operational mode.
+ * @param value A pointer to a uint8_t variable where the retrieved operational
+ * mode value will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcOpmode_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -12158,6 +19691,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcOpmode_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC ORX correlation output for a specified instance by
+ * reading multiple registers.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC ORX correlation output.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * correlation output will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcOrxCorrDoutIa_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -12181,6 +19727,20 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcOrxCorrDoutIa_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC ORX correlation output I/Q data from the specified
+ * device instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC ORX correlation output.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * correlation output will be stored.
+ * @return Returns the status of the last read operation, indicating success (0)
+ * or failure (non-zero). The retrieved correlation output is stored in
+ * the variable pointed to by `value`.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcOrxCorrDoutIb_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -12204,6 +19764,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcOrxCorrDoutIb_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a 24-bit value from a specific register map for the RFDC ORX
+ * correlation output.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns a status code indicating success (0) or failure (non-zero) of
+ * the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcOrxCorrDoutQa_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -12227,6 +19799,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcOrxCorrDoutQa_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC ORX correlation output value from the specified
+ * device instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC ORX correlation output.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * correlation output value will be stored.
+ * @return Returns the status of the last read operation, indicating success (0)
+ * or an error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcOrxCorrDoutQb_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -12249,6 +19834,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcOrxCorrDoutQb_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC ORX correction I value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC ORX correction.
+ * @param value A 32-bit unsigned integer representing the correction value to
+ * be set.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcOrxCorrIa_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t value)
@@ -12266,6 +19863,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcOrxCorrIa_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC ORX correction I value from the specified device
+ * instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC ORX correction.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * correction value will be stored.
+ * @return Returns the status of the last read operation, where a value of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcOrxCorrIa_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -12288,6 +19898,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcOrxCorrIa_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC ORX correction I bias value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A 32-bit unsigned integer containing the value to be set, which
+ * is split across multiple registers.
+ * @return Returns the status of the last write operation, indicating success
+ * (0) or an error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcOrxCorrIb_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t value)
@@ -12305,6 +19927,20 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcOrxCorrIb_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC ORX correction I value from the specified device
+ * instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC ORX correction register.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * correction value will be stored.
+ * @return Returns the status of the last read operation, indicating success (0)
+ * or failure (non-zero). The final value of the RFDC ORX correction I
+ * is stored in the variable pointed to by `value`.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcOrxCorrIb_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -12327,6 +19963,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcOrxCorrIb_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC ORX correlation QA register values for a specified
+ * instance of the device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC ORX correlation QA register.
+ * @param value A 32-bit unsigned integer containing the value to be set in the
+ * registers.
+ * @return Returns the status of the last write operation, indicating success
+ * (0) or an error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcOrxCorrQa_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t value)
@@ -12344,6 +19993,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcOrxCorrQa_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC ORX correlation QA value from the specified device
+ * instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC ORX correlation QA to access.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * correlation QA value will be stored.
+ * @return Returns the status of the last read operation, with a value of 0
+ * indicating success and a non-zero value indicating an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcOrxCorrQa_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -12366,6 +20028,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcOrxCorrQa_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC ORX correction Qb value in the ADRV9001 device's
+ * register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC ORX correction register.
+ * @param value A 32-bit unsigned integer containing the value to be set in the
+ * RFDC ORX correction registers.
+ * @return Returns the status of the last write operation, where a value of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcOrxCorrQb_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t value)
@@ -12383,6 +20058,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcOrxCorrQb_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC ORX correction value from the device's register
+ * map.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumeration value representing the specific instance of
+ * the RFDC ORX correction register.
+ * @param value A pointer to a 32-bit unsigned integer where the retrieved
+ * correction value will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcOrxCorrQb_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint32_t *value)
@@ -12405,6 +20093,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcOrxCorrQb_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC pause/resume mode in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC register map.
+ * @param value A uint8_t value indicating the desired pause/resume state (0 or
+ * 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcPauseResumeMode_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -12416,6 +20116,17 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcPauseResumeMode_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC pause/resume mode value from a specified register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcPauseResumeMode_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -12430,6 +20141,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcPauseResumeMode_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC soft reset value in the ADRV9001 device's register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC register map.
+ * @param value An 8-bit unsigned integer representing the soft reset value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcSoftRst_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -12441,6 +20164,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcSoftRst_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC soft reset status from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC.
+ * @param value A pointer to a uint8_t variable where the retrieved soft reset
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcSoftRst_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -12455,6 +20190,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcSoftRst_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC SPI access selection in the ADRV9001 device's NVS
+ * register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the RFDC SPI access selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcSpiAccessSel_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -12466,6 +20214,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcSpiAccessSel_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC SPI access selection value from a specific register
+ * for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcSpiAccessSel_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -12480,6 +20240,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcSpiAccessSel_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC SPI access selection for a specified instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC register map.
+ * @param value An 8-bit value to be written to the register, indicating the SPI
+ * access selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcSpiAccessSelB_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -12491,6 +20264,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcSpiAccessSelB_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC SPI access selection value from a specific
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcSpiAccessSelB_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -12505,6 +20290,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcSpiAccessSelB_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC SPI address in the NVS register map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the RFDC SPI address.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcSpiAddr_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -12516,6 +20314,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcSpiAddr_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC SPI address from a specified register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcSpiAddr_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -12530,6 +20340,17 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcSpiAddr_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC SPI data in the NVS register map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure used for communication.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC register map.
+ * @param value A 64-bit integer value to be written to the register map.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcSpiDataIn_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint64_t value)
@@ -12556,6 +20377,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcSpiDataIn_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a 48-bit value from a series of registers by reading them
+ * sequentially.
+ *
+ * @param device A pointer to the device context used for register access.
+ * @param instance An enumeration value representing the specific instance of
+ * the RFDC.
+ * @param value A pointer to a 64-bit integer where the retrieved value will be
+ * stored.
+ * @return Returns the status of the last register read operation, with a value
+ * of 0 indicating success.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcSpiDataIn_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint64_t *value)
@@ -12591,6 +20424,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcSpiDataIn_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves a 48-bit value from a series of registers by reading them
+ * sequentially.
+ *
+ * @param device A pointer to the device context used for register access.
+ * @param instance An enumerated type indicating the specific instance of the
+ * register map.
+ * @param value A pointer to a 64-bit integer where the retrieved value will be
+ * stored.
+ * @return Returns the status of the last register read operation, where a value
+ * of zero indicates success.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcSpiDataOut_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint64_t *value)
@@ -12625,6 +20470,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcSpiDataOut_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC SPI read value in the NVS register map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcSpiRd_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -12636,6 +20494,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcSpiRd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Reads a specific register value from the RFDC SPI and stores it in the
+ * provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t where the read register value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcSpiRd_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -12650,6 +20520,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcSpiRd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets a specific RFDC SPI register value for a given instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific RFDC register
+ * instance to be accessed.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcSpiWr_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -12661,6 +20543,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcSpiWr_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the RFDC SPI and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcSpiWr_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -12675,6 +20570,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcSpiWr_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC start configuration in the ADRV9001 device's NVS
+ * register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that specifies the RFDC start configuration to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcStart_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -12686,6 +20594,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcStart_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC start value from a specific register for a given
+ * instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC.
+ * @param value A pointer to a uint8_t variable where the retrieved RFDC start
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcStart_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -12700,17 +20620,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcStart_Get(void *device,
     return status;
 }
 
-/**
- * (B0 New) Update mode to DC tables and/or [orx, ILB, ELB] correction registers. Note all update modes must be qualifies with LOID allowing write to occur.
-
- * 00 = only update immediate on DC estimation complete
-
- * 01 = only update when agc_gain_change
-
- * 10 = only update on falling edge rxon
-
- * 11=
- */
+/***************************************************************************//**
+ * @brief Sets the RFDC update mode in the ADRV9001 device's NVS register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the update mode to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcUpdateMode_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -12722,17 +20643,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcUpdateMode_Set(void *device,
     return status;
 }
 
-/**
- * (B0 New) Update mode to DC tables and/or [orx, ILB, ELB] correction registers. Note all update modes must be qualifies with LOID allowing write to occur.
-
- * 00 = only update immediate on DC estimation complete
-
- * 01 = only update when agc_gain_change
-
- * 10 = only update on falling edge rxon
-
- * 11=
- */
+/***************************************************************************//**
+ * @brief Retrieves the RFDC update mode from a specified register and stores it
+ * in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcUpdateMode_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -12747,6 +20669,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcUpdateMode_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC threshold value in the NVS register map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the threshold value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcUthld_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -12758,6 +20693,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcUthld_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC threshold value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC.
+ * @param value A pointer to a uint8_t variable where the retrieved threshold
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcUthld_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -12772,6 +20719,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcUthld_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC VI scaling value in the ADRV9001 device's register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC register map.
+ * @param value A 16-bit unsigned integer representing the scaling value to be
+ * set.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if any of the write operations fail.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcViScaling_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t value)
@@ -12786,6 +20745,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcViScaling_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC VI scaling value from the specified device
+ * instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC to access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * scaling value will be stored.
+ * @return Returns the status of the read operations, where a status of 0
+ * indicates success.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcViScaling_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t *value)
@@ -12804,6 +20776,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcViScaling_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDC threshold value in the NVS register map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the threshold value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcWthld_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -12815,6 +20800,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcWthld_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDC threshold value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RFDC.
+ * @param value A pointer to a uint8_t variable where the retrieved threshold
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcWthld_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -12829,6 +20826,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcWthld_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RFDCO LOID bypass configuration in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcoLoidBypass_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -12840,6 +20849,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcoLoidBypass_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RFDCO LOID bypass value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RfdcoLoidBypass_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -12854,13 +20875,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RfdcoLoidBypass_Get(void *device,
     return status;
 }
 
-/**
- * When set, normal RSSI measurement duration is used.  When clear,
-
- * the extended measurement duration is triggered and the duration is determined
-
- * as described in registers "rssi_measurement_duration_0 through _3"
- */
+/***************************************************************************//**
+ * @brief Sets the RSSI default mode for a specified instance in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the RSSI default mode.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RssiDefaultMode_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -12872,13 +20899,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RssiDefaultMode_Set(void *device,
     return status;
 }
 
-/**
- * When set, normal RSSI measurement duration is used.  When clear,
-
- * the extended measurement duration is triggered and the duration is determined
-
- * as described in registers "rssi_measurement_duration_0 through _3"
- */
+/***************************************************************************//**
+ * @brief Retrieves the RSSI default mode value from a specified register for a
+ * given device instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved RSSI value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RssiDefaultMode_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -12893,13 +20925,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RssiDefaultMode_Get(void *device,
     return status;
 }
 
-/**
- * This register configures the RSSI block to wait for the configured duration
-
- * for before kicking off an RSSI measurement.  The RSSI measurement is enabled
-
- * by writing to "rssi_enable_meas" register.  The duration is specified in output sample rate clock cycles (clkRout rate).
- */
+/***************************************************************************//**
+ * @brief Sets the RSSI delay value in the NVS register map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A 16-bit unsigned integer representing the RSSI delay value to
+ * be set.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if any of the write operations fail.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RssiDelay_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t value)
@@ -12914,13 +20952,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RssiDelay_Set(void *device,
     return status;
 }
 
-/**
- * This register configures the RSSI block to wait for the configured duration
-
- * for before kicking off an RSSI measurement.  The RSSI measurement is enabled
-
- * by writing to "rssi_enable_meas" register.  The duration is specified in output sample rate clock cycles (clkRout rate).
- */
+/***************************************************************************//**
+ * @brief Retrieves the RSSI delay value from the specified instance of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved RSSI
+ * delay value will be stored.
+ * @return Returns the status of the read operations, with `*value` containing
+ * the combined RSSI delay value from two registers.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RssiDelay_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t *value)
@@ -12939,9 +20983,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RssiDelay_Get(void *device,
     return status;
 }
 
-/**
- * Enables RSSI measurement according to the mode set in "rssi_mode_select" register.
- */
+/***************************************************************************//**
+ * @brief Sets the RSSI measurement enable state in the ADRV9001 device's RXB
+ * NVS register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific RXB instance to
+ * configure.
+ * @param value A uint8_t value indicating the desired state for RSSI
+ * measurement enable (0 or 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RssiEnableMeas_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -12953,9 +21007,17 @@ static inline int32_t adrv9001_NvsRegmapRxb_RssiEnableMeas_Set(void *device,
     return status;
 }
 
-/**
- * Enables RSSI measurement according to the mode set in "rssi_mode_select" register.
- */
+/***************************************************************************//**
+ * @brief Retrieves the RSSI measurement enable status from a specific register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value indicating the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RssiEnableMeas_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -12970,9 +21032,20 @@ static inline int32_t adrv9001_NvsRegmapRxb_RssiEnableMeas_Get(void *device,
     return status;
 }
 
-/**
- * 00: RFIR, 01: Dualband Band A 10: Dualband Band B 11: RFIR
- */
+/***************************************************************************//**
+ * @brief Sets the RSSI input selection for a specified instance in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map for which the RSSI input selection is being
+ * set.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the RSSI input selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RssiInputSelect_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -12984,9 +21057,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RssiInputSelect_Set(void *device,
     return status;
 }
 
-/**
- * 00: RFIR, 01: Dualband Band A 10: Dualband Band B 11: RFIR
- */
+/***************************************************************************//**
+ * @brief Retrieves the RSSI input selection value from a specified register for
+ * a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved RSSI input
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RssiInputSelect_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -13001,9 +21083,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RssiInputSelect_Get(void *device,
     return status;
 }
 
-/**
- * When set, the log block input is shifted to give an accuracy over a greater range. This shift is corrected after the log block. Set this bit for improving accuracy below -40dB.
- */
+/***************************************************************************//**
+ * @brief Sets the RSSI log shift value in the ADRV9001 NVS register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the RSSI log shift.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RssiLogshift_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -13015,9 +21106,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RssiLogshift_Set(void *device,
     return status;
 }
 
-/**
- * When set, the log block input is shifted to give an accuracy over a greater range. This shift is corrected after the log block. Set this bit for improving accuracy below -40dB.
- */
+/***************************************************************************//**
+ * @brief Retrieves the RSSI log shift value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved RSSI log
+ * shift value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RssiLogshift_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -13032,17 +21132,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RssiLogshift_Get(void *device,
     return status;
 }
 
-/**
- * When "rssi_default_mode" is set, these bits set the measurement
-
- * duration for the RSSI calculation.  In this case, the measurement duration is: RSSI duration=2^avrg0 where avrg0 is the value written in these bits.
-
- * When "rssi_default_mode" is clear, the extended measurement mode is triggered and the measurement length is set by averaging durations with weighted multipliers.  If the weighting is non zero, then the measurement duration is the sum of each measurement duration as a power of two.  That is, if all four weights are used, the duration will be:
-
- * RSSI duration=2^avrg0+2^avrg1+2^avrg2+2^avrg3
-
- * If any of the corresponding weights are set to zero, then that term is removed from the equation.
- */
+/***************************************************************************//**
+ * @brief Sets the RSSI measurement duration for a specified instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the RSSI measurement
+ * duration to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RssiMeasurementDuration0_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -13054,17 +21156,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RssiMeasurementDuration0_Set(void *d
     return status;
 }
 
-/**
- * When "rssi_default_mode" is set, these bits set the measurement
-
- * duration for the RSSI calculation.  In this case, the measurement duration is: RSSI duration=2^avrg0 where avrg0 is the value written in these bits.
-
- * When "rssi_default_mode" is clear, the extended measurement mode is triggered and the measurement length is set by averaging durations with weighted multipliers.  If the weighting is non zero, then the measurement duration is the sum of each measurement duration as a power of two.  That is, if all four weights are used, the duration will be:
-
- * RSSI duration=2^avrg0+2^avrg1+2^avrg2+2^avrg3
-
- * If any of the corresponding weights are set to zero, then that term is removed from the equation.
- */
+/***************************************************************************//**
+ * @brief Retrieves the RSSI measurement duration from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved RSSI
+ * measurement duration will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RssiMeasurementDuration0_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -13079,9 +21182,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RssiMeasurementDuration0_Get(void *d
     return status;
 }
 
-/**
- * When "rssi_default_mode" is clear, the extended measurement mode is triggered and the measurement length is set by averaging durations with weighted multipliers.  See the description for "rssi_measurement_duration_0" for more details.
- */
+/***************************************************************************//**
+ * @brief Sets the RSSI measurement duration for a specified instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the RSSI measurement
+ * duration value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RssiMeasurementDuration1_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -13093,9 +21206,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RssiMeasurementDuration1_Set(void *d
     return status;
 }
 
-/**
- * When "rssi_default_mode" is clear, the extended measurement mode is triggered and the measurement length is set by averaging durations with weighted multipliers.  See the description for "rssi_measurement_duration_0" for more details.
- */
+/***************************************************************************//**
+ * @brief Retrieves the RSSI measurement duration from a specific register in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved RSSI
+ * measurement duration will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RssiMeasurementDuration1_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -13110,9 +21233,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RssiMeasurementDuration1_Get(void *d
     return status;
 }
 
-/**
- * When "rssi_default_mode" is clear, the extended measurement mode is triggered and the measurement length is set by averaging durations with weighted multipliers.  See the description for "rssi_measurement_duration_0" for more details.
- */
+/***************************************************************************//**
+ * @brief Sets the RSSI measurement duration for a specified instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the duration value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RssiMeasurementDuration2_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -13124,9 +21257,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RssiMeasurementDuration2_Set(void *d
     return status;
 }
 
-/**
- * When "rssi_default_mode" is clear, the extended measurement mode is triggered and the measurement length is set by averaging durations with weighted multipliers.  See the description for "rssi_measurement_duration_0" for more details.
- */
+/***************************************************************************//**
+ * @brief Retrieves the RSSI measurement duration from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved RSSI
+ * measurement duration will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RssiMeasurementDuration2_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -13141,9 +21283,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RssiMeasurementDuration2_Get(void *d
     return status;
 }
 
-/**
- * When "rssi_default_mode" is clear, the extended measurement mode is triggered and the measurement length is set by averaging durations with weighted multipliers.  See the description for "rssi_measurement_duration_0" for more details.
- */
+/***************************************************************************//**
+ * @brief Sets the RSSI measurement duration for a specified instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the duration value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RssiMeasurementDuration3_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -13155,9 +21307,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RssiMeasurementDuration3_Set(void *d
     return status;
 }
 
-/**
- * When "rssi_default_mode" is clear, the extended measurement mode is triggered and the measurement length is set by averaging durations with weighted multipliers.  See the description for "rssi_measurement_duration_0" for more details.
- */
+/***************************************************************************//**
+ * @brief Retrieves the RSSI measurement duration from a specific register in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved RSSI
+ * measurement duration will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RssiMeasurementDuration3_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -13172,9 +21334,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RssiMeasurementDuration3_Get(void *d
     return status;
 }
 
-/**
- * These bits set the method for enabling the RSSI measurement according to the following options. The RSSI Algorithm will (re)start when: 000 --  AGC in fast attack mode locks the gain 001 --  EN_AGC pin is pulled high 010 --  Device enters Rx mode 011 --  Gain change occurs 100 --  SPI write to 0x4C6[D1] 101 --  Gain change occurs OR EN_AGC pin pulled high
- */
+/***************************************************************************//**
+ * @brief Sets the RSSI mode select field in the NVS register map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the RSSI mode select field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RssiModeSelect_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -13186,9 +21358,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RssiModeSelect_Set(void *device,
     return status;
 }
 
-/**
- * These bits set the method for enabling the RSSI measurement according to the following options. The RSSI Algorithm will (re)start when: 000 --  AGC in fast attack mode locks the gain 001 --  EN_AGC pin is pulled high 010 --  Device enters Rx mode 011 --  Gain change occurs 100 --  SPI write to 0x4C6[D1] 101 --  Gain change occurs OR EN_AGC pin pulled high
- */
+/***************************************************************************//**
+ * @brief Retrieves the RSSI mode selection value from a specified register for
+ * a given device instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved RSSI mode
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RssiModeSelect_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -13203,9 +21384,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RssiModeSelect_Get(void *device,
     return status;
 }
 
-/**
- * This is the offset for RSSI power calculation. This value is subtracted from the power calculated. The net effect is to add a -ve offset (move the scale in negative direction). Resolution of 1dB.
- */
+/***************************************************************************//**
+ * @brief Sets the RSSI offset value in the NVS register map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the RSSI offset value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RssiOffset_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -13217,9 +21408,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RssiOffset_Set(void *device,
     return status;
 }
 
-/**
- * This is the offset for RSSI power calculation. This value is subtracted from the power calculated. The net effect is to add a -ve offset (move the scale in negative direction). Resolution of 1dB.
- */
+/***************************************************************************//**
+ * @brief Retrieves the RSSI offset value from a specified register for a given
+ * device instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved RSSI offset
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RssiOffset_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -13235,9 +21436,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RssiOffset_Get(void *device,
 }
 
 
-/**
- * The first Ch1 RSSI calculated afther RSSI is enabled or the first RSSI after RXON goes high. It is the same as Ch1 RSSI Symbol except that it does not get updated during successive RSSI durations. Resolution is 0.25dB.
- */
+/***************************************************************************//**
+ * @brief Retrieves the RSSI preamble value from the specified register map
+ * instance.
+ *
+ * @param device A pointer to the device context used for register access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved RSSI
+ * preamble value will be stored.
+ * @return Returns the status of the read operations, where a value of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RssiPreamble_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t *value)
@@ -13257,9 +21467,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RssiPreamble_Get(void *device,
 }
 
 
-/**
- * Ch1 RSSI calculated for each RSSI duration.  This value is updated after every measurement interval.  Resolution is 0.25dB.
- */
+/***************************************************************************//**
+ * @brief Retrieves the RSSI symbol value from a specified register in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating the specific instance of the
+ * register map to access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved RSSI
+ * symbol value will be stored.
+ * @return Returns the status of the read operations, where a status of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RssiSymbol_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t *value)
@@ -13278,9 +21498,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RssiSymbol_Get(void *device,
     return status;
 }
 
-/**
- * This register specifies the duration in output sample rate cycles between consecutive RSSI measurements.  The RSSI block makes measurements on a continuous basis.  The measurement may be required to start off at the start of a time slot or a half frame.  For example, a UMTS frame (2560 chipsx10 time slots) can be configured to provide an RSSI measurement every time slot boundary by configuring the RSSI measurement duration to 2048 samples and the wait time to 512 samples.
- */
+/***************************************************************************//**
+ * @brief Sets the RSSI wait time in the ADRV9001 device's NVS register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A 16-bit unsigned integer representing the RSSI wait time to be
+ * set.
+ * @return Returns an integer status code indicating the success (0) or failure
+ * (non-zero) of the operations performed.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RssiWaitTime_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t value)
@@ -13295,9 +21524,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RssiWaitTime_Set(void *device,
     return status;
 }
 
-/**
- * This register specifies the duration in output sample rate cycles between consecutive RSSI measurements.  The RSSI block makes measurements on a continuous basis.  The measurement may be required to start off at the start of a time slot or a half frame.  For example, a UMTS frame (2560 chipsx10 time slots) can be configured to provide an RSSI measurement every time slot boundary by configuring the RSSI measurement duration to 2048 samples and the wait time to 512 samples.
- */
+/***************************************************************************//**
+ * @brief Retrieves the RSSI wait time value from the specified instance of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved RSSI
+ * wait time will be stored.
+ * @return Returns the status of the read operations, where a value of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RssiWaitTime_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t *value)
@@ -13316,13 +21555,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RssiWaitTime_Get(void *device,
     return status;
 }
 
-/**
- * When "rssi_default_mode" is clear, the extended measurement mode is triggered and the measurement length is set by averaging durations with weighted multipliers.  The weight for duration 0 is programmed into this register and is determined using the following equation:
-
- * Weight 0=2552^avrg0/(RSSI duration)
-
- * The total of all weights (rssi_weighted_multiplier_0 through _3) must be 0xFF.
- */
+/***************************************************************************//**
+ * @brief Sets the RSSI weighted multiplier for a specified instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the RSSI weighted multiplier.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RssiWeightedMultiplier0_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -13334,13 +21579,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RssiWeightedMultiplier0_Set(void *de
     return status;
 }
 
-/**
- * When "rssi_default_mode" is clear, the extended measurement mode is triggered and the measurement length is set by averaging durations with weighted multipliers.  The weight for duration 0 is programmed into this register and is determined using the following equation:
-
- * Weight 0=2552^avrg0/(RSSI duration)
-
- * The total of all weights (rssi_weighted_multiplier_0 through _3) must be 0xFF.
- */
+/***************************************************************************//**
+ * @brief Retrieves the RSSI weighted multiplier value from a specified register
+ * for a given device instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RssiWeightedMultiplier0_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -13355,13 +21606,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RssiWeightedMultiplier0_Get(void *de
     return status;
 }
 
-/**
- * When "rssi_default_mode" is clear, the extended measurement mode is triggered and the measurement length is set by averaging durations with weighted multipliers.  The weight for duration 1 is programmed into this register and is determined using the following equation:
-
- * Weight 0=2552^avrg0/(RSSI duration)
-
- * The total of all weights (rssi_weighted_multiplier_0 through _3) must be 0xFF.
- */
+/***************************************************************************//**
+ * @brief Sets the RSSI weighted multiplier for a specified instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the RSSI weighted multiplier.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RssiWeightedMultiplier1_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -13373,13 +21630,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RssiWeightedMultiplier1_Set(void *de
     return status;
 }
 
-/**
- * When "rssi_default_mode" is clear, the extended measurement mode is triggered and the measurement length is set by averaging durations with weighted multipliers.  The weight for duration 1 is programmed into this register and is determined using the following equation:
-
- * Weight 0=2552^avrg0/(RSSI duration)
-
- * The total of all weights (rssi_weighted_multiplier_0 through _3) must be 0xFF.
- */
+/***************************************************************************//**
+ * @brief Retrieves the weighted multiplier value from a specific register for
+ * the given instance of the device.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved weighted
+ * multiplier value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RssiWeightedMultiplier1_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -13394,13 +21656,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RssiWeightedMultiplier1_Get(void *de
     return status;
 }
 
-/**
- * When "rssi_default_mode" is clear, the extended measurement mode is triggered and the measurement length is set by averaging durations with weighted multipliers.  The weight for duration 2 is programmed into this register and is determined using the following equation:
-
- * Weight 0=2552^avrg0/(RSSI duration)
-
- * The total of all weights (rssi_weighted_multiplier_0 through _3) must be 0xFF.
- */
+/***************************************************************************//**
+ * @brief Sets the RSSI weighted multiplier for a specified instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the RSSI weighted multiplier.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RssiWeightedMultiplier2_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -13412,13 +21680,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RssiWeightedMultiplier2_Set(void *de
     return status;
 }
 
-/**
- * When "rssi_default_mode" is clear, the extended measurement mode is triggered and the measurement length is set by averaging durations with weighted multipliers.  The weight for duration 2 is programmed into this register and is determined using the following equation:
-
- * Weight 0=2552^avrg0/(RSSI duration)
-
- * The total of all weights (rssi_weighted_multiplier_0 through _3) must be 0xFF.
- */
+/***************************************************************************//**
+ * @brief Retrieves the weighted multiplier value from a specific register for
+ * the given instance of the device.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved weighted
+ * multiplier value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RssiWeightedMultiplier2_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -13433,13 +21706,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RssiWeightedMultiplier2_Get(void *de
     return status;
 }
 
-/**
- * When "rssi_default_mode" is clear, the extended measurement mode is triggered and the measurement length is set by averaging durations with weighted multipliers.  The weight for duration 3 is programmed into this register and is determined using the following equation:
-
- * Weight 0=2552^avrg0/(RSSI duration)
-
- * The total of all weights (rssi_weighted_multiplier_0 through _3) must be 0xFF.
- */
+/***************************************************************************//**
+ * @brief Sets the RSSI weighted multiplier for a specified instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the RSSI weighted multiplier.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RssiWeightedMultiplier3_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -13451,13 +21730,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RssiWeightedMultiplier3_Set(void *de
     return status;
 }
 
-/**
- * When "rssi_default_mode" is clear, the extended measurement mode is triggered and the measurement length is set by averaging durations with weighted multipliers.  The weight for duration 3 is programmed into this register and is determined using the following equation:
-
- * Weight 0=2552^avrg0/(RSSI duration)
-
- * The total of all weights (rssi_weighted_multiplier_0 through _3) must be 0xFF.
- */
+/***************************************************************************//**
+ * @brief Retrieves the RSSI weighted multiplier value from a specific register
+ * for a given instance.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RssiWeightedMultiplier3_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -13472,9 +21757,17 @@ static inline int32_t adrv9001_NvsRegmapRxb_RssiWeightedMultiplier3_Get(void *de
     return status;
 }
 
-/**
- * First Band / Single band datapath - Enable
- */
+/***************************************************************************//**
+ * @brief Sets the RX Band A enable state in the ADRV9001 device's register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map to modify.
+ * @param value A uint8_t value indicating the enable state to set (0 or 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RxBandAEnable_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -13486,9 +21779,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RxBandAEnable_Set(void *device,
     return status;
 }
 
-/**
- * First Band / Single band datapath - Enable
- */
+/***************************************************************************//**
+ * @brief Retrieves the RX Band A enable status from a specific register for the
+ * given device instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RX Band A register.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RxBandAEnable_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -13503,9 +21806,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RxBandAEnable_Get(void *device,
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the reset mask for the RxDpGainComp9 register in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A 8-bit unsigned integer representing the value to be written to
+ * the reset mask.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RxDpGainComp9ResetbMask_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -13517,9 +21830,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RxDpGainComp9ResetbMask_Set(void *de
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a register and stores it
+ * in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RxDpGainComp9ResetbMask_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -13535,11 +21857,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RxDpGainComp9ResetbMask_Get(void *de
 }
 
 
-/**
- * This register contains the readback value of the Ch1 Rx front end gain.
-
- * If "read_gain_table" is set, the value is read back from the gain table corresponding to the "gt_addr". If "read_gain_table" is clear,the value is the current gain being used.
- */
+/***************************************************************************//**
+ * @brief Retrieves the front-end gain value from a specific register for a
+ * given instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map to access.
+ * @param value A pointer to a uint8_t variable where the retrieved gain value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RxFeGain_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -13555,9 +21885,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RxFeGain_Get(void *device,
 }
 
 
-/**
- * This is a read only field and returns the delay value of Rx1/Tx1 gain delay calibrations
- */
+/***************************************************************************//**
+ * @brief Retrieves the analog digital delay value from the RX gain calibration
+ * register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RX gain calibration.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved delay
+ * value will be stored.
+ * @return Returns the status of the read operations, with *value containing the
+ * combined 16-bit delay value from two registers.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RxGdcalAnaDigDelay_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint16_t *value)
@@ -13576,6 +21915,17 @@ static inline int32_t adrv9001_NvsRegmapRxb_RxGdcalAnaDigDelay_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RX NBWB selection in the ADRV9001 device's register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RX NBWB selection.
+ * @param value A uint8_t value representing the selection to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RxNbwbSel_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -13587,6 +21937,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RxNbwbSel_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific field from a register and stores it
+ * in the provided variable.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumeration value indicating the specific instance of the
+ * register to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RxNbwbSel_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -13601,9 +21963,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RxNbwbSel_Get(void *device,
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the RX NCO 13 clock reset value in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the RX NCO 13 clock reset.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RxNco13ClkReset_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -13615,9 +21986,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RxNco13ClkReset_Set(void *device,
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the NCO13 clock reset value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved clock reset
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RxNco13ClkReset_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -13632,9 +22012,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RxNco13ClkReset_Get(void *device,
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Sets the RX NCO 13 clock reset mask in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A 8-bit unsigned integer representing the value to be written to
+ * the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RxNco13ClkResetbMask_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -13646,9 +22035,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RxNco13ClkResetbMask_Set(void *devic
     return status;
 }
 
-/**
- * (B0 New)
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the `RxNco13ClkResetbMask` field from a
+ * specific register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RxNco13ClkResetbMask_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -13663,9 +22061,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RxNco13ClkResetbMask_Get(void *devic
     return status;
 }
 
-/**
- * (B0 New) force RX PFIR_X source selection 0: from datapath, 1: from SPI
- */
+/***************************************************************************//**
+ * @brief Sets the PFIR X selection force value in the ADRV9001 device's
+ * register.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RxPfirXSelForce_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -13677,9 +22085,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RxPfirXSelForce_Set(void *device,
     return status;
 }
 
-/**
- * (B0 New) force RX PFIR_X source selection 0: from datapath, 1: from SPI
- */
+/***************************************************************************//**
+ * @brief Retrieves the PFIR X selection force value from a specific register
+ * for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RxPfirXSelForce_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -13694,9 +22111,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RxPfirXSelForce_Get(void *device,
     return status;
 }
 
-/**
- * (B0 New) Select RX_PFIR_X_SEL (0:1x, 1:2x, 2:4x, 3:4x)
- */
+/***************************************************************************//**
+ * @brief Sets the PFIR X selection value in the RX register map for the
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RX register map.
+ * @param value An 8-bit unsigned integer representing the PFIR X selection
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RxPfirXSelValue_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -13708,9 +22135,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RxPfirXSelValue_Set(void *device,
     return status;
 }
 
-/**
- * (B0 New) Select RX_PFIR_X_SEL (0:1x, 1:2x, 2:4x, 3:4x)
- */
+/***************************************************************************//**
+ * @brief Retrieves the PFIR X selection value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved PFIR X
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RxPfirXSelValue_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -13725,6 +22161,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RxPfirXSelValue_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RX TIA profile in the ADRV9001 device's NVS register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RX TIA profile.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the RX TIA profile.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RxTiaProfile_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -13736,6 +22184,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RxTiaProfile_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RX TIA profile value from a specific register for the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific RX TIA profile
+ * instance to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RxTiaProfile_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -13750,6 +22211,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RxTiaProfile_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RX TIA profile value in the ADRV9001 device's NVS register
+ * map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RX TIA profile.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the RX TIA profile.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RxTiaProfileVal_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -13761,6 +22235,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RxTiaProfileVal_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RX TIA profile value from a specific register for the
+ * given device instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RX TIA profile.
+ * @param value A pointer to a uint8_t variable where the retrieved profile
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RxTiaProfileVal_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -13775,9 +22261,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RxTiaProfileVal_Get(void *device,
     return status;
 }
 
-/**
- * 0 : 3 cycle delay for valid signal, 1: 2 cycle delay for valid signal
- */
+/***************************************************************************//**
+ * @brief Sets the RXFE valid delay for a specified instance in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value An 8-bit unsigned integer representing the delay value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RxfeValidDelay_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -13789,9 +22285,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RxfeValidDelay_Set(void *device,
     return status;
 }
 
-/**
- * 0 : 3 cycle delay for valid signal, 1: 2 cycle delay for valid signal
- */
+/***************************************************************************//**
+ * @brief Retrieves the RXFE valid delay value from a specific register for a
+ * given instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value A pointer to a uint8_t variable where the retrieved RXFE valid
+ * delay value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RxfeValidDelay_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -13806,9 +22312,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RxfeValidDelay_Get(void *device,
     return status;
 }
 
-/**
- * This setting overrides the delayed update feature for setting Rx1 FE gain. Setting this field allows new values of Rx1 FE gains to be effective as soon as they are output from the gain table. This setting may cause spurious overloads on the ADC until gains to all block before the ADC (Rx1 FE, Rx1 TIA) have settled.
- */
+/***************************************************************************//**
+ * @brief Sets the RXFE valid override value in the ADRV9001 NVS register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that specifies the RXFE valid override to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RxfeValidOverride_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -13820,9 +22335,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RxfeValidOverride_Set(void *device,
     return status;
 }
 
-/**
- * This setting overrides the delayed update feature for setting Rx1 FE gain. Setting this field allows new values of Rx1 FE gains to be effective as soon as they are output from the gain table. This setting may cause spurious overloads on the ADC until gains to all block before the ADC (Rx1 FE, Rx1 TIA) have settled.
- */
+/***************************************************************************//**
+ * @brief Retrieves the RXFE valid override value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RxfeValidOverride_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -13837,6 +22361,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RxfeValidOverride_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the gain compensation input selection for a specified instance in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the gain compensation input selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RxfuncGainCompInSel_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -13848,6 +22385,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RxfuncGainCompInSel_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the RX function gain compensation input selection value from
+ * a specified register.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * RX function.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RxfuncGainCompInSel_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -13862,6 +22411,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RxfuncGainCompInSel_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the slicer input selection for a specified instance in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to set for the
+ * slicer input selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RxfuncSlicerInSel_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -13873,6 +22435,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_RxfuncSlicerInSel_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the slicer input selection value from a specific register
+ * for a given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_RxfuncSlicerInSel_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -13887,6 +22461,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_RxfuncSlicerInSel_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the slicer position offset in the NVS register map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the slicer position
+ * offset to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SlicerPositionOffset_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -13898,6 +22485,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_SlicerPositionOffset_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the slicer position offset from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved slicer
+ * position offset will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SlicerPositionOffset_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -13912,9 +22511,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_SlicerPositionOffset_Get(void *devic
     return status;
 }
 
-/**
- * General purpose SW spare bits
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific register in the ADRV9001 device's NVS
+ * register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the specified register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare0_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -13926,9 +22535,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare0_Set(void *device,
     return status;
 }
 
-/**
- * General purpose SW spare bits
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register from the device and stores
+ * it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare0_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -13943,9 +22562,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare0_Get(void *device,
     return status;
 }
 
-/**
- * General purpose SW spare bits
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific register in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare1_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -13957,9 +22585,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare1_Set(void *device,
     return status;
 }
 
-/**
- * General purpose SW spare bits
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the Software Spare 1 register from the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare1_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -13974,9 +22612,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare1_Get(void *device,
     return status;
 }
 
-/**
- * General purpose SW spare bits
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific register in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare10_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -13988,9 +22635,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare10_Set(void *device,
     return status;
 }
 
-/**
- * General purpose SW spare bits
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register from the device and stores
+ * it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare10_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -14005,9 +22662,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare10_Get(void *device,
     return status;
 }
 
-/**
- * General purpose SW spare bits
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific register in the ADRV9001 device's NVS
+ * register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the specified register.
+ * @return Returns an integer status code indicating the result of the register
+ * write operation, where a value of 0 typically indicates success.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare11_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -14019,9 +22686,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare11_Set(void *device,
     return status;
 }
 
-/**
- * General purpose SW spare bits
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare11_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -14036,9 +22713,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare11_Get(void *device,
     return status;
 }
 
-/**
- * General purpose SW spare bits
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific register in the ADRV9001 device's NVS
+ * register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the specified register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare12_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -14050,9 +22737,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare12_Set(void *device,
     return status;
 }
 
-/**
- * General purpose SW spare bits
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register from the device and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare12_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -14067,9 +22764,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare12_Get(void *device,
     return status;
 }
 
-/**
- * General purpose SW spare bits
- */
+/***************************************************************************//**
+ * @brief Sets the value of the Software Spare 13 register for a specified
+ * instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare13_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -14081,9 +22788,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare13_Set(void *device,
     return status;
 }
 
-/**
- * General purpose SW spare bits
- */
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumeration value that specifies which instance of the
+ * register map to access.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare13_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -14098,9 +22815,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare13_Get(void *device,
     return status;
 }
 
-/**
- * General purpose SW spare bits
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific register in the ADRV9001 device's NVS
+ * register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the specified register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare14_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -14112,9 +22839,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare14_Set(void *device,
     return status;
 }
 
-/**
- * General purpose SW spare bits
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register from the device and stores
+ * it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare14_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -14129,9 +22866,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare14_Get(void *device,
     return status;
 }
 
-/**
- * General purpose SW spare bits
- */
+/***************************************************************************//**
+ * @brief Sets the value of the Software Spare 15 register for a specified
+ * instance in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare15_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -14143,9 +22890,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare15_Set(void *device,
     return status;
 }
 
-/**
- * General purpose SW spare bits
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register from the device and stores
+ * it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare15_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -14160,9 +22917,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare15_Get(void *device,
     return status;
 }
 
-/**
- * General purpose SW spare bits
- */
+/***************************************************************************//**
+ * @brief Sets the value of the Software Spare 16 register for a specified
+ * instance in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare16_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -14174,9 +22941,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare16_Set(void *device,
     return status;
 }
 
-/**
- * General purpose SW spare bits
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the Software Spare 16 register from the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare16_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -14191,9 +22968,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare16_Get(void *device,
     return status;
 }
 
-/**
- * General purpose SW spare bits
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific register in the ADRV9001 device's NVS
+ * register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the specified register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare17_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -14205,9 +22992,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare17_Set(void *device,
     return status;
 }
 
-/**
- * General purpose SW spare bits
- */
+/***************************************************************************//**
+ * @brief Retrieves the value from a specific register and stores it in the
+ * provided pointer.
+ *
+ * @param device A pointer to the device structure used for register access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare17_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -14222,6 +23018,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare17_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the Software Spare 18 register for a specified
+ * instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare18_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -14233,6 +23042,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare18_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register from the device and stores
+ * it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare18_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -14247,6 +23069,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare18_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the Software Spare 19 register for a specified
+ * instance of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare19_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -14258,6 +23093,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare19_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves a specific register value from the device and stores it in
+ * the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare19_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -14272,9 +23120,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare19_Get(void *device,
     return status;
 }
 
-/**
- * General purpose SW spare bits
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific register in the ADRV9001 device's NVS
+ * register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the specified register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare2_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -14286,9 +23144,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare2_Set(void *device,
     return status;
 }
 
-/**
- * General purpose SW spare bits
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register from the device and stores
+ * it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare2_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -14303,9 +23171,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare2_Get(void *device,
     return status;
 }
 
-/**
- * General purpose SW spare bits
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific register in the ADRV9001 device's NVS
+ * register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the specified register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare3_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -14317,9 +23195,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare3_Set(void *device,
     return status;
 }
 
-/**
- * General purpose SW spare bits
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register from the ADRV9001 device
+ * and stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare3_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -14334,9 +23222,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare3_Get(void *device,
     return status;
 }
 
-/**
- * General purpose SW spare bits
- */
+/***************************************************************************//**
+ * @brief Sets the value of a specific register in the ADRV9001 device's NVS
+ * register map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the specified register.
+ * @return Returns an integer status code indicating the result of the register
+ * write operation, where a value of 0 typically indicates success.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare4_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -14348,9 +23246,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare4_Set(void *device,
     return status;
 }
 
-/**
- * General purpose SW spare bits
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register from the ADRV9001 device
+ * and stores it in the provided pointer.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare4_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -14365,9 +23273,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare4_Get(void *device,
     return status;
 }
 
-/**
- * General purpose SW spare bits
- */
+/***************************************************************************//**
+ * @brief Sets the value of the Software Spare 5 register for a specified
+ * instance in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare5_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -14379,9 +23297,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare5_Set(void *device,
     return status;
 }
 
-/**
- * General purpose SW spare bits
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register from the device and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare5_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -14396,9 +23324,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare5_Get(void *device,
     return status;
 }
 
-/**
- * General purpose SW spare bits
- */
+/***************************************************************************//**
+ * @brief Sets the value of the Software Spare 6 register for a specified
+ * instance in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare6_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -14410,9 +23348,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare6_Set(void *device,
     return status;
 }
 
-/**
- * General purpose SW spare bits
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register from the device and stores
+ * it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare6_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -14427,9 +23375,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare6_Get(void *device,
     return status;
 }
 
-/**
- * General purpose SW spare bits
- */
+/***************************************************************************//**
+ * @brief Sets the value of the Software Spare 7 register for a specified
+ * instance in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare7_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -14441,9 +23399,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare7_Set(void *device,
     return status;
 }
 
-/**
- * General purpose SW spare bits
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register from the device and stores
+ * it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the register read operation, indicating success
+ * or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare7_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -14458,6 +23426,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare7_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the Software Spare 8 register for a specified
+ * instance in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare8_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -14469,6 +23450,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare8_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register from the device and stores
+ * it in the provided pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare8_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -14483,6 +23477,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare8_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the Software Spare 9 register for a specified
+ * instance in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare9_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -14494,6 +23501,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare9_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register from the device and stores
+ * it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for communication with
+ * the hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * register to read.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare9_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -14508,6 +23528,17 @@ static inline int32_t adrv9001_NvsRegmapRxb_SoftwareSpare9_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the freeze mask for the RFDC LNAP in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that specifies the freeze mask to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SpiRfdcLnapFreezeMask_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -14519,6 +23550,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_SpiRfdcLnapFreezeMask_Set(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the freeze mask value from a specific register for the RFDC
+ * LNAP in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating the specific instance of the
+ * NVS register map.
+ * @param value A pointer to a uint8_t variable where the retrieved freeze mask
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_SpiRfdcLnapFreezeMask_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -14534,11 +23578,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_SpiRfdcLnapFreezeMask_Get(void *devi
 }
 
 
-/**
- * TIA control readback for Ch1. Bit[0] is TIA gain and bit [1] is ADC gain.
-
- * If "read_gain_table" is set, the value is read back from the gain table corresponding to the "gt_addr". If "read_gain_table" is clear,the value is the current gain being used.
- */
+/***************************************************************************//**
+ * @brief Retrieves the TIA control value from the RXB register map for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific RXB instance to
+ * read from.
+ * @param value A pointer to a uint8_t variable where the retrieved TIA control
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_TiaControl_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -14553,9 +23604,17 @@ static inline int32_t adrv9001_NvsRegmapRxb_TiaControl_Get(void *device,
     return status;
 }
 
-/**
- * This setting overrides the delayed update feature for setting Rx1 TIA gain. Setting this field allows new values of Rx1 TIA gains to be effective as soon as they are output from the gain table. This setting may cause spurious overloads on the ADC until gains to all block before the ADC (Rx1 FE, Rx1 TIA) have settled.
- */
+/***************************************************************************//**
+ * @brief Sets the TIA valid override value in the ADRV9001 NVS register map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * NVS register map.
+ * @param value A uint8_t value that specifies the TIA valid override to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_TiaValidOverride_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -14567,9 +23626,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_TiaValidOverride_Set(void *device,
     return status;
 }
 
-/**
- * This setting overrides the delayed update feature for setting Rx1 TIA gain. Setting this field allows new values of Rx1 TIA gains to be effective as soon as they are output from the gain table. This setting may cause spurious overloads on the ADC until gains to all block before the ADC (Rx1 FE, Rx1 TIA) have settled.
- */
+/***************************************************************************//**
+ * @brief Retrieves the TIA valid override value from a specific register for a
+ * given instance.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_TiaValidOverride_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
@@ -14584,6 +23652,19 @@ static inline int32_t adrv9001_NvsRegmapRxb_TiaValidOverride_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the gain index for a specified instance of the RXB register map
+ * using a value from another channel.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * RXB register map.
+ * @param value An 8-bit unsigned integer representing the gain index value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_UseGainIndexFromAnotherChannel_Set(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t value)
@@ -14595,6 +23676,18 @@ static inline int32_t adrv9001_NvsRegmapRxb_UseGainIndexFromAnotherChannel_Set(v
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the gain index from a specified channel's register and
+ * stores it in the provided value pointer.
+ *
+ * @param device A pointer to the device structure used for hardware access.
+ * @param instance An enumerated value representing the specific instance of the
+ * register map.
+ * @param value A pointer to a uint8_t variable where the retrieved gain index
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the register read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_NvsRegmapRxb_UseGainIndexFromAnotherChannel_Get(void *device,
     adrv9001_BfNvsRegmapRxb_e instance,
     uint8_t *value)
