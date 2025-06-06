@@ -36,7 +36,18 @@
 
 #include "iio_types.h"
 
-/** IIO Descriptor */
+/***************************************************************************//**
+ * @brief The `ada4250_iio_descriptor` is a constant global variable of type
+ * `struct iio_device`. It is used to describe the IIO (Industrial
+ * Input/Output) device interface for the ADA4250, which is likely an
+ * analog front-end or similar device from Analog Devices. This
+ * descriptor is part of the IIO framework, which is used for interfacing
+ * with various sensors and data acquisition devices in a standardized
+ * way.
+ *
+ * @details This variable is used to provide a structured description of the
+ * ADA4250 device for integration with the IIO subsystem.
+ ******************************************************************************/
 extern const struct iio_device ada4250_iio_descriptor;
 
 #endif //IIO_ADA4250_H

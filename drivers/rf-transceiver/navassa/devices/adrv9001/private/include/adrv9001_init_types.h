@@ -37,18 +37,55 @@ extern "C" {
 #define ADRV9001_TCIDAC_MAX        (4095)
 
 /* Enumation for Coarse and Fine calibrations */
+/***************************************************************************//**
+ * @brief The `adrv9001_PllVcoCalType_e` is an enumeration that defines the
+ * types of VCO (Voltage Controlled Oscillator) calibration available in
+ * the ADRV9001 system. It includes two types of calibration: coarse and
+ * fine calibration (`PLL_COARSE_FINE_CAL`) and coarse calibration only
+ * (`PLL_COARSE_CAL`). This enumeration is used to specify the
+ * calibration method for the PLL (Phase-Locked Loop) in the ADRV9001
+ * device, which is crucial for ensuring accurate frequency synthesis and
+ * stability in RF applications.
+ *
+ * @param PLL_COARSE_FINE_CAL Represents a VCO Coarse/Fine Calibration.
+ * @param PLL_COARSE_CAL Represents a VCO Coarse Calibration.
+ ******************************************************************************/
 typedef enum adrv9001_PllVcoCalType
 {
     PLL_COARSE_FINE_CAL, /*!< VCO Coarse/Fine Cal  */
     PLL_COARSE_CAL       /*!< VCO Coarse Cal    */    
 } adrv9001_PllVcoCalType_e;
 
+/***************************************************************************//**
+ * @brief The `adrv9001_LfPllMode_e` is an enumeration that defines the
+ * operational modes for the loop filter PLL settings in the ADRV9001
+ * device. It provides two modes: `PLL_NORM_MODE` for slow mode operation
+ * and `PLL_FAST_MODE` for fast mode operation, allowing for flexibility
+ * in configuring the loop filter's performance characteristics.
+ *
+ * @param PLL_NORM_MODE Loopfilter PLL setting in slow mode.
+ * @param PLL_FAST_MODE Loopfilter PLL setting in fast mode.
+ ******************************************************************************/
 typedef enum adrv9001_LfPllMode 
 {
     PLL_NORM_MODE = 0x00, /*!< Loopfilter PLL setting In slow mode */
     PLL_FAST_MODE = 0x01  /*!< Loopfilter PLL setting In Fast mode  */
 } adrv9001_LfPllMode_e;
 
+/***************************************************************************//**
+ * @brief The `adrv9001_PhaseTrackMode_e` is an enumeration that defines the
+ * modes of phase tracking for the ADRV9001 device. It provides three
+ * options: disabling phase tracking, performing a single phase
+ * initialization, or performing a single phase initialization followed
+ * by continuous tracking updates. This allows for flexible configuration
+ * of phase tracking behavior based on the specific requirements of the
+ * application.
+ *
+ * @param PHSYNC_OFF Phase tracking is disabled.
+ * @param PHSYNC_INIT_ONLY Only one phase initialization is performed.
+ * @param PHSYNC_CONTINUOUS_TRACK One phase initialization is performed followed
+ * by continuous tracking updates.
+ ******************************************************************************/
 typedef enum adrv9001_PhaseTrackMode
 {
     PHSYNC_OFF              = 0x00,     /*!< Phase tracking disabled */
@@ -56,6 +93,22 @@ typedef enum adrv9001_PhaseTrackMode
     PHSYNC_CONTINUOUS_TRACK = 0x02      /*!< Do only 1 phase init and continuous track update */
 } adrv9001_PhaseTrackMode_e;
     
+/***************************************************************************//**
+ * @brief The `adrv9001_TempCoef_t` structure is used to define temperature
+ * coefficient parameters for the ADRV9001 device. It includes fields for
+ * two frequency values in MHz, a bias reference, a bias temperature
+ * coefficient, and a VCO varactor temperature coefficient. These
+ * parameters are crucial for configuring and calibrating the
+ * temperature-dependent behavior of the device's voltage-controlled
+ * oscillator (VCO).
+ *
+ * @param f1_MHz Represents the first frequency in MHz.
+ * @param f2_MHz Represents the second frequency in MHz.
+ * @param biasRef Represents the VCO bias reference DAC.
+ * @param biasTcf Represents the VCO bias DAC temperature coefficient.
+ * @param vcoVarTc Represents the number of varactors connected to the output of
+ * the VCO temperature compensation IDAC.
+ ******************************************************************************/
 typedef struct adrv9001_TempCoef 
 {
     uint16_t    f1_MHz;
@@ -65,6 +118,24 @@ typedef struct adrv9001_TempCoef
     uint8_t     vcoVarTc;
 } adrv9001_TempCoef_t;
 
+/***************************************************************************//**
+ * @brief The `adrv9001_loopFilterResult_t` structure is used to store the
+ * results of a loop filter configuration in the ADRV9001 device. It
+ * contains values for capacitors (C1, C2, C3) and resistors (R1, R3)
+ * that define the loop filter's characteristics, as well as the ICP
+ * value for the charge pump. Additionally, it includes the effective
+ * loop bandwidth, which is calculated based on the resistor and
+ * capacitor values, providing a comprehensive representation of the loop
+ * filter's configuration.
+ *
+ * @param C1 Loopfilter C1 value.
+ * @param C2 Loopfilter C2 value.
+ * @param C3 Loopfilter C3 value.
+ * @param R1 Loopfilter R1 value.
+ * @param R3 Loopfilter R3 value.
+ * @param ICP Loopfilter ICP (I (current) Charge Pump) value.
+ * @param effectiveLoopBW Loopfilter Effective Bandwidth from calculated R/Cs.
+ ******************************************************************************/
 typedef struct adrv9001_loopFilterResult 
 {
     uint8_t      C1;  /*!< Loopfilter C1 value */
@@ -77,6 +148,66 @@ typedef struct adrv9001_loopFilterResult
 } adrv9001_loopFilterResult_t;
 
 /* This structure contains the state of the PLL settings */
+/***************************************************************************//**
+ * @brief The `adrv9001_PllSynthParam_t` structure is a comprehensive data
+ * structure used to define the parameters and settings for the PLL
+ * synthesizer in the ADRV9001 device. It includes fields for
+ * frequencies, dividers, calibration settings, and various control flags
+ * that manage the operation and calibration of the PLL and VCO. This
+ * structure is crucial for configuring the PLL to achieve desired
+ * frequency synthesis and stability, and it supports both normal and
+ * debug modes for detailed calibration and testing.
+ *
+ * @param pllFreq_Hz PLL frequency ranging from 30MHz to 6GHz.
+ * @param vcoFreq_Hz VCO frequency in Hz.
+ * @param isPllInUse Indicates if the PLL is in use.
+ * @param isPathEnabled Indicates if the path is enabled.
+ * @param refClkDiv Reference clock divider with possible values 1, 2, or 4.
+ * @param k1ClkDiv Device clock divider, which is 2 raised to the power of n
+ * (n=0~6).
+ * @param refClockFreq_Hz Reference clock frequency, which should be less than
+ * or equal to 307.2MHz.
+ * @param loDiv LO frequency divider ranging from 2 to 1022 in steps of 2.
+ * @param vcoVaractor VCO varactor setting.
+ * @param maxCnt Maximum counter for frequency calibration.
+ * @param vcoInitDelay Initial delay for VCO calibration.
+ * @param vcoClkDiv Clock divider for VCO calibration ALC.
+ * @param alcWait Wait period for VCO ALC (Auto Level Control).
+ * @param alcInitWait Initial wait period for VCO ALC.
+ * @param fractionalByte0 First byte of the PLL fractional part.
+ * @param fractionalByte1 Second byte of the PLL fractional part.
+ * @param fractionalByte2 Third byte of the PLL fractional part.
+ * @param integerByte0 First byte of the PLL integer part.
+ * @param integerByte1 Second byte of the PLL integer part.
+ * @param biasRef VCO bias reference DAC setting.
+ * @param biasTcf Temperature coefficient for VCO bias DAC.
+ * @param vcoVarTc Number of varactors connected to the VCO temp comp IDAC
+ * output.
+ * @param quickFreqCalEn Enables quick frequency calibration for VCO/ALC.
+ * @param quickFreqCalThreshold Threshold for quick frequency calibration of
+ * VCO/ALC.
+ * @param vcoCalMaxCntBandEn Enables max count band for VCO/ALC calibration.
+ * @param endVcoCalMaxCntEn Enables end max count for VCO/ALC calibration.
+ * @param vcoFineCalEn Enables fine calibration for VCO/ALC.
+ * @param temperature Temperature of the PLL.
+ * @param bandIndex Index of the PLL band ranging from 0 to 52.
+ * @param feCapIndx Index for front-end capacitance.
+ * @param locmIndx Index for local oscillator common mode.
+ * @param lohilow Indicates high or low state of the local oscillator.
+ * @param toneChannel Tone channel with possible values 0, 1, or 0xFF.
+ * @param isLfUserOverride Indicates if the loop filter is user overridden.
+ * @param loopBW Loop bandwidth setting.
+ * @param phaseMargin Phase margin setting.
+ * @param voutLvl Output level setting.
+ * @param mode Mode of the loop filter PLL.
+ * @param phaseSyncMode Phase synchronization mode.
+ * @param loopFilter Loop filter result structure containing various parameters.
+ * @param dbg_f_alc Debug field for ALC frequency.
+ * @param dbg_f_fineband Debug field for fine band frequency.
+ * @param dbg_f_coarseband Debug field for coarse band frequency.
+ * @param dbg_tcidac Debug field for TC IDAC.
+ * @param dbg_f_calbits Debug field for calibration bits.
+ ******************************************************************************/
 typedef struct adrv9001_PllSynthParam
 {
     uint64_t      pllFreq_Hz;      /*!< PLL frequency (30MHz~6GHz) */
@@ -130,6 +261,17 @@ typedef struct adrv9001_PllSynthParam
 } adrv9001_PllSynthParam_t;
 
 /* This data structure holds the rc tune clock scaling parameters. */
+/***************************************************************************//**
+ * @brief The `adrv9001_AdcTunerCalClk_t` structure is used to define the
+ * parameters for the ADC tuner calibration clock in the ADRV9001 system.
+ * It contains two members: `divRatio`, which specifies the divide ratio,
+ * and `nScale`, which indicates the normalization scale. These
+ * parameters are crucial for configuring the clock scaling during the
+ * ADC tuning process, ensuring accurate and efficient calibration.
+ *
+ * @param divRatio Divide ratio for the ADC tuner calibration clock.
+ * @param nScale Normalization scale for the ADC tuner calibration clock.
+ ******************************************************************************/
 typedef struct adrv9001_AdcTunerCalClk
 {
     uint8_t  divRatio; /*!< Divide ratio */
@@ -137,6 +279,16 @@ typedef struct adrv9001_AdcTunerCalClk
 } adrv9001_AdcTunerCalClk_t;
     
 /* This is a data structure used to hold the capacitance and conductance scaling factors. */
+/***************************************************************************//**
+ * @brief The `adrv9001_AdcTunerResult_t` structure is used to store the results
+ * of an ADC tuning process, specifically the scaling factors for
+ * capacitance and conductance. These factors are represented as unsigned
+ * 16-bit integers and are crucial for adjusting the ADC's performance
+ * characteristics in the ADRV9001 system.
+ *
+ * @param sc Capacitance scaling factor.
+ * @param sg Conductance scaling factor.
+ ******************************************************************************/
 typedef struct adrv9001_AdcTunerResult
 {
     uint16_t  sc; /*!< capacitance scaling factor */

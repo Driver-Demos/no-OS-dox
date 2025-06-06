@@ -23,96 +23,120 @@ extern "C" {
 #include "talise_types.h"
 #include "talise_error_types.h"
 
-/**
- * \brief Helper function for return of current Error code
+/***************************************************************************//**
+ * @brief Use this function to obtain the current error source and error code
+ * from a specified Talise device instance. It is essential for debugging
+ * and error handling, providing insight into the root cause of issues.
+ * Ensure that the device and both output pointers are valid and non-null
+ * before calling this function. The function will return an error if any
+ * of these pointers are invalid.
  *
- * Returns an error code containing root source of the error and an error code
- * from that source. The sources are defined by the enumeration taliseErrSources_t
- * Each source has its own enumerated list of error codes.
- * HAL layer error codes are defined by  adiHalErr_t in adi_hal.h
- * and API errors are defined by  taliseErr_t.
- *
- * \param device Pointer to device data structure identifying desired instance of Talise device
- * \param errSrc Return Source of error at the pointer address
- * \param errCode Returns Enumerated error code value at the pointer address
- *
- * \retval TALACT_NO_ACTION function completed successfully, no action required
- * \retval TALACT_ERR_CHECK_PARAM if device reference unknown or invalid parameter
-*/
+ * @param device Pointer to a taliseDevice_t structure representing the Talise
+ * device instance. Must not be null.
+ * @param errSrc Pointer to a uint32_t where the function will store the error
+ * source. Must not be null.
+ * @param errCode Pointer to a uint32_t where the function will store the error
+ * code. Must not be null.
+ * @return Returns TALACT_NO_ACTION if successful, or TALACT_ERR_CHECK_PARAM if
+ * any input parameter is invalid.
+ ******************************************************************************/
 uint32_t TALISE_getErrCode(taliseDevice_t *device, uint32_t *errSrc,
 			   uint32_t *errCode);
 
-/**
- * \brief Helper function to return a character string based on error code.
+/***************************************************************************//**
+ * @brief Use this function to obtain a human-readable error message
+ * corresponding to a specific error source and error code. This is
+ * particularly useful for debugging and understanding the nature of
+ * errors encountered during the operation of the Talise device. The
+ * function is only effective when the TALISE_VERBOSE macro is enabled in
+ * the configuration. It is important to ensure that the error source and
+ * code provided are valid and correspond to the enumerated lists defined
+ * for the Talise API.
  *
- * A helper function to return a string message for each error code.
- * The error source and error code is available from the read only devStateInfo
- * member of the Talise device reference.
- *
- * This debug feature is enabled when the MACRO TALISE_VERBOSE is set to 1 in
- * talise_user.h configuration file.
- *
- * \param errSrc  A value representing the source of error.
- *
- * \param errCode Error code. There is an enumerated list of
- *        error codes per source.
- *
- * \return Returns character string based on errSrc and errCode values
- */
+ * @param errSrc A value representing the source of the error. It must
+ * correspond to a valid error source as defined in the Talise
+ * API.
+ * @param errCode An error code associated with the specified error source. It
+ * must be a valid code from the enumerated list of error codes
+ * for the given source.
+ * @return Returns a constant character string that describes the error based on
+ * the provided error source and code.
+ ******************************************************************************/
 const char* TALISE_getErrorMessage(uint32_t errSrc, uint32_t errCode);
 
-/**
- * \brief Helper function to return a character string based on error code.
+/***************************************************************************//**
+ * @brief Use this function to obtain a human-readable error message
+ * corresponding to a specific error source and code, which can aid in
+ * debugging and error handling. This function is particularly useful
+ * when the TALISE_VERBOSE macro is enabled, as it provides detailed
+ * error messages. It should be called whenever an error code is
+ * retrieved from a Talise device to understand the nature of the error.
+ * The function requires a valid device pointer and will return an empty
+ * string if verbose mode is not enabled.
  *
- * A helper function to return a string message for each error code.
- * The error source and error code is available from the read only devStateInfo
- * member of the Talise device reference.
- *
- * This debug feature is enabled when the MACRO TALISE_VERBOSE is set to 1 in
- * talise_user.h configuration file.
- *
- * \param device Pointer to device data structure identifying desired instance of Talise device
- *
- * \param errSrc  A value representing the source of error.
- *
- * \param errCode Error code. There is an enumerated list of
- *        error codes per source.
- *
- * \return Returns character string based on errSrc and errCode values
- */
+ * @param device Pointer to a taliseDevice_t structure that identifies the
+ * specific instance of the Talise device. Must not be null.
+ * @param errSrc An unsigned 32-bit integer representing the source of the
+ * error. Must correspond to a valid error source as defined in
+ * the Talise API.
+ * @param errCode An unsigned 32-bit integer representing the specific error
+ * code. Must correspond to a valid error code for the given
+ * error source.
+ * @return Returns a constant character pointer to a string describing the
+ * error. If TALISE_VERBOSE is not enabled, returns an empty string.
+ ******************************************************************************/
 const char* TALISE_getRegisteredErrorMessage(taliseDevice_t *device,
 		uint32_t errSrc, uint32_t errCode);
 
-/**
- * \brief Private helper function to register error message callback functions.
+/***************************************************************************//**
+ * @brief This function allows the registration of a callback function that
+ * processes error messages for a specific error source on a Talise
+ * device. It should be used when custom error handling is required for
+ * specific error sources. The function is only effective when the
+ * TALISE_VERBOSE macro is enabled. If the registration is successful,
+ * the callback function will be invoked for the specified error source.
+ * The function returns an error code indicating success or failure of
+ * the registration process.
  *
- * \param device Pointer to device data structure identifying desired instance of Talise device
- *
- * \param errSrc            A value representing the source of error.
- *
- * \param callbackFunction  pointer to callback function which processes Error Messages.
- *                          const char* (*callbackFunction)(uint32_t errSrc, uint32_t errCode).
- *                          The callback function params are (unit32_t errSrc, uint32_t errCode).
- *                          The callback function return a (const char *).
- *
- * \retval uint32_t         0 - Success ; 1 - Failure
- */
+ * @param device Pointer to a taliseDevice_t structure that identifies the
+ * specific instance of the Talise device. Must not be null.
+ * @param errSrc An unsigned 32-bit integer representing the source of the error
+ * for which the callback function is being registered.
+ * @param callbackFunction Pointer to a function that takes two uint32_t
+ * parameters (errSrc and errCode) and returns a const
+ * char*. This function will be called to process error
+ * messages. Must not be null.
+ * @return Returns 0 on successful registration, or 1 if the registration fails
+ * due to lack of available space in the error function table.
+ ******************************************************************************/
 uint32_t talRegisterErrorMessage(taliseDevice_t *device, uint32_t errSrc,
 				 const char* (*callbackFunction)(uint32_t, uint32_t));
 
-/**
- * \brief Private Helper function to process detected errors  and determine if
- *        a new recovery action should be recommended.
+/***************************************************************************//**
+ * @brief This function is used to handle errors detected in the Talise API and
+ * determine the appropriate recovery action based on the type of error
+ * handler specified. It should be called whenever an error is detected
+ * to ensure that the device's state is updated correctly and any
+ * necessary recovery actions are taken. The function logs errors and
+ * updates the device's error state information. It is important to
+ * provide valid error handler types and ensure that the device pointer
+ * is correctly initialized before calling this function.
  *
- *
- * \param device Pointer to device data structure identifying desired device instance
- * \param errHdl Error Handler type
- * \param detErr Error detected to be processed by handler
- * \param retVal current Recovery Action,
- * \param recAction new Recovery Action to be returned should error handler determine an error
- *
- * \retval uint32_t Value representing the latest recovery Action following processing of detected error.
-*/
+ * @param device Pointer to a taliseDevice_t structure identifying the desired
+ * instance of the Talise device. Must not be null and should be
+ * properly initialized before use.
+ * @param errHdl Specifies the type of error handler to use. Must be a valid
+ * value from the taliseErrHdls_t enumeration.
+ * @param detErr The detected error code to be processed by the handler. Should
+ * be a valid error code as defined by the relevant error source.
+ * @param retVal The current recovery action to be returned if no new error is
+ * detected. Must be a valid talRecoveryActions_t value.
+ * @param recAction The new recovery action to be returned if the error handler
+ * determines an error. Must be a valid talRecoveryActions_t
+ * value.
+ * @return Returns a talRecoveryActions_t value representing the latest recovery
+ * action following the processing of the detected error.
+ ******************************************************************************/
 talRecoveryActions_t talApiErrHandler(taliseDevice_t *device,
 				      taliseErrHdls_t errHdl, uint32_t detErr, talRecoveryActions_t retVal,
 				      talRecoveryActions_t recAction);

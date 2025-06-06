@@ -21,18 +21,43 @@
 #define ADI_ADRV9001_MAG_COMP_PFIR_COEFS_MAX_SIZE		21
 #define ADI_ADRV9001_WB_NB_PFIR_COEFS_MAX_SIZE			128
 
-/**
- *  \brief Enumerations to determine symmetricity of PFIR coefficients
- */
+/***************************************************************************//**
+ * @brief The `adi_adrv9001_PfirSymmetric_e` is an enumeration that defines the
+ * symmetricity of PFIR (Programmable Finite Impulse Response)
+ * coefficients. It provides two possible values:
+ * `ADI_ADRV9001_PFIR_COEF_NON_SYMMETRIC` indicating that the
+ * coefficients are non-symmetric, and `ADI_ADRV9001_PFIR_COEF_SYMMETRIC`
+ * indicating that the coefficients are symmetric. This enumeration is
+ * used to specify the expected symmetry property of the PFIR
+ * coefficients in the ADRV9001 device.
+ *
+ * @param ADI_ADRV9001_PFIR_COEF_NON_SYMMETRIC Coefficients are expected to be
+ * non-symmetric.
+ * @param ADI_ADRV9001_PFIR_COEF_SYMMETRIC Coefficients are expected to be
+ * symmetric.
+ ******************************************************************************/
 typedef enum adi_adrv9001_PfirSymmetric
 {
     ADI_ADRV9001_PFIR_COEF_NON_SYMMETRIC = 0u, /*!< Coefficients are expected to be non-symmetric */
     ADI_ADRV9001_PFIR_COEF_SYMMETRIC = 1u,     /*!< Coefficients are expected to be symmetric */
 } adi_adrv9001_PfirSymmetric_e;
 
-/**
- *  \brief Enumerations to determine number of PFIR filter taps
- */
+/***************************************************************************//**
+ * @brief The `adi_adrv9001_PfirNumTaps_e` is an enumeration that defines the
+ * number of taps available for a Programmable Finite Impulse Response
+ * (PFIR) filter in the ADRV9001 device. Each enumerator corresponds to a
+ * specific number of taps, ranging from 32 to 128, which are used to
+ * configure the PFIR filter's complexity and performance
+ * characteristics. The `ADI_ADRV9001_PFIR_TAPS_MAX_ID` serves as a
+ * boundary marker for the maximum tap ID value.
+ *
+ * @param ADI_ADRV9001_PFIR_32_TAPS Represents a PFIR filter with 32 taps.
+ * @param ADI_ADRV9001_PFIR_64_TAPS Represents a PFIR filter with 64 taps.
+ * @param ADI_ADRV9001_PFIR_96_TAPS Represents a PFIR filter with 96 taps.
+ * @param ADI_ADRV9001_PFIR_128_TAPS Represents a PFIR filter with 128 taps.
+ * @param ADI_ADRV9001_PFIR_TAPS_MAX_ID Defines the maximum ID value for PFIR
+ * taps.
+ ******************************************************************************/
 typedef enum adi_adrv9001_PfirNumTaps
 {
     ADI_ADRV9001_PFIR_32_TAPS = 0u,     /*!<  32 taps PFIR */
@@ -42,9 +67,30 @@ typedef enum adi_adrv9001_PfirNumTaps
     ADI_ADRV9001_PFIR_TAPS_MAX_ID = 3u, /*!< PFIR taps max ID */
 } adi_adrv9001_PfirNumTaps_e;
 
-/**
- *  \brief Enumerations for PFIR gain
- */
+/***************************************************************************//**
+ * @brief The `adi_adrv9001_PfirGain_e` is an enumeration that defines various
+ * gain levels for Programmable Finite Impulse Response (PFIR) filters in
+ * the ADRV9001 device. Each enumerator corresponds to a specific gain
+ * value in decibels (dB), ranging from -12 dB to +26 dB, allowing for
+ * precise control over the gain applied to the PFIR filters. This
+ * enumeration is used to select the desired gain setting for different
+ * PFIR configurations within the ADRV9001 API.
+ *
+ * @param ADI_ADRV9001_PFIR_GAIN_NEG_12_DB Represents a PFIR gain of -12 dB.
+ * @param ADI_ADRV9001_PFIR_GAIN_NEG_6_DB Represents a PFIR gain of -6 dB.
+ * @param ADI_ADRV9001_PFIR_GAIN_ZERO_DB Represents a PFIR gain of 0 dB.
+ * @param ADI_ADRV9001_PFIR_GAIN_POS_6_DB Represents a PFIR gain of +6 dB.
+ * @param ADI_ADRV9001_PFIR_GAIN_POS_9_54_DB Represents a PFIR gain of +9.54 dB.
+ * @param ADI_ADRV9001_PFIR_GAIN_POS_12_DB Represents a PFIR gain of +12 dB.
+ * @param ADI_ADRV9001_PFIR_GAIN_POS_14_DB Represents a PFIR gain of +14 dB.
+ * @param ADI_ADRV9001_PFIR_GAIN_POS_20_DB Represents a PFIR gain of +20 dB.
+ * @param ADI_ADRV9001_RX_MAX Represents the maximum value for RX gain, set to
+ * 7u.
+ * @param ADI_ADRV9001_PFIR_GAIN_PLUS_24DB Represents a PFIR gain of +24 dB.
+ * @param ADI_ADRV9001_PFIR_GAIN_PLUS_26DB Represents a PFIR gain of +26 dB.
+ * @param ADI_ADRV9001_PFIR_GAIN_MAX Represents the maximum value for PFIR gain,
+ * set to 9u.
+ ******************************************************************************/
 typedef enum adi_adrv9001_PfirGain
 {
     ADI_ADRV9001_PFIR_GAIN_NEG_12_DB = 0u,   /*!< -12dB */
@@ -62,9 +108,23 @@ typedef enum adi_adrv9001_PfirGain
     ADI_ADRV9001_PFIR_GAIN_MAX = 9u,
 } adi_adrv9001_PfirGain_e;
 
-/**
-* \brief Data structure to hold WB/NB compensation PFIR structure
-*/
+/***************************************************************************//**
+ * @brief The `adi_adrv9001_PfirWbNbBuffer_t` structure is designed to hold the
+ * configuration and coefficients for a wideband/narrowband Programmable
+ * Finite Impulse Response (PFIR) filter used in the ADRV9001 system. It
+ * includes fields for specifying the number of coefficients, the
+ * symmetry of the coefficients, the number of filter taps, and the gain
+ * setting. The coefficients themselves are stored in an array, allowing
+ * for flexible filter design within the constraints of the maximum size
+ * defined by the system.
+ *
+ * @param numCoeff Number of coefficients in the PFIR buffer.
+ * @param symmetricSel Selection for symmetricity of the PFIR coefficients.
+ * @param tapsSel Selection for the number of taps in the PFIR filter.
+ * @param gainSel Selection for the gain applied to the PFIR filter.
+ * @param coefficients Array holding the PFIR coefficients, with a maximum size
+ * defined by ADI_ADRV9001_WB_NB_PFIR_COEFS_MAX_SIZE.
+ ******************************************************************************/
 typedef struct adi_adrv9001_PfirWbNbBuffer
 {
     uint8_t numCoeff;                                             /*!< number of coefficients */
@@ -74,9 +134,22 @@ typedef struct adi_adrv9001_PfirWbNbBuffer
     int32_t coefficients[ADI_ADRV9001_WB_NB_PFIR_COEFS_MAX_SIZE]; /*!< coefficients */
 } adi_adrv9001_PfirWbNbBuffer_t;
 
-/**
-* \brief Data structure to hold RX NB pulse shaping RFIR Buffer structure
-*/
+/***************************************************************************//**
+ * @brief The `adi_adrv9001_PfirPulseBuffer_t` structure is designed to hold the
+ * configuration and coefficients for a pulse shaping filter in the
+ * ADRV9001 RF transceiver. It includes fields for specifying the number
+ * of coefficients, the symmetry of the coefficients, the number of taps,
+ * the gain applied, and an array to store the coefficients themselves.
+ * This structure is used to configure the pulse shaping filters for
+ * narrowband applications, allowing for precise control over the filter
+ * characteristics.
+ *
+ * @param numCoeff Number of coefficients in the pulse buffer.
+ * @param symmetricSel Selection for symmetricity of the coefficients.
+ * @param taps Number of taps in the pulse buffer.
+ * @param gainSel Selection for gain applied to the coefficients.
+ * @param coefficients Array holding the coefficients for the pulse buffer.
+ ******************************************************************************/
 typedef struct adi_adrv9001_PfirPulseBuffer_t
 {
     uint8_t numCoeff;                                             /*!< number of coefficients */
@@ -86,25 +159,92 @@ typedef struct adi_adrv9001_PfirPulseBuffer_t
     int32_t coefficients[ADI_ADRV9001_WB_NB_PFIR_COEFS_MAX_SIZE]; /*!< coefficients   */
 } adi_adrv9001_PfirPulseBuffer_t;
 
-/**
-* \brief Data structure to hold RX Low/High TIA Bandwidth HP/LP ADC PFIR Buffer structure
-*/
+/***************************************************************************//**
+ * @brief The `adi_adrv9001_PfirMag21Buffer_t` structure is designed to hold the
+ * coefficients for a PFIR (Programmable Finite Impulse Response) filter
+ * used in RX Low/High TIA Bandwidth HP/LP ADC applications. It contains
+ * a field for the number of coefficients and an array to store the
+ * actual coefficient values, with a maximum size of 21. This structure
+ * is part of the ADRV9001 API, which is used for configuring and
+ * managing the PFIR filters in the ADRV9001 transceiver.
+ *
+ * @param numCoeff Stores the number of coefficients in the buffer.
+ * @param coefficients An array holding the PFIR coefficients with a maximum
+ * size defined by
+ * ADI_ADRV9001_MAG_COMP_PFIR_COEFS_MAX_SIZE.
+ ******************************************************************************/
 typedef struct adi_adrv9001_PfirMag21Buffer
 {
     uint8_t numCoeff;
     int32_t coefficients[ADI_ADRV9001_MAG_COMP_PFIR_COEFS_MAX_SIZE];
 } adi_adrv9001_PfirMag21Buffer_t;
 
-/**
-* \brief Data structure to hold TX/RX Magnitude Compensation PFIR for NB
-*/
+/***************************************************************************//**
+ * @brief The `adi_adrv9001_PfirMag13Buffer_t` structure is designed to hold the
+ * magnitude compensation PFIR coefficients for narrowband (NB)
+ * applications in the ADRV9001 device. It contains a count of the
+ * coefficients and an array to store the actual coefficient values,
+ * which are used to adjust the magnitude response of the signal
+ * processing chain. This structure is part of a larger set of data
+ * structures that manage various PFIR configurations for the ADRV9001,
+ * facilitating dynamic profile switching and signal processing
+ * customization.
+ *
+ * @param numCoeff Represents the number of coefficients in the buffer.
+ * @param coefficients An array of integers storing the PFIR coefficients, with
+ * a maximum size defined by
+ * ADI_ADRV9001_MAG_COMP_NB_PFIR_COEFS_MAX_SIZE.
+ ******************************************************************************/
 typedef struct
 {
     uint8_t numCoeff;
     int32_t coefficients[ADI_ADRV9001_MAG_COMP_NB_PFIR_COEFS_MAX_SIZE];
 } adi_adrv9001_PfirMag13Buffer_t;
 
-/*! PFIR coefficent buffer */
+/***************************************************************************//**
+ * @brief The `adi_adrv9001_PfirBuffer_t` structure is designed to hold various
+ * types of PFIR (Programmable Finite Impulse Response) coefficients used
+ * in the ADRV9001 system for both RX and TX paths. It includes
+ * coefficients for wideband/narrowband compensation, pulse shaping, and
+ * magnitude compensation across different banks and channels. This
+ * structure is crucial for dynamic profile switching, where specific
+ * PFIRs need to be reloaded for each profile. The structure supports
+ * multiple banks (A, B, C, D) and channels, providing flexibility in
+ * configuring the signal processing chain for different operational
+ * modes.
+ *
+ * @param pfirRxWbNbChFilterCoeff_A RX WB/NB Compensation PFIR coefficient Bank
+ * A.
+ * @param pfirRxWbNbChFilterCoeff_B RX WB/NB Compensation PFIR coefficient Bank
+ * B.
+ * @param pfirRxWbNbChFilterCoeff_C RX WB/NB Compensation PFIR coefficient Bank
+ * C.
+ * @param pfirRxWbNbChFilterCoeff_D RX WB/NB Compensation PFIR coefficient Bank
+ * D.
+ * @param pfirTxWbNbPulShpCoeff_A TX WB/NB Preprocessing pulse shaping PFIR
+ * coefficient Bank A.
+ * @param pfirTxWbNbPulShpCoeff_B TX WB/NB Preprocessing pulse shaping PFIR
+ * coefficient Bank B.
+ * @param pfirTxWbNbPulShpCoeff_C TX WB/NB Preprocessing pulse shaping PFIR
+ * coefficient Bank C.
+ * @param pfirTxWbNbPulShpCoeff_D TX WB/NB Preprocessing pulse shaping PFIR
+ * coefficient Bank D.
+ * @param pfirRxNbPulShp RX NB Pulse Shaping pFIR 128 taps for channels 1 and 2.
+ * @param pfirRxMagLowTiaLowSRHp Channel 1/2 Low TIA Bandwidth HP ADC.
+ * @param pfirRxMagLowTiaHighSRHp Channel 1/2 Low TIA Bandwidth HP ADC with high
+ * sample rate.
+ * @param pfirRxMagHighTiaHighSRHp Channel 1/2 High TIA Bandwidth HP ADC with
+ * high sample rate.
+ * @param pfirRxMagLowTiaLowSRLp Channel 1/2 Low TIA Bandwidth LP ADC.
+ * @param pfirRxMagLowTiaHighSRLp Channel 1/2 Low TIA Bandwidth LP ADC with high
+ * sample rate.
+ * @param pfirRxMagHighTiaHighSRLp Channel 1/2 High TIA Bandwidth LP ADC with
+ * high sample rate.
+ * @param pfirTxMagComp1 TX Magnitude Compensation PFIR with 21 taps.
+ * @param pfirTxMagComp2 Second TX Magnitude Compensation PFIR with 21 taps.
+ * @param pfirTxMagCompNb TX Magnitude Compensation PFIR for NB.
+ * @param pfirRxMagCompNb RX Magnitude Compensation PFIR for NB.
+ ******************************************************************************/
 typedef struct adi_adrv9001_PfirBuffer
 {
     /*!< During dynamic profile switching, the first two types of PFIRs, RXWbNb and TXWbNbPulShp, would be reloaded for each
@@ -141,9 +281,18 @@ typedef struct adi_adrv9001_PfirBuffer
     adi_adrv9001_PfirMag13Buffer_t pfirRxMagCompNb[ADI_ADRV9001_MAX_RX_ONLY];
 } adi_adrv9001_PfirBuffer_t;
 
-/**
- *  \brief Enumerations of PFIR bank selection
- */
+/***************************************************************************//**
+ * @brief The `adi_adrv9001_PfirBank_e` is an enumeration that defines the
+ * selection of PFIR banks, labeled A through D, each represented by a
+ * unique unsigned integer value. This enumeration is used to specify
+ * which PFIR bank is being referenced or utilized in the context of
+ * configuring or managing PFIR buffers within the ADRV9001 system.
+ *
+ * @param ADI_ADRV9001_PFIR_BANK_A Represents PFIR bank A with a value of 0.
+ * @param ADI_ADRV9001_PFIR_BANK_B Represents PFIR bank B with a value of 1.
+ * @param ADI_ADRV9001_PFIR_BANK_C Represents PFIR bank C with a value of 2.
+ * @param ADI_ADRV9001_PFIR_BANK_D Represents PFIR bank D with a value of 3.
+ ******************************************************************************/
 typedef enum adi_adrv9001_PfirBank
 {
     ADI_ADRV9001_PFIR_BANK_A = 0u, /*!< PFIR bank A */
@@ -152,9 +301,17 @@ typedef enum adi_adrv9001_PfirBank
     ADI_ADRV9001_PFIR_BANK_D = 3u, /*!< PFIR bank D */
 } adi_adrv9001_PfirBank_e;
 
-/**
- * \brief Data structure to hold PFI coefficients
- */
+/***************************************************************************//**
+ * @brief The `adi_adrv9001_PfirCoeff_t` structure is a simple data structure
+ * used to hold the number of coefficients for a PFIR (Programmable
+ * Finite Impulse Response) filter. It contains a single member,
+ * `numCoeff`, which is a 32-bit unsigned integer representing the count
+ * of coefficients. This structure is part of the ADRV9001 API, which is
+ * used for configuring and managing PFIR filters in Analog Devices'
+ * ADRV9001 transceiver.
+ *
+ * @param numCoeff Number of Coefficients
+ ******************************************************************************/
 typedef struct adi_adrv9001_PfirCoeff
 {
     uint32_t numCoeff; /*!< Number of Coefficients */
@@ -162,9 +319,23 @@ typedef struct adi_adrv9001_PfirCoeff
 
 /* TODO: With new PFIR structure change, this structure is not used anywhere now.
          But according to Jim Bush, this structure will be used in dynamic profile switching */
-/**
- * \brief Data structure to hold PfirWbNbConfig
- */
+/***************************************************************************//**
+ * @brief The `adi_adrv9001_PfirWbNbConfig_t` structure is used to configure the
+ * wideband/narrowband PFIR (Programmable Finite Impulse Response) filter
+ * settings for the ADRV9001 device. It includes fields for selecting the
+ * PFIR bank, determining the symmetry of the coefficients, specifying
+ * the number of filter taps, setting the gain, and providing the
+ * coefficients themselves. This structure is essential for defining the
+ * filter characteristics used in signal processing within the device.
+ *
+ * @param bankSel Specifies the PFIR bank selection, which can be one of four
+ * banks: A, B, C, or D.
+ * @param symmetricSel Indicates whether the PFIR coefficients are symmetric or
+ * non-symmetric.
+ * @param tapsSel Determines the number of taps in the PFIR filter.
+ * @param gainSel Specifies the gain in decibels for the PFIR filter.
+ * @param coeff Holds the PFIR coefficients.
+ ******************************************************************************/
 typedef struct adi_adrv9001_PfirWbNbConfig
 {
     adi_adrv9001_PfirBank_e      bankSel;		/*!< bank: PFIR_BANK_A = 0u (bank A), PFIR_BANK_B = 1u (bank B),

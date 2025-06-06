@@ -151,7 +151,18 @@ typedef int (*tx_en_pin_ctrl_t)(void *user_data, uint8_t enable);
  */
 typedef int (*reset_pin_ctrl_t)(void *user_data, uint8_t enable);
 
-/** API register access structure */
+/***************************************************************************//**
+ * @brief The `adi_reg_data` structure is used to represent a register in a
+ * device, consisting of a register address and its corresponding value.
+ * This structure is typically used in the context of device
+ * communication, where specific registers need to be accessed and
+ * manipulated. The `reg` member holds the address of the register, while
+ * the `val` member holds the value to be written to or read from that
+ * register.
+ *
+ * @param reg A 16-bit unsigned integer representing the register address.
+ * @param val An 8-bit unsigned integer representing the register value.
+ ******************************************************************************/
 struct adi_reg_data {
 	/** Register address */
 	uint16_t reg;
@@ -159,7 +170,19 @@ struct adi_reg_data {
 	uint8_t val;
 };
 
-/** ADI Device Identification Data */
+/***************************************************************************//**
+ * @brief The `adi_chip_id_t` structure is used to encapsulate identification
+ * data for an ADI device, including the chip type, product ID, product
+ * grade, and device revision. This structure is essential for
+ * distinguishing between different versions and types of devices,
+ * ensuring that the correct configurations and operations are applied
+ * based on the specific hardware being used.
+ *
+ * @param chip_type A uint8_t representing the chip type code.
+ * @param prod_id A uint16_t representing the product ID code.
+ * @param prod_grade A uint8_t representing the product grade code.
+ * @param dev_revision A uint8_t representing the device revision.
+ ******************************************************************************/
 typedef struct {
 	/** Chip Type Code */
 	uint8_t chip_type;
@@ -171,7 +194,24 @@ typedef struct {
 	uint8_t dev_revision;
 } adi_chip_id_t;
 
-/** SPI Interface Parameters. */
+/***************************************************************************//**
+ * @brief The `spi_sdo_config_t` is an enumeration that defines the
+ * configuration options for the SPI interface's data output pins. It
+ * includes options for setting the SPI SDO pin for 4-wire communication
+ * and the SPI SDIO pin for 3-wire communication, with an additional
+ * value for error checking and a boundary marker. This enumeration is
+ * used to configure the SPI interface in a way that matches the specific
+ * hardware requirements of the application.
+ *
+ * @param SPI_NONE Represents an invalid SPI configuration value, used for error
+ * checking.
+ * @param SPI_SDO Activates the SPI SDO (Serial Data Output) pin for 4-wire SPI
+ * communication.
+ * @param SPI_SDIO Activates the SPI SDIO (Serial Data Input-Output) pin for
+ * 3-wire SPI communication.
+ * @param SPI_CONFIG_MAX Represents the maximum value for SPI configuration,
+ * used as a boundary marker.
+ ******************************************************************************/
 typedef enum {
 	/* Keep this invalid value as 0, so the API can test for wrong setting. */
 	SPI_NONE = 0,
@@ -189,35 +229,94 @@ typedef enum {
 	SPI_CONFIG_MAX = 3
 } spi_sdo_config_t;
 
-/** Enumerate Signal Types */
+/***************************************************************************//**
+ * @brief The `signal_type_t` is an enumeration that defines different types of
+ * signal types that can be used within the API. It includes three
+ * possible values: `SIGNAL_CMOS` for CMOS signal type, `SIGNAL_LVDS` for
+ * LVDS signal type, and `SIGNAL_UNKNOWN` for any signal type that is
+ * unknown or undefined. This enumeration is useful for categorizing and
+ * handling different signal types in a structured manner within the
+ * software.
+ *
+ * @param SIGNAL_CMOS Represents the CMOS signal type.
+ * @param SIGNAL_LVDS Represents the LVDS signal type.
+ * @param SIGNAL_UNKNOWN Represents an unknown or undefined signal type.
+ ******************************************************************************/
 typedef enum {
 	SIGNAL_CMOS = 0, /**CMOS SIGNAL TYPE */
 	SIGNAL_LVDS,	 /**LVDS SIGNAL TYPE */
 	SIGNAL_UNKNOWN	 /**UNKNOW/UNDEFINED SIGNAL TYPE */
 } signal_type_t;
 
-/** Enumerate coupling mode */
+/***************************************************************************//**
+ * @brief The `signal_coupling_t` is an enumeration that defines the types of
+ * signal coupling modes available, specifically AC, DC, and an unknown
+ * state. This data structure is used to categorize the coupling mode of
+ * a signal, which is crucial for signal processing applications where
+ * the type of coupling affects the behavior and characteristics of the
+ * signal being processed.
+ *
+ * @param COUPLING_AC Represents an AC coupled signal.
+ * @param COUPLING_DC Represents a DC signal.
+ * @param COUPLING_UNKNOWN Represents an unknown or undefined coupling.
+ ******************************************************************************/
 typedef enum {
 	COUPLING_AC = 0,	 /**AC COUPLED SIGNAL */
 	COUPLING_DC,		 /**DC SIGNAL  */
 	COUPLING_UNKNOWN	 /**UNKNOWN/UNDEFINED COUPLING */
 } signal_coupling_t;
 
-/** Enumerates JESD LINK Signals */
+/***************************************************************************//**
+ * @brief The `jesd_link_t` is an enumeration that defines constants for
+ * identifying different JESD links in a system. It includes specific
+ * values for individual links (JESD_LINK_0 and JESD_LINK_1) as well as a
+ * value representing all links (JESD_LINK_ALL). This enumeration is
+ * useful for configuring or managing JESD interfaces by providing a
+ * clear and concise way to refer to specific links or all links
+ * collectively.
+ *
+ * @param JESD_LINK_0 Represents JESD LINK 0 with a value of 0x0.
+ * @param JESD_LINK_1 Represents JESD LINK 1 with a value of 0x1.
+ * @param JESD_LINK_ALL Represents all JESD LINKS with a value of 0xFF.
+ ******************************************************************************/
 typedef enum {
 	JESD_LINK_0 = 0x0,     /**< JESD LINK 0 */
 	JESD_LINK_1 = 0x1,     /**< JESD LINK 1 */
 	JESD_LINK_ALL = 0xFF   /**< ALL JESD LINKS */
 } jesd_link_t;
 
-/** Enumerates SYNCOUTB Output Signals */
+/***************************************************************************//**
+ * @brief The `jesd_syncoutb_t` is an enumeration that defines the possible
+ * SYNCOUTB output signals for a JESD interface. It includes specific
+ * values for individual SYNCOUTB signals (0 and 1) as well as a value
+ * representing all SYNCOUTB signals. This enumeration is used to
+ * configure or identify the SYNCOUTB signal state in a JESD interface
+ * setup.
+ *
+ * @param SYNCOUTB_0 Represents the SYNCOUTB signal 0 with a value of 0x0.
+ * @param SYNCOUTB_1 Represents the SYNCOUTB signal 1 with a value of 0x1.
+ * @param SYNCOUTB_ALL Represents all SYNCOUTB signals with a value of 0xFF.
+ ******************************************************************************/
 typedef enum {
 	SYNCOUTB_0 = 0x0,     /**< SYNCOUTB 0 */
 	SYNCOUTB_1 = 0x1,     /**< SYNCOUTB 1 */
 	SYNCOUTB_ALL = 0xFF   /**< ALL SYNCOUTB SIGNALS */
 } jesd_syncoutb_t;
 
-/** Enumerates SYSREF Synchronization Mode */
+/***************************************************************************//**
+ * @brief The `jesd_sysref_mode_t` is an enumeration that defines the different
+ * modes of SYSREF synchronization for JESD interfaces. It includes modes
+ * for no SYSREF support, one-shot SYSREF, continuous synchronization,
+ * and monitoring, as well as an invalid mode to handle erroneous
+ * settings. This enumeration is used to configure and manage the SYSREF
+ * signal behavior in JESD systems.
+ *
+ * @param SYSREF_NONE No SYSREF Support.
+ * @param SYSREF_ONESHOT ONE-SHOT SYSREF.
+ * @param SYSREF_CONT Continuous Sysref Synchronisation.
+ * @param SYSREF_MON SYSREF monitor Mode.
+ * @param SYSREF_MODE_INVLD Invalid SYSREF mode.
+ ******************************************************************************/
 typedef enum {
 	SYSREF_NONE = 0x0,     /**< No SYSREF Support */
 	SYSREF_ONESHOT,	 /**< ONE-SHOT SYSREF */
@@ -226,7 +325,32 @@ typedef enum {
 	SYSREF_MODE_INVLD
 } jesd_sysref_mode_t;
 
-/** JESD Interface Parameters. */
+/***************************************************************************//**
+ * @brief The `jesd_param_t` structure is a comprehensive data structure used to
+ * define various parameters related to the JESD (Joint Electron Device
+ * Engineering Council) interface. It includes fields for lane
+ * parameters, octet parameters, converter parameters, sample parameters,
+ * high density settings, multiframe settings, converter resolution, bit
+ * packing, and device identification, among others. This structure is
+ * essential for configuring and managing the JESD interface in devices
+ * that require precise control over data transmission and reception
+ * parameters.
+ *
+ * @param jesd_L JESD Lane Param L.
+ * @param jesd_F JESD Octet Param F.
+ * @param jesd_M JESD Converter Param M.
+ * @param jesd_S JESD No of Sample Param S.
+ * @param jesd_HD JESD High Density Param HD.
+ * @param jesd_K JESD multiframe Param K.
+ * @param jesd_N JESD Converter Resolution Param N.
+ * @param jesd_NP JESD Bit Packing Sample NP.
+ * @param jesd_CF JESD Param CF.
+ * @param jesd_CS JESD Param CS.
+ * @param jesd_DID JESD Device ID Param DID.
+ * @param jesd_BID JESD Bank ID Param BID.
+ * @param jesd_LID0 JESD Lane ID for Lane 0 Param LIDO.
+ * @param jesd_JESDV JESD Version.
+ ******************************************************************************/
 typedef struct {
 	uint8_t jesd_L;	    /**< JESD Lane Param L. */
 	uint8_t jesd_F;	    /**< JESD Octet Param F. */
@@ -246,14 +370,44 @@ typedef struct {
 	uint8_t jesd_JESDV; /**< JESD Version */
 } jesd_param_t;
 
-/** Enumerates all available Jesd Subclass Modes */
+/***************************************************************************//**
+ * @brief The `jesd_subclass_t` is an enumeration that defines the available
+ * JESD (Joint Electron Device Engineering Council) subclass modes. It
+ * includes two valid subclasses, `JESD_SUBCLASS_0` and
+ * `JESD_SUBCLASS_1`, which are used to specify different operational
+ * modes for JESD interfaces, and an `JESD_SUBCLASS_INVALID` to represent
+ * an invalid or uninitialized state.
+ *
+ * @param JESD_SUBCLASS_0 Represents JESD Subclass 0.
+ * @param JESD_SUBCLASS_1 Represents JESD Subclass 1.
+ * @param JESD_SUBCLASS_INVALID Indicates an invalid JESD subclass.
+ ******************************************************************************/
 typedef enum {
 	JESD_SUBCLASS_0,     /**< JESD SUBCLASS 0*/
 	JESD_SUBCLASS_1,     /**< JESD SUBCLASS 1 */
 	JESD_SUBCLASS_INVALID
 } jesd_subclass_t;
 
-/** Enumerates all available PRBS patterns */
+/***************************************************************************//**
+ * @brief The `jesd_prbs_pattern_t` is an enumeration that defines various
+ * Pseudo-Random Binary Sequence (PRBS) patterns used in JESD (Joint
+ * Electron Device Engineering Council) interfaces. These patterns,
+ * including PRBS7, PRBS15, and PRBS31, are used for testing and
+ * validation of data transmission systems by simulating random data
+ * sequences. The enumeration also includes a `PRBS_NONE` option to
+ * indicate that no PRBS pattern is applied, and a `PRBS_MAX` to
+ * represent the count of patterns available in the enumeration.
+ *
+ * @param PRBS_NONE Indicates that the PRBS (Pseudo-Random Binary Sequence) is
+ * turned off.
+ * @param PRBS7 Represents the PRBS7 pattern, a specific type of pseudo-random
+ * binary sequence.
+ * @param PRBS15 Represents the PRBS15 pattern, another type of pseudo-random
+ * binary sequence.
+ * @param PRBS31 Represents the PRBS31 pattern, a longer pseudo-random binary
+ * sequence.
+ * @param PRBS_MAX Denotes the number of members in this enumeration.
+ ******************************************************************************/
 typedef enum {
 	PRBS_NONE, /**< PRBS OFF */
 	PRBS7,	   /**< PRBS7 pattern */

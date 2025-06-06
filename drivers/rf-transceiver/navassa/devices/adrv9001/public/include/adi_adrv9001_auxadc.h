@@ -22,53 +22,71 @@ extern "C" {
 #include "adi_adrv9001_auxadc_types.h"
 #include "adi_adrv9001_types.h"
 
-/**
- * \brief This function sets the configuration for AuxADCs.
+/***************************************************************************//**
+ * @brief Use this function to enable or disable a specific auxiliary ADC on the
+ * ADRV9001 device. It should be called when the device is in any of the
+ * following states: STANDBY, CALIBRATED, PRIMED, or RF_ENABLED. This
+ * function allows for direct register access to configure the power
+ * state of the selected auxiliary ADC, either powering it up or down
+ * based on the provided parameters. Ensure that the device context is
+ * properly initialized before calling this function.
  *
- * \note Message type: \ref timing_direct "Direct register access"
- *
- * \pre Channel state any of STANDBY, CALIBRATED, PRIMED, RF_ENABLED
- *
- * \param[in] adrv9001	     Context variable - Pointer to the ADRV9001 device settings data structure
- * \param[in] auxAdc         Selected AuxADC to be configured
- * \param[in] enable         True: Power up selected AuxADC, False: Power down selected AuxADC
- *
- * \returns A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required action to recover
- */
+ * @param adrv9001 Pointer to the ADRV9001 device settings data structure. Must
+ * not be null, and the device should be properly initialized.
+ * @param auxAdc The auxiliary ADC to be configured. It must be a valid value of
+ * type adi_adrv9001_AuxAdc_e, representing one of the available
+ * auxiliary ADCs on the device.
+ * @param enable Boolean value indicating whether to power up (true) or power
+ * down (false) the selected auxiliary ADC.
+ * @return Returns an int32_t code indicating success (ADI_COMMON_ACT_NO_ACTION)
+ * or the required action to recover from an error.
+ ******************************************************************************/
 int32_t adi_adrv9001_AuxAdc_Configure(adi_adrv9001_Device_t *adrv9001,
                                       adi_adrv9001_AuxAdc_e auxAdc,
                                       bool enable);
 
-/**
- * \brief This function gets the configuration of selected AuxADC
+/***************************************************************************//**
+ * @brief Use this function to determine whether a specific auxiliary ADC
+ * (AuxADC) on the ADRV9001 device is currently powered up or down. It is
+ * essential to call this function when the channel state is in any of
+ * the following states: STANDBY, CALIBRATED, PRIMED, or RF_ENABLED. This
+ * function provides direct register access to read the configuration
+ * status of the selected AuxADC. Ensure that the `enabled` pointer is
+ * valid and non-null to receive the status result.
  *
- * \note Message type: \ref timing_direct "Direct register access"
- *
- * \pre Channel state any of STANDBY, CALIBRATED, PRIMED, RF_ENABLED
- *
- * \param[in]  adrv9001	     Context variable - Pointer to the ADRV9001 device settings data structure
- * \param[in]  auxAdc        Select AuxADC to read back the configuration
- * \param[out] enabled       Read back the status; True:selected AuxADC is powered up, False:selected AuxADC is powered down
- *
- * \returns A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required action to recover
- */
+ * @param adrv9001 Pointer to the ADRV9001 device settings data structure. Must
+ * not be null, and the device should be properly initialized.
+ * @param auxAdc The specific auxiliary ADC to inspect. Must be a valid value of
+ * type `adi_adrv9001_AuxAdc_e`.
+ * @param enabled Pointer to a boolean where the function will store the power
+ * status of the selected AuxADC. Must not be null.
+ * @return Returns an integer code indicating success (ADI_COMMON_ACT_NO_ACTION)
+ * or the required action to recover. The `enabled` parameter is set to
+ * true if the AuxADC is powered up, false if powered down.
+ ******************************************************************************/
 int32_t adi_adrv9001_AuxAdc_Inspect(adi_adrv9001_Device_t *adrv9001,
                                     adi_adrv9001_AuxAdc_e auxAdc,
                                     bool *enabled);
 
-/**
- * \brief This function reads the ADC code of selected AuxADC and converts to mV.
+/***************************************************************************//**
+ * @brief Use this function to obtain the voltage in millivolts from a specified
+ * auxiliary ADC on the ADRV9001 device. It is essential to ensure that
+ * the device is in one of the valid states: STANDBY, CALIBRATED, PRIMED,
+ * or RF_ENABLED before calling this function. The function reads the ADC
+ * code from the selected AuxADC and converts it to a voltage value in
+ * millivolts, which is then stored in the provided output parameter.
+ * This function is useful for applications requiring precise voltage
+ * measurements from the ADRV9001's auxiliary ADCs.
  *
- * \note Message type: \ref timing_direct "Direct register access"
- *
- * \pre Channel state any of STANDBY, CALIBRATED, PRIMED, RF_ENABLED
- *
- * \param[in]  adrv9001	     Context variable - Pointer to the ADRV9001 device settings data structure
- * \param[in]  auxAdc        AuxADC selection to read ADC AuxADC
- * \param[out] auxAdc_mV     ADC value read in mV from ADRV9001 device for the selected AuxADC
- *
- * \returns A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required action to recover
- */
+ * @param adrv9001 Pointer to the ADRV9001 device settings data structure. Must
+ * not be null and should point to a valid device context.
+ * @param auxAdc Specifies which AuxADC to read from. Must be a valid value of
+ * type adi_adrv9001_AuxAdc_e.
+ * @param auxAdc_mV Pointer to a uint16_t where the converted voltage in
+ * millivolts will be stored. Must not be null.
+ * @return Returns an int32_t code indicating success (ADI_COMMON_ACT_NO_ACTION)
+ * or the required action to recover.
+ ******************************************************************************/
 int32_t adi_adrv9001_AuxAdc_Voltage_Get(adi_adrv9001_Device_t *adrv9001,
                                         adi_adrv9001_AuxAdc_e auxAdc,
                                         uint16_t *auxAdc_mV);

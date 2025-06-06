@@ -44,7 +44,16 @@
 /*************************** Types Declarations *******************************/
 /******************************************************************************/
 
-/** IIO Descriptor */
+/***************************************************************************//**
+ * @brief The `adf5902_iio_descriptor` is a global variable of type `struct
+ * iio_device` that is declared as an external constant. It is intended
+ * to provide an IIO (Industrial I/O) device descriptor for the ADF5902,
+ * which is a microwave VCO (Voltage Controlled Oscillator) with
+ * integrated PLL (Phase-Locked Loop).
+ *
+ * @details This variable is used to interface with the ADF5902 device through
+ * the IIO framework, enabling configuration and data acquisition.
+ ******************************************************************************/
 extern struct iio_device const adf5902_iio_descriptor;
 
 #endif //IIO_ADF5902_H

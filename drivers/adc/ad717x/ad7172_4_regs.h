@@ -37,7 +37,16 @@
 #include "ad717x.h"
 
 #ifdef AD7172_4_INIT
-/*! Array holding the info for the AD7172_4 registers - address, initial value, size */
+/***************************************************************************//**
+ * @brief The `ad7172_4_regs` is an array of structures, each representing a
+ * register of the AD7172-4 analog-to-digital converter. Each element in
+ * the array contains the register address, an initial value, and the
+ * size of the register in bytes. This array is used to configure and
+ * manage the various settings and operations of the AD7172-4 device.
+ *
+ * @details This variable is used to initialize and configure the AD7172-4
+ * registers with specific settings for operation.
+ ******************************************************************************/
 ad717x_st_reg ad7172_4_regs[] = {
 	{ AD717X_STATUS_REG, 0x00, 1 },
 	{ AD717X_ADCMODE_REG, 0x0000, 2 },

@@ -14,9 +14,18 @@
 #ifndef _ADI_ADRV9001_AUXDAC_TYPES_H_
 #define _ADI_ADRV9001_AUXDAC_TYPES_H_
 
-/**
-*  \brief Enum to select AuxDAC
-*/
+/***************************************************************************//**
+ * @brief The `adi_adrv9001_AuxDac_e` is an enumeration that defines constants
+ * for selecting one of the four auxiliary DAC channels available on the
+ * ADRV9001 device. Each enumerator corresponds to a specific DAC
+ * channel, allowing for easy configuration and selection within the
+ * device's API.
+ *
+ * @param ADI_ADRV9001_AUXDAC0 Represents the first auxiliary DAC channel.
+ * @param ADI_ADRV9001_AUXDAC1 Represents the second auxiliary DAC channel.
+ * @param ADI_ADRV9001_AUXDAC2 Represents the third auxiliary DAC channel.
+ * @param ADI_ADRV9001_AUXDAC3 Represents the fourth auxiliary DAC channel.
+ ******************************************************************************/
 typedef enum adi_adrv9001_AuxDac
 {
     ADI_ADRV9001_AUXDAC0, /*!< AuxDAC0 */

@@ -414,6 +414,22 @@
 /*************************** Types Declarations *******************************/
 /******************************************************************************/
 
+/***************************************************************************//**
+ * @brief The `slope` structure is designed to encapsulate parameters related to
+ * frequency deviation and step size in a frequency synthesizer or
+ * similar application. It includes a deviation word (`dev_word`) for
+ * specifying the magnitude of deviation, a deviation offset
+ * (`dev_offset`) for fine-tuning the deviation, and a step word
+ * (`step_word`) for defining the step size in frequency adjustments.
+ * This structure is likely used in the context of configuring or
+ * controlling frequency modulation characteristics in a device such as
+ * the ADF5902.
+ *
+ * @param dev_word Represents the deviation word as a signed 16-bit integer.
+ * @param dev_offset Represents the deviation offset as an unsigned 8-bit
+ * integer.
+ * @param step_word Represents the step word as an unsigned 32-bit integer.
+ ******************************************************************************/
 struct slope {
 	/* Deviation Word */
 	int16_t dev_word;
@@ -423,6 +439,42 @@ struct slope {
 	uint32_t step_word;
 };
 
+/***************************************************************************//**
+ * @brief The `adf5902_init_param` structure is used to initialize the ADF5902
+ * device, a microwave frequency synthesizer. It contains various
+ * configuration parameters such as SPI and GPIO initialization settings,
+ * frequency settings for the reference input and VCO output, and control
+ * flags for features like reference frequency doubling, ADC averaging,
+ * and ramp delay. Additionally, it includes settings for clock dividers,
+ * charge pump current, and ramp mode, as well as arrays for delay words
+ * and slope structures to manage frequency deviation parameters.
+ *
+ * @param spi_init Pointer to SPI initialization parameters.
+ * @param gpio_ce_param Pointer to GPIO Chip Enable initialization parameters.
+ * @param ref_in Reference input frequency in Hz.
+ * @param rf_out Output frequency of the internal VCO in Hz.
+ * @param ref_doubler_en Flag to enable reference frequency doubling.
+ * @param ref_div2_en Flag to enable reference frequency division by 2.
+ * @param adc_avg ADC average value setting.
+ * @param tx_amp_cal_ref Transmitter amplitude calibration reference code.
+ * @param ramp_delay_en Flag to enable ramp delay.
+ * @param tx_trig_en Flag to enable TX data trigger.
+ * @param delay_words_no Number of delay words.
+ * @param delay_wd Array of delay words.
+ * @param slopes_no Number of deviation parameters.
+ * @param slopes Pointer to an array of slope structures.
+ * @param tx_ramp_clk TX data ramp clock setting.
+ * @param tx_data_invert Flag to enable TX data inversion.
+ * @param ramp_status Ramp status indicator.
+ * @param clk1_div_ramp Clock divider value in ramp mode.
+ * @param clk2_div_no Number of 12-bit clock dividers.
+ * @param clk2_div Array of 12-bit clock divider values.
+ * @param le_sel LE select setting.
+ * @param clk_div_mode Clock divider mode setting.
+ * @param cp_current Charge pump current setting.
+ * @param cp_tristate_en Flag to enable charge pump tristate.
+ * @param ramp_mode Ramp mode setting.
+ ******************************************************************************/
 struct adf5902_init_param {
 	/* SPI Initialization parameters */
 	struct no_os_spi_init_param	*spi_init;
@@ -476,6 +528,54 @@ struct adf5902_init_param {
 	uint8_t			ramp_mode;
 };
 
+/***************************************************************************//**
+ * @brief The `adf5902_dev` structure is a comprehensive configuration and state
+ * representation for the ADF5902 device, which is a microwave frequency
+ * synthesizer. It includes various fields for managing SPI
+ * communication, GPIO control, frequency settings, and calibration
+ * parameters. The structure allows for detailed configuration of the
+ * device's internal VCO, phase frequency detector, and clock dividers,
+ * as well as control over ramping and amplitude calibration. It supports
+ * advanced features such as reference doubling, fractional division, and
+ * multiple clock and delay configurations, making it suitable for
+ * precise frequency synthesis applications.
+ *
+ * @param spi_desc Pointer to the SPI descriptor for communication.
+ * @param gpio_ce Pointer to the GPIO descriptor for chip enable control.
+ * @param ref_in Reference input frequency in Hz.
+ * @param rf_out Output frequency of the internal VCO in Hz.
+ * @param f_pfd Phase Frequency Detector frequency in Hz.
+ * @param ref_div_factor Divide ratio of the binary 5-bit reference counter.
+ * @param ref_doubler_en Flag to enable the reference doubler.
+ * @param ref_div2_en Flag to enable reference divide by 2.
+ * @param int_div Integer division value for Register 5.
+ * @param frac_msb Most significant bits of the fractional division value for
+ * Register 5.
+ * @param frac_lsb Least significant bits of the fractional division value for
+ * Register 5.
+ * @param freq_cal_div Frequency calibration divider value.
+ * @param clk1_div Clock divider value for CLK1.
+ * @param clk1_div_ramp Clock divider value for CLK1 in Ramp mode.
+ * @param adc_clk_div ADC clock divider value.
+ * @param adc_avg ADC average value setting.
+ * @param tx_amp_cal_ref Transmitter amplitude calibration reference code.
+ * @param ramp_delay_en Flag to enable ramp delay.
+ * @param tx_trig_en Flag to enable TX data trigger.
+ * @param delay_words_no Number of delay words.
+ * @param delay_wd Pointer to an array of delay words.
+ * @param slopes_no Number of deviation parameters.
+ * @param slopes Pointer to an array of slope structures.
+ * @param tx_ramp_clk TX data ramp clock setting.
+ * @param tx_data_invert Flag to invert TX data.
+ * @param ramp_status Status of the ramp.
+ * @param clk2_div_no Number of 12-bit clock dividers.
+ * @param clk2_div Pointer to an array of 12-bit clock dividers.
+ * @param le_sel LE select setting.
+ * @param clk_div_mode Clock divider mode setting.
+ * @param cp_current Charge pump current setting.
+ * @param cp_tristate_en Flag to enable charge pump tristate.
+ * @param ramp_mode Ramp mode setting.
+ ******************************************************************************/
 struct adf5902_dev {
 	/* SPI Descriptor */
 	struct no_os_spi_desc		*spi_desc;
@@ -549,28 +649,149 @@ struct adf5902_dev {
 /************************ Functions Declarations ******************************/
 /******************************************************************************/
 
-/** ADF5902 SPI write */
+/***************************************************************************//**
+ * @brief Use this function to write a 32-bit data value to a specific register
+ * of the ADF5902 device. This function is typically called when
+ * configuring the device or updating its settings. It requires a valid
+ * device structure that has been properly initialized and a valid
+ * register address. The function combines the register address with the
+ * data and sends it over SPI. Ensure that the device is correctly
+ * initialized before calling this function to avoid communication
+ * errors.
+ *
+ * @param dev A pointer to an adf5902_dev structure representing the device.
+ * Must not be null and should be properly initialized before use.
+ * @param reg_addr A uint8_t value representing the register address to which
+ * the data will be written. Valid register addresses are
+ * defined by the device's register map.
+ * @param data A uint32_t value containing the data to be written to the
+ * specified register. The data is combined with the register
+ * address before transmission.
+ * @return Returns an int32_t value indicating the success or failure of the SPI
+ * write operation. A non-negative value typically indicates success,
+ * while a negative value indicates an error.
+ ******************************************************************************/
 int32_t adf5902_write(struct adf5902_dev *dev, uint8_t reg_addr,
 		      uint32_t data);
 
-/** ADF5902 SPI Readback */
+/***************************************************************************//**
+ * @brief Use this function to read data from a specific register of the ADF5902
+ * device. It requires a valid device structure and a register address to
+ * perform the read operation. The function communicates with the device
+ * over SPI and retrieves the data from the specified register, storing
+ * it in the provided data pointer. Ensure that the device is properly
+ * initialized before calling this function. The function returns an
+ * error code if the SPI communication fails.
+ *
+ * @param dev A pointer to an initialized adf5902_dev structure representing the
+ * device. Must not be null.
+ * @param reg_addr The address of the register to read from. Must be a valid
+ * register address within the device's addressable range.
+ * @param data A pointer to a uint32_t variable where the read data will be
+ * stored. Must not be null.
+ * @return Returns an int32_t error code: 0 on success, or a negative error code
+ * on failure.
+ ******************************************************************************/
 int32_t adf5902_readback(struct adf5902_dev *dev, uint8_t reg_addr,
 			 uint32_t *data);
 
-/** ADF5902 Initialization */
+/***************************************************************************//**
+ * @brief This function initializes the ADF5902 device using the provided
+ * initialization parameters. It sets up the necessary GPIO and SPI
+ * interfaces, configures the device registers, and performs initial
+ * calibration. This function must be called before any other operations
+ * on the ADF5902 device. It handles memory allocation for the device
+ * structure and ensures that all initialization parameters are valid. If
+ * any step in the initialization process fails, the function will return
+ * an error code and clean up any allocated resources.
+ *
+ * @param device A pointer to a pointer of type `struct adf5902_dev`. This will
+ * be allocated and initialized by the function. The caller must
+ * ensure this pointer is valid and will receive ownership of the
+ * allocated device structure.
+ * @param init_param A pointer to a `struct adf5902_init_param` containing the
+ * initialization parameters for the device. This must not be
+ * null and must contain valid configuration data for the
+ * device. The function will validate these parameters before
+ * proceeding with initialization.
+ * @return Returns 0 on success or a negative error code on failure. On success,
+ * the `device` pointer will point to a newly allocated and initialized
+ * `adf5902_dev` structure.
+ ******************************************************************************/
 int32_t adf5902_init(struct adf5902_dev **device,
 		     struct adf5902_init_param *init_param);
 
-/** ADF5902 Recalibration Procedure */
+/***************************************************************************//**
+ * @brief Use this function to perform a recalibration of the ADF5902 device,
+ * which is necessary to ensure accurate frequency operation. This
+ * function should be called when the device requires recalibration, such
+ * as after significant temperature changes or when the device has been
+ * powered down for an extended period. The function assumes that the
+ * device has been properly initialized and configured. It temporarily
+ * modifies certain device settings to perform the recalibration and then
+ * restores them to their original state. The function returns an error
+ * code if the recalibration process fails at any step.
+ *
+ * @param dev A pointer to an initialized adf5902_dev structure representing the
+ * device to be recalibrated. Must not be null. The function will
+ * return an error if the device is not properly initialized.
+ * @return Returns 0 on success or a negative error code if the recalibration
+ * fails at any step.
+ ******************************************************************************/
 int32_t adf5902_recalibrate(struct adf5902_dev *dev);
 
-/** ADF5902 Read Temperature procedure */
+/***************************************************************************//**
+ * @brief Use this function to obtain the current temperature reading from an
+ * ADF5902 device. It must be called with a valid device structure that
+ * has been properly initialized. The function performs an ADC conversion
+ * to read the temperature sensor data and returns the temperature in
+ * degrees Celsius through the provided pointer. Ensure that the device
+ * is not in a power-down state before calling this function. The
+ * function returns an error code if the operation fails at any step.
+ *
+ * @param dev A pointer to an initialized adf5902_dev structure representing the
+ * device. Must not be null.
+ * @param temp A pointer to a float where the temperature value will be stored.
+ * Must not be null.
+ * @return Returns 0 on success, or a negative error code if the operation
+ * fails.
+ ******************************************************************************/
 int32_t adf5902_read_temp(struct adf5902_dev *dev, float *temp);
 
 /* ADF5902 Measure Output locked frequency */
+/***************************************************************************//**
+ * @brief Use this function to measure and compute the output frequency of an
+ * ADF5902 device. It should be called when you need to determine the
+ * current frequency output of the device. Ensure that the device is
+ * properly initialized and configured before calling this function. The
+ * function will perform necessary register reads and writes to calculate
+ * the frequency, and it requires a valid device structure. It returns an
+ * error code if any operation fails during the process.
+ *
+ * @param dev A pointer to an initialized adf5902_dev structure representing the
+ * device. Must not be null. The caller retains ownership.
+ * @param freq A pointer to a uint64_t where the computed frequency will be
+ * stored. Must not be null. The function writes the computed
+ * frequency to this location.
+ * @return Returns an int32_t error code: 0 on success, or a negative error code
+ * on failure.
+ ******************************************************************************/
 int32_t adf5902f_compute_frequency(struct adf5902_dev *dev, uint64_t *freq);
 
-/** ADF5902 Resources Deallocation */
+/***************************************************************************//**
+ * @brief Use this function to properly release all resources allocated for an
+ * ADF5902 device when it is no longer needed. This function should be
+ * called to clean up after the device has been initialized and used,
+ * ensuring that any associated SPI and GPIO resources are also released.
+ * It is important to call this function to prevent resource leaks in the
+ * system.
+ *
+ * @param dev A pointer to an adf5902_dev structure representing the device to
+ * be removed. Must not be null. The function will handle invalid
+ * pointers by returning an error code.
+ * @return Returns 0 on successful removal of resources, or a negative error
+ * code if an error occurs during the removal process.
+ ******************************************************************************/
 int32_t adf5902_remove(struct adf5902_dev *dev);
 
 #endif /* SRC_ADF5902_H_ */

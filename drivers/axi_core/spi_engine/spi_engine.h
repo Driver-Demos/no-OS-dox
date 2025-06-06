@@ -76,10 +76,26 @@ and will be used inside the function call */
 /*************************** Types Declarations *******************************/
 /******************************************************************************/
 
-/**
- * @struct spi_engine_init_param
- * @brief  Structure containing the init parameters needed by the SPI engine
- */
+/***************************************************************************//**
+ * @brief The `spi_engine_init_param` structure is used to define the
+ * initialization parameters for an SPI engine. It includes configuration
+ * settings such as the reference clock frequency, the type of SPI
+ * implementation, and the base address of the HDL core. Additionally, it
+ * specifies the delay between chip select toggling and the start of the
+ * serial clock, the data width for SPI transfers, and the idle state of
+ * the SDO line when the chip select is inactive or during read-only
+ * operations. This structure is essential for setting up the SPI engine
+ * with the correct parameters for operation.
+ *
+ * @param ref_clk_hz SPI engine reference clock frequency in hertz.
+ * @param type Type of SPI implementation, defined by the enum xil_spi_type.
+ * @param spi_engine_baseaddr Base address where the HDL core is located.
+ * @param cs_delay Delay between the chip select toggle and the start of the
+ * serial clock.
+ * @param data_width Width of one SPI transfer in bits.
+ * @param sdo_idle_state Output state of SDO when chip select is inactive or
+ * during read-only transfers.
+ ******************************************************************************/
 struct spi_engine_init_param {
 	/** SPI engine reference clock */
 	uint32_t	ref_clk_hz;
@@ -96,10 +112,37 @@ struct spi_engine_init_param {
 };
 
 
-/**
- * @struct spi_engine_desc
- * @brief  Structure representing an SPI engine device
- */
+/***************************************************************************//**
+ * @brief The `spi_engine_desc` structure represents an SPI engine device,
+ * encapsulating various parameters and configurations necessary for SPI
+ * communication. It includes references to clock settings, DMAC pointers
+ * for handling data transmission and reception, and configuration
+ * settings for transfer modes and data widths. The structure also
+ * specifies base addresses for the SPI engine and DMAC cores, as well as
+ * timing parameters such as chip select delay and clock division. This
+ * comprehensive structure is designed to facilitate efficient and
+ * flexible SPI operations, supporting both transmission and reception
+ * with configurable data widths and offload capabilities.
+ *
+ * @param ref_clk_hz SPI engine reference clock frequency in hertz.
+ * @param type Specifies the type of SPI implementation.
+ * @param offload_tx_dma Pointer to a DMAC used for transmission.
+ * @param offload_rx_dma Pointer to a DMAC used for reception.
+ * @param cyclic Transfer mode for the Tx DMAC.
+ * @param offload_config Configuration for offload module transfer direction:
+ * TX, RX, or both.
+ * @param offload_tx_len Number of words to be sent by the module.
+ * @param offload_rx_len Number of words to be received by the module.
+ * @param spi_engine_baseaddr Base address of the HDL core.
+ * @param rx_dma_baseaddr Base address of the RX DMAC core.
+ * @param tx_dma_baseaddr Base address of the TX DMAC core.
+ * @param cs_delay Delay between chip select toggle and start of SCLK.
+ * @param clk_div Clock divider used for transmission delays.
+ * @param data_width Data width of one SPI transfer in bits.
+ * @param max_data_width Maximum data width supported by the engine.
+ * @param sdo_idle_state Output state of SDO when CS is inactive or during read-
+ * only transfers.
+ ******************************************************************************/
 struct spi_engine_desc {
 	/** SPI engine reference clock */
 	uint32_t	ref_clk_hz;
@@ -136,10 +179,19 @@ struct spi_engine_desc {
 };
 
 
-/**
- * @struct spi_engine_offload_init_param
- * @brief  Structure containing the init parameters needed by the offload module
- */
+/***************************************************************************//**
+ * @brief The `spi_engine_offload_init_param` structure is used to initialize
+ * the offload module of the SPI engine. It contains parameters such as
+ * the base addresses for the RX and TX DMAC cores, DMAC flags which
+ * default to DMA_CYCLIC if not specified, and the configuration for the
+ * offload module's transfer direction, which can be set to transmit
+ * (TX), receive (RX), or both.
+ *
+ * @param rx_dma_baseaddr Base address where the RX DMAC core is situated.
+ * @param tx_dma_baseaddr Base address where the TX DMAC core is situated.
+ * @param dma_flags DMAC flags, defaulting to DMA_CYCLIC if not initialized.
+ * @param offload_config Offload's module transfer direction: TX, RX, or both.
+ ******************************************************************************/
 struct spi_engine_offload_init_param {
 	/** Base address where the RX DMAC core is situated */
 	uint32_t	rx_dma_baseaddr;
@@ -151,10 +203,23 @@ struct spi_engine_offload_init_param {
 	uint8_t		offload_config;
 };
 
-/**
- * @struct spi_engine_offload_message
- * @brief  Structure representing an offload message
- */
+/***************************************************************************//**
+ * @brief The `spi_engine_offload_message` structure is designed to encapsulate
+ * the details of an offload message for the SPI engine. It includes
+ * pointers to command buffers and data, as well as addresses for
+ * transmission and reception, facilitating the management of SPI data
+ * transfers in an offload context. This structure is crucial for
+ * handling the specifics of SPI communication, such as the commands to
+ * be executed and the data to be transmitted or received, thereby
+ * enabling efficient and organized SPI operations.
+ *
+ * @param commands Pointer to the SPI engine commands buffer that will be sent.
+ * @param no_commands Length of the SPI engine commands buffer.
+ * @param commands_data Pointer of the data that will be sent over SPI.
+ * @param tx_addr The address where the data that will be transmitted is
+ * situated.
+ * @param rx_addr The address where the data that will be received is situated.
+ ******************************************************************************/
 struct spi_engine_offload_message {
 	/** Pointer to the SPI engine commands buffer that will be sent.
 	 * The available commands can be found at:
@@ -175,9 +240,15 @@ struct spi_engine_offload_message {
 /************************ Functions Declarations ******************************/
 /******************************************************************************/
 
-/**
- * @brief Spi engine platform specific SPI platform ops structure
- */
+/***************************************************************************//**
+ * @brief `xil_spi_ops` is a constant external variable of type `struct
+ * no_os_spi_platform_ops`. It is used to define the platform-specific
+ * operations for the SPI engine on Xilinx platforms.
+ *
+ * @details This variable is used to provide a set of function pointers for SPI
+ * operations specific to Xilinx hardware, facilitating the integration
+ * of the SPI engine with Xilinx systems.
+ ******************************************************************************/
 extern const struct no_os_spi_platform_ops xil_spi_ops;
 
 /* Write SPI Engine's axi registers */

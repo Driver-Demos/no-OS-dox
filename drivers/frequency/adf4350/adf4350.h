@@ -122,7 +122,26 @@
 
 /******************************************************************************/
 /************************ Types Definitions ***********************************/
-/******************************************************************************/
+/***************************************************************************//**
+ * @brief The `adf4350_platform_data` structure is used to configure the ADF4350
+ * frequency synthesizer device. It contains parameters for setting the
+ * input clock frequency, channel spacing, and power-up frequency, as
+ * well as various configuration flags and user settings for the device's
+ * registers. This structure allows for detailed customization of the
+ * device's operation, including reference division and doubling, and
+ * provides a mechanism for lock detection through a GPIO pin.
+ *
+ * @param clkin The input clock frequency in Hz.
+ * @param channel_spacing The frequency spacing between channels in Hz.
+ * @param power_up_frequency The frequency in Hz at which the device powers up.
+ * @param ref_div_factor The reference division factor, a 10-bit R counter.
+ * @param ref_doubler_en Flag to enable the reference doubler.
+ * @param ref_div2_en Flag to enable the reference divide-by-2.
+ * @param r2_user_settings User-defined settings for register 2.
+ * @param r3_user_settings User-defined settings for register 3.
+ * @param r4_user_settings User-defined settings for register 4.
+ * @param gpio_lock_detect GPIO pin configuration for lock detection.
+ ******************************************************************************/
 struct adf4350_platform_data {
 	uint32_t	clkin;
 	uint32_t	channel_spacing;
@@ -138,6 +157,46 @@ struct adf4350_platform_data {
 	int32_t	    gpio_lock_detect;
 };
 
+/***************************************************************************//**
+ * @brief The `adf4350_init_param` structure is used to initialize and configure
+ * the ADF4350 frequency synthesizer. It includes parameters for SPI
+ * communication, device settings such as input clock frequency, channel
+ * spacing, and power-up frequency, as well as various user settings for
+ * phase detection, lock detection, charge pump current, and output
+ * configurations. This structure allows for detailed customization of
+ * the ADF4350's operation, enabling precise control over frequency
+ * synthesis and output characteristics.
+ *
+ * @param spi_init Holds the SPI initialization parameters for communication.
+ * @param clkin Specifies the input clock frequency in Hz.
+ * @param channel_spacing Defines the channel spacing in Hz.
+ * @param power_up_frequency Sets the initial frequency at power-up in Hz.
+ * @param reference_div_factor Determines the reference division factor.
+ * @param reference_doubler_enable Enables or disables the reference doubler.
+ * @param reference_div2_enable Enables or disables the reference divide-by-2.
+ * @param phase_detector_polarity_positive_enable Enables positive polarity for
+ * the phase detector.
+ * @param lock_detect_precision_6ns_enable Enables 6ns precision for lock
+ * detection.
+ * @param lock_detect_function_integer_n_enable Enables lock detect function for
+ * integer-N mode.
+ * @param charge_pump_current Sets the charge pump current in microamperes.
+ * @param muxout_select Selects the MUXOUT pin function.
+ * @param low_spur_mode_enable Enables low spur mode.
+ * @param cycle_slip_reduction_enable Enables cycle slip reduction.
+ * @param charge_cancellation_enable Enables charge cancellation.
+ * @param anti_backlash_3ns_enable Enables 3ns anti-backlash pulse.
+ * @param band_select_clock_mode_high_enable Enables high mode for band select
+ * clock.
+ * @param clk_divider_12bit Sets the 12-bit clock divider value.
+ * @param clk_divider_mode Defines the clock divider mode.
+ * @param aux_output_enable Enables the auxiliary output.
+ * @param aux_output_fundamental_enable Enables fundamental frequency for
+ * auxiliary output.
+ * @param mute_till_lock_enable Mutes the output until lock is detected.
+ * @param output_power Sets the output power level.
+ * @param aux_output_power Sets the auxiliary output power level.
+ ******************************************************************************/
 typedef struct {
 	/* SPI */
 	struct no_os_spi_init_param	spi_init;
@@ -174,6 +233,32 @@ typedef struct {
 	uint32_t	aux_output_power;
 } adf4350_init_param;
 
+/***************************************************************************//**
+ * @brief The `adf4350_dev` structure is used to represent the state and
+ * configuration of an ADF4350 device, which is a wideband synthesizer
+ * with integrated VCO. It includes pointers to SPI communication
+ * descriptors and platform-specific data, as well as various
+ * configuration parameters such as input clock frequency, channel
+ * spacing, and phase frequency detector frequency. The structure also
+ * contains arrays for register configurations and specific fields for
+ * fractional and integer frequency settings, modulus, and RF divider
+ * selection, which are essential for the operation and tuning of the
+ * synthesizer.
+ *
+ * @param spi_desc Pointer to a SPI descriptor for communication.
+ * @param pdata Pointer to platform-specific data for the ADF4350.
+ * @param clkin Input clock frequency in Hz.
+ * @param chspc Channel spacing in Hz.
+ * @param fpfd Phase Frequency Detector frequency in Hz.
+ * @param min_out_freq Minimum output frequency in Hz.
+ * @param r0_fract Fractional part of the frequency word for register 0.
+ * @param r0_int Integer part of the frequency word for register 0.
+ * @param r1_mod Modulus value for register 1.
+ * @param r4_rf_div_sel RF divider select value for register 4.
+ * @param regs Array of 6 registers for configuration.
+ * @param regs_hw Array of 6 hardware registers for configuration.
+ * @param val A general-purpose value used in the device.
+ ******************************************************************************/
 typedef struct {
 	struct no_os_spi_desc	*spi_desc;
 	struct adf4350_platform_data *pdata;
@@ -193,22 +278,129 @@ typedef struct {
 /******************************************************************************/
 /************************ Functions Declarations ******************************/
 /******************************************************************************/
-/*! Initializes the ADF4350. */
+/***************************************************************************//**
+ * @brief This function sets up the ADF4350 device by allocating necessary
+ * resources and configuring it according to the provided initialization
+ * parameters. It must be called before any other operations on the
+ * ADF4350 device. The function initializes the SPI interface and
+ * configures the device settings such as frequency, channel spacing, and
+ * various user settings. If the initialization is successful, the
+ * function returns a non-negative value and provides a pointer to the
+ * initialized device structure. In case of failure, it returns a
+ * negative error code.
+ *
+ * @param device A pointer to a pointer of type adf4350_dev. This will be set to
+ * point to the newly allocated and initialized device structure.
+ * Must not be null.
+ * @param init_param A structure of type adf4350_init_param containing the
+ * initialization parameters for the device. This includes SPI
+ * initialization parameters and various device-specific
+ * settings. The caller retains ownership of this structure.
+ * @return Returns 0 on success or a negative error code on failure. On success,
+ * the device pointer is updated to point to the initialized device
+ * structure.
+ ******************************************************************************/
 int32_t adf4350_setup(adf4350_dev **device,
 		      adf4350_init_param init_param);
-/*! Writes 4 bytes of data to ADF4350. */
+/***************************************************************************//**
+ * @brief This function is used to send a 32-bit data word to the ADF4350 device
+ * over the SPI interface. It is typically called when configuring the
+ * device registers. The function requires a valid device structure that
+ * has been properly initialized with SPI settings. It is important to
+ * ensure that the device is ready to receive data before calling this
+ * function to avoid communication errors.
+ *
+ * @param dev A pointer to an adf4350_dev structure representing the device.
+ * This must be a valid, initialized device structure, and must not
+ * be null. The caller retains ownership.
+ * @param data A 32-bit unsigned integer representing the data to be written to
+ * the device. The data is split into four bytes and sent over SPI.
+ * @return Returns an int32_t indicating the success or failure of the SPI write
+ * operation. A non-negative value typically indicates success, while a
+ * negative value indicates an error.
+ ******************************************************************************/
 int32_t adf4350_write(adf4350_dev *dev,
 		      uint32_t data);
-/*! Stores PLL 0 frequency in Hz. */
+/***************************************************************************//**
+ * @brief Use this function to set the output frequency of the ADF4350 device to
+ * a specified value in Hertz. This function should be called after the
+ * device has been properly initialized. It is important to ensure that
+ * the frequency value provided is within the valid range supported by
+ * the device. The function returns the actual frequency set, which may
+ * differ from the requested frequency due to device constraints or
+ * rounding.
+ *
+ * @param dev A pointer to an adf4350_dev structure representing the device.
+ * Must not be null, and the device must be initialized before
+ * calling this function.
+ * @param Hz The desired output frequency in Hertz. The value should be within
+ * the device's supported frequency range. If the value is outside
+ * this range, the function will handle it according to the device's
+ * capabilities, potentially clamping or adjusting the frequency.
+ * @return Returns the actual frequency set on the device in Hertz, which may
+ * differ from the requested frequency due to device constraints or
+ * rounding.
+ ******************************************************************************/
 int64_t adf4350_out_altvoltage0_frequency(adf4350_dev *dev,
 		int64_t Hz);
-/*! Stores PLL 0 frequency resolution/channel spacing in Hz. */
+/***************************************************************************//**
+ * @brief This function sets the channel spacing for the ADF4350 device to the
+ * specified frequency in Hertz. It should be called when you need to
+ * configure or update the channel spacing of the device. If the input
+ * frequency is not INT32_MAX, the channel spacing is updated to the
+ * provided value. This function returns the current channel spacing
+ * after the update. It is important to ensure that the device is
+ * properly initialized before calling this function.
+ *
+ * @param dev A pointer to an adf4350_dev structure representing the device.
+ * Must not be null, and the device should be initialized before use.
+ * @param Hz An integer representing the desired channel spacing in Hertz. If
+ * set to INT32_MAX, the channel spacing is not updated. Otherwise, it
+ * updates the channel spacing to this value.
+ * @return Returns the current channel spacing in Hertz after the function call.
+ ******************************************************************************/
 int32_t adf4350_out_altvoltage0_frequency_resolution(adf4350_dev *dev,
 		int32_t Hz);
-/*! Sets PLL 0 REFin frequency in Hz. */
+/***************************************************************************//**
+ * @brief This function sets the reference input frequency for the ADF4350
+ * device to the specified value in Hertz. It should be used when you
+ * need to configure or update the reference frequency for the device.
+ * The function will update the device's internal state with the new
+ * frequency unless the specified frequency is INT32_MAX, in which case
+ * the current frequency setting is retained. This function returns the
+ * current reference input frequency after the operation, which may be
+ * useful for verification purposes.
+ *
+ * @param dev A pointer to an adf4350_dev structure representing the device.
+ * Must not be null, and the device should be properly initialized
+ * before calling this function.
+ * @param Hz The desired reference input frequency in Hertz. If set to
+ * INT32_MAX, the function will not change the current frequency
+ * setting. Otherwise, it updates the device's reference frequency to
+ * this value.
+ * @return Returns the current reference input frequency of the device in Hertz
+ * after the operation.
+ ******************************************************************************/
 int64_t adf4350_out_altvoltage0_refin_frequency(adf4350_dev *dev,
 		int64_t Hz);
-/*! Powers down the PLL.  */
+/***************************************************************************//**
+ * @brief Use this function to control the power state of the PLL by either
+ * powering it down or powering it up. This function should be called
+ * when you need to manage the power consumption of the device, such as
+ * when the PLL is not in use. It is important to ensure that the device
+ * has been properly initialized before calling this function. The
+ * function modifies the power state based on the input parameter and
+ * returns the current power state of the PLL.
+ *
+ * @param dev A pointer to an adf4350_dev structure representing the device.
+ * Must not be null, and the device should be properly initialized
+ * before use.
+ * @param pwd An integer indicating the desired power state. Use 1 to power down
+ * the PLL and 0 to power it up. Any other values are ignored, and
+ * the function will not change the power state.
+ * @return Returns the current power state of the PLL as an integer, where a
+ * non-zero value indicates that the PLL is powered down.
+ ******************************************************************************/
 int32_t adf4350_out_altvoltage0_powerdown(adf4350_dev *dev,
 		int32_t pwd);
 

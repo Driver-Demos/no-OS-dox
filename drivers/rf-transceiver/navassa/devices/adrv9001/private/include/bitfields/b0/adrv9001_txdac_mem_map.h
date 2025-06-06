@@ -13,21 +13,55 @@
 
 #include "adrv9001_bf_hal.h"
 
+/***************************************************************************//**
+ * @brief The `adrv9001_BfTxdacMemMap_e` is an enumeration that defines memory
+ * map addresses for the TX DACs in the ADRV9001 device. It includes two
+ * members, `ADRV9001_BF_TX1_DAC` and `ADRV9001_BF_TX2_DAC`, which
+ * correspond to specific memory addresses used for accessing the TX1 and
+ * TX2 DACs, respectively. This enumeration is part of the bitfield
+ * accessors for the TX DAC memory map, facilitating the configuration
+ * and control of the DACs in the ADRV9001 transceiver.
+ *
+ * @param ADRV9001_BF_TX1_DAC Represents the memory map address for the TX1 DAC,
+ * set to 0x2c00.
+ * @param ADRV9001_BF_TX2_DAC Represents the memory map address for the TX2 DAC,
+ * set to 0x2e00.
+ ******************************************************************************/
 typedef enum adrv9001_BfTxdacMemMap_e
 {
     ADRV9001_BF_TX1_DAC    =   0x2c00,
     ADRV9001_BF_TX2_DAC    =   0x2e00
 } adrv9001_BfTxdacMemMap_e;
 
+/***************************************************************************//**
+ * @brief The `txdacMemMapInstances` is a static constant array of type
+ * `adrv9001_BfTxdacMemMap_e`, which is an enumeration representing
+ * memory map instances for the TX DACs in the ADRV9001 device. It
+ * contains two elements: `ADRV9001_BF_TX1_DAC` and
+ * `ADRV9001_BF_TX2_DAC`, which correspond to specific memory addresses
+ * for the TX1 and TX2 DACs.
+ *
+ * @details This array is used to reference the memory map instances for the TX
+ * DACs in various functions that perform operations on these DACs.
+ ******************************************************************************/
 static const adrv9001_BfTxdacMemMap_e txdacMemMapInstances[] = {
     ADRV9001_BF_TX1_DAC,
     ADRV9001_BF_TX2_DAC
 };
 
 
-/**
- * IDAC Calibration status
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration status of the I DAC by reading a specific
+ * register.
+ *
+ * @param device A pointer to the device context used for communication.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a uint8_t variable where the retrieved calibration
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalActiveI_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -43,9 +77,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalActiveI_Get(void *device,
 }
 
 
-/**
- * QDAC Calibration status
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration status of the QDAC by reading a specific
+ * register value.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific QDAC instance
+ * to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalActiveQ_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -60,9 +104,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalActiveQ_Get(void *device,
     return status;
 }
 
-/**
- * IDAC Address for CALDAC read and write operations.  Also address for debug mode.
- */
+/***************************************************************************//**
+ * @brief Sets the calibration address for the IDAC in the TXDAC memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value An 8-bit unsigned integer representing the calibration address
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalAddrI_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -74,9 +127,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalAddrI_Set(void *device,
     return status;
 }
 
-/**
- * IDAC Address for CALDAC read and write operations.  Also address for debug mode.
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration address for the I DAC in the TXDAC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration address will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalAddrI_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -91,9 +154,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalAddrI_Get(void *device,
     return status;
 }
 
-/**
- * QDAC Address for CALDAC read and write operations.  Also address for debug mode.
- */
+/***************************************************************************//**
+ * @brief Sets the calibration address for the QDAC in the TXDAC memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (either TX1 or TX2).
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the calibration address.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalAddrQ_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -105,9 +177,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalAddrQ_Set(void *device,
     return status;
 }
 
-/**
- * QDAC Address for CALDAC read and write operations.  Also address for debug mode.
- */
+/***************************************************************************//**
+ * @brief The `adrv9001_TxdacMemMap_TxdacCalAddrQ_Get` function retrieves the
+ * calibration address for the QDAC from the specified device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfTxdacMemMap_e` that
+ * specifies which DAC instance to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration address will be stored.
+ * @return The function returns an integer status code indicating the success or
+ * failure of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalAddrQ_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -122,9 +204,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalAddrQ_Get(void *device,
     return status;
 }
 
-/**
- * DEBUG: IDAC Calibration debug mode.  Changes behavior of calibration state machine.
- */
+/***************************************************************************//**
+ * @brief Sets the calibration debug mode for the IDAC in the TXDAC memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A uint8_t value that sets the debug mode for the IDAC
+ * calibration.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalDebugI_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -136,9 +227,20 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalDebugI_Set(void *device,
     return status;
 }
 
-/**
- * DEBUG: IDAC Calibration debug mode.  Changes behavior of calibration state machine.
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration debug mode value for the IDAC in the TXDAC
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration debug mode value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation, with the retrieved calibration debug mode value
+ * stored in the provided `value` pointer.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalDebugI_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -153,9 +255,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalDebugI_Get(void *device,
     return status;
 }
 
-/**
- * DEBUG: QDAC Calibration debug mode.  Changes behavior of calibration state machine.
- */
+/***************************************************************************//**
+ * @brief Sets the QDAC calibration debug mode for the specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific QDAC instance
+ * (e.g., ADRV9001_BF_TX1_DAC or ADRV9001_BF_TX2_DAC).
+ * @param value A uint8_t value that sets the debug mode for the QDAC
+ * calibration.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalDebugQ_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -167,9 +278,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalDebugQ_Set(void *device,
     return status;
 }
 
-/**
- * DEBUG: QDAC Calibration debug mode.  Changes behavior of calibration state machine.
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration debug mode value for the QDAC.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific QDAC instance
+ * (e.g., ADRV9001_BF_TX1_DAC or ADRV9001_BF_TX2_DAC).
+ * @param value A pointer to a uint8_t variable where the retrieved calibration
+ * debug mode value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalDebugQ_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -184,9 +304,17 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalDebugQ_Get(void *device,
     return status;
 }
 
-/**
- * SPI initialize ISB calibration reference
- */
+/***************************************************************************//**
+ * @brief Sets the ISB calibration reference for the TXDAC.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (either TX1 or TX2).
+ * @param value A uint8_t value that sets the ISB calibration reference.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalDoIsbref_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -198,9 +326,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalDoIsbref_Set(void *device,
     return status;
 }
 
-/**
- * SPI initialize ISB calibration reference
- */
+/***************************************************************************//**
+ * @brief Retrieves the ISB calibration reference value from the specified TXDAC
+ * memory map.
+ *
+ * @param device A pointer to the device context used for communication.
+ * @param instance An enumerated value indicating which TXDAC instance to
+ * access.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalDoIsbref_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -215,9 +352,17 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalDoIsbref_Get(void *device,
     return status;
 }
 
-/**
- * Enables Calibration Machine to correct for Comparator Offsets
- */
+/***************************************************************************//**
+ * @brief Sets the offset calibration for the TXDAC calibration machine.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A uint8_t value that indicates the calibration offset to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalDoOffsetCal_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -229,9 +374,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalDoOffsetCal_Set(void *device,
     return status;
 }
 
-/**
- * Enables Calibration Machine to correct for Comparator Offsets
- */
+/***************************************************************************//**
+ * @brief Retrieves the offset calibration setting for the TXDAC.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerator value indicating which TXDAC instance to
+ * access.
+ * @param value A pointer to a uint8_t variable where the retrieved calibration
+ * offset value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalDoOffsetCal_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -247,9 +401,20 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalDoOffsetCal_Get(void *device,
 }
 
 
-/**
- * IDAC Calibration status
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration done status for the I DAC in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating which TXDAC instance (TX1 or
+ * TX2) to access.
+ * @param value A pointer to a `uint8_t` variable where the calibration done
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation, while the calibration done status is stored in
+ * the provided value pointer.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalDoneI_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -265,9 +430,20 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalDoneI_Get(void *device,
 }
 
 
-/**
- * QDAC Calibration status
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration done status for the QDAC in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific QDAC instance
+ * (e.g., ADRV9001_BF_TX1_DAC or ADRV9001_BF_TX2_DAC).
+ * @param value A pointer to a uint8_t variable where the calibration done
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation, while the calibration done status is stored in
+ * the provided value pointer.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalDoneQ_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -282,9 +458,17 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalDoneQ_Get(void *device,
     return status;
 }
 
-/**
- * Loop on ISB calibration to center ISB cal codes
- */
+/***************************************************************************//**
+ * @brief Sets the ISB calibration loop configuration for the TXDAC.
+ *
+ * @param device A pointer to the device context that is used for the operation.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (TX1 or TX2).
+ * @param value A uint8_t value that determines the state of the ISB calibration
+ * loop.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalIsbLoop_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -296,9 +480,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalIsbLoop_Set(void *device,
     return status;
 }
 
-/**
- * Loop on ISB calibration to center ISB cal codes
- */
+/***************************************************************************//**
+ * @brief Retrieves the ISB calibration loop status from the specified TXDAC
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration loop status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalIsbLoop_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -314,9 +508,16 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalIsbLoop_Get(void *device,
 }
 
 
-/**
- * IDAC Count of ISB CALDACS that saturated to 0 or 15.  Count saturates at 7.
- */
+/***************************************************************************//**
+ * @brief Retrieves the count of ISB CALDACs that have saturated to 0 or 15.
+ *
+ * @param device A pointer to the device context used for communication.
+ * @param instance An enumerated type indicating which TXDAC instance to access.
+ * @param value A pointer to a uint8_t variable where the saturated count will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalIsbSatI_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -332,9 +533,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalIsbSatI_Get(void *device,
 }
 
 
-/**
- * QDAC Count of ISB CALDACS that saturated to 0 or 15.  Count saturates at 7.
- */
+/***************************************************************************//**
+ * @brief Retrieves the count of ISB CALDACS that have saturated to 0 or 15 for
+ * the specified TXDAC instance.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * hardware.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the saturated count will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalIsbSatQ_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -349,9 +560,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalIsbSatQ_Get(void *device,
     return status;
 }
 
-/**
- * DEBUG: Initial value for ISB REF CALDAC.  See also txdac_cal_skip_isbref.
- */
+/***************************************************************************//**
+ * @brief Sets the initial value for ISB calibration reference in the TXDAC
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value An 8-bit unsigned integer representing the initial value to set
+ * for the ISB calibration reference.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalIsbrefInit_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -363,9 +584,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalIsbrefInit_Set(void *device,
     return status;
 }
 
-/**
- * DEBUG: Initial value for ISB REF CALDAC.  See also txdac_cal_skip_isbref.
- */
+/***************************************************************************//**
+ * @brief Retrieves the initial value for ISB calibration reference from the
+ * specified TXDAC instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration reference value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalIsbrefInit_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -380,9 +611,16 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalIsbrefInit_Get(void *device,
     return status;
 }
 
-/**
- * Loop on MSB calibration to center MSB cal codes (priority over ISB loop)
- */
+/***************************************************************************//**
+ * @brief Sets the MSB calibration loop for the TXDAC.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerated value representing the specific TXDAC instance.
+ * @param value A uint8_t value indicating the state to set for the MSB
+ * calibration loop.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalMsbLoop_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -394,9 +632,17 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalMsbLoop_Set(void *device,
     return status;
 }
 
-/**
- * Loop on MSB calibration to center MSB cal codes (priority over ISB loop)
- */
+/***************************************************************************//**
+ * @brief Retrieves the MSB calibration loop status for the TXDAC.
+ *
+ * @param device A pointer to the device context used for hardware access.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (TX1 or TX2).
+ * @param value A pointer to a `uint8_t` where the retrieved MSB calibration
+ * loop status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalMsbLoop_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -412,9 +658,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalMsbLoop_Get(void *device,
 }
 
 
-/**
- * IDAC Count of MSB CALDACS that saturated to 0 or 127.  Count saturates at 15.
- */
+/***************************************************************************//**
+ * @brief Retrieves the count of MSB CALDACS that have saturated to 0 or 127.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (either TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the saturated count will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalMsbSatI_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -430,9 +685,15 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalMsbSatI_Get(void *device,
 }
 
 
-/**
- * QDAC Count of MSB CALDACS that saturated to 0 or 127.  Count saturates at 15.
- */
+/***************************************************************************//**
+ * @brief Retrieves the saturated count of MSB CALDACs for the QDAC.
+ *
+ * @param device A pointer to the device context used for communication.
+ * @param instance An enumerated type indicating which QDAC instance to access.
+ * @param value A pointer to a uint8_t where the result will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalMsbSatQ_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -448,9 +709,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalMsbSatQ_Get(void *device,
 }
 
 
-/**
- * IDAC Flag indicating one of the Offset CALDACS saturated to 127.
- */
+/***************************************************************************//**
+ * @brief Retrieves the saturation offset status for the IDAC calibration.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the result will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalOffsetSatI_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -466,9 +736,20 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalOffsetSatI_Get(void *device,
 }
 
 
-/**
- * QDAC Flag indicating one of the Offset CALDACS saturated to 127.
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration offset saturation status for the QDAC in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfTxdacMemMap_e`
+ * indicating which DAC instance (TX1 or TX2) to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved saturation
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation, with the saturation status stored in the provided
+ * `value` pointer.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalOffsetSatQ_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -484,9 +765,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalOffsetSatQ_Get(void *device,
 }
 
 
-/**
- * IDAC CALDAC read data.  Valid range for MSB CALDACs is 0 to 127.  Valid range for ISB CALDACs is 0 to 15.
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration read data for the I DAC from the specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific DAC instance
+ * (e.g., ADRV9001_BF_TX1_DAC or ADRV9001_BF_TX2_DAC).
+ * @param value A pointer to a `uint8_t` variable where the read calibration
+ * data will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalRdDataI_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -502,9 +793,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalRdDataI_Get(void *device,
 }
 
 
-/**
- * QDAC CALDAC read data.  Valid range for MSB CALDACs is 0 to 127.  Valid range for ISB CALDACs is 0 to 15.
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration read data for the QDAC from the specified
+ * device instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific QDAC instance
+ * to read from.
+ * @param value A pointer to a `uint8_t` variable where the read data will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalRdDataQ_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -519,9 +820,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalRdDataQ_Get(void *device,
     return status;
 }
 
-/**
- * Amount of time to wait for signals to settle before performing SAR calibration on a CALDAC.  Units are calibration clocks.  0=no delay 31=maximum delay
- */
+/***************************************************************************//**
+ * @brief Sets the calibration settle delay for the TXDAC.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (TX1 or TX2).
+ * @param value An 8-bit unsigned integer representing the settle delay value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalSettleDelay_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -533,9 +843,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalSettleDelay_Set(void *device,
     return status;
 }
 
-/**
- * Amount of time to wait for signals to settle before performing SAR calibration on a CALDAC.  Units are calibration clocks.  0=no delay 31=maximum delay
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration settle delay value for the TXDAC.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (TX1 or TX2).
+ * @param value A pointer to a `uint8_t` where the retrieved settle delay value
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalSettleDelay_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -550,9 +869,17 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalSettleDelay_Get(void *device,
     return status;
 }
 
-/**
- * I DAC Calibration Start
- */
+/***************************************************************************//**
+ * @brief Sets the calibration start for the I DAC in the TXDAC memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A uint8_t value that indicates the calibration start command.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalStartI_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -564,9 +891,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalStartI_Set(void *device,
     return status;
 }
 
-/**
- * I DAC Calibration Start
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration start status for the I DAC.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific DAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration start status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalStartI_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -581,9 +917,17 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalStartI_Get(void *device,
     return status;
 }
 
-/**
- * Q DAC Calibration Start
- */
+/***************************************************************************//**
+ * @brief Sets the calibration start value for the Q DAC in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific TX DAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A uint8_t value that indicates the calibration start setting.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalStartQ_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -595,9 +939,20 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalStartQ_Set(void *device,
     return status;
 }
 
-/**
- * Q DAC Calibration Start
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration start status for the Q DAC in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific TX DAC instance
+ * (either TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration start status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation, with the calibration start status stored in the
+ * provided value pointer.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalStartQ_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -612,9 +967,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalStartQ_Get(void *device,
     return status;
 }
 
-/**
- * DEBUG: Select cell for calibration debug: 0 = off, 1=driven according to TXDAC_CAL_ADDR_I/ TXDAC_CAL_ADDR_Q
- */
+/***************************************************************************//**
+ * @brief Sets the calibration use selection for the TXDAC.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A uint8_t value that indicates the calibration use selection (0
+ * or 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalUseSelect_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -626,9 +990,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalUseSelect_Set(void *device,
     return status;
 }
 
-/**
- * DEBUG: Select cell for calibration debug: 0 = off, 1=driven according to TXDAC_CAL_ADDR_I/ TXDAC_CAL_ADDR_Q
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration use selection for the TXDAC.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration use selection will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalUseSelect_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -643,9 +1016,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalUseSelect_Get(void *device,
     return status;
 }
 
-/**
- * I DAC CALDAC write operation.  0 to 1 transition will save txdac_cal_wr_data to txdac_cal_addr.
- */
+/***************************************************************************//**
+ * @brief Sets the calibration write enable for the I DAC in the TXDAC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A uint8_t value that indicates whether to enable (1) or disable
+ * (0) the write operation.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalWeI_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -657,9 +1040,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalWeI_Set(void *device,
     return status;
 }
 
-/**
- * I DAC CALDAC write operation.  0 to 1 transition will save txdac_cal_wr_data to txdac_cal_addr.
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration write enable status for the I DAC.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the read value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalWeI_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -674,9 +1066,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalWeI_Get(void *device,
     return status;
 }
 
-/**
- * Q DAC CALDAC write operation.  0 to 1 transition will save txdac_cal_wr_data to txdac_cal_addr.
- */
+/***************************************************************************//**
+ * @brief Sets the calibration write enable for the Q DAC in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific TX DAC instance
+ * (TX1 or TX2).
+ * @param value A uint8_t value that indicates whether to enable or disable the
+ * write operation.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalWeQ_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -688,9 +1090,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalWeQ_Set(void *device,
     return status;
 }
 
-/**
- * Q DAC CALDAC write operation.  0 to 1 transition will save txdac_cal_wr_data to txdac_cal_addr.
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration write enable status for the Q DAC in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfTxdacMemMap_e`
+ * indicating which DAC instance (TX1 or TX2) to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration write enable status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalWeQ_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -705,9 +1117,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalWeQ_Get(void *device,
     return status;
 }
 
-/**
- * IDAC CALDAC write data.  Valid range for MSB CALDACs is 0 to 127.  Valid range for ISB CALDACs is 0 to 15.
- */
+/***************************************************************************//**
+ * @brief Sets the calibration write data for the I DAC in the TXDAC memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value An 8-bit unsigned integer representing the calibration write
+ * data to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalWrDataI_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -719,9 +1140,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalWrDataI_Set(void *device,
     return status;
 }
 
-/**
- * IDAC CALDAC write data.  Valid range for MSB CALDACs is 0 to 127.  Valid range for ISB CALDACs is 0 to 15.
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration write data for the I DAC from the specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration write data will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalWrDataI_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -736,9 +1167,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalWrDataI_Get(void *device,
     return status;
 }
 
-/**
- * QDAC CALDAC write data.  Valid range for MSB CALDACs is 0 to 127.  Valid range for ISB CALDACs is 0 to 15.
- */
+/***************************************************************************//**
+ * @brief Sets the calibration write data for the QDAC in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific QDAC instance
+ * (TX1 or TX2).
+ * @param value An 8-bit unsigned integer representing the calibration write
+ * data to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalWrDataQ_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -750,9 +1190,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalWrDataQ_Set(void *device,
     return status;
 }
 
-/**
- * QDAC CALDAC write data.  Valid range for MSB CALDACs is 0 to 127.  Valid range for ISB CALDACs is 0 to 15.
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration write data for the QDAC from the specified
+ * device instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific QDAC instance
+ * to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration write data will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalWrDataQ_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -767,9 +1217,17 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalWrDataQ_Get(void *device,
     return status;
 }
 
-/**
- * DAC clock divide ratio for calibration clock.  Set to 3-6 MHz
- */
+/***************************************************************************//**
+ * @brief Sets the DAC clock divide ratio for calibration clock.
+ *
+ * @param device A pointer to the device structure that represents the DAC.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (either TX1 or TX2).
+ * @param value An 8-bit unsigned integer representing the desired clock divide
+ * ratio.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalclkDiv_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -781,9 +1239,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalclkDiv_Set(void *device,
     return status;
 }
 
-/**
- * DAC clock divide ratio for calibration clock.  Set to 3-6 MHz
- */
+/***************************************************************************//**
+ * @brief Retrieves the DAC calibration clock division value from the specified
+ * device instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration clock division value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalclkDiv_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -798,9 +1266,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalclkDiv_Get(void *device,
     return status;
 }
 
-/**
- * I DAC calibration clock enable.
- */
+/***************************************************************************//**
+ * @brief Sets the calibration clock enable for the I DAC in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A uint8_t value that indicates whether to enable (1) or disable
+ * (0) the calibration clock.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalclkEnI_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -812,9 +1290,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalclkEnI_Set(void *device,
     return status;
 }
 
-/**
- * I DAC calibration clock enable.
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration clock enable status for the I DAC in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a uint8_t variable where the retrieved calibration
+ * clock enable status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalclkEnI_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -829,9 +1317,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalclkEnI_Get(void *device,
     return status;
 }
 
-/**
- * Q DAC calibration clock enable.
- */
+/***************************************************************************//**
+ * @brief Sets the calibration clock enable for the Q DAC in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific TX DAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A uint8_t value that indicates whether to enable or disable the
+ * calibration clock.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalclkEnQ_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -843,9 +1341,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalclkEnQ_Set(void *device,
     return status;
 }
 
-/**
- * Q DAC calibration clock enable.
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration clock enable status for the Q DAC.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a uint8_t variable where the retrieved calibration
+ * clock enable status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCalclkEnQ_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -860,9 +1367,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCalclkEnQ_Get(void *device,
     return status;
 }
 
-/**
- * Calibration DAC's Fullscale Current Setting
- */
+/***************************************************************************//**
+ * @brief Sets the full-scale current setting for the calibration DAC.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value An 8-bit unsigned integer representing the full-scale current
+ * setting to be applied.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCaldacFsc_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -874,9 +1390,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCaldacFsc_Set(void *device,
     return status;
 }
 
-/**
- * Calibration DAC's Fullscale Current Setting
- */
+/***************************************************************************//**
+ * @brief Retrieves the full-scale current setting of the calibration DAC.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value indicating which TXDAC instance to
+ * access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved full-scale
+ * current value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCaldacFsc_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -891,9 +1416,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCaldacFsc_Get(void *device,
     return status;
 }
 
-/**
- * Calibration MSB DAC's offset
- */
+/***************************************************************************//**
+ * @brief Sets the calibration offset for the MSB DAC in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value An 8-bit unsigned integer representing the offset value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCaldacOffset_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -905,9 +1439,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCaldacOffset_Set(void *device,
     return status;
 }
 
-/**
- * Calibration MSB DAC's offset
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration offset value for the TXDAC CALDAC from the
+ * specified device instance.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration offset value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCaldacOffset_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -922,9 +1466,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCaldacOffset_Get(void *device,
     return status;
 }
 
-/**
- * Assumed DAC Output Common Mode Level.  Needs to match BBF Common Mode
- */
+/***************************************************************************//**
+ * @brief Sets the assumed DAC output common mode level for a specified TXDAC
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the DAC
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value An 8-bit unsigned integer representing the common mode level to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCmCtrl_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -936,9 +1490,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCmCtrl_Set(void *device,
     return status;
 }
 
-/**
- * Assumed DAC Output Common Mode Level.  Needs to match BBF Common Mode
- */
+/***************************************************************************//**
+ * @brief Retrieves the common mode control value for the TXDAC.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a uint8_t variable where the retrieved common mode
+ * control value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCmCtrl_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -954,9 +1517,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCmCtrl_Get(void *device,
 }
 
 
-/**
- * IDAC Average Value of all 32 MSB CALDAC codes
- */
+/***************************************************************************//**
+ * @brief Retrieves the average value of all 32 MSB CALDAC codes for the IDAC.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerator of type `adrv9001_BfTxdacMemMap_e` that
+ * specifies which DAC instance to access.
+ * @param value A pointer to a `uint8_t` where the retrieved average value will
+ * be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCompAvgmsbI_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -972,9 +1544,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCompAvgmsbI_Get(void *device,
 }
 
 
-/**
- * QDAC Average Value of all 32 MSB CALDAC codes
- */
+/***************************************************************************//**
+ * @brief Retrieves the average most significant bit (MSB) value from the QDAC
+ * calibration data.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type indicating which QDAC instance to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved average
+ * MSB value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCompAvgmsbQ_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -989,9 +1570,16 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCompAvgmsbQ_Get(void *device,
     return status;
 }
 
-/**
- * DEBUG: comparator powerdown value to use when txdac_powerdown_override==1
- */
+/***************************************************************************//**
+ * @brief Sets the comparator powerdown value for the TXDAC.
+ *
+ * @param device A pointer to the device structure.
+ * @param instance An enumerated value indicating which TXDAC instance to
+ * configure.
+ * @param value A uint8_t value representing the powerdown state to set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCompBiaspd_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -1003,9 +1591,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCompBiaspd_Set(void *device,
     return status;
 }
 
-/**
- * DEBUG: comparator powerdown value to use when txdac_powerdown_override==1
- */
+/***************************************************************************//**
+ * @brief Retrieves the comparator bias power-down value from the TXDAC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type indicating which TXDAC instance to access.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCompBiaspd_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -1020,9 +1617,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCompBiaspd_Get(void *device,
     return status;
 }
 
-/**
- * Disable Comparator Settling Speed up
- */
+/***************************************************************************//**
+ * @brief Sets the fast comparator enable bit in the TXDAC memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A uint8_t value that indicates whether to enable or disable the
+ * fast comparator.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCompFastcmEnb_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -1034,9 +1640,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCompFastcmEnb_Set(void *device,
     return status;
 }
 
-/**
- * Disable Comparator Settling Speed up
- */
+/***************************************************************************//**
+ * @brief Retrieves the fast comparator enable status from the TXDAC memory map.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved comparator
+ * enable status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation, while the comparator enable status is stored in
+ * the provided `value` pointer.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCompFastcmEnb_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -1051,9 +1667,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCompFastcmEnb_Get(void *device,
     return status;
 }
 
-/**
- * ISB Comparator: Trade off Comparator Settling Time for Accuracy.  Larger value is higher gain/slower settling.
- */
+/***************************************************************************//**
+ * @brief Sets the ISB comparator gain in the TXDAC memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value An 8-bit unsigned integer representing the gain value to be set
+ * for the ISB comparator.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCompGainIsb_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -1065,9 +1690,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCompGainIsb_Set(void *device,
     return status;
 }
 
-/**
- * ISB Comparator: Trade off Comparator Settling Time for Accuracy.  Larger value is higher gain/slower settling.
- */
+/***************************************************************************//**
+ * @brief Retrieves the ISB comparator gain setting from the specified TXDAC
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (TX1 or TX2).
+ * @param value A pointer to a uint8_t variable where the retrieved gain value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCompGainIsb_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -1082,9 +1717,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCompGainIsb_Get(void *device,
     return status;
 }
 
-/**
- * MSB Comparator: Trade off Comparator Settling Time for Accuracy.  Larger value is higher gain/slower settling.
- */
+/***************************************************************************//**
+ * @brief Sets the most significant bit (MSB) gain for the TXDAC comparator.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value An 8-bit unsigned integer representing the gain value to be set
+ * for the MSB comparator.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCompGainMsb_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -1096,9 +1740,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCompGainMsb_Set(void *device,
     return status;
 }
 
-/**
- * MSB Comparator: Trade off Comparator Settling Time for Accuracy.  Larger value is higher gain/slower settling.
- */
+/***************************************************************************//**
+ * @brief Retrieves the most significant bit (MSB) of the comparator gain
+ * setting for the TXDAC.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved MSB
+ * comparator gain will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCompGainMsb_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -1113,9 +1767,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCompGainMsb_Get(void *device,
     return status;
 }
 
-/**
- * Number of SAR runs to average for each ISB CALDAC measurement.
- */
+/***************************************************************************//**
+ * @brief Sets the number of SAR runs to average for each ISB CALDAC
+ * measurement.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value An 8-bit unsigned integer representing the number of SAR runs to
+ * average.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCompIsbavg_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -1127,9 +1791,17 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCompIsbavg_Set(void *device,
     return status;
 }
 
-/**
- * Number of SAR runs to average for each ISB CALDAC measurement.
- */
+/***************************************************************************//**
+ * @brief Retrieves the average number of SAR runs for ISB calibration.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type indicating which TXDAC instance to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved average
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCompIsbavg_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -1144,9 +1816,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCompIsbavg_Get(void *device,
     return status;
 }
 
-/**
- * DEBUG: comparator powerdown value to use when txdac_powerdown_override==1
- */
+/***************************************************************************//**
+ * @brief Sets the ISB comparator powerdown value in the TXDAC memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A uint8_t value that specifies the powerdown state for the ISB
+ * comparator.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCompIsbpd_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -1158,9 +1839,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCompIsbpd_Set(void *device,
     return status;
 }
 
-/**
- * DEBUG: comparator powerdown value to use when txdac_powerdown_override==1
- */
+/***************************************************************************//**
+ * @brief Retrieves the ISB comparator powerdown configuration from the
+ * specified device instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved powerdown
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCompIsbpd_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -1175,9 +1866,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCompIsbpd_Get(void *device,
     return status;
 }
 
-/**
- * Number of SAR runs to average for each MSB CALDAC measurement.
- */
+/***************************************************************************//**
+ * @brief Sets the MSB averaging count for the ISB calibration in the TXDAC
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (either TX1 or TX2).
+ * @param value An 8-bit unsigned integer representing the number of SAR runs to
+ * average.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCompMsbavg_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -1189,9 +1890,20 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCompMsbavg_Set(void *device,
     return status;
 }
 
-/**
- * Number of SAR runs to average for each MSB CALDAC measurement.
- */
+/***************************************************************************//**
+ * @brief Retrieves the average value of the most significant bits (MSB) from
+ * the calibration DAC for a specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved average
+ * MSB value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation, with the average MSB value stored in the provided
+ * pointer.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCompMsbavg_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -1206,9 +1918,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCompMsbavg_Get(void *device,
     return status;
 }
 
-/**
- * DEBUG: comparator powerdown value to use when txdac_powerdown_override==1
- */
+/***************************************************************************//**
+ * @brief Sets the most significant bit of the comparator powerdown value for
+ * the TXDAC.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A 8-bit unsigned integer representing the value to set for the
+ * comparator powerdown.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCompMsbpd_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -1220,9 +1942,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCompMsbpd_Set(void *device,
     return status;
 }
 
-/**
- * DEBUG: comparator powerdown value to use when txdac_powerdown_override==1
- */
+/***************************************************************************//**
+ * @brief Retrieves the most significant byte of the comparator bias power-down
+ * setting for a specified TXDAC instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCompMsbpd_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -1237,9 +1969,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCompMsbpd_Get(void *device,
     return status;
 }
 
-/**
- * Disable Comparator Settling Speed Up
- */
+/***************************************************************************//**
+ * @brief Sets the one-shot enable for the comparator in the TXDAC memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A `uint8_t` value that indicates whether to enable (1) or
+ * disable (0) the one-shot comparator.
+ * @return Returns an `int32_t` status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCompOneshotEnb_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -1251,9 +1992,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCompOneshotEnb_Set(void *device,
     return status;
 }
 
-/**
- * Disable Comparator Settling Speed Up
- */
+/***************************************************************************//**
+ * @brief Retrieves the one-shot enable status of the comparator for the TXDAC.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCompOneshotEnb_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -1269,9 +2019,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCompOneshotEnb_Get(void *device,
 }
 
 
-/**
- * IDAC Comparator raw output value.
- */
+/***************************************************************************//**
+ * @brief Retrieves the raw output value of the IDAC comparator.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved comparator
+ * output value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCompOutI_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -1287,9 +2046,17 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCompOutI_Get(void *device,
 }
 
 
-/**
- * QDAC Comparator raw output value.
- */
+/***************************************************************************//**
+ * @brief Retrieves the comparator output value for the QDAC.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type indicating which TXDAC instance to access.
+ * @param value A pointer to a uint8_t variable where the retrieved comparator
+ * output value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacCompOutQ_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -1304,9 +2071,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacCompOutQ_Get(void *device,
     return status;
 }
 
-/**
- * Set amplitude of dither
- */
+/***************************************************************************//**
+ * @brief Sets the amplitude of dither for the TXDAC.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value An 8-bit unsigned integer representing the desired dither
+ * amplitude.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacDitherAmplitude_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -1318,9 +2094,16 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacDitherAmplitude_Set(void *device
     return status;
 }
 
-/**
- * Set amplitude of dither
- */
+/***************************************************************************//**
+ * @brief Retrieves the dither amplitude value from the TXDAC memory map.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which TXDAC instance to access.
+ * @param value A pointer to a uint8_t where the retrieved dither amplitude will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacDitherAmplitude_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -1335,9 +2118,17 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacDitherAmplitude_Get(void *device
     return status;
 }
 
-/**
- * Enable DAC MSB dither
- */
+/***************************************************************************//**
+ * @brief Sets the dither enable state for the DAC.
+ *
+ * @param device A pointer to the device structure that represents the DAC.
+ * @param instance An enumerated value representing the specific DAC instance
+ * (TX1 or TX2).
+ * @param value A uint8_t value indicating whether to enable (1) or disable (0)
+ * the dither.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacDitherEnable_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -1349,9 +2140,17 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacDitherEnable_Set(void *device,
     return status;
 }
 
-/**
- * Enable DAC MSB dither
- */
+/***************************************************************************//**
+ * @brief Retrieves the dither enable status for the DAC.
+ *
+ * @param device A pointer to the device structure that represents the DAC.
+ * @param instance An enumerator indicating which DAC instance (TX1 or TX2) to
+ * access.
+ * @param value A pointer to a `uint8_t` where the dither enable status will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacDitherEnable_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -1366,9 +2165,17 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacDitherEnable_Get(void *device,
     return status;
 }
 
-/**
- * Update rate of triangle waveform used to dither the thermometer code start pointer.
- */
+/***************************************************************************//**
+ * @brief Sets the update rate of the triangle waveform used for dithering in
+ * the DAC.
+ *
+ * @param device A pointer to the device structure that represents the DAC.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A 16-bit unsigned integer representing the dither period.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacDitherPeriod_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint16_t value)
@@ -1383,9 +2190,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacDitherPeriod_Set(void *device,
     return status;
 }
 
-/**
- * Update rate of triangle waveform used to dither the thermometer code start pointer.
- */
+/***************************************************************************//**
+ * @brief Retrieves the dither period value for the TXDAC.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (TX1 or TX2).
+ * @param value A pointer to a uint16_t variable where the retrieved dither
+ * period value will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacDitherPeriod_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint16_t *value)
@@ -1404,9 +2220,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacDitherPeriod_Get(void *device,
     return status;
 }
 
-/**
- * DEBUG: Bring IDAC Currents to a Test Port.  Current selection driven by txdac_cal_debug, txdac_cal_address, and txdac_sel_cal_to_pin
- */
+/***************************************************************************//**
+ * @brief Sets the external calibration enable for the I DAC in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating which TXDAC instance (TX1 or
+ * TX2) is being configured.
+ * @param value A uint8_t value that indicates whether to enable or disable the
+ * external calibration (1 to enable, 0 to disable).
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacExtcalEnableI_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -1418,9 +2244,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacExtcalEnableI_Set(void *device,
     return status;
 }
 
-/**
- * DEBUG: Bring IDAC Currents to a Test Port.  Current selection driven by txdac_cal_debug, txdac_cal_address, and txdac_sel_cal_to_pin
- */
+/***************************************************************************//**
+ * @brief Retrieves the external calibration enable status for the I DAC in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific TX DAC instance
+ * (TX1 or TX2).
+ * @param value A pointer to a uint8_t variable where the retrieved calibration
+ * enable status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacExtcalEnableI_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -1435,9 +2271,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacExtcalEnableI_Get(void *device,
     return status;
 }
 
-/**
- * DEBUG: Bring QDAC Currents to a Test Port.  Current selection driven by txdac_cal_debug, txdac_cal_address, and txdac_sel_cal_to_pin
- */
+/***************************************************************************//**
+ * @brief Sets the external calibration enable for the QDAC in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A uint8_t value that indicates whether to enable (1) or disable
+ * (0) the external calibration.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacExtcalEnableQ_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -1449,9 +2295,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacExtcalEnableQ_Set(void *device,
     return status;
 }
 
-/**
- * DEBUG: Bring QDAC Currents to a Test Port.  Current selection driven by txdac_cal_debug, txdac_cal_address, and txdac_sel_cal_to_pin
- */
+/***************************************************************************//**
+ * @brief Retrieves the external calibration enable status for the QDAC in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a uint8_t variable where the retrieved calibration
+ * enable status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacExtcalEnableQ_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -1466,9 +2322,17 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacExtcalEnableQ_Get(void *device,
     return status;
 }
 
-/**
- * Boost IDAC Output Power by 3dB
- */
+/***************************************************************************//**
+ * @brief Sets the boost level for the IDAC output power by 3dB.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A uint8_t value indicating the boost level to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacFscBoostI_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -1480,9 +2344,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacFscBoostI_Set(void *device,
     return status;
 }
 
-/**
- * Boost IDAC Output Power by 3dB
- */
+/***************************************************************************//**
+ * @brief Retrieves the boost setting for the IDAC output power.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a uint8_t variable where the retrieved boost
+ * setting will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacFscBoostI_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -1497,9 +2370,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacFscBoostI_Get(void *device,
     return status;
 }
 
-/**
- * Boost QDAC Output Power by 3dB
- */
+/***************************************************************************//**
+ * @brief Sets the QDAC output power boost for the specified TXDAC instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A uint8_t value indicating whether to enable or disable the
+ * boost (typically 0 or 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacFscBoostQ_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -1511,9 +2393,16 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacFscBoostQ_Set(void *device,
     return status;
 }
 
-/**
- * Boost QDAC Output Power by 3dB
- */
+/***************************************************************************//**
+ * @brief Retrieves the boost setting for the QDAC output power.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerated value representing the specific QDAC instance.
+ * @param value A pointer to a uint8_t variable where the retrieved boost value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacFscBoostQ_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -1528,9 +2417,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacFscBoostQ_Get(void *device,
     return status;
 }
 
-/**
- * Fine tune IDAC full scale current between [-256uA,240uA) in 16uA steps.  Offset binary format.
- */
+/***************************************************************************//**
+ * @brief Sets the fine-tuning value for the IDAC full-scale current.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value An 8-bit unsigned integer representing the fine-tuning value for
+ * the IDAC full-scale current.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacFscTuneI_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -1542,9 +2440,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacFscTuneI_Set(void *device,
     return status;
 }
 
-/**
- * Fine tune IDAC full scale current between [-256uA,240uA) in 16uA steps.  Offset binary format.
- */
+/***************************************************************************//**
+ * @brief Retrieves the fine-tuning value for the IDAC full-scale current.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a uint8_t variable where the retrieved fine-tuning
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacFscTuneI_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -1559,9 +2466,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacFscTuneI_Get(void *device,
     return status;
 }
 
-/**
- * Fine tune QDAC full scale current between [-256uA,240uA) in 16uA steps.  Offset binary format.
- */
+/***************************************************************************//**
+ * @brief Sets the fine-tune full-scale current for the QDAC.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific QDAC instance
+ * to be configured.
+ * @param value An 8-bit unsigned integer representing the fine-tune value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacFscTuneQ_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -1573,9 +2489,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacFscTuneQ_Set(void *device,
     return status;
 }
 
-/**
- * Fine tune QDAC full scale current between [-256uA,240uA) in 16uA steps.  Offset binary format.
- */
+/***************************************************************************//**
+ * @brief Retrieves the fine scale current tuning value for the QDAC.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific QDAC instance
+ * to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved tuning
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacFscTuneQ_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -1590,9 +2515,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacFscTuneQ_Get(void *device,
     return status;
 }
 
-/**
- * Enable random shuffle for DAC ISBs
- */
+/***************************************************************************//**
+ * @brief Enables or disables random shuffling for DAC ISB calibration.
+ *
+ * @param device A pointer to the device structure that represents the DAC
+ * device.
+ * @param instance An enumerated value representing the specific DAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A uint8_t value (0 or 1) indicating whether to enable (1) or
+ * disable (0) the shuffling.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacIsbShuffleEnable_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -1604,9 +2538,15 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacIsbShuffleEnable_Set(void *devic
     return status;
 }
 
-/**
- * Enable random shuffle for DAC ISBs
- */
+/***************************************************************************//**
+ * @brief Retrieves the shuffle enable status for the DAC ISB.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which TXDAC instance to access.
+ * @param value A pointer to a uint8_t where the retrieved value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacIsbShuffleEnable_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -1621,9 +2561,16 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacIsbShuffleEnable_Get(void *devic
     return status;
 }
 
-/**
- * Enable random shuffle for DAC MSBs
- */
+/***************************************************************************//**
+ * @brief Sets the MSB shuffle enable for the DAC.
+ *
+ * @param device A pointer to the device structure.
+ * @param instance An enumerated value representing the specific TXDAC instance.
+ * @param value A uint8_t value indicating whether to enable or disable the MSB
+ * shuffle.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacMsbShuffleEnable_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -1635,9 +2582,17 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacMsbShuffleEnable_Set(void *devic
     return status;
 }
 
-/**
- * Enable random shuffle for DAC MSBs
- */
+/***************************************************************************//**
+ * @brief Retrieves the MSB shuffle enable status for the TXDAC.
+ *
+ * @param device A pointer to the device context used for communication.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (TX1 or TX2).
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacMsbShuffleEnable_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -1652,9 +2607,17 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacMsbShuffleEnable_Get(void *devic
     return status;
 }
 
-/**
- * Forces DAC Output to 0.2-0.3V in case BBF is not setting common mode
- */
+/***************************************************************************//**
+ * @brief Sets the output protection level for the DAC to a specified value.
+ *
+ * @param device A pointer to the device structure that represents the DAC.
+ * @param instance An enumerated value representing the specific DAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A uint8_t value that sets the output protection level, typically
+ * a binary value.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacOutputProtect0p2v_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -1666,9 +2629,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacOutputProtect0p2v_Set(void *devi
     return status;
 }
 
-/**
- * Forces DAC Output to 0.2-0.3V in case BBF is not setting common mode
- */
+/***************************************************************************//**
+ * @brief Retrieves the output protection value for the DAC, ensuring it is set
+ * to a safe voltage.
+ *
+ * @param device A pointer to the device structure that represents the DAC.
+ * @param instance An enumerated value representing the specific DAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a uint8_t variable where the retrieved protection
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacOutputProtect0p2v_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -1683,9 +2655,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacOutputProtect0p2v_Get(void *devi
     return status;
 }
 
-/**
- * Forces DAC Output to ground in case BBF is not setting common mode
- */
+/***************************************************************************//**
+ * @brief Sets the ground protection for the TXDAC output in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A uint8_t value indicating whether to enable or disable the
+ * ground protection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacOutputProtectGnd_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -1697,9 +2679,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacOutputProtectGnd_Set(void *devic
     return status;
 }
 
-/**
- * Forces DAC Output to ground in case BBF is not setting common mode
- */
+/***************************************************************************//**
+ * @brief Retrieves the ground protection status for the TXDAC output.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacOutputProtectGnd_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -1714,9 +2705,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacOutputProtectGnd_Get(void *devic
     return status;
 }
 
-/**
- * Force Masterbias to stay on
- */
+/***************************************************************************//**
+ * @brief Sets the power-down bias override for the TXDAC.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A uint8_t value that indicates whether to override the power-
+ * down bias (1 to enable, 0 to disable).
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacPdMbiasOverride_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -1728,9 +2728,20 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacPdMbiasOverride_Set(void *device
     return status;
 }
 
-/**
- * Force Masterbias to stay on
- */
+/***************************************************************************//**
+ * @brief Retrieves the override status for the Masterbias power down in the
+ * TXDAC memory map.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation, while the `value` pointer is updated with the
+ * retrieved override status.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacPdMbiasOverride_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -1745,9 +2756,15 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacPdMbiasOverride_Get(void *device
     return status;
 }
 
-/**
- * DEBUG: Power down Driver Control when txdac_powerdown_override==1.  Needed for Comparator or DAC Manual Powerup/Powerdown
- */
+/***************************************************************************//**
+ * @brief Sets the power down driver control for the TXDAC.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which TXDAC instance to configure.
+ * @param value A uint8_t value indicating the power down state to set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacPddriverEnable_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -1759,9 +2776,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacPddriverEnable_Set(void *device,
     return status;
 }
 
-/**
- * DEBUG: Power down Driver Control when txdac_powerdown_override==1.  Needed for Comparator or DAC Manual Powerup/Powerdown
- */
+/***************************************************************************//**
+ * @brief Retrieves the status of the power down driver control for the TXDAC.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacPddriverEnable_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -1776,9 +2802,17 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacPddriverEnable_Get(void *device,
     return status;
 }
 
-/**
- * DAC clock divide ratio for powerdown state machine clock. Set to 200kHz - 400kHz
- */
+/***************************************************************************//**
+ * @brief Sets the DAC clock divide ratio for the powerdown state machine.
+ *
+ * @param device A pointer to the device structure that represents the DAC.
+ * @param instance An enumerated value representing the specific DAC instance
+ * (TX1 or TX2).
+ * @param value An 8-bit unsigned integer representing the clock divide ratio to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacPowerdownClkdiv_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -1790,9 +2824,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacPowerdownClkdiv_Set(void *device
     return status;
 }
 
-/**
- * DAC clock divide ratio for powerdown state machine clock. Set to 200kHz - 400kHz
- */
+/***************************************************************************//**
+ * @brief Retrieves the DAC powerdown clock divider setting from the specified
+ * device instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a uint8_t variable where the retrieved clock
+ * divider value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacPowerdownClkdiv_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -1807,9 +2851,17 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacPowerdownClkdiv_Get(void *device
     return status;
 }
 
-/**
- * DEBUG: dac powerdown control to use when txdac_powerdown_override==1
- */
+/***************************************************************************//**
+ * @brief Sets the power down control for the TXDAC in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (TX1 or TX2).
+ * @param value A uint8_t value that indicates the power down control setting.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacPowerdownCtrl_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -1821,9 +2873,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacPowerdownCtrl_Set(void *device,
     return status;
 }
 
-/**
- * DEBUG: dac powerdown control to use when txdac_powerdown_override==1
- */
+/***************************************************************************//**
+ * @brief Retrieves the power down control status for the TXDAC.
+ *
+ * @param device A pointer to the device structure representing the TXDAC
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved power down
+ * control value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacPowerdownCtrl_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -1838,9 +2899,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacPowerdownCtrl_Get(void *device,
     return status;
 }
 
-/**
- * I DAC Powerdown Control
- */
+/***************************************************************************//**
+ * @brief Sets the power down state for the I DAC in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating which TXDAC instance (TX1 or
+ * TX2) is being configured.
+ * @param value A uint8_t value that indicates the desired power down state (0
+ * for active, 1 for power down).
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacPowerdownI_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -1852,9 +2922,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacPowerdownI_Set(void *device,
     return status;
 }
 
-/**
- * I DAC Powerdown Control
- */
+/***************************************************************************//**
+ * @brief Retrieves the power-down status of the I DAC in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating which TXDAC instance (TX1 or
+ * TX2) to query.
+ * @param value A pointer to a uint8_t variable where the power-down status will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacPowerdownI_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -1869,9 +2948,17 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacPowerdownI_Get(void *device,
     return status;
 }
 
-/**
- * DEBUG: manual override of txdac_powerdown_i and txdac_powerdown_q signals
- */
+/***************************************************************************//**
+ * @brief Sets the power down override for the TXDAC.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (TX1 or TX2).
+ * @param value A uint8_t value indicating the power down override state.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacPowerdownOverride_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -1883,9 +2970,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacPowerdownOverride_Set(void *devi
     return status;
 }
 
-/**
- * DEBUG: manual override of txdac_powerdown_i and txdac_powerdown_q signals
- */
+/***************************************************************************//**
+ * @brief Retrieves the power down override status for the TXDAC.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved power down
+ * override value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacPowerdownOverride_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -1900,9 +2996,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacPowerdownOverride_Get(void *devi
     return status;
 }
 
-/**
- * Q DAC powerdown Control
- */
+/***************************************************************************//**
+ * @brief Sets the power down state for the Q DAC in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfTxdacMemMap_e`
+ * indicating which DAC instance (TX1 or TX2) is being
+ * configured.
+ * @param value A `uint8_t` value representing the desired power down state (0
+ * for active, 1 for power down).
+ * @return Returns an `int32_t` status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacPowerdownQ_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -1914,9 +3020,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacPowerdownQ_Set(void *device,
     return status;
 }
 
-/**
- * Q DAC powerdown Control
- */
+/***************************************************************************//**
+ * @brief Retrieves the power-down status of the Q DAC in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific DAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the power-down status
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacPowerdownQ_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -1932,9 +3047,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacPowerdownQ_Get(void *device,
 }
 
 
-/**
- * I DAC Powerdown Status
- */
+/***************************************************************************//**
+ * @brief Retrieves the power-down status of the I DAC in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating which TXDAC instance (TX1 or
+ * TX2) to query.
+ * @param value A pointer to a uint8_t variable where the power-down status will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacPowerdownStatI_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -1950,9 +3074,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacPowerdownStatI_Get(void *device,
 }
 
 
-/**
- * Q DAC Powerdown Status
- */
+/***************************************************************************//**
+ * @brief Retrieves the power-down status of the TXDAC for a specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the power-down status
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacPowerdownStatQ_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -1968,9 +3101,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacPowerdownStatQ_Get(void *device,
 }
 
 
-/**
- * I DAC Powerup Status
- */
+/***************************************************************************//**
+ * @brief Retrieves the power-up status of the I DAC in the TXDAC memory map.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * hardware.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved power-up
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation, while the power-up status is stored in the
+ * provided `value` pointer.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacPowerupStatI_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -1986,9 +3129,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacPowerupStatI_Get(void *device,
 }
 
 
-/**
- * Q DAC Powerup Status
- */
+/***************************************************************************//**
+ * @brief Retrieves the power-up status of the TXDAC for a specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved power-up
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacPowerupStatQ_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -2003,9 +3155,17 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacPowerupStatQ_Get(void *device,
     return status;
 }
 
-/**
- * DEBUG: Selects which current branch to bring out
- */
+/***************************************************************************//**
+ * @brief Sets the calibration current branch to be output to a test pin.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A uint8_t value that selects which current branch to output.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacSelCalToPin_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -2017,9 +3177,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacSelCalToPin_Set(void *device,
     return status;
 }
 
-/**
- * DEBUG: Selects which current branch to bring out
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration selection for the TXDAC pin.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (TX1 or TX2).
+ * @param value A pointer to a uint8_t variable where the retrieved calibration
+ * selection will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacSelCalToPin_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -2034,9 +3203,17 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacSelCalToPin_Get(void *device,
     return status;
 }
 
-/**
- * Set amplitude of random shuffle
- */
+/***************************************************************************//**
+ * @brief Sets the amplitude of the random shuffle for the DAC.
+ *
+ * @param device A pointer to the device structure that represents the DAC.
+ * @param instance An enumerated value representing the specific DAC instance
+ * (TX1 or TX2).
+ * @param value An 8-bit unsigned integer representing the amplitude value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacShuffleAmplitude_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -2048,9 +3225,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacShuffleAmplitude_Set(void *devic
     return status;
 }
 
-/**
- * Set amplitude of random shuffle
- */
+/***************************************************************************//**
+ * @brief Retrieves the amplitude value for the random shuffle feature of the
+ * DAC.
+ *
+ * @param device A pointer to the device structure that represents the DAC.
+ * @param instance An enumerated value representing the specific DAC instance
+ * (TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved amplitude
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacShuffleAmplitude_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -2065,9 +3251,16 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacShuffleAmplitude_Get(void *devic
     return status;
 }
 
-/**
- * LOW resets the decoder shuffle state
- */
+/***************************************************************************//**
+ * @brief Sets the shuffle reset state for the TXDAC.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerated value representing the specific TXDAC instance.
+ * @param value A uint8_t value that indicates the reset state (0 for reset, 1
+ * for no reset).
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacShuffleResetb_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -2079,9 +3272,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacShuffleResetb_Set(void *device,
     return status;
 }
 
-/**
- * LOW resets the decoder shuffle state
- */
+/***************************************************************************//**
+ * @brief Retrieves the current state of the shuffle reset bit for the TXDAC.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved shuffle
+ * reset state will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacShuffleResetb_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -2096,9 +3298,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacShuffleResetb_Get(void *device,
     return status;
 }
 
-/**
- * Currently Unassigned Bits
- */
+/***************************************************************************//**
+ * @brief Sets the spare control bits in the TXDAC memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the spare control register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacSpareCtrl_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -2110,9 +3321,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacSpareCtrl_Set(void *device,
     return status;
 }
 
-/**
- * Currently Unassigned Bits
- */
+/***************************************************************************//**
+ * @brief Retrieves the spare control register value from the TXDAC memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacSpareCtrl_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -2127,9 +3347,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacSpareCtrl_Get(void *device,
     return status;
 }
 
-/**
- * DEBUG: SPI driven Clock for poweron state machine when txdac_startup_mansel==1
- */
+/***************************************************************************//**
+ * @brief Sets the manual clock for the TXDAC startup process.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A uint8_t value that indicates the state of the manual clock (0
+ * or 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacStartupManclk_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -2141,9 +3370,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacStartupManclk_Set(void *device,
     return status;
 }
 
-/**
- * DEBUG: SPI driven Clock for poweron state machine when txdac_startup_mansel==1
- */
+/***************************************************************************//**
+ * @brief Retrieves the startup manual clock status for the TXDAC.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a uint8_t variable where the retrieved clock status
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacStartupManclk_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -2158,9 +3396,16 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacStartupManclk_Get(void *device,
     return status;
 }
 
-/**
- * DEBUG: poweron state machine clock bypass
- */
+/***************************************************************************//**
+ * @brief Sets the startup manual selection for the TXDAC power-on state
+ * machine.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerated value representing the specific TXDAC instance.
+ * @param value A uint8_t value indicating the manual selection state.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacStartupMansel_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -2172,9 +3417,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacStartupMansel_Set(void *device,
     return status;
 }
 
-/**
- * DEBUG: poweron state machine clock bypass
- */
+/***************************************************************************//**
+ * @brief Retrieves the startup state of the TXDAC's manual selection for a
+ * given device instance.
+ *
+ * @param device A pointer to the device structure representing the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacStartupMansel_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -2190,9 +3445,15 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacStartupMansel_Get(void *device,
 }
 
 
-/**
- * DAC is ready to be taken out of powerdown
- */
+/***************************************************************************//**
+ * @brief Retrieves the startup readiness status of the TXDAC.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating which TXDAC instance to query.
+ * @param value A pointer to a uint8_t where the result will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacStartupReady_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -2207,9 +3468,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacStartupReady_Get(void *device,
     return status;
 }
 
-/**
- * DEBUG: Performance vs Power tradeoff
- */
+/***************************************************************************//**
+ * @brief Sets the ISB control for the TXDAC, affecting performance versus power
+ * tradeoff.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A uint8_t value that sets the control for the ISB.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacThrowIsbCtrl_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -2221,9 +3491,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacThrowIsbCtrl_Set(void *device,
     return status;
 }
 
-/**
- * DEBUG: Performance vs Power tradeoff
- */
+/***************************************************************************//**
+ * @brief Retrieves the control value for the ISB calibration throw setting in
+ * the TXDAC memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacThrowIsbCtrl_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -2238,9 +3518,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacThrowIsbCtrl_Get(void *device,
     return status;
 }
 
-/**
- * DEBUG: Performance vs Power tradeoff
- */
+/***************************************************************************//**
+ * @brief Sets the LSB control for the TXDAC in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (TX1 or TX2).
+ * @param value A uint8_t value representing the LSB control setting to be
+ * applied.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacThrowLsbCtrl_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -2252,9 +3541,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacThrowLsbCtrl_Set(void *device,
     return status;
 }
 
-/**
- * DEBUG: Performance vs Power tradeoff
- */
+/***************************************************************************//**
+ * @brief Retrieves the LSB control value for the TXDAC.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved LSB
+ * control value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacThrowLsbCtrl_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -2269,9 +3567,17 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacThrowLsbCtrl_Get(void *device,
     return status;
 }
 
-/**
- * Use Calibrated FSC
- */
+/***************************************************************************//**
+ * @brief Sets the gain usage for the TXDAC in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating which TXDAC instance (TX1 or
+ * TX2) is being configured.
+ * @param value A uint8_t value representing the gain setting to be applied.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacUseGain_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -2283,9 +3589,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacUseGain_Set(void *device,
     return status;
 }
 
-/**
- * Use Calibrated FSC
- */
+/***************************************************************************//**
+ * @brief Retrieves the gain setting from the TXDAC memory map for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved gain value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacUseGain_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -2300,9 +3616,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacUseGain_Get(void *device,
     return status;
 }
 
-/**
- * DEBUG: Set Current Source Headroom.  margin = 60mV + code*30mV
- */
+/***************************************************************************//**
+ * @brief Sets the Vds margin for the TXDAC current source.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value An 8-bit unsigned integer representing the desired Vds margin
+ * value.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacVdsMargin_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -2314,9 +3639,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacVdsMargin_Set(void *device,
     return status;
 }
 
-/**
- * DEBUG: Set Current Source Headroom.  margin = 60mV + code*30mV
- */
+/***************************************************************************//**
+ * @brief Retrieves the Vds margin value from the TXDAC memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved Vds margin
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacVdsMargin_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -2331,9 +3665,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacVdsMargin_Get(void *device,
     return status;
 }
 
-/**
- * Enable MSB start pointer to slowly increment over time.
- */
+/***************************************************************************//**
+ * @brief Sets the walking enable state for the TXDAC.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (TX1 or TX2).
+ * @param value A uint8_t value indicating whether to enable (1) or disable (0)
+ * the walking feature.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacWalkEnable_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -2345,9 +3688,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacWalkEnable_Set(void *device,
     return status;
 }
 
-/**
- * Enable MSB start pointer to slowly increment over time.
- */
+/***************************************************************************//**
+ * @brief Retrieves the current value of the TXDAC walk enable setting.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (TX1 or TX2).
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacWalkEnable_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)
@@ -2362,9 +3714,19 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacWalkEnable_Get(void *device,
     return status;
 }
 
-/**
- * Start pointer for the MSB thermometer code will slowly increase over time.  This sets the pointer update rate.
- */
+/***************************************************************************//**
+ * @brief Sets the walking period for the MSB thermometer code in the TXDAC
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value An 8-bit unsigned integer representing the walking period to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacWalkPeriod_Set(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t value)
@@ -2376,9 +3738,18 @@ static inline int32_t adrv9001_TxdacMemMap_TxdacWalkPeriod_Set(void *device,
     return status;
 }
 
-/**
- * Start pointer for the MSB thermometer code will slowly increase over time.  This sets the pointer update rate.
- */
+/***************************************************************************//**
+ * @brief Retrieves the walking period setting for the MSB thermometer code in
+ * the TXDAC memory map.
+ *
+ * @param device A pointer to the device context used for communication.
+ * @param instance An enumerated value representing the specific TXDAC instance
+ * (e.g., TX1 or TX2).
+ * @param value A pointer to a `uint8_t` where the retrieved walking period
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_TxdacMemMap_TxdacWalkPeriod_Get(void *device,
     adrv9001_BfTxdacMemMap_e instance,
     uint8_t *value)

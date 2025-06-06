@@ -13,6 +13,23 @@
 
 #include "adrv9001_bf_hal.h"
 
+/***************************************************************************//**
+ * @brief The `adrv9001_BfAdc2MemMap_e` is an enumeration that defines specific
+ * memory map addresses for different ADC channels in the ADRV9001
+ * device. Each enumerator corresponds to a unique address used to access
+ * the I and Q channels of RX1 and RX2 ADCs, facilitating the
+ * configuration and control of these channels in the device's memory
+ * map.
+ *
+ * @param ADRV9001_BF_RX1_ADC_I Represents the memory map address for RX1 ADC I
+ * channel.
+ * @param ADRV9001_BF_RX1_ADC_Q Represents the memory map address for RX1 ADC Q
+ * channel.
+ * @param ADRV9001_BF_RX2_ADC_I Represents the memory map address for RX2 ADC I
+ * channel.
+ * @param ADRV9001_BF_RX2_ADC_Q Represents the memory map address for RX2 ADC Q
+ * channel.
+ ******************************************************************************/
 typedef enum adrv9001_BfAdc2MemMap_e
 {
     ADRV9001_BF_RX1_ADC_I    =   0x2200,
@@ -22,9 +39,17 @@ typedef enum adrv9001_BfAdc2MemMap_e
 } adrv9001_BfAdc2MemMap_e;
 
 
-/**
- * Codes for bias branches
- */
+/***************************************************************************//**
+ * @brief Sets the ADC cascade bias value in the ADC2 memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the bias value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcCascBias_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -36,9 +61,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcCascBias_Set(void *device,
     return status;
 }
 
-/**
- * Codes for bias branches
- */
+/***************************************************************************//**
+ * @brief Retrieves the ADC cascade bias value from a specified memory map
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance to
+ * access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved bias value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcCascBias_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -53,9 +88,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcCascBias_Get(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Sets the calibration value for ADC DAC1 calibration register 0.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal0_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -67,9 +111,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal0_Set(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration value for ADC DAC1 calibration register 0.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value that specifies which ADC instance to
+ * access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal0_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -84,9 +137,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal0_Get(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Sets the calibration value for the ADC DAC1 calibration register.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies which ADC instance to configure.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal1_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -98,9 +160,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal1_Set(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration value for ADC DAC1 calibration 1.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies which ADC instance to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal1_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -115,9 +186,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal1_Get(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Sets the calibration value for ADC DAC1 calibration 10.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal10_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -129,9 +209,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal10_Set(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration value for ADC DAC1 calibration 10.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal10_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -146,9 +235,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal10_Get(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Sets the calibration value for ADC DAC1 calibration 11.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal11_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -160,9 +258,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal11_Set(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration value for ADC DAC1 calibration register 11.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal11_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -177,9 +284,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal11_Get(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Sets the calibration value for ADC DAC1 calibration 12.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal12_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -191,9 +307,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal12_Set(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration value for ADC DAC1 channel 12 from the
+ * specified device.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies which ADC instance to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal12_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -208,9 +334,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal12_Get(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Sets the calibration value for ADC DAC1 calibration register 13.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal13_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -222,9 +357,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal13_Set(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration value for ADC DAC1 calibration 13.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal13_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -239,9 +383,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal13_Get(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Sets the calibration value for ADC DAC1 calibration register 14.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal14_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -253,9 +406,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal14_Set(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration value for ADC DAC1 calibration 14.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal14_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -270,9 +432,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal14_Get(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Sets the calibration value for ADC DAC1 calibration register 15.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal15_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -284,9 +455,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal15_Set(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration value for ADC DAC1 calibration 15.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal15_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -301,9 +481,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal15_Get(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Sets the calibration value for ADC DAC1 calibration 2.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal2_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -315,9 +504,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal2_Set(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration value for ADC DAC1 channel 2 from the
+ * specified device.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies which ADC instance to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal2_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -332,9 +531,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal2_Get(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Sets the calibration value for ADC DAC1 calibration 3.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal3_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -346,9 +554,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal3_Set(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration value for ADC DAC1 calibration 3.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration value will be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal3_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -363,9 +580,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal3_Get(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Sets the calibration value for ADC DAC1 calibration 4.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal4_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -377,9 +603,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal4_Set(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration value for ADC DAC1 calibration 4.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies which ADC instance to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal4_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -394,9 +629,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal4_Get(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Sets the calibration value for ADC DAC1 calibration register 5.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies which ADC instance to configure.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal5_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -408,9 +652,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal5_Set(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration value for ADC DAC1 calibration register 5.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies which ADC instance to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal5_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -425,9 +678,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal5_Get(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Sets the calibration value for ADC DAC1 calibration 6.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal6_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -439,9 +701,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal6_Set(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration value for ADC DAC1 calibration 6.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal6_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -456,9 +727,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal6_Get(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Sets the calibration value for ADC DAC1 calibration register 7.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies which ADC instance to configure.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal7_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -470,9 +750,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal7_Set(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration value for ADC DAC1 calibration register 7.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies which ADC instance to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal7_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -487,9 +776,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal7_Get(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Sets the calibration value for ADC DAC1 channel 8.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies which ADC instance to configure.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal8_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -501,9 +799,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal8_Set(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration value for ADC DAC1 channel 8 from the
+ * specified device.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies which ADC instance to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal8_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -518,9 +826,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal8_Get(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Sets the calibration value for ADC DAC1 calibration 9.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal9_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -532,9 +849,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal9_Set(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration value for ADC DAC1 calibration 9.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal9_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -549,9 +875,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac1Cal9_Get(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Sets the calibration value for ADC DAC2 calibration register 0.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies which ADC instance to configure.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal0_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -563,9 +898,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal0_Set(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration value from the ADC DAC2 calibration
+ * register.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance to
+ * access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal0_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -580,9 +925,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal0_Get(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Sets the calibration value for the ADC DAC2 calibration register.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies which ADC instance to configure.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal1_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -594,9 +948,17 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal1_Set(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration value for DAC2 from the ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the specific ADC instance to
+ * access.
+ * @param value A pointer to a `uint8_t` where the retrieved calibration value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal1_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -611,9 +973,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal1_Get(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Sets the calibration value for ADC DAC2 calibration 10.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal10_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -625,9 +996,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal10_Set(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration value for ADC DAC 2 calibration 10.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance to
+ * access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal10_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -642,9 +1022,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal10_Get(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Sets the calibration value for ADC DAC2 calibration 11.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal11_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -656,9 +1045,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal11_Set(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration value for ADC DAC 2 calibration 11.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal11_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -673,9 +1071,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal11_Get(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Sets the calibration value for ADC DAC2 calibration 12.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal12_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -687,9 +1094,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal12_Set(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration value for ADC DAC 2 from the specified
+ * device instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies which ADC instance to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal12_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -704,9 +1121,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal12_Get(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Sets the calibration value for ADC DAC2 calibration 13.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal13_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -718,9 +1144,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal13_Set(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration value for ADC DAC 2 calibration 13.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal13_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -735,9 +1170,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal13_Get(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Sets the calibration value for ADC DAC2 calibration 14.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal14_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -749,9 +1193,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal14_Set(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration value for ADC DAC 2 calibration 14.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal14_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -766,9 +1219,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal14_Get(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Sets the calibration value for ADC DAC 2 calibration 15.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal15_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -780,9 +1242,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal15_Set(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration value for ADC DAC 2 calibration 15.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal15_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -797,9 +1268,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal15_Get(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Sets the calibration value for ADC DAC2 in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies which ADC instance to configure.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal2_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -811,9 +1291,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal2_Set(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration value from the ADC DAC2 calibration
+ * register.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance to
+ * access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal2_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -828,9 +1318,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal2_Get(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Sets the calibration value for ADC DAC2 calibration 3.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal3_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -842,9 +1341,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal3_Set(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration value for ADC DAC 2 calibration 3.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal3_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -859,9 +1367,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal3_Get(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Sets the calibration value for ADC DAC2 calibration 4.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal4_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -873,9 +1390,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal4_Set(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration value for ADC DAC 2 calibration 4.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies which ADC instance to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal4_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -890,9 +1416,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal4_Get(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Sets the calibration value for ADC DAC2 calibration 5.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal5_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -904,9 +1439,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal5_Set(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration value for ADC DAC 2 calibration 5.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal5_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -921,9 +1465,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal5_Get(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Sets the calibration value for ADC DAC2 calibration 6.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal6_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -935,9 +1488,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal6_Set(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration value for ADC DAC 2 calibration 6.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies which ADC instance to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal6_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -952,9 +1514,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal6_Get(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Sets the calibration value for ADC DAC 2 calibration 7.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal7_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -966,9 +1537,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal7_Set(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration value for ADC DAC 2 calibration 7.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal7_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -983,9 +1563,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal7_Get(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Sets the calibration value for ADC DAC2 in the ADC2 memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies which ADC instance to configure.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal8_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -997,9 +1586,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal8_Set(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration value for ADC DAC 2 from the specified
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies which ADC instance to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal8_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1014,9 +1613,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal8_Get(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Sets the calibration value for ADC DAC2 calibration 9.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal9_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -1028,9 +1636,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal9_Set(void *device,
     return status;
 }
 
-/**
- * Calibration codes for each element in DAC1 and DAC2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration value for ADC DAC 2 calibration 9.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal9_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1045,9 +1662,17 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDac2Cal9_Get(void *device,
     return status;
 }
 
-/**
- * Codes for bias branches
- */
+/***************************************************************************//**
+ * @brief Sets the ADC diode bias value in the ADC2 memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance to
+ * configure.
+ * @param value An 8-bit unsigned integer representing the bias value to set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDiodeBias_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -1059,9 +1684,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDiodeBias_Set(void *device,
     return status;
 }
 
-/**
- * Codes for bias branches
- */
+/***************************************************************************//**
+ * @brief Retrieves the ADC diode bias value from a specified memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value that specifies which ADC instance to
+ * access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved diode bias
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcDiodeBias_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1077,9 +1711,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcDiodeBias_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 0 Byte 0
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the ADC Flash Calibration Count 00 from the
+ * specified device instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration count will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount00_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1095,9 +1739,17 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount00_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 0 Byte 1
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration count from the ADC flash memory.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration count will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount01_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1113,9 +1765,16 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount01_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 0 Byte 2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration count from the ADC flash memory.
+ *
+ * @param device A pointer to the device structure representing the ADC.
+ * @param instance An enumerated value representing the specific ADC instance.
+ * @param value A pointer to a `uint8_t` where the retrieved calibration count
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount02_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1131,9 +1790,16 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount02_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 10 Byte 0
- */
+/***************************************************************************//**
+ * @brief Retrieves the Flash Calibration Count 100 from the ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the specific ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration count will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount100_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1149,9 +1815,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount100_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 10 Byte 1
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the ADC Flash Calibration Count 101 from the
+ * specified device instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated type indicating the specific ADC instance to
+ * access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration count will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount101_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1167,9 +1843,17 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount101_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 10 Byte 2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration count from the ADC flash memory.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration count will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount102_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1185,9 +1869,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount102_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 11 Byte 0
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the ADC Flash Calibration Count 110 from the
+ * specified device instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated type indicating the specific ADC instance to
+ * access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration count will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount110_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1203,9 +1897,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount110_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 11 Byte 1
- */
+/***************************************************************************//**
+ * @brief Retrieves the second byte of the ADC Flash Calibration Count 11 from
+ * the specified device instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated type indicating the specific ADC instance to
+ * access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration count byte will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount111_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1221,9 +1925,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount111_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 11 Byte 2
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the ADC Flash Calibration Count 112 from the
+ * specified device instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the instance of the ADC.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration count will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount112_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1239,9 +1953,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount112_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 12 Byte 0
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration count from the ADC flash memory for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance to
+ * access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration count will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount120_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1257,9 +1981,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount120_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 12 Byte 1
- */
+/***************************************************************************//**
+ * @brief Retrieves the second byte of the ADC Flash Calibration Count 12 from
+ * the specified device instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the instance of the ADC.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration count byte will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount121_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1275,9 +2009,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount121_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 12 Byte 2
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the ADC Flash Calibration Count 122 from the
+ * specified device instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration count will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount122_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1293,9 +2037,16 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount122_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 13 Byte 0
- */
+/***************************************************************************//**
+ * @brief Retrieves the Flash Calibration Count 130 from the ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating the specific ADC instance.
+ * @param value A pointer to a `uint8_t` where the retrieved calibration count
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount130_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1311,9 +2062,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount130_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 13 Byte 1
- */
+/***************************************************************************//**
+ * @brief Retrieves the ADC Flash Calibration Count 131 from the specified
+ * device instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration count will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount131_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1329,9 +2090,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount131_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 13 Byte 2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration count from the ADC flash memory for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance to
+ * access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration count will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount132_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1347,9 +2118,16 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount132_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 14 Byte 0
- */
+/***************************************************************************//**
+ * @brief Retrieves the Flash Calibration Count 140 from the ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating the specific ADC instance.
+ * @param value A pointer to a `uint8_t` where the retrieved calibration count
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount140_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1365,9 +2143,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount140_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 14 Byte 1
- */
+/***************************************************************************//**
+ * @brief Retrieves the second byte of the ADC Flash Calibration Count 141 from
+ * the specified device instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration count byte will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount141_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1383,9 +2171,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount141_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 14 Byte 2
- */
+/***************************************************************************//**
+ * @brief Retrieves the ADC Flash Calibration Count 142 from the specified
+ * device instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration count will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount142_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1401,9 +2199,16 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount142_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 15 Byte 0
- */
+/***************************************************************************//**
+ * @brief Retrieves the Flash Calibration Count 150 from the ADC memory map.
+ *
+ * @param device A pointer to the device structure representing the ADC.
+ * @param instance An enumerated value representing the specific ADC instance.
+ * @param value A pointer to a `uint8_t` where the retrieved calibration count
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount150_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1419,9 +2224,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount150_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 15 Byte 1
- */
+/***************************************************************************//**
+ * @brief Retrieves the second byte of the ADC Flash Calibration Count 151 from
+ * the specified device instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration count byte will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount151_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1437,9 +2252,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount151_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 15 Byte 2
- */
+/***************************************************************************//**
+ * @brief Retrieves the ADC Flash Calibration Count 152 from the specified
+ * device instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration count will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount152_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1455,9 +2280,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount152_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 1 Byte 0
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the ADC Flash Calibration Count 10 from the
+ * specified device instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated type indicating the specific ADC instance to
+ * access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration count will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount10_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1473,9 +2308,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount10_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 1 Byte 1
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration count from the ADC flash memory for a
+ * specific instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance to
+ * access.
+ * @param value A pointer to a `uint8_t` where the retrieved calibration count
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount11_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1491,9 +2336,17 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount11_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 1 Byte 2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration count value from the ADC flash memory.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration count will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount12_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1509,9 +2362,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount12_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 2 Byte 0
- */
+/***************************************************************************//**
+ * @brief Retrieves the second byte of the ADC Flash Calibration Count from the
+ * specified device instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance to
+ * access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration count will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount20_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1527,9 +2390,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount20_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 2 Byte 1
- */
+/***************************************************************************//**
+ * @brief Retrieves the second byte of the ADC Flash Calibration Count 2 from
+ * the specified device instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration count byte will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount21_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1545,9 +2418,16 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount21_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 2 Byte 2
- */
+/***************************************************************************//**
+ * @brief Retrieves the Flash Calibration Count 22 from the ADC memory map.
+ *
+ * @param device A pointer to the device structure representing the ADC.
+ * @param instance An enumerated value representing the specific ADC instance.
+ * @param value A pointer to a `uint8_t` where the retrieved calibration count
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount22_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1563,9 +2443,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount22_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 3 Byte 0
- */
+/***************************************************************************//**
+ * @brief Retrieves the third byte of the ADC Flash Calibration Count from the
+ * specified device instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance to
+ * access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration count byte will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount30_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1581,9 +2471,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount30_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 3 Byte 1
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration count from the ADC flash memory for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance to
+ * access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration count will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount31_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1599,9 +2499,17 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount31_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 3 Byte 2
- */
+/***************************************************************************//**
+ * @brief Retrieves the 32-bit calibration count from the ADC flash memory.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance.
+ * @param value A pointer to a `uint8_t` where the retrieved calibration count
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount32_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1617,9 +2525,17 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount32_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 4 Byte 0
- */
+/***************************************************************************//**
+ * @brief Retrieves the Flash Calibration Count 40 value from the ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the specific ADC instance.
+ * @param value A pointer to a `uint8_t` where the retrieved calibration count
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount40_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1635,9 +2551,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount40_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 4 Byte 1
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration count from the ADC flash memory for a
+ * specific instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance to
+ * access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration count will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount41_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1653,9 +2579,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount41_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 4 Byte 2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration count from the ADC flash memory for a
+ * specific instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance to
+ * access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration count will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount42_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1671,9 +2607,16 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount42_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 5 Byte 0
- */
+/***************************************************************************//**
+ * @brief Retrieves the Flash Calibration Count 50 from the ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the specific ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration count will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount50_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1689,9 +2632,17 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount50_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 5 Byte 1
- */
+/***************************************************************************//**
+ * @brief Retrieves the Flash Calibration Count 51 value from the ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the specific ADC instance.
+ * @param value A pointer to a `uint8_t` where the retrieved calibration count
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount51_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1707,9 +2658,16 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount51_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 5 Byte 2
- */
+/***************************************************************************//**
+ * @brief Retrieves the Flash Calibration Count 52 from the ADC memory map.
+ *
+ * @param device A pointer to the device structure representing the ADC.
+ * @param instance An enumerated value representing the specific ADC instance.
+ * @param value A pointer to a `uint8_t` where the retrieved calibration count
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount52_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1725,9 +2683,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount52_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 6 Byte 0
- */
+/***************************************************************************//**
+ * @brief Retrieves the Flash Calibration Count 60 from the ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration count will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount60_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1743,9 +2710,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount60_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 6 Byte 1
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration count from the ADC flash memory for a
+ * specific instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance to
+ * access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration count will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount61_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1761,9 +2738,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount61_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 6 Byte 2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration count from the ADC flash memory for a
+ * specific instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance to
+ * access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration count will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount62_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1779,9 +2766,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount62_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 7 Byte 0
- */
+/***************************************************************************//**
+ * @brief Retrieves the ADC Flash Calibration Count 70 from the specified device
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration count will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount70_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1797,9 +2794,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount70_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 7 Byte 1
- */
+/***************************************************************************//**
+ * @brief Retrieves the ADC Flash Calibration Count 71 from the specified device
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance to
+ * access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration count will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount71_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1815,9 +2822,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount71_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 7 Byte 2
- */
+/***************************************************************************//**
+ * @brief Retrieves the ADC Flash Calibration Count 72 from the specified device
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration count will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount72_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1833,9 +2850,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount72_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 8 Byte 0
- */
+/***************************************************************************//**
+ * @brief Retrieves the ADC Flash Calibration Count 80 from the specified device
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration count will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount80_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1851,9 +2877,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount80_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 8 Byte 1
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration count from the ADC flash memory for a
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance to
+ * access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration count will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount81_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1869,9 +2905,17 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount81_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 8 Byte 2
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration count value from the ADC flash memory.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration count will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount82_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1887,9 +2931,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount82_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 9 Byte 0
- */
+/***************************************************************************//**
+ * @brief Retrieves the ADC Flash Calibration Count 90 from the specified device
+ * instance.
+ *
+ * @param device A pointer to the device structure representing the ADC device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration count will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount90_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1905,9 +2958,17 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount90_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 9 Byte 1
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration count from the ADC flash memory.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration count will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount91_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1923,9 +2984,16 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount91_Get(void *device,
 }
 
 
-/**
- * Flash Cal counter 9 Byte 2
- */
+/***************************************************************************//**
+ * @brief Retrieves the Flash Calibration Count 92 from the ADC memory map.
+ *
+ * @param device A pointer to the device structure representing the ADC.
+ * @param instance An enumerated value representing the specific ADC instance.
+ * @param value A pointer to a `uint8_t` where the retrieved calibration count
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount92_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1940,9 +3008,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashCalCount92_Get(void *device,
     return status;
 }
 
-/**
- * Comparator 0 Offset Calibration
- */
+/***************************************************************************//**
+ * @brief Sets the offset calibration value for Comparator 0 in the ADC flash
+ * memory.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp0_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -1954,9 +3032,17 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp0_Set(void *device,
     return status;
 }
 
-/**
- * Comparator 0 Offset Calibration
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the ADC Flash Comparator 0 offset calibration.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp0_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -1971,9 +3057,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp0_Get(void *device,
     return status;
 }
 
-/**
- * Comparator 1 Offset Calibration
- */
+/***************************************************************************//**
+ * @brief Sets the offset calibration value for Comparator 1 in the ADC flash
+ * memory.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp1_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -1985,9 +3081,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp1_Set(void *device,
     return status;
 }
 
-/**
- * Comparator 1 Offset Calibration
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the ADC Flash Comparator 1 from the specified
+ * device instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance to
+ * access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved comparator
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp1_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -2002,9 +3108,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp1_Get(void *device,
     return status;
 }
 
-/**
- * Comparator 10 Offset Calibration
- */
+/***************************************************************************//**
+ * @brief Sets the offset calibration value for Comparator 10 in the ADC flash
+ * memory.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp10_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -2016,9 +3132,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp10_Set(void *device,
     return status;
 }
 
-/**
- * Comparator 10 Offset Calibration
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the ADC Flash Comparator 10 from the specified
+ * device instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the instance of the ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved comparator
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp10_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -2033,9 +3159,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp10_Get(void *device,
     return status;
 }
 
-/**
- * Comparator 11 Offset Calibration
- */
+/***************************************************************************//**
+ * @brief Sets the offset calibration value for Comparator 11 in the ADC flash
+ * memory.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp11_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -2047,9 +3183,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp11_Set(void *device,
     return status;
 }
 
-/**
- * Comparator 11 Offset Calibration
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the ADC Flash Comparator 11 from the specified
+ * device instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the instance of the ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved comparator
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp11_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -2064,9 +3210,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp11_Get(void *device,
     return status;
 }
 
-/**
- * Comparator 12 Offset Calibration
- */
+/***************************************************************************//**
+ * @brief Sets the offset calibration value for Comparator 12 in the ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp12_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -2078,9 +3234,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp12_Set(void *device,
     return status;
 }
 
-/**
- * Comparator 12 Offset Calibration
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the ADC Flash Comparator 12 from the specified
+ * device instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved comparator
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp12_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -2095,9 +3261,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp12_Get(void *device,
     return status;
 }
 
-/**
- * Comparator 13 Offset Calibration
- */
+/***************************************************************************//**
+ * @brief Sets the offset calibration value for Comparator 13 in the ADC flash
+ * memory.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp13_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -2109,9 +3285,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp13_Set(void *device,
     return status;
 }
 
-/**
- * Comparator 13 Offset Calibration
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the ADC Flash Comparator 13 from the specified
+ * device instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved comparator
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp13_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -2126,9 +3312,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp13_Get(void *device,
     return status;
 }
 
-/**
- * Comparator 14 Offset Calibration
- */
+/***************************************************************************//**
+ * @brief Sets the value of the ADC Flash Comparator 14 in the ADC2 memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the instance of the ADC memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the comparator.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp14_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -2140,9 +3335,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp14_Set(void *device,
     return status;
 }
 
-/**
- * Comparator 14 Offset Calibration
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the ADC Flash Comparator 14 from the specified
+ * device instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved comparator
+ * value will be stored.
+ * @return Returns the status of the read operation, where a value of 0
+ * indicates success.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp14_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -2157,9 +3362,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp14_Get(void *device,
     return status;
 }
 
-/**
- * Comparator 15 Offset Calibration
- */
+/***************************************************************************//**
+ * @brief Sets the value for the ADC Flash Comparator 15 in the ADC2 memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the instance of the ADC memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the comparator.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp15_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -2171,9 +3385,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp15_Set(void *device,
     return status;
 }
 
-/**
- * Comparator 15 Offset Calibration
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the ADC Flash Comparator 15 from the specified
+ * device instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved comparator
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp15_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -2188,9 +3412,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp15_Get(void *device,
     return status;
 }
 
-/**
- * Comparator 2 Offset Calibration
- */
+/***************************************************************************//**
+ * @brief Sets the ADC Flash Comparator 2 offset calibration value.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the calibration value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp2_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -2202,9 +3435,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp2_Set(void *device,
     return status;
 }
 
-/**
- * Comparator 2 Offset Calibration
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the ADC Flash Comparator 2 from the specified
+ * device instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies which ADC instance to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved comparator
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp2_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -2219,9 +3462,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp2_Get(void *device,
     return status;
 }
 
-/**
- * Comparator 3 Offset Calibration
- */
+/***************************************************************************//**
+ * @brief Sets the value of the ADC Flash Comparator 3 in the ADC2 memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the comparator.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp3_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -2233,9 +3485,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp3_Set(void *device,
     return status;
 }
 
-/**
- * Comparator 3 Offset Calibration
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the ADC Flash Comparator 3 from the specified
+ * device instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies which ADC instance to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved comparator
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp3_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -2250,9 +3512,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp3_Get(void *device,
     return status;
 }
 
-/**
- * Comparator 4 Offset Calibration
- */
+/***************************************************************************//**
+ * @brief Sets the value of the ADC Flash Comparator 4 in the ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the comparator.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp4_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -2264,9 +3535,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp4_Set(void *device,
     return status;
 }
 
-/**
- * Comparator 4 Offset Calibration
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the ADC Flash Comparator 4 from the specified
+ * device instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved comparator
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp4_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -2281,9 +3562,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp4_Get(void *device,
     return status;
 }
 
-/**
- * Comparator 5 Offset Calibration
- */
+/***************************************************************************//**
+ * @brief Sets the value of the ADC Flash Comparator 5 in the ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the comparator.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp5_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -2295,9 +3585,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp5_Set(void *device,
     return status;
 }
 
-/**
- * Comparator 5 Offset Calibration
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the ADC Flash Comparator 5 from the specified
+ * device instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance to
+ * access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved comparator
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp5_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -2312,9 +3612,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp5_Get(void *device,
     return status;
 }
 
-/**
- * Comparator 6 Offset Calibration
- */
+/***************************************************************************//**
+ * @brief Sets the value of the ADC Flash Comparator 6 in the ADC2 memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the comparator.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp6_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -2326,9 +3635,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp6_Set(void *device,
     return status;
 }
 
-/**
- * Comparator 6 Offset Calibration
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the ADC Flash Comparator 6 from the specified
+ * device instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the instance of the ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp6_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -2343,9 +3662,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp6_Get(void *device,
     return status;
 }
 
-/**
- * Comparator 7 Offset Calibration
- */
+/***************************************************************************//**
+ * @brief Sets the value of the ADC Flash Comparator 7 in the ADC2 memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the comparator.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp7_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -2357,9 +3685,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp7_Set(void *device,
     return status;
 }
 
-/**
- * Comparator 7 Offset Calibration
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the ADC Flash Comparator 7 from the specified
+ * device instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved comparator
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp7_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -2374,9 +3712,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp7_Get(void *device,
     return status;
 }
 
-/**
- * Comparator 8 Offset Calibration
- */
+/***************************************************************************//**
+ * @brief Sets the value of the ADC Flash Comparator 8 in the ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance
+ * from the `adrv9001_BfAdc2MemMap_e` enumeration.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the comparator.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp8_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -2388,9 +3735,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp8_Set(void *device,
     return status;
 }
 
-/**
- * Comparator 8 Offset Calibration
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the ADC Flash Comparator 8 from the specified
+ * device instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies which ADC instance to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved comparator
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp8_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -2405,9 +3762,16 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp8_Get(void *device,
     return status;
 }
 
-/**
- * Comparator 9 Offset Calibration
- */
+/***************************************************************************//**
+ * @brief Sets the comparator 9 offset calibration value in the ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the specific ADC instance.
+ * @param value The 8-bit value to be set for the comparator 9 offset
+ * calibration.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp9_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -2419,9 +3783,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp9_Set(void *device,
     return status;
 }
 
-/**
- * Comparator 9 Offset Calibration
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the ADC Flash Comparator 9 from the specified
+ * device instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the instance of the ADC memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved comparator
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp9_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -2436,9 +3810,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashComp9_Get(void *device,
     return status;
 }
 
-/**
- * Coarse Flash-DAC clock delay control
- */
+/***************************************************************************//**
+ * @brief Sets the coarse Flash-DAC clock delay control for the ADC.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the delay value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashFckDelayCtrl_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -2450,9 +3833,17 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashFckDelayCtrl_Set(void *device,
     return status;
 }
 
-/**
- * Coarse Flash-DAC clock delay control
- */
+/***************************************************************************//**
+ * @brief Retrieves the Flash-DAC clock delay control value from the ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the specific ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashFckDelayCtrl_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -2468,9 +3859,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashFckDelayCtrl_Get(void *device,
 }
 
 
-/**
- * ADC FlashCal Counting done
- */
+/***************************************************************************//**
+ * @brief Retrieves the ADC Flash Calibration Count Done status from the
+ * specified device instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the instance of the ADC.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * calibration count status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashcalCntDone_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -2485,9 +3886,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashcalCntDone_Get(void *device,
     return status;
 }
 
-/**
- * ADC FlashCal Counter enable
- */
+/***************************************************************************//**
+ * @brief Sets the ADC Flash Calibration Counter Enable bit in the ADC2 memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance to
+ * configure.
+ * @param value A uint8_t value that indicates whether to enable (1) or disable
+ * (0) the Flash Calibration Counter.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashcalCnten_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -2499,9 +3910,17 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashcalCnten_Set(void *device,
     return status;
 }
 
-/**
- * ADC FlashCal Counter enable
- */
+/***************************************************************************//**
+ * @brief Retrieves the ADC Flash Calibration Counter Enable status.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashcalCnten_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -2516,9 +3935,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashcalCnten_Get(void *device,
     return status;
 }
 
-/**
- * ADC FlashCal Counter Size
- */
+/***************************************************************************//**
+ * @brief Sets the ADC Flash Calibration Counter Size in the ADC2 memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the size to set for the
+ * ADC Flash Calibration Counter.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashcalCntsize_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -2530,9 +3958,19 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashcalCntsize_Set(void *device,
     return status;
 }
 
-/**
- * ADC FlashCal Counter Size
- */
+/***************************************************************************//**
+ * @brief Retrieves the ADC Flash Calibration Counter Size from the specified
+ * device instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance to
+ * access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved counter
+ * size will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcFlashcalCntsize_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)
@@ -2547,9 +3985,18 @@ static inline int32_t adrv9001_Adc2MemMap_AdcFlashcalCntsize_Get(void *device,
     return status;
 }
 
-/**
- * Fine Flash-DAC clock delay control
- */
+/***************************************************************************//**
+ * @brief Sets the fine Flash-DAC clock delay for the ADC bias.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAdc2MemMap_e` that
+ * specifies the ADC instance.
+ * @param value An 8-bit unsigned integer representing the delay value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcIbiasFlashFckDelay_Set(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t value)
@@ -2561,9 +4008,17 @@ static inline int32_t adrv9001_Adc2MemMap_AdcIbiasFlashFckDelay_Set(void *device
     return status;
 }
 
-/**
- * Fine Flash-DAC clock delay control
- */
+/***************************************************************************//**
+ * @brief Retrieves the Flash DAC clock delay for the ADC I-bias.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc2MemMap_AdcIbiasFlashFckDelay_Get(void *device,
     adrv9001_BfAdc2MemMap_e instance,
     uint8_t *value)

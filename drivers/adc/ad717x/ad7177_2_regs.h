@@ -37,7 +37,17 @@
 #include "ad717x.h"
 
 #ifdef AD7172_2_INIT
-/*! Array holding the info for the AD7172_2 registers - address, initial value, size */
+/***************************************************************************//**
+ * @brief The `ad7172_2_regs` is an array of structures, each representing a
+ * register of the AD7172-2 analog-to-digital converter. Each element in
+ * the array contains the register address, an initial value, and the
+ * size of the register in bytes. This array is used to configure and
+ * manage the various registers of the AD7172-2 device.
+ *
+ * @details This variable is used to initialize and manage the configuration of
+ * the AD7172-2 ADC registers by providing their addresses, initial
+ * values, and sizes.
+ ******************************************************************************/
 ad717x_st_reg ad7172_2_regs[] = {
 	{ AD717X_STATUS_REG, 0x00, 1 },
 	{ AD717X_ADCMODE_REG, 0x0000, 2	},

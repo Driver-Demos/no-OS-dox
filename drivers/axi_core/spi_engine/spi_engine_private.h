@@ -137,11 +137,35 @@
 /*************************** Types Declarations *******************************/
 /******************************************************************************/
 
+/***************************************************************************//**
+ * @brief The `spi_engine_cmd_queue` is a linked list data structure used to
+ * store a sequence of commands for the SPI engine. Each node in the list
+ * contains a command represented by a 32-bit unsigned integer and a
+ * pointer to the next command in the queue, allowing for dynamic and
+ * flexible command management in SPI operations.
+ *
+ * @param cmd A 32-bit unsigned integer representing a command in the queue.
+ * @param next A pointer to the next spi_engine_cmd_queue structure, forming a
+ * linked list.
+ ******************************************************************************/
 typedef struct spi_engine_cmd_queue {
 	uint32_t	cmd;
 	struct		spi_engine_cmd_queue *next;
 } spi_engine_cmd_queue;
 
+/***************************************************************************//**
+ * @brief The `spi_engine_msg` structure is used to encapsulate the data and
+ * command queue necessary for performing SPI transactions using the SPI
+ * Engine. It includes pointers to transmit and receive buffers, the
+ * length of the data to be transferred, and a command queue that
+ * dictates the sequence of operations to be performed during the SPI
+ * communication.
+ *
+ * @param tx_buf Pointer to a buffer containing data to be transmitted.
+ * @param rx_buf Pointer to a buffer where received data will be stored.
+ * @param length The length of the data to be transmitted or received.
+ * @param cmds Pointer to a queue of SPI engine commands to be executed.
+ ******************************************************************************/
 typedef struct spi_engine_msg {
 	uint32_t			*tx_buf;
 	uint32_t			*rx_buf;

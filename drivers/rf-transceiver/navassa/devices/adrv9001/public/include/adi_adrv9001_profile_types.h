@@ -20,11 +20,21 @@
 #include "adi_adrv9001_pfirBuffer_types.h"
 #include "adi_adrv9001_dynamicProfile_types.h"
 
-/**
- * \brief Data structure to hold ADRV9001 device instance initialization settings
+/***************************************************************************//**
+ * @brief The `adi_adrv9001_Init_t` structure is designed to encapsulate the
+ * initialization settings for an ADRV9001 device instance. It includes
+ * various configuration settings such as clock settings, receive and
+ * transmit settings, system configuration, and data interface settings.
+ * Each member of the structure corresponds to a specific aspect of the
+ * device's configuration, allowing for comprehensive initialization of
+ * the device's operational parameters.
  *
- * \implements IPmagTarget
- */
+ * @param clocks Holds settings for CLKPLL and reference clock.
+ * @param rx Rx settings data structure.
+ * @param tx Tx settings data structure.
+ * @param sysConfig Device system config struct.
+ * @param pfirBuffer Holds the Data Interface CSSI/LSSI data link settings.
+ ******************************************************************************/
 typedef struct adi_adrv9001_Init
 {
     adi_adrv9001_ClockSettings_t clocks;      /*!< Holds settings for CLKPLL and reference clock */

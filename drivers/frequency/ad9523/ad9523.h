@@ -267,7 +267,39 @@
 
 /******************************************************************************/
 /************************ Types Definitions ***********************************/
-/******************************************************************************/
+/***************************************************************************//**
+ * @brief The `outp_drv_mode` enumeration defines various output driver modes
+ * for a device, specifying different electrical characteristics such as
+ * current levels and logic families (e.g., LVPECL, LVDS, HSTL, and
+ * CMOS). Each enumerator represents a specific configuration that can be
+ * used to control the output behavior of the device's driver, allowing
+ * for flexibility in interfacing with different types of circuits.
+ *
+ * @param TRISTATE Represents a high-impedance state for the output driver.
+ * @param LVPECL_8mA Specifies an LVPECL output driver mode with 8mA current.
+ * @param LVDS_4mA Specifies an LVDS output driver mode with 4mA current.
+ * @param LVDS_7mA Specifies an LVDS output driver mode with 7mA current.
+ * @param HSTL0_16mA Specifies an HSTL output driver mode with 16mA current.
+ * @param HSTL1_8mA Specifies an HSTL output driver mode with 8mA current.
+ * @param CMOS_CONF1 Specifies a CMOS configuration mode 1 for the output
+ * driver.
+ * @param CMOS_CONF2 Specifies a CMOS configuration mode 2 for the output
+ * driver.
+ * @param CMOS_CONF3 Specifies a CMOS configuration mode 3 for the output
+ * driver.
+ * @param CMOS_CONF4 Specifies a CMOS configuration mode 4 for the output
+ * driver.
+ * @param CMOS_CONF5 Specifies a CMOS configuration mode 5 for the output
+ * driver.
+ * @param CMOS_CONF6 Specifies a CMOS configuration mode 6 for the output
+ * driver.
+ * @param CMOS_CONF7 Specifies a CMOS configuration mode 7 for the output
+ * driver.
+ * @param CMOS_CONF8 Specifies a CMOS configuration mode 8 for the output
+ * driver.
+ * @param CMOS_CONF9 Specifies a CMOS configuration mode 9 for the output
+ * driver.
+ ******************************************************************************/
 enum outp_drv_mode {
 	TRISTATE,
 	LVPECL_8mA,
@@ -286,6 +318,21 @@ enum outp_drv_mode {
 	CMOS_CONF9
 };
 
+/***************************************************************************//**
+ * @brief The `ref_sel_mode` enumeration defines various modes for selecting
+ * reference signals in a system, such as staying on a specific
+ * reference, reverting to another, or selecting an external reference.
+ * This is typically used in systems that require precise control over
+ * reference signal selection, such as clock distribution systems.
+ *
+ * @param NONEREVERTIVE_STAY_ON_REFB Indicates a non-revertive mode where the
+ * system stays on reference B.
+ * @param REVERT_TO_REFA Indicates a mode where the system reverts to reference
+ * A.
+ * @param SELECT_REFA Indicates a mode where reference A is selected.
+ * @param SELECT_REFB Indicates a mode where reference B is selected.
+ * @param EXT_REF_SEL Indicates a mode where an external reference is selected.
+ ******************************************************************************/
 enum ref_sel_mode {
 	NONEREVERTIVE_STAY_ON_REFB,
 	REVERT_TO_REFA,
@@ -294,10 +341,30 @@ enum ref_sel_mode {
 	EXT_REF_SEL
 };
 
-/**
- * @struct ad9523_channel_spec
- * @brief Output channel configuration
- */
+/***************************************************************************//**
+ * @brief The `ad9523_channel_spec` structure defines the configuration for an
+ * output channel in the AD9523 device. It includes settings for the
+ * channel number, clock polarity inversion, SYNC signal handling, power
+ * mode, alternative clock source usage, channel power state, driver
+ * mode, initial phase of the divider, and the channel divider value.
+ * Additionally, it allows for an optional descriptive name for the
+ * channel. This structure is crucial for configuring the behavior and
+ * characteristics of each output channel in the AD9523 clock
+ * distribution system.
+ *
+ * @param channel_num Output channel number.
+ * @param divider_output_invert_en Invert the polarity of the output clock.
+ * @param sync_ignore_en Ignore chip-level SYNC signal.
+ * @param low_power_mode_en Reduce power used in the differential output modes.
+ * @param use_alt_clock_src Channel divider uses alternative clock source:
+ * CH0..CH3 VCXO, CH4..CH9 VCO2.
+ * @param output_dis Disables, powers down the entire channel.
+ * @param driver_mode Output driver mode (logic level family).
+ * @param divider_phase Divider initial phase after a SYNC, range 0..63, LSB =
+ * 1/2 of a period of the divider input clock.
+ * @param channel_divider 10-bit channel divider.
+ * @param extended_name Optional descriptive channel name.
+ ******************************************************************************/
 struct ad9523_channel_spec {
 	/** Output channel number. */
 	uint8_t channel_num;
@@ -323,6 +390,24 @@ struct ad9523_channel_spec {
 	int8_t extended_name[16];
 };
 
+/***************************************************************************//**
+ * @brief The `pll1_rzero_resistor` enumeration defines a set of constants
+ * representing different resistor values used in the loop filter of the
+ * PLL1 (Phase-Locked Loop) in the AD9523 device. These resistor values
+ * are critical for configuring the loop filter characteristics, which in
+ * turn affect the stability and performance of the PLL. The enumeration
+ * provides predefined resistor values, as well as an option to use an
+ * external resistor, allowing for flexibility in the design and tuning
+ * of the PLL loop filter.
+ *
+ * @param RZERO_883_OHM Represents a resistor value of 883 ohms.
+ * @param RZERO_677_OHM Represents a resistor value of 677 ohms.
+ * @param RZERO_341_OHM Represents a resistor value of 341 ohms.
+ * @param RZERO_135_OHM Represents a resistor value of 135 ohms.
+ * @param RZERO_10_OHM Represents a resistor value of 10 ohms.
+ * @param RZERO_USE_EXT_RES Indicates the use of an external resistor, with a
+ * specific value of 8.
+ ******************************************************************************/
 enum pll1_rzero_resistor {
 	RZERO_883_OHM,
 	RZERO_677_OHM,
@@ -332,6 +417,20 @@ enum pll1_rzero_resistor {
 	RZERO_USE_EXT_RES = 8,
 };
 
+/***************************************************************************//**
+ * @brief The `rpole2_resistor` enumeration defines a set of constants
+ * representing specific resistor values used in the loop filter of the
+ * AD9523 PLL2 configuration. These values are used to configure the
+ * resistance in the loop filter, which is critical for determining the
+ * stability and performance of the phase-locked loop (PLL). Each
+ * enumerator corresponds to a specific resistance value in ohms,
+ * allowing for easy selection and configuration within the software.
+ *
+ * @param RPOLE2_900_OHM Represents a resistor value of 900 ohms.
+ * @param RPOLE2_450_OHM Represents a resistor value of 450 ohms.
+ * @param RPOLE2_300_OHM Represents a resistor value of 300 ohms.
+ * @param RPOLE2_225_OHM Represents a resistor value of 225 ohms.
+ ******************************************************************************/
 enum rpole2_resistor {
 	RPOLE2_900_OHM,
 	RPOLE2_450_OHM,
@@ -339,6 +438,22 @@ enum rpole2_resistor {
 	RPOLE2_225_OHM,
 };
 
+/***************************************************************************//**
+ * @brief The `rzero_resistor` enum defines a set of constants representing
+ * different resistor values in ohms, which are used to configure the
+ * loop filter of a PLL (Phase-Locked Loop) in the AD9523 device. Each
+ * enumerator corresponds to a specific resistance value, allowing for
+ * easy selection and configuration of the loop filter's characteristics.
+ *
+ * @param RZERO_3250_OHM Represents a resistor with a resistance of 3250 ohms.
+ * @param RZERO_2750_OHM Represents a resistor with a resistance of 2750 ohms.
+ * @param RZERO_2250_OHM Represents a resistor with a resistance of 2250 ohms.
+ * @param RZERO_2100_OHM Represents a resistor with a resistance of 2100 ohms.
+ * @param RZERO_3000_OHM Represents a resistor with a resistance of 3000 ohms.
+ * @param RZERO_2500_OHM Represents a resistor with a resistance of 2500 ohms.
+ * @param RZERO_2000_OHM Represents a resistor with a resistance of 2000 ohms.
+ * @param RZERO_1850_OHM Represents a resistor with a resistance of 1850 ohms.
+ ******************************************************************************/
 enum rzero_resistor {
 	RZERO_3250_OHM,
 	RZERO_2750_OHM,
@@ -350,6 +465,24 @@ enum rzero_resistor {
 	RZERO_1850_OHM,
 };
 
+/***************************************************************************//**
+ * @brief The `cpole1_capacitor` enumeration defines a set of constants
+ * representing different capacitor values in picofarads, which are used
+ * in configuring the loop filter of the AD9523 PLL2. Each enumerator
+ * corresponds to a specific capacitor value, allowing for easy selection
+ * and configuration of the loop filter's characteristics. The
+ * placeholder `_CPOLE1_24_PF` is included for potential future use or as
+ * a reserved value.
+ *
+ * @param CPOLE1_0_PF Represents a capacitor value of 0 picofarads.
+ * @param CPOLE1_8_PF Represents a capacitor value of 8 picofarads.
+ * @param CPOLE1_16_PF Represents a capacitor value of 16 picofarads.
+ * @param CPOLE1_24_PF Represents a capacitor value of 24 picofarads.
+ * @param _CPOLE1_24_PF A placeholder for a capacitor value of 24 picofarads.
+ * @param CPOLE1_32_PF Represents a capacitor value of 32 picofarads.
+ * @param CPOLE1_40_PF Represents a capacitor value of 40 picofarads.
+ * @param CPOLE1_48_PF Represents a capacitor value of 48 picofarads.
+ ******************************************************************************/
 enum cpole1_capacitor {
 	CPOLE1_0_PF,
 	CPOLE1_8_PF,
@@ -361,10 +494,57 @@ enum cpole1_capacitor {
 	CPOLE1_48_PF,
 };
 
-/**
- * @struct ad9523_platform_data
- * @brief platform specific information
- */
+/***************************************************************************//**
+ * @brief The `ad9523_platform_data` structure is a comprehensive configuration
+ * data structure for the AD9523 device, which is a clock generator and
+ * distribution IC. It includes settings for external VCXO frequency, SPI
+ * communication mode, input selection for various differential and
+ * single-ended signals, and detailed PLL1 and PLL2 configuration
+ * parameters such as dividers, charge pump currents, and loop filter
+ * settings. Additionally, it holds information about the output channel
+ * configuration, including the number of channels and a pointer to the
+ * channel specifications. This structure is essential for initializing
+ * and configuring the AD9523 device to meet specific application
+ * requirements.
+ *
+ * @param vcxo_freq External VCXO frequency in Hz.
+ * @param spi3wire Enable SPI-3wire mode.
+ * @param refa_diff_rcv_en REFA differential/single-ended input selection.
+ * @param refb_diff_rcv_en REFB differential/single-ended input selection.
+ * @param zd_in_diff_en Zero Delay differential/single-ended input selection.
+ * @param osc_in_diff_en OSC differential/single-ended input selection.
+ * @param refa_cmos_neg_inp_en REFA single-ended neg./pos. input enable.
+ * @param refb_cmos_neg_inp_en REFB single-ended neg./pos. input enable.
+ * @param zd_in_cmos_neg_inp_en Zero Delay single-ended neg./pos. input enable.
+ * @param osc_in_cmos_neg_inp_en OSC single-ended neg./pos. input enable.
+ * @param refa_r_div PLL1 10-bit: REFA R divider.
+ * @param refb_r_div PLL1 10-bit: REFB R divider.
+ * @param pll1_feedback_div PLL1 10-bit Feedback N divider.
+ * @param pll1_charge_pump_current_nA Magnitude of PLL1 charge pump current in
+ * nA.
+ * @param zero_delay_mode_internal_en Internal, external Zero Delay mode
+ * selection.
+ * @param osc_in_feedback_en PLL1 feedback path, local feedback from the OSC_IN
+ * receiver or zero delay mode.
+ * @param pll1_bypass_en Bypass PLL1 - Single loop mode.
+ * @param pll1_loop_filter_rzero PLL1 Loop Filter Zero Resistor selection.
+ * @param ref_mode Reference mode selection.
+ * @param pll2_charge_pump_current_nA Magnitude of PLL2 charge pump current in
+ * nA.
+ * @param pll2_ndiv_a_cnt PLL2 Feedback N-divider, A Counter, range 0..4.
+ * @param pll2_ndiv_b_cnt PLL2 Feedback N-divider, B Counter, range 0..63.
+ * @param pll2_freq_doubler_en PLL2 frequency doubler enable.
+ * @param pll2_r2_div PLL2 R2 divider, range 0..31.
+ * @param pll2_vco_diff_m1 VCO1 divider, range 3..5.
+ * @param pll2_vco_diff_m2 VCO2 divider, range 3..5.
+ * @param rpole2 PLL2 loop filter Rpole resistor value.
+ * @param rzero PLL2 loop filter Rzero resistor value.
+ * @param cpole1 PLL2 loop filter Cpole capacitor value.
+ * @param rzero_bypass_en PLL2 loop filter Rzero bypass enable.
+ * @param num_channels Array size of struct ad9523_channel_spec.
+ * @param channels Pointer to channel array.
+ * @param name Optional alternative iio device name.
+ ******************************************************************************/
 struct ad9523_platform_data {
 	/** External VCXO frequency in Hz */
 	uint32_t vcxo_freq;
@@ -453,6 +633,21 @@ struct ad9523_platform_data {
 	int8_t name[16];
 };
 
+/***************************************************************************//**
+ * @brief The `ad9523_state` structure is used to maintain the state of the
+ * AD9523 device, which is a clock generator and distribution IC. It
+ * holds configuration data such as the frequencies of the VCXO and VCO,
+ * as well as mappings of VCO outputs to channels. This structure is
+ * essential for managing the device's operation and ensuring that the
+ * correct frequencies are output to the appropriate channels.
+ *
+ * @param pdata Pointer to a structure containing platform-specific data for the
+ * AD9523.
+ * @param vcxo_freq Frequency of the external VCXO in Hz.
+ * @param vco_freq Frequency of the VCO in Hz.
+ * @param vco_out_freq Array holding the output frequencies of the VCO.
+ * @param vco_out_map Array mapping VCO outputs to specific channels.
+ ******************************************************************************/
 struct ad9523_state {
 	struct ad9523_platform_data *pdata;
 	uint32_t vcxo_freq;
@@ -461,6 +656,20 @@ struct ad9523_state {
 	uint8_t vco_out_map[14];
 };
 
+/***************************************************************************//**
+ * @brief The `ad9523_out_frequencies` enumeration defines the possible output
+ * frequency sources for the AD9523 device, which include two VCOs and a
+ * VCXO. This enumeration is used to specify which clock source is being
+ * referred to in the context of configuring or querying the AD9523 clock
+ * distribution device.
+ *
+ * @param AD9523_VCO1 Represents the first VCO (Voltage Controlled Oscillator)
+ * output frequency.
+ * @param AD9523_VCO2 Represents the second VCO output frequency.
+ * @param AD9523_VCXO Represents the VCXO (Voltage Controlled Crystal
+ * Oscillator) output frequency.
+ * @param AD9523_NUM_CLK_SRC Indicates the number of clock sources available.
+ ******************************************************************************/
 enum ad9523_out_frequencies {
 	AD9523_VCO1,
 	AD9523_VCO2,
@@ -468,6 +677,20 @@ enum ad9523_out_frequencies {
 	AD9523_NUM_CLK_SRC,
 };
 
+/***************************************************************************//**
+ * @brief The `ad9523_dev` structure is a compound data type used to encapsulate
+ * the necessary components for managing and interfacing with an AD9523
+ * device. It includes a SPI descriptor for communication, a state
+ * structure to maintain the current configuration and operational state
+ * of the device, and a pointer to platform-specific data that provides
+ * additional configuration details. This structure is essential for
+ * initializing, configuring, and controlling the AD9523 device within a
+ * software application.
+ *
+ * @param spi_desc Pointer to a SPI descriptor for communication.
+ * @param ad9523_st Holds the state information of the AD9523 device.
+ * @param pdata Pointer to platform-specific data for the AD9523 device.
+ ******************************************************************************/
 struct ad9523_dev {
 	/* SPI */
 	struct no_os_spi_desc		*spi_desc;
@@ -476,6 +699,18 @@ struct ad9523_dev {
 	struct ad9523_platform_data	*pdata;
 };
 
+/***************************************************************************//**
+ * @brief The `ad9523_init_param` structure is used to initialize the AD9523
+ * device, encapsulating both the SPI initialization parameters and a
+ * pointer to the platform-specific data settings. This structure is
+ * essential for setting up the device's communication interface and
+ * configuring its operational parameters according to the specific
+ * platform requirements.
+ *
+ * @param spi_init Holds the initialization parameters for the SPI interface.
+ * @param pdata Pointer to the platform-specific data structure containing
+ * device settings.
+ ******************************************************************************/
 struct ad9523_init_param {
 	/* SPI */
 	struct no_os_spi_init_param	spi_init;
@@ -487,35 +722,194 @@ struct ad9523_init_param {
 /************************ Functions Declarations ******************************/
 /******************************************************************************/
 /* Reads the value of the selected register. */
+/***************************************************************************//**
+ * @brief Use this function to read the value of a specific register from the
+ * AD9523 device. It requires a valid device structure and a register
+ * address to read from. The function will store the read value in the
+ * provided output parameter. Ensure that the device has been properly
+ * initialized before calling this function. The function returns an
+ * error code if the SPI communication fails.
+ *
+ * @param dev A pointer to an ad9523_dev structure representing the device. Must
+ * not be null and should be properly initialized before use.
+ * @param reg_addr The address of the register to read from. It should be a
+ * valid register address within the device's addressable range.
+ * @param reg_data A pointer to a uint32_t where the read register value will be
+ * stored. Must not be null.
+ * @return Returns an int32_t error code, where 0 indicates success and a
+ * negative value indicates an error in SPI communication.
+ ******************************************************************************/
 int32_t ad9523_spi_read(struct ad9523_dev *dev,
 			uint32_t reg_addr,
 			uint32_t *reg_data);
 
 /* Writes a value to the selected register. */
+/***************************************************************************//**
+ * @brief Use this function to write a 32-bit value to a specific register of
+ * the AD9523 device via SPI. This function is typically called when
+ * configuring the device or updating its settings. Ensure that the
+ * device has been properly initialized and that the SPI interface is
+ * correctly set up before calling this function. The function returns an
+ * error code if the SPI write operation fails.
+ *
+ * @param dev A pointer to an ad9523_dev structure representing the device. Must
+ * not be null, and the device must be initialized.
+ * @param reg_addr The address of the register to write to. Must be a valid
+ * register address for the AD9523.
+ * @param reg_data The 32-bit data to write to the specified register. The data
+ * is split into bytes and sent over SPI.
+ * @return Returns an int32_t error code, where 0 indicates success and a
+ * negative value indicates an error during the SPI write operation.
+ ******************************************************************************/
 int32_t ad9523_spi_write(struct ad9523_dev *dev,
 			 uint32_t reg_addr,
 			 uint32_t reg_data);
 
 /* Updates the AD9523 configuration */
+/***************************************************************************//**
+ * @brief Use this function to apply any pending configuration changes to the
+ * AD9523 device. It must be called after making configuration changes
+ * that require an update to take effect. This function communicates with
+ * the device via SPI to ensure the new settings are applied. It is
+ * essential to ensure that the device is properly initialized before
+ * calling this function.
+ *
+ * @param dev A pointer to an initialized ad9523_dev structure representing the
+ * device. Must not be null. The function will return an error if the
+ * device is not properly initialized.
+ * @return Returns an int32_t value indicating success or failure of the update
+ * operation. A non-zero return value indicates an error.
+ ******************************************************************************/
 int32_t ad9523_io_update(struct ad9523_dev *dev);
 
 /* Sets the clock provider for selected channel. */
+/***************************************************************************//**
+ * @brief This function configures the clock source for a specified output
+ * channel on the AD9523 device. It should be used when you need to
+ * change the clock source for a channel, either to the VCO or another
+ * source. The function must be called with a valid device structure and
+ * a channel number within the range of 0 to 9. The output parameter
+ * determines the clock source, where a non-zero value selects the VCO.
+ * The function returns an error code if the operation fails, and it
+ * updates the internal state of the device to reflect the new
+ * configuration.
+ *
+ * @param dev A pointer to an initialized ad9523_dev structure. Must not be
+ * null. The caller retains ownership.
+ * @param ch The channel number to configure, ranging from 0 to 9. Values
+ * outside this range result in no operation.
+ * @param out Determines the clock source for the channel. A non-zero value
+ * selects the VCO as the clock source, while zero selects an
+ * alternative source.
+ * @return Returns an int32_t error code, where 0 indicates success and a
+ * negative value indicates an error. The internal state of the device
+ * is updated to reflect the new clock source configuration.
+ ******************************************************************************/
 int32_t ad9523_vco_out_map(struct ad9523_dev *dev,
 			   uint32_t ch,
 			   uint32_t out);
 
 /* Updates the AD9523 configuration. */
+/***************************************************************************//**
+ * @brief This function is used to synchronize the AD9523 device by controlling
+ * the synchronization signal. It should be called when a synchronization
+ * of the device is required, such as after configuration changes. The
+ * function reads the current status signals, modifies the
+ * synchronization control bit, writes it back, and updates the device
+ * configuration. It is important to ensure that the device is properly
+ * initialized before calling this function to avoid undefined behavior.
+ *
+ * @param dev A pointer to an ad9523_dev structure representing the device. Must
+ * not be null. The caller retains ownership and is responsible for
+ * ensuring the device is initialized.
+ * @return Returns 0 on success or a negative error code on failure, indicating
+ * the type of error encountered during synchronization.
+ ******************************************************************************/
 int32_t ad9523_sync(struct ad9523_dev *dev);
 
 /* Initialize the AD9523 data structure*/
+/***************************************************************************//**
+ * @brief This function initializes the AD9523 device by setting up the provided
+ * initialization parameters with default values. It is typically called
+ * before any other operations on the AD9523 to ensure that the device is
+ * in a known state. The function does not perform any hardware
+ * communication; it only prepares the initialization structure. It must
+ * be called before using the `ad9523_setup` function to configure the
+ * device.
+ *
+ * @param init_param A pointer to an `ad9523_init_param` structure that must not
+ * be null. The structure should be allocated by the caller,
+ * and the function will populate its `pdata` field with
+ * default configuration values. The caller retains ownership
+ * of the memory.
+ * @return Returns 0 on successful initialization of the parameters.
+ ******************************************************************************/
 int32_t ad9523_init(struct ad9523_init_param *init_param);
 
 /* Configure the AD9523. */
+/***************************************************************************//**
+ * @brief This function sets up the AD9523 device by initializing its SPI
+ * interface and configuring its PLLs and output channels based on the
+ * provided initialization parameters. It must be called before any other
+ * operations on the AD9523 device. The function allocates memory for the
+ * device structure and initializes it with the specified parameters. It
+ * handles various configuration settings, including PLL dividers, charge
+ * pump currents, and channel configurations. The function returns an
+ * error code if initialization fails at any step, ensuring that the
+ * device is not left in an undefined state.
+ *
+ * @param device A pointer to a pointer of type `struct ad9523_dev`. This will
+ * be allocated and initialized by the function. The caller must
+ * ensure this pointer is valid and will receive ownership of the
+ * allocated memory.
+ * @param init_param A pointer to a constant `struct ad9523_init_param`
+ * containing the initialization parameters for the device.
+ * This includes SPI settings and platform-specific data. The
+ * pointer must not be null, and the structure must be fully
+ * populated with valid configuration data.
+ * @return Returns an `int32_t` status code. A value of 0 indicates success,
+ * while a negative value indicates an error occurred during setup.
+ ******************************************************************************/
 int32_t ad9523_setup(struct ad9523_dev **device,
 		     const struct ad9523_init_param *init_param);
 
 /* Free the resources allocated by ad9523_setup(). */
+/***************************************************************************//**
+ * @brief This function is used to release all resources associated with an
+ * AD9523 device instance. It should be called when the device is no
+ * longer needed, typically after all operations with the device are
+ * complete. The function ensures that any allocated memory and
+ * associated SPI resources are properly freed. It is important to ensure
+ * that the `dev` parameter is a valid pointer to an initialized
+ * `ad9523_dev` structure before calling this function. Failure to do so
+ * may result in undefined behavior.
+ *
+ * @param dev A pointer to an `ad9523_dev` structure representing the device to
+ * be removed. This pointer must not be null and should point to a
+ * valid, initialized device structure. The function will handle
+ * invalid pointers by potentially causing undefined behavior.
+ * @return Returns an integer status code from the SPI removal operation, where
+ * 0 typically indicates success and a negative value indicates an
+ * error.
+ ******************************************************************************/
 int32_t ad9523_remove(struct ad9523_dev *dev);
 
+/***************************************************************************//**
+ * @brief This function is used to verify the operational status of the AD9523
+ * device by checking various status indicators. It should be called to
+ * ensure that the device is functioning correctly, particularly after
+ * initialization or configuration changes. The function checks the
+ * status of the VCXO and PLL2 lock, and if PLL1 is not bypassed, it also
+ * checks additional status indicators. It returns an error code if any
+ * of the critical status indicators are not in the expected state. This
+ * function must be called with a valid device structure that has been
+ * properly initialized.
+ *
+ * @param dev A pointer to an ad9523_dev structure representing the device. This
+ * must be a valid, initialized device structure. The function will
+ * not modify this structure, but it must not be null.
+ * @return Returns 0 if the device status is as expected, or -1 if there are
+ * errors in the VCXO or PLL2 lock status.
+ ******************************************************************************/
 int32_t ad9523_status(struct ad9523_dev *dev);
 #endif // __AD9523_H__

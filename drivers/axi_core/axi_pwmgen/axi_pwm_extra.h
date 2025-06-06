@@ -43,10 +43,19 @@
 /******************************************************************************/
 /*************************** Types Declarations *******************************/
 /******************************************************************************/
-/**
- * @struct axi_pwm_init_param
- * @brief Structure holding the initialization parameters for axi PWM.
- */
+/***************************************************************************//**
+ * @brief The `axi_pwm_init_param` structure is used to define the
+ * initialization parameters for an AXI PWM (Pulse Width Modulation)
+ * controller. It includes the base address of the PWM core, the
+ * reference clock frequency in Hertz, and the specific channel of the
+ * PWM controller that is desired for operation. This structure is
+ * essential for setting up the PWM controller with the correct
+ * configuration before it is used in applications.
+ *
+ * @param base_addr PWM core base address.
+ * @param ref_clock_Hz PWM reference clock in Hertz.
+ * @param channel Desired channel of the PWM controller.
+ ******************************************************************************/
 struct axi_pwm_init_param {
 	/** PWM core base address */
 	uint32_t base_addr;
@@ -56,10 +65,21 @@ struct axi_pwm_init_param {
 	uint32_t channel;
 };
 
-/**
- * @struct axi_pwm_desc
- * @brief AXI PWM descriptor
- */
+/***************************************************************************//**
+ * @brief The `axi_pwm_desc` structure is a descriptor for an AXI PWM (Pulse
+ * Width Modulation) controller, encapsulating essential configuration
+ * parameters such as the base address of the PWM core, the reference
+ * clock frequency, the specific channel to be used, and additional
+ * details like the period of a disabled channel and the hardware version
+ * for register offset validation. This structure is crucial for managing
+ * and interfacing with the PWM hardware in a system.
+ *
+ * @param base_addr PWM core base address.
+ * @param ref_clock_Hz PWM reference clock frequency in Hertz.
+ * @param channel Desired channel of the PWM controller.
+ * @param ch_period Stores the period when the channel is disabled.
+ * @param hw_major_ver Hardware version for checking correct register offsets.
+ ******************************************************************************/
 struct axi_pwm_desc {
 	/** PWM core base address */
 	uint32_t base_addr;
@@ -73,9 +93,19 @@ struct axi_pwm_desc {
 	uint32_t hw_major_ver;
 };
 
-/**
- * @brief AXI specific PWM platform ops structure
- */
+/***************************************************************************//**
+ * @brief The `axi_pwm_ops` is a constant structure of type
+ * `no_os_pwm_platform_ops` that provides platform-specific operations
+ * for the AXI PWM driver. It is used to define the function pointers and
+ * operations that are specific to the AXI PWM hardware implementation.
+ * This structure is essential for abstracting the hardware-specific
+ * details and providing a uniform interface for PWM operations across
+ * different platforms.
+ *
+ * @details This variable is used to interface with the AXI PWM hardware by
+ * providing the necessary function pointers for platform-specific
+ * operations.
+ ******************************************************************************/
 extern const struct no_os_pwm_platform_ops axi_pwm_ops;
 
 #endif

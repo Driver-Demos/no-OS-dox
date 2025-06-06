@@ -37,7 +37,16 @@
 #include "ad717x.h"
 
 #ifdef AD7175_8_INIT
-/*! Array holding the info for the AD7175_8 registers - address, initial value, size */
+/***************************************************************************//**
+ * @brief The `ad7175_8_regs` is an array of structures, each representing a
+ * register of the AD7175-8 analog-to-digital converter. Each element in
+ * the array contains the register address, an initial value, and the
+ * size of the register in bytes. This array is used to configure and
+ * manage the various registers of the AD7175-8 device.
+ *
+ * @details This variable is used to initialize and configure the AD7175-8
+ * registers with specific settings for operation.
+ ******************************************************************************/
 ad717x_st_reg ad7175_8_regs[] = {
 	{ AD717X_STATUS_REG, 0x00, 1 },
 	{ AD717X_ADCMODE_REG, 0x0000, 2 },

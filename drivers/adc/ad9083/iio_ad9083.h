@@ -42,7 +42,17 @@
 
 #include "iio_types.h"
 
-/** IIO Descriptor */
+/***************************************************************************//**
+ * @brief The `ad9083_iio_descriptor` is an external global variable of type
+ * `struct iio_device`. It is declared in the header file `iio_ad9083.h`
+ * and is intended to be used in conjunction with the Industrial I/O
+ * (IIO) framework, which is a subsystem in the Linux kernel used for
+ * interfacing with various sensors and data acquisition devices.
+ *
+ * @details This variable is used to represent the IIO device descriptor for the
+ * AD9083 device, facilitating its integration and management within
+ * the IIO framework.
+ ******************************************************************************/
 extern struct iio_device ad9083_iio_descriptor;
 
 #endif /* IIO_AD9083_H_ */

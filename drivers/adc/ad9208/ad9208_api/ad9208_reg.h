@@ -15,14 +15,92 @@
 
 #include "api_def.h"
 
+/***************************************************************************//**
+ * @brief This function is used to write multiple register values to an AD9208
+ * device in a single operation. It is useful when configuring the device
+ * with a set of predefined register settings. The function iterates over
+ * a table of register-value pairs and writes each pair to the device. It
+ * must be called with a valid device handle and a non-null table of
+ * register data. If the table is null, the function returns an error.
+ * The function stops writing and returns an error if any individual
+ * register write fails.
+ *
+ * @param h A pointer to an ad9208_handle_t structure representing the device
+ * handle. Must not be null. The caller retains ownership.
+ * @param tbl A pointer to an array of adi_reg_data structures, each containing
+ * a register address and value to be written. Must not be null.
+ * @param count The number of register-value pairs in the table. Must be a non-
+ * negative integer.
+ * @return Returns an integer status code. Returns API_ERROR_OK on success, or
+ * an error code if any register write fails or if the table is null.
+ ******************************************************************************/
 int ad9208_register_write_tbl(ad9208_handle_t *h,
 			      struct adi_reg_data *tbl, uint32_t count);
 
+/***************************************************************************//**
+ * @brief This function is used to read a sequence of consecutive registers from
+ * the AD9208 device starting at a specified address. It is useful when
+ * multiple register values need to be retrieved in a single operation.
+ * The function requires a valid device handle and a buffer to store the
+ * read data. It must be called with a valid address and a count
+ * specifying the number of registers to read. The function will return
+ * an error code if any individual register read fails, ensuring that the
+ * operation is reliable and errors are promptly reported.
+ *
+ * @param h A pointer to an ad9208_handle_t structure representing the device
+ * handle. Must not be null. The caller retains ownership.
+ * @param address The starting address of the register block to read. Must be a
+ * valid register address within the device's address space.
+ * @param data A pointer to a buffer where the read data will be stored. Must
+ * not be null and must have enough space to hold 'count' bytes. The
+ * caller retains ownership.
+ * @param count The number of consecutive registers to read. Must be a positive
+ * integer. If zero, no operation is performed.
+ * @return Returns an integer error code. Returns API_ERROR_OK on success or an
+ * error code if a read operation fails.
+ ******************************************************************************/
 int ad9208_register_read_block(ad9208_handle_t *h,
 			       const uint16_t address, uint8_t *data,
 			       uint32_t count);
 int ad9208_adc_select_ch(ad9208_handle_t *h, uint8_t ch);
+/***************************************************************************//**
+ * @brief Use this function to initiate a transfer of SPI register settings to
+ * the AD9208 chip. This function is typically called after configuring
+ * multiple registers to ensure that all settings are applied
+ * simultaneously. It requires a valid handle to the AD9208 device and
+ * will return an error code if the transfer cannot be initiated. Ensure
+ * that the device handle is properly initialized before calling this
+ * function.
+ *
+ * @param h A pointer to an ad9208_handle_t structure representing the device
+ * handle. This must be a valid, non-null pointer to an initialized
+ * device handle. If the pointer is null or invalid, the function will
+ * return an error code.
+ * @return Returns an integer error code. A return value of API_ERROR_OK
+ * indicates success, while any other value indicates an error occurred
+ * during the transfer initiation.
+ ******************************************************************************/
 int ad9208_register_chip_transfer(ad9208_handle_t *h);
+/***************************************************************************//**
+ * @brief This function determines whether the synchronous SPI update mode is
+ * enabled for the AD9208 device. It should be called when you need to
+ * verify the current state of the SPI update mode. The function requires
+ * a valid device handle and a non-null pointer to store the result. If
+ * the pointer is null, the function returns an error. The function reads
+ * the relevant register and sets the output parameter to indicate the
+ * status of the synchronous update mode.
+ *
+ * @param h A pointer to an ad9208_handle_t structure representing the device
+ * handle. It must be a valid handle initialized prior to calling this
+ * function.
+ * @param enabled A pointer to a uint8_t where the function will store the
+ * result. The value will be set to 1 if synchronous SPI update
+ * is enabled, or 0 if it is not. This pointer must not be null,
+ * or the function will return an error.
+ * @return Returns an integer status code. Returns API_ERROR_OK on success, or
+ * an error code if the input parameters are invalid or if the register
+ * read operation fails.
+ ******************************************************************************/
 int ad9208_is_sync_spi_update_enabled(ad9208_handle_t *h, uint8_t *enabled);
 
 /*Device DEFINITION */

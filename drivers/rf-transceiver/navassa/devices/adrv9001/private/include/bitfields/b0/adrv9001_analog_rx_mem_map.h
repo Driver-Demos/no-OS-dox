@@ -13,17 +13,54 @@
 
 #include "adrv9001_bf_hal.h"
 
+/***************************************************************************//**
+ * @brief The `adrv9001_BfAnalogRxMemMap_e` is an enumeration that defines
+ * memory map addresses for the analog settings of the RX1 and RX2
+ * channels in the ADRV9001 device. These addresses are used to access
+ * and configure specific analog parameters for each RX channel,
+ * facilitating the control and management of the device's analog front-
+ * end.
+ *
+ * @param ADRV9001_BF_RX1_ANA Represents the memory map address for RX1 analog
+ * settings, with a value of 0x3000.
+ * @param ADRV9001_BF_RX2_ANA Represents the memory map address for RX2 analog
+ * settings, with a value of 0x3400.
+ ******************************************************************************/
 typedef enum adrv9001_BfAnalogRxMemMap_e
 {
     ADRV9001_BF_RX1_ANA    =   0x3000,
     ADRV9001_BF_RX2_ANA    =   0x3400
 } adrv9001_BfAnalogRxMemMap_e;
 
+/***************************************************************************//**
+ * @brief The `analogRxMemMapInstances` is a static constant array of type
+ * `adrv9001_BfAnalogRxMemMap_e`, which is an enumeration representing
+ * different analog receive memory map instances. It contains two
+ * elements: `ADRV9001_BF_RX1_ANA` and `ADRV9001_BF_RX2_ANA`, which
+ * correspond to specific memory map addresses for RX1 and RX2 analog
+ * components.
+ *
+ * @details This array is used to reference specific analog receive memory map
+ * instances for operations involving RX1 and RX2 components.
+ ******************************************************************************/
 static const adrv9001_BfAnalogRxMemMap_e analogRxMemMapInstances[] = {
     ADRV9001_BF_RX1_ANA,
     ADRV9001_BF_RX2_ANA
 };
 
+/***************************************************************************//**
+ * @brief Sets the high range value for the auxiliary low frequency output of
+ * the analog receiver.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog receiver memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the high range.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_AuxLoHighR_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -35,6 +72,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_AuxLoHighR_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the high byte of the auxiliary low frequency signal from the
+ * specified analog receiver memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog receiver memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_AuxLoHighR_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -49,6 +99,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_AuxLoHighR_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the bypass mode for the auxiliary low dropout regulator in the
+ * analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A 8-bit unsigned integer that specifies the bypass setting for
+ * the LDO.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_AuxLoLdoBypass_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -60,6 +123,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_AuxLoLdoBypass_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the bypass status of the auxiliary low dropout regulator
+ * (LDO) for the analog receiver.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific analog receiver
+ * instance (e.g., RX1 or RX2).
+ * @param value A pointer to a uint8_t variable where the retrieved bypass
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_AuxLoLdoBypass_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -74,6 +150,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_AuxLoLdoBypass_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the bypass state for the auxiliary low dropout (LDO) filter in
+ * the analog receiver memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog receiver memory map.
+ * @param value A uint8_t value indicating whether to enable or disable the
+ * bypass (1 to enable, 0 to disable).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_AuxLoLdoFilterBypass_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -85,6 +174,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_AuxLoLdoFilterBypass_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the bypass status of the auxiliary low-dropout (LDO) filter
+ * in the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved filter
+ * bypass status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_AuxLoLdoFilterBypass_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -99,6 +201,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_AuxLoLdoFilterBypass_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state for the auxiliary low dropout regulator in
+ * the analog receiver.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog receiver memory map.
+ * @param value A uint8_t value indicating the desired power down state (0 for
+ * active, 1 for power down).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_AuxLoLdoPd_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -110,6 +225,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_AuxLoLdoPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the auxiliary low dropout regulator power down
+ * status from the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_AuxLoLdoPd_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -125,6 +253,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_AuxLoLdoPd_Get(void *device,
 }
 
 
+/***************************************************************************//**
+ * @brief Retrieves the status of the auxiliary low dropout regulator (LDO) for
+ * the specified analog receiver instance.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific analog receiver
+ * instance (e.g., RX1 or RX2).
+ * @param value A pointer to a uint8_t variable where the retrieved status value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_AuxLoLdoStatus_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -139,6 +280,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_AuxLoLdoStatus_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the output selection for the auxiliary low dropout regulator
+ * (LDO) voltage.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A 8-bit unsigned integer representing the desired output
+ * selection value for the LDO.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_AuxLoLdoVoutSel_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -150,6 +304,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_AuxLoLdoVoutSel_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the output selection for the auxiliary low dropout regulator
+ * voltage.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_AuxLoLdoVoutSel_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -164,6 +331,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_AuxLoLdoVoutSel_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the output trim value for the auxiliary low dropout regulator in
+ * the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the trim value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_AuxLoLdoVoutTrim_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -175,6 +354,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_AuxLoLdoVoutTrim_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the output trim value for the auxiliary low dropout
+ * regulator (LDO) in the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved trim value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_AuxLoLdoVoutTrim_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -189,6 +381,21 @@ static inline int32_t adrv9001_AnalogRxMemMap_AuxLoLdoVoutTrim_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the calibration tone driver attenuation for the specified
+ * instance in the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific analog RX
+ * memory map instance (e.g., RX1 or RX2).
+ * @param regInstance An unsigned integer representing the specific register
+ * instance to be modified.
+ * @param value An 8-bit unsigned integer representing the attenuation value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_CalToneDriverAttn_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -201,6 +408,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_CalToneDriverAttn_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the calibration tone driver attenuation value from the
+ * specified register.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * hardware.
+ * @param instance An enumerated value representing the specific analog RX
+ * memory map instance.
+ * @param regInstance An unsigned integer representing the specific register
+ * instance to read from.
+ * @param value A pointer to a uint8_t where the retrieved value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_CalToneDriverAttn_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -216,6 +437,21 @@ static inline int32_t adrv9001_AnalogRxMemMap_CalToneDriverAttn_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state for the calibration tone driver input
+ * buffer.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param regInstance An unsigned integer representing the specific register
+ * instance to be modified.
+ * @param value An 8-bit unsigned integer representing the value to set for the
+ * power down state.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_CalToneDriverInbufPd_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -228,6 +464,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_CalToneDriverInbufPd_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the power down status of the calibration tone driver input
+ * buffer.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type indicating which instance of the analog RX
+ * memory map is being accessed.
+ * @param regInstance An unsigned integer representing the specific register
+ * instance to read from.
+ * @param value A pointer to a uint8_t where the retrieved value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_CalToneDriverInbufPd_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -243,6 +493,21 @@ static inline int32_t adrv9001_AnalogRxMemMap_CalToneDriverInbufPd_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state for the calibration tone driver in the
+ * analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param regInstance An unsigned integer representing the specific register
+ * instance to be modified.
+ * @param value An 8-bit unsigned integer representing the power down state to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_CalToneDriverPd_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -255,6 +520,21 @@ static inline int32_t adrv9001_AnalogRxMemMap_CalToneDriverPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the power down status of the calibration tone driver for the
+ * specified analog RX instance.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific analog RX
+ * instance (e.g., RX1 or RX2).
+ * @param regInstance An unsigned integer representing the specific register
+ * instance to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_CalToneDriverPd_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -270,6 +550,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_CalToneDriverPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RX attenuation input control for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific analog RX
+ * memory map instance (e.g., RX1 or RX2).
+ * @param regInstance An unsigned integer representing the specific register
+ * instance to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the RX attenuation.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_EnRxattenInputCm_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -282,6 +576,21 @@ static inline int32_t adrv9001_AnalogRxMemMap_EnRxattenInputCm_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `EnRxattenInputCm` register for the
+ * specified instance and register instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type indicating which analog RX memory map
+ * instance to access.
+ * @param regInstance An unsigned integer representing the specific register
+ * instance to read from.
+ * @param value A pointer to a `uint8_t` where the retrieved register value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_EnRxattenInputCm_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -297,6 +606,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_EnRxattenInputCm_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the auxiliary low source enable bit in the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that indicates whether to enable or disable the
+ * auxiliary low source.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_EnableAuxLoSource_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -308,6 +629,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_EnableAuxLoSource_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the auxiliary low source enable bit from the
+ * analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_EnableAuxLoSource_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -322,6 +656,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_EnableAuxLoSource_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the low source for the first local oscillator in the analog
+ * receiver memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog receiver memory map.
+ * @param value A 8-bit unsigned integer that specifies the value to set for the
+ * low source.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_EnableLoSourceLb1_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -333,6 +680,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_EnableLoSourceLb1_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief The `adrv9001_AnalogRxMemMap_EnableLoSourceLb1_Get` function retrieves
+ * the value of the low source enable bit for the first local oscillator.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAnalogRxMemMap_e`
+ * that specifies which instance of the analog RX memory map to
+ * access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return The function returns an integer status code indicating the success or
+ * failure of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_EnableLoSourceLb1_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -347,6 +708,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_EnableLoSourceLb1_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the low source for the second local oscillator in the analog RX
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A 8-bit unsigned integer representing the value to set for the
+ * low source.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_EnableLoSourceLb2_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -358,6 +732,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_EnableLoSourceLb2_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the LO source LB2 setting from the analog RX
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_EnableLoSourceLb2_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -372,6 +759,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_EnableLoSourceLb2_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the Tx LO source for the ADRV9001 analog receiver.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog receiver memory map.
+ * @param value A uint8_t value that indicates the desired state of the Tx LO
+ * source (0 or 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_EnableTxLoSource_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -383,6 +782,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_EnableTxLoSource_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the current value of the Tx LO source enable bit from the
+ * analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_EnableTxLoSource_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -397,6 +809,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_EnableTxLoSource_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the bypass resistance for the IDIST in the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A 8-bit unsigned integer representing the value to set for the
+ * bypass resistance.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_IdistBypassBiasRes_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -408,6 +832,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_IdistBypassBiasRes_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the bypass bias resistance value from the analog RX memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_IdistBypassBiasRes_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -422,6 +859,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_IdistBypassBiasRes_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the LB1 attenuation value in the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the attenuation value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1Attn_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -433,6 +882,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1Attn_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the LB1 attenuation setting from the analog RX
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * attenuation value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1Attn_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -447,6 +909,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1Attn_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the `Lb1AttnB` field in the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the `Lb1AttnB` field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1AttnB_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -458,6 +932,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1AttnB_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `Lb1AttnB` field from the analog RX memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1AttnB_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -472,6 +959,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1AttnB_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the coarse correction value for the I component of the LO delay
+ * in the ADRV9001 analog receiver.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog receiver memory map.
+ * @param value An 8-bit unsigned integer representing the coarse correction
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayCoarseCorrI_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -483,6 +983,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayCoarseCorrI_Set(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the coarse correction value for the I channel of the low
+ * delay in the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value that specifies which instance of the
+ * analog RX memory map to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayCoarseCorrI_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -497,6 +1010,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayCoarseCorrI_Get(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the coarse correction value for the I component of the LO delay
+ * in the ADRV9001 analog receiver.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog receiver memory map.
+ * @param value An 8-bit unsigned integer representing the coarse correction
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayCoarseCorrIb_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -508,6 +1034,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayCoarseCorrIb_Set(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the coarse correction value for the I component of the LO
+ * delay in the ADRV9001 analog receiver.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog receiver memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved coarse
+ * correction value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayCoarseCorrIb_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -522,6 +1061,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayCoarseCorrIb_Get(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the coarse correction value for the Q channel of the low delay in
+ * the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the correction value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayCoarseCorrQ_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -533,6 +1085,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayCoarseCorrQ_Set(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the coarse correction value for the Q channel of the low
+ * delay in the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayCoarseCorrQ_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -547,6 +1112,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayCoarseCorrQ_Get(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the coarse correction value for the Qb channel of the low delay
+ * in the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the coarse correction.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayCoarseCorrQb_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -558,6 +1136,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayCoarseCorrQb_Set(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the coarse correction value for the Q channel of the low
+ * delay in the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value that specifies which instance of the
+ * analog RX memory map to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayCoarseCorrQb_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -572,6 +1163,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayCoarseCorrQb_Get(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the low delay correction power down for the analog receiver.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog receiver memory map.
+ * @param value A 8-bit unsigned integer representing the value to set for the
+ * low delay correction power down.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayCorrPd_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -583,6 +1186,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayCorrPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the correction value for the low delay correction phase
+ * detector in the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayCorrPd_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -597,6 +1213,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayCorrPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the DAC bias resistor bypass for the low band 1 analog receiver.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog receiver memory map.
+ * @param value A `uint8_t` value that indicates whether to bypass the DAC bias
+ * resistor (1) or not (0).
+ * @return Returns an `int32_t` status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayDacBiasResBypass_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -608,6 +1236,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayDacBiasResBypass_Set(voi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the DAC bias resistor bypass status for the Low Band 1
+ * analog receiver.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog receiver memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayDacBiasResBypass_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -622,6 +1263,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayDacBiasResBypass_Get(voi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the DAC resolution for the low band 1 delay in the analog RX
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the DAC resolution value
+ * to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayDacRes_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -633,6 +1287,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayDacRes_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the DAC resolution for the low delay of the first loopback
+ * channel.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved DAC
+ * resolution will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayDacRes_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -647,6 +1314,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayDacRes_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the fine correction DAC value for the low band 1 analog receiver.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog receiver memory map.
+ * @param value A 16-bit unsigned integer representing the value to be set for
+ * the fine correction DAC.
+ * @return Returns the status of the operations, where 0 indicates success and a
+ * negative value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayFineCorrDac_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint16_t value)
@@ -661,6 +1340,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayFineCorrDac_Set(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the fine correction DAC value for the low band 1 analog
+ * receiver.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific analog receiver
+ * instance.
+ * @param value A pointer to a `uint16_t` variable where the retrieved DAC value
+ * will be stored.
+ * @return Returns the status of the read operations, where a non-zero value
+ * indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayFineCorrDac_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint16_t *value)
@@ -679,6 +1371,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayFineCorrDac_Get(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the fine correction DAC value for the low band 1 analog receiver.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog receiver memory map.
+ * @param value A 16-bit unsigned integer representing the value to be set for
+ * the fine correction DAC.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayFineCorrDacB_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint16_t value)
@@ -693,6 +1397,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayFineCorrDacB_Set(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the fine correction DAC value for the Low Band 1 of the
+ * analog receiver.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog receiver memory map.
+ * @param value A pointer to a `uint16_t` variable where the retrieved DAC value
+ * will be stored.
+ * @return Returns an integer status code indicating success or failure of the
+ * read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayFineCorrDacB_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint16_t *value)
@@ -711,9 +1428,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayFineCorrDacB_Get(void *d
     return status;
 }
 
-/**
- * Toggling this bit latches the ORx1 LO delay correction DAC word.
- */
+/***************************************************************************//**
+ * @brief Sets the latch enable for the LO delay correction DAC in the ADRV9001
+ * analog receiver.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog receiver memory map.
+ * @param value A 8-bit value that determines whether to enable or disable the
+ * latch.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayLatchEn_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -725,9 +1452,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayLatchEn_Set(void *device
     return status;
 }
 
-/**
- * Toggling this bit latches the ORx1 LO delay correction DAC word.
- */
+/***************************************************************************//**
+ * @brief Retrieves the latch enable status for the LO delay correction DAC in
+ * the ADRV9001 analog receiver.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerator value indicating which instance of the analog
+ * receiver memory map is being accessed.
+ * @param value A pointer to a `uint8_t` variable where the retrieved latch
+ * enable status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayLatchEn_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -742,6 +1479,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1LoDelayLatchEn_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Configures the mixer settings for the Low Band 1 (Lb1) of the analog
+ * receiver.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog receiver memory map.
+ * @param value An 8-bit unsigned integer representing the configuration value
+ * to be set for the mixer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1MixerConfig_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -753,6 +1503,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1MixerConfig_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the configuration value of the LB1 mixer from the analog RX
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved mixer
+ * configuration value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1MixerConfig_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -767,6 +1530,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1MixerConfig_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the `Lb1feLocm` field in the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer value to be written to the `Lb1feLocm`
+ * field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1feLocm_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -778,6 +1553,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1feLocm_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `Lb1feLocm` field from the analog RX memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` where the retrieved value will be
+ * stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1feLocm_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -792,6 +1580,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1feLocm_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the `Lb1feLocmB` field in the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the `Lb1feLocmB` field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1feLocmB_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -803,6 +1603,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1feLocmB_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `Lb1feLocmB` field from the analog RX
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1feLocmB_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -817,6 +1630,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1feLocmB_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state for the loopback filter in the analog RX
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAnalogRxMemMap_e`
+ * that specifies the instance of the analog RX memory map.
+ * @param value A `uint8_t` value that indicates the power down state to be set.
+ * @return Returns an `int32_t` status code indicating the result of the
+ * operation, where 0 indicates success and a non-zero value indicates
+ * an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1fePd_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -828,6 +1654,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1fePd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the power down status of the loopback filter for the analog
+ * receiver.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerator of type `adrv9001_BfAnalogRxMemMap_e` that
+ * specifies which instance of the analog receiver memory map to
+ * access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating success or failure of the
+ * read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1fePd_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -842,6 +1682,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1fePd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down override for the loopback filter stage in the
+ * analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that indicates the power down override state (0
+ * or 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1fePdOverride_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -853,6 +1706,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1fePdOverride_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief The `adrv9001_AnalogRxMemMap_Lb1fePdOverride_Get` function retrieves
+ * the power down override status for the LB1 FE.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerator value that specifies which instance of the
+ * analog RX memory map to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return The function returns an integer status code indicating the success or
+ * failure of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1fePdOverride_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -867,6 +1733,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1fePdOverride_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down override selection for the LB1FE (Low Band 1 Front
+ * End) in the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that indicates the power down override
+ * selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1fePdOverrideSelect_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -878,6 +1757,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1fePdOverrideSelect_Set(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the power down override selection status for the LB1 FE.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1fePdOverrideSelect_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -892,6 +1783,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1fePdOverrideSelect_Get(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the `Lb1fecap` field in the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the `Lb1fecap` field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1fecap_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -903,6 +1806,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1fecap_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `Lb1fecap` register from the analog RX
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value that specifies which instance of the
+ * analog RX memory map to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1fecap_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -917,6 +1833,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1fecap_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the `Lb1fecapB` field in the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAnalogRxMemMap_e`
+ * that specifies the instance of the analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the `Lb1fecapB` field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1fecapB_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -928,6 +1856,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1fecapB_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `Lb1fecapB` register from the analog RX
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerator of type `adrv9001_BfAnalogRxMemMap_e` that
+ * specifies which instance of the analog RX memory map to
+ * access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Lb1fecapB_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -942,9 +1884,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Lb1fecapB_Get(void *device,
     return status;
 }
 
-/**
- * Enable override for each filter stage in loopback filter for ch1. Setting each bit high will force the corresponding filter stage to be enabled (bit 0 for stage1, bit 1 for stage2, bit 2 for stage3, bit 3 for stage4). For debug only.
- */
+/***************************************************************************//**
+ * @brief Sets the force enable state for each stage of the loopback filter in
+ * the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A 8-bit unsigned integer where each bit corresponds to enabling
+ * or disabling a stage in the loopback filter.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_LoopbackFilter1StageForceEn_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -956,9 +1908,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_LoopbackFilter1StageForceEn_Set(vo
     return status;
 }
 
-/**
- * Enable override for each filter stage in loopback filter for ch1. Setting each bit high will force the corresponding filter stage to be enabled (bit 0 for stage1, bit 1 for stage2, bit 2 for stage3, bit 3 for stage4). For debug only.
- */
+/***************************************************************************//**
+ * @brief Retrieves the forced enable state of the first stage of the loopback
+ * filter in the analog RX memory map.
+ *
+ * @param device A pointer to the device context, which is used to access the
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_LoopbackFilter1StageForceEn_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -973,9 +1935,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_LoopbackFilter1StageForceEn_Get(vo
     return status;
 }
 
-/**
- * This bit is used to set up Tx CH1 LO leakage calibration mode. By setting this bit, TX LO leakage calibration runs in differential mode, when this bit is cleared calibration is run in common-mode.
- */
+/***************************************************************************//**
+ * @brief Sets the loopback filter differential mode for channel 1 in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that sets the loopback filter mode (differential
+ * or common).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_LoopbackFilterDiffCh1_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -987,9 +1959,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_LoopbackFilterDiffCh1_Set(void *de
     return status;
 }
 
-/**
- * This bit is used to set up Tx CH1 LO leakage calibration mode. By setting this bit, TX LO leakage calibration runs in differential mode, when this bit is cleared calibration is run in common-mode.
- */
+/***************************************************************************//**
+ * @brief Retrieves the differential loopback filter setting for channel 1 in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_LoopbackFilterDiffCh1_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -1004,9 +1986,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_LoopbackFilterDiffCh1_Get(void *de
     return status;
 }
 
-/**
- * These bits control the Tx1 loopback and CalPLL injection point according the following: Function 00 --  Tx switch open (not looped-back) no CalPLL injection 01 --  Tx switch closed (loopback Tx into loopback receiver) 10 --  Tx switch open, inject CalPLL signal into Rx loopback FE 11 --  Tx switch open, inject CalPLL signal into Rx FE
- */
+/***************************************************************************//**
+ * @brief Sets the loopback switch configuration for channel 1 in the analog RX
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAnalogRxMemMap_e`
+ * that specifies the instance of the analog RX memory map.
+ * @param value A `uint8_t` value that determines the loopback switch
+ * configuration.
+ * @return Returns an `int32_t` status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_LoopbackSwCh1_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -1018,9 +2010,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_LoopbackSwCh1_Set(void *device,
     return status;
 }
 
-/**
- * These bits control the Tx1 loopback and CalPLL injection point according the following: Function 00 --  Tx switch open (not looped-back) no CalPLL injection 01 --  Tx switch closed (loopback Tx into loopback receiver) 10 --  Tx switch open, inject CalPLL signal into Rx loopback FE 11 --  Tx switch open, inject CalPLL signal into Rx FE
- */
+/***************************************************************************//**
+ * @brief Retrieves the loopback switch channel 1 configuration from the analog
+ * RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_LoopbackSwCh1_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -1035,6 +2037,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_LoopbackSwCh1_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the attenuation value for the ORx1 channel to 1.0V.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the attenuation value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1Force1p0vAttn_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -1046,6 +2060,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1Force1p0vAttn_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the forced 1.0V attenuation value for the ORx1 channel.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved
+ * attenuation value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1Force1p0vAttn_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -1060,6 +2086,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1Force1p0vAttn_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the override for the ORx1 enable signal in the analog RX memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A 8-bit unsigned integer that indicates the value to set for the
+ * override.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1ForceEnableOverrideLo_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -1071,6 +2110,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1ForceEnableOverrideLo_Set(void
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `Orx1ForceEnableOverrideLo` register from
+ * the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1ForceEnableOverrideLo_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -1085,6 +2137,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1ForceEnableOverrideLo_Get(void
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the maximum attenuation for the ORx1 channel in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerator value indicating which instance of the analog
+ * RX memory map to modify.
+ * @param value An 8-bit unsigned integer representing the maximum attenuation
+ * value to set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1ForceMaxAttn_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -1096,6 +2161,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1ForceMaxAttn_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the maximum attention value for the ORx1 channel in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating which instance of the analog
+ * RX memory map to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved maximum
+ * attention value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation, while the maximum attention value is stored in
+ * the variable pointed to by `value`.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1ForceMaxAttn_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -1110,6 +2189,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1ForceMaxAttn_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the high-resolution enable bit for the ORx1 channel in the analog
+ * RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that indicates whether to enable (1) or disable
+ * (0) the high-resolution mode.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1HiLoResEn_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -1121,6 +2213,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1HiLoResEn_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the high-resolution enable status for the ORx1 channel in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1HiLoResEn_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -1135,6 +2240,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1HiLoResEn_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the high-resolution enable bit for the ORx1 channel in the analog
+ * RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that indicates whether to enable (1) or disable
+ * (0) the high-resolution mode.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1HiLoResEnB_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -1146,6 +2264,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1HiLoResEnB_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief The `adrv9001_AnalogRxMemMap_Orx1HiLoResEnB_Get` function retrieves
+ * the high/low resolution enable status for the ORx1 channel.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAnalogRxMemMap_e`
+ * that specifies the instance of the analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return The function returns an integer status code indicating the success or
+ * failure of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1HiLoResEnB_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -1160,6 +2291,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1HiLoResEnB_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the coarse correction value for the I channel of the ORx1 LO
+ * delay.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the coarse correction
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayCoarseCorrI_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -1171,6 +2315,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayCoarseCorrI_Set(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the coarse correction value for the I component of the ORx1
+ * LO delay.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayCoarseCorrI_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -1185,6 +2342,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayCoarseCorrI_Get(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the coarse correction value for the I component of the ORx1 LO
+ * delay.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the coarse correction
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayCoarseCorrIb_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -1196,6 +2366,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayCoarseCorrIb_Set(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the coarse correction value for the I component of the ORx1
+ * LO delay.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayCoarseCorrIb_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -1210,6 +2393,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayCoarseCorrIb_Get(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the coarse correction value for the ORx1 LO delay.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the coarse correction
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayCoarseCorrQ_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -1221,6 +2416,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayCoarseCorrQ_Set(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the coarse correction value for the ORx1 LO delay.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type indicating which instance of the analog RX
+ * memory map to access.
+ * @param value A pointer to a `uint8_t` where the retrieved value will be
+ * stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayCoarseCorrQ_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -1235,6 +2442,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayCoarseCorrQ_Get(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the coarse correction value for the Q channel of the ORx1 LO
+ * delay.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the coarse correction.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayCoarseCorrQb_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -1246,6 +2466,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayCoarseCorrQb_Set(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the coarse correction value for the Q channel of the ORx1 LO
+ * delay.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayCoarseCorrQb_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -1260,6 +2493,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayCoarseCorrQb_Get(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the correction value for the ORx1 LO delay.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the correction value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayCorrPd_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -1271,6 +2516,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayCorrPd_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the correction value for the ORx1 LO delay.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved correction
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayCorrPd_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -1285,6 +2542,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayCorrPd_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the DAC bias resistor bypass for the ORx1 low delay.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that indicates whether to bypass the DAC bias
+ * resistor (1) or not (0).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayDacBiasResBypass_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -1296,6 +2565,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayDacBiasResBypass_Set(vo
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the DAC bias resistor bypass status for the ORx1 LO delay.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayDacBiasResBypass_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -1310,6 +2591,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayDacBiasResBypass_Get(vo
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the DAC resolution for the ORx1 LO delay.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the value to set for the
+ * DAC resolution.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayDacRes_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -1321,6 +2614,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayDacRes_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the DAC resolution for the ORx1 LO delay.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved DAC
+ * resolution will be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayDacRes_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -1335,6 +2640,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayDacRes_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the fine correction DAC value for the ORx1 LO delay.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type indicating which instance of the analog RX
+ * memory map is being accessed.
+ * @param value A 16-bit unsigned integer representing the value to be set for
+ * the fine correction DAC.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayFineCorrDac_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint16_t value)
@@ -1349,6 +2666,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayFineCorrDac_Set(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the fine correction DAC value for the ORx1 LO delay in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerator value indicating which instance of the analog
+ * RX memory map to access.
+ * @param value A pointer to a `uint16_t` where the retrieved DAC value will be
+ * stored.
+ * @return Returns an integer status code indicating success or failure of the
+ * read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayFineCorrDac_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint16_t *value)
@@ -1367,6 +2697,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayFineCorrDac_Get(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the fine correction DAC value for the ORx1 LO delay.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A 16-bit unsigned integer representing the value to be set for
+ * the fine correction DAC.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero).
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayFineCorrDacB_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint16_t value)
@@ -1381,6 +2723,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayFineCorrDacB_Set(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the fine correction DAC value for the ORx1 LO delay.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint16_t` variable where the retrieved DAC value
+ * will be stored.
+ * @return Returns an integer status code indicating success or failure of the
+ * read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayFineCorrDacB_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint16_t *value)
@@ -1399,9 +2753,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayFineCorrDacB_Get(void *
     return status;
 }
 
-/**
- * Toggling this bit latches the ORx1 LO delay correction DAC word.
- */
+/***************************************************************************//**
+ * @brief Sets the latch enable for the ORx1 LO delay correction DAC.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that indicates whether to enable or disable the
+ * latch.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayLatchEn_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -1413,9 +2776,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayLatchEn_Set(void *devic
     return status;
 }
 
-/**
- * Toggling this bit latches the ORx1 LO delay correction DAC word.
- */
+/***************************************************************************//**
+ * @brief Retrieves the latch enable status for the ORx1 LO delay correction.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved latch
+ * enable value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayLatchEn_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -1430,6 +2802,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1LoDelayLatchEn_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Configures the mixer settings for the ORx1 channel in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit value that configures the mixer settings.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1MixerConfig_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -1441,6 +2825,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1MixerConfig_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the mixer configuration value for the ORx1 channel.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved mixer
+ * configuration value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1MixerConfig_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -1455,6 +2851,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1MixerConfig_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the 1.8V supply selection for the ORx1 analog receiver.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog receiver memory map.
+ * @param value A 8-bit unsigned integer representing the value to set for the
+ * 1.8V supply selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1Sel1p8vSupply_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -1466,6 +2874,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1Sel1p8vSupply_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the 1.8V supply selection for the ORx1 analog receiver.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerator of type `adrv9001_BfAnalogRxMemMap_e` that
+ * specifies which instance of the analog receiver is being
+ * accessed.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1Sel1p8vSupply_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -1480,6 +2901,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1Sel1p8vSupply_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the attenuation resistor shunt word for the ORx1 channel in the
+ * ADRV9001 analog receiver.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog receiver memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the attenuation resistor shunt.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1SelAttenRshuntWord_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -1491,6 +2925,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1SelAttenRshuntWord_Set(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `Orx1SelAttenRshuntWord` from the analog RX
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerator value that specifies which instance of the
+ * analog RX memory map to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1SelAttenRshuntWord_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -1505,6 +2952,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1SelAttenRshuntWord_Get(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the `Orx1feLocm` field in the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer value to be written to the specified
+ * field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1feLocm_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -1516,6 +2975,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1feLocm_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the `feLocm` value from the specified instance of the analog
+ * RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1feLocm_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -1530,6 +3002,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1feLocm_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the `Orx1feLocmB` field in the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer value to be written to the
+ * `Orx1feLocmB` field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1feLocmB_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -1541,6 +3025,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1feLocmB_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `Orx1feLocmB` register from the analog RX
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type indicating which instance of the analog RX
+ * memory map to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1feLocmB_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -1555,6 +3052,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1feLocmB_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state for the `ORx1` front-end analog circuitry.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAnalogRxMemMap_e`
+ * that specifies which instance of the analog RX memory map to
+ * configure.
+ * @param value A `uint8_t` value that indicates the desired power down state (0
+ * for active, 1 for power down).
+ * @return Returns an `int32_t` status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1feLodcPd_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -1566,6 +3076,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1feLodcPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the power down status of the `Orx1feLodc` field from the
+ * analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type indicating which instance of the analog RX
+ * memory map to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1feLodcPd_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -1580,6 +3103,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1feLodcPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state for the ORx1 front-end.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value indicating the desired power down state (0 for
+ * active, 1 for power down).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1fePd_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -1591,6 +3126,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1fePd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the power down status of the ORx1 front-end.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved power down
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1fePd_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -1605,6 +3152,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1fePd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down override for the ORx1 front-end.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that indicates the power down override state to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1fePdOverride_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -1616,6 +3175,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1fePdOverride_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the power down override status for the ORx1 front-end.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1fePdOverride_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -1630,6 +3201,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1fePdOverride_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the override selection for the power down state of the ORx1
+ * front-end.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that indicates the power down override selection
+ * state.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1fePdOverrideSelect_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -1641,6 +3225,17 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1fePdOverrideSelect_Set(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the power down override selection for the ORx1 front-end.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerator indicating the specific instance of the analog
+ * RX memory map.
+ * @param value A pointer to a `uint8_t` where the retrieved value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1fePdOverrideSelect_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -1655,6 +3250,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1fePdOverrideSelect_Get(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RBB disable state for the ORx1 analog receiver.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerator of type `adrv9001_BfAnalogRxMemMap_e` that
+ * specifies the instance of the analog receiver.
+ * @param value A `uint8_t` value that indicates the desired state for the RBB
+ * disable (0 or 1).
+ * @return Returns an `int32_t` status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1feRbbDisable_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -1666,6 +3273,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1feRbbDisable_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the RBB disable bit for the ORx1 FE.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1feRbbDisable_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -1680,6 +3299,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1feRbbDisable_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the `Orx1fecap` field in the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAnalogRxMemMap_e`
+ * that specifies the instance of the analog RX memory map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the `Orx1fecap` field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1fecap_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -1691,6 +3322,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1fecap_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `Orx1fecap` register from the analog RX
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1fecap_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -1705,6 +3349,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1fecap_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the `Orx1fecapB` field in the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the `Orx1fecapB` field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1fecapB_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -1716,6 +3372,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1fecapB_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `Orx1fecapB` register from the analog RX
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx1fecapB_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -1730,6 +3399,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx1fecapB_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the attenuation value for the ORx2 channel to 1.0V.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the attenuation value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2Force1p0vAttn_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -1741,6 +3422,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2Force1p0vAttn_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief The `adrv9001_AnalogRxMemMap_Orx2Force1p0vAttn_Get` function retrieves
+ * the value of the 1.0V attenuation setting for the ORx2 channel.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerator of type `adrv9001_BfAnalogRxMemMap_e` that
+ * specifies the instance of the analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return The function returns an integer status code indicating the success or
+ * failure of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2Force1p0vAttn_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -1755,6 +3449,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2Force1p0vAttn_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the override for the ORx2 enable low bit in the analog RX memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that indicates whether to enable or disable the
+ * override.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2ForceEnableOverrideLo_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -1766,6 +3473,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2ForceEnableOverrideLo_Set(void
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `Orx2ForceEnableOverrideLo` register.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type indicating which instance of the analog RX
+ * memory map is being accessed.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2ForceEnableOverrideLo_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -1780,6 +3499,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2ForceEnableOverrideLo_Get(void
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the maximum attenuation for the ORx2 channel in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the maximum attenuation
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2ForceMaxAttn_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -1791,6 +3523,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2ForceMaxAttn_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the maximum attenuation setting for the ORx2 channel in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating which instance of the analog
+ * RX memory map to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved maximum
+ * attenuation value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2ForceMaxAttn_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -1805,6 +3550,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2ForceMaxAttn_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the high/low resolution enable for the ORx2 channel in the
+ * ADRV9001 analog receiver.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog receiver memory map.
+ * @param value A uint8_t value that indicates whether to enable (1) or disable
+ * (0) the high/low resolution.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2HiLoResEn_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -1816,6 +3574,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2HiLoResEn_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the high and low resolution enable status for the ORx2
+ * channel.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2HiLoResEn_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -1830,6 +3601,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2HiLoResEn_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the high-resolution enable bit for the ORx2 channel in the analog
+ * RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that indicates whether to enable (1) or disable
+ * (0) the high-resolution mode.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2HiLoResEnB_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -1841,6 +3625,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2HiLoResEnB_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the high-resolution enable status for the ORx2 channel.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerator value indicating which instance of the analog
+ * RX memory map to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2HiLoResEnB_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -1855,6 +3651,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2HiLoResEnB_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the coarse correction value for the I channel of the ORx2 LO
+ * delay.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the coarse correction
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayCoarseCorrI_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -1866,6 +3675,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayCoarseCorrI_Set(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the coarse correction value for the I component of the ORx2
+ * LO delay.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayCoarseCorrI_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -1880,6 +3702,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayCoarseCorrI_Get(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the coarse correction value for the I component of the ORx2 LO
+ * delay.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the coarse correction.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayCoarseCorrIb_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -1891,6 +3726,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayCoarseCorrIb_Set(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the coarse correction value for the I component of the ORx2
+ * LO delay.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayCoarseCorrIb_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -1905,6 +3753,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayCoarseCorrIb_Get(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the coarse correction value for the ORx2 LO delay.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the coarse correction
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayCoarseCorrQ_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -1916,6 +3776,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayCoarseCorrQ_Set(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the coarse correction value for the ORx2 LO delay.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayCoarseCorrQ_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -1930,6 +3802,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayCoarseCorrQ_Get(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the coarse correction value for the Q channel of the ORx2 LO
+ * delay.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the coarse correction.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayCoarseCorrQb_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -1941,6 +3826,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayCoarseCorrQb_Set(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the coarse correction value for the ORx2 LO delay.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayCoarseCorrQb_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -1955,6 +3852,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayCoarseCorrQb_Get(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the ORx2 LO delay correction power down.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that specifies the power down state for the LO
+ * delay correction.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayCorrPd_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -1966,6 +3875,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayCorrPd_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the correction value for the ORx2 LO delay.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved correction
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayCorrPd_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -1980,6 +3901,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayCorrPd_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the DAC bias resistor bypass for the ORx2 LO delay.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that indicates whether to bypass the DAC bias
+ * resistor (1) or not (0).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayDacBiasResBypass_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -1991,6 +3924,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayDacBiasResBypass_Set(vo
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the DAC bias resistor bypass status for the ORx2 LO delay.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayDacBiasResBypass_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -2005,6 +3950,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayDacBiasResBypass_Get(vo
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the DAC resolution for the ORx2 LO delay.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the value to set for the
+ * DAC resolution.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayDacRes_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -2016,6 +3973,17 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayDacRes_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the DAC resolution for the ORx2 LO delay.
+ *
+ * @param device A pointer to the device structure.
+ * @param instance An enumerator indicating the specific instance of the analog
+ * RX memory map.
+ * @param value A pointer to a `uint8_t` where the retrieved value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayDacRes_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -2030,6 +3998,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayDacRes_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the fine correction DAC value for the ORx2 LO delay in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A 16-bit unsigned integer representing the value to be set for
+ * the fine correction DAC.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the operations failed.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayFineCorrDac_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint16_t value)
@@ -2044,6 +4025,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayFineCorrDac_Set(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the fine correction DAC value for the ORx2 LO delay.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type indicating which instance of the analog RX
+ * memory map to access.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success or failure of the
+ * read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayFineCorrDac_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint16_t *value)
@@ -2062,6 +4055,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayFineCorrDac_Get(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the fine correction DAC value for the ORx2 LO delay.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerator of type `adrv9001_BfAnalogRxMemMap_e` that
+ * specifies the instance of the analog RX memory map.
+ * @param value A 16-bit unsigned integer representing the value to be set for
+ * the fine correction DAC.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayFineCorrDacB_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint16_t value)
@@ -2076,6 +4081,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayFineCorrDacB_Set(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the fine correction DAC value for the ORx2 LO delay.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint16_t` variable where the retrieved DAC value
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero). The retrieved DAC value is stored in the variable pointed
+ * to by `value`.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayFineCorrDacB_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint16_t *value)
@@ -2094,9 +4112,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayFineCorrDacB_Get(void *
     return status;
 }
 
-/**
- * Toggling this bit latches the ORx1 LO delay correction DAC word.
- */
+/***************************************************************************//**
+ * @brief Sets the latch enable for the ORx2 LO delay correction DAC.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that indicates whether to enable or disable the
+ * latch.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayLatchEn_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -2108,9 +4135,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayLatchEn_Set(void *devic
     return status;
 }
 
-/**
- * Toggling this bit latches the ORx1 LO delay correction DAC word.
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the ORx2 LO delay latch enable bit from the
+ * analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayLatchEn_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -2125,6 +4162,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2LoDelayLatchEn_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the mixer configuration for the ORx2 channel in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the configuration value
+ * to be set for the mixer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2MixerConfig_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -2136,6 +4186,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2MixerConfig_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the mixer configuration value for the ORx2 channel.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved mixer
+ * configuration value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2MixerConfig_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -2150,6 +4212,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2MixerConfig_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the selection of the 1.8V supply for the ORx2 instance in the
+ * analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAnalogRxMemMap_e`
+ * that specifies which instance of the analog RX memory map is
+ * being configured.
+ * @param value A `uint8_t` value that indicates the selection state for the
+ * 1.8V supply.
+ * @return Returns an `int32_t` status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2Sel1p8vSupply_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -2161,6 +4237,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2Sel1p8vSupply_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the 1.8V supply selection for the ORx2 channel in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerator of type `adrv9001_BfAnalogRxMemMap_e`
+ * indicating which instance of the analog RX memory map to
+ * access.
+ * @param value A pointer to a `uint8_t` where the retrieved value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2Sel1p8vSupply_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -2175,6 +4265,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2Sel1p8vSupply_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the attenuation resistor shunt word for the ORx2 channel in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the attenuation resistor shunt.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2SelAttenRshuntWord_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -2186,6 +4289,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2SelAttenRshuntWord_Set(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the attenuation resistor shunt word for the
+ * ORx2 channel.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2SelAttenRshuntWord_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -2200,6 +4316,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2SelAttenRshuntWord_Get(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the `feLocm` field in the ORx2 front-end configuration.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer value to be written to the `feLocm`
+ * field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2feLocm_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -2211,6 +4339,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2feLocm_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `Orx2feLocm` field from the analog RX
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2feLocm_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -2225,6 +4366,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2feLocm_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the `Orx2feLocmB` field in the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer value to be written to the
+ * `Orx2feLocmB` field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2feLocmB_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -2236,6 +4389,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2feLocmB_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `Orx2feLocmB` register from the analog RX
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2feLocmB_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -2250,6 +4416,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2feLocmB_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state for the local oscillator (LO) digital-to-
+ * analog converter (DAC) in the analog receiver.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog receiver memory map.
+ * @param value A 8-bit unsigned integer that indicates the power down state to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2feLodcPd_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -2261,6 +4440,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2feLodcPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `Orx2feLodcPd` field from the analog RX
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2feLodcPd_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -2275,6 +4467,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2feLodcPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state for the ORx2 front-end.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerator of type `adrv9001_BfAnalogRxMemMap_e` that
+ * specifies which instance of the analog RX memory map to
+ * configure.
+ * @param value A `uint8_t` value that indicates the desired power down state (0
+ * for active, 1 for power down).
+ * @return Returns an `int32_t` status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2fePd_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -2286,6 +4491,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2fePd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the power down status of the ORx2 front-end.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerator value that specifies which instance of the
+ * analog RX memory map to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2fePd_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -2300,6 +4517,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2fePd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down override for the ORx2 front-end.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that indicates the power down override state to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2fePdOverride_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -2311,6 +4540,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2fePdOverride_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the power down override status for the ORx2 front-end.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerator value that specifies which instance of the
+ * analog RX memory map to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2fePdOverride_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -2325,6 +4566,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2fePdOverride_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down override selection for the ORx2 front-end.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that indicates the power down override
+ * selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2fePdOverrideSelect_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -2336,6 +4589,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2fePdOverrideSelect_Set(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the override selection value for the ORx2 front-end power
+ * down.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a uint8_t where the retrieved value will be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2fePdOverrideSelect_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -2350,6 +4615,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2fePdOverrideSelect_Get(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RBB disable state for the ORx2 front-end.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerator of type `adrv9001_BfAnalogRxMemMap_e` that
+ * specifies which instance of the analog RX memory map to
+ * modify.
+ * @param value A `uint8_t` value that indicates the desired state for the RBB
+ * disable (0 or 1).
+ * @return Returns an `int32_t` status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2feRbbDisable_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -2361,6 +4639,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2feRbbDisable_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the RBB disable bit for the ORx2 front-end.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2feRbbDisable_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -2375,6 +4665,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2feRbbDisable_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the `Orx2fecap` field in the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAnalogRxMemMap_e`
+ * that specifies the instance of the analog RX memory map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the `Orx2fecap` field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2fecap_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -2386,6 +4688,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2fecap_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `Orx2fecap` register from the analog RX
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2fecap_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -2400,6 +4715,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2fecap_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the `Orx2fecapB` field in the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the `Orx2fecapB` field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2fecapB_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -2411,6 +4738,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2fecapB_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `Orx2fecapB` register from the analog RX
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Orx2fecapB_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -2425,6 +4765,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_Orx2fecapB_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the ORx attenuation calibration signal in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific analog RX
+ * memory map instance (e.g., RX1 or RX2).
+ * @param regInstance An unsigned integer representing the specific register
+ * instance to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the calibration signal.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxAttnCalSig_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -2437,6 +4791,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxAttnCalSig_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the calibration signal value for the ORx attenuation.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific analog RX
+ * memory map instance (e.g., RX1 or RX2).
+ * @param regInstance An unsigned integer representing the specific register
+ * instance to read from.
+ * @param value A pointer to a uint8_t where the retrieved calibration signal
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxAttnCalSig_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -2452,6 +4820,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxAttnCalSig_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the decay value for the ORx block detection in the ADRV9001
+ * analog receiver.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog receiver memory map.
+ * @param value An 8-bit unsigned integer representing the decay value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxBlockDetDecay_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -2463,6 +4844,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxBlockDetDecay_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief The `adrv9001_AnalogRxMemMap_OrxBlockDetDecay_Get` function retrieves
+ * the decay value from a specific register in the analog RX memory map.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * hardware.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved decay
+ * value will be stored.
+ * @return The function returns an integer status code indicating the success or
+ * failure of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxBlockDetDecay_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -2477,6 +4871,21 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxBlockDetDecay_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the lower threshold for the ORx block detection in the ADRV9001
+ * analog receiver.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific analog receiver
+ * instance (e.g., RX1 or RX2).
+ * @param regInstance An unsigned integer representing the specific register
+ * instance for the block detection threshold.
+ * @param value An 8-bit unsigned integer representing the value to set for the
+ * lower threshold.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxBlockDetLlbth_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -2489,6 +4898,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxBlockDetLlbth_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the block detection lower threshold value from the ORx block
+ * of the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerator indicating which instance of the analog RX
+ * memory map to access.
+ * @param regInstance An index specifying the register instance to read from.
+ * @param value A pointer to a uint8_t where the retrieved value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxBlockDetLlbth_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -2504,6 +4926,21 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxBlockDetLlbth_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the upper limit threshold for the ORx block detection in the
+ * ADRV9001 analog receiver.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerator value indicating which instance of the analog
+ * receiver memory map is being accessed.
+ * @param regInstance An index specifying the specific register instance to be
+ * modified.
+ * @param value The value to be set for the upper limit threshold, which is a
+ * 6-bit value.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxBlockDetUlbth_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -2516,6 +4953,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxBlockDetUlbth_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the ultra-low threshold value from the ORx block detection
+ * register.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type indicating which instance of the analog RX
+ * memory map to access.
+ * @param regInstance An index to specify which register instance to read from.
+ * @param value A pointer to a uint8_t where the retrieved value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxBlockDetUlbth_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -2531,6 +4981,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxBlockDetUlbth_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state for the ORx block detection circuit.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value indicating the power down state to set (1 for
+ * power down, 0 for active).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxBlockdetPd_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -2542,6 +5004,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxBlockdetPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the power down status of the ORx block detection circuit.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved power down
+ * status will be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxBlockdetPd_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -2556,9 +5030,17 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxBlockdetPd_Get(void *device,
     return status;
 }
 
-/**
- * Setting each bit enables the power down override for the corresponding ORx blocker detection circuit in 0x204[D5:D4]. Bit D5 applies to ORx2 and bit D4 applies to ORx1.
- */
+/***************************************************************************//**
+ * @brief Sets the power down override for the ORx block detection circuit.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that specifies the power down override setting.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxBlockdetPdOverride_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -2570,9 +5052,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxBlockdetPdOverride_Set(void *de
     return status;
 }
 
-/**
- * Setting each bit enables the power down override for the corresponding ORx blocker detection circuit in 0x204[D5:D4]. Bit D5 applies to ORx2 and bit D4 applies to ORx1.
- */
+/***************************************************************************//**
+ * @brief Retrieves the power down override status for the ORx block detection
+ * circuit.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` where the retrieved value will be
+ * stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxBlockdetPdOverride_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -2587,9 +5079,17 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxBlockdetPdOverride_Get(void *de
     return status;
 }
 
-/**
- * Setting each bit enables the power down override for the corresponding ORx blocker detection circuit in 0x204[D5:D4]. Bit D5 applies to ORx2 and bit D4 applies to ORx1.
- */
+/***************************************************************************//**
+ * @brief Sets the power down override for the ORx block detection circuit.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that indicates the power down override setting.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxBlockdetPdOverrideSelect_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -2601,9 +5101,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxBlockdetPdOverrideSelect_Set(vo
     return status;
 }
 
-/**
- * Setting each bit enables the power down override for the corresponding ORx blocker detection circuit in 0x204[D5:D4]. Bit D5 applies to ORx2 and bit D4 applies to ORx1.
- */
+/***************************************************************************//**
+ * @brief Retrieves the power down override selection status for the ORx block
+ * detection circuit.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxBlockdetPdOverrideSelect_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -2618,6 +5128,21 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxBlockdetPdOverrideSelect_Get(vo
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state for the ORx calibration signal.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerator of type `adrv9001_BfAnalogRxMemMap_e` that
+ * specifies which instance of the analog RX memory map to
+ * access.
+ * @param regInstance A 32-bit unsigned integer that specifies the register
+ * instance to be modified.
+ * @param value An 8-bit unsigned integer that represents the value to set for
+ * the power down state.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxCalSigPd_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -2630,6 +5155,22 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxCalSigPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the calibration signal power down status for the ORx
+ * channel.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific analog RX
+ * memory map instance (e.g., ADRV9001_BF_RX1_ANA or
+ * ADRV9001_BF_RX2_ANA).
+ * @param regInstance An unsigned integer representing the specific register
+ * instance to read from.
+ * @param value A pointer to a uint8_t variable where the read value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxCalSigPd_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -2645,6 +5186,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxCalSigPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state of the `ORx` `Osdac`.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAnalogRxMemMap_e`
+ * that specifies which instance of the analog RX memory map to
+ * modify.
+ * @param value A `uint8_t` value that indicates the desired power down state (1
+ * to power down, 0 to enable).
+ * @return Returns an `int32_t` indicating the success or failure of the
+ * operation, where 0 indicates success.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxOsdacPd_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -2656,6 +5210,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxOsdacPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the power down status of the `OrxOsdac`.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxOsdacPd_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -2670,9 +5236,17 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxOsdacPd_Get(void *device,
     return status;
 }
 
-/**
- * Setting this bit powers down the ADC. Clearing this bit enables the ADC.
- */
+/***************************************************************************//**
+ * @brief Sets the power down override for the ORx OS DAC.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that indicates the power down state to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxOsdacPdOverride_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -2684,9 +5258,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxOsdacPdOverride_Set(void *devic
     return status;
 }
 
-/**
- * Setting this bit powers down the ADC. Clearing this bit enables the ADC.
- */
+/***************************************************************************//**
+ * @brief Retrieves the power down override status for the ORx OS DAC.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerator value that specifies which instance of the
+ * analog RX memory map to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxOsdacPdOverride_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -2701,9 +5284,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxOsdacPdOverride_Get(void *devic
     return status;
 }
 
-/**
- * Setting this bit powers down the ADC. Clearing this bit enables the ADC.
- */
+/***************************************************************************//**
+ * @brief Sets the power down override selection for the ORx OS DAC.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that indicates the power down override
+ * selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxOsdacPdOverrideSelect_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -2715,9 +5307,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxOsdacPdOverrideSelect_Set(void 
     return status;
 }
 
-/**
- * Setting this bit powers down the ADC. Clearing this bit enables the ADC.
- */
+/***************************************************************************//**
+ * @brief Retrieves the OS DAC power down override selection value from the
+ * specified analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxOsdacPdOverrideSelect_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -2732,9 +5334,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxOsdacPdOverrideSelect_Get(void 
     return status;
 }
 
-/**
- * Used force update of the mode control bits.
- */
+/***************************************************************************//**
+ * @brief Sets the force update for the ORx TIA mode control bits.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that indicates the desired state to set for the
+ * TIA force update.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxTiaForceUpdate_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -2746,9 +5357,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxTiaForceUpdate_Set(void *device
     return status;
 }
 
-/**
- * Used force update of the mode control bits.
- */
+/***************************************************************************//**
+ * @brief Retrieves the forced update value for the ORx TIA configuration.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxTiaForceUpdate_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -2763,9 +5383,17 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxTiaForceUpdate_Get(void *device
     return status;
 }
 
-/**
- * Configures rxtia tuner in analog to directly output pll clock to TIA.
- */
+/***************************************************************************//**
+ * @brief Sets the direct mode for the ORx TIA in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that sets the mode for the TIA.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxTiaModeDirect_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -2777,9 +5405,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxTiaModeDirect_Set(void *device,
     return status;
 }
 
-/**
- * Configures rxtia tuner in analog to directly output pll clock to TIA.
- */
+/***************************************************************************//**
+ * @brief Retrieves the direct mode setting for the ORx TIA in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating which instance of the analog
+ * RX memory map to access.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxTiaModeDirect_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -2794,9 +5432,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxTiaModeDirect_Get(void *device,
     return status;
 }
 
-/**
- * Configures rxtia tuner in analog to ouput pll cloclk to TIA divided by 16.
- */
+/***************************************************************************//**
+ * @brief Sets the TIA mode to directly output the PLL clock divided by 16.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the TIA mode.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxTiaModeDirectDiv16_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -2808,9 +5455,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxTiaModeDirectDiv16_Set(void *de
     return status;
 }
 
-/**
- * Configures rxtia tuner in analog to ouput pll cloclk to TIA divided by 16.
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the `OrxTiaModeDirectDiv16` setting from the
+ * analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxTiaModeDirectDiv16_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -2825,9 +5482,17 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxTiaModeDirectDiv16_Get(void *de
     return status;
 }
 
-/**
- * Enable lfsr mode and route output to TIA
- */
+/***************************************************************************//**
+ * @brief Sets the LFSR mode for the ORx TIA mode in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that sets the LFSR mode.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxTiaModeLfsr_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -2839,9 +5504,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxTiaModeLfsr_Set(void *device,
     return status;
 }
 
-/**
- * Enable lfsr mode and route output to TIA
- */
+/***************************************************************************//**
+ * @brief Retrieves the LFSR mode setting for the ORx TIA mode in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved LFSR mode
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxTiaModeLfsr_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -2856,9 +5531,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxTiaModeLfsr_Get(void *device,
     return status;
 }
 
-/**
- * This bit is used in mode_wr. 0=program divider, 1= program lfsr.
- */
+/***************************************************************************//**
+ * @brief Sets the LFSR tap seed bit for the ORx TIA mode in the ADRV9001 analog
+ * RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A 8-bit unsigned integer representing the value to be set for
+ * the LFSR tap seed.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxTiaModeLfsrTapSeedb_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -2870,9 +5555,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxTiaModeLfsrTapSeedb_Set(void *d
     return status;
 }
 
-/**
- * This bit is used in mode_wr. 0=program divider, 1= program lfsr.
- */
+/***************************************************************************//**
+ * @brief Retrieves the LFSR tap seed value for the ORx TIA mode from the
+ * specified device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved LFSR tap
+ * seed value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxTiaModeLfsrTapSeedb_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -2887,9 +5582,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxTiaModeLfsrTapSeedb_Get(void *d
     return status;
 }
 
-/**
- * Enable Tia tuner in analog to output clock in divider mode to TIA.
- */
+/***************************************************************************//**
+ * @brief Sets the sequence mode for the ORx TIA in the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the mode to set for the
+ * ORx TIA.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxTiaModeSeq_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -2901,9 +5605,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxTiaModeSeq_Set(void *device,
     return status;
 }
 
-/**
- * Enable Tia tuner in analog to output clock in divider mode to TIA.
- */
+/***************************************************************************//**
+ * @brief Retrieves the ORx TIA mode sequence from the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxTiaModeSeq_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -2918,6 +5631,21 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxTiaModeSeq_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the overlap control for the I channel of the ORx mixer in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param regInstance An unsigned integer representing the specific register
+ * instance to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxmixerILogenOvlpCtrl_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -2930,6 +5658,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxmixerILogenOvlpCtrl_Set(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the overlap control value for the I channel of the ORx
+ * mixer.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated type indicating which instance of the analog RX
+ * memory map to access.
+ * @param regInstance An index to specify the particular register instance to
+ * read from.
+ * @param value A pointer to a uint8_t where the retrieved value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxmixerILogenOvlpCtrl_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -2945,6 +5687,21 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxmixerILogenOvlpCtrl_Get(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the overlap control for the Q channel of the ORx mixer in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param regInstance An unsigned integer representing the specific register
+ * instance to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the overlap control.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxmixerQLogenOvlpCtrl_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -2957,6 +5714,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxmixerQLogenOvlpCtrl_Set(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the Q channel's Logarithmic Enable Overlap
+ * Control register for the specified instance.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated type indicating which instance of the analog RX
+ * memory map to access.
+ * @param regInstance An index specifying the register instance to read from.
+ * @param value A pointer to a uint8_t where the retrieved value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxmixerQLogenOvlpCtrl_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -2972,6 +5742,17 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxmixerQLogenOvlpCtrl_Get(void *d
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the bypass bias for the ORx TIA in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value representing the bias setting to be applied.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxtiaBypBiasR_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -2983,6 +5764,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxtiaBypBiasR_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the bypass bias value for the ORx TIA from the analog RX
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxtiaBypBiasR_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -2997,6 +5791,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxtiaBypBiasR_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the bias control stage 1 for the ORx TIA in the ADRV9001 analog
+ * receiver.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog receiver memory map.
+ * @param value An 8-bit unsigned integer representing the value to set for the
+ * bias control.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxtiaIbiasCntrlStg1_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -3008,6 +5815,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxtiaIbiasCntrlStg1_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the control stage 1 bias current setting for the ORx TIA.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` where the retrieved bias current value
+ * will be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxtiaIbiasCntrlStg1_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -3022,6 +5841,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxtiaIbiasCntrlStg1_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the bias control stage 2 for the ORx1 channel in the ADRV9001
+ * analog receiver.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog receiver memory map.
+ * @param value An 8-bit unsigned integer representing the bias control value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxtiaIbiasCntrlStg2_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -3033,6 +5865,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxtiaIbiasCntrlStg2_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the control stage 2 bias current setting for the ORx TIA.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved bias
+ * current setting will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxtiaIbiasCntrlStg2_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -3047,6 +5891,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxtiaIbiasCntrlStg2_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the SPI override for the TIA delay in the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the TIA delay.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxtiaPdTiaDelaySpiOvrd_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -3058,6 +5914,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxtiaPdTiaDelaySpiOvrd_Set(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the SPI override delay value for the TIA in the analog RX
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved delay value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxtiaPdTiaDelaySpiOvrd_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -3072,6 +5941,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxtiaPdTiaDelaySpiOvrd_Get(void *
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power control stage 1 for the ORx TIA in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerator indicating which instance of the analog RX
+ * memory map is being accessed.
+ * @param regInstance An index specifying the register instance for the power
+ * control.
+ * @param value A byte value representing the power control setting to be
+ * written.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxtiaPowCntrlStg1_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -3084,6 +5967,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxtiaPowCntrlStg1_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the power control setting for stage 1 of the ORx TIA.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerator value that specifies which instance of the
+ * analog RX memory map to access.
+ * @param regInstance An index that specifies the register instance for which
+ * the power control setting is being retrieved.
+ * @param value A pointer to a uint8_t variable where the retrieved power
+ * control value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxtiaPowCntrlStg1_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -3099,6 +5996,21 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxtiaPowCntrlStg1_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power control for stage 2 of the ORx TIA.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerator of type `adrv9001_BfAnalogRxMemMap_e` that
+ * specifies which instance of the analog RX memory map to
+ * access.
+ * @param regInstance A 32-bit unsigned integer that specifies the register
+ * instance to be modified.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the specified register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxtiaPowCntrlStg2_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -3111,6 +6023,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxtiaPowCntrlStg2_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the power control settings for stage 2 of the ORx TIA.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerator value that specifies which instance of the
+ * analog RX memory map to access.
+ * @param regInstance An index that specifies the register instance for which
+ * the power control setting is being retrieved.
+ * @param value A pointer to a uint8_t variable where the retrieved power
+ * control value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxtiaPowCntrlStg2_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -3126,6 +6052,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxtiaPowCntrlStg2_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the override for the Vcm generator power down in the analog RX
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that indicates the desired state for the Vcm
+ * generator override.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxtiaSpiPdVcmgenOvrd_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -3137,6 +6076,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxtiaSpiPdVcmgenOvrd_Set(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the override value for the Vcm generator in the analog RX
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxtiaSpiPdVcmgenOvrd_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -3151,9 +6103,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxtiaSpiPdVcmgenOvrd_Get(void *de
     return status;
 }
 
-/**
- * Used to reset rxtia_tuner.  Write a 0 followed by a 1.
- */
+/***************************************************************************//**
+ * @brief Sets the reset state of the ORx Tuner in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that indicates the reset state to be set (0 or
+ * 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxtiaTunerResetb_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -3165,9 +6126,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxtiaTunerResetb_Set(void *device
     return status;
 }
 
-/**
- * Used to reset rxtia_tuner.  Write a 0 followed by a 1.
- */
+/***************************************************************************//**
+ * @brief Retrieves the reset status of the `OrxtiaTuner` in the `adrv9001`
+ * device.
+ *
+ * @param device A pointer to the device structure representing the `adrv9001`
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAnalogRxMemMap_e`
+ * indicating which instance of the analog receiver memory map
+ * to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxtiaTunerResetb_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -3182,6 +6154,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxtiaTunerResetb_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the output level of the Vcmgen for the ORx1 channel in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the desired output level
+ * for the Vcmgen.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxtiaVcmgenOutlevel_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -3193,6 +6178,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxtiaVcmgenOutlevel_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the output level of the Vcm generator for the specified
+ * analog RX memory map instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved output
+ * level will be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_OrxtiaVcmgenOutlevel_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -3207,6 +6205,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_OrxtiaVcmgenOutlevel_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state for the baseband analog multiplexer for the
+ * ORx1 and Tx1 loopback.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that indicates the desired power down state (0
+ * or 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdBbAmuxOrx1Tx1lb_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -3218,6 +6229,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdBbAmuxOrx1Tx1lb_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `PdBbAmuxOrx1Tx1lb` register for the
+ * specified device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value that specifies which instance of the
+ * analog RX memory map to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdBbAmuxOrx1Tx1lb_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -3232,6 +6256,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdBbAmuxOrx1Tx1lb_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state for the baseband analog multiplexer for the
+ * ORx2 and Tx2 loopback.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that indicates the desired power down state (0
+ * or 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdBbAmuxOrx2Tx2lb_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -3243,6 +6280,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdBbAmuxOrx2Tx2lb_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `PdBbAmuxOrx2Tx2lb` field from the analog
+ * RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdBbAmuxOrx2Tx2lb_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -3257,6 +6307,17 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdBbAmuxOrx2Tx2lb_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the `PdIDist` field in the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A `uint8_t` value to be written to the `PdIDist` field.
+ * @return Returns an `int32_t` status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdIDist_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -3268,6 +6329,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdIDist_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `PdIDist` register from the analog RX
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdIDist_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -3282,6 +6356,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdIDist_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the LO delay buffer configuration for the specified analog
+ * receiver instance.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific analog receiver
+ * instance (e.g., RX1 or RX2).
+ * @param value A 8-bit unsigned integer representing the value to be written to
+ * the LO delay buffer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdLb1LodelayBuffer_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -3293,6 +6380,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdLb1LodelayBuffer_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `PdLb1LodelayBuffer` register for the
+ * specified analog receiver instance.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific analog receiver
+ * instance (e.g., `ADRV9001_BF_RX1_ANA` or
+ * `ADRV9001_BF_RX2_ANA`).
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdLb1LodelayBuffer_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -3307,6 +6408,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdLb1LodelayBuffer_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the override for the LO delay buffer in the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that specifies the override setting for the LO
+ * delay buffer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdLb1LodelayBufferOverride_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -3318,6 +6431,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdLb1LodelayBufferOverride_Set(voi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the override value for the LO delay buffer of the first
+ * loopback channel.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdLb1LodelayBufferOverride_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -3332,6 +6458,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdLb1LodelayBufferOverride_Get(voi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the override selection for the LO delay buffer in the ADRV9001
+ * analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that specifies the override selection for the LO
+ * delay buffer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdLb1LodelayBufferOverrideSelect_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -3343,6 +6482,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdLb1LodelayBufferOverrideSelect_S
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the override selection value for the LO delay buffer in the
+ * ADRV9001 analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdLb1LodelayBufferOverrideSelect_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -3357,6 +6509,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdLb1LodelayBufferOverrideSelect_G
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the `Capdac` value for the `Lb1` mixer in the `adrv9001` device.
+ *
+ * @param device A pointer to the device structure representing the `adrv9001`
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAnalogRxMemMap_e`
+ * indicating the specific instance of the analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the `Capdac`.
+ * @return Returns an `int32_t` indicating the status of the write operation,
+ * where 0 indicates success.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdLb1MixerCapdac_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -3368,6 +6532,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdLb1MixerCapdac_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `Capdac` register for the `Lb1` mixer in
+ * the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdLb1MixerCapdac_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -3382,6 +6559,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdLb1MixerCapdac_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the override value for the `Lb1` mixer capacitor DAC in the
+ * `adrv9001` device.
+ *
+ * @param device A pointer to the device structure representing the `adrv9001`
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAnalogRxMemMap_e`
+ * indicating the specific instance of the analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the value to set for the
+ * mixer capacitor DAC override.
+ * @return Returns an `int32_t` indicating the status of the write operation,
+ * where 0 indicates success and a non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdLb1MixerCapdacOverride_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -3393,6 +6583,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdLb1MixerCapdacOverride_Set(void 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the override value for the `Lb1` mixer capacitor DAC from
+ * the specified device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdLb1MixerCapdacOverride_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -3407,6 +6610,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdLb1MixerCapdacOverride_Get(void 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the mixer capacitor DAC override selection for the ADRV9001
+ * analog receiver.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog receiver memory map.
+ * @param value A uint8_t value that specifies the override selection for the
+ * mixer capacitor DAC.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdLb1MixerCapdacOverrideSelect_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -3418,6 +6634,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdLb1MixerCapdacOverrideSelect_Set
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `Lb1MixerCapdacOverrideSelect` field from
+ * the specified device instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdLb1MixerCapdacOverrideSelect_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -3432,6 +6661,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdLb1MixerCapdacOverrideSelect_Get
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the LO delay buffer for the analog receiver.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog receiver memory map.
+ * @param value A 8-bit unsigned integer representing the value to be written to
+ * the LO delay buffer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdOrx1LodelayBuffer_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -3443,6 +6684,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdOrx1LodelayBuffer_Set(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the LO delay buffer for the ORx1 channel.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdOrx1LodelayBuffer_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -3457,6 +6710,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdOrx1LodelayBuffer_Get(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the override value for the LO delay buffer of the ORx1 channel.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that specifies the override setting for the LO
+ * delay buffer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdOrx1LodelayBufferOverride_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -3468,6 +6733,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdOrx1LodelayBufferOverride_Set(vo
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the override value for the LO delay buffer of the ORx1
+ * channel.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdOrx1LodelayBufferOverride_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -3482,6 +6760,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdOrx1LodelayBufferOverride_Get(vo
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the override selection for the LO delay buffer of the ORx1
+ * channel in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that specifies the override selection for the LO
+ * delay buffer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdOrx1LodelayBufferOverrideSelect_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -3493,6 +6784,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdOrx1LodelayBufferOverrideSelect_
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the override selection value for the ORx1 LO delay buffer.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdOrx1LodelayBufferOverrideSelect_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -3507,6 +6810,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdOrx1LodelayBufferOverrideSelect_
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the mixer capacitor digital-to-analog converter (DAC) value for
+ * the ORx1 channel.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the mixer capacitor DAC.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdOrx1MixerCapdac_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -3518,6 +6834,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdOrx1MixerCapdac_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief The `adrv9001_AnalogRxMemMap_PdOrx1MixerCapdac_Get` function retrieves
+ * the value of the mixer capacitor DAC for the ORx1 channel.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAnalogRxMemMap_e`
+ * that specifies the instance of the analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return The function returns an integer status code indicating the success or
+ * failure of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdOrx1MixerCapdac_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -3532,6 +6861,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdOrx1MixerCapdac_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the mixer capacitor DAC override value for the ORx1 channel in
+ * the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific analog RX
+ * memory map instance (e.g., ADRV9001_BF_RX1_ANA or
+ * ADRV9001_BF_RX2_ANA).
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the mixer capacitor DAC override.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdOrx1MixerCapdacOverride_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -3543,6 +6886,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdOrx1MixerCapdacOverride_Set(void
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the mixer capacitor DAC override value for the ORx1 channel.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdOrx1MixerCapdacOverride_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -3557,6 +6912,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdOrx1MixerCapdacOverride_Get(void
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the mixer capacitor DAC override selection for the ORx1 channel
+ * in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value representing the selection for the mixer
+ * capacitor DAC override.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdOrx1MixerCapdacOverrideSelect_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -3568,6 +6936,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdOrx1MixerCapdacOverrideSelect_Se
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the mixer capacitor DAC override selection value for the
+ * ORx1 channel.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdOrx1MixerCapdacOverrideSelect_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -3582,6 +6963,17 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdOrx1MixerCapdacOverrideSelect_Ge
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the LO delay buffer for the ORx2 channel in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value to set the LO delay buffer.
+ * @return Returns the status of the write operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdOrx2LodelayBuffer_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -3593,6 +6985,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdOrx2LodelayBuffer_Set(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the LO delay buffer value for the ORx2 channel in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating which instance of the analog
+ * RX memory map to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved LO delay
+ * buffer value will be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdOrx2LodelayBuffer_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -3607,6 +7012,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdOrx2LodelayBuffer_Get(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the override value for the LO delay buffer of the ORx2 channel.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that specifies the override setting for the LO
+ * delay buffer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdOrx2LodelayBufferOverride_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -3618,6 +7035,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdOrx2LodelayBufferOverride_Set(vo
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the override value for the LO delay buffer of the ORx2
+ * channel.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific analog RX
+ * memory map instance (e.g., ADRV9001_BF_RX1_ANA or
+ * ADRV9001_BF_RX2_ANA).
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdOrx2LodelayBufferOverride_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -3632,6 +7063,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdOrx2LodelayBufferOverride_Get(vo
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the override selection for the LO delay buffer of the second ORx
+ * channel in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that indicates the override selection for the LO
+ * delay buffer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdOrx2LodelayBufferOverrideSelect_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -3643,6 +7087,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdOrx2LodelayBufferOverrideSelect_
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the override selection value for the LO delay buffer of the
+ * second ORx channel.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdOrx2LodelayBufferOverrideSelect_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -3657,6 +7114,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdOrx2LodelayBufferOverrideSelect_
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the mixer capacitor DAC value for the ORx2 channel.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating which instance of the analog
+ * RX memory map is being accessed.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the mixer capacitor DAC.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdOrx2MixerCapdac_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -3668,6 +7137,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdOrx2MixerCapdac_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief The `adrv9001_AnalogRxMemMap_PdOrx2MixerCapdac_Get` function retrieves
+ * the value of the mixer capacitor DAC for the ORx2 channel.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAnalogRxMemMap_e`
+ * that specifies the instance of the analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return The function returns an integer status code indicating the success or
+ * failure of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdOrx2MixerCapdac_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -3682,6 +7164,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdOrx2MixerCapdac_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the mixer capacitor DAC override value for the ORx2 channel.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the value to set for the
+ * mixer capacitor DAC override.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdOrx2MixerCapdacOverride_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -3693,6 +7187,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdOrx2MixerCapdacOverride_Set(void
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the mixer capacitor DAC override value for the ORx2 channel.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerator value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdOrx2MixerCapdacOverride_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -3707,6 +7213,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdOrx2MixerCapdacOverride_Get(void
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the mixer capacitor DAC override selection for the ORx2 channel
+ * in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific analog RX
+ * memory map instance (e.g., ORx2).
+ * @param value A 8-bit unsigned integer representing the value to set for the
+ * mixer capacitor DAC override.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdOrx2MixerCapdacOverrideSelect_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -3718,6 +7237,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdOrx2MixerCapdacOverrideSelect_Se
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the mixer capacitor DAC override selection value for the
+ * ORx2 channel.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdOrx2MixerCapdacOverrideSelect_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -3732,9 +7264,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdOrx2MixerCapdacOverrideSelect_Ge
     return status;
 }
 
-/**
- * Setting this bit forces the output stage of the Rx1 loopback filter to loopback mixer to be powered down. This bit is for debug only.
- */
+/***************************************************************************//**
+ * @brief Sets the power down override for the output stage of the Rx1 loopback
+ * filter.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that indicates whether to enable or disable the
+ * power down override.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdOverrideOutRx1Loopback_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -3746,9 +7288,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdOverrideOutRx1Loopback_Set(void 
     return status;
 }
 
-/**
- * Setting this bit forces the output stage of the Rx1 loopback filter to loopback mixer to be powered down. This bit is for debug only.
- */
+/***************************************************************************//**
+ * @brief Retrieves the power down override status for the output stage of the
+ * Rx1 loopback filter.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdOverrideOutRx1Loopback_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -3763,6 +7315,21 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdOverrideOutRx1Loopback_Get(void 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the DAC for the specified instance in the analog RX
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerator of type `adrv9001_BfAnalogRxMemMap_e` that
+ * specifies which analog RX memory map instance to configure.
+ * @param regInstance A 32-bit unsigned integer that specifies the register
+ * instance to be modified.
+ * @param value An 8-bit unsigned integer that represents the value to be set
+ * for the DAC.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdTuneDac_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -3775,6 +7342,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdTuneDac_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the DAC tuning register for the specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated type indicating which analog RX memory map
+ * instance to access.
+ * @param regInstance An index to specify which register instance to read from.
+ * @param value A pointer to a uint8_t where the retrieved register value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_PdTuneDac_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -3790,6 +7371,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_PdTuneDac_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the high range of the RF local oscillator for the analog
+ * receiver.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog receiver memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the RF local oscillator high range.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RfLoHighR_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -3801,6 +7395,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RfLoHighR_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the high range value of the RF local oscillator from the
+ * analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RfLoHighR_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -3815,9 +7422,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RfLoHighR_Get(void *device,
     return status;
 }
 
-/**
- * These bits scale the bias current for the Rx1 loopback filter buffers according to the following settings. These bits are for debug only. 00 --  X0.8 01 --  X1.0 10 --  X1.3 11 --  X2.0
- */
+/***************************************************************************//**
+ * @brief Sets the bias configuration for the Rx1 loopback filter in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the bias configuration
+ * value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Rx1LoopbackFilterBiasConfig_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -3829,9 +7446,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Rx1LoopbackFilterBiasConfig_Set(vo
     return status;
 }
 
-/**
- * These bits scale the bias current for the Rx1 loopback filter buffers according to the following settings. These bits are for debug only. 00 --  X0.8 01 --  X1.0 10 --  X1.3 11 --  X2.0
- */
+/***************************************************************************//**
+ * @brief Retrieves the bias configuration for the Rx1 loopback filter.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved bias
+ * configuration will be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Rx1LoopbackFilterBiasConfig_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -3846,9 +7472,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Rx1LoopbackFilterBiasConfig_Get(vo
     return status;
 }
 
-/**
- * These bits set the Rx1 loopback filter's high pas pole. The following settings show possible high pass pole frequencies. These bits are for debug only. 000 --  15.9 MHz 001 --  31.8 MHz 010 --  63.7 MHz 100 --  127.3 MHz 111 --  238.7 MHz
- */
+/***************************************************************************//**
+ * @brief Sets the R-gate value for the Rx1 loopback filter in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the R-gate value to be
+ * set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Rx1LoopbackFilterRgate_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -3860,9 +7496,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_Rx1LoopbackFilterRgate_Set(void *d
     return status;
 }
 
-/**
- * These bits set the Rx1 loopback filter's high pas pole. The following settings show possible high pass pole frequencies. These bits are for debug only. 000 --  15.9 MHz 001 --  31.8 MHz 010 --  63.7 MHz 100 --  127.3 MHz 111 --  238.7 MHz
- */
+/***************************************************************************//**
+ * @brief Retrieves the Rgate value from the Rx1 loopback filter configuration.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved Rgate
+ * value will be stored.
+ * @return Returns an integer status code indicating success or failure of the
+ * read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Rx1LoopbackFilterRgate_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -3877,9 +7522,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Rx1LoopbackFilterRgate_Get(void *d
     return status;
 }
 
-/**
- * These bits set the Rx1 loopback filter's high pas pole. The following settings show possible high pass pole frequencies. These bits are for debug only. 000 --  15.9 MHz 001 --  31.8 MHz 010 --  63.7 MHz 100 --  127.3 MHz 111 --  238.7 MHz
- */
+/***************************************************************************//**
+ * @brief Sets the override for the loopback filter stages in the Rx1 path of
+ * the ADRV9001.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A 8-bit unsigned integer that specifies which filter stages to
+ * override.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Rx1PdLoopbackFilterOverride_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -3891,9 +7546,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_Rx1PdLoopbackFilterOverride_Set(vo
     return status;
 }
 
-/**
- * These bits set the Rx1 loopback filter's high pas pole. The following settings show possible high pass pole frequencies. These bits are for debug only. 000 --  15.9 MHz 001 --  31.8 MHz 010 --  63.7 MHz 100 --  127.3 MHz 111 --  238.7 MHz
- */
+/***************************************************************************//**
+ * @brief Retrieves the override value for the Rx1 loopback filter in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating which instance of the analog
+ * RX memory map to access.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_Rx1PdLoopbackFilterOverride_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -3908,6 +7573,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_Rx1PdLoopbackFilterOverride_Get(vo
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state for the auxiliary low buffer in the analog
+ * RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAnalogRxMemMap_e`
+ * that specifies which instance of the analog RX memory map to
+ * modify.
+ * @param value A `uint8_t` value that indicates the desired power down state (0
+ * for active, 1 for power down).
+ * @return Returns an `int32_t` status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxAuxLoBufPd_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -3919,6 +7598,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxAuxLoBufPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the power down status of the auxiliary low buffer in the
+ * analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxAuxLoBufPd_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -3933,6 +7625,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxAuxLoBufPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RxAuxloR termination value in the ADRV9001 analog RX memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that represents the termination setting to be
+ * applied.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxAuxloRTerm_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -3944,6 +7649,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxAuxloRTerm_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `RxAuxloRTerm` register from the specified
+ * device instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxAuxloRTerm_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -3958,6 +7676,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxAuxloRTerm_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state for the auxiliary low input buffer in the
+ * analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value indicating the desired power down state (0 for
+ * active, 1 for power down).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxCalToneAuxloInbufPd_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -3969,6 +7700,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxCalToneAuxloInbufPd_Set(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the power down status of the auxiliary low input buffer for
+ * the RX calibration tone.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxCalToneAuxloInbufPd_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -3983,6 +7727,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxCalToneAuxloInbufPd_Get(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state for the RX calibration tone output buffer.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value indicating the power down state to set (1 for
+ * power down, 0 for active).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxCalToneOutbufPd_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -3994,6 +7750,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxCalToneOutbufPd_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the power down status of the RX calibration tone output
+ * buffer.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxCalToneOutbufPd_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -4008,6 +7777,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxCalToneOutbufPd_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state for the RX calibration tone's low input
+ * buffer.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value indicating the desired power down state (0 or
+ * 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxCalToneRxloInbufPd_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -4019,6 +7801,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxCalToneRxloInbufPd_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the power down status of the RXLO input buffer for the
+ * calibration tone.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved power down
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxCalToneRxloInbufPd_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -4033,6 +7828,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxCalToneRxloInbufPd_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the auxiliary low tone selection for the RX calibration in the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A 8-bit unsigned integer representing the value to set for the
+ * auxiliary low tone selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxCalToneSelAuxLo_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -4044,6 +7852,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxCalToneSelAuxLo_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the auxiliary low tone selection value from the RX
+ * calibration memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxCalToneSelAuxLo_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -4058,6 +7879,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxCalToneSelAuxLo_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the auxiliary low termination enable for the analog receiver.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog receiver memory map.
+ * @param value A uint8_t value that indicates whether to enable or disable the
+ * auxiliary low termination.
+ * @return Returns the status of the write operation, which is an integer
+ * indicating success or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxEnAuxloTerm_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -4069,6 +7902,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxEnAuxloTerm_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the auxiliary low termination enable bit from
+ * the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxEnAuxloTerm_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -4083,6 +7929,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxEnAuxloTerm_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the high range of the local oscillator (LO) for the analog
+ * receiver.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog receiver memory map.
+ * @param value An 8-bit unsigned integer representing the value to set for the
+ * high range of the LO.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxLoHighR_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -4094,6 +7953,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxLoHighR_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the high register value for the Rx LO in the analog RX
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxLoHighR_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -4108,6 +7980,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxLoHighR_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RxLoLineR termination value in the ADRV9001 analog receiver
+ * memory map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog receiver memory map.
+ * @param value A uint8_t value representing the termination setting to be
+ * applied.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxLoLineRTerm_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -4119,6 +8004,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxLoLineRTerm_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `RxLoLineRTerm` register for the specified
+ * instance of the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerator of type `adrv9001_BfAnalogRxMemMap_e` that
+ * specifies which instance of the analog RX memory map to
+ * access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxLoLineRTerm_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -4133,6 +8032,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxLoLineRTerm_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state for the receive low line buffer in the
+ * analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value indicating the desired power down state (0 or
+ * 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxLoLineRcvBufPd_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -4144,6 +8056,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxLoLineRcvBufPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the power down status of the receive buffer for the low line
+ * of the analog receiver.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog receiver memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved power down
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxLoLineRcvBufPd_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -4158,6 +8083,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxLoLineRcvBufPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the line termination bias power down state for the Rx low line.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that indicates the desired power down state for
+ * the line termination bias.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxLoLineTermBiasPd_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -4169,6 +8106,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxLoLineTermBiasPd_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the bias power down status for the low line termination of
+ * the analog receiver.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog receiver memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved bias power
+ * down status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxLoLineTermBiasPd_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -4183,6 +8133,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxLoLineTermBiasPd_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the line termination enable state for the Rx low frequency path
+ * in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value indicating the desired state of the line
+ * termination enable (1 to enable, 0 to disable).
+ * @return Returns the status of the write operation, indicating success (0) or
+ * an error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxLoLineTermEnable_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -4194,6 +8157,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxLoLineTermEnable_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the line termination enable status for the RxLo line in the
+ * analog RX memory map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved line
+ * termination enable status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxLoLineTermEnable_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -4208,6 +8184,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxLoLineTermEnable_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state for the auxiliary low input buffer in the RX
+ * mixer.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAnalogRxMemMap_e`
+ * that specifies which instance of the analog RX memory map to
+ * modify.
+ * @param value A `uint8_t` value that indicates the desired power down state (0
+ * for active, 1 for power down).
+ * @return Returns an `int32_t` status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxMixAuxloInbufPd_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -4219,6 +8209,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxMixAuxloInbufPd_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the power down status of the auxiliary low input buffer in
+ * the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxMixAuxloInbufPd_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -4233,6 +8236,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxMixAuxloInbufPd_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state for the low output buffer of the Rx mixer.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAnalogRxMemMap_e`
+ * that specifies which instance of the analog RX memory map to
+ * operate on.
+ * @param value A `uint8_t` value that indicates the desired power down state (1
+ * to power down, 0 to power up).
+ * @return Returns an `int32_t` indicating the status of the operation, where 0
+ * indicates success and a non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxMixLoOutbufPd_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -4244,6 +8260,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxMixLoOutbufPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the power down status of the `RxMixLoOutbuf` for the
+ * specified device instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAnalogRxMemMap_e`
+ * that specifies which instance of the analog RX memory map to
+ * access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved power down
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxMixLoOutbufPd_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -4258,6 +8288,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxMixLoOutbufPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the auxiliary low selection for the Rx mixer in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A 8-bit unsigned integer representing the value to set for the
+ * auxiliary low selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxMixLoSelAuxLo_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -4269,6 +8312,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxMixLoSelAuxLo_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `RxMixLoSelAuxLo` field from the analog RX
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` where the retrieved value will be
+ * stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxMixLoSelAuxLo_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -4283,6 +8339,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxMixLoSelAuxLo_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state of the RX low input buffer.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value indicating the desired power down state (1 to
+ * power down, 0 to power up).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxMixRxloInbufPd_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -4294,6 +8362,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxMixRxloInbufPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the power down status of the `RxMixRxloInbuf` buffer for the
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved power down
+ * status will be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxMixRxloInbufPd_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -4308,6 +8389,17 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxMixRxloInbufPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the auxiliary low termination bias for the analog receiver.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog receiver memory map.
+ * @param value An 8-bit unsigned integer representing the bias value to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxPdAuxloTermBias_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -4319,6 +8411,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxPdAuxloTermBias_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the auxiliary low termination bias value from the analog RX
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved bias value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxPdAuxloTermBias_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -4333,6 +8438,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxPdAuxloTermBias_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the `RxSpare1` register in the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the `RxSpare1` register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxSpare1_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -4344,6 +8461,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxSpare1_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `RxSpare1` register from the analog RX
+ * memory map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxSpare1_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -4358,6 +8488,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxSpare1_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the value of the `RxSpare2` register in the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAnalogRxMemMap_e`
+ * that specifies the instance of the analog RX memory map.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the `RxSpare2` register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxSpare2_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -4369,6 +8511,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxSpare2_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `RxSpare2` register from the analog RX
+ * memory map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxSpare2_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -4383,6 +8538,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxSpare2_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the control for the `RxtiaBbinjAmp` in the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the `RxtiaBbinjAmp` control.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxtiaBbinjAmpCtrl_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -4394,6 +8561,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxtiaBbinjAmpCtrl_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the control value for the `RxtiaBbinjAmpCtrl` register from
+ * the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, where a non-zero value
+ * indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxtiaBbinjAmpCtrl_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -4408,6 +8588,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxtiaBbinjAmpCtrl_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state for the `Rxtia` block in the analog RX
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A `uint8_t` value indicating the power down state to be set.
+ * @return Returns an `int32_t` status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxtiaBbinjPd_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -4419,6 +8611,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxtiaBbinjPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the power down status of the `RxtiaBbinj` component in the
+ * analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxtiaBbinjPd_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -4433,6 +8638,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxtiaBbinjPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the `RxtiaBbinjSelchop` field in the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the value to be written
+ * to the `RxtiaBbinjSelchop` field.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxtiaBbinjSelchop_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -4444,6 +8661,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxtiaBbinjSelchop_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `RxtiaBbinjSelchop` field from the
+ * specified instance of the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxtiaBbinjSelchop_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -4458,6 +8688,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxtiaBbinjSelchop_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the standby state for the `RxtiaBbinj` field in the analog RX
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A `uint8_t` value that indicates the standby state to be set.
+ * @return Returns an `int32_t` status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxtiaBbinjStdby_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -4469,6 +8711,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxtiaBbinjStdby_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the standard by-pass status of the `Rxtia` block in the
+ * analog receiver memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerator value that specifies which instance of the
+ * analog receiver memory map to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxtiaBbinjStdby_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -4483,9 +8738,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxtiaBbinjStdby_Get(void *device,
     return status;
 }
 
-/**
- * I and Q get the same capacitor setting for Fc.
- */
+/***************************************************************************//**
+ * @brief Sets the RX TIA configuration for a specified instance and register.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type indicating which analog RX memory map
+ * instance to configure.
+ * @param regInstance An index indicating the specific register instance to be
+ * configured.
+ * @param value A 16-bit value representing the configuration settings to be
+ * applied.
+ * @return Returns the status of the operation, indicating success or failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxtiaC1_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -4501,9 +8766,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxtiaC1_Set(void *device,
     return status;
 }
 
-/**
- * I and Q get the same capacitor setting for Fc.
- */
+/***************************************************************************//**
+ * @brief Retrieves the RXTIA C1 configuration value from the specified device
+ * and instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific analog RX
+ * memory map instance.
+ * @param regInstance An index to specify which register instance to read from.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success or failure of the
+ * read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxtiaC1_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -4523,9 +8799,21 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxtiaC1_Get(void *device,
     return status;
 }
 
-/**
- * Setting for fine capacitor tuning for QEC (for C1)
- */
+/***************************************************************************//**
+ * @brief Sets the fine tuning value for the `RxtiaC1` capacitor in the analog
+ * RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerator of type `adrv9001_BfAnalogRxMemMap_e` that
+ * specifies the instance of the analog RX memory map.
+ * @param regInstance A 32-bit unsigned integer that specifies the register
+ * instance for the operation.
+ * @param value A 16-bit unsigned integer representing the value to be set for
+ * the `RxtiaC1` capacitor.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxtiaC1Fine_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -4541,9 +8829,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxtiaC1Fine_Set(void *device,
     return status;
 }
 
-/**
- * Setting for fine capacitor tuning for QEC (for C1)
- */
+/***************************************************************************//**
+ * @brief Retrieves the fine adjustment value for the `RxtiaC1` register in the
+ * analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type indicating which instance of the analog RX
+ * memory map to access.
+ * @param regInstance An index to specify which register instance to read from.
+ * @param value A pointer to a `uint16_t` where the retrieved value will be
+ * stored.
+ * @return Returns an integer status code indicating success or failure of the
+ * read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxtiaC1Fine_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -4563,9 +8862,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxtiaC1Fine_Get(void *device,
     return status;
 }
 
-/**
- * For BIQ setting, set according to Fc (BIQ)
- */
+/***************************************************************************//**
+ * @brief Sets the RXTIA C2 configuration for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific analog RX
+ * memory map instance.
+ * @param regInstance An index to specify the register instance for the
+ * configuration.
+ * @param value A 16-bit value representing the configuration to be set.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero).
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxtiaC2_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -4581,9 +8890,22 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxtiaC2_Set(void *device,
     return status;
 }
 
-/**
- * For BIQ setting, set according to Fc (BIQ)
- */
+/***************************************************************************//**
+ * @brief The `adrv9001_AnalogRxMemMap_RxtiaC2_Get` function retrieves the value
+ * of the `RxtiaC2` register from the analog RX memory map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated type indicating which instance of the analog RX
+ * memory map to access.
+ * @param regInstance An unsigned integer representing the specific register
+ * instance to read from.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * register value will be stored.
+ * @return The function returns an integer status code indicating success (0) or
+ * failure (non-zero) of the read operations, and the retrieved value is
+ * stored in the location pointed to by the `value` parameter.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxtiaC2_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -4603,9 +8925,21 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxtiaC2_Get(void *device,
     return status;
 }
 
-/**
- * Setting for fine capacitor tuning for QEC (for C2)
- */
+/***************************************************************************//**
+ * @brief Sets the fine adjustment for the `RxtiaC2` register in the analog RX
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type indicating which instance of the analog RX
+ * memory map is being accessed.
+ * @param regInstance An index indicating the specific register instance to be
+ * modified.
+ * @param value A 16-bit value representing the fine adjustment setting to be
+ * written to the register.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxtiaC2Fine_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -4621,9 +8955,22 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxtiaC2Fine_Set(void *device,
     return status;
 }
 
-/**
- * Setting for fine capacitor tuning for QEC (for C2)
- */
+/***************************************************************************//**
+ * @brief Retrieves the fine adjustment value for the `RxtiaC2` register in the
+ * analog RX memory map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific analog RX
+ * memory map instance (e.g., RX1 or RX2).
+ * @param regInstance An unsigned integer representing the specific register
+ * instance to read from.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success or failure of the
+ * read operation, and the retrieved fine adjustment value is stored in
+ * the provided pointer.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxtiaC2Fine_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -4643,9 +8990,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxtiaC2Fine_Get(void *device,
     return status;
 }
 
-/**
- * Select between TIA or Biquad
- */
+/***************************************************************************//**
+ * @brief Sets the RX TIA mode in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific analog RX
+ * memory map instance (e.g., RX1 or RX2).
+ * @param regInstance An integer representing the specific register instance to
+ * be modified.
+ * @param value A byte value representing the mode to set for the RX TIA.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxtiaMode_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -4658,9 +9015,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxtiaMode_Set(void *device,
     return status;
 }
 
-/**
- * Select between TIA or Biquad
- */
+/***************************************************************************//**
+ * @brief Retrieves the RX TIA mode from the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type indicating which instance of the analog RX
+ * memory map to access.
+ * @param regInstance An index to specify the register instance within the
+ * selected memory map.
+ * @param value A pointer to a uint8_t where the retrieved RX TIA mode value
+ * will be stored.
+ * @return Returns an integer status code indicating success or failure of the
+ * read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxtiaMode_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -4676,9 +9044,21 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxtiaMode_Get(void *device,
     return status;
 }
 
-/**
- * Set input resistor for integrator stage for Biquad
- */
+/***************************************************************************//**
+ * @brief Sets the input resistor for the integrator stage of the Biquad filter
+ * in the ADRV9001 analog receiver.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerator indicating which instance of the analog
+ * receiver memory map is being accessed.
+ * @param regInstance An index indicating the specific register instance to be
+ * modified.
+ * @param value A 16-bit unsigned integer representing the value to set for the
+ * input resistor.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxtiaR2_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -4694,9 +9074,21 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxtiaR2_Set(void *device,
     return status;
 }
 
-/**
- * Set input resistor for integrator stage for Biquad
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the `RxtiaR2` register from the analog RX
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerator value that specifies which instance of the
+ * analog RX memory map to access.
+ * @param regInstance An index that specifies the register instance to read
+ * from.
+ * @param value A pointer to a `uint16_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, which is 0 on success or a
+ * negative error code on failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxtiaR2_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -4716,9 +9108,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxtiaR2_Get(void *device,
     return status;
 }
 
-/**
- * Set leaky integrator reiststor of Biquad
- */
+/***************************************************************************//**
+ * @brief Sets the R3 register value for the RX TIA in the ADRV9001 analog
+ * receiver memory map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerator value indicating which analog RX memory map
+ * instance to configure.
+ * @param regInstance An index specifying the register instance to be set.
+ * @param value The 16-bit value to be written to the R3 register.
+ * @return Returns the status of the operation, indicating success (0) or an
+ * error code.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxtiaR3_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -4734,9 +9136,21 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxtiaR3_Set(void *device,
     return status;
 }
 
-/**
- * Set leaky integrator reiststor of Biquad
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the `RxtiaR3` register from the analog RX
+ * memory map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific analog RX
+ * memory map instance.
+ * @param regInstance An unsigned integer representing the specific register
+ * instance to read.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * register value will be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxtiaR3_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -4756,9 +9170,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxtiaR3_Get(void *device,
     return status;
 }
 
-/**
- * Sets feedback resistor value in TIA.
- */
+/***************************************************************************//**
+ * @brief Sets the feedback resistor value in the TIA for the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param regInstance An index representing the specific register instance to be
+ * modified.
+ * @param value A 16-bit unsigned integer representing the feedback resistor
+ * value to be set.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero).
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxtiaR4_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -4774,9 +9199,21 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxtiaR4_Set(void *device,
     return status;
 }
 
-/**
- * Sets feedback resistor value in TIA.
- */
+/***************************************************************************//**
+ * @brief Retrieves the feedback resistor value from the `RxtiaR4` register for
+ * the specified instance.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerator of type `adrv9001_BfAnalogRxMemMap_e` that
+ * specifies the instance of the analog RX memory map.
+ * @param regInstance A 32-bit unsigned integer that specifies the register
+ * instance to read from.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved
+ * feedback resistor value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxtiaR4_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -4796,6 +9233,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxtiaR4_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RX TIA selection for stage 1 in the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerator of type `adrv9001_BfAnalogRxMemMap_e` that
+ * specifies the instance of the analog RX memory map.
+ * @param regInstance A 32-bit unsigned integer that specifies the register
+ * instance to be modified.
+ * @param value An 8-bit unsigned integer that represents the value to be
+ * written to the specified register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxtiaSelccStg1_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -4808,6 +9259,21 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxtiaSelccStg1_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `RxtiaSelccStg1` register for the specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific analog RX
+ * memory map instance.
+ * @param regInstance An unsigned integer representing the specific register
+ * instance to read from.
+ * @param value A pointer to a `uint8_t` where the retrieved register value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxtiaSelccStg1_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -4823,6 +9289,21 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxtiaSelccStg1_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the selection for the second stage of the `Rxtia` configuration
+ * in the analog receiver memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAnalogRxMemMap_e`
+ * that specifies the instance of the analog receiver.
+ * @param regInstance A 32-bit unsigned integer that specifies the register
+ * instance for the configuration.
+ * @param value An 8-bit unsigned integer that represents the value to be set
+ * for the second stage selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxtiaSelccStg2_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -4835,6 +9316,21 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxtiaSelccStg2_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `RxtiaSelccStg2` register for the specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerator value that specifies which instance of the
+ * analog RX memory map to access.
+ * @param regInstance An index that specifies the register instance to read
+ * from.
+ * @param value A pointer to a `uint8_t` where the retrieved register value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxtiaSelccStg2_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -4850,6 +9346,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxtiaSelccStg2_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RXTIA selection for stage 1 in the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param regInstance An unsigned integer representing the register instance to
+ * be modified.
+ * @param value An 8-bit unsigned integer representing the value to set for the
+ * RXTIA selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxtiaSelrzStg1_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -4862,6 +9372,21 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxtiaSelrzStg1_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `RxtiaSelrzStg1` register from the analog
+ * RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type indicating which instance of the analog RX
+ * memory map to access.
+ * @param regInstance An index to specify the particular register instance to
+ * read.
+ * @param value A pointer to a `uint8_t` where the retrieved register value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxtiaSelrzStg1_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -4877,6 +9402,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxtiaSelrzStg1_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the RX TIA selection for stage 2 in the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerator value that specifies which instance of the
+ * analog RX memory map to access.
+ * @param regInstance An index that specifies the register instance to be
+ * modified.
+ * @param value The value to be written to the specified register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxtiaSelrzStg2_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -4889,6 +9427,21 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxtiaSelrzStg2_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the `RxtiaSelrzStg2` register from the
+ * specified device.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerator value that specifies which instance of the
+ * analog RX memory map to access.
+ * @param regInstance An index that specifies the register instance to read
+ * from.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_RxtiaSelrzStg2_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -4904,6 +9457,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_RxtiaSelrzStg2_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the high gate voltage for the RX attenuation.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param regInstance An index to specify the register instance for the
+ * operation.
+ * @param value The value to be written to the specified register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_SelRxattennVgateHi_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -4916,6 +9482,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_SelRxattennVgateHi_Set(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the high gate voltage setting for the RX attenuation.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific analog RX
+ * memory map instance (e.g., RX1 or RX2).
+ * @param regInstance An unsigned integer representing the specific register
+ * instance to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_SelRxattennVgateHi_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -4931,6 +9511,21 @@ static inline int32_t adrv9001_AnalogRxMemMap_SelRxattennVgateHi_Get(void *devic
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the self-injection calibration value for the analog RX memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific analog RX
+ * memory map instance (e.g., RX1 or RX2).
+ * @param regInstance An unsigned integer representing the specific register
+ * instance to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the self-injection calibration.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_SelbInjCal_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -4943,6 +9538,21 @@ static inline int32_t adrv9001_AnalogRxMemMap_SelbInjCal_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the self-injection calibration value from the analog RX
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific analog RX
+ * memory map instance (e.g., RX1 or RX2).
+ * @param regInstance An unsigned integer representing the specific register
+ * instance to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved calibration
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_SelbInjCal_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -4958,6 +9568,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_SelbInjCal_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the ORx1 or Tx1 loopback configuration in the analog RX memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that specifies the configuration to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_SelectOrx1OrTx1lb_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -4969,6 +9591,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_SelectOrx1OrTx1lb_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the ORx1 or Tx1 loopback configuration from the
+ * analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_SelectOrx1OrTx1lb_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -4983,6 +9618,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_SelectOrx1OrTx1lb_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the ORx2 or Tx2 loopback configuration in the analog RX memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAnalogRxMemMap_e`
+ * that specifies the instance of the analog RX memory map.
+ * @param value An 8-bit unsigned integer that represents the value to be set
+ * for the specified instance.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_SelectOrx2OrTx2lb_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -4994,6 +9642,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_SelectOrx2OrTx2lb_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the ORx2 or Tx2 low band.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAnalogRxMemMap_e`
+ * that specifies which instance of the analog RX memory map to
+ * access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_SelectOrx2OrTx2lb_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -5008,6 +9669,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_SelectOrx2OrTx2lb_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state for the TIA in the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value indicating the desired power down state (0 for
+ * active, 1 for power down).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_TiaPd_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -5019,6 +9692,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_TiaPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief The `adrv9001_AnalogRxMemMap_TiaPd_Get` function retrieves the power
+ * down status of the TIA (Transimpedance Amplifier) for a specified
+ * analog receiver instance.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAnalogRxMemMap_e`
+ * indicating which analog receiver instance to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved power down
+ * status will be stored.
+ * @return The function returns an integer status code indicating the success or
+ * failure of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_TiaPd_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -5033,9 +9720,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_TiaPd_Get(void *device,
     return status;
 }
 
-/**
- * Setting each bit enables the power down override for the corresponding ORx TIA in 0x204[D7:D6]. Bit D7 applies to ORx2 and bit D6 applies to ORx1.
- */
+/***************************************************************************//**
+ * @brief Sets the power down override for the TIA in the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that indicates the power down override state to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_TiaPdOverride_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -5047,9 +9743,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_TiaPdOverride_Set(void *device,
     return status;
 }
 
-/**
- * Setting each bit enables the power down override for the corresponding ORx TIA in 0x204[D7:D6]. Bit D7 applies to ORx2 and bit D6 applies to ORx1.
- */
+/***************************************************************************//**
+ * @brief Retrieves the TIA power down override value from the specified analog
+ * RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_TiaPdOverride_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -5064,9 +9770,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_TiaPdOverride_Get(void *device,
     return status;
 }
 
-/**
- * Setting each bit enables the power down override for the corresponding ORx TIA in 0x204[D7:D6]. Bit D7 applies to ORx2 and bit D6 applies to ORx1.
- */
+/***************************************************************************//**
+ * @brief Sets the TIA power down override selection for the ADRV9001 analog
+ * receiver.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog receiver memory map.
+ * @param value A 8-bit unsigned integer that specifies the power down override
+ * selection value.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_TiaPdOverrideSelect_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -5078,9 +9794,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_TiaPdOverrideSelect_Set(void *devi
     return status;
 }
 
-/**
- * Setting each bit enables the power down override for the corresponding ORx TIA in 0x204[D7:D6]. Bit D7 applies to ORx2 and bit D6 applies to ORx1.
- */
+/***************************************************************************//**
+ * @brief Retrieves the TIA power down override selection value from the
+ * specified analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_TiaPdOverrideSelect_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -5095,6 +9821,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_TiaPdOverrideSelect_Get(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state for the TIA tuner clock driver input buffer.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value indicating the desired power down state (0 for
+ * active, 1 for power down).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_TiaTunerClkDriverInbufPd_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -5106,6 +9844,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_TiaTunerClkDriverInbufPd_Set(void 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the power down status of the `TiaTunerClkDriverInbuf` for
+ * the specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_TiaTunerClkDriverInbufPd_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -5120,6 +9871,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_TiaTunerClkDriverInbufPd_Get(void 
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state for the `TiaTunerClkDriver` in the analog RX
+ * memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAnalogRxMemMap_e`
+ * that specifies which instance of the analog RX memory map to
+ * operate on.
+ * @param value A `uint8_t` value that indicates the desired power down state (0
+ * or 1).
+ * @return Returns an `int32_t` indicating the success or failure of the write
+ * operation, where 0 typically indicates success.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_TiaTunerClkDriverPd_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -5131,6 +9896,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_TiaTunerClkDriverPd_Set(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the power down status of the `TiaTunerClkDriver` for the
+ * specified instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value of type `adrv9001_BfAnalogRxMemMap_e`
+ * that specifies which instance of the analog RX memory map to
+ * access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_TiaTunerClkDriverPd_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -5145,6 +9924,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_TiaTunerClkDriverPd_Get(void *devi
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the DAC gain for the analog receiver.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerator that specifies which instance of the analog
+ * receiver memory map to configure.
+ * @param regInstance An index that specifies the register instance to be
+ * modified.
+ * @param value A 16-bit value representing the gain setting to be applied to
+ * the DAC.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero).
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_TuneDacGm1_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -5160,6 +9953,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_TuneDacGm1_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the DAC gain setting for the specified instance
+ * and register.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated type indicating which analog RX memory map
+ * instance to access.
+ * @param regInstance An index specifying the register instance to read from.
+ * @param value A pointer to a uint16_t where the retrieved value will be
+ * stored.
+ * @return Returns an integer status code indicating success or failure of the
+ * read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_TuneDacGm1_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -5179,6 +9986,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_TuneDacGm1_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the gain of the DAC for the second gain stage in the analog
+ * receiver.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type indicating which instance of the analog
+ * receiver is being configured.
+ * @param regInstance An index to specify the register instance for the DAC
+ * setting.
+ * @param value The value to set for the DAC gain, which is a 16-bit value.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the operations performed.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_TuneDacGm2_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -5194,6 +10015,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_TuneDacGm2_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the DAC gain setting for the second gain stage
+ * in the analog receiver.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific analog receiver
+ * instance (e.g., RX1 or RX2).
+ * @param regInstance An index to specify which register instance to read from.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the read operations failed.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_TuneDacGm2_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -5213,6 +10048,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_TuneDacGm2_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the DAC resolution for the analog receiver.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerator of type `adrv9001_BfAnalogRxMemMap_e` that
+ * specifies the instance of the analog receiver.
+ * @param regInstance A 32-bit unsigned integer that specifies the register
+ * instance to be modified.
+ * @param value An 8-bit unsigned integer that represents the value to be set
+ * for the DAC resolution.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_TuneDacRes_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -5225,6 +10074,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_TuneDacRes_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the DAC resolution setting from the specified register.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific analog RX
+ * memory map instance.
+ * @param regInstance An unsigned integer representing the specific register
+ * instance to read from.
+ * @param value A pointer to a uint8_t where the retrieved DAC resolution value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_TuneDacRes_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -5240,6 +10103,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_TuneDacRes_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state for the auxiliary low input buffer in the Tx
+ * calibration tone path.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value indicating the desired power down state (0 for
+ * active, 1 for power down).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_TxCalToneAuxloInbufPd_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -5251,6 +10127,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_TxCalToneAuxloInbufPd_Set(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the Tx calibration tone auxiliary low input
+ * buffer power down status.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_TxCalToneAuxloInbufPd_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -5265,6 +10154,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_TxCalToneAuxloInbufPd_Get(void *de
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state for the Tx calibration tone output buffer.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value indicating the power down state to set (1 for
+ * power down, 0 for active).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_TxCalToneOutbufPd_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -5276,6 +10177,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_TxCalToneOutbufPd_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the power down status of the Tx calibration tone output
+ * buffer.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_TxCalToneOutbufPd_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -5290,6 +10204,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_TxCalToneOutbufPd_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the auxiliary low tone selection for the Tx calibration in the
+ * ADRV9001 analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value that specifies the tone selection to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_TxCalToneSelAuxLo_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -5301,6 +10227,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_TxCalToneSelAuxLo_Set(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the Tx calibration tone selection for the
+ * auxiliary low frequency.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_TxCalToneSelAuxLo_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -5315,6 +10254,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_TxCalToneSelAuxLo_Get(void *device
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state for the Tx LO input buffer in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value indicating the desired power down state (1 to
+ * power down, 0 to power up).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_TxCalToneTxloInbufPd_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -5326,6 +10278,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_TxCalToneTxloInbufPd_Set(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief The `adrv9001_AnalogRxMemMap_TxCalToneTxloInbufPd_Get` function
+ * retrieves the power down status of the Tx calibration tone low input
+ * buffer.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return The function returns an integer status code indicating the success or
+ * failure of the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_TxCalToneTxloInbufPd_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -5340,6 +10306,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_TxCalToneTxloInbufPd_Get(void *dev
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state for the auxiliary low input buffer in the
+ * ADRV9001 analog receiver.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog receiver memory map.
+ * @param value A uint8_t value indicating the desired power down state (0 for
+ * active, 1 for power down).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_TxLbAuxloInbufPd_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -5351,6 +10330,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_TxLbAuxloInbufPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the TxLbAuxloInbufPd register for the specified
+ * device and instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_TxLbAuxloInbufPd_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -5365,6 +10357,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_TxLbAuxloInbufPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state for the low output buffer of the Tx
+ * loopback.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value indicating the desired power down state (0 or
+ * 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_TxLbLoOutbufPd_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -5376,6 +10381,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_TxLbLoOutbufPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the Tx Low Buffer Output Power Down bit from
+ * the specified analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value that specifies which instance of the
+ * analog RX memory map to access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_TxLbLoOutbufPd_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -5390,6 +10408,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_TxLbLoOutbufPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the auxiliary low selection for the Tx loopback.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A 8-bit unsigned integer representing the value to set for the
+ * auxiliary low selection.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_TxLbLoSelAuxLo_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -5401,6 +10431,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_TxLbLoSelAuxLo_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the TxLbLoSelAuxLo register for the specified
+ * device instance.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_TxLbLoSelAuxLo_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -5415,6 +10458,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_TxLbLoSelAuxLo_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the power down state for the Tx low band transmit low input
+ * buffer.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A uint8_t value indicating the power down state to set (1 for
+ * power down, 0 for active).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_TxLbTxloInbufPd_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -5426,6 +10482,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_TxLbTxloInbufPd_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the value of the Tx low buffer power down bit from the
+ * analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, which indicates success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_TxLbTxloInbufPd_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -5440,6 +10509,18 @@ static inline int32_t adrv9001_AnalogRxMemMap_TxLbTxloInbufPd_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the Tx LO high range value in the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value An 8-bit unsigned integer representing the value to be set for
+ * the Tx LO high range.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_TxLoHighR_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t value)
@@ -5451,6 +10532,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_TxLoHighR_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the high byte value of the Tx LO frequency from the analog
+ * RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated value representing the specific instance of the
+ * analog RX memory map.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_TxLoHighR_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint8_t *value)
@@ -5465,6 +10559,19 @@ static inline int32_t adrv9001_AnalogRxMemMap_TxLoHighR_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the Vhi gate control for the analog RX memory map.
+ *
+ * @param device A pointer to the device structure that represents the hardware
+ * device.
+ * @param instance An enumerated type indicating which instance of the analog RX
+ * memory map is being accessed.
+ * @param regInstance An index to specify the particular register instance
+ * within the selected memory map.
+ * @param value A 8-bit value to be written to the specified register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_VhiGateCtrl_Set(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,
@@ -5477,6 +10584,20 @@ static inline int32_t adrv9001_AnalogRxMemMap_VhiGateCtrl_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the VhiGate control value from the analog RX memory map.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerator value indicating which instance of the analog
+ * RX memory map to access.
+ * @param regInstance An index to specify the register instance within the
+ * selected memory map.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_AnalogRxMemMap_VhiGateCtrl_Get(void *device,
     adrv9001_BfAnalogRxMemMap_e instance,
     uint32_t regInstance,

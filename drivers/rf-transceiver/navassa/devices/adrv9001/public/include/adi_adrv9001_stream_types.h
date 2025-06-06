@@ -28,9 +28,20 @@ extern "C" {
 #define ADI_ADRV9001_STREAM_BINARY_IMAGE_FILE_SIZE_BYTES	(32*1024)
 #define ADRV9001_MAX_NUM_STREAM			5		/* Maximum number of stream processors */
 
-/**
-* \brief Data structure to hold stream processor version information
-*/
+/***************************************************************************//**
+ * @brief The `adi_adrv9001_StreamVersion_t` structure is used to store version
+ * information for a stream processor in the ADRV9001 API. It contains
+ * four fields, each represented as an 8-bit unsigned integer, which
+ * denote the major, minor, maintenance, and build version numbers
+ * respectively. This structure is essential for tracking and managing
+ * different versions of the stream processor firmware.
+ *
+ * @param majorVer Represents the major version number of the stream processor.
+ * @param minorVer Represents the minor version number of the stream processor.
+ * @param maintVer Represents the maintenance version number of the stream
+ * processor.
+ * @param buildVer Represents the build version number of the stream processor.
+ ******************************************************************************/
 typedef struct adi_adrv9001_StreamVersion
 {
     uint8_t majorVer;

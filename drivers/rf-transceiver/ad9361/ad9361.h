@@ -2862,11 +2862,39 @@
 *	Driver
 */
 
+/***************************************************************************//**
+ * @brief The `rx_gain_table_type` is an enumeration that defines the types of
+ * gain tables available for the receiver in the AD9361 driver. It
+ * includes two types: `RXGAIN_FULL_TBL`, which indicates a full gain
+ * table, and `RXGAIN_SPLIT_TBL`, which indicates a split gain table.
+ * This enumeration is used to specify the gain table configuration for
+ * the receiver, which is crucial for managing the gain settings in
+ * different operational modes.
+ *
+ * @param RXGAIN_FULL_TBL Represents a full gain table type for the receiver.
+ * @param RXGAIN_SPLIT_TBL Represents a split gain table type for the receiver.
+ ******************************************************************************/
 enum rx_gain_table_type {
 	RXGAIN_FULL_TBL,
 	RXGAIN_SPLIT_TBL,
 };
 
+/***************************************************************************//**
+ * @brief The `rx_gain_table_name` enumeration defines a set of constants
+ * representing different gain tables used for various frequency ranges
+ * in the AD9361 driver. Each constant corresponds to a specific
+ * frequency range, allowing the software to select the appropriate gain
+ * table for signal processing. The `RXGAIN_TBLS_END` serves as a
+ * sentinel value to indicate the end of the enumeration.
+ *
+ * @param TBL_200_1300_MHZ Represents the gain table for the frequency range 200
+ * MHz to 1300 MHz.
+ * @param TBL_1300_4000_MHZ Represents the gain table for the frequency range
+ * 1300 MHz to 4000 MHz.
+ * @param TBL_4000_6000_MHZ Represents the gain table for the frequency range
+ * 4000 MHz to 6000 MHz.
+ * @param RXGAIN_TBLS_END Marks the end of the RX gain tables enumeration.
+ ******************************************************************************/
 enum rx_gain_table_name {
 	TBL_200_1300_MHZ,
 	TBL_1300_4000_MHZ,
@@ -2874,6 +2902,22 @@ enum rx_gain_table_name {
 	RXGAIN_TBLS_END,
 };
 
+/***************************************************************************//**
+ * @brief The `gain_table_info` structure is used to define and manage the gain
+ * table information for a specific frequency range in the AD9361 driver.
+ * It includes the start and end frequencies that the gain table covers,
+ * the maximum index for the table, and whether the table is split. It
+ * also contains pointers to the absolute gain table and a 2D array
+ * representing the gain table itself, which is used to store gain values
+ * and related data for different configurations.
+ *
+ * @param start Defines the starting frequency range for the gain table.
+ * @param end Defines the ending frequency range for the gain table.
+ * @param max_index Specifies the maximum index value for the gain table.
+ * @param split_table Indicates whether the gain table is split or not.
+ * @param abs_gain_tbl Pointer to an array of absolute gain values.
+ * @param tab Pointer to a 2D array representing the gain table with 3 columns.
+ ******************************************************************************/
 struct gain_table_info {
 	uint64_t start;
 	uint64_t end;
@@ -2883,6 +2927,27 @@ struct gain_table_info {
 	uint8_t (*tab)[3];
 };
 
+/***************************************************************************//**
+ * @brief The `fir_dest` enumeration defines constants for specifying the
+ * destination of FIR (Finite Impulse Response) filters in a system,
+ * distinguishing between transmit and receive paths. Each constant is
+ * associated with a unique hexadecimal value, allowing for easy
+ * identification and configuration of filter paths in the AD9361 driver.
+ *
+ * @param FIR_TX1 Represents the first transmit filter destination with a value
+ * of 0x01.
+ * @param FIR_TX2 Represents the second transmit filter destination with a value
+ * of 0x02.
+ * @param FIR_TX1_TX2 Represents both transmit filter destinations with a value
+ * of 0x03.
+ * @param FIR_RX1 Represents the first receive filter destination with a value
+ * of 0x81.
+ * @param FIR_RX2 Represents the second receive filter destination with a value
+ * of 0x82.
+ * @param FIR_RX1_RX2 Represents both receive filter destinations with a value
+ * of 0x83.
+ * @param FIR_IS_RX Indicates a receive filter with a base value of 0x80.
+ ******************************************************************************/
 enum fir_dest {
 	FIR_TX1 = 0x01,
 	FIR_TX2 = 0x02,
@@ -2893,11 +2958,37 @@ enum fir_dest {
 	FIR_IS_RX = 0x80,
 };
 
+/***************************************************************************//**
+ * @brief The `rf_gain_ctrl` structure is used to define the gain control
+ * settings for a radio frequency (RF) system. It includes an antenna
+ * configuration and a mode for gain control, which can be used to adjust
+ * the gain settings dynamically based on the operational requirements of
+ * the RF system. This structure is part of the AD9361 driver, which is
+ * used for configuring and controlling the AD9361 RF transceiver.
+ *
+ * @param ant A 32-bit unsigned integer representing the antenna configuration.
+ * @param mode An 8-bit unsigned integer representing the gain control mode.
+ ******************************************************************************/
 struct rf_gain_ctrl {
 	uint32_t ant;
 	uint8_t mode;
 };
 
+/***************************************************************************//**
+ * @brief The `rf_gain_ctrl_mode` is an enumeration that defines different modes
+ * of gain control for RF (Radio Frequency) systems. It includes manual
+ * gain control (MGC) and various automatic gain control (AGC) modes such
+ * as fast attack, slow attack, and hybrid. These modes are used to
+ * adjust the gain of the RF signal dynamically or manually, depending on
+ * the selected mode, to optimize signal quality and strength.
+ *
+ * @param RF_GAIN_MGC Represents manual gain control mode.
+ * @param RF_GAIN_FASTATTACK_AGC Represents fast attack automatic gain control
+ * mode.
+ * @param RF_GAIN_SLOWATTACK_AGC Represents slow attack automatic gain control
+ * mode.
+ * @param RF_GAIN_HYBRID_AGC Represents hybrid automatic gain control mode.
+ ******************************************************************************/
 enum rf_gain_ctrl_mode {
 	RF_GAIN_MGC,
 	RF_GAIN_FASTATTACK_AGC,
@@ -2905,6 +2996,19 @@ enum rf_gain_ctrl_mode {
 	RF_GAIN_HYBRID_AGC
 };
 
+/***************************************************************************//**
+ * @brief The `f_agc_target_gain_index_type` is an enumeration that defines
+ * different target gain index types for an automatic gain control (AGC)
+ * system. It includes options for setting the gain to its maximum, a
+ * specific value, an optimized value, or leaving it unchanged. This
+ * enumeration is used to control the behavior of the AGC in response to
+ * varying signal conditions.
+ *
+ * @param MAX_GAIN Represents the maximum gain setting.
+ * @param SET_GAIN Represents a specific gain setting.
+ * @param OPTIMIZED_GAIN Represents an optimized gain setting.
+ * @param NO_GAIN_CHANGE Indicates no change in gain setting.
+ ******************************************************************************/
 enum f_agc_target_gain_index_type {
 	MAX_GAIN,
 	SET_GAIN,
@@ -2912,6 +3016,139 @@ enum f_agc_target_gain_index_type {
 	NO_GAIN_CHANGE,
 };
 
+/***************************************************************************//**
+ * @brief The `gain_control` structure is a comprehensive configuration for
+ * managing the gain control settings of a radio frequency (RF) system,
+ * specifically for the AD9361 device. It includes settings for both
+ * manual gain control (MGC) and automatic gain control (AGC), with
+ * parameters for handling overload conditions, gain steps, and
+ * thresholds for both ADC and LMT components. The structure also
+ * supports fast AGC configurations, allowing for rapid adjustments in
+ * response to signal conditions. Each field is carefully defined to
+ * ensure precise control over the gain behavior, accommodating various
+ * operational modes and conditions.
+ *
+ * @param rx1_mode Specifies the gain control mode for the first receiver.
+ * @param rx2_mode Specifies the gain control mode for the second receiver.
+ * @param adc_ovr_sample_size Defines the number of ADC samples to sum for
+ * overload detection.
+ * @param adc_small_overload_thresh Threshold for small ADC overload detection.
+ * @param adc_large_overload_thresh Threshold for large ADC overload detection.
+ * @param lmt_overload_high_thresh High threshold for LMT overload detection in
+ * mV.
+ * @param lmt_overload_low_thresh Low threshold for LMT overload detection in
+ * mV.
+ * @param dec_pow_measuremnt_duration Duration for power measurement in samples.
+ * @param low_power_thresh Threshold for low power detection in dBFS.
+ * @param use_rx_fir_out_for_dec_pwr_meas Flag to use RX FIR output for power
+ * measurement.
+ * @param dig_gain_en Enables digital gain, should be off for ADI GT.
+ * @param max_dig_gain Maximum digital gain value.
+ * @param mgc_rx1_ctrl_inp_en Enables pin control for RX1 in MGC mode.
+ * @param mgc_rx2_ctrl_inp_en Enables pin control for RX2 in MGC mode.
+ * @param mgc_inc_gain_step Step size for increasing gain in MGC mode.
+ * @param mgc_dec_gain_step Step size for decreasing gain in MGC mode.
+ * @param mgc_split_table_ctrl_inp_gain_mode Mode for controlling gain in split
+ * table MGC.
+ * @param agc_attack_delay_extra_margin_us Extra margin for AGC attack delay in
+ * microseconds.
+ * @param agc_outer_thresh_high High threshold for outer AGC loop.
+ * @param agc_outer_thresh_high_dec_steps Steps to decrease gain when outer high
+ * threshold is exceeded.
+ * @param agc_inner_thresh_high High threshold for inner AGC loop.
+ * @param agc_inner_thresh_high_dec_steps Steps to decrease gain when inner high
+ * threshold is exceeded.
+ * @param agc_inner_thresh_low Low threshold for inner AGC loop.
+ * @param agc_inner_thresh_low_inc_steps Steps to increase gain when inner low
+ * threshold is exceeded.
+ * @param agc_outer_thresh_low Low threshold for outer AGC loop.
+ * @param agc_outer_thresh_low_inc_steps Steps to increase gain when outer low
+ * threshold is exceeded.
+ * @param adc_small_overload_exceed_counter Counter for small ADC overload
+ * exceedances.
+ * @param adc_large_overload_exceed_counter Counter for large ADC overload
+ * exceedances.
+ * @param adc_large_overload_inc_steps Steps to increase gain when large ADC
+ * overload is detected.
+ * @param adc_lmt_small_overload_prevent_gain_inc Prevents gain increase if
+ * small overload is detected.
+ * @param lmt_overload_large_exceed_counter Counter for large LMT overload
+ * exceedances.
+ * @param lmt_overload_small_exceed_counter Counter for small LMT overload
+ * exceedances.
+ * @param lmt_overload_large_inc_steps Steps to increase gain when large LMT
+ * overload is detected.
+ * @param dig_saturation_exceed_counter Counter for digital saturation
+ * exceedances.
+ * @param dig_gain_step_size Step size for digital gain adjustment.
+ * @param sync_for_gain_counter_en Enables synchronization for gain counter.
+ * @param gain_update_interval_us Interval for gain updates in microseconds.
+ * @param immed_gain_change_if_large_adc_overload Immediate gain change if large
+ * ADC overload is detected.
+ * @param immed_gain_change_if_large_lmt_overload Immediate gain change if large
+ * LMT overload is detected.
+ * @param f_agc_dec_pow_measuremnt_duration Duration for fast AGC power
+ * measurement in samples.
+ * @param f_agc_state_wait_time_ns Wait time for fast AGC state in nanoseconds.
+ * @param f_agc_allow_agc_gain_increase Allows AGC gain increase in fast AGC
+ * mode.
+ * @param f_agc_lp_thresh_increment_time Time increment for low power threshold
+ * in fast AGC.
+ * @param f_agc_lp_thresh_increment_steps Step increment for low power threshold
+ * in fast AGC.
+ * @param f_agc_lock_level Lock level for fast AGC, not used.
+ * @param f_agc_lock_level_lmt_gain_increase_en Enables LMT gain increase at
+ * lock level in fast AGC.
+ * @param f_agc_lock_level_gain_increase_upper_limit Upper limit for gain
+ * increase at lock level in
+ * fast AGC.
+ * @param f_agc_lpf_final_settling_steps Final settling steps for LPF in fast
+ * AGC.
+ * @param f_agc_lmt_final_settling_steps Final settling steps for LMT in fast
+ * AGC.
+ * @param f_agc_final_overrange_count Final overrange count for fast AGC.
+ * @param f_agc_gain_increase_after_gain_lock_en Enables gain increase after
+ * gain lock in fast AGC.
+ * @param f_agc_gain_index_type_after_exit_rx_mode Gain index type after exiting
+ * RX mode in fast AGC.
+ * @param f_agc_use_last_lock_level_for_set_gain_en Uses last lock level for
+ * setting gain in fast AGC.
+ * @param f_agc_optimized_gain_offset Optimized gain offset in fast AGC.
+ * @param f_agc_rst_gla_stronger_sig_thresh_exceeded_en Enables reset if
+ * stronger signal
+ * threshold is exceeded in
+ * fast AGC.
+ * @param f_agc_rst_gla_stronger_sig_thresh_above_ll Threshold above lock level
+ * for stronger signal in fast
+ * AGC.
+ * @param f_agc_rst_gla_engergy_lost_sig_thresh_exceeded_en Enables reset if
+ * energy lost
+ * threshold is
+ * exceeded in fast
+ * AGC.
+ * @param f_agc_rst_gla_engergy_lost_goto_optim_gain_en Enables optimized gain
+ * if energy lost in fast
+ * AGC.
+ * @param f_agc_rst_gla_engergy_lost_sig_thresh_below_ll Threshold below lock
+ * level for energy lost
+ * in fast AGC.
+ * @param f_agc_energy_lost_stronger_sig_gain_lock_exit_cnt Exit count for gain
+ * lock if energy lost
+ * or stronger signal
+ * in fast AGC.
+ * @param f_agc_rst_gla_large_adc_overload_en Enables reset for large ADC
+ * overload in fast AGC.
+ * @param f_agc_rst_gla_large_lmt_overload_en Enables reset for large LMT
+ * overload in fast AGC.
+ * @param f_agc_rst_gla_en_agc_pulled_high_en Enables AGC pulled high reset in
+ * fast AGC.
+ * @param f_agc_rst_gla_if_en_agc_pulled_high_mode Mode for AGC pulled high
+ * reset in fast AGC.
+ * @param f_agc_power_measurement_duration_in_state5 Power measurement duration
+ * in state 5 for fast AGC.
+ * @param f_agc_large_overload_inc_steps Steps to increase gain for large
+ * overload in fast AGC.
+ ******************************************************************************/
 struct gain_control {
 	enum rf_gain_ctrl_mode rx1_mode;
 	enum rf_gain_ctrl_mode rx2_mode;
@@ -3011,6 +3248,28 @@ struct gain_control {
 	uint8_t f_agc_large_overload_inc_steps; /* 0x106 [D6:D4] 0..7 */
 };
 
+/***************************************************************************//**
+ * @brief The `auxdac_control` structure is used to manage the configuration and
+ * operation of auxiliary DACs in a system. It includes default values
+ * for two DACs, flags to enable manual mode, and specific modes (RX, TX,
+ * and alert) for each DAC. Additionally, it provides delay settings for
+ * each DAC in RX and TX modes, allowing for precise timing control in
+ * various operational states.
+ *
+ * @param dac1_default_value Default value for DAC1.
+ * @param dac2_default_value Default value for DAC2.
+ * @param auxdac_manual_mode_en Enables manual mode for auxiliary DAC.
+ * @param dac1_in_rx_en Enables DAC1 during RX mode.
+ * @param dac1_in_tx_en Enables DAC1 during TX mode.
+ * @param dac1_in_alert_en Enables DAC1 during alert mode.
+ * @param dac2_in_rx_en Enables DAC2 during RX mode.
+ * @param dac2_in_tx_en Enables DAC2 during TX mode.
+ * @param dac2_in_alert_en Enables DAC2 during alert mode.
+ * @param dac1_rx_delay_us Delay for DAC1 in RX mode in microseconds.
+ * @param dac1_tx_delay_us Delay for DAC1 in TX mode in microseconds.
+ * @param dac2_rx_delay_us Delay for DAC2 in RX mode in microseconds.
+ * @param dac2_tx_delay_us Delay for DAC2 in TX mode in microseconds.
+ ******************************************************************************/
 struct auxdac_control {
 	uint16_t dac1_default_value;
 	uint16_t dac2_default_value;
@@ -3031,6 +3290,30 @@ struct auxdac_control {
 	uint8_t dac2_tx_delay_us;
 };
 
+/***************************************************************************//**
+ * @brief The `rssi_restart_mode` is an enumeration that defines various
+ * conditions under which the RSSI (Received Signal Strength Indicator)
+ * measurement process should be restarted. It includes conditions such
+ * as when the AGC (Automatic Gain Control) locks the gain in fast attack
+ * mode, when the EN_AGC pin is pulled high, when the system enters RX
+ * mode, when a gain change occurs, when an SPI write to a register is
+ * performed, or when either a gain change occurs or the EN_AGC pin is
+ * pulled high. This enumeration is used to control the behavior of the
+ * RSSI measurement process in response to these specific events.
+ *
+ * @param AGC_IN_FAST_ATTACK_MODE_LOCKS_THE_GAIN Indicates that the AGC in fast
+ * attack mode locks the gain.
+ * @param EN_AGC_PIN_IS_PULLED_HIGH Indicates that the EN_AGC pin is pulled
+ * high.
+ * @param ENTERS_RX_MODE Indicates that the system enters RX mode.
+ * @param GAIN_CHANGE_OCCURS Indicates that a gain change occurs.
+ * @param SPI_WRITE_TO_REGISTER Indicates that an SPI write to a register
+ * occurs.
+ * @param GAIN_CHANGE_OCCURS_OR_EN_AGC_PIN_PULLED_HIGH Indicates that a gain
+ * change occurs or the
+ * EN_AGC pin is pulled
+ * high.
+ ******************************************************************************/
 enum rssi_restart_mode {
 	AGC_IN_FAST_ATTACK_MODE_LOCKS_THE_GAIN,
 	EN_AGC_PIN_IS_PULLED_HIGH,
@@ -3040,6 +3323,23 @@ enum rssi_restart_mode {
 	GAIN_CHANGE_OCCURS_OR_EN_AGC_PIN_PULLED_HIGH,
 };
 
+/***************************************************************************//**
+ * @brief The `rssi_control` structure is used to configure the parameters for
+ * RSSI (Received Signal Strength Indicator) measurement in a radio
+ * frequency system. It includes settings for the mode of RSSI
+ * measurement restart, whether the unit of measurement is in RX samples
+ * or time, and timing parameters such as delay, wait, and duration for
+ * the RSSI measurement process. This structure is crucial for managing
+ * how and when RSSI measurements are taken, which is important for
+ * signal strength analysis and system performance optimization.
+ *
+ * @param restart_mode Specifies the mode in which RSSI measurement restarts.
+ * @param rssi_unit_is_rx_samples Indicates if the RSSI unit is in RX samples
+ * instead of time.
+ * @param rssi_delay Defines the delay before starting RSSI measurement.
+ * @param rssi_wait Specifies the wait time before RSSI measurement begins.
+ * @param rssi_duration Determines the duration of the RSSI measurement.
+ ******************************************************************************/
 struct rssi_control {
 	enum rssi_restart_mode restart_mode;
 	bool rssi_unit_is_rx_samples;	/* default unit is time */
@@ -3048,6 +3348,27 @@ struct rssi_control {
 	uint32_t rssi_duration;
 };
 
+/***************************************************************************//**
+ * @brief The `rx_gain_info` structure is used to define the parameters of a
+ * receive (RX) gain table in a radio frequency (RF) system. It includes
+ * fields for specifying the type of gain table, the starting and maximum
+ * gain values in decibels, the step size for gain increments, and the
+ * maximum index and step offset for navigating the gain table. This
+ * structure is essential for configuring and managing the gain settings
+ * in RF applications, ensuring optimal signal reception and processing.
+ *
+ * @param tbl_type Specifies the type of the RX gain table using the
+ * `rx_gain_table_type` enum.
+ * @param starting_gain_db Defines the starting gain in decibels for the RX gain
+ * table.
+ * @param max_gain_db Specifies the maximum gain in decibels that can be
+ * achieved.
+ * @param gain_step_db Indicates the step size in decibels for each gain
+ * increment.
+ * @param max_idx Represents the maximum index value for the gain table.
+ * @param idx_step_offset Defines the offset for index stepping in the gain
+ * table.
+ ******************************************************************************/
 struct rx_gain_info {
 	enum rx_gain_table_type tbl_type;
 	int32_t starting_gain_db;
@@ -3057,6 +3378,25 @@ struct rx_gain_info {
 	int32_t idx_step_offset;
 };
 
+/***************************************************************************//**
+ * @brief The `port_control` structure is designed to manage various
+ * configuration settings related to the parallel port and LVDS (Low
+ * Voltage Differential Signaling) interfaces in a hardware system. It
+ * includes fields for configuring the parallel port, setting delays for
+ * RX and TX clocks and data, controlling digital I/O, and managing LVDS
+ * bias and inversion settings. This structure is likely used in the
+ * context of configuring and controlling data communication interfaces
+ * in a hardware device, such as a radio transceiver.
+ *
+ * @param pp_conf An array of 3 uint8_t values for parallel port configuration.
+ * @param rx_clk_data_delay A uint8_t value representing the delay for the RX
+ * clock and data.
+ * @param tx_clk_data_delay A uint8_t value representing the delay for the TX
+ * clock and data.
+ * @param digital_io_ctrl A uint8_t value for controlling digital I/O settings.
+ * @param lvds_bias_ctrl A uint8_t value for controlling LVDS bias settings.
+ * @param lvds_invert An array of 2 uint8_t values for LVDS inversion settings.
+ ******************************************************************************/
 struct port_control {
 	uint8_t			pp_conf[3];
 	uint8_t			rx_clk_data_delay;
@@ -3066,11 +3406,44 @@ struct port_control {
 	uint8_t			lvds_invert[2];
 };
 
+/***************************************************************************//**
+ * @brief The `ctrl_outs_control` structure is a simple data structure used to
+ * manage control outputs in the AD9361 driver. It contains two fields:
+ * `index`, which specifies the index of the control output, and
+ * `en_mask`, which is used to enable or disable specific control outputs
+ * based on a mask. This structure is likely used in conjunction with
+ * other components of the driver to configure and control the behavior
+ * of the AD9361 device.
+ *
+ * @param index A uint8_t field representing the index of the control output.
+ * @param en_mask A uint8_t field representing the enable mask for the control
+ * output.
+ ******************************************************************************/
 struct ctrl_outs_control {
 	uint8_t			index;
 	uint8_t			en_mask;
 };
 
+/***************************************************************************//**
+ * @brief The `elna_control` structure is used to manage the configuration and
+ * control of external low-noise amplifiers (ELNAs) in a radio frequency
+ * system. It includes parameters for setting the gain and bypass loss in
+ * milli-decibels, as well as the settling delay in nanoseconds.
+ * Additionally, it provides boolean flags to enable or disable control
+ * for two external LNAs and to include the ELNA in all gain table
+ * indices. This structure is crucial for optimizing signal amplification
+ * and noise reduction in RF applications.
+ *
+ * @param gain_mdB Represents the gain in milli-decibels.
+ * @param bypass_loss_mdB Represents the bypass loss in milli-decibels.
+ * @param settling_delay_ns Specifies the settling delay in nanoseconds.
+ * @param elna_1_control_en Indicates if the control for external LNA 1 is
+ * enabled (GPO0).
+ * @param elna_2_control_en Indicates if the control for external LNA 2 is
+ * enabled (GPO1).
+ * @param elna_in_gaintable_all_index_en Indicates if the external LNA is
+ * included in all gain table indices.
+ ******************************************************************************/
 struct elna_control {
 	uint16_t			gain_mdB;
 	uint16_t			bypass_loss_mdB;
@@ -3080,6 +3453,28 @@ struct elna_control {
 	bool			elna_in_gaintable_all_index_en;
 };
 
+/***************************************************************************//**
+ * @brief The `auxadc_control` structure is designed to manage the configuration
+ * and operation of an auxiliary ADC (Analog-to-Digital Converter) in a
+ * system. It includes parameters for setting the offset, clock rate, and
+ * decimation factors for both the ADC and the temperature sensor.
+ * Additionally, it provides a mechanism to enable or disable periodic
+ * temperature measurements, allowing for flexible control over how and
+ * when temperature data is collected and processed.
+ *
+ * @param offset An 8-bit integer representing the offset for the auxiliary ADC.
+ * @param temp_time_inteval_ms A 32-bit unsigned integer specifying the time
+ * interval in milliseconds for temperature
+ * measurements.
+ * @param temp_sensor_decimation A 32-bit unsigned integer indicating the
+ * decimation factor for the temperature sensor.
+ * @param periodic_temp_measuremnt A boolean flag indicating if periodic
+ * temperature measurement is enabled.
+ * @param auxadc_clock_rate A 32-bit unsigned integer representing the clock
+ * rate for the auxiliary ADC.
+ * @param auxadc_decimation A 32-bit unsigned integer specifying the decimation
+ * factor for the auxiliary ADC.
+ ******************************************************************************/
 struct auxadc_control {
 	int8_t			offset;
 	uint32_t			temp_time_inteval_ms;
@@ -3089,6 +3484,53 @@ struct auxadc_control {
 	uint32_t			auxadc_decimation;
 };
 
+/***************************************************************************//**
+ * @brief The `gpo_control` structure is designed to manage the General Purpose
+ * Outputs (GPOs) in a system, providing control over their manual mode,
+ * inactive states, and operational delays. It includes a mask for
+ * enabling manual mode, flags for setting the inactive state of each GPO
+ * to high, and enabling GPOs during slave RX and TX operations.
+ * Additionally, it allows for specifying delays in microseconds for both
+ * RX and TX operations for each GPO, facilitating precise timing control
+ * in applications that require synchronization with external events or
+ * devices.
+ *
+ * @param gpo_manual_mode_enable_mask A 32-bit mask to enable manual mode for
+ * GPOs.
+ * @param gpo_manual_mode_en A boolean flag to enable manual mode for GPOs.
+ * @param gpo0_inactive_state_high_en A boolean flag to set GPO0 inactive state
+ * to high.
+ * @param gpo1_inactive_state_high_en A boolean flag to set GPO1 inactive state
+ * to high.
+ * @param gpo2_inactive_state_high_en A boolean flag to set GPO2 inactive state
+ * to high.
+ * @param gpo3_inactive_state_high_en A boolean flag to set GPO3 inactive state
+ * to high.
+ * @param gpo0_slave_rx_en A boolean flag to enable GPO0 during slave RX.
+ * @param gpo0_slave_tx_en A boolean flag to enable GPO0 during slave TX.
+ * @param gpo1_slave_rx_en A boolean flag to enable GPO1 during slave RX.
+ * @param gpo1_slave_tx_en A boolean flag to enable GPO1 during slave TX.
+ * @param gpo2_slave_rx_en A boolean flag to enable GPO2 during slave RX.
+ * @param gpo2_slave_tx_en A boolean flag to enable GPO2 during slave TX.
+ * @param gpo3_slave_rx_en A boolean flag to enable GPO3 during slave RX.
+ * @param gpo3_slave_tx_en A boolean flag to enable GPO3 during slave TX.
+ * @param gpo0_rx_delay_us An 8-bit value representing the RX delay for GPO0 in
+ * microseconds.
+ * @param gpo0_tx_delay_us An 8-bit value representing the TX delay for GPO0 in
+ * microseconds.
+ * @param gpo1_rx_delay_us An 8-bit value representing the RX delay for GPO1 in
+ * microseconds.
+ * @param gpo1_tx_delay_us An 8-bit value representing the TX delay for GPO1 in
+ * microseconds.
+ * @param gpo2_rx_delay_us An 8-bit value representing the RX delay for GPO2 in
+ * microseconds.
+ * @param gpo2_tx_delay_us An 8-bit value representing the TX delay for GPO2 in
+ * microseconds.
+ * @param gpo3_rx_delay_us An 8-bit value representing the RX delay for GPO3 in
+ * microseconds.
+ * @param gpo3_tx_delay_us An 8-bit value representing the TX delay for GPO3 in
+ * microseconds.
+ ******************************************************************************/
 struct gpo_control {
 	uint32_t gpo_manual_mode_enable_mask;
 	bool gpo_manual_mode_en;
@@ -3114,6 +3556,34 @@ struct gpo_control {
 	uint8_t gpo3_tx_delay_us;
 };
 
+/***************************************************************************//**
+ * @brief The `tx_monitor_control` structure is used to configure and control
+ * the transmit monitoring features of a system. It includes settings for
+ * enabling tracking and one-shot modes, as well as parameters for gain
+ * thresholds, gain values, and monitoring delays and durations.
+ * Additionally, it provides configuration for front-end gain and local
+ * oscillator common mode for two transmit monitors, allowing for
+ * detailed control over the monitoring process.
+ *
+ * @param tx_mon_track_en Indicates if the transmit monitor tracking is enabled.
+ * @param one_shot_mode_en Indicates if the one-shot mode is enabled for the
+ * transmit monitor.
+ * @param low_high_gain_threshold_mdB Specifies the threshold in milli-decibels
+ * for switching between low and high gain.
+ * @param low_gain_dB Defines the low gain value in decibels.
+ * @param high_gain_dB Defines the high gain value in decibels.
+ * @param tx_mon_delay Specifies the delay in the transmit monitor operation.
+ * @param tx_mon_duration Specifies the duration for which the transmit monitor
+ * is active.
+ * @param tx1_mon_front_end_gain Defines the front-end gain for the first
+ * transmit monitor.
+ * @param tx2_mon_front_end_gain Defines the front-end gain for the second
+ * transmit monitor.
+ * @param tx1_mon_lo_cm Specifies the local oscillator common mode for the first
+ * transmit monitor.
+ * @param tx2_mon_lo_cm Specifies the local oscillator common mode for the
+ * second transmit monitor.
+ ******************************************************************************/
 struct tx_monitor_control {
 	bool tx_mon_track_en;
 	bool one_shot_mode_en;
@@ -3128,6 +3598,23 @@ struct tx_monitor_control {
 	uint8_t tx2_mon_lo_cm;
 };
 
+/***************************************************************************//**
+ * @brief The `ad9361_pdata_rx_freq` enumeration defines a set of constants
+ * representing various frequency parameters related to the receiver path
+ * in the AD9361 RF transceiver. Each enumerator corresponds to a
+ * specific frequency component within the receiver's signal processing
+ * chain, such as the baseband PLL, ADC, and different stages of the
+ * receiver. This enumeration is used to identify and manage the
+ * different clock frequencies involved in the receiver's operation.
+ *
+ * @param BBPLL_FREQ Represents the baseband phase-locked loop frequency.
+ * @param ADC_FREQ Represents the analog-to-digital converter frequency.
+ * @param R2_FREQ Represents the frequency of the second receiver stage.
+ * @param R1_FREQ Represents the frequency of the first receiver stage.
+ * @param CLKRF_FREQ Represents the clock frequency for the receiver.
+ * @param RX_SAMPL_FREQ Represents the receiver sampling frequency.
+ * @param NUM_RX_CLOCKS Represents the total number of receiver clocks.
+ ******************************************************************************/
 enum ad9361_pdata_rx_freq {
 	BBPLL_FREQ,
 	ADC_FREQ,
@@ -3138,6 +3625,23 @@ enum ad9361_pdata_rx_freq {
 	NUM_RX_CLOCKS,
 };
 
+/***************************************************************************//**
+ * @brief The `ad9361_pdata_tx_freq` is an enumeration that defines various
+ * frequency states related to the transmission path in the AD9361
+ * device. Each enumerator represents a specific frequency or clock type
+ * used in the transmission process, such as DAC frequency, T1 and T2
+ * clock frequencies, and the transmission sampling frequency. This
+ * enumeration is used to manage and reference different transmission
+ * clock frequencies within the AD9361 driver.
+ *
+ * @param IGNORE Represents a state where the frequency is ignored.
+ * @param DAC_FREQ Represents the frequency of the Digital-to-Analog Converter.
+ * @param T2_FREQ Represents the frequency of the T2 clock.
+ * @param T1_FREQ Represents the frequency of the T1 clock.
+ * @param CLKTF_FREQ Represents the frequency of the CLKTF clock.
+ * @param TX_SAMPL_FREQ Represents the frequency of the transmission sampling.
+ * @param NUM_TX_CLOCKS Represents the total number of transmission clocks.
+ ******************************************************************************/
 enum ad9361_pdata_tx_freq {
 	IGNORE,
 	DAC_FREQ,
@@ -3148,6 +3652,24 @@ enum ad9361_pdata_tx_freq {
 	NUM_TX_CLOCKS,
 };
 
+/***************************************************************************//**
+ * @brief The `ad9361_clkout` enumeration defines various clock output
+ * configurations for the AD9361 device. It includes options to disable
+ * the clock output, use a buffered crystal oscillator or DCXO, and
+ * several divisions of the ADC clock. This allows for flexible clock
+ * management in the AD9361 system, enabling different clock rates to be
+ * selected based on the application requirements.
+ *
+ * @param CLKOUT_DISABLE Represents the state where the clock output is
+ * disabled.
+ * @param BUFFERED_XTALN_DCXO Represents the buffered crystal oscillator or DCXO
+ * output.
+ * @param ADC_CLK_DIV_2 Represents the ADC clock divided by 2.
+ * @param ADC_CLK_DIV_3 Represents the ADC clock divided by 3.
+ * @param ADC_CLK_DIV_4 Represents the ADC clock divided by 4.
+ * @param ADC_CLK_DIV_8 Represents the ADC clock divided by 8.
+ * @param ADC_CLK_DIV_16 Represents the ADC clock divided by 16.
+ ******************************************************************************/
 enum ad9361_clkout {
 	CLKOUT_DISABLE,
 	BUFFERED_XTALN_DCXO,
@@ -3158,6 +3680,72 @@ enum ad9361_clkout {
 	ADC_CLK_DIV_16,
 };
 
+/***************************************************************************//**
+ * @brief The `ad9361_phy_platform_data` structure is a comprehensive
+ * configuration data structure for the AD9361 RF transceiver. It
+ * includes various boolean flags and parameters to control the
+ * operational modes such as FDD, TDD, and the use of external components
+ * like clocks and LOs. The structure also contains settings for gain
+ * control, RSSI, and various other control interfaces, making it
+ * essential for initializing and configuring the AD9361 device for
+ * specific application requirements. It supports both RX and TX path
+ * configurations, including clock settings and bandwidth specifications,
+ * and provides options for advanced features like fastlock and phase
+ * inversion.
+ *
+ * @param rx2tx2 Indicates if the device operates in 2x2 mode.
+ * @param fdd Specifies if the device is in Frequency Division Duplex mode.
+ * @param fdd_independent_mode Enables independent mode for FDD operation.
+ * @param split_gt Indicates if split gain table is used.
+ * @param use_extclk Specifies if an external clock is used.
+ * @param ensm_pin_pulse_mode Enables pulse mode for ENSM pin control.
+ * @param ensm_pin_ctrl Enables pin control for ENSM.
+ * @param debug_mode Enables debug mode for additional logging.
+ * @param tdd_use_dual_synth Indicates if dual synthesizers are used in TDD
+ * mode.
+ * @param tdd_skip_vco_cal Skips VCO calibration in TDD mode.
+ * @param use_ext_rx_lo Specifies if an external LO is used for RX.
+ * @param use_ext_tx_lo Specifies if an external LO is used for TX.
+ * @param rx1rx2_phase_inversion_en Enables phase inversion between RX1 and RX2.
+ * @param qec_tracking_slow_mode_en Enables slow mode for QEC tracking.
+ * @param dc_offset_update_events Number of events for DC offset update.
+ * @param dc_offset_attenuation_high High attenuation level for DC offset.
+ * @param dc_offset_attenuation_low Low attenuation level for DC offset.
+ * @param rf_dc_offset_count_high High count for RF DC offset.
+ * @param rf_dc_offset_count_low Low count for RF DC offset.
+ * @param dig_interface_tune_skipmode Skip mode for digital interface tuning.
+ * @param dig_interface_tune_fir_disable Disables FIR during digital interface
+ * tuning.
+ * @param lo_powerdown_managed_en Enables managed power down for LO.
+ * @param dcxo_coarse Coarse tuning value for DCXO.
+ * @param dcxo_fine Fine tuning value for DCXO.
+ * @param rf_rx_input_sel Selection for RF RX input.
+ * @param rf_tx_output_sel Selection for RF TX output.
+ * @param rx1tx1_mode_use_rx_num RX number used in RX1TX1 mode.
+ * @param rx1tx1_mode_use_tx_num TX number used in RX1TX1 mode.
+ * @param rx_path_clks Clock frequencies for RX path.
+ * @param tx_path_clks Clock frequencies for TX path.
+ * @param trx_synth_max_fref Maximum reference frequency for TRX synthesizer.
+ * @param rx_synth_freq Frequency for RX synthesizer.
+ * @param tx_synth_freq Frequency for TX synthesizer.
+ * @param rf_rx_bandwidth_Hz RF bandwidth for RX in Hz.
+ * @param rf_tx_bandwidth_Hz RF bandwidth for TX in Hz.
+ * @param tx_atten Attenuation level for TX.
+ * @param update_tx_gain_via_alert Updates TX gain via alert.
+ * @param rx_fastlock_delay_ns Delay for RX fastlock in nanoseconds.
+ * @param tx_fastlock_delay_ns Delay for TX fastlock in nanoseconds.
+ * @param trx_fastlock_pinctrl_en Enables pin control for TRX fastlock.
+ * @param ad9361_clkout_mode Clock output mode for AD9361.
+ * @param gain_ctrl Gain control settings.
+ * @param rssi_ctrl RSSI control settings.
+ * @param port_ctrl Port control settings.
+ * @param ctrl_outs_ctrl Control outputs settings.
+ * @param elna_ctrl External LNA control settings.
+ * @param auxadc_ctrl Auxiliary ADC control settings.
+ * @param auxdac_ctrl Auxiliary DAC control settings.
+ * @param gpo_ctrl General Purpose Output control settings.
+ * @param txmon_ctrl TX monitor control settings.
+ ******************************************************************************/
 struct ad9361_phy_platform_data {
 	bool			rx2tx2;
 	bool			fdd;
@@ -3213,6 +3801,25 @@ struct ad9361_phy_platform_data {
 	struct tx_monitor_control txmon_ctrl;
 };
 
+/***************************************************************************//**
+ * @brief The `rf_rx_gain` structure is used to represent the gain settings for
+ * a radio frequency receiver. It includes fields for specifying the
+ * antenna number, gain values in decibels, and indices for various
+ * components such as the LNA, TIA, and mixer. This structure is
+ * particularly useful in configurations where gain settings need to be
+ * adjusted or monitored, especially in split gain table modes where
+ * individual component gains are managed separately.
+ *
+ * @param ant Antenna number to read gain.
+ * @param gain_db Gain value in dB.
+ * @param fgt_lmt_index Full Gain Table / LNA-MIXER-TIA gain index.
+ * @param lmt_gain LNA-MIXER-TIA gain in dB (Split GT mode only).
+ * @param lpf_gain Low pass filter gain in dB / index (Split GT mode only).
+ * @param digital_gain Digital gain in dB / index.
+ * @param lna_index LNA Index (Split GT mode only).
+ * @param tia_index TIA Index (Split GT mode only).
+ * @param mixer_index MIXER Index (Split GT mode only).
+ ******************************************************************************/
 struct rf_rx_gain {
 	uint32_t ant;		/* Antenna number to read gain */
 	int32_t gain_db;		/* gain value in dB */
@@ -3226,6 +3833,21 @@ struct rf_rx_gain {
 	uint32_t mixer_index;		/* MIXER Index (Split GT mode only) */
 
 };
+/***************************************************************************//**
+ * @brief The `rf_rssi` structure is used to represent the Received Signal
+ * Strength Indicator (RSSI) for a specific antenna. It includes fields
+ * for the antenna number, runtime and initial RSSI values, a multiplier
+ * for converting the reported RSSI, and the duration over which the RSSI
+ * measurement is considered. This structure is essential for managing
+ * and interpreting RSSI data in radio frequency applications, providing
+ * a comprehensive view of signal strength over time.
+ *
+ * @param ant Antenna number for which RSSI is reported.
+ * @param symbol Runtime RSSI value.
+ * @param preamble Initial RSSI value.
+ * @param multiplier Multiplier to convert reported RSSI.
+ * @param duration Duration to be considered for measuring RSSI.
+ ******************************************************************************/
 struct rf_rssi {
 	uint32_t ant;		/* Antenna number for which RSSI is reported */
 	uint32_t symbol;		/* Runtime RSSI */
@@ -3234,6 +3856,31 @@ struct rf_rssi {
 	uint8_t duration;		/* Duration to be considered for measuring */
 };
 
+/***************************************************************************//**
+ * @brief The `SynthLUT` structure is used to define the parameters for a
+ * synthesizer's lookup table, specifically for configuring the Voltage
+ * Controlled Oscillator (VCO) and the loop filter components. It
+ * includes settings for the VCO frequency, output level, varactor, bias,
+ * and calibration, as well as the charge pump current and loop filter
+ * components. This structure is essential for fine-tuning the
+ * synthesizer's performance in RF applications.
+ *
+ * @param VCO_MHz Represents the frequency of the Voltage Controlled Oscillator
+ * in MHz.
+ * @param VCO_Output_Level Indicates the output level of the VCO.
+ * @param VCO_Varactor Specifies the varactor setting for the VCO.
+ * @param VCO_Bias_Ref Defines the reference bias for the VCO.
+ * @param VCO_Bias_Tcf Specifies the temperature coefficient for the VCO bias.
+ * @param VCO_Cal_Offset Represents the calibration offset for the VCO.
+ * @param VCO_Varactor_Reference Indicates the reference setting for the VCO
+ * varactor.
+ * @param Charge_Pump_Current Specifies the current setting for the charge pump.
+ * @param LF_C2 Represents the C2 component of the loop filter.
+ * @param LF_C1 Represents the C1 component of the loop filter.
+ * @param LF_R1 Represents the R1 component of the loop filter.
+ * @param LF_C3 Represents the C3 component of the loop filter.
+ * @param LF_R3 Represents the R3 component of the loop filter.
+ ******************************************************************************/
 struct SynthLUT {
 	uint16_t VCO_MHz;
 	uint8_t VCO_Output_Level;
@@ -3257,6 +3904,39 @@ enum {
 	LUT_FTDD_ENT,
 };
 
+/***************************************************************************//**
+ * @brief The `ad9361_clocks` enumeration defines a set of constants
+ * representing various clock sources used in the AD9361 RF transceiver.
+ * These clocks are essential for the operation of different components
+ * within the device, such as the baseband, RF, and digital sections.
+ * Each enumerator corresponds to a specific clock type, providing a
+ * clear and organized way to reference these clocks in the code.
+ *
+ * @param BB_REFCLK Represents the baseband reference clock.
+ * @param RX_REFCLK Represents the receive reference clock.
+ * @param TX_REFCLK Represents the transmit reference clock.
+ * @param BBPLL_CLK Represents the baseband phase-locked loop clock.
+ * @param ADC_CLK Represents the analog-to-digital converter clock.
+ * @param R2_CLK Represents the R2 clock.
+ * @param R1_CLK Represents the R1 clock.
+ * @param CLKRF_CLK Represents the clock RF clock.
+ * @param RX_SAMPL_CLK Represents the receive sample clock.
+ * @param DAC_CLK Represents the digital-to-analog converter clock.
+ * @param T2_CLK Represents the T2 clock.
+ * @param T1_CLK Represents the T1 clock.
+ * @param CLKTF_CLK Represents the clock TF clock.
+ * @param TX_SAMPL_CLK Represents the transmit sample clock.
+ * @param RX_RFPLL_INT Represents the receive RF phase-locked loop internal
+ * clock.
+ * @param TX_RFPLL_INT Represents the transmit RF phase-locked loop internal
+ * clock.
+ * @param RX_RFPLL_DUMMY Represents a dummy receive RF phase-locked loop clock.
+ * @param TX_RFPLL_DUMMY Represents a dummy transmit RF phase-locked loop clock.
+ * @param RX_RFPLL Represents the receive RF phase-locked loop clock.
+ * @param TX_RFPLL Represents the transmit RF phase-locked loop clock.
+ * @param NUM_AD9361_CLKS Represents the total number of AD9361 clocks.
+ * @param EXT_REF_CLK Represents the external reference clock.
+ ******************************************************************************/
 enum ad9361_clocks {
 	BB_REFCLK,
 	RX_REFCLK,
@@ -3282,6 +3962,26 @@ enum ad9361_clocks {
 	EXT_REF_CLK,
 };
 
+/***************************************************************************//**
+ * @brief The `ad9361_debugfs_entry` structure is used to define an entry in the
+ * debug filesystem for the AD9361 device. It contains pointers and
+ * values that represent various properties and commands related to the
+ * device's debugging capabilities. This structure allows for the storage
+ * and retrieval of debug information, facilitating the monitoring and
+ * control of the AD9361's operational parameters.
+ *
+ * @param phy A pointer to an `ad9361_rf_phy` structure, representing the
+ * physical layer of the AD9361 device.
+ * @param propname A constant character pointer representing the property name
+ * associated with the debug entry.
+ * @param out_value A void pointer to store the output value of the debug entry.
+ * @param val A 32-bit unsigned integer representing a value associated with the
+ * debug entry.
+ * @param size An 8-bit unsigned integer indicating the size of the data
+ * associated with the debug entry.
+ * @param cmd An 8-bit unsigned integer representing a command or operation code
+ * for the debug entry.
+ ******************************************************************************/
 struct ad9361_debugfs_entry {
 	struct ad9361_rf_phy *phy;
 	const char *propname;
@@ -3291,6 +3991,22 @@ struct ad9361_debugfs_entry {
 	uint8_t cmd;
 };
 
+/***************************************************************************//**
+ * @brief The `ad9361_fastlock_entry` structure is used to manage fastlock
+ * profiles in the AD9361 driver. It contains fields for storing flags
+ * and ALC values, which are crucial for configuring and managing the
+ * fastlock feature that allows rapid frequency switching in RF
+ * applications. The structure is part of the fastlock mechanism that
+ * optimizes the time it takes to switch between different frequency
+ * profiles, enhancing the performance of the RF system.
+ *
+ * @param flags A 8-bit unsigned integer used to store flags related to the
+ * fastlock entry.
+ * @param alc_orig A 8-bit unsigned integer representing the original ALC
+ * (Automatic Level Control) value.
+ * @param alc_written A 8-bit unsigned integer representing the ALC value that
+ * has been written.
+ ******************************************************************************/
 struct ad9361_fastlock_entry {
 #define FASTLOOK_INIT	1
 	uint8_t flags;
@@ -3298,12 +4014,43 @@ struct ad9361_fastlock_entry {
 	uint8_t alc_written;
 };
 
+/***************************************************************************//**
+ * @brief The `ad9361_fastlock` structure is designed to manage fastlock
+ * profiles for the AD9361 RF transceiver. It contains a flag to indicate
+ * if the current profile should be saved, an array to store the current
+ * profile indices for two profiles, and a two-dimensional array of
+ * `ad9361_fastlock_entry` structures to hold the fastlock entries for
+ * each profile. This structure facilitates quick switching between pre-
+ * configured frequency settings, enhancing the performance of the RF
+ * transceiver in applications requiring rapid frequency changes.
+ *
+ * @param save_profile Indicates whether the current profile should be saved.
+ * @param current_profile Stores the current profile index for two profiles.
+ * @param entry Holds fastlock entries for two profiles, each with eight
+ * entries.
+ ******************************************************************************/
 struct ad9361_fastlock {
 	uint8_t save_profile;
 	uint8_t current_profile[2];
 	struct ad9361_fastlock_entry entry[2][8];
 };
 
+/***************************************************************************//**
+ * @brief The `dig_tune_flags` is an enumeration that defines a set of flags
+ * used to control digital tuning operations in the AD9361 driver. Each
+ * flag represents a specific tuning or configuration option, such as
+ * enabling verbose output, applying input or output delays, skipping
+ * result storage, or restoring default settings. These flags are used to
+ * modify the behavior of digital interface tuning processes, allowing
+ * for flexible and customizable tuning operations.
+ *
+ * @param BE_VERBOSE Enables verbose output with a value of 1.
+ * @param BE_MOREVERBOSE Enables more verbose output with a value of 2.
+ * @param DO_IDELAY Enables input delay with a value of 4.
+ * @param DO_ODELAY Enables output delay with a value of 8.
+ * @param SKIP_STORE_RESULT Skips storing the result with a value of 16.
+ * @param RESTORE_DEFAULT Restores default settings with a value of 32.
+ ******************************************************************************/
 enum dig_tune_flags {
 	BE_VERBOSE = 1,
 	BE_MOREVERBOSE = 2,
@@ -3313,24 +4060,162 @@ enum dig_tune_flags {
 	RESTORE_DEFAULT = 32,
 };
 
+/***************************************************************************//**
+ * @brief The `ad9361_bist_mode` is an enumeration that defines the different
+ * modes for the Built-In Self-Test (BIST) functionality in the AD9361
+ * driver. It includes modes for disabling BIST, injecting BIST into the
+ * transmit path, and injecting BIST into the receive path. This
+ * enumeration is used to control and configure the BIST operations
+ * within the AD9361 device, allowing for testing and verification of the
+ * device's functionality.
+ *
+ * @param BIST_DISABLE Represents the mode where Built-In Self-Test (BIST) is
+ * disabled.
+ * @param BIST_INJ_TX Represents the mode where BIST is injected into the
+ * transmit (TX) path.
+ * @param BIST_INJ_RX Represents the mode where BIST is injected into the
+ * receive (RX) path.
+ ******************************************************************************/
 enum ad9361_bist_mode {
 	BIST_DISABLE,
 	BIST_INJ_TX,
 	BIST_INJ_RX,
 };
 
+/***************************************************************************//**
+ * @brief The `synth_pd_ctrl` enumeration defines the power control states for a
+ * synthesizer's local oscillator (LO) in a radio frequency (RF) system.
+ * It provides three states: `LO_DONTCARE`, where the LO power state is
+ * irrelevant; `LO_OFF`, where the LO is explicitly turned off; and
+ * `LO_ON`, where the LO is explicitly turned on. This enumeration is
+ * typically used to manage the power state of the LO in RF systems, such
+ * as those found in the AD9361 driver, to optimize power consumption and
+ * performance.
+ *
+ * @param LO_DONTCARE Represents a state where the LO (Local Oscillator) power
+ * state is not a concern.
+ * @param LO_OFF Indicates that the LO (Local Oscillator) is powered off.
+ * @param LO_ON Indicates that the LO (Local Oscillator) is powered on.
+ ******************************************************************************/
 enum synth_pd_ctrl {
 	LO_DONTCARE,
 	LO_OFF,
 	LO_ON,
 };
 
+/***************************************************************************//**
+ * @brief The `dev_id` enumeration defines a set of constants representing
+ * different device IDs for the AD936x series of RF transceivers. Each
+ * enumerator corresponds to a specific model of the AD936x family,
+ * allowing the software to identify and differentiate between the
+ * AD9361, AD9364, and AD9363A devices. This enumeration is typically
+ * used in the context of device initialization and configuration to
+ * ensure the correct handling of device-specific features and
+ * capabilities.
+ *
+ * @param ID_AD9361 Represents the device ID for AD9361.
+ * @param ID_AD9364 Represents the device ID for AD9364.
+ * @param ID_AD9363A Represents the device ID for AD9363A.
+ ******************************************************************************/
 enum dev_id {
 	ID_AD9361,
 	ID_AD9364,
 	ID_AD9363A
 };
 
+/***************************************************************************//**
+ * @brief The `ad9361_rf_phy` structure is a comprehensive data structure used
+ * to manage and configure the AD9361 RF transceiver. It includes various
+ * members for device selection, SPI communication, GPIO control, clock
+ * management, and calibration settings. The structure also contains
+ * function pointers for recalculating and setting RF PLL rates, as well
+ * as pointers to platform-specific data and gain table information.
+ * Additionally, it holds state information for the ENSM, cached values
+ * for RF PLL dividers, and flags for various operational modes and
+ * configurations. This structure is central to the operation and control
+ * of the AD9361 device, providing a detailed framework for managing its
+ * complex functionalities.
+ *
+ * @param dev_sel Specifies the device selection for the AD9361 RF PHY.
+ * @param spi Pointer to the SPI descriptor for communication.
+ * @param gpio_desc_resetb GPIO descriptor for the reset pin.
+ * @param gpio_desc_sync GPIO descriptor for the sync pin.
+ * @param gpio_desc_cal_sw1 GPIO descriptor for calibration switch 1.
+ * @param gpio_desc_cal_sw2 GPIO descriptor for calibration switch 2.
+ * @param rx_adc Pointer to the RX ADC structure (not present if AXI ADC is not
+ * defined).
+ * @param tx_dac Pointer to the TX DAC structure (not present if AXI ADC is not
+ * defined).
+ * @param clk_refin Pointer to the reference input clock.
+ * @param clks Array of pointers to clock structures for the AD9361.
+ * @param ref_clk_scale Array of pointers to reference clock scale structures.
+ * @param ad9361_rfpll_ext_recalc_rate Function pointer to recalculate the RF
+ * PLL external rate.
+ * @param ad9361_rfpll_ext_round_rate Function pointer to round the RF PLL
+ * external rate.
+ * @param ad9361_rfpll_ext_set_rate Function pointer to set the RF PLL external
+ * rate.
+ * @param pdata Pointer to the platform data structure for AD9361 PHY.
+ * @param prev_ensm_state Previous state of the ENSM (Enable State Machine).
+ * @param curr_ensm_state Current state of the ENSM (Enable State Machine).
+ * @param cached_rx_rfpll_div Cached RX RF PLL divider value.
+ * @param cached_tx_rfpll_div Cached TX RF PLL divider value.
+ * @param cached_synth_pd Array to cache synthesizer power-down states.
+ * @param tx_quad_lpf_tia_match TX quadrature low-pass filter TIA match value.
+ * @param current_table Current gain table index.
+ * @param gt_info Pointer to the gain table information structure.
+ * @param ensm_pin_ctl_en Flag to enable ENSM pin control.
+ * @param auto_cal_en Flag to enable automatic calibration.
+ * @param manual_tx_quad_cal_en Flag to enable manual TX quadrature calibration.
+ * @param last_tx_quad_cal_freq Frequency of the last TX quadrature calibration.
+ * @param last_tx_quad_cal_phase Phase of the last TX quadrature calibration.
+ * @param current_tx_lo_freq Current TX local oscillator frequency.
+ * @param current_rx_lo_freq Current RX local oscillator frequency.
+ * @param current_tx_use_tdd_table Flag indicating if the current TX uses TDD
+ * table.
+ * @param current_rx_use_tdd_table Flag indicating if the current RX uses TDD
+ * table.
+ * @param current_rx_path_clks Array of current RX path clock frequencies.
+ * @param current_tx_path_clks Array of current TX path clock frequencies.
+ * @param flags Flags for various configuration settings.
+ * @param cal_threshold_freq Calibration threshold frequency.
+ * @param current_rx_bw_Hz Current RX bandwidth in Hertz.
+ * @param current_tx_bw_Hz Current TX bandwidth in Hertz.
+ * @param rxbbf_div RX baseband filter divider value.
+ * @param rate_governor Rate governor setting.
+ * @param bypass_rx_fir Flag to bypass RX FIR filter.
+ * @param bypass_tx_fir Flag to bypass TX FIR filter.
+ * @param rx_eq_2tx Flag indicating RX equal to 2 TX.
+ * @param filt_valid Flag indicating if the filter is valid.
+ * @param filt_rx_path_clks Array of filtered RX path clock frequencies.
+ * @param filt_tx_path_clks Array of filtered TX path clock frequencies.
+ * @param filt_rx_bw_Hz Filtered RX bandwidth in Hertz.
+ * @param filt_tx_bw_Hz Filtered TX bandwidth in Hertz.
+ * @param tx_fir_int TX FIR filter interpolation factor.
+ * @param tx_fir_ntaps Number of taps in the TX FIR filter.
+ * @param rx_fir_dec RX FIR filter decimation factor.
+ * @param rx_fir_ntaps Number of taps in the RX FIR filter.
+ * @param agc_mode Array indicating the AGC mode for each channel.
+ * @param rfdc_track_en Flag to enable RF DC tracking.
+ * @param bbdc_track_en Flag to enable baseband DC tracking.
+ * @param quad_track_en Flag to enable quadrature tracking.
+ * @param txmon_tdd_en Flag to enable TX monitor in TDD mode.
+ * @param auxdac1_value Value for auxiliary DAC 1.
+ * @param auxdac2_value Value for auxiliary DAC 2.
+ * @param tx1_atten_cached Cached attenuation value for TX1.
+ * @param tx2_atten_cached Cached attenuation value for TX2.
+ * @param fastlock Structure for fastlock profiles.
+ * @param adc_conv Pointer to the ADC converter structure.
+ * @param adc_state Pointer to the ADC state structure.
+ * @param bist_loopback_mode Mode for BIST loopback.
+ * @param bist_config Configuration for BIST.
+ * @param bist_prbs_mode Mode for BIST PRBS.
+ * @param bist_tone_mode Mode for BIST tone.
+ * @param bist_tone_freq_Hz Frequency of the BIST tone in Hertz.
+ * @param bist_tone_level_dB Level of the BIST tone in dB.
+ * @param bist_tone_mask Mask for the BIST tone.
+ * @param bbpll_initialized Flag indicating if the BBPLL is initialized.
+ ******************************************************************************/
 struct ad9361_rf_phy {
 	enum dev_id		dev_sel;
 	struct no_os_spi_desc 	*spi;
@@ -3411,6 +4296,21 @@ struct ad9361_rf_phy {
 	bool			bbpll_initialized;
 };
 
+/***************************************************************************//**
+ * @brief The `refclk_scale` structure is used to manage the scaling of
+ * reference clocks in the AD9361 RF PHY. It contains pointers to SPI and
+ * PHY structures for communication and control, as well as multiplier
+ * and divider values to adjust the clock frequency. The structure also
+ * includes enumerations to specify the source and parent source clocks,
+ * facilitating the configuration of clock hierarchies in the RF system.
+ *
+ * @param spi Pointer to a SPI descriptor for communication.
+ * @param phy Pointer to an AD9361 RF PHY structure.
+ * @param mult Multiplier for the reference clock scaling.
+ * @param div Divider for the reference clock scaling.
+ * @param source Enum indicating the source clock.
+ * @param parent_source Enum indicating the parent source clock.
+ ******************************************************************************/
 struct refclk_scale {
 	struct no_os_spi_desc	*spi;
 	struct ad9361_rf_phy	*phy;
@@ -3420,6 +4320,30 @@ struct refclk_scale {
 	enum ad9361_clocks 	parent_source;
 };
 
+/***************************************************************************//**
+ * @brief The `debugfs_cmd` enumeration defines a set of commands used within a
+ * debug file system for the AD9361 driver. These commands are used to
+ * perform various diagnostic and testing operations, such as
+ * initialization, loopback testing, and Built-In Self-Test (BIST) for
+ * different signal processing functions. Each enumerator represents a
+ * specific command that can be issued to control or test the behavior of
+ * the AD9361 device.
+ *
+ * @param DBGFS_NONE Represents no debug file system command.
+ * @param DBGFS_INIT Represents the initialization command for the debug file
+ * system.
+ * @param DBGFS_LOOPBACK Represents the loopback command for testing purposes.
+ * @param DBGFS_BIST_PRBS Represents the Built-In Self-Test (BIST) command for
+ * Pseudo-Random Binary Sequence (PRBS) testing.
+ * @param DBGFS_BIST_TONE Represents the BIST command for tone generation
+ * testing.
+ * @param DBGFS_BIST_DT_ANALYSIS Represents the BIST command for data tone
+ * analysis.
+ * @param DBGFS_RXGAIN_1 Represents a command to adjust or test the first
+ * receiver gain.
+ * @param DBGFS_RXGAIN_2 Represents a command to adjust or test the second
+ * receiver gain.
+ ******************************************************************************/
 enum debugfs_cmd {
 	DBGFS_NONE,
 	DBGFS_INIT,
@@ -3433,134 +4357,1576 @@ enum debugfs_cmd {
 
 /******************************************************************************/
 /************************ Functions Declarations ******************************/
-/******************************************************************************/
+/***************************************************************************//**
+ * @brief This function is used to read a specified number of bytes from a given
+ * register of the AD9361 device over SPI. It should be called after the
+ * SPI interface has been properly initialized. The function allocates
+ * memory for the read buffer, which must be freed by the caller after
+ * use. If the number of bytes to read exceeds the maximum allowed size,
+ * or if memory allocation fails, the function will return an error code.
+ * Additionally, if the SPI communication fails, an error will be logged,
+ * and the read buffer will not be populated.
+ *
+ * @param spi Pointer to the SPI descriptor structure. Must not be null.
+ * @param reg The register address to read from. This should be a valid register
+ * address defined in the driver.
+ * @param rbuf Pointer to the buffer where the read data will be stored. Must
+ * not be null and should be large enough to hold 'num' bytes.
+ * @param num The number of bytes to read from the register. Must be greater
+ * than 0 and less than or equal to MAX_MBYTE_SPI.
+ * @return Returns 0 on success, or a negative error code on failure.
+ ******************************************************************************/
 int32_t ad9361_spi_readm(struct no_os_spi_desc *spi, uint32_t reg,
 			 uint8_t *rbuf, uint32_t num);
+/***************************************************************************//**
+ * @brief This function is used to read a single byte from a specified register
+ * of the AD9361 device over SPI. It should be called after the SPI
+ * interface has been properly initialized. The `reg` parameter specifies
+ * the register address to read from, and the function will return the
+ * value stored in that register. If the read operation fails, a negative
+ * error code will be returned. Ensure that the `spi` descriptor is valid
+ * and properly configured before calling this function.
+ *
+ * @param spi Pointer to a `struct no_os_spi_desc` that describes the SPI
+ * interface. Must not be null and should be initialized before use.
+ * @param reg The register address to read from, which should be a valid
+ * register address defined in the driver. The value must be within
+ * the range of valid register addresses.
+ * @return Returns the value read from the specified register as an `int32_t`.
+ * If the read operation fails, a negative error code is returned.
+ ******************************************************************************/
 int32_t ad9361_spi_read(struct no_os_spi_desc *spi, uint32_t reg);
+/***************************************************************************//**
+ * @brief This function is used to read a value from a specified register of the
+ * AD9361 device. It must be called with a valid `phy` structure that has
+ * been properly initialized. The `reg` parameter specifies the register
+ * address to read from, and the `val` parameter is a pointer to a
+ * variable where the read value will be stored. If the read operation is
+ * successful, the function returns 0; otherwise, it returns a negative
+ * error code. It is important to ensure that the `phy` pointer is not
+ * null and that the `val` pointer is valid before calling this function.
+ *
+ * @param phy Pointer to a `struct ad9361_rf_phy` that represents the AD9361
+ * device. Must not be null.
+ * @param reg The address of the register to read from. This should be a valid
+ * register address defined in the driver.
+ * @param val Pointer to a `uint32_t` where the read value will be stored. Must
+ * not be null.
+ * @return Returns 0 on success, or a negative error code on failure.
+ ******************************************************************************/
 int32_t ad9361_reg_read(struct ad9361_rf_phy *phy,
 			uint32_t reg, uint32_t *val);
+/***************************************************************************//**
+ * @brief This function is used to write a value to a specific register of the
+ * AD9361 device using SPI communication. It should be called after the
+ * SPI interface has been properly initialized. The function takes care
+ * of constructing the command and sending it over SPI. If the provided
+ * `spi` descriptor is null or if the write operation fails, an error
+ * code is returned. It is important to ensure that the register address
+ * and value are within valid ranges as defined by the device
+ * specifications.
+ *
+ * @param spi Pointer to the SPI descriptor. Must not be null and should point
+ * to a valid initialized SPI interface.
+ * @param reg The register address to which the value will be written. It should
+ * be a valid register address defined in the AD9361 register map.
+ * @param val The value to write to the specified register. It should be within
+ * the valid range for the register being accessed.
+ * @return Returns 0 on success, or a negative error code if the write operation
+ * fails.
+ ******************************************************************************/
 int32_t ad9361_spi_write(struct no_os_spi_desc *spi,
 			 uint32_t reg, uint32_t val);
+/***************************************************************************//**
+ * @brief This function is used to write a 32-bit value to a specified register
+ * of the AD9361 device. It must be called after the device has been
+ * properly initialized and configured. The function expects a valid
+ * pointer to an `ad9361_rf_phy` structure, which represents the device
+ * context. If the provided pointer is null, the function will not
+ * perform any operation. The register address and value to be written
+ * must be valid, and the function will return an error code if the write
+ * operation fails.
+ *
+ * @param phy Pointer to an `ad9361_rf_phy` structure representing the device
+ * context. Must not be null.
+ * @param reg The register address to which the value will be written. This
+ * should be a valid register address defined in the driver.
+ * @param val The 32-bit value to write to the specified register. This value
+ * should be within the acceptable range for the register being
+ * accessed.
+ * @return Returns a status code indicating the success or failure of the write
+ * operation. A return value of 0 indicates success, while a negative
+ * value indicates an error.
+ ******************************************************************************/
 int32_t ad9361_reg_write(struct ad9361_rf_phy *phy,
 			 uint32_t reg, uint32_t val);
+/***************************************************************************//**
+ * @brief This function is used to reset the AD9361 RF PHY device. It should be
+ * called when the device needs to be reinitialized or when it is in an
+ * unknown state. The function checks if a GPIO reset pin is available;
+ * if so, it performs a hardware reset using that pin. If the GPIO reset
+ * pin is not available, it attempts a software reset via SPI, which may
+ * lead to unpredictable behavior. Therefore, it is recommended to ensure
+ * that a GPIO reset pin is specified for reliable operation.
+ *
+ * @param phy A pointer to a `struct ad9361_rf_phy` that represents the AD9361
+ * RF PHY device. This pointer must not be null and should point to a
+ * valid initialized structure. If the structure is not properly
+ * initialized, the function may not behave as expected.
+ * @return Returns 0 on success if the reset is performed via GPIO, or -ENODEV
+ * if the reset is attempted via SPI without a GPIO reset pin,
+ * indicating that the operation could not be completed reliably.
+ ******************************************************************************/
 int32_t ad9361_reset(struct ad9361_rf_phy *phy);
+/***************************************************************************//**
+ * @brief This function must be called after initializing the `ad9361_rf_phy`
+ * structure to properly set up the clock sources used by the AD9361 RF
+ * transceiver. It registers various reference clocks, including transmit
+ * and receive reference clocks, baseband PLL clocks, and others,
+ * ensuring that the RF PHY has the necessary clock signals for
+ * operation. The function does not return any error codes, but it is
+ * important to ensure that the `phy` pointer is valid and properly
+ * initialized before calling this function.
+ *
+ * @param phy A pointer to a valid `struct ad9361_rf_phy` instance. This pointer
+ * must not be null and should point to an initialized structure that
+ * represents the RF PHY.
+ * @return Returns 0 on success, indicating that the clocks have been
+ * successfully registered.
+ ******************************************************************************/
 int32_t ad9361_register_clocks(struct ad9361_rf_phy *phy);
+/***************************************************************************//**
+ * @brief This function should be called to release any resources associated
+ * with the clocks of the `ad9361_rf_phy` structure when they are no
+ * longer needed. It is typically invoked during cleanup or shutdown
+ * procedures. The function assumes that the clocks have been previously
+ * registered and allocated. It safely frees the memory allocated for
+ * each clock and reference clock scale, ensuring that there are no
+ * memory leaks. Calling this function with an uninitialized or null
+ * `phy` pointer may lead to undefined behavior.
+ *
+ * @param phy A pointer to an `ad9361_rf_phy` structure representing the RF PHY
+ * instance. This pointer must not be null and should point to a
+ * valid instance that has been initialized and registered with
+ * clocks.
+ * @return Returns 0 on success, indicating that the clocks were successfully
+ * unregistered. No other values are returned, and there are no side
+ * effects on the input parameters.
+ ******************************************************************************/
 int32_t ad9361_unregister_clocks(struct ad9361_rf_phy *phy);
+/***************************************************************************//**
+ * @brief This function retrieves the current gain table index used by the
+ * `ad9361_rf_phy` structure. It should be called after the
+ * initialization of the `ad9361_rf_phy` instance to ensure that the gain
+ * table is properly set. If the current gain table is not set (i.e., it
+ * is equal to `NO_GAIN_TABLE`), the function will log an error and
+ * return 0. Therefore, it is important to check the return value to
+ * confirm that a valid gain table is in use.
+ *
+ * @param phy A pointer to an `ad9361_rf_phy` structure that represents the
+ * state of the AD9361 device. This pointer must not be null and
+ * should point to a valid initialized instance. If the
+ * `current_table` field of the structure is set to `NO_GAIN_TABLE`,
+ * the function will return 0.
+ * @return Returns the current gain table index as a `uint32_t`. If the gain
+ * table is not set, it returns 0.
+ ******************************************************************************/
 uint32_t ad9361_gt(struct ad9361_rf_phy *phy);
 int32_t ad9361_init_gain_tables(struct ad9361_rf_phy *phy);
+/***************************************************************************//**
+ * @brief This function configures the AD9361 RF transceiver for operation,
+ * including setting up various parameters such as bandwidth, clock
+ * rates, and enabling necessary components. It should be called after
+ * initializing the `phy` structure and before using the transceiver for
+ * transmission or reception. The function performs several validations
+ * and configurations, and it may return error codes if any setup step
+ * fails. Ensure that the `phy` structure is properly initialized and
+ * that the reference clock is available before calling this function.
+ *
+ * @param phy A pointer to a `struct ad9361_rf_phy` that contains the
+ * configuration and state of the RF transceiver. This pointer must
+ * not be null and should point to a valid initialized structure.
+ * @return Returns 0 on success, or a negative error code if the setup fails.
+ ******************************************************************************/
 int32_t ad9361_setup(struct ad9361_rf_phy *phy);
 int32_t ad9361_post_setup(struct ad9361_rf_phy *phy);
+/***************************************************************************//**
+ * @brief This function configures the ENSM (Enable State Machine) mode of the
+ * AD9361 device. It should be called after the device has been
+ * initialized and before any data transmission or reception occurs. The
+ * `fdd` parameter determines whether to operate in Frequency Division
+ * Duplex (FDD) mode or not, while the `pinctrl` parameter specifies
+ * whether to use pin control for synthesizer enablement. If invalid
+ * values are provided, the function may return an error code, indicating
+ * the failure to set the desired mode.
+ *
+ * @param phy Pointer to the `ad9361_rf_phy` structure representing the AD9361
+ * device. Must not be null.
+ * @param fdd Boolean indicating whether to set the device to FDD mode (true) or
+ * not (false). Valid values are true or false.
+ * @param pinctrl Boolean indicating whether to enable pin control for the
+ * synthesizer (true) or not (false). Valid values are true or
+ * false.
+ * @return Returns a status code indicating success (0) or an error code if the
+ * operation fails.
+ ******************************************************************************/
 int32_t ad9361_set_ensm_mode(struct ad9361_rf_phy *phy, bool fdd, bool pinctrl);
+/***************************************************************************//**
+ * @brief This function is used to change the state of the ENSM (Enable State
+ * Machine) in the AD9361 RF PHY. It should be called after the device
+ * has been properly initialized. The function takes into account the
+ * current state and the desired new state, ensuring that transitions are
+ * valid according to the device's operational modes. If an invalid state
+ * transition is attempted, an error code will be returned. The function
+ * also allows for pin control to be enabled or disabled, which can
+ * affect the behavior of the ENSM.
+ *
+ * @param phy Pointer to the `ad9361_rf_phy` structure representing the RF PHY.
+ * Must not be null.
+ * @param ensm_state The desired ENSM state to set. Valid values are defined by
+ * the ENSM state constants. Invalid values may result in an
+ * error.
+ * @param pinctrl A boolean indicating whether to enable pin control for the
+ * ENSM. This parameter can be true or false.
+ * @return Returns 0 on success, or a negative error code on failure, indicating
+ * the reason for the failure.
+ ******************************************************************************/
 int32_t ad9361_ensm_set_state(struct ad9361_rf_phy *phy, uint8_t ensm_state,
 			      bool pinctrl);
+/***************************************************************************//**
+ * @brief This function is used to configure the receive gain for a specific RX
+ * path identified by `rx_id`. It should be called after the device has
+ * been properly initialized and is in a state where gain adjustments are
+ * permitted. The function checks if the specified RX path is valid and
+ * if the device is in Manual Gain Control (MGC) mode before applying the
+ * gain settings. If the RX path is not valid or if the device is not in
+ * MGC mode, an error code is returned. The gain settings are provided
+ * through the `rx_gain` structure, which contains the desired gain
+ * values.
+ *
+ * @param phy Pointer to the `ad9361_rf_phy` structure representing the device.
+ * Must not be null.
+ * @param rx_id Identifier for the RX path, which must be either 1 or 2. Any
+ * other value will result in an error.
+ * @param rx_gain Pointer to a `rf_rx_gain` structure containing the gain
+ * settings. Must not be null.
+ * @return Returns 0 on success, or a negative error code on failure.
+ ******************************************************************************/
 int32_t ad9361_set_rx_gain(struct ad9361_rf_phy *phy,
 			   uint32_t rx_id, struct rf_rx_gain *rx_gain);
+/***************************************************************************//**
+ * @brief This function is used to obtain the current gain settings for a
+ * specified receive channel in the AD9361 RF transceiver. It should be
+ * called after the transceiver has been properly initialized and the
+ * desired RX channel is enabled. If the specified channel is not
+ * enabled, the function will return an error. Additionally, if the gain
+ * control is in fast attack mode, the function checks if the gain state
+ * machine has locked the gain before reading the gain values. The caller
+ * must ensure that the `rx_gain` structure is properly allocated and can
+ * hold the gain values.
+ *
+ * @param phy Pointer to the `ad9361_rf_phy` structure representing the RF
+ * transceiver. Must not be null.
+ * @param rx_id Identifier for the RX channel, which must be either 1 or 2. Any
+ * other value will result in an error.
+ * @param rx_gain Pointer to a `rf_rx_gain` structure where the gain information
+ * will be stored. Must not be null.
+ * @return Returns 0 on success, or a negative error code if the operation
+ * fails, such as -EINVAL for invalid parameters or -EAGAIN if the RX
+ * channel is not enabled.
+ ******************************************************************************/
 int32_t ad9361_get_rx_gain(struct ad9361_rf_phy *phy,
 			   uint32_t rx_id, struct rf_rx_gain *rx_gain);
+/***************************************************************************//**
+ * @brief This function is used to configure the RF bandwidth for both the
+ * receive and transmit paths of the AD9361 RF transceiver. It should be
+ * called after the device has been properly initialized and is ready for
+ * configuration. The function will first disable tracking control, set
+ * the ENSM state to alert, and then update the bandwidth settings. If
+ * the manual TX quadrature calibration is not enabled, it will also
+ * perform a TX quadrature calibration. The function handles invalid
+ * bandwidth values by returning an error code, ensuring that only valid
+ * configurations are applied.
+ *
+ * @param phy A pointer to a `struct ad9361_rf_phy` that represents the RF
+ * transceiver instance. This pointer must not be null and must point
+ * to a valid initialized instance.
+ * @param rf_rx_bw The desired receive bandwidth in Hz. This value must be
+ * within the valid range supported by the device, otherwise,
+ * the function will return an error.
+ * @param rf_tx_bw The desired transmit bandwidth in Hz. Similar to the receive
+ * bandwidth, this value must also be within the valid range
+ * supported by the device, or the function will return an
+ * error.
+ * @return Returns 0 on success, or a negative error code if the operation fails
+ * due to invalid parameters or other issues.
+ ******************************************************************************/
 int32_t ad9361_update_rf_bandwidth(struct ad9361_rf_phy *phy,
 				   uint32_t rf_rx_bw, uint32_t rf_tx_bw);
+/***************************************************************************//**
+ * @brief This function is used to compute the clock frequencies for the receive
+ * and transmit paths of the AD9361 RF transceiver based on the specified
+ * transmit sample rate and rate governor. It must be called after the
+ * AD9361 has been properly initialized. The function takes into account
+ * various internal configurations, such as FIR bypass settings, and
+ * ensures that the calculated clock rates are within specified limits.
+ * If the provided parameters lead to invalid clock configurations, the
+ * function may attempt to adjust the rate governor and recalculate. The
+ * output clock frequencies are written to the provided arrays, which
+ * must be allocated by the caller.
+ *
+ * @param phy Pointer to the `ad9361_rf_phy` structure representing the RF
+ * transceiver. Must not be null.
+ * @param tx_sample_rate The desired transmit sample rate in Hz. Must be less
+ * than or equal to `MAX_BASEBAND_RATE`.
+ * @param rate_gov An integer representing the rate governor mode, which
+ * influences the calculation of clock rates. Must be within the
+ * valid range.
+ * @param rx_path_clks Pointer to an array of `uint32_t` where the calculated
+ * receive path clock frequencies will be stored. Caller
+ * retains ownership.
+ * @param tx_path_clks Pointer to an array of `uint32_t` where the calculated
+ * transmit path clock frequencies will be stored. Caller
+ * retains ownership.
+ * @return Returns 0 on success, or a negative error code if the calculation
+ * fails due to invalid parameters or configurations.
+ ******************************************************************************/
 int32_t ad9361_calculate_rf_clock_chain(struct ad9361_rf_phy *phy,
 					uint32_t tx_sample_rate,
 					uint32_t rate_gov,
 					uint32_t *rx_path_clks,
 					uint32_t *tx_path_clks);
+/***************************************************************************//**
+ * @brief This function configures the clock frequencies for both the receive
+ * and transmit paths of the transceiver. It should be called after the
+ * transceiver has been initialized and before any data transmission or
+ * reception occurs. The function expects two arrays of clock
+ * frequencies, one for the receive path and one for the transmit path.
+ * If either of the provided arrays is null, the function will return an
+ * error. The function also validates the clock frequencies before
+ * applying them, ensuring they meet the required specifications.
+ *
+ * @param phy A pointer to the `ad9361_rf_phy` structure representing the
+ * transceiver. Must not be null.
+ * @param rx_path_clks A pointer to an array of `uint32_t` values representing
+ * the clock frequencies for the receive path. Must not be
+ * null and should contain valid frequency values.
+ * @param tx_path_clks A pointer to an array of `uint32_t` values representing
+ * the clock frequencies for the transmit path. Must not be
+ * null and should contain valid frequency values.
+ * @return Returns 0 on success, or a negative error code if an error occurs,
+ * such as invalid input parameters.
+ ******************************************************************************/
 int32_t ad9361_set_trx_clock_chain(struct ad9361_rf_phy *phy,
 				   uint32_t *rx_path_clks,
 				   uint32_t *tx_path_clks);
+/***************************************************************************//**
+ * @brief This function is used to obtain the clock frequencies for both the
+ * receive (RX) and transmit (TX) paths of the AD9361 RF transceiver. It
+ * should be called after the transceiver has been properly initialized.
+ * If both `rx_path_clks` and `tx_path_clks` are null, the function will
+ * return an error. The function populates the provided arrays with the
+ * clock frequencies corresponding to various components, including the
+ * baseband PLL and the ADC/DAC clocks. It is important to ensure that
+ * the provided pointers are valid and that the arrays have sufficient
+ * size to hold the expected values.
+ *
+ * @param phy Pointer to the `ad9361_rf_phy` structure representing the RF
+ * transceiver. Must not be null.
+ * @param rx_path_clks Pointer to an array where RX path clock frequencies will
+ * be stored. Can be null if RX frequencies are not needed.
+ * @param tx_path_clks Pointer to an array where TX path clock frequencies will
+ * be stored. Can be null if TX frequencies are not needed.
+ * @return Returns 0 on success, or a negative error code if an error occurs.
+ ******************************************************************************/
 int32_t ad9361_get_trx_clock_chain(struct ad9361_rf_phy *phy,
 				   uint32_t *rx_path_clks,
 				   uint32_t *tx_path_clks);
+/***************************************************************************//**
+ * @brief This function is used to convert a frequency value in hertz to a
+ * corresponding clock value. It is particularly useful in scenarios
+ * where the frequency needs to be adjusted for clock generation or
+ * configuration. The input frequency must be a valid 64-bit unsigned
+ * integer, and the function will return a 32-bit unsigned integer
+ * representing the clock value. The conversion is performed by right-
+ * shifting the frequency by one bit, effectively halving the input
+ * value. It is important to ensure that the input frequency is within a
+ * reasonable range to avoid unexpected results.
+ *
+ * @param freq A 64-bit unsigned integer representing the frequency in hertz.
+ * Must be a non-negative value. The function does not handle
+ * negative values or values that exceed the maximum representable
+ * frequency for the clock.
+ * @return Returns a 32-bit unsigned integer that represents the clock value
+ * derived from the input frequency.
+ ******************************************************************************/
 uint32_t ad9361_to_clk(uint64_t freq);
+/***************************************************************************//**
+ * @brief This function is used to convert a clock frequency specified in
+ * megahertz (MHz) from a 32-bit unsigned integer to a 64-bit unsigned
+ * integer representation. It is particularly useful when dealing with
+ * frequency values that need to be manipulated or stored in a larger
+ * format. The input frequency must be a valid 32-bit unsigned integer,
+ * and the function will shift the input value left by one bit,
+ * effectively multiplying it by two. This function should be called when
+ * a conversion from a lower precision frequency representation to a
+ * higher precision is required.
+ *
+ * @param freq A 32-bit unsigned integer representing the clock frequency in
+ * MHz. Must be a valid frequency value. The function does not
+ * handle negative values or values exceeding the maximum for a
+ * 32-bit unsigned integer.
+ * @return Returns a 64-bit unsigned integer that represents the input frequency
+ * multiplied by two.
+ ******************************************************************************/
 uint64_t ad9361_from_clk(uint32_t freq);
+/***************************************************************************//**
+ * @brief This function retrieves the Received Signal Strength Indicator (RSSI)
+ * values for a specified antenna from the AD9361 device. It should be
+ * called after the device has been properly initialized and configured.
+ * The `rssi` structure must be allocated and initialized by the caller,
+ * and the `ant` field should be set to either 1 or 2 to specify which
+ * antenna's RSSI to read. If an invalid antenna number is provided, the
+ * function will return an error code. The function populates the
+ * `symbol` and `preamble` fields of the `rssi` structure with the
+ * calculated RSSI values, and sets the `multiplier` field to a
+ * predefined constant.
+ *
+ * @param phy Pointer to a `struct ad9361_rf_phy` that represents the AD9361
+ * device. Must not be null.
+ * @param rssi Pointer to a `struct rf_rssi` where the RSSI values will be
+ * stored. Must not be null and should have its `ant` field set to 1
+ * or 2.
+ * @return Returns 0 on success, or a negative error code if an invalid antenna
+ * number is specified or if the read operation fails.
+ ******************************************************************************/
 int32_t ad9361_read_rssi(struct ad9361_rf_phy *phy, struct rf_rssi *rssi);
+/***************************************************************************//**
+ * @brief This function configures the gain control mode for a specified antenna
+ * in the AD9361 RF transceiver. It must be called after the RF
+ * transceiver has been initialized and before any gain adjustments are
+ * made. The function takes a pointer to a `struct rf_gain_ctrl` which
+ * specifies the desired gain control mode and the antenna number. If an
+ * invalid mode or antenna number is provided, the function will return
+ * an error code. Additionally, the function disables the specified
+ * receiver before making changes and re-enables it afterward, ensuring
+ * that the changes take effect.
+ *
+ * @param phy Pointer to a `struct ad9361_rf_phy` representing the RF
+ * transceiver. Must not be null.
+ * @param gain_ctrl Pointer to a `struct rf_gain_ctrl` that specifies the gain
+ * control mode and antenna number. Must not be null. The
+ * `mode` field should be one of the predefined gain control
+ * modes, and the `ant` field should be either 1 or 2,
+ * representing the respective antennas.
+ * @return Returns 0 on success, or a negative error code on failure, indicating
+ * the type of error encountered.
+ ******************************************************************************/
 int32_t ad9361_set_gain_ctrl_mode(struct ad9361_rf_phy *phy,
 				  struct rf_gain_ctrl *gain_ctrl);
+/***************************************************************************//**
+ * @brief This function is used to load FIR filter coefficients into the
+ * specified destination (either transmit or receive) of the AD9361 RF
+ * transceiver. It should be called after the transceiver has been
+ * properly initialized and configured. The function expects a valid
+ * pointer to an array of coefficients, the number of taps (which must be
+ * a multiple of 16 and not exceed 128), and a gain value in dB. If the
+ * provided parameters are invalid, the function will return an error
+ * code. The function also manages the state of the transceiver during
+ * the operation, ensuring that the FIR filter is correctly configured
+ * before and after loading the coefficients.
+ *
+ * @param phy Pointer to the `ad9361_rf_phy` structure representing the RF
+ * transceiver. Must not be null.
+ * @param dest An enumeration value indicating the destination for the FIR
+ * filter coefficients (e.g., `FIR_TX1`, `FIR_RX1`). Valid values
+ * are defined in the `fir_dest` enum.
+ * @param gain_dB An integer representing the gain in dB to be applied. This
+ * value can be negative, with a specific handling for -6 dB.
+ * @param ntaps An unsigned integer specifying the number of filter taps. Must
+ * be greater than 0, a multiple of 16, and not exceed 128.
+ * @param coef Pointer to an array of 16-bit integers containing the FIR filter
+ * coefficients. Must not be null.
+ * @return Returns 0 on success, or a negative error code if the parameters are
+ * invalid or if an error occurs during the operation.
+ ******************************************************************************/
 int32_t ad9361_load_fir_filter_coef(struct ad9361_rf_phy *phy,
 				    enum fir_dest dest, int32_t gain_dB,
 				    uint32_t ntaps, short *coef);
+/***************************************************************************//**
+ * @brief This function should be called to ensure that the FIR filters are
+ * correctly configured and enabled for both transmission and reception
+ * paths of the AD9361 RF PHY. It checks the filter settings and
+ * validates the interpolation and decimation factors, ensuring they meet
+ * the required constraints. If the filters are bypassed or not valid, it
+ * calculates the necessary clock rates for the RF chain. The function
+ * should be called after the PHY has been initialized and before any
+ * data transmission or reception occurs. It may return an error code if
+ * the configuration is invalid or if the clock chain calculation fails.
+ *
+ * @param phy Pointer to the `ad9361_rf_phy` structure representing the RF PHY.
+ * Must not be null.
+ * @return Returns a non-negative integer on success, or a negative error code
+ * if validation fails or if an error occurs during clock chain
+ * calculations.
+ ******************************************************************************/
 int32_t ad9361_validate_enable_fir(struct ad9361_rf_phy *phy);
+/***************************************************************************//**
+ * @brief This function is used to configure the transmission attenuation for
+ * the AD9361 RF PHY device. It allows the user to set the attenuation
+ * level in millidecibels (mdB) for two transmit channels (TX1 and TX2).
+ * The attenuation value must not exceed the maximum limit defined by
+ * `MAX_TX_ATTENUATION_DB`. The function can be called at any time, but
+ * it is recommended to do so when the device is in a suitable state for
+ * configuration. If the `immed` parameter is set to true, the changes
+ * will take effect immediately; otherwise, they will be applied at the
+ * next opportunity. If either `tx1` or `tx2` is set to true, the
+ * corresponding channel's attenuation will be updated.
+ *
+ * @param phy A pointer to the `ad9361_rf_phy` structure representing the RF PHY
+ * device. Must not be null.
+ * @param atten_mdb The desired attenuation level in millidecibels (mdB). Valid
+ * range is from 0 to 89750 (which corresponds to 89.75 dB).
+ * Values exceeding this range will result in an error.
+ * @param tx1 A boolean indicating whether to set the attenuation for TX1. If
+ * true, the attenuation for TX1 will be updated.
+ * @param tx2 A boolean indicating whether to set the attenuation for TX2. If
+ * true, the attenuation for TX2 will be updated.
+ * @param immed A boolean indicating whether the changes should take effect
+ * immediately. If true, the changes are applied right away; if
+ * false, they will be applied at the next opportunity.
+ * @return Returns 0 on success, or a negative error code if the operation
+ * fails, such as -EINVAL for invalid attenuation values.
+ ******************************************************************************/
 int32_t ad9361_set_tx_atten(struct ad9361_rf_phy *phy, uint32_t atten_mdb,
 			    bool tx1, bool tx2, bool immed);
+/***************************************************************************//**
+ * @brief This function is used to obtain the current transmit attenuation
+ * setting for a specified transmitter channel, identified by `tx_num`.
+ * It is essential to call this function after the AD9361 device has been
+ * properly initialized and configured. The function reads the
+ * attenuation value from the appropriate register based on the
+ * transmitter number provided. If the specified transmitter number is
+ * invalid or if there is an error during the SPI read operation, the
+ * function will return a negative error code.
+ *
+ * @param phy A pointer to the `ad9361_rf_phy` structure representing the AD9361
+ * device. This pointer must not be null and should point to a valid
+ * initialized instance of the device.
+ * @param tx_num An unsigned integer representing the transmitter number, which
+ * can be either 1 or 2. If the value is outside this range, the
+ * function will handle it by returning an error code.
+ * @return Returns the current transmit attenuation value in millidecibels (m
+ * dB) for the specified transmitter. If an error occurs during the
+ * operation, a negative error code is returned.
+ ******************************************************************************/
 int32_t ad9361_get_tx_atten(struct ad9361_rf_phy *phy, uint32_t tx_num);
+/***************************************************************************//**
+ * @brief This function is used to compute the new clock rate for a given
+ * reference clock scale structure based on a specified parent clock
+ * rate. It should be called after the reference clock scale structure
+ * has been properly initialized. The function performs a calculation
+ * using the multiplier and divider values from the `clk_priv` structure,
+ * which must be set before calling this function. If the `parent_rate`
+ * is zero, the behavior is undefined, and it is recommended to ensure
+ * that valid rates are provided.
+ *
+ * @param clk_priv A pointer to a `struct refclk_scale` that contains the
+ * multiplier and divider used for the calculation. This pointer
+ * must not be null.
+ * @param parent_rate The parent clock rate, which should be a non-zero value.
+ * If zero is passed, the behavior is undefined.
+ * @return Returns the recalculated clock rate as a `uint32_t` value, which is
+ * derived from the formula (parent_rate * mult) / div.
+ ******************************************************************************/
 uint32_t ad9361_clk_factor_recalc_rate(struct refclk_scale *clk_priv,
 				       uint32_t parent_rate);
+/***************************************************************************//**
+ * @brief This function is used to determine the closest clock configuration for
+ * a specified rate based on the current settings of the clock. It should
+ * be called when adjusting the clock rate to ensure that the new rate is
+ * valid and can be set without causing errors. The function modifies the
+ * `clk_priv` structure to reflect the calculated multiplier and divider
+ * values. It is important to ensure that the `prate` parameter is
+ * initialized to a valid rate before calling this function, as it will
+ * be used in the calculations. If the calculated divider is zero, it
+ * will be set to one to avoid division by zero errors.
+ *
+ * @param clk_priv A pointer to a `struct refclk_scale` that holds the current
+ * clock configuration. This structure will be modified to
+ * reflect the new multiplier and divider values. Must not be
+ * null.
+ * @param rate The desired clock rate to round. This value should be within the
+ * operational limits of the clock system.
+ * @param prate A pointer to a `uint32_t` that represents the current reference
+ * rate. This value is used to determine the appropriate multiplier
+ * and divider. Must not be null.
+ * @return Returns the rounded clock rate based on the calculated multiplier and
+ * divider values. If an error occurs during the process, a negative
+ * error code is returned.
+ ******************************************************************************/
 int32_t ad9361_clk_factor_round_rate(struct refclk_scale *clk_priv,
 				     uint32_t rate,
 				     uint32_t *prate);
+/***************************************************************************//**
+ * @brief This function is used to configure the clock scaling factors for a
+ * specific rate based on the parent clock rate. It should be called when
+ * the desired clock rate is known and must be set before using the clock
+ * for any operations. The function calculates the multiplier and divider
+ * based on the relationship between the desired rate and the parent
+ * rate. If the desired rate is greater than or equal to the parent rate,
+ * it sets the multiplier accordingly; otherwise, it sets the divider. If
+ * the calculated divider is zero, it defaults to one to avoid division
+ * by zero errors.
+ *
+ * @param clk_priv A pointer to a `struct refclk_scale` that holds the current
+ * clock scaling factors. This pointer must not be null.
+ * @param rate The desired clock rate in Hz. This value must be less than or
+ * equal to the parent rate to avoid invalid configurations.
+ * @param parent_rate The parent clock rate in Hz. This value must be greater
+ * than zero to ensure valid calculations.
+ * @return Returns an integer status code. A return value of 0 indicates
+ * success, while a negative value indicates an error.
+ ******************************************************************************/
 int32_t ad9361_clk_factor_set_rate(struct refclk_scale *clk_priv, uint32_t rate,
 				   uint32_t parent_rate);
+/***************************************************************************//**
+ * @brief This function is used to compute the new baseband PLL rate based on
+ * the provided parent clock rate. It should be called when the parent
+ * clock rate changes or when the PLL needs to be reconfigured. The
+ * function reads the current PLL configuration from the device registers
+ * and calculates the new rate using the fractional and integer parts of
+ * the frequency word. It is important to ensure that the `clk_priv`
+ * structure is properly initialized and that the `parent_rate` is within
+ * valid limits before calling this function.
+ *
+ * @param clk_priv A pointer to a `struct refclk_scale` that contains the SPI
+ * device context. This structure must be initialized and valid
+ * before calling the function. It must not be null.
+ * @param parent_rate The parent clock rate in Hz, which must be a positive
+ * integer. If an invalid value is provided (e.g., zero), the
+ * behavior is undefined.
+ * @return Returns the recalculated baseband PLL rate as a 32-bit unsigned
+ * integer. This value represents the new frequency that the PLL should
+ * operate at, based on the provided parent rate.
+ ******************************************************************************/
 uint32_t ad9361_bbpll_recalc_rate(struct refclk_scale *clk_priv,
 				  uint32_t parent_rate);
+/***************************************************************************//**
+ * @brief This function is used to adjust a specified frequency to the nearest
+ * valid frequency that can be set for the baseband PLL. It should be
+ * called when configuring the PLL frequency, ensuring that the requested
+ * rate falls within the defined limits. The function checks if the
+ * provided rate is within the acceptable range, defined by
+ * `MIN_BBPLL_FREQ` and `MAX_BBPLL_FREQ`. If the rate is outside this
+ * range, it will return the closest valid frequency instead. The `prate`
+ * parameter must point to a valid memory location that holds the
+ * reference rate, which is used in the rounding calculation.
+ *
+ * @param clk_priv A pointer to a `struct refclk_scale` that contains the
+ * reference clock scaling information. This parameter must not
+ * be null.
+ * @param rate The desired frequency to round, which must be within the range
+ * defined by `MIN_BBPLL_FREQ` and `MAX_BBPLL_FREQ`. If the rate is
+ * less than `MIN_BBPLL_FREQ`, the function will return
+ * `MIN_BBPLL_FREQ`. If it exceeds `MAX_BBPLL_FREQ`, it will return
+ * `MAX_BBPLL_FREQ`.
+ * @param prate A pointer to a `uint32_t` that represents the reference rate.
+ * This pointer must not be null and should point to a valid memory
+ * location.
+ * @return Returns the rounded frequency as a `uint32_t`. If the input rate is
+ * valid, it returns the closest valid frequency based on the reference
+ * rate provided.
+ ******************************************************************************/
 int32_t ad9361_bbpll_round_rate(struct refclk_scale *clk_priv, uint32_t rate,
 				uint32_t *prate);
+/***************************************************************************//**
+ * @brief This function configures the baseband PLL rate based on the specified
+ * target rate and the parent clock rate. It must be called after the
+ * initialization of the PLL and before any data transmission or
+ * reception occurs. The function calculates the necessary parameters for
+ * the PLL and writes them to the appropriate registers. If the provided
+ * rates are invalid or out of the acceptable range, the function will
+ * clamp the values to ensure they remain within valid limits.
+ *
+ * @param clk_priv A pointer to a `refclk_scale` structure that contains the SPI
+ * descriptor and other necessary information for clock
+ * configuration. This pointer must not be null.
+ * @param rate The desired baseband PLL rate in Hz. This value must be within
+ * the range defined by the hardware specifications.
+ * @param parent_rate The parent clock rate in Hz. This value must also be
+ * within the range defined by the hardware specifications.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation. A return value of 0 indicates success, while a
+ * negative value indicates an error.
+ ******************************************************************************/
 int32_t ad9361_bbpll_set_rate(struct refclk_scale *clk_priv, uint32_t rate,
 			      uint32_t parent_rate);
+/***************************************************************************//**
+ * @brief This function is used to recalculate the integer rate of the RF PLL
+ * based on the provided parent clock rate. It should be called after the
+ * initialization of the reference clock scale structure. The function
+ * expects a valid `clk_priv` structure that contains the source of the
+ * clock, which can be either RX or TX RFPLL. If the source is invalid,
+ * the function will return an error. The function also handles the case
+ * where a fast lock profile is used, reading values from the appropriate
+ * registers. The output is the recalculated integer rate based on the
+ * parent rate and the internal parameters.
+ *
+ * @param clk_priv Pointer to a `struct refclk_scale` that contains the clock
+ * source and other necessary parameters. Must not be null.
+ * @param parent_rate The parent clock rate in Hz. This value must be a positive
+ * integer.
+ * @return Returns the recalculated integer rate of the RF PLL in Hz based on
+ * the provided parent rate.
+ ******************************************************************************/
 uint32_t ad9361_rfpll_int_recalc_rate(struct refclk_scale *clk_priv,
 				      uint32_t parent_rate);
+/***************************************************************************//**
+ * @brief This function is used to round a specified rate to the nearest valid
+ * integer rate for the RF PLL. It is essential to call this function
+ * with a valid `struct refclk_scale` pointer that has been properly
+ * initialized. The function checks if the provided rate is within the
+ * acceptable range defined by the maximum and minimum carrier
+ * frequencies, which depend on the PLL source type (TX or RX). If the
+ * rate is out of bounds, it returns an error code. The rounded rate can
+ * be stored in the provided pointer if it is not null.
+ *
+ * @param clk_priv Pointer to a `struct refclk_scale` that contains the PLL
+ * configuration. Must not be null.
+ * @param rate The desired rate to round, which should be a positive integer.
+ * The function will validate this rate against the defined
+ * frequency limits.
+ * @param prate Pointer to a `uint32_t` where the rounded rate will be stored.
+ * If the pointer is null, the rounded rate will not be returned.
+ * @return Returns the rounded rate if successful, or -EINVAL if the input rate
+ * is out of the valid range.
+ ******************************************************************************/
 int32_t ad9361_rfpll_int_round_rate(struct refclk_scale *clk_priv,
 				    uint32_t rate,
 				    uint32_t *prate);
+/***************************************************************************//**
+ * @brief This function is used to configure the rate of the RF Phase-Locked
+ * Loop (PLL) for either the transmitter or receiver. It must be called
+ * after the initialization of the RF PHY and before any data
+ * transmission or reception occurs. The function takes into account the
+ * parent clock rate and calculates the necessary settings for the PLL.
+ * If the specified rate is invalid or if the PLL cannot be configured,
+ * an error code will be returned. Additionally, the function may perform
+ * internal calibration steps depending on the configuration of the RF
+ * PHY.
+ *
+ * @param clk_priv A pointer to a `struct refclk_scale` that contains the
+ * private data for the clock configuration. This must not be
+ * null.
+ * @param rate The desired output rate for the RF PLL in Hz. This value must be
+ * within the valid range defined by the hardware specifications.
+ * @param parent_rate The parent clock rate in Hz, which is used for calculating
+ * the PLL settings. This value must also be valid and
+ * correspond to the actual clock source.
+ * @return Returns 0 on success, or a negative error code if the operation
+ * fails.
+ ******************************************************************************/
 int32_t ad9361_rfpll_int_set_rate(struct refclk_scale *clk_priv, uint32_t rate,
 				  uint32_t parent_rate);
+/***************************************************************************//**
+ * @brief This function retrieves the clock rate associated with a specific
+ * clock source from the `refclk_scale` structure. It should be called
+ * after the `refclk_scale` structure has been properly initialized and
+ * configured. The function does not perform any validation on the
+ * `clk_priv` parameter, so it is the caller's responsibility to ensure
+ * that it is not null and that it points to a valid structure. If the
+ * `source` field in `clk_priv` is out of bounds, the behavior is
+ * undefined.
+ *
+ * @param clk_priv A pointer to a `refclk_scale` structure that contains the
+ * clock source information. This pointer must not be null and
+ * must point to a valid structure that has been initialized.
+ * The `source` field within this structure should be a valid
+ * index corresponding to the available clock sources;
+ * otherwise, the behavior is undefined.
+ * @return Returns the clock rate as a `uint32_t` value, which represents the
+ * rate of the specified clock source.
+ ******************************************************************************/
 uint32_t ad9361_rfpll_dummy_recalc_rate(struct refclk_scale *clk_priv);
+/***************************************************************************//**
+ * @brief This function is used to set the rate of the RF PLL dummy clock. It
+ * should be called after the initialization of the `refclk_scale`
+ * structure and before any operations that depend on the clock rate. The
+ * function does not perform any validation on the `rate` parameter, so
+ * it is the caller's responsibility to ensure that the rate is within
+ * acceptable limits for the specific application. The function will
+ * always return 0, indicating success.
+ *
+ * @param clk_priv A pointer to a `refclk_scale` structure that contains the
+ * private data for the clock scaling. This pointer must not be
+ * null.
+ * @param rate The desired clock rate to set. The valid range for this value
+ * depends on the specific hardware capabilities and should be
+ * determined by the user.
+ * @return Returns 0 to indicate success.
+ ******************************************************************************/
 int32_t ad9361_rfpll_dummy_set_rate(struct refclk_scale *clk_priv,
 				    uint32_t rate);
+/***************************************************************************//**
+ * @brief This function is used to recalculate the RF PLL rate based on the
+ * provided reference clock scale structure. It should be called when
+ * there is a need to update the RF PLL rate, typically after a change in
+ * the reference clock settings. The function takes into account the
+ * source of the clock (either RX or TX) and adjusts the rate
+ * accordingly. It is important to ensure that the `clk_priv` structure
+ * is properly initialized before calling this function. If an invalid
+ * source is provided, the function will return a rate of 0.
+ *
+ * @param clk_priv A pointer to a `struct refclk_scale` that contains the
+ * reference clock scale information. This structure must not be
+ * null and should be properly initialized before calling the
+ * function. The `source` field within this structure should be
+ * set to either `RX_RFPLL` or `TX_RFPLL` to indicate the
+ * desired PLL source.
+ * @return Returns the recalculated RF PLL rate as a `uint32_t`. If the source
+ * is invalid, it returns 0.
+ ******************************************************************************/
 uint32_t ad9361_rfpll_recalc_rate(struct refclk_scale *clk_priv);
+/***************************************************************************//**
+ * @brief This function is used to determine the closest valid rate for the
+ * RFPLL based on the provided input rate and the clock source specified
+ * in `clk_priv`. It should be called after initializing the RFPLL and
+ * before setting the rate to ensure that the rate is valid for the
+ * selected clock source. The function handles both RX and TX RFPLL
+ * sources and will return a rounded rate based on the internal rounding
+ * logic. If an invalid clock source is provided, the function will
+ * return 0.
+ *
+ * @param clk_priv A pointer to a `struct refclk_scale` that contains the clock
+ * source and associated PHY data. This pointer must not be
+ * null.
+ * @param rate The desired rate to round, which should be a positive integer. If
+ * the rate is invalid or cannot be rounded to a valid RFPLL rate,
+ * the function will return 0.
+ * @return Returns the nearest valid RFPLL rate as an integer. If the clock
+ * source is invalid, it returns 0.
+ ******************************************************************************/
 int32_t ad9361_rfpll_round_rate(struct refclk_scale *clk_priv, uint32_t rate);
+/***************************************************************************//**
+ * @brief This function is used to configure the RF PLL rate for either the
+ * receive (RX) or transmit (TX) path of the AD9361 device. It must be
+ * called after the device has been properly initialized and configured.
+ * The `rate` parameter specifies the desired frequency, which should be
+ * within the valid range defined by the device specifications. If the
+ * function is called with an invalid `rate`, it may return an error
+ * code. Additionally, if the device is set to use an external local
+ * oscillator (LO), the function will attempt to set the rate using the
+ * external method; otherwise, it will use the internal method. The
+ * function also handles gain table loading and may trigger calibration
+ * routines if necessary.
+ *
+ * @param clk_priv A pointer to a `struct refclk_scale` that contains the
+ * reference clock configuration. This structure must not be
+ * null and should be properly initialized before calling the
+ * function.
+ * @param rate The desired RF PLL rate in Hz. This value must be within the
+ * operational limits of the device, typically between 25 MHz and
+ * 640 MHz for the AD9361. If the rate is outside this range, the
+ * function will return an error.
+ * @return Returns 0 on success, or a negative error code if the operation
+ * fails.
+ ******************************************************************************/
 int32_t ad9361_rfpll_set_rate(struct refclk_scale *clk_priv, uint32_t rate);
+/***************************************************************************//**
+ * @brief This function is used to configure the parent clock source for the
+ * AD9361 clock multiplexer. It should be called when the clock source
+ * needs to be changed, typically after the device has been initialized.
+ * The function will force the state of the device to ALERT before making
+ * the change and will restore the previous state afterward. It is
+ * important to ensure that the `clk_priv` structure is properly
+ * initialized and that the `index` parameter is within the valid range,
+ * as invalid values may lead to undefined behavior.
+ *
+ * @param clk_priv Pointer to a `struct refclk_scale` that contains the clock
+ * configuration and state. Must not be null.
+ * @param index An 8-bit unsigned integer representing the index of the parent
+ * clock source to set. Valid values are typically defined by the
+ * specific implementation, and the function may not handle out-of-
+ * range values gracefully.
+ * @return Returns a 32-bit signed integer indicating the success or failure of
+ * the operation. A negative value indicates an error, while a non-
+ * negative value indicates success.
+ ******************************************************************************/
 int32_t ad9361_clk_mux_set_parent(struct refclk_scale *clk_priv, uint8_t index);
+/***************************************************************************//**
+ * @brief This function is used to enable or disable tracking for baseband DC
+ * offsets and quadrature errors in the AD9361 RF transceiver. It should
+ * be called after the transceiver has been properly initialized. The
+ * parameters allow for selective tracking of baseband DC offsets, RF DC
+ * offsets, and quadrature errors, which can help improve the performance
+ * of the RF system. If any of the tracking parameters are set to true,
+ * the corresponding tracking will be enabled; otherwise, it will be
+ * disabled.
+ *
+ * @param phy Pointer to the `ad9361_rf_phy` structure representing the RF
+ * transceiver. Must not be null.
+ * @param bbdc_track Boolean flag to enable or disable baseband DC offset
+ * tracking. Valid values are true (enable) or false
+ * (disable).
+ * @param rfdc_track Boolean flag to enable or disable RF DC offset tracking.
+ * Valid values are true (enable) or false (disable).
+ * @param rxquad_track Boolean flag to enable or disable quadrature tracking.
+ * Valid values are true (enable) or false (disable).
+ * @return Returns 0 on success, indicating that the tracking control settings
+ * have been applied successfully. If an error occurs, a negative error
+ * code may be returned.
+ ******************************************************************************/
 int32_t ad9361_tracking_control(struct ad9361_rf_phy *phy, bool bbdc_track,
 				bool rfdc_track, bool rxquad_track);
+/***************************************************************************//**
+ * @brief This function is used to configure the Built-In Self-Test (BIST)
+ * loopback mode for the AD9361 RF PHY. It should be called after the PHY
+ * has been properly initialized. The function accepts a mode parameter
+ * that determines the type of loopback to be enabled: 0 for disabling
+ * loopback, 1 for internal loopback from TX to RX, and 2 for internal
+ * loopback from RX to TX. If an invalid mode is provided, the function
+ * will return an error code. The function modifies the internal state of
+ * the PHY and may affect its operation until the loopback mode is
+ * changed again.
+ *
+ * @param phy Pointer to the `ad9361_rf_phy` structure representing the RF PHY.
+ * Must not be null.
+ * @param mode An integer representing the loopback mode. Valid values are 0
+ * (disable), 1 (TX to RX), and 2 (RX to TX). Any other value will
+ * result in an error.
+ * @return Returns 0 on success, or a negative error code if an invalid mode is
+ * specified.
+ ******************************************************************************/
 int32_t ad9361_bist_loopback(struct ad9361_rf_phy *phy, int32_t mode);
+/***************************************************************************//**
+ * @brief This function is used to obtain the current Built-In Self-Test (BIST)
+ * loopback mode of the specified `ad9361_rf_phy` structure. It should be
+ * called after the `ad9361_rf_phy` structure has been properly
+ * initialized. The function writes the current loopback mode into the
+ * provided pointer, allowing the caller to check the mode of operation.
+ * It is important to ensure that the pointer passed to the function is
+ * valid and points to a memory location that can store an `int32_t`
+ * value.
+ *
+ * @param phy A pointer to an `ad9361_rf_phy` structure that represents the
+ * device context. This pointer must not be null and should point to
+ * a valid initialized structure.
+ * @param mode A pointer to an `int32_t` variable where the current BIST
+ * loopback mode will be stored. This pointer must not be null and
+ * should point to a valid memory location.
+ * @return The function does not return a value. Instead, it populates the
+ * `mode` variable with the current BIST loopback mode from the `phy`
+ * structure.
+ ******************************************************************************/
 void ad9361_get_bist_loopback(struct ad9361_rf_phy *phy, int32_t *mode);
+/***************************************************************************//**
+ * @brief This function is used to set the PRBS (Pseudo-Random Binary Sequence)
+ * mode for the built-in self-test feature of the AD9361 RF PHY. It
+ * should be called after the RF PHY has been properly initialized. The
+ * function accepts a mode parameter that determines the type of BIST
+ * operation: disabling BIST, injecting a test signal into the
+ * transmitter, or injecting a test signal into the receiver. If an
+ * invalid mode is provided, the function will not change the current
+ * configuration, and the previous state will remain unchanged.
+ *
+ * @param phy A pointer to the `ad9361_rf_phy` structure representing the RF PHY
+ * instance. Must not be null.
+ * @param mode An enumeration value of type `ad9361_bist_mode` that specifies
+ * the BIST mode to set. Valid values are `BIST_DISABLE`,
+ * `BIST_INJ_TX`, and `BIST_INJ_RX`.
+ * @return Returns an integer value indicating the success or failure of the
+ * operation. A return value of 0 indicates success, while a negative
+ * value indicates an error.
+ ******************************************************************************/
 int32_t ad9361_bist_prbs(struct ad9361_rf_phy *phy, enum ad9361_bist_mode mode);
+/***************************************************************************//**
+ * @brief This function is used to obtain the current BIST (Built-In Self-Test)
+ * PRBS (Pseudo-Random Binary Sequence) mode from the specified
+ * `ad9361_rf_phy` structure. It should be called after the
+ * `ad9361_rf_phy` structure has been properly initialized. The function
+ * writes the current BIST PRBS mode into the provided pointer, allowing
+ * the caller to determine the mode currently in use. There are no side
+ * effects or state changes associated with this function.
+ *
+ * @param phy A pointer to an `ad9361_rf_phy` structure that represents the
+ * state of the AD9361 device. This pointer must not be null and
+ * should point to a valid initialized structure.
+ * @param mode A pointer to an `enum ad9361_bist_mode` variable where the
+ * current BIST PRBS mode will be stored. This pointer must not be
+ * null.
+ * @return The function does not return a value. Instead, it updates the value
+ * pointed to by `mode` with the current BIST PRBS mode.
+ ******************************************************************************/
 void ad9361_get_bist_prbs(struct ad9361_rf_phy *phy,
 			  enum ad9361_bist_mode *mode);
+/***************************************************************************//**
+ * @brief This function is used to configure the BIST tone generation for either
+ * transmission or reception in the AD9361 RF transceiver. It should be
+ * called after the device has been properly initialized and configured.
+ * The function allows the user to specify the mode of operation (enable
+ * or disable BIST), the frequency of the tone, the level of the tone in
+ * decibels, and a mask to select specific channels. If the specified
+ * frequency is less than 4 Hz, it is directly used; otherwise, it is
+ * adjusted based on the clock rate. The function handles invalid inputs
+ * by clamping or ignoring them as necessary, ensuring that the device
+ * remains in a safe state.
+ *
+ * @param phy Pointer to the `ad9361_rf_phy` structure representing the RF
+ * device. Must not be null.
+ * @param mode An enumeration value of type `ad9361_bist_mode` that specifies
+ * the BIST mode. Valid values are `BIST_DISABLE`, `BIST_INJ_TX`,
+ * and `BIST_INJ_RX`.
+ * @param freq_Hz The frequency of the tone in Hertz. Must be a non-negative
+ * integer. If less than 4, it is used directly; otherwise, it is
+ * adjusted based on the clock rate.
+ * @param level_dB The level of the tone in decibels. This value is expected to
+ * be within a valid range for the device, typically between
+ * -100 dB and 0 dB.
+ * @param mask A bitmask that specifies which channels to apply the BIST tone
+ * to. The value should be a valid bitmask corresponding to the
+ * channels available in the device.
+ * @return Returns an integer status code. A return value of 0 indicates
+ * success, while a negative value indicates an error occurred during
+ * the operation.
+ ******************************************************************************/
 int32_t ad9361_bist_tone(struct ad9361_rf_phy *phy,
 			 enum ad9361_bist_mode mode, uint32_t freq_Hz,
 			 uint32_t level_dB, uint32_t mask);
+/***************************************************************************//**
+ * @brief This function is used to obtain the current settings for the built-in
+ * self-test tone, including the mode, frequency, level, and mask. It
+ * should be called after the `ad9361_rf_phy` structure has been properly
+ * initialized. The function populates the provided pointers with the
+ * corresponding values from the `phy` structure. If any of the pointers
+ * are null, the function will not attempt to write to them.
+ *
+ * @param phy A pointer to the `ad9361_rf_phy` structure that holds the
+ * configuration and state of the device. Must not be null.
+ * @param mode A pointer to an `enum ad9361_bist_mode` variable where the
+ * current BIST mode will be stored. Must not be null.
+ * @param freq_Hz A pointer to a `uint32_t` variable where the current BIST tone
+ * frequency in Hertz will be stored. Must not be null.
+ * @param level_dB A pointer to a `uint32_t` variable where the current BIST
+ * tone level in decibels will be stored. Must not be null.
+ * @param mask A pointer to a `uint32_t` variable where the current BIST tone
+ * mask will be stored. Must not be null.
+ * @return None
+ ******************************************************************************/
 void ad9361_get_bist_tone(struct ad9361_rf_phy *phy,
 			  enum ad9361_bist_mode *mode, uint32_t *freq_Hz,
 			  uint32_t *level_dB, uint32_t *mask);
+/***************************************************************************//**
+ * @brief This function configures the RF port settings for the AD9361 device.
+ * It should be called after initializing the `ad9361_rf_phy` structure
+ * and before using the RF ports for transmission or reception. The
+ * `is_out` parameter determines whether the configuration is for output
+ * or input. The `rx_inputs` parameter specifies the number of RX inputs
+ * to be configured, which must be between 0 and 11. If `rx_inputs` is
+ * greater than 11, the function will return an error. The `txb`
+ * parameter indicates whether to select TX1B or TX2B. If `is_out` is
+ * false and `rx_inputs` is greater than 8, the function will control the
+ * TX monitor based on the specified inputs.
+ *
+ * @param phy Pointer to the `ad9361_rf_phy` structure representing the RF
+ * device. Must not be null.
+ * @param is_out Boolean indicating if the configuration is for output (true) or
+ * input (false).
+ * @param rx_inputs Number of RX inputs to configure, valid range is 0 to 11. If
+ * greater than 11, the function returns -EINVAL.
+ * @param txb Indicates whether to select TX1B (1) or TX2B (2).
+ * @return Returns 0 on success, or a negative error code on failure.
+ ******************************************************************************/
 int32_t ad9361_rf_port_setup(struct ad9361_rf_phy *phy, bool is_out,
 			     uint32_t rx_inputs, uint32_t txb);
+/***************************************************************************//**
+ * @brief This function is used to configure the Multi-Chip Synchronization
+ * (MCS) state of the AD9361 RF transceiver. It should be called after
+ * the transceiver has been initialized and is ready for configuration.
+ * The `step` parameter determines the specific configuration step to
+ * execute, with valid values ranging from 1 to 5. Each step performs
+ * different actions related to enabling or disabling various components
+ * of the transceiver. If an invalid `step` value is provided, the
+ * function will not perform any operations for that step. It is
+ * important to ensure that the transceiver is in a proper state before
+ * invoking this function to avoid unexpected behavior.
+ *
+ * @param phy Pointer to the `ad9361_rf_phy` structure representing the RF
+ * transceiver. Must not be null.
+ * @param step An integer value representing the configuration step to execute.
+ * Valid values are 1 through 5. Providing a value outside this
+ * range will result in no operation being performed.
+ * @return Returns 0 on success, indicating that the operation was completed
+ * successfully. No other return values are defined.
+ ******************************************************************************/
 int32_t ad9361_mcs(struct ad9361_rf_phy *phy, int32_t step);
+/***************************************************************************//**
+ * @brief This function is used to perform specific calibration routines on the
+ * AD9361 RF PHY, which must be called after the device has been properly
+ * initialized. The calibration type is specified by the `cal` parameter,
+ * which can take values such as `TX_QUAD_CAL` or `RFDC_CAL`. The `arg`
+ * parameter allows for additional arguments specific to the calibration
+ * type. It is important to ensure that the device is in the correct
+ * state before calling this function, as it may change the state of the
+ * device during the calibration process. If an invalid calibration type
+ * is provided, the function will return an error code.
+ *
+ * @param phy Pointer to the `ad9361_rf_phy` structure representing the RF PHY.
+ * Must not be null.
+ * @param cal Calibration type to perform, which must be one of the predefined
+ * constants (e.g., `TX_QUAD_CAL`, `RFDC_CAL`). Invalid values will
+ * result in an error.
+ * @param arg An integer argument that may be used for specific calibration
+ * routines. The expected value depends on the calibration type.
+ * @return Returns a status code indicating the success or failure of the
+ * calibration operation. A negative value indicates an error, while a
+ * non-negative value indicates success.
+ ******************************************************************************/
 int32_t ad9361_do_calib_run(struct ad9361_rf_phy *phy, uint32_t cal,
 			    int32_t arg);
+/***************************************************************************//**
+ * @brief This function is used to store fast lock profile data for either the
+ * transmitter or receiver of the AD9361 RF transceiver. It should be
+ * called after the transceiver has been properly initialized and
+ * configured. The `profile` parameter specifies which profile to store,
+ * and the `tx` parameter indicates whether the profile is for the
+ * transmitter (true) or receiver (false). The function reads various
+ * configuration values from the device and stores them in a specified
+ * profile. If the `profile` value is out of range, the function will
+ * handle it gracefully without causing any undefined behavior.
+ *
+ * @param phy Pointer to the `ad9361_rf_phy` structure representing the RF
+ * transceiver. Must not be null.
+ * @param tx Boolean indicating whether to store the profile for the transmitter
+ * (true) or receiver (false). Valid values are true or false.
+ * @param profile The profile index to store the fast lock data. Must be within
+ * the valid range of profile indices defined by the device.
+ * @return Returns an integer value indicating the success or failure of the
+ * operation. A return value of 0 indicates success, while a negative
+ * value indicates an error.
+ ******************************************************************************/
 int32_t ad9361_fastlock_store(struct ad9361_rf_phy *phy, bool tx,
 			      uint32_t profile);
+/***************************************************************************//**
+ * @brief This function is used to recall a fast lock profile for either the
+ * transmitter or receiver of the AD9361 device. It should be called
+ * after the device has been properly initialized and configured. The
+ * `profile` parameter specifies which fast lock profile to recall, and
+ * the `tx` boolean indicates whether the operation is for the
+ * transmitter (true) or receiver (false). If the specified profile has
+ * not been initialized, the function will return an error. Additionally,
+ * the function modifies the current profile index to the recalled
+ * profile.
+ *
+ * @param phy A pointer to the `ad9361_rf_phy` structure representing the AD9361
+ * device. Must not be null.
+ * @param tx A boolean indicating whether to recall the profile for the
+ * transmitter (true) or receiver (false).
+ * @param profile An unsigned integer representing the index of the fast lock
+ * profile to recall. Valid values are from 0 to 7, corresponding
+ * to the available profiles.
+ * @return Returns 0 on success, or a negative error code if the operation
+ * fails, such as if the specified profile is not initialized.
+ ******************************************************************************/
 int32_t ad9361_fastlock_recall(struct ad9361_rf_phy *phy, bool tx,
 			       uint32_t profile);
+/***************************************************************************//**
+ * @brief This function is used to load a fast lock profile into the AD9361
+ * device, which is essential for quickly switching between different
+ * configurations. It should be called after the device has been properly
+ * initialized and configured. The `tx` parameter determines whether the
+ * profile is for the transmitter or receiver. The `profile` parameter
+ * specifies which profile to load, and the `values` array contains the
+ * configuration values for the specified profile. The function does not
+ * perform any validation on the `profile` value, so it is the caller's
+ * responsibility to ensure it is within the valid range. If the `values`
+ * pointer is null, the function will not execute, and it is expected
+ * that the caller handles such cases appropriately.
+ *
+ * @param phy Pointer to the `ad9361_rf_phy` structure representing the AD9361
+ * device. Must not be null.
+ * @param tx Boolean indicating whether to load the profile for the transmitter
+ * (true) or receiver (false).
+ * @param profile An unsigned integer representing the profile index to load.
+ * The valid range is implementation-specific and should be
+ * defined in the documentation.
+ * @param values Pointer to an array of 16 bytes containing the configuration
+ * values for the specified profile. Must not be null.
+ * @return Returns 0 on success, or a negative error code on failure.
+ ******************************************************************************/
 int32_t ad9361_fastlock_load(struct ad9361_rf_phy *phy, bool tx,
 			     uint32_t profile, uint8_t *values);
+/***************************************************************************//**
+ * @brief This function is used to save fast lock configuration values for
+ * either the transmit (TX) or receive (RX) path of the AD9361 RF
+ * transceiver. It should be called after the transceiver has been
+ * properly initialized and configured. The `profile` parameter specifies
+ * which profile to save the values for, and the `values` array must be
+ * large enough to hold the configuration data, which is defined by
+ * `RX_FAST_LOCK_CONFIG_WORD_NUM`. If the `phy` pointer is null or if the
+ * `values` pointer is null, the function will not perform any
+ * operations.
+ *
+ * @param phy Pointer to the `ad9361_rf_phy` structure representing the RF
+ * transceiver. Must not be null.
+ * @param tx Boolean indicating whether to save TX (true) or RX (false)
+ * configuration.
+ * @param profile An unsigned integer representing the profile number to save.
+ * Valid profile numbers depend on the specific implementation.
+ * @param values Pointer to an array of 8-bit unsigned integers where the
+ * configuration values will be stored. Must not be null and
+ * should have a size of at least `RX_FAST_LOCK_CONFIG_WORD_NUM`.
+ * @return Returns 0 on success, indicating that the values were successfully
+ * saved. If an error occurs, a negative error code may be returned.
+ ******************************************************************************/
 int32_t ad9361_fastlock_save(struct ad9361_rf_phy *phy, bool tx,
 			     uint32_t profile, uint8_t *values);
+/***************************************************************************//**
+ * @brief This function is used to set the ENSM (Enable State Machine) state of
+ * the AD9361 RF PHY. It should be called when the device is initialized
+ * and ready for state changes. The function checks the current ENSM
+ * state and only performs the state transition if the requested state
+ * differs from the current state. If the requested state is invalid, an
+ * error is logged, and no state change occurs. The function may block
+ * until the state transition is confirmed or a timeout occurs, which can
+ * lead to potential delays in execution.
+ *
+ * @param phy Pointer to the `ad9361_rf_phy` structure representing the RF PHY
+ * device. Must not be null.
+ * @param ensm_state The desired ENSM state to set. Valid values are defined by
+ * the ENSM_STATE macros. Invalid values will result in an
+ * error being logged.
+ * @return Returns nothing. The function may log errors if the state transition
+ * fails or if an invalid state is requested.
+ ******************************************************************************/
 void ad9361_ensm_force_state(struct ad9361_rf_phy *phy, uint8_t ensm_state);
+/***************************************************************************//**
+ * @brief This function is used to obtain the current state of the Enhanced
+ * State Machine (ENSM) in the AD9361 RF transceiver. It should be called
+ * after the transceiver has been properly initialized and configured.
+ * The function returns a value that indicates the current state, which
+ * can be used to determine the operational mode of the device. The
+ * possible states include sleep, alert, transmit, receive, and others as
+ * defined in the device's state machine. It is important to note that
+ * the function does not modify any input parameters or the state of the
+ * device.
+ *
+ * @param phy A pointer to a `struct ad9361_rf_phy` that represents the RF PHY
+ * instance. This pointer must not be null and should point to a
+ * valid initialized instance of the AD9361 driver.
+ * @return Returns a `uint8_t` value representing the current ENSM state. The
+ * possible return values correspond to different operational states of
+ * the AD9361, such as ENSM_STATE_SLEEP, ENSM_STATE_ALERT,
+ * ENSM_STATE_TX, ENSM_STATE_RX, etc.
+ ******************************************************************************/
 uint8_t ad9361_ensm_get_state(struct ad9361_rf_phy *phy);
+/***************************************************************************//**
+ * @brief This function is used to restore the ENSM (Enable State Machine) state
+ * of the AD9361 RF PHY to a specified state. It should be called after
+ * the initialization of the `ad9361_rf_phy` structure and before any
+ * data transmission or reception. The function modifies the internal
+ * state of the device based on the provided `ensm_state` parameter,
+ * which must be one of the defined ENSM states. If an invalid state is
+ * provided, the function will log a debug message and return without
+ * making any changes. Additionally, if the ENSM state was not previously
+ * saved, a debug message will indicate that no restoration is necessary.
+ *
+ * @param phy Pointer to the `ad9361_rf_phy` structure representing the RF PHY.
+ * Must not be null.
+ * @param ensm_state The desired ENSM state to restore. Valid values are defined
+ * in the driver, including ENSM_STATE_TX, ENSM_STATE_RX,
+ * ENSM_STATE_ALERT, and ENSM_STATE_FDD. Invalid values will
+ * result in a debug message and no state change.
+ * @return Returns nothing. The function modifies the internal state of the
+ * `ad9361_rf_phy` structure based on the provided `ensm_state`.
+ ******************************************************************************/
 void ad9361_ensm_restore_state(struct ad9361_rf_phy *phy, uint8_t ensm_state);
+/***************************************************************************//**
+ * @brief This function should be called to revert the state of the ENSM (Enable
+ * State Machine) to its previous configuration. It is typically used in
+ * scenarios where the system needs to return to a prior operational
+ * state after a change. The function assumes that the `phy` parameter
+ * has been properly initialized and that the previous state is valid. If
+ * the `phy` structure is not initialized or if the previous state is
+ * invalid, the behavior is undefined.
+ *
+ * @param phy A pointer to a `struct ad9361_rf_phy` that represents the RF PHY
+ * instance. This pointer must not be null and should point to a
+ * valid instance that has been initialized.
+ * @return This function does not return a value and does not modify any input
+ * parameters.
+ ******************************************************************************/
 void ad9361_ensm_restore_prev_state(struct ad9361_rf_phy *phy);
+/***************************************************************************//**
+ * @brief This function is used to configure the frequency of the transceiver
+ * clock chain in an AD9361 RF PHY device. It should be called after the
+ * device has been properly initialized and configured. The frequency
+ * parameter must be within the valid range supported by the device. If
+ * the frequency is invalid or if there is an error during the frequency
+ * calculation, the function will return a negative error code.
+ * Otherwise, it will return the result of setting the clock chain
+ * frequency.
+ *
+ * @param phy A pointer to the `ad9361_rf_phy` structure representing the RF PHY
+ * device. This pointer must not be null and must point to a valid
+ * initialized structure.
+ * @param freq The desired frequency for the transceiver clock chain, specified
+ * in Hz. This value must be within the valid operating range of the
+ * device. If the frequency is out of range, the function will
+ * return an error.
+ * @return Returns a non-negative value on success, indicating the result of
+ * setting the clock chain frequency, or a negative error code if the
+ * operation fails.
+ ******************************************************************************/
 int32_t ad9361_set_trx_clock_chain_freq(struct ad9361_rf_phy *phy,
 					uint32_t freq);
+/***************************************************************************//**
+ * @brief This function scans a buffer of bytes to identify the longest sequence
+ * of consecutive zero bytes. It is useful for applications that need to
+ * analyze data patterns or find gaps in data streams. The function
+ * should be called with a valid buffer and size, and it will return the
+ * length of the longest sequence found. If the buffer is empty or the
+ * size is zero, the function will return zero. The starting index of the
+ * longest sequence is stored in the `ret_start` parameter, which must
+ * not be null.
+ *
+ * @param field A pointer to a buffer of bytes where the function will search
+ * for the longest sequence of zeros. Must not be null.
+ * @param size The number of bytes in the buffer pointed to by `field`. Must be
+ * greater than zero.
+ * @param ret_start A pointer to a variable where the starting index of the
+ * longest sequence of zeros will be stored. Caller retains
+ * ownership and must ensure it is not null.
+ * @return Returns the length of the longest contiguous sequence of zeros found
+ * in the buffer. If no zeros are found, it returns zero.
+ ******************************************************************************/
 int32_t ad9361_find_opt(uint8_t *field, uint32_t size, uint32_t *ret_start);
 int32_t ad9361_hdl_loopback(struct ad9361_rf_phy *phy, bool enable);
+/***************************************************************************//**
+ * @brief This function is used to perform a timing analysis of the digital
+ * interface of the AD9361 RF transceiver. It should be called after the
+ * device has been properly initialized and configured. The function
+ * expects a buffer to store the results of the analysis, and it will
+ * fill this buffer with formatted output. The buffer must be large
+ * enough to hold the output, and the function will not check for buffer
+ * overflow. If the buffer length is insufficient, the output may be
+ * truncated. The function also mutes the transmitter during the analysis
+ * to prevent any unwanted transmission.
+ *
+ * @param phy Pointer to the `ad9361_rf_phy` structure representing the RF
+ * device. Must not be null.
+ * @param buf Pointer to a character buffer where the results of the analysis
+ * will be stored. Must not be null.
+ * @param buflen The length of the buffer pointed to by `buf`. Must be greater
+ * than zero.
+ * @return Returns the length of the output written to the buffer, or a negative
+ * value in case of an error.
+ ******************************************************************************/
 int32_t ad9361_dig_interface_timing_analysis(struct ad9361_rf_phy *phy,
 		char *buf, int32_t buflen);
 int32_t ad9361_dig_tune(struct ad9361_rf_phy *phy, uint32_t max_freq,
 			enum dig_tune_flags flags);
+/***************************************************************************//**
+ * @brief This function is used to enable or disable a specific transmit channel
+ * in the AD9361 RF transceiver. It should be called after the
+ * transceiver has been properly initialized. The `tx_if` parameter
+ * specifies which transmit channel to control, while the `enable`
+ * parameter determines whether to enable (non-zero value) or disable
+ * (zero value) the channel. If an invalid combination of `tx_if` and
+ * `enable` is provided, the function will return an error code. It is
+ * important to ensure that the `phy` pointer is valid and that the
+ * device is in a state that allows for channel configuration.
+ *
+ * @param phy Pointer to the `ad9361_rf_phy` structure representing the RF
+ * transceiver. Must not be null.
+ * @param tx_if Specifies the transmit channel to enable or disable. Valid
+ * values are defined by the hardware specifications.
+ * @param enable Indicates whether to enable (non-zero) or disable (zero) the
+ * specified transmit channel.
+ * @return Returns 0 on success, or a negative error code on failure.
+ ******************************************************************************/
 int32_t ad9361_en_dis_tx(struct ad9361_rf_phy *phy, uint32_t tx_if,
 			 uint32_t enable);
+/***************************************************************************//**
+ * @brief This function is used to enable or disable a specific receive channel
+ * in the AD9361 RF transceiver. It should be called after the
+ * transceiver has been properly initialized. The `rx_if` parameter
+ * specifies which receive channel to control, while the `enable`
+ * parameter determines whether to enable (non-zero value) or disable
+ * (zero value) the channel. If an invalid combination of `rx_if` and
+ * `enable` is provided, the function will return an error code. It is
+ * important to ensure that the `phy` pointer is valid and points to an
+ * initialized `ad9361_rf_phy` structure.
+ *
+ * @param phy Pointer to an `ad9361_rf_phy` structure that represents the state
+ * of the RF transceiver. Must not be null.
+ * @param rx_if Specifies the receive channel to enable or disable. Valid values
+ * are defined by the hardware specifications.
+ * @param enable A flag indicating whether to enable (non-zero) or disable
+ * (zero) the specified receive channel.
+ * @return Returns 0 on success, or a negative error code on failure.
+ ******************************************************************************/
 int32_t ad9361_en_dis_rx(struct ad9361_rf_phy *phy, uint32_t rx_if,
 			 uint32_t enable);
+/***************************************************************************//**
+ * @brief This function is used to determine the appropriate channel mapping for
+ * a single receiver and transmitter configuration in the AD9361 RF PHY.
+ * It should be called after the PHY has been properly initialized. The
+ * function takes into account whether the device is configured for dual
+ * transmitters and receivers, and adjusts the channel mapping
+ * accordingly. If the device is set to use dual transmitters and
+ * receivers, the original channel is returned without modification. If
+ * the device is configured for single transmitter and receiver
+ * operation, the function may return a modified channel based on the
+ * mapping settings.
+ *
+ * @param phy Pointer to the `ad9361_rf_phy` structure representing the RF PHY
+ * instance. Must not be null.
+ * @param tx Boolean indicating whether the mapping is for transmission (true)
+ * or reception (false). Must be a valid boolean value.
+ * @param channel The channel number to be mapped. This should be a valid
+ * channel index based on the device's configuration.
+ * @return Returns the mapped channel number based on the configuration of the
+ * PHY. If the configuration allows for a different channel mapping, the
+ * returned value may be adjusted accordingly.
+ ******************************************************************************/
 int32_t ad9361_1rx1tx_channel_map(struct ad9361_rf_phy *phy, bool tx,
 				  int32_t channel);
+/***************************************************************************//**
+ * @brief This function should be called to perform gain step calibration for
+ * the RSSI (Received Signal Strength Indicator) in the AD9361 RF
+ * transceiver. It is essential to ensure that the `phy` parameter is
+ * properly initialized and points to a valid `ad9361_rf_phy` structure.
+ * The function will configure the necessary registers, execute the
+ * calibration process, and store the results. It is important to note
+ * that this function may take some time to complete, as it involves
+ * hardware interactions and waiting for calibration to finish.
+ *
+ * @param phy A pointer to an `ad9361_rf_phy` structure that represents the
+ * state of the AD9361 device. This pointer must not be null and must
+ * point to a valid initialized structure.
+ * @return Returns 0 on success, indicating that the calibration was completed
+ * successfully. If an error occurs, a negative value may be returned,
+ * indicating the type of error encountered.
+ ******************************************************************************/
 int32_t ad9361_rssi_gain_step_calib(struct ad9361_rf_phy *phy);
+/***************************************************************************//**
+ * @brief This function is used to configure the DCXO (Digital Controlled
+ * Crystal Oscillator) tuning parameters for the AD9361 RF PHY. It should
+ * be called after the initialization of the `ad9361_rf_phy` structure
+ * and before any RF operations are performed. The function will return
+ * an error if the external clock is being used, as indicated by the
+ * `use_extclk` flag in the `pdata` structure. The coarse and fine tuning
+ * values are expected to be within valid ranges, and the function will
+ * write these values to the appropriate registers.
+ *
+ * @param phy Pointer to the `ad9361_rf_phy` structure, which must not be null
+ * and should be properly initialized.
+ * @param coarse Coarse tuning value for the DCXO, expected to be within a valid
+ * range defined by the hardware specifications.
+ * @param fine Fine tuning value for the DCXO, also expected to be within a
+ * valid range defined by the hardware specifications.
+ * @return Returns 0 on success, or a negative error code if the operation
+ * fails, such as when an external clock is being used.
+ ******************************************************************************/
 int32_t ad9361_set_dcxo_tune(struct ad9361_rf_phy *phy,
 			     uint32_t coarse, uint32_t fine);
+/***************************************************************************//**
+ * @brief This function is used to control the mute state of the transmitter in
+ * the AD9361 RF PHY. It should be called when you want to mute or unmute
+ * the transmitter, typically during initialization or when changing
+ * transmission states. The `state` parameter determines whether to mute
+ * (1) or unmute (0) the transmitter. If muting, the function caches the
+ * current attenuation settings for both transmitters, allowing them to
+ * be restored when unmuting. It is important to ensure that the `phy`
+ * structure is properly initialized before calling this function.
+ *
+ * @param phy Pointer to the `ad9361_rf_phy` structure representing the RF PHY.
+ * Must not be null and should be initialized before use.
+ * @param state An integer value that indicates the mute state. A value of 1
+ * mutes the transmitter, while a value of 0 unmutes it. Valid
+ * values are 0 and 1.
+ * @return Returns an integer indicating the success or failure of the
+ * operation. A return value of 0 indicates success, while a negative
+ * value indicates an error.
+ ******************************************************************************/
 int32_t ad9361_tx_mute(struct ad9361_rf_phy *phy, uint32_t state);
+/***************************************************************************//**
+ * @brief This function is used to validate the RF bandwidth for the
+ * `ad9361_rf_phy` structure. It should be called to ensure that the
+ * specified bandwidth is within the acceptable range for the device
+ * selected. The function clamps the bandwidth value to the valid range
+ * based on the device type, which is determined by the `dev_sel` field
+ * in the `phy` structure. If the provided bandwidth is outside the valid
+ * range, it will be adjusted to the nearest valid value. This function
+ * is typically called during the configuration of the RF PHY to ensure
+ * proper operation.
+ *
+ * @param phy A pointer to the `ad9361_rf_phy` structure, which must not be
+ * null. This structure contains the device selection information
+ * that determines the valid bandwidth range.
+ * @param bw The desired RF bandwidth in Hz. It must be a positive integer. If
+ * the value is below the minimum or above the maximum allowed for the
+ * selected device, it will be clamped to the nearest valid value.
+ * @return Returns the validated RF bandwidth in Hz, which may be adjusted from
+ * the input value if it was out of range.
+ ******************************************************************************/
 uint32_t ad9361_validate_rf_bw(struct ad9361_rf_phy *phy, uint32_t bw);
+/***************************************************************************//**
+ * @brief This function is used to obtain the temperature reading from the
+ * AD9361 device. It should be called after the device has been properly
+ * initialized and configured. The function temporarily powers down the
+ * auxiliary ADC to read the temperature value, ensuring that the reading
+ * is accurate. It is important to note that the temperature value
+ * returned is in microdegrees Celsius, and the function handles the
+ * conversion internally. If the device is not initialized or if the
+ * `phy` pointer is null, the behavior is undefined.
+ *
+ * @param phy A pointer to a `struct ad9361_rf_phy` that represents the AD9361
+ * device. This pointer must not be null and should point to a valid
+ * initialized device structure.
+ * @return Returns the temperature reading in microdegrees Celsius. The value is
+ * calculated based on the raw data read from the temperature sensor.
+ ******************************************************************************/
 int32_t ad9361_get_temp(struct ad9361_rf_phy *phy);
+/***************************************************************************//**
+ * @brief This function is used to control the power state of the synthesizer
+ * for both the RX and TX channels in the AD9361 RF PHY. It should be
+ * called when there is a need to power down the synthesizer, such as
+ * during low-power operation or when the device is not in use. The
+ * function modifies the internal state of the synthesizer based on the
+ * provided control parameters for RX and TX. It is important to ensure
+ * that the device is properly initialized before calling this function,
+ * and to handle any potential errors that may arise from invalid control
+ * values.
+ *
+ * @param phy Pointer to the `ad9361_rf_phy` structure representing the RF PHY
+ * device. Must not be null.
+ * @param rx Control for the RX synthesizer power state, which can be one of the
+ * following: `LO_OFF` to power down, `LO_ON` to power up, or
+ * `LO_DONTCARE` to leave unchanged.
+ * @param tx Control for the TX synthesizer power state, which can be one of the
+ * following: `LO_OFF` to power down, `LO_ON` to power up, or
+ * `LO_DONTCARE` to leave unchanged.
+ * @return Returns an integer indicating the success or failure of the
+ * operation. A negative value indicates an error occurred.
+ ******************************************************************************/
 int ad9361_synth_lo_powerdown(struct ad9361_rf_phy *phy,
 			      enum synth_pd_ctrl rx,
 			      enum synth_pd_ctrl tx);
+/***************************************************************************//**
+ * @brief This function is intended to reset the internal state of the
+ * `ad9361_rf_phy` structure to its default values. It should be called
+ * when reinitializing the device or when a clean state is required
+ * before starting new operations. The function does not return any value
+ * and does not modify any input parameters. It is important to ensure
+ * that the `phy` pointer is valid and points to an initialized
+ * `ad9361_rf_phy` structure before calling this function.
+ *
+ * @param phy A pointer to an `ad9361_rf_phy` structure that represents the RF
+ * PHY device. This pointer must not be null and should point to a
+ * valid, initialized instance of the structure.
+ * @return None
+ ******************************************************************************/
 void ad9361_clear_state(struct ad9361_rf_phy *phy);
 #endif

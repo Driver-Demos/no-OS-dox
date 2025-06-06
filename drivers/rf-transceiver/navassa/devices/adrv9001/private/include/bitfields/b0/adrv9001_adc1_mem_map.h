@@ -13,20 +13,53 @@
 
 #include "adrv9001_bf_hal.h"
 
+/***************************************************************************//**
+ * @brief The `adrv9001_BfAdc1MemMap_e` is an enumeration that defines memory
+ * map addresses for ADCs in the ADRV9001 device. It includes specific
+ * addresses for RX1 and RX2 ADCs, which are used to access and control
+ * the ADCs' settings and operations. This enumeration is part of a
+ * larger system for managing ADC configurations and operations in the
+ * ADRV9001, a high-performance RF transceiver.
+ *
+ * @param ADRV9001_BF_RX1_ADC Represents the memory map address for RX1 ADC, set
+ * to 0x2000.
+ * @param ADRV9001_BF_RX2_ADC Represents the memory map address for RX2 ADC, set
+ * to 0x2600.
+ ******************************************************************************/
 typedef enum adrv9001_BfAdc1MemMap_e
 {
     ADRV9001_BF_RX1_ADC    =   0x2000,
     ADRV9001_BF_RX2_ADC    =   0x2600
 } adrv9001_BfAdc1MemMap_e;
 
+/***************************************************************************//**
+ * @brief The `adc1MemMapInstances` is a static constant array of type
+ * `adrv9001_BfAdc1MemMap_e`, which is an enumeration representing
+ * specific ADC memory map instances. It contains two elements:
+ * `ADRV9001_BF_RX1_ADC` and `ADRV9001_BF_RX2_ADC`, which correspond to
+ * specific memory map addresses for ADC channels RX1 and RX2.
+ *
+ * @details This array is used to reference specific ADC memory map instances
+ * for configuration or control within the ADC1 memory map operations.
+ ******************************************************************************/
 static const adrv9001_BfAdc1MemMap_e adc1MemMapInstances[] = {
     ADRV9001_BF_RX1_ADC,
     ADRV9001_BF_RX2_ADC
 };
 
-/**
- * Compensation capacitor on ADC Amplifier 1 4th/5th-order path, from 160f to 1280f by 160f
- */
+/***************************************************************************//**
+ * @brief Sets the compensation capacitor value for ADC Amplifier 1, Cap 1.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the ADC instance (e.g., RX1
+ * or RX2).
+ * @param regInstance An index to specify the register instance for the
+ * operation.
+ * @param value The value to set for the compensation capacitor, represented as
+ * an 8-bit unsigned integer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcAmp1Cap1_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -39,9 +72,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcAmp1Cap1_Set(void *device,
     return status;
 }
 
-/**
- * Compensation capacitor on ADC Amplifier 1 4th/5th-order path, from 160f to 1280f by 160f
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the compensation capacitor for ADC Amplifier 1,
+ * Cap 1.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated type indicating which ADC instance to access.
+ * @param regInstance An unsigned integer representing the specific register
+ * instance to read from.
+ * @param value A pointer to a uint8_t where the retrieved value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcAmp1Cap1_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -57,9 +100,21 @@ static inline int32_t adrv9001_Adc1MemMap_AdcAmp1Cap1_Get(void *device,
     return status;
 }
 
-/**
- * Compensation capacitor on ADC Amplifier 1 5th-order path, from 160f to 1280f by 160f
- */
+/***************************************************************************//**
+ * @brief Sets the compensation capacitor value for ADC Amplifier 1's 5th-order
+ * path.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated type indicating which ADC instance (e.g., RX1
+ * or RX2) is being configured.
+ * @param regInstance An index representing the specific register instance to be
+ * modified.
+ * @param value The value to set for the compensation capacitor, represented as
+ * an 8-bit unsigned integer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcAmp1Cap2_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -72,9 +127,17 @@ static inline int32_t adrv9001_Adc1MemMap_AdcAmp1Cap2_Set(void *device,
     return status;
 }
 
-/**
- * Compensation capacitor on ADC Amplifier 1 5th-order path, from 160f to 1280f by 160f
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the compensation capacitor setting for ADC
+ * Amplifier 1, 5th-order path.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance to access.
+ * @param regInstance An index to specify the register instance for the ADC.
+ * @param value A pointer to a uint8_t where the retrieved value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcAmp1Cap2_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -90,9 +153,18 @@ static inline int32_t adrv9001_Adc1MemMap_AdcAmp1Cap2_Get(void *device,
     return status;
 }
 
-/**
- * Enable ADC Amplifier 1
- */
+/***************************************************************************//**
+ * @brief Sets the enable state of ADC Amplifier 1.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance
+ * (e.g., RX1 or RX2).
+ * @param value A uint8_t value indicating whether to enable (1) or disable (0)
+ * the ADC amplifier.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcAmp1En_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t value)
@@ -104,9 +176,18 @@ static inline int32_t adrv9001_Adc1MemMap_AdcAmp1En_Set(void *device,
     return status;
 }
 
-/**
- * Enable ADC Amplifier 1
- */
+/***************************************************************************//**
+ * @brief Retrieves the enabled state of ADC Amplifier 1.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance
+ * (e.g., RX1 or RX2).
+ * @param value A pointer to a uint8_t variable where the retrieved enabled
+ * state will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcAmp1En_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t *value)
@@ -121,6 +202,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcAmp1En_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the spare configuration for ADC Amplifier 1.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerator of type `adrv9001_BfAdc1MemMap_e` that
+ * specifies the ADC instance.
+ * @param regInstance A 32-bit unsigned integer representing the specific
+ * register instance to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the specified register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcAmp1Spare_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -133,6 +227,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcAmp1Spare_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the spare register value for ADC Amplifier 1 from the
+ * specified device.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value indicating which ADC instance to access.
+ * @param regInstance An index specifying the register instance to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcAmp1Spare_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -148,9 +255,21 @@ static inline int32_t adrv9001_Adc1MemMap_AdcAmp1Spare_Get(void *device,
     return status;
 }
 
-/**
- * Compensation capacitor on ADC Amplifier 2 4th/5th-order path, from 160f to 1280f by 160f
- */
+/***************************************************************************//**
+ * @brief Sets the compensation capacitor value for ADC Amplifier 2's first
+ * capacitor.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated type indicating which ADC instance to
+ * configure.
+ * @param regInstance An index representing the specific register instance to
+ * modify.
+ * @param value The value to set for the compensation capacitor, represented as
+ * an 8-bit unsigned integer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcAmp2Cap1_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -163,9 +282,18 @@ static inline int32_t adrv9001_Adc1MemMap_AdcAmp2Cap1_Set(void *device,
     return status;
 }
 
-/**
- * Compensation capacitor on ADC Amplifier 2 4th/5th-order path, from 160f to 1280f by 160f
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the compensation capacitor setting for ADC
+ * Amplifier 2, 4th/5th-order path.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance to access.
+ * @param regInstance An index to specify the particular register instance.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcAmp2Cap1_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -181,9 +309,20 @@ static inline int32_t adrv9001_Adc1MemMap_AdcAmp2Cap1_Get(void *device,
     return status;
 }
 
-/**
- * Compensation capacitor on ADC Amplifier 2 5th-order path, from 160f to 1280f by 160f
- */
+/***************************************************************************//**
+ * @brief Sets the compensation capacitor value for ADC Amplifier 2's 5th-order
+ * path.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance (e.g., RX1
+ * or RX2) is being configured.
+ * @param regInstance An index representing the specific register instance to be
+ * modified.
+ * @param value The value to set for the compensation capacitor, represented as
+ * an 8-bit unsigned integer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcAmp2Cap2_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -196,9 +335,18 @@ static inline int32_t adrv9001_Adc1MemMap_AdcAmp2Cap2_Set(void *device,
     return status;
 }
 
-/**
- * Compensation capacitor on ADC Amplifier 2 5th-order path, from 160f to 1280f by 160f
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the compensation capacitor setting for ADC
+ * Amplifier 2 5th-order path.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance to access.
+ * @param regInstance An index to specify the particular register instance.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcAmp2Cap2_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -214,9 +362,18 @@ static inline int32_t adrv9001_Adc1MemMap_AdcAmp2Cap2_Get(void *device,
     return status;
 }
 
-/**
- * Enable ADC Amplifier 2
- */
+/***************************************************************************//**
+ * @brief Sets the enable state for ADC Amplifier 2.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance
+ * (e.g., RX1 or RX2).
+ * @param value A uint8_t value that indicates whether to enable (1) or disable
+ * (0) the ADC amplifier.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcAmp2En_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t value)
@@ -228,9 +385,18 @@ static inline int32_t adrv9001_Adc1MemMap_AdcAmp2En_Set(void *device,
     return status;
 }
 
-/**
- * Enable ADC Amplifier 2
- */
+/***************************************************************************//**
+ * @brief Retrieves the enabled state of ADC Amplifier 2.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance
+ * (e.g., RX1 or RX2).
+ * @param value A pointer to a uint8_t variable where the retrieved enabled
+ * state will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcAmp2En_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t *value)
@@ -245,6 +411,20 @@ static inline int32_t adrv9001_Adc1MemMap_AdcAmp2En_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the spare configuration for ADC Amplifier 2 in the ADRV9001
+ * device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value indicating which ADC instance (e.g., RX1
+ * or RX2) is being configured.
+ * @param regInstance An index representing the specific register instance to be
+ * modified.
+ * @param value An 8-bit value to be written to the specified register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcAmp2Spare_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -257,6 +437,16 @@ static inline int32_t adrv9001_Adc1MemMap_AdcAmp2Spare_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the spare ADC amplifier value from the specified register.
+ *
+ * @param device A pointer to the device structure representing the ADC.
+ * @param instance An enumerated type indicating which ADC instance to access.
+ * @param regInstance An index specifying the register instance to read from.
+ * @param value A pointer to a uint8_t where the retrieved value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcAmp2Spare_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -272,9 +462,18 @@ static inline int32_t adrv9001_Adc1MemMap_AdcAmp2Spare_Get(void *device,
     return status;
 }
 
-/**
- * Enable ADC Amplifier 3
- */
+/***************************************************************************//**
+ * @brief Sets the enable state for ADC Amplifier 3.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance
+ * (e.g., ADRV9001_BF_RX1_ADC or ADRV9001_BF_RX2_ADC).
+ * @param value A uint8_t value that indicates whether to enable (1) or disable
+ * (0) the ADC amplifier.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcAmp3En_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t value)
@@ -286,9 +485,18 @@ static inline int32_t adrv9001_Adc1MemMap_AdcAmp3En_Set(void *device,
     return status;
 }
 
-/**
- * Enable ADC Amplifier 3
- */
+/***************************************************************************//**
+ * @brief Retrieves the enable status of ADC Amplifier 3.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance
+ * (e.g., RX1 or RX2).
+ * @param value A pointer to a uint8_t variable where the retrieved enable
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcAmp3En_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t *value)
@@ -303,6 +511,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcAmp3En_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the spare configuration for ADC Amplifier 3.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerator of type `adrv9001_BfAdc1MemMap_e` that
+ * specifies the ADC instance.
+ * @param regInstance A 32-bit unsigned integer representing the specific
+ * register instance to be modified.
+ * @param value An 8-bit unsigned integer representing the value to be set in
+ * the specified register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcAmp3Spare_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -315,6 +536,18 @@ static inline int32_t adrv9001_Adc1MemMap_AdcAmp3Spare_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the spare value from the ADC amplifier 3 register.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated type indicating which ADC instance to access.
+ * @param regInstance An index specifying the register instance to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcAmp3Spare_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -330,9 +563,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcAmp3Spare_Get(void *device,
     return status;
 }
 
-/**
- * Bias current for ADC Amplifier 1, input GM stage, from 5uA to 42.5uA
- */
+/***************************************************************************//**
+ * @brief Sets the bias current for ADC Amplifier 1's input GM stage.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the ADC instance (e.g., RX1
+ * or RX2).
+ * @param regInstance An index for the specific register instance to be
+ * modified.
+ * @param value The bias current value to be set, represented as an 8-bit
+ * unsigned integer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp1Gm1a_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -345,9 +588,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp1Gm1a_Set(void *device,
     return status;
 }
 
-/**
- * Bias current for ADC Amplifier 1, input GM stage, from 5uA to 42.5uA
- */
+/***************************************************************************//**
+ * @brief Retrieves the bias current setting for ADC Amplifier 1's input GM
+ * stage.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value indicating which ADC instance to access.
+ * @param regInstance An index to specify the register instance for the ADC.
+ * @param value A pointer to a uint8_t variable where the retrieved bias current
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp1Gm1a_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -363,9 +616,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp1Gm1a_Get(void *device,
     return status;
 }
 
-/**
- * Bias current for ADC Amplifier 1, input GM stage on 1.8V, from 5uA to 42.5uA
- */
+/***************************************************************************//**
+ * @brief Sets the bias current for ADC Amplifier 1's input GM stage on 1.8V.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance to
+ * configure.
+ * @param regInstance An index to specify the register instance for the
+ * configuration.
+ * @param value The value to set for the bias current, represented as an 8-bit
+ * unsigned integer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp1Gm1a1p8_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -378,9 +641,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp1Gm1a1p8_Set(void *device,
     return status;
 }
 
-/**
- * Bias current for ADC Amplifier 1, input GM stage on 1.8V, from 5uA to 42.5uA
- */
+/***************************************************************************//**
+ * @brief Retrieves the bias current setting for ADC Amplifier 1's input GM
+ * stage on 1.8V.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated type indicating which ADC instance to access.
+ * @param regInstance An index to specify the register instance for the ADC.
+ * @param value A pointer to a uint8_t variable where the retrieved bias current
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp1Gm1a1p8_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -396,9 +669,20 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp1Gm1a1p8_Get(void *device,
     return status;
 }
 
-/**
- * Bias current for ADC Amplifier 1, midband GM stage, from 5uA to 42.5uA
- */
+/***************************************************************************//**
+ * @brief Sets the bias current for the midband GM stage of ADC Amplifier 1.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated type indicating which ADC instance to
+ * configure.
+ * @param regInstance An index representing the specific register instance to
+ * modify.
+ * @param value The value to set for the bias current, which is a 8-bit unsigned
+ * integer.
+ * @return Returns the status of the write operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp1Gm1b_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -411,9 +695,18 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp1Gm1b_Set(void *device,
     return status;
 }
 
-/**
- * Bias current for ADC Amplifier 1, midband GM stage, from 5uA to 42.5uA
- */
+/***************************************************************************//**
+ * @brief Retrieves the bias current setting for the midband GM stage of ADC
+ * Amplifier 1.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value indicating which ADC instance to access.
+ * @param regInstance An index to specify the register instance for the ADC.
+ * @param value A pointer to a uint8_t variable where the retrieved bias current
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp1Gm1b_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -429,9 +722,18 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp1Gm1b_Get(void *device,
     return status;
 }
 
-/**
- * Bias current for ADC Amplifier 1, high speed GM stage, from 5uA to 42.5uA
- */
+/***************************************************************************//**
+ * @brief Sets the bias current for the high-speed GM stage of ADC Amplifier 1.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance to
+ * configure.
+ * @param regInstance An index to specify the register instance for the ADC
+ * configuration.
+ * @param value An 8-bit value representing the desired bias current setting.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp1Gm1d_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -444,9 +746,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp1Gm1d_Set(void *device,
     return status;
 }
 
-/**
- * Bias current for ADC Amplifier 1, high speed GM stage, from 5uA to 42.5uA
- */
+/***************************************************************************//**
+ * @brief Retrieves the bias current setting for the high-speed GM stage of ADC
+ * Amplifier 1.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value indicating which ADC instance to access.
+ * @param regInstance An index specifying the register instance to read from.
+ * @param value A pointer to a uint8_t where the retrieved bias current value
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp1Gm1d_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -462,9 +774,18 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp1Gm1d_Get(void *device,
     return status;
 }
 
-/**
- * Bias current for ADC Amplifier 1, high gain GM stage, from 5uA to 42.5uA
- */
+/***************************************************************************//**
+ * @brief Sets the bias current for ADC Amplifier 1's high gain GM stage.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance to
+ * configure.
+ * @param regInstance An index to specify the register instance for the
+ * configuration.
+ * @param value An 8-bit value representing the desired bias current setting.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp1Gm2a_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -477,9 +798,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp1Gm2a_Set(void *device,
     return status;
 }
 
-/**
- * Bias current for ADC Amplifier 1, high gain GM stage, from 5uA to 42.5uA
- */
+/***************************************************************************//**
+ * @brief Retrieves the bias current setting for the ADC Amplifier 1 high gain
+ * GM stage.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated type indicating which ADC instance to access.
+ * @param regInstance An index to specify the register instance for the ADC.
+ * @param value A pointer to a uint8_t variable where the retrieved bias current
+ * value will be stored.
+ * @return Returns an integer status code indicating success or failure of the
+ * read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp1Gm2a_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -495,9 +826,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp1Gm2a_Get(void *device,
     return status;
 }
 
-/**
- * Bias current for ADC Amplifier 1, midband GM stage, from 5uA to 42.5uA
- */
+/***************************************************************************//**
+ * @brief Sets the bias current for the ADC Amplifier 1 midband GM stage.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance to
+ * configure.
+ * @param regInstance An index to specify the register instance for the
+ * configuration.
+ * @param value The value to set for the bias current, represented as an 8-bit
+ * unsigned integer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp1Gm4a_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -510,9 +851,18 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp1Gm4a_Set(void *device,
     return status;
 }
 
-/**
- * Bias current for ADC Amplifier 1, midband GM stage, from 5uA to 42.5uA
- */
+/***************************************************************************//**
+ * @brief Retrieves the bias current setting for ADC Amplifier 1's midband GM
+ * stage.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance to access.
+ * @param regInstance An index to specify the register instance for the ADC.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp1Gm4a_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -528,9 +878,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp1Gm4a_Get(void *device,
     return status;
 }
 
-/**
- * Bias current for ADC Amplifier 2, input GM stage, from 5uA to 42.5uA
- */
+/***************************************************************************//**
+ * @brief Sets the bias current for ADC Amplifier 2's input GM stage.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the ADC instance (e.g., RX1
+ * or RX2).
+ * @param regInstance An index for the specific register instance to be
+ * modified.
+ * @param value The value to set for the bias current, represented as an 8-bit
+ * unsigned integer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp2Gm1a_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -543,9 +903,17 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp2Gm1a_Set(void *device,
     return status;
 }
 
-/**
- * Bias current for ADC Amplifier 2, input GM stage, from 5uA to 42.5uA
- */
+/***************************************************************************//**
+ * @brief Retrieves the bias current for ADC Amplifier 2's input GM stage.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance to access.
+ * @param regInstance An index to specify the register instance for the ADC.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp2Gm1a_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -561,9 +929,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp2Gm1a_Get(void *device,
     return status;
 }
 
-/**
- * Bias current for ADC Amplifier 2, input GM stage on 1.8V, from 5uA to 42.5uA
- */
+/***************************************************************************//**
+ * @brief Sets the bias current for ADC Amplifier 2's input GM stage on 1.8V.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance to
+ * configure.
+ * @param regInstance An index for the specific register instance to be
+ * modified.
+ * @param value The value to set for the bias current, represented as an 8-bit
+ * unsigned integer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp2Gm1a1p8_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -576,9 +954,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp2Gm1a1p8_Set(void *device,
     return status;
 }
 
-/**
- * Bias current for ADC Amplifier 2, input GM stage on 1.8V, from 5uA to 42.5uA
- */
+/***************************************************************************//**
+ * @brief Retrieves the bias current for ADC Amplifier 2's input GM stage on
+ * 1.8V.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated type indicating which ADC instance to access.
+ * @param regInstance An index to specify the register instance for the ADC.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp2Gm1a1p8_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -594,9 +982,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp2Gm1a1p8_Get(void *device,
     return status;
 }
 
-/**
- * Bias current for ADC Amplifier 2, midband GM stage, from 5uA to 42.5uA
- */
+/***************************************************************************//**
+ * @brief Sets the bias current for the midband GM stage of ADC Amplifier 1.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance is being
+ * configured.
+ * @param regInstance An index for the specific register instance to be
+ * modified.
+ * @param value The value to set for the bias current, which is a 8-bit unsigned
+ * integer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp2Gm1b_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -609,9 +1007,21 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp2Gm1b_Set(void *device,
     return status;
 }
 
-/**
- * Bias current for ADC Amplifier 2, midband GM stage, from 5uA to 42.5uA
- */
+/***************************************************************************//**
+ * @brief Retrieves the bias current setting for the midband GM stage of ADC
+ * Amplifier 1.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated type indicating which ADC instance (e.g., RX1
+ * or RX2) is being accessed.
+ * @param regInstance An unsigned integer representing the specific register
+ * instance to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved bias current
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp2Gm1b_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -627,9 +1037,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp2Gm1b_Get(void *device,
     return status;
 }
 
-/**
- * Bias current for ADC Amplifier 2, high speed GM stage, from 5uA to 42.5uA
- */
+/***************************************************************************//**
+ * @brief Sets the bias current for the ADC Amplifier 2 high speed GM stage.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the ADC instance (e.g., RX1
+ * or RX2).
+ * @param regInstance An unsigned integer representing the specific register
+ * instance.
+ * @param value An 8-bit unsigned integer representing the bias current value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp2Gm1d_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -642,9 +1062,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp2Gm1d_Set(void *device,
     return status;
 }
 
-/**
- * Bias current for ADC Amplifier 2, high speed GM stage, from 5uA to 42.5uA
- */
+/***************************************************************************//**
+ * @brief Retrieves the bias current setting for the ADC Amplifier 1 high speed
+ * GM stage.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated type indicating which ADC instance to access.
+ * @param regInstance An index to specify the particular register instance.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp2Gm1d_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -660,9 +1090,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp2Gm1d_Get(void *device,
     return status;
 }
 
-/**
- * Bias current for ADC Amplifier 2, high gain GM stage, from 5uA to 42.5uA
- */
+/***************************************************************************//**
+ * @brief Sets the bias current for ADC Amplifier 2's input GM stage.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the ADC instance (e.g., RX1
+ * or RX2).
+ * @param regInstance An index for the specific register instance to be
+ * modified.
+ * @param value The value to set for the bias current, which is a 8-bit unsigned
+ * integer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp2Gm2a_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -675,9 +1115,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp2Gm2a_Set(void *device,
     return status;
 }
 
-/**
- * Bias current for ADC Amplifier 2, high gain GM stage, from 5uA to 42.5uA
- */
+/***************************************************************************//**
+ * @brief Retrieves the bias current setting for ADC Amplifier 2's high gain GM
+ * stage.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value indicating which ADC instance to access.
+ * @param regInstance An index to specify the register instance for the ADC.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp2Gm2a_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -693,9 +1143,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp2Gm2a_Get(void *device,
     return status;
 }
 
-/**
- * Bias current for ADC Amplifier 2, midband GM stage, from 5uA to 42.5uA
- */
+/***************************************************************************//**
+ * @brief Sets the bias current for ADC Amplifier 2's input GM stage on 1.8V.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance is being
+ * configured.
+ * @param regInstance An index representing the specific register instance to be
+ * modified.
+ * @param value The value to set for the bias current, represented as an 8-bit
+ * unsigned integer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp2Gm4a_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -708,9 +1168,21 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp2Gm4a_Set(void *device,
     return status;
 }
 
-/**
- * Bias current for ADC Amplifier 2, midband GM stage, from 5uA to 42.5uA
- */
+/***************************************************************************//**
+ * @brief Retrieves the bias current setting for ADC Amplifier 2's input GM
+ * stage on 1.8V.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated type indicating which ADC instance (e.g., RX1
+ * or RX2) is being accessed.
+ * @param regInstance An unsigned integer representing the specific register
+ * instance to read from.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp2Gm4a_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -726,9 +1198,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp2Gm4a_Get(void *device,
     return status;
 }
 
-/**
- * Bias current for ADC Amplifier 3, input GM stage, from 5uA to 42.5uA
- */
+/***************************************************************************//**
+ * @brief Sets the bias current for ADC Amplifier 3's input GM stage.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance is being
+ * configured.
+ * @param regInstance An index to specify the register instance for the
+ * configuration.
+ * @param value The value to set for the bias current, represented as an 8-bit
+ * unsigned integer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp3Gm1a_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -741,9 +1223,18 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp3Gm1a_Set(void *device,
     return status;
 }
 
-/**
- * Bias current for ADC Amplifier 3, input GM stage, from 5uA to 42.5uA
- */
+/***************************************************************************//**
+ * @brief Retrieves the bias current for ADC Amplifier 3's input GM stage.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated type indicating which ADC instance to access.
+ * @param regInstance An index to specify the register instance for the ADC.
+ * @param value A pointer to a uint8_t variable where the retrieved bias current
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp3Gm1a_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -759,9 +1250,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp3Gm1a_Get(void *device,
     return status;
 }
 
-/**
- * Bias current for ADC Amplifier 3, input GM stage on 1.8V, from 5uA to 42.5uA
- */
+/***************************************************************************//**
+ * @brief Sets the bias current for ADC Amplifier 3's input GM stage on 1.8V.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance is being
+ * configured.
+ * @param regInstance An index to specify the register instance for the ADC
+ * configuration.
+ * @param value The value to set for the bias current, which is a 8-bit unsigned
+ * integer.
+ * @return Returns the status of the write operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp3Gm1a1p8_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -774,9 +1275,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp3Gm1a1p8_Set(void *device,
     return status;
 }
 
-/**
- * Bias current for ADC Amplifier 3, input GM stage on 1.8V, from 5uA to 42.5uA
- */
+/***************************************************************************//**
+ * @brief Retrieves the bias current for ADC Amplifier 3's input GM stage on
+ * 1.8V.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated type indicating which ADC instance to access.
+ * @param regInstance An index to specify the register instance for the ADC.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp3Gm1a1p8_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -792,9 +1303,20 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp3Gm1a1p8_Get(void *device,
     return status;
 }
 
-/**
- * Bias current for ADC Amplifier 3, high speed GM stage, from 5uA to 42.5uA
- */
+/***************************************************************************//**
+ * @brief Sets the bias current for the ADC Amplifier 1 high speed GM stage.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated type indicating which ADC instance to
+ * configure.
+ * @param regInstance An index representing the specific register instance to be
+ * modified.
+ * @param value The value to set for the bias current, which is a 8-bit unsigned
+ * integer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp3Gm1d_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -807,9 +1329,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp3Gm1d_Set(void *device,
     return status;
 }
 
-/**
- * Bias current for ADC Amplifier 3, high speed GM stage, from 5uA to 42.5uA
- */
+/***************************************************************************//**
+ * @brief Retrieves the bias current setting for the ADC Amplifier 3 high speed
+ * GM stage.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated type indicating which ADC instance to access.
+ * @param regInstance An index to specify the particular register instance.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp3Gm1d_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -825,9 +1357,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp3Gm1d_Get(void *device,
     return status;
 }
 
-/**
- * Bias current for ADC Amplifier 3, midband GM stage, from 5uA to 42.5uA
- */
+/***************************************************************************//**
+ * @brief Sets the bias current for ADC Amplifier 3's input GM stage.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance is being
+ * configured.
+ * @param regInstance An index for the specific register instance to be
+ * modified.
+ * @param value The value to set for the bias current, represented as an 8-bit
+ * unsigned integer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp3Gm4a_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -840,9 +1382,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp3Gm4a_Set(void *device,
     return status;
 }
 
-/**
- * Bias current for ADC Amplifier 3, midband GM stage, from 5uA to 42.5uA
- */
+/***************************************************************************//**
+ * @brief Retrieves the bias current setting for ADC Amplifier 3's midband GM
+ * stage.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated type indicating which ADC instance to access.
+ * @param regInstance An index to specify the particular register instance.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp3Gm4a_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -858,9 +1410,16 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasAmp3Gm4a_Get(void *device,
     return status;
 }
 
-/**
- * No longer used
- */
+/***************************************************************************//**
+ * @brief Sets the bias DAC amplifier for ADC 1.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the specific ADC instance
+ * (e.g., RX1 or RX2).
+ * @param value An 8-bit value to set the bias DAC amplifier.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasDacAmp_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t value)
@@ -872,9 +1431,18 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasDacAmp_Set(void *device,
     return status;
 }
 
-/**
- * No longer used
- */
+/***************************************************************************//**
+ * @brief Retrieves the ADC bias DAC amplifier value from the specified ADC
+ * instance.
+ *
+ * @param device A pointer to the device structure representing the ADC.
+ * @param instance An enumerated value representing the specific ADC instance
+ * (e.g., RX1 or RX2).
+ * @param value A pointer to a `uint8_t` where the retrieved DAC amplifier value
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasDacAmp_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t *value)
@@ -889,9 +1457,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasDacAmp_Get(void *device,
     return status;
 }
 
-/**
- * Bias current for op-amp controlling DAC N-current sink in ADC
- */
+/***************************************************************************//**
+ * @brief Sets the bias current for the op-amp controlling the DAC N-current
+ * sink in the ADC.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance
+ * (e.g., RX1 or RX2).
+ * @param value An 8-bit unsigned integer representing the bias current value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasDacAmpNcurr_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t value)
@@ -903,9 +1481,17 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasDacAmpNcurr_Set(void *device,
     return status;
 }
 
-/**
- * Bias current for op-amp controlling DAC N-current sink in ADC
- */
+/***************************************************************************//**
+ * @brief Retrieves the bias current for the op-amp controlling the DAC
+ * N-current sink in the ADC.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the specific ADC instance.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasDacAmpNcurr_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t *value)
@@ -920,9 +1506,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasDacAmpNcurr_Get(void *device,
     return status;
 }
 
-/**
- * Bias current for op-amp controlling DAC P-current source in ADC
- */
+/***************************************************************************//**
+ * @brief Sets the bias current for the op-amp controlling the DAC P-current
+ * source in the ADC.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance
+ * (e.g., RX1 or RX2).
+ * @param value An 8-bit unsigned integer representing the bias current value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasDacAmpPcurr_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t value)
@@ -934,9 +1530,18 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasDacAmpPcurr_Set(void *device,
     return status;
 }
 
-/**
- * Bias current for op-amp controlling DAC P-current source in ADC
- */
+/***************************************************************************//**
+ * @brief Retrieves the bias current for the op-amp controlling the DAC
+ * P-current source in the ADC.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the specific ADC instance
+ * (e.g., RX1 or RX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved bias
+ * current value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasDacAmpPcurr_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t *value)
@@ -951,9 +1556,17 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasDacAmpPcurr_Get(void *device,
     return status;
 }
 
-/**
- * Bias current controlling DAC cascode transistor voltage in ADC
- */
+/***************************************************************************//**
+ * @brief Sets the bias current controlling the DAC cascode transistor voltage
+ * in the ADC.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the specific ADC instance.
+ * @param value An 8-bit unsigned integer representing the bias current value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasDacBiasPply_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t value)
@@ -965,9 +1578,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasDacBiasPply_Set(void *device,
     return status;
 }
 
-/**
- * Bias current controlling DAC cascode transistor voltage in ADC
- */
+/***************************************************************************//**
+ * @brief Retrieves the bias DAC voltage for the ADC from the specified device
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance
+ * (e.g., RX1 or RX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved bias DAC
+ * voltage will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasDacBiasPply_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t *value)
@@ -982,9 +1605,15 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasDacBiasPply_Get(void *device,
     return status;
 }
 
-/**
- * Bias control to set DAC calibration current
- */
+/***************************************************************************//**
+ * @brief Sets the DAC calibration current for the ADC.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the specific ADC instance.
+ * @param value A uint8_t value representing the calibration current to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasDacIcalPply_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t value)
@@ -996,9 +1625,16 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasDacIcalPply_Set(void *device,
     return status;
 }
 
-/**
- * Bias control to set DAC calibration current
- */
+/***************************************************************************//**
+ * @brief Retrieves the calibration current setting for the DAC bias in the ADC.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the specific ADC instance.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasDacIcalPply_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t *value)
@@ -1013,9 +1649,17 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasDacIcalPply_Get(void *device,
     return status;
 }
 
-/**
- * Bias control to set DAC LSB current in ADC
- */
+/***************************************************************************//**
+ * @brief Sets the ILSB (Least Significant Bit) current for the DAC in the ADC.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance (e.g., RX1
+ * or RX2) is being configured.
+ * @param value An 8-bit unsigned integer representing the ILSB current value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasDacIlsb_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t value)
@@ -1027,9 +1671,17 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasDacIlsb_Set(void *device,
     return status;
 }
 
-/**
- * Bias control to set DAC LSB current in ADC
- */
+/***************************************************************************//**
+ * @brief Retrieves the DAC ILSB bias current setting for the specified ADC
+ * instance.
+ *
+ * @param device A pointer to the device structure representing the ADC.
+ * @param instance An enumerated value indicating which ADC instance to access.
+ * @param value A pointer to a uint8_t variable where the retrieved ILSB bias
+ * current value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasDacIlsb_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t *value)
@@ -1044,9 +1696,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasDacIlsb_Get(void *device,
     return status;
 }
 
-/**
- * Bias current for FLASH in ADC
- */
+/***************************************************************************//**
+ * @brief Sets the bias current for the FLASH in the ADC.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance is being
+ * configured.
+ * @param regInstance An index to specify the register instance for the bias
+ * setting.
+ * @param value The value to set for the bias current, represented as an 8-bit
+ * unsigned integer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasFlashBias_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -1059,9 +1721,17 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasFlashBias_Set(void *device,
     return status;
 }
 
-/**
- * Bias current for FLASH in ADC
- */
+/***************************************************************************//**
+ * @brief Retrieves the bias current for the FLASH in the ADC.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance to access.
+ * @param regInstance An index to specify the register instance.
+ * @param value A pointer to a uint8_t variable where the retrieved bias value
+ * will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasFlashBias_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -1077,9 +1747,18 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasFlashBias_Get(void *device,
     return status;
 }
 
-/**
- * Bias current for FLASH reference voltage generator in ADC
- */
+/***************************************************************************//**
+ * @brief Sets the bias current for the FLASH reference voltage generator in the
+ * ADC.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the specific ADC instance
+ * (e.g., RX1 or RX2).
+ * @param value An 8-bit unsigned integer representing the bias current value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasFlashRefgen_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t value)
@@ -1091,9 +1770,18 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasFlashRefgen_Set(void *device,
     return status;
 }
 
-/**
- * Bias current for FLASH reference voltage generator in ADC
- */
+/***************************************************************************//**
+ * @brief Retrieves the bias current setting for the FLASH reference voltage
+ * generator in the ADC.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the specific ADC instance
+ * (e.g., RX1 or RX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved bias
+ * current value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasFlashRefgen_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t *value)
@@ -1108,9 +1796,18 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasFlashRefgen_Get(void *device,
     return status;
 }
 
-/**
- * Programmable 1k reference resistor in ADC
- */
+/***************************************************************************//**
+ * @brief Sets the programmable 1k reference resistor in the ADC.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance to
+ * configure.
+ * @param regInstance An index to specify the register instance for the
+ * operation.
+ * @param value The value to set for the programmable reference resistor.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasRcal_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -1123,9 +1820,17 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasRcal_Set(void *device,
     return status;
 }
 
-/**
- * Programmable 1k reference resistor in ADC
- */
+/***************************************************************************//**
+ * @brief Retrieves the programmable 1k reference resistor value from the ADC.
+ *
+ * @param device A pointer to the device structure representing the ADC.
+ * @param instance An enumerated type indicating which ADC instance to access.
+ * @param regInstance An index to specify the register instance for the ADC.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating success or failure of the
+ * read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasRcal_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -1141,9 +1846,18 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasRcal_Get(void *device,
     return status;
 }
 
-/**
- * Bias current for op-amp controlling the common-mode voltage in ADC
- */
+/***************************************************************************//**
+ * @brief Sets the bias current for the op-amp controlling the common-mode
+ * voltage in the ADC.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the specific ADC instance
+ * (e.g., RX1 or RX2).
+ * @param value An 8-bit unsigned integer representing the bias current value to
+ * be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasVcmAmp_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t value)
@@ -1155,9 +1869,18 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasVcmAmp_Set(void *device,
     return status;
 }
 
-/**
- * Bias current for op-amp controlling the common-mode voltage in ADC
- */
+/***************************************************************************//**
+ * @brief Retrieves the ADC bias voltage for the common-mode voltage amplifier.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance
+ * (e.g., RX1 or RX2).
+ * @param value A pointer to a uint8_t variable where the retrieved bias voltage
+ * value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasVcmAmp_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t *value)
@@ -1172,9 +1895,17 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasVcmAmp_Get(void *device,
     return status;
 }
 
-/**
- * Bias current to set the on-voltage of switch transistors of programmable R&C in ADC
- */
+/***************************************************************************//**
+ * @brief Sets the bias voltage for the ADC switch transistors.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance
+ * (e.g., RX1 or RX2).
+ * @param value An 8-bit unsigned integer representing the bias voltage setting.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasVon_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t value)
@@ -1186,9 +1917,18 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasVon_Set(void *device,
     return status;
 }
 
-/**
- * Bias current to set the on-voltage of switch transistors of programmable R&C in ADC
- */
+/***************************************************************************//**
+ * @brief Retrieves the ADC bias voltage for the specified ADC instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance
+ * (e.g., RX1 or RX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved bias
+ * voltage value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasVon_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t *value)
@@ -1203,9 +1943,15 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasVon_Get(void *device,
     return status;
 }
 
-/**
- * Bias current for op-amp controlling VON voltage generation in ADC
- */
+/***************************************************************************//**
+ * @brief Sets the bias voltage for the ADC amplifier.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the specific ADC instance.
+ * @param value An 8-bit unsigned integer representing the bias voltage setting.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasVonAmp_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t value)
@@ -1217,9 +1963,17 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasVonAmp_Set(void *device,
     return status;
 }
 
-/**
- * Bias current for op-amp controlling VON voltage generation in ADC
- */
+/***************************************************************************//**
+ * @brief Retrieves the bias voltage for the ADC amplifier from the specified
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value indicating which ADC instance to access.
+ * @param value A pointer to a `uint8_t` where the retrieved bias voltage will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcBiasVonAmp_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t *value)
@@ -1234,9 +1988,18 @@ static inline int32_t adrv9001_Adc1MemMap_AdcBiasVonAmp_Get(void *device,
     return status;
 }
 
-/**
- * Programmable capacitor in ADC 1st stage
- */
+/***************************************************************************//**
+ * @brief Sets a programmable capacitor in the ADC's first stage.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance to
+ * configure.
+ * @param regInstance An index representing the specific register instance to be
+ * modified.
+ * @param value The 16-bit value to be set for the programmable capacitor.
+ * @return Returns the status of the write operations, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcC1_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -1252,9 +2015,20 @@ static inline int32_t adrv9001_Adc1MemMap_AdcC1_Set(void *device,
     return status;
 }
 
-/**
- * Programmable capacitor in ADC 1st stage
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a programmable capacitor in the ADC's first
+ * stage.
+ *
+ * @param device A pointer to the device context used for communication with the
+ * hardware.
+ * @param instance An enumerated type indicating which ADC instance to access.
+ * @param regInstance An index specifying the particular register instance to
+ * read from.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success or failure of the
+ * read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcC1_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -1274,9 +2048,18 @@ static inline int32_t adrv9001_Adc1MemMap_AdcC1_Get(void *device,
     return status;
 }
 
-/**
- * Programmable capacitor in ADC 2nd stage
- */
+/***************************************************************************//**
+ * @brief Sets the programmable capacitor in the ADC 2nd stage.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance is being
+ * configured.
+ * @param regInstance An index representing the specific register instance to be
+ * modified.
+ * @param value The 16-bit value to be set for the programmable capacitor.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcC2_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -1292,9 +2075,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcC2_Set(void *device,
     return status;
 }
 
-/**
- * Programmable capacitor in ADC 2nd stage
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the ADC C2 register from the specified ADC
+ * instance.
+ *
+ * @param device A pointer to the device structure representing the ADC.
+ * @param instance An enumerated type indicating which ADC instance to access.
+ * @param regInstance An index specifying the register instance to read.
+ * @param value A pointer to a 16-bit unsigned integer where the read value will
+ * be stored.
+ * @return Returns an integer status code indicating success or failure of the
+ * read operations, and the retrieved value is stored in the provided
+ * pointer.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcC2_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -1314,9 +2107,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcC2_Get(void *device,
     return status;
 }
 
-/**
- * Programmable capacitor in ADC 3rd stage
- */
+/***************************************************************************//**
+ * @brief Sets the value of a programmable capacitor in the ADC 3rd stage.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance to
+ * configure.
+ * @param regInstance An index representing the specific register instance to be
+ * modified.
+ * @param value The value to set for the programmable capacitor, represented as
+ * an 8-bit unsigned integer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcC3_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -1329,9 +2132,20 @@ static inline int32_t adrv9001_Adc1MemMap_AdcC3_Set(void *device,
     return status;
 }
 
-/**
- * Programmable capacitor in ADC 3rd stage
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a specific register in the ADC 3rd stage of the
+ * ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated type indicating which ADC instance to access.
+ * @param regInstance An index specifying the specific register instance to
+ * read.
+ * @param value A pointer to a `uint8_t` where the retrieved register value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcC3_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -1347,9 +2161,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcC3_Get(void *device,
     return status;
 }
 
-/**
- * Programmable capacitor for capacitively-coupled feedback in ADC 3rd stage
- */
+/***************************************************************************//**
+ * @brief Sets the programmable capacitor for capacitively-coupled feedback in
+ * the ADC's 3rd stage.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance is being
+ * configured.
+ * @param regInstance An index representing the specific register instance to be
+ * modified.
+ * @param value A 16-bit value representing the configuration for the capacitor.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcCdfb_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -1365,9 +2189,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcCdfb_Set(void *device,
     return status;
 }
 
-/**
- * Programmable capacitor for capacitively-coupled feedback in ADC 3rd stage
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the programmable capacitor for capacitively-
+ * coupled feedback in the ADC's third stage.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance to access.
+ * @param regInstance An index to specify the register instance for the
+ * operation.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcCdfb_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -1387,9 +2221,16 @@ static inline int32_t adrv9001_Adc1MemMap_AdcCdfb_Get(void *device,
     return status;
 }
 
-/**
- * Bypass DAC filter resistors in ADC
- */
+/***************************************************************************//**
+ * @brief Sets the bypass state for DAC filter resistors in the ADC.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the specific ADC instance
+ * (e.g., RX1 or RX2).
+ * @param value A uint8_t value indicating the bypass state to set (0 or 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcDacsBypassRf_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t value)
@@ -1401,9 +2242,16 @@ static inline int32_t adrv9001_Adc1MemMap_AdcDacsBypassRf_Set(void *device,
     return status;
 }
 
-/**
- * Bypass DAC filter resistors in ADC
- */
+/***************************************************************************//**
+ * @brief Retrieves the bypass status of DAC filter resistors in the ADC.
+ *
+ * @param device A pointer to the device structure representing the ADC.
+ * @param instance An enumerated value indicating which ADC instance to access.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcDacsBypassRf_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t *value)
@@ -1418,9 +2266,16 @@ static inline int32_t adrv9001_Adc1MemMap_AdcDacsBypassRf_Get(void *device,
     return status;
 }
 
-/**
- * Flash Cal Reference Voltage
- */
+/***************************************************************************//**
+ * @brief Sets the Flash Calibration Bias Reference Control for the ADC.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the specific ADC instance
+ * (e.g., RX1 or RX2).
+ * @param value A uint8_t value that sets the bias reference control.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcFlashCalBiasRefCtrl_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t value)
@@ -1432,9 +2287,18 @@ static inline int32_t adrv9001_Adc1MemMap_AdcFlashCalBiasRefCtrl_Set(void *devic
     return status;
 }
 
-/**
- * Flash Cal Reference Voltage
- */
+/***************************************************************************//**
+ * @brief Retrieves the Flash Calibration Bias Reference Control value from the
+ * ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the specific ADC instance
+ * (e.g., RX1 or RX2).
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcFlashCalBiasRefCtrl_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t *value)
@@ -1449,9 +2313,16 @@ static inline int32_t adrv9001_Adc1MemMap_AdcFlashCalBiasRefCtrl_Get(void *devic
     return status;
 }
 
-/**
- * Flash Reference Shuffler Control. [2:0] control mode, [7:3] is the override state
- */
+/***************************************************************************//**
+ * @brief Sets the Flash Reference Shuffler Control for the ADC.
+ *
+ * @param device A pointer to the device context.
+ * @param instance An enumerated type indicating the ADC instance.
+ * @param regInstance An index for the specific register instance.
+ * @param value A byte value to set for the control.
+ * @return Returns the status of the write operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcFlashEslCtrl_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -1464,9 +2335,16 @@ static inline int32_t adrv9001_Adc1MemMap_AdcFlashEslCtrl_Set(void *device,
     return status;
 }
 
-/**
- * Flash Reference Shuffler Control. [2:0] control mode, [7:3] is the override state
- */
+/***************************************************************************//**
+ * @brief Retrieves the Flash ESL control value from the ADC memory map.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance to access.
+ * @param regInstance An index specifying the register instance to read from.
+ * @param value A pointer to a uint8_t where the retrieved value will be stored.
+ * @return Returns an integer status code indicating success or failure of the
+ * read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcFlashEslCtrl_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -1482,9 +2360,16 @@ static inline int32_t adrv9001_Adc1MemMap_AdcFlashEslCtrl_Get(void *device,
     return status;
 }
 
-/**
- * Flash-DAC Clock Delay Mode
- */
+/***************************************************************************//**
+ * @brief Sets the Flash-DAC Clock Delay Mode for the ADC.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the specific ADC instance
+ * (e.g., RX1 or RX2).
+ * @param value An 8-bit value representing the delay mode to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcFlashFckDelayMode_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t value)
@@ -1496,9 +2381,18 @@ static inline int32_t adrv9001_Adc1MemMap_AdcFlashFckDelayMode_Set(void *device,
     return status;
 }
 
-/**
- * Flash-DAC Clock Delay Mode
- */
+/***************************************************************************//**
+ * @brief Retrieves the Flash-DAC Clock Delay Mode setting from the ADC memory
+ * map.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the specific ADC instance
+ * (e.g., RX1 or RX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcFlashFckDelayMode_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t *value)
@@ -1513,9 +2407,16 @@ static inline int32_t adrv9001_Adc1MemMap_AdcFlashFckDelayMode_Get(void *device,
     return status;
 }
 
-/**
- * Sets a comparator's output to 0.
- */
+/***************************************************************************//**
+ * @brief Sets the output of a comparator in the ADC flash memory.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance to
+ * configure.
+ * @param value A 16-bit value to be written to the comparator's output.
+ * @return Returns the status of the write operations, where 0 indicates success
+ * and a non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcFlashR_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint16_t value)
@@ -1530,9 +2431,17 @@ static inline int32_t adrv9001_Adc1MemMap_AdcFlashR_Set(void *device,
     return status;
 }
 
-/**
- * Sets a comparator's output to 0.
- */
+/***************************************************************************//**
+ * @brief Retrieves the ADC Flash register value for a specified instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the specific ADC instance
+ * (e.g., RX1 or RX2).
+ * @param value A pointer to a uint16_t variable where the retrieved register
+ * value will be stored.
+ * @return Returns the status of the read operation, where a value of 0
+ * indicates success and any non-zero value indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcFlashR_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint16_t *value)
@@ -1551,9 +2460,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcFlashR_Get(void *device,
     return status;
 }
 
-/**
- * Controls the flash LSB.
- */
+/***************************************************************************//**
+ * @brief Sets the flash reference control for the ADC.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance is being
+ * configured.
+ * @param regInstance An index to specify the register instance for the
+ * operation.
+ * @param value A byte value to be written to the flash reference control
+ * register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcFlashRefCtrl_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -1566,9 +2485,18 @@ static inline int32_t adrv9001_Adc1MemMap_AdcFlashRefCtrl_Set(void *device,
     return status;
 }
 
-/**
- * Controls the flash LSB.
- */
+/***************************************************************************//**
+ * @brief Retrieves the control value for the flash reference in the ADC.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance to access.
+ * @param regInstance An index to specify the register instance for the
+ * operation.
+ * @param value A pointer to a uint8_t variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcFlashRefCtrl_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -1584,9 +2512,17 @@ static inline int32_t adrv9001_Adc1MemMap_AdcFlashRefCtrl_Get(void *device,
     return status;
 }
 
-/**
- * Determines which comparators are set to 1 and which are set to 0. This is to balacing out aging effects from reset.
- */
+/***************************************************************************//**
+ * @brief Sets the flash reset mode for the ADC.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance to
+ * configure.
+ * @param value A uint8_t value that determines the reset mode for the ADC
+ * flash.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcFlashResetMode_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t value)
@@ -1598,9 +2534,18 @@ static inline int32_t adrv9001_Adc1MemMap_AdcFlashResetMode_Set(void *device,
     return status;
 }
 
-/**
- * Determines which comparators are set to 1 and which are set to 0. This is to balacing out aging effects from reset.
- */
+/***************************************************************************//**
+ * @brief Retrieves the ADC flash reset mode setting from the specified device
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the specific ADC instance
+ * (e.g., RX1 or RX2).
+ * @param value A pointer to a `uint8_t` variable where the retrieved reset mode
+ * value will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcFlashResetMode_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t *value)
@@ -1615,9 +2560,16 @@ static inline int32_t adrv9001_Adc1MemMap_AdcFlashResetMode_Get(void *device,
     return status;
 }
 
-/**
- * Set a comparator's output to 1. Superceded by adc_flash_r/
- */
+/***************************************************************************//**
+ * @brief Sets the output of a comparator in the ADC to 1.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the specific ADC instance.
+ * @param value A 16-bit unsigned integer representing the value to be set for
+ * the comparator.
+ * @return Returns the status of the write operations, where a non-zero value
+ * indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcFlashS_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint16_t value)
@@ -1632,9 +2584,16 @@ static inline int32_t adrv9001_Adc1MemMap_AdcFlashS_Set(void *device,
     return status;
 }
 
-/**
- * Set a comparator's output to 1. Superceded by adc_flash_r/
- */
+/***************************************************************************//**
+ * @brief Retrieves the ADC Flash S value from the specified device instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the specific ADC instance.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success or failure of the
+ * read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcFlashS_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint16_t *value)
@@ -1653,9 +2612,17 @@ static inline int32_t adrv9001_Adc1MemMap_AdcFlashS_Get(void *device,
     return status;
 }
 
-/**
- * ILSB current setting in ADC 3rd stage
- */
+/***************************************************************************//**
+ * @brief Sets the ILSB current setting in the ADC 3rd stage.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance to
+ * configure.
+ * @param regInstance An index to specify the register instance for the setting.
+ * @param value The value to set for the ILSB current.
+ * @return Returns an integer status code indicating success or failure of the
+ * operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcI3_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -1668,9 +2635,17 @@ static inline int32_t adrv9001_Adc1MemMap_AdcI3_Set(void *device,
     return status;
 }
 
-/**
- * ILSB current setting in ADC 3rd stage
- */
+/***************************************************************************//**
+ * @brief Retrieves the ILSB current setting from the ADC 3rd stage.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance to access.
+ * @param regInstance An index to specify the particular register instance.
+ * @param value A pointer to a uint8_t where the retrieved ILSB current value
+ * will be stored.
+ * @return Returns an integer status code indicating success or failure of the
+ * read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcI3_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -1686,9 +2661,16 @@ static inline int32_t adrv9001_Adc1MemMap_AdcI3_Get(void *device,
     return status;
 }
 
-/**
- * ADC input resistor selection for gain step
- */
+/***************************************************************************//**
+ * @brief Sets the ADC input resistor selection for gain adjustment.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the specific ADC instance
+ * (e.g., ADRV9001_BF_RX1_ADC or ADRV9001_BF_RX2_ADC).
+ * @param value A uint8_t value representing the resistor selection to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcInputAlt_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t value)
@@ -1700,9 +2682,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcInputAlt_Set(void *device,
     return status;
 }
 
-/**
- * ADC input resistor selection for gain step
- */
+/***************************************************************************//**
+ * @brief Retrieves the alternate ADC input resistor selection for a specified
+ * ADC instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance
+ * (e.g., RX1 or RX2).
+ * @param value A pointer to a uint8_t variable where the retrieved resistor
+ * selection value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcInputAlt_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t *value)
@@ -1717,9 +2709,16 @@ static inline int32_t adrv9001_Adc1MemMap_AdcInputAlt_Get(void *device,
     return status;
 }
 
-/**
- * Open-circuits ADC input
- */
+/***************************************************************************//**
+ * @brief Sets the ADC input to an open-circuit state.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the specific ADC instance.
+ * @param value A uint8_t value that determines the state of the ADC input (0 to
+ * open-circuit).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcInputzero_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t value)
@@ -1731,9 +2730,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcInputzero_Set(void *device,
     return status;
 }
 
-/**
- * Open-circuits ADC input
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the ADC input zero configuration from the
+ * device.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance to
+ * access.
+ * @param value A pointer to a `uint8_t` variable where the retrieved value will
+ * be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcInputzero_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t *value)
@@ -1748,9 +2757,18 @@ static inline int32_t adrv9001_Adc1MemMap_AdcInputzero_Get(void *device,
     return status;
 }
 
-/**
- * Powerdown of master bias circuit in ADC
- */
+/***************************************************************************//**
+ * @brief Sets the power-down bias for the ADC in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance
+ * (e.g., RX1 or RX2).
+ * @param value A uint8_t value indicating the desired power-down state (0 or
+ * 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcPdBias_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t value)
@@ -1762,9 +2780,18 @@ static inline int32_t adrv9001_Adc1MemMap_AdcPdBias_Set(void *device,
     return status;
 }
 
-/**
- * Powerdown of master bias circuit in ADC
- */
+/***************************************************************************//**
+ * @brief Retrieves the ADC power-down bias setting from the specified ADC
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the specific ADC instance
+ * (e.g., RX1 or RX2).
+ * @param value A pointer to a uint8_t variable where the retrieved bias value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcPdBias_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t *value)
@@ -1779,9 +2806,16 @@ static inline int32_t adrv9001_Adc1MemMap_AdcPdBias_Get(void *device,
     return status;
 }
 
-/**
- * DAC powerdown in ADC
- */
+/***************************************************************************//**
+ * @brief Sets the powerdown state of the DACs in the ADC.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the specific ADC instance.
+ * @param value A uint8_t value indicating the desired powerdown state of the
+ * DACs.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcPdDacs_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t value)
@@ -1793,9 +2827,16 @@ static inline int32_t adrv9001_Adc1MemMap_AdcPdDacs_Set(void *device,
     return status;
 }
 
-/**
- * DAC powerdown in ADC
- */
+/***************************************************************************//**
+ * @brief Retrieves the power-down status of the DACs in the ADC.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance to access.
+ * @param value A pointer to a uint8_t variable where the retrieved power-down
+ * status will be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcPdDacs_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t *value)
@@ -1810,9 +2851,16 @@ static inline int32_t adrv9001_Adc1MemMap_AdcPdDacs_Get(void *device,
     return status;
 }
 
-/**
- * DAC delayed powerdown in ADC
- */
+/***************************************************************************//**
+ * @brief Sets the delay for the DAC powerdown in the ADC.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the specific ADC instance.
+ * @param value A uint8_t value representing the delay setting for DAC
+ * powerdown.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcPdDacsDelay_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t value)
@@ -1824,9 +2872,16 @@ static inline int32_t adrv9001_Adc1MemMap_AdcPdDacsDelay_Set(void *device,
     return status;
 }
 
-/**
- * DAC delayed powerdown in ADC
- */
+/***************************************************************************//**
+ * @brief Retrieves the delay setting for the DAC powerdown in the ADC.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance to access.
+ * @param value A pointer to a uint8_t variable where the retrieved delay value
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcPdDacsDelay_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t *value)
@@ -1841,9 +2896,16 @@ static inline int32_t adrv9001_Adc1MemMap_AdcPdDacsDelay_Get(void *device,
     return status;
 }
 
-/**
- * FLASH powerdown in ADC
- */
+/***************************************************************************//**
+ * @brief Sets the FLASH powerdown state in the ADC.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the specific ADC instance.
+ * @param value A uint8_t value indicating the desired powerdown state (0 for
+ * active, 1 for powerdown).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcPdFlash_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t value)
@@ -1855,9 +2917,16 @@ static inline int32_t adrv9001_Adc1MemMap_AdcPdFlash_Set(void *device,
     return status;
 }
 
-/**
- * FLASH powerdown in ADC
- */
+/***************************************************************************//**
+ * @brief Retrieves the power-down status of the FLASH in the ADC.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the specific ADC instance.
+ * @param value A pointer to a uint8_t variable where the retrieved power-down
+ * status will be stored.
+ * @return Returns the status of the read operation, where a non-zero value
+ * indicates an error.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcPdFlash_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t *value)
@@ -1872,9 +2941,16 @@ static inline int32_t adrv9001_Adc1MemMap_AdcPdFlash_Get(void *device,
     return status;
 }
 
-/**
- * Loopfilter powerdown in ADC
- */
+/***************************************************************************//**
+ * @brief Sets the power down state of the loop filter in the ADC.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the specific ADC instance.
+ * @param value A uint8_t value indicating the desired power down state (0 or
+ * 1).
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcPdLf_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t value)
@@ -1886,9 +2962,16 @@ static inline int32_t adrv9001_Adc1MemMap_AdcPdLf_Set(void *device,
     return status;
 }
 
-/**
- * Loopfilter powerdown in ADC
- */
+/***************************************************************************//**
+ * @brief Retrieves the power-down status of the loop filter in the ADC.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the specific ADC instance.
+ * @param value A pointer to a uint8_t variable where the retrieved power-down
+ * status will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcPdLf_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t *value)
@@ -1903,9 +2986,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcPdLf_Get(void *device,
     return status;
 }
 
-/**
- * Programmable input resistor in ADC 1st stage
- */
+/***************************************************************************//**
+ * @brief Sets the programmable input resistor in the ADC 1st stage.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance to
+ * configure.
+ * @param regInstance An index representing the specific register instance to be
+ * modified.
+ * @param value A 16-bit value representing the configuration for the input
+ * resistor.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcR1_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -1921,9 +3014,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcR1_Set(void *device,
     return status;
 }
 
-/**
- * Programmable input resistor in ADC 1st stage
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the programmable input resistor in the ADC 1st
+ * stage.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance to access.
+ * @param regInstance An index specifying the particular register instance to
+ * read from.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success or failure of the
+ * read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcR1_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -1943,9 +3046,20 @@ static inline int32_t adrv9001_Adc1MemMap_AdcR1_Get(void *device,
     return status;
 }
 
-/**
- * Programmable alternate setting of input resistor in ADC 1st stage
- */
+/***************************************************************************//**
+ * @brief Sets the programmable alternate setting of the input resistor in the
+ * ADC 1st stage.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance to
+ * configure.
+ * @param regInstance An index representing the specific register instance to
+ * modify.
+ * @param value A 16-bit value representing the new setting for the input
+ * resistor.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the operations performed.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcR1Alt_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -1961,9 +3075,18 @@ static inline int32_t adrv9001_Adc1MemMap_AdcR1Alt_Set(void *device,
     return status;
 }
 
-/**
- * Programmable alternate setting of input resistor in ADC 1st stage
- */
+/***************************************************************************//**
+ * @brief Retrieves the alternate programmable input resistor value from the ADC
+ * 1st stage.
+ *
+ * @param device A pointer to the device structure representing the ADC.
+ * @param instance An enumerated type indicating which ADC instance to access.
+ * @param regInstance An index specifying the register instance to read from.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcR1Alt_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -1983,9 +3106,17 @@ static inline int32_t adrv9001_Adc1MemMap_AdcR1Alt_Get(void *device,
     return status;
 }
 
-/**
- * Programmable resistor in ADC 2nd stage
- */
+/***************************************************************************//**
+ * @brief Sets the programmable resistor in the ADC 2nd stage.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance is being
+ * configured.
+ * @param regInstance An index for the specific register instance to be set.
+ * @param value The 16-bit value to be written to the resistor.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero).
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcR2_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -2001,9 +3132,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcR2_Set(void *device,
     return status;
 }
 
-/**
- * Programmable resistor in ADC 2nd stage
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a programmable resistor in the ADC's second
+ * stage.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance to access.
+ * @param regInstance An index specifying the particular register instance to
+ * read from.
+ * @param value A pointer to a 16-bit unsigned integer where the retrieved value
+ * will be stored.
+ * @return Returns an integer status code indicating success (0) or an error
+ * code if the read operation fails.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcR2_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -2023,9 +3164,16 @@ static inline int32_t adrv9001_Adc1MemMap_AdcR2_Get(void *device,
     return status;
 }
 
-/**
- * Programmable resistor in ADC 3rd stage
- */
+/***************************************************************************//**
+ * @brief Sets the programmable resistor in the ADC 3rd stage.
+ *
+ * @param device A pointer to the device structure.
+ * @param instance An enumerated type indicating the ADC instance.
+ * @param regInstance An index for the specific register instance.
+ * @param value The 16-bit value to set for the resistor.
+ * @return Returns an integer status code indicating success or failure of the
+ * operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcR3_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -2041,9 +3189,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcR3_Set(void *device,
     return status;
 }
 
-/**
- * Programmable resistor in ADC 3rd stage
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the ADC resistor R3 from the specified ADC
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance to access.
+ * @param regInstance An index specifying the specific register instance to read
+ * from.
+ * @param value A pointer to a 16-bit unsigned integer where the read value will
+ * be stored.
+ * @return Returns an integer status code indicating success (0) or failure
+ * (non-zero) of the read operations.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcR3_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -2063,9 +3221,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcR3_Get(void *device,
     return status;
 }
 
-/**
- * Programmable feedback resistor in ADC
- */
+/***************************************************************************//**
+ * @brief Sets the programmable feedback resistor in the ADC.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance to
+ * configure.
+ * @param regInstance An index representing the specific register instance to be
+ * modified.
+ * @param value The value to set for the feedback resistor, represented as an
+ * 8-bit unsigned integer.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcR4_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -2078,9 +3246,18 @@ static inline int32_t adrv9001_Adc1MemMap_AdcR4_Set(void *device,
     return status;
 }
 
-/**
- * Programmable feedback resistor in ADC
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of the programmable feedback resistor in the ADC.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated type indicating which ADC instance to access.
+ * @param regInstance An index indicating the specific register instance to read
+ * from.
+ * @param value A pointer to a uint8_t where the retrieved value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcR4_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -2096,9 +3273,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcR4_Get(void *device,
     return status;
 }
 
-/**
- * Programmable resistor that sinks ADC input common-mode current
- */
+/***************************************************************************//**
+ * @brief Sets a programmable resistor that sinks ADC input common-mode current.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated type indicating which ADC instance is being
+ * configured.
+ * @param regInstance An index representing the specific register instance to be
+ * modified.
+ * @param value The value to set for the programmable resistor.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcRcm_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -2111,9 +3298,18 @@ static inline int32_t adrv9001_Adc1MemMap_AdcRcm_Set(void *device,
     return status;
 }
 
-/**
- * Programmable resistor that sinks ADC input common-mode current
- */
+/***************************************************************************//**
+ * @brief Retrieves the value of a programmable resistor that sinks ADC input
+ * common-mode current.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated type indicating which ADC instance to access.
+ * @param regInstance An index specifying the particular register instance to
+ * read from.
+ * @param value A pointer to a uint8_t where the retrieved value will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcRcm_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint32_t regInstance,
@@ -2129,9 +3325,15 @@ static inline int32_t adrv9001_Adc1MemMap_AdcRcm_Get(void *device,
     return status;
 }
 
-/**
- * Reset for integrator in ADC 1st stage
- */
+/***************************************************************************//**
+ * @brief Sets the reset state for the integrator in ADC 1st stage.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the specific ADC instance.
+ * @param value A uint8_t value indicating the reset state to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcResetInt1_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t value)
@@ -2143,9 +3345,19 @@ static inline int32_t adrv9001_Adc1MemMap_AdcResetInt1_Set(void *device,
     return status;
 }
 
-/**
- * Reset for integrator in ADC 1st stage
- */
+/***************************************************************************//**
+ * @brief Retrieves the reset status of the ADC integrator for a specified
+ * instance.
+ *
+ * @param device A pointer to the device structure that represents the ADC
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance
+ * (e.g., RX1 or RX2).
+ * @param value A pointer to a uint8_t variable where the retrieved reset status
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcResetInt1_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t *value)
@@ -2160,9 +3372,16 @@ static inline int32_t adrv9001_Adc1MemMap_AdcResetInt1_Get(void *device,
     return status;
 }
 
-/**
- * ADC digital reset
- */
+/***************************************************************************//**
+ * @brief Sets the digital reset state of the ADC.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the specific ADC instance
+ * (e.g., RX1 or RX2).
+ * @param value A uint8_t value indicating the reset state to be set.
+ * @return Returns an integer status code indicating the success or failure of
+ * the operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcRstDig_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t value)
@@ -2174,9 +3393,16 @@ static inline int32_t adrv9001_Adc1MemMap_AdcRstDig_Set(void *device,
     return status;
 }
 
-/**
- * ADC digital reset
- */
+/***************************************************************************//**
+ * @brief Retrieves the digital reset status of the ADC.
+ *
+ * @param device A pointer to the device structure that represents the ADC.
+ * @param instance An enumerated value representing the specific ADC instance.
+ * @param value A pointer to a uint8_t variable where the retrieved reset status
+ * will be stored.
+ * @return Returns an integer status code indicating the success or failure of
+ * the read operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcRstDig_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t *value)
@@ -2191,6 +3417,17 @@ static inline int32_t adrv9001_Adc1MemMap_AdcRstDig_Get(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Sets the spare register value for ADC1 in the ADRV9001 device.
+ *
+ * @param device A pointer to the device structure representing the ADRV9001
+ * device.
+ * @param instance An enumerated value representing the specific ADC instance
+ * (e.g., RX1 or RX2).
+ * @param value An 8-bit value to be written to the spare register.
+ * @return Returns an integer status code indicating the success or failure of
+ * the write operation.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcSpare_Set(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t value)
@@ -2202,6 +3439,16 @@ static inline int32_t adrv9001_Adc1MemMap_AdcSpare_Set(void *device,
     return status;
 }
 
+/***************************************************************************//**
+ * @brief Retrieves the spare register value from the ADC memory map.
+ *
+ * @param device A pointer to the device structure representing the ADC.
+ * @param instance An enumerator value indicating which ADC instance to access.
+ * @param value A pointer to a uint8_t where the retrieved register value will
+ * be stored.
+ * @return Returns the status of the read operation, indicating success or
+ * failure.
+ ******************************************************************************/
 static inline int32_t adrv9001_Adc1MemMap_AdcSpare_Get(void *device,
     adrv9001_BfAdc1MemMap_e instance,
     uint8_t *value)

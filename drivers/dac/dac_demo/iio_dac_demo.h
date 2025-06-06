@@ -38,8 +38,39 @@
 #include "iio_types.h"
 #include "dac_demo.h"
 
+/***************************************************************************//**
+ * @brief The `dac_demo_iio_descriptor` is a global variable of type `struct
+ * iio_device`, which is part of the IIO (Industrial I/O) framework. This
+ * structure is used to describe a DAC (Digital-to-Analog Converter)
+ * device in a demo setup, providing the necessary interface for IIO
+ * operations.
+ *
+ * @details This variable is used to represent and manage the DAC device within
+ * the IIO framework, facilitating interaction with the DAC in a demo
+ * environment.
+ ******************************************************************************/
 extern struct iio_device dac_demo_iio_descriptor;
+/***************************************************************************//**
+ * @brief The variable `dac_iio_sw_trig_desc` is an external declaration of a
+ * structure of type `iio_trigger`. This structure is likely used to
+ * define a software trigger for a DAC (Digital-to-Analog Converter) in
+ * an IIO (Industrial I/O) context. The `iio_trigger` structure typically
+ * contains information necessary to manage and execute triggers in an
+ * IIO device setup.
+ *
+ * @details This variable is used to manage a software-based trigger mechanism
+ * for a DAC in an IIO system.
+ ******************************************************************************/
 extern struct iio_trigger dac_iio_sw_trig_desc;
+/***************************************************************************//**
+ * @brief The variable `dac_iio_timer_trig_desc` is an external declaration of a
+ * structure of type `iio_trigger`. This structure is likely used to
+ * describe a timer-based trigger for an IIO (Industrial I/O) device,
+ * specifically for a DAC (Digital-to-Analog Converter) demo application.
+ *
+ * @details This variable is used to manage and configure a timer-based trigger
+ * mechanism for the DAC demo IIO device.
+ ******************************************************************************/
 extern struct iio_trigger dac_iio_timer_trig_desc;
 
 #endif /* IIO_DEMO_DAC */

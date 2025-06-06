@@ -44,7 +44,18 @@
 /********************** Macros and Constants Definitions **********************/
 /******************************************************************************/
 
-/** IIO Descriptor */
+/***************************************************************************//**
+ * @brief The `adpd410x_iio_descriptor` is an external constant structure of
+ * type `iio_device` that represents the IIO (Industrial Input/Output)
+ * device descriptor for the ADPD410x sensor. This descriptor is used to
+ * define the interface and capabilities of the ADPD410x device within
+ * the IIO framework, which is a subsystem in the Linux kernel for
+ * handling sensors and other input/output devices.
+ *
+ * @details This variable is used to provide a structured representation of the
+ * ADPD410x device for integration with the IIO subsystem, enabling
+ * standardized interaction with the device.
+ ******************************************************************************/
 extern struct iio_device const adpd410x_iio_descriptor;
 
 #endif //IIO_ADPD410X_H

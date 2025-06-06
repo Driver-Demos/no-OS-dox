@@ -40,6 +40,16 @@
 
 #include "iio.h"
 
+/***************************************************************************//**
+ * @brief The `iio_ad7124_device` is an external global variable of type `struct
+ * iio_device`. It is declared in the header file `iio_ad7124.h` and is
+ * intended to represent an IIO (Industrial I/O) device, specifically for
+ * the AD7124, which is a precision analog-to-digital converter (ADC)
+ * from Analog Devices.
+ *
+ * @details This variable is used to interface with and manage the AD7124 ADC
+ * device within the IIO framework.
+ ******************************************************************************/
 extern struct iio_device iio_ad7124_device;
 
 #endif /** IIO_AD7124_H */

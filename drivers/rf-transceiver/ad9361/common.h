@@ -48,11 +48,33 @@
 typedef enum { false, true } bool;
 #endif
 
+/***************************************************************************//**
+ * @brief The `no_os_clk` structure is designed to represent a clock in a system
+ * without an operating system. It contains two members: `name`, which is
+ * a constant character pointer used to store the name of the clock, and
+ * `rate`, which is a 32-bit unsigned integer that holds the clock's
+ * rate. This structure is likely used in embedded systems or low-level
+ * hardware interfacing where clocks need to be managed without the
+ * overhead of an operating system.
+ *
+ * @param name A constant character pointer representing the name of the clock.
+ * @param rate An unsigned 32-bit integer representing the rate of the clock.
+ ******************************************************************************/
 struct no_os_clk {
 	const char	*name;
 	uint32_t	rate;
 };
 
+/***************************************************************************//**
+ * @brief The `no_os_clk_hw` structure is a simple data structure that
+ * encapsulates a pointer to a `no_os_clk` structure, which represents a
+ * hardware clock. This structure is used to manage and interface with
+ * clock hardware in a system, allowing for the abstraction and
+ * manipulation of clock properties through the `no_os_clk` structure it
+ * points to.
+ *
+ * @param clk A pointer to a no_os_clk structure, representing a clock.
+ ******************************************************************************/
 struct no_os_clk_hw {
 	struct no_os_clk *clk;
 };

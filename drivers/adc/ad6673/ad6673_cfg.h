@@ -40,7 +40,18 @@
 
 /******************************************************************************/
 /************************ Variables Declarations ******************************/
-/******************************************************************************/
+/***************************************************************************//**
+ * @brief The `ad6673_pdata_lpc` is a global variable of type `struct
+ * ad6673_platform_data` that holds configuration data for the AD6673
+ * device. It includes fields for power-down mode, clock settings, ADC
+ * reference voltage, PLL encoding, and a name identifier. This structure
+ * is used to initialize and configure the AD6673 device according to
+ * specific application requirements.
+ *
+ * @details This variable is used to store and provide configuration settings
+ * for the AD6673 device, facilitating its initialization and
+ * operation.
+ ******************************************************************************/
 struct ad6673_platform_data ad6673_pdata_lpc = {
 	0,           // extrnPDWNmode
 	1,           // enClkDCS
@@ -52,6 +63,21 @@ struct ad6673_platform_data ad6673_pdata_lpc = {
 	"ad6673-lpc" //name
 };
 
+/***************************************************************************//**
+ * @brief The `ad6673_jesd204b_interface` is a global variable of type `struct
+ * ad6673_jesd204b_cfg` that holds the configuration settings for the
+ * JESD204B interface of the AD6673 device. This structure includes
+ * various fields such as `jtxInStandBy`, `cmlLevel`, `quickCfgOption`,
+ * and others, which are used to configure the JESD204B interface
+ * parameters like subclass, scrambling, and lane assignments. The
+ * configuration is crucial for setting up the data transmission
+ * characteristics and ensuring proper communication with the AD6673
+ * device.
+ *
+ * @details This variable is used to configure the JESD204B interface settings
+ * for the AD6673 device, enabling proper data transmission and
+ * communication.
+ ******************************************************************************/
 struct ad6673_jesd204b_cfg ad6673_jesd204b_interface = {
 	0,      // jtxInStandBy
 	3,      // cmlLevel
@@ -78,6 +104,17 @@ struct ad6673_jesd204b_cfg ad6673_jesd204b_interface = {
 	1,      // lane1Assign
 };
 
+/***************************************************************************//**
+ * @brief The `ad6673_fast_detect` is a global variable of type `struct
+ * ad6673_fast_detect_cfg` that is used to configure the fast detection
+ * feature of the AD6673 device. It contains several fields such as
+ * `enFd`, `pinFunction`, `forcePins`, `pinForceValue`, `fdUpperTresh`,
+ * `fdLowerTresh`, and `dfDwellTime`, all initialized to zero, which
+ * control various aspects of the fast detection functionality.
+ *
+ * @details This variable is used to store configuration settings for the fast
+ * detection feature of the AD6673 device.
+ ******************************************************************************/
 struct ad6673_fast_detect_cfg ad6673_fast_detect = {
 	0,      // enFd
 	0,      // pinFunction

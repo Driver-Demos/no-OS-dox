@@ -411,18 +411,40 @@
 #define ns_TO_ps			1000
 #define uA_TO_A				1000000
 
-/**
- * @brief Supported device ids
-*/
+/***************************************************************************//**
+ * @brief The `adf5611_device_id` is an enumeration that defines the supported
+ * device IDs for the ADF5611 and ADF5612 devices. This enumeration is
+ * used to identify and differentiate between the two types of devices
+ * within the driver implementation, allowing for specific configurations
+ * and operations to be applied based on the device type.
+ *
+ * @param ID_ADF5611 Represents the device ID for the ADF5611 device.
+ * @param ID_ADF5612 Represents the device ID for the ADF5612 device.
+ ******************************************************************************/
 enum adf5611_device_id {
 	ID_ADF5611,
 	ID_ADF5612,
 };
 
-/**
- * @struct adf5611_init_param
- * @brief ADF5611 Inintialization Parameters Structure.
-*/
+/***************************************************************************//**
+ * @brief The `adf5611_init_param` structure is used to initialize the ADF5611
+ * device, containing parameters for SPI communication, reference and
+ * output frequencies, and various configuration settings such as charge
+ * pump current and dividers. It is essential for setting up the device
+ * with the correct operational parameters before use.
+ *
+ * @param spi_init Pointer to SPI initialization parameters.
+ * @param spi4wire Boolean indicating if SPI 4-wire mode is used.
+ * @param cmos_3v3 Boolean indicating if CMOS 3.3V is used.
+ * @param ref_clk_freq Reference clock frequency in Hz.
+ * @param rfout_freq RF output frequency in Hz.
+ * @param ref_div Reference divider value.
+ * @param cp_i Charge pump current setting.
+ * @param bleed_word Bleed current setting.
+ * @param ld_count Lock detect count setting.
+ * @param rfoutdiv_div RF output divider value.
+ * @param id Device ID from the adf5611_device_id enum.
+ ******************************************************************************/
 struct adf5611_init_param {
 	/** SPI Initialization Parameters*/
 	struct no_os_spi_init_param	*spi_init;
@@ -439,10 +461,30 @@ struct adf5611_init_param {
 	enum adf5611_device_id		id;
 };
 
-/**
- * @struct adf5611_dev
- * @brief ADF5611 Device Descriptor.
-*/
+/***************************************************************************//**
+ * @brief The `adf5611_dev` structure is a device descriptor for the ADF5611, a
+ * frequency synthesizer. It contains configuration parameters and
+ * settings necessary for controlling the device, such as SPI
+ * communication details, reference and output frequencies, and various
+ * operational settings like charge pump current and frequency limits.
+ * This structure is essential for initializing and managing the ADF5611
+ * device in a system.
+ *
+ * @param spi_desc Pointer to the SPI descriptor for communication.
+ * @param spi4wire Boolean indicating if SPI 4-wire mode is used.
+ * @param cmos_3v3 Boolean indicating if CMOS 3.3V is used.
+ * @param ref_clk_freq Frequency of the input reference clock in Hz.
+ * @param rfout_freq Frequency of the RF output in Hz.
+ * @param ref_div Reference divider value.
+ * @param cp_i Charge pump current setting.
+ * @param bleed_word Bleed current setting.
+ * @param ld_count Lock detect count setting.
+ * @param rfoutdiv_div RF output divider value.
+ * @param freq_max Maximum frequency limit in Hz.
+ * @param freq_min Minimum frequency limit in Hz.
+ * @param vco_max Maximum VCO frequency in Hz.
+ * @param vco_min Minimum VCO frequency in Hz.
+ ******************************************************************************/
 struct adf5611_dev {
 	/** SPI Descriptor */
 	struct no_os_spi_desc		*spi_desc;
@@ -464,19 +506,33 @@ struct adf5611_dev {
 	uint64_t			vco_min;
 };
 
-/**
- * @struct reg_sequence
- * @brief ADF5611 Register Format Structure for Default Values
-*/
+/***************************************************************************//**
+ * @brief The `reg_sequence` structure is used to define a register and its
+ * corresponding value for the ADF5611 device. It is typically used to
+ * store default register values or to facilitate register configuration
+ * by specifying the register address and the value to be written. This
+ * structure is essential for managing the configuration of the ADF5611
+ * device through SPI communication.
+ *
+ * @param reg A 16-bit unsigned integer representing the register address.
+ * @param val An 8-bit unsigned integer representing the value to be written to
+ * the register.
+ ******************************************************************************/
 struct reg_sequence {
 	uint16_t reg;
 	uint8_t val;
 };
 
-/**
- * @struct adf5611_reg_defaults
- * @brief ADF5611 register initialization
- */
+/***************************************************************************//**
+ * @brief The `adf5611_reg_defaults` is a static constant array of `struct
+ * reg_sequence` that holds default register values for the ADF5611
+ * device. Each element in the array consists of a register address and
+ * its corresponding default value. This array is used to initialize the
+ * ADF5611 registers to their default states during device setup.
+ *
+ * @details This variable is used to set the default register values for the
+ * ADF5611 device during initialization.
+ ******************************************************************************/
 static const struct reg_sequence adf5611_reg_defaults[] = {
 	{ 0x0000, 0x18 },
 	{ 0x001F, 0x02 },
@@ -531,70 +587,433 @@ static const struct reg_sequence adf5611_reg_defaults[] = {
 	{ 0x0010, 0x78 },
 };
 
-/** ADF5611 SPI write */
+/***************************************************************************//**
+ * @brief This function is used to write a byte of data to a specific register
+ * of the ADF5611 device using the SPI interface. It is essential to
+ * ensure that the device has been properly initialized and that the SPI
+ * descriptor within the device structure is valid before calling this
+ * function. The function constructs a command based on the register
+ * address and data, and then sends it over SPI. It is important to
+ * handle the return value to check for any communication errors.
+ *
+ * @param dev A pointer to an adf5611_dev structure representing the device.
+ * Must not be null and should be properly initialized with a valid
+ * SPI descriptor.
+ * @param reg_addr A 16-bit unsigned integer representing the register address
+ * to which data will be written. The address should be within
+ * the valid range of the device's register map.
+ * @param data An 8-bit unsigned integer representing the data to be written to
+ * the specified register. The data should be formatted according to
+ * the register's requirements.
+ * @return Returns an integer status code. A value of 0 indicates success, while
+ * a negative value indicates an error in the SPI communication.
+ ******************************************************************************/
 int adf5611_spi_write(struct adf5611_dev *dev, uint16_t reg_addr, uint8_t data);
 
-/** ADF5611 SPI Read */
+/***************************************************************************//**
+ * @brief Use this function to read a specific register from the ADF5611 device
+ * using SPI communication. It is essential to ensure that the device has
+ * been properly initialized and configured before calling this function.
+ * The function sends a read command to the specified register address
+ * and retrieves the data. It is important to handle the return value to
+ * check for any communication errors.
+ *
+ * @param dev A pointer to an initialized adf5611_dev structure representing the
+ * device. Must not be null.
+ * @param reg_addr The 16-bit address of the register to read from. Valid
+ * register addresses depend on the device specification.
+ * @param data A pointer to a uint8_t variable where the read data will be
+ * stored. Must not be null.
+ * @return Returns 0 on success, or a negative error code if the SPI
+ * communication fails.
+ ******************************************************************************/
 int adf5611_spi_read(struct adf5611_dev *dev, uint16_t reg_addr, uint8_t *data);
 
-/** ADF5611 updates a bit in the register space over SPI */
+/***************************************************************************//**
+ * @brief Use this function to modify specific bits in a register of the ADF5611
+ * device over SPI. It reads the current value of the register, applies
+ * the mask to clear the bits, and then sets the bits according to the
+ * provided data. This function should be called when you need to change
+ * specific settings in a register without affecting other bits. Ensure
+ * that the device is properly initialized before calling this function.
+ * The function returns an error code if the read or write operation
+ * fails.
+ *
+ * @param dev Pointer to an initialized adf5611_dev structure representing the
+ * device. Must not be null.
+ * @param reg_addr The address of the register to be updated. Must be a valid
+ * register address for the ADF5611 device.
+ * @param mask A bitmask indicating which bits in the register should be
+ * updated. Only the bits set in the mask will be affected.
+ * @param data The new values for the bits specified by the mask. Bits not
+ * covered by the mask are ignored.
+ * @return Returns 0 on success, or a negative error code if the SPI read or
+ * write operation fails.
+ ******************************************************************************/
 int adf5611_spi_update_bits(struct adf5611_dev *dev, uint16_t reg_addr,
 			    uint8_t mask, uint8_t data);
 
-/** ADF5611 Set reference frequency attribute */
+/***************************************************************************//**
+ * @brief This function configures the reference clock frequency for the
+ * specified ADF5611 device. It should be called when you need to update
+ * the reference clock frequency, ensuring it is within the valid range
+ * defined by the device specifications. If the provided frequency
+ * exceeds the maximum or is below the minimum allowed values, it will be
+ * clamped to the nearest valid limit. The function must be called with a
+ * valid device descriptor, and it will return an error if the descriptor
+ * is null.
+ *
+ * @param dev A pointer to an adf5611_dev structure representing the device.
+ * Must not be null. The caller retains ownership.
+ * @param val The desired reference clock frequency in Hz. Valid values are
+ * between ADF5611_REF_CLK_MIN (50 MHz) and ADF5611_REF_CLK_MAX (300
+ * MHz). Values outside this range will be clamped.
+ * @return Returns 0 on success or a negative error code if the device
+ * descriptor is null or if setting the frequency fails.
+ ******************************************************************************/
 int adf5611_set_ref_clk(struct adf5611_dev *dev, uint64_t val);
 
-/** ADF5611 Get reference frequency attribute */
+/***************************************************************************//**
+ * @brief Use this function to obtain the current reference clock frequency of
+ * an initialized ADF5611 device. It is essential to ensure that the
+ * device pointer is valid before calling this function. The function
+ * will store the reference clock frequency in the provided memory
+ * location. If the device pointer is null, the function will return an
+ * error code.
+ *
+ * @param dev A pointer to an adf5611_dev structure representing the device.
+ * Must not be null. If null, the function returns -EINVAL.
+ * @param val A pointer to a uint64_t variable where the reference clock
+ * frequency will be stored. Must not be null.
+ * @return Returns 0 on success, or -EINVAL if the device pointer is null.
+ ******************************************************************************/
 int adf5611_get_ref_clk(struct adf5611_dev *dev, uint64_t *val);
 
-/** ADF5611 Set reference divider attribute */
+/***************************************************************************//**
+ * @brief This function sets the reference divider value for the ADF5611 device,
+ * which is used to divide the input reference clock frequency. It must
+ * be called with a valid device descriptor that has been initialized.
+ * The function ensures that the divider value does not exceed the
+ * maximum allowed value by clamping it if necessary. After setting the
+ * divider, it updates the device's frequency settings. This function
+ * should be used when the reference clock division needs to be adjusted,
+ * and it returns an error code if the device descriptor is null.
+ *
+ * @param dev A pointer to an initialized adf5611_dev structure representing the
+ * device. Must not be null. The function returns an error if this
+ * parameter is null.
+ * @param div An integer representing the desired reference divider value. Valid
+ * values are from 0 to ADF5611_REF_DIV_MAX. Values greater than
+ * ADF5611_REF_DIV_MAX are clamped to ADF5611_REF_DIV_MAX.
+ * @return Returns 0 on success or a negative error code if the device
+ * descriptor is null or if there is an error updating the frequency
+ * settings.
+ ******************************************************************************/
 int adf5611_set_ref_div(struct adf5611_dev *dev, int32_t div);
 
-/** ADF5611 Get reference divider attribute */
+/***************************************************************************//**
+ * @brief This function is used to obtain the current reference divider value
+ * from an ADF5611 device. It reads the necessary registers over SPI to
+ * determine the divider value and stores it in the provided output
+ * parameter. This function should be called when the reference divider
+ * value is needed for configuration or diagnostic purposes. It is
+ * important to ensure that the device has been properly initialized
+ * before calling this function to avoid communication errors.
+ *
+ * @param dev A pointer to an initialized adf5611_dev structure representing the
+ * device. Must not be null.
+ * @param div A pointer to an int32_t where the reference divider value will be
+ * stored. Must not be null.
+ * @return Returns 0 on success, or a non-zero error code if the SPI read
+ * operation fails.
+ ******************************************************************************/
 int adf5611_get_ref_div(struct adf5611_dev *dev, int32_t *div);
 
-/** ADF5611 Set the charge pump current attribute */
+/***************************************************************************//**
+ * @brief This function configures the charge pump current of the ADF5611 device
+ * by setting the appropriate register value. It should be called when
+ * the charge pump current needs to be adjusted as part of the device
+ * configuration. The function ensures that the provided current value
+ * does not exceed the maximum allowable value by clamping it if
+ * necessary. After setting the charge pump current, the function updates
+ * the device frequency settings. This function must be called with a
+ * valid device descriptor that has been properly initialized.
+ *
+ * @param dev A pointer to an adf5611_dev structure representing the device.
+ * Must not be null and should be initialized before calling this
+ * function. The caller retains ownership.
+ * @param reg_val An integer representing the desired charge pump current
+ * setting. Valid values range from 0 to ADF5611_CPI_VAL_MAX
+ * (15). Values greater than the maximum are clamped to
+ * ADF5611_CPI_VAL_MAX.
+ * @return Returns an integer status code from the adf5611_set_freq function,
+ * indicating success or failure of the frequency update.
+ ******************************************************************************/
 int adf5611_set_cp_i(struct adf5611_dev *dev, int32_t reg_val);
 
-/** ADF5611 Get the charge pump current attribute */
+/***************************************************************************//**
+ * @brief Use this function to obtain the current charge pump setting from an
+ * ADF5611 device. It reads the relevant register via SPI and updates the
+ * provided variable with the charge pump current value. This function
+ * should be called when you need to verify or log the current charge
+ * pump setting. Ensure that the device has been properly initialized
+ * before calling this function to avoid communication errors.
+ *
+ * @param dev A pointer to an initialized adf5611_dev structure representing the
+ * device. Must not be null.
+ * @param reg_val A pointer to an int32_t where the charge pump current value
+ * will be stored. Must not be null.
+ * @return Returns 0 on success, or a non-zero error code if the SPI read
+ * operation fails.
+ ******************************************************************************/
 int adf5611_get_cp_i(struct adf5611_dev *dev, int32_t *reg_val);
 
-/** ADF5611 Set the output power attribute */
+/***************************************************************************//**
+ * @brief This function configures the output power level of the ADF5611 device.
+ * It should be called when the user needs to adjust the power output of
+ * the device. The function ensures that the power level does not exceed
+ * the maximum allowed value by clamping it if necessary. It requires a
+ * valid device descriptor and a power level within the acceptable range.
+ * The function communicates with the device over SPI to update the power
+ * setting.
+ *
+ * @param dev A pointer to an adf5611_dev structure representing the device.
+ * Must not be null. The caller retains ownership.
+ * @param pwr An int8_t representing the desired output power level. Valid
+ * values are from 0 to ADF5611_RFOUT_PWR_MAX. Values above the
+ * maximum are clamped to ADF5611_RFOUT_PWR_MAX.
+ * @return Returns an integer status code. A non-zero value indicates an error
+ * occurred during the SPI communication.
+ ******************************************************************************/
 int adf5611_set_output_power(struct adf5611_dev *dev, int8_t pwr);
 
-/** ADF5611 Get the output power attribute */
+/***************************************************************************//**
+ * @brief Use this function to obtain the current output power setting of the
+ * ADF5611 device. It is essential to call this function after the device
+ * has been properly initialized and configured. The function reads the
+ * relevant register from the device and extracts the output power value.
+ * Ensure that the provided device structure is valid and that the
+ * pointer for storing the power value is not null. The function returns
+ * an error code if the read operation fails.
+ *
+ * @param dev A pointer to an initialized adf5611_dev structure representing the
+ * device. Must not be null.
+ * @param pwr A pointer to an int8_t variable where the output power value will
+ * be stored. Must not be null.
+ * @return Returns 0 on success, or a negative error code if the SPI read
+ * operation fails.
+ ******************************************************************************/
 int adf5611_get_output_power(struct adf5611_dev *dev, int8_t *pwr);
 
-/** ADF5611 Set the rfoutdiv power attribute */
+/***************************************************************************//**
+ * @brief This function sets the power level for the RF output divider of the
+ * ADF5611 device. It should be called when you need to adjust the power
+ * level of the RF output divider to a specific value. The function
+ * ensures that the power level does not exceed the maximum allowed value
+ * by clamping it if necessary. It is important to ensure that the device
+ * has been properly initialized before calling this function.
+ *
+ * @param dev A pointer to an adf5611_dev structure representing the device.
+ * Must not be null, and the device must be initialized.
+ * @param pwr An integer representing the desired power level for the RF output
+ * divider. Valid values range from 0 to ADF5611_RFOUTDIV_PWR_MAX.
+ * Values greater than the maximum are clamped to
+ * ADF5611_RFOUTDIV_PWR_MAX.
+ * @return Returns 0 on success or a negative error code on failure.
+ ******************************************************************************/
 int adf5611_set_rfoutdiv_power(struct adf5611_dev *dev, int32_t pwr);
 
-/** ADF5611 Get the rfoutdiv power attribute */
+/***************************************************************************//**
+ * @brief This function is used to obtain the current RF output divider power
+ * setting from an ADF5611 device. It should be called when you need to
+ * read the power setting for the RF output divider, typically for
+ * monitoring or configuration purposes. The function requires a valid
+ * device descriptor and a pointer to an integer where the power setting
+ * will be stored. It is important to ensure that the device has been
+ * properly initialized before calling this function. The function will
+ * return an error code if the read operation fails.
+ *
+ * @param dev A pointer to an adf5611_dev structure representing the device.
+ * This must be a valid, initialized device descriptor and must not
+ * be null.
+ * @param pwr A pointer to an int32_t where the RF output divider power setting
+ * will be stored. This pointer must not be null, and the caller is
+ * responsible for providing a valid memory location.
+ * @return Returns 0 on success, or a negative error code if the operation
+ * fails.
+ ******************************************************************************/
 int adf5611_get_rfoutdiv_power(struct adf5611_dev *dev, int32_t *pwr);
 
-/** ADF5611 Set the rfoutdiv divider attribute */
+/***************************************************************************//**
+ * @brief This function configures the RF output divider of the ADF5611 device
+ * to the specified value. It should be called when the RF output divider
+ * needs to be set or adjusted. The function ensures that the divider
+ * value does not exceed the maximum allowed value by clamping it if
+ * necessary. It requires a valid device descriptor and updates the
+ * device's configuration via SPI communication. This function must be
+ * called after the device has been properly initialized.
+ *
+ * @param dev A pointer to an adf5611_dev structure representing the device.
+ * Must not be null. The caller retains ownership.
+ * @param div_val The desired RF output divider value as an 8-bit unsigned
+ * integer. Valid values range from 0 to
+ * ADF5611_RFOUTDIV_DIV_MAX. Values exceeding the maximum are
+ * clamped to ADF5611_RFOUTDIV_DIV_MAX.
+ * @return Returns 0 on success or a negative error code on failure, such as
+ * -EINVAL if the device pointer is null.
+ ******************************************************************************/
 int adf5611_set_rfoutdiv_divider(struct adf5611_dev *dev, uint8_t div_val);
 
-/** ADF5611 Get the rfoutdiv divider attribute */
+/***************************************************************************//**
+ * @brief This function is used to obtain the current RF output divider value
+ * from an ADF5611 device. It should be called when you need to know the
+ * current divider setting for the RF output. The function requires a
+ * valid device descriptor and a pointer to store the retrieved divider
+ * value. It reads the necessary register via SPI and extracts the
+ * divider value, storing it in the provided pointer. Ensure that the
+ * device has been properly initialized before calling this function.
+ *
+ * @param dev A pointer to an adf5611_dev structure representing the device.
+ * Must not be null. The device should be initialized before calling
+ * this function.
+ * @param div A pointer to an int8_t where the RF output divider value will be
+ * stored. Must not be null. The function writes the retrieved
+ * divider value to this location.
+ * @return Returns 0 on success, or a negative error code if the SPI read
+ * operation fails.
+ ******************************************************************************/
 int adf5611_get_rfoutdiv_divider(struct adf5611_dev *dev, int8_t *div);
 
-/** ADF5611 Set the enable/disable rfoutdiv */
+/***************************************************************************//**
+ * @brief This function is used to enable or disable the RF output divider on
+ * the ADF5611 device. It should be called when you need to control the
+ * state of the RF output divider, typically as part of configuring the
+ * device for a specific operation. Ensure that the device has been
+ * properly initialized before calling this function. The function
+ * updates the relevant register to reflect the desired state.
+ *
+ * @param dev A pointer to an adf5611_dev structure representing the device.
+ * Must not be null. The caller retains ownership.
+ * @param en A boolean value indicating whether to enable (true) or disable
+ * (false) the RF output divider.
+ * @return Returns 0 on success or a negative error code on failure.
+ ******************************************************************************/
 int adf5611_set_en_rfoutdiv(struct adf5611_dev *dev, bool en);
 
-/** ADF5611 Get the enable/disable rfoutdiv */
+/***************************************************************************//**
+ * @brief Use this function to check whether the RF output divider is enabled or
+ * disabled on the ADF5611 device. It must be called with a valid device
+ * descriptor and a pointer to a boolean variable where the result will
+ * be stored. This function is typically used in scenarios where the
+ * configuration of the RF output needs to be verified or adjusted.
+ * Ensure that the device has been properly initialized before calling
+ * this function.
+ *
+ * @param dev A pointer to an adf5611_dev structure representing the device.
+ * Must not be null. The function will return an error if the device
+ * is not properly initialized or if communication fails.
+ * @param en A pointer to a boolean variable where the enable status of the RF
+ * output divider will be stored. Must not be null. The function will
+ * write true if the divider is enabled, false otherwise.
+ * @return Returns 0 on success, or a negative error code if the operation
+ * fails.
+ ******************************************************************************/
 int adf5611_get_en_rfoutdiv(struct adf5611_dev *dev, bool *en);
 
-/** ADF5611 Set output frequency attribute */
+/***************************************************************************//**
+ * @brief This function sets the RF output frequency of the ADF5611 device to
+ * the specified value. It ensures that the frequency is within the valid
+ * range by clamping it to the maximum or minimum allowed values if
+ * necessary. This function should be called when you need to update the
+ * RF output frequency of the device, and it must be used with a properly
+ * initialized device structure. The function returns an integer status
+ * code indicating the success or failure of the operation.
+ *
+ * @param dev A pointer to an adf5611_dev structure representing the device.
+ * Must not be null, and the device must be properly initialized
+ * before calling this function.
+ * @param val The desired RF output frequency in Hz. The value will be clamped
+ * to the range [ADF5611_RFOUT_MIN, ADF5611_RFOUT_MAX] if it falls
+ * outside this range.
+ * @return Returns an integer status code from the adf5611_set_freq function,
+ * indicating success or failure of the frequency setting operation.
+ ******************************************************************************/
 int adf5611_set_rfout(struct adf5611_dev *dev, uint64_t val);
 
-/** ADF5611 Get output frequency attribute */
+/***************************************************************************//**
+ * @brief Use this function to obtain the current RF output frequency from an
+ * ADF5611 device. It is essential to ensure that the device has been
+ * properly initialized before calling this function. The function reads
+ * multiple registers from the device to compute the frequency and stores
+ * the result in the provided memory location. This function returns an
+ * error code if any of the SPI read operations fail, indicating that the
+ * frequency could not be retrieved.
+ *
+ * @param dev A pointer to an initialized adf5611_dev structure representing the
+ * device. Must not be null.
+ * @param val A pointer to a uint64_t variable where the RF output frequency
+ * will be stored. Must not be null.
+ * @return Returns 0 on success, or a negative error code if a SPI read
+ * operation fails.
+ ******************************************************************************/
 int adf5611_get_rfout(struct adf5611_dev *dev, uint64_t *val);
 
-/** ADF5611 Sets frequency */
+/***************************************************************************//**
+ * @brief This function configures the frequency of the ADF5611 device based on
+ * the parameters set in the device structure. It must be called after
+ * the device has been properly initialized and configured with the
+ * desired frequency settings. The function handles various internal
+ * configurations and calibrations necessary to achieve the specified
+ * frequency. It returns an error code if any step in the configuration
+ * process fails, ensuring that the device is correctly set up before
+ * returning control to the caller.
+ *
+ * @param dev A pointer to an initialized adf5611_dev structure. This structure
+ * must be properly configured with the desired frequency and other
+ * relevant parameters before calling this function. The pointer must
+ * not be null, and the caller retains ownership.
+ * @return Returns 0 on success, or a negative error code if the frequency
+ * setting process fails at any step.
+ ******************************************************************************/
 int adf5611_set_freq(struct adf5611_dev *dev);
 
-/** ADF5611 Initialization */
+/***************************************************************************//**
+ * @brief This function sets up and initializes an ADF5611 device using the
+ * provided initialization parameters. It must be called before any other
+ * operations on the device. The function configures the SPI interface,
+ * sets device-specific parameters, and writes default register values.
+ * It also performs a reset and a basic communication test to ensure the
+ * device is operational. If initialization fails at any step, resources
+ * are cleaned up and an error code is returned.
+ *
+ * @param dev A pointer to a pointer of an adf5611_dev structure. This will be
+ * allocated and initialized by the function. Must not be null.
+ * @param init_param A pointer to an adf5611_init_param structure containing the
+ * initialization parameters. Must not be null and should be
+ * properly populated with valid configuration data.
+ * @return Returns 0 on success or a negative error code on failure. On success,
+ * the dev pointer is updated to point to a newly allocated and
+ * initialized adf5611_dev structure.
+ ******************************************************************************/
 int adf5611_init(struct adf5611_dev **device,
 		 struct adf5611_init_param *init_param);
 
-/** ADF5611 Remove */
+/***************************************************************************//**
+ * @brief Use this function to properly remove an ADF5611 device instance and
+ * release any associated resources. It should be called when the device
+ * is no longer needed, typically during application shutdown or when
+ * reinitializing the device. This function ensures that the SPI
+ * descriptor associated with the device is removed and the device memory
+ * is freed if the SPI removal fails. It is important to ensure that the
+ * device pointer is valid and initialized before calling this function.
+ *
+ * @param dev A pointer to an adf5611_dev structure representing the device
+ * instance to be removed. Must not be null and should point to a
+ * valid, initialized device structure. The function does not handle
+ * null pointers and expects the caller to ensure the validity of the
+ * input.
+ * @return Returns 0 on successful removal of the device instance. The function
+ * does not return error codes for SPI removal failures, but it attempts
+ * to free the device memory in such cases.
+ ******************************************************************************/
 int adf5611_remove(struct adf5611_dev *dev);

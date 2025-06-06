@@ -732,10 +732,24 @@
 /*************************** Types Declarations *******************************/
 /******************************************************************************/
 
-/**
- * @enum ade9078_isum_cfg_e
- * @brief ADE9078 isum calculation configuration.
- */
+/***************************************************************************//**
+ * @brief The `ade9078_isum_cfg_e` is an enumeration that defines various
+ * configuration options for calculating the neutral current RMS in the
+ * ADE9078 energy metering IC. It includes options for approximating the
+ * neutral current RMS, as well as detecting positive and negative
+ * mismatches between neutral and phase currents. This enumeration is
+ * used to configure the behavior of the ADE9078 in terms of how it
+ * processes and calculates current mismatches and RMS values.
+ *
+ * @param ADE9078_ISUM_APROX_N Represents an approximated neutral current RMS
+ * calculation.
+ * @param ADE9078_ISUM_DET_MISM_POS Determines positive mismatch between neutral
+ * and phase currents.
+ * @param ADE9078_ISUM_DET_MISM_NEG Determines negative mismatch between neutral
+ * and phase currents.
+ * @param ADE9078_ISUM_APROX_N_RMS Represents an approximated neutral current
+ * RMS calculation.
+ ******************************************************************************/
 enum ade9078_isum_cfg_e {
 	/* Approximated neutral current rms calculation */
 	ADE9078_ISUM_APROX_N,
@@ -749,11 +763,28 @@ enum ade9078_isum_cfg_e {
 	ADE9078_ISUM_APROX_N_RMS
 };
 
-/**
- * @enum ade9078_aregion_sel_e
- * @brief ADE9078 These bits indicate which AIGAINx and APHCALx
-    is currently being used.
- */
+/***************************************************************************//**
+ * @brief The `ade9078_aregion_sel_e` enumeration defines a set of constants
+ * used to select which AIGAINx and APHCALx settings are currently being
+ * used in the ADE9078 device. These settings are used for gain and phase
+ * calibration of the device, with options ranging from 0 to 4 for
+ * different calibration settings, and an option to disable the function
+ * entirely. This enumeration is part of the configuration for the
+ * ADE9078, a device used for energy measurement and monitoring.
+ *
+ * @param ADE9078_AIGAIN_APHCAL_0 Represents the first gain and phase
+ * calibration setting.
+ * @param ADE9078_AIGAIN_APHCAL_1 Represents the second gain and phase
+ * calibration setting.
+ * @param ADE9078_AIGAIN_APHCAL_2 Represents the third gain and phase
+ * calibration setting.
+ * @param ADE9078_AIGAIN_APHCAL_3 Represents the fourth gain and phase
+ * calibration setting.
+ * @param ADE9078_AIGAIN_APHCAL_4 Represents the fifth gain and phase
+ * calibration setting.
+ * @param ADE9078_AIGAIN_APHCAL_DISABLE Indicates that the function is disabled,
+ * with a value of 15.
+ ******************************************************************************/
 enum ade9078_aregion_sel_e {
 	/* 0 */
 	ADE9078_AIGAIN_APHCAL_0,
@@ -769,11 +800,27 @@ enum ade9078_aregion_sel_e {
 	ADE9078_AIGAIN_APHCAL_DISABLE = 15
 };
 
-/**
- * @enum ade9078_bregion_sel_e
- * @brief ADE9078 These bits indicate which BIGAINx and BPHCALx
-    is currently being used.
- */
+/***************************************************************************//**
+ * @brief The `ade9078_bregion_sel_e` enumeration defines the possible gain and
+ * phase calibration settings for the B region in the ADE9078 device.
+ * Each enumerator corresponds to a specific calibration setting, with
+ * the option to disable the function entirely. This enumeration is used
+ * to select which BIGAINx and BPHCALx settings are currently active,
+ * allowing for precise control over the calibration of the B region.
+ *
+ * @param ADE9078_BIGAIN_BPHCAL_0 Represents the first gain and phase
+ * calibration setting for B region.
+ * @param ADE9078_BIGAIN_BPHCAL_1 Represents the second gain and phase
+ * calibration setting for B region.
+ * @param ADE9078_BIGAIN_BPHCAL_2 Represents the third gain and phase
+ * calibration setting for B region.
+ * @param ADE9078_BIGAIN_BPHCAL_3 Represents the fourth gain and phase
+ * calibration setting for B region.
+ * @param ADE9078_BIGAIN_BPHCAL_4 Represents the fifth gain and phase
+ * calibration setting for B region.
+ * @param ADE9078_BIGAIN_BPHCAL_DISABLE Indicates that the gain and phase
+ * calibration function is disabled.
+ ******************************************************************************/
 enum ade9078_bregion_sel_e {
 	/* 0 */
 	ADE9078_BIGAIN_BPHCAL_0,
@@ -789,11 +836,28 @@ enum ade9078_bregion_sel_e {
 	ADE9078_BIGAIN_BPHCAL_DISABLE = 15
 };
 
-/**
- * @enum ade9078_cregion_sel_e
- * @brief ADE9078 These bits indicate which CIGAINx and CPHCALx
-    is currently being used.
- */
+/***************************************************************************//**
+ * @brief The `ade9078_cregion_sel_e` enumeration defines the selection of
+ * CIGAIN and CPHCAL configurations for the ADE9078 device. It provides
+ * options to select from five different configurations, each
+ * corresponding to a specific gain and phase calibration setting, or to
+ * disable the function entirely. This enumeration is used to manage and
+ * switch between different calibration settings for the C phase in the
+ * ADE9078 energy metering IC.
+ *
+ * @param ADE9078_CIGAIN_CPHCAL_0 Represents the first configuration of CIGAIN
+ * and CPHCAL.
+ * @param ADE9078_CIGAIN_CPHCAL_1 Represents the second configuration of CIGAIN
+ * and CPHCAL.
+ * @param ADE9078_CIGAIN_CPHCAL_2 Represents the third configuration of CIGAIN
+ * and CPHCAL.
+ * @param ADE9078_CIGAIN_CPHCAL_3 Represents the fourth configuration of CIGAIN
+ * and CPHCAL.
+ * @param ADE9078_CIGAIN_CPHCAL_4 Represents the fifth configuration of CIGAIN
+ * and CPHCAL.
+ * @param ADE9078_CIGAIN_CPHCAL_DISABLE Indicates that the CIGAIN and CPHCAL
+ * function is disabled.
+ ******************************************************************************/
 enum ade9078_cregion_sel_e {
 	/* 0 */
 	ADE9078_CIGAIN_CPHCAL_0,
@@ -809,11 +873,24 @@ enum ade9078_cregion_sel_e {
 	ADE9078_CIGAIN_CPHCAL_DISABLE = 15
 };
 
-/**
- * @enum ade9078_cf4_pin_out_cfg_e
- * @brief ADE9078 These bits indicate which function
-    to output on CF4 pin
- */
+/***************************************************************************//**
+ * @brief The `ade9078_cf4_pin_out_cfg_e` is an enumeration that defines the
+ * possible configurations for the CF4 pin output on the ADE9078 device.
+ * It allows the selection of different functionalities such as digital
+ * to frequency conversion, event signaling, or data readiness
+ * indication, which can be output through the CF4 pin. This
+ * configuration is crucial for interfacing the ADE9078 with other
+ * components in a system, enabling it to signal specific conditions or
+ * data states.
+ *
+ * @param ADE9078_CF4_D_F_CONV Represents a digital to frequency converter
+ * output on the CF4 pin.
+ * @param ADE9078_CF4_D_F_CONV2 Represents a second digital to frequency
+ * converter output on the CF4 pin.
+ * @param ADE9078_CF4_EVENT Indicates an event output on the CF4 pin.
+ * @param ADE9078_CF4_DREADY Indicates a data ready signal output on the CF4
+ * pin.
+ ******************************************************************************/
 enum ade9078_cf4_pin_out_cfg_e {
 	/* Digital to freq converter */
 	ADE9078_CF4_D_F_CONV,
@@ -825,10 +902,19 @@ enum ade9078_cf4_pin_out_cfg_e {
 	ADE9078_CF4_DREADY,
 };
 
-/**
- * @enum ade9078_pwr_settle_e
- * @brief ADE9078 Power settle time
- */
+/***************************************************************************//**
+ * @brief The `ade9078_pwr_settle_e` is an enumeration that defines different
+ * power settle times for the ADE9078 device. Each enumerator corresponds
+ * to a specific time duration in milliseconds, which is used to
+ * configure the power settling time in the device. This configuration is
+ * crucial for ensuring that the device stabilizes its power measurements
+ * over the specified time period, allowing for accurate readings.
+ *
+ * @param ADE9078_PWR_SETTLE_0 Represents a power settle time of 64 ms.
+ * @param ADE9078_PWR_SETTLE_1 Represents a power settle time of 128 ms.
+ * @param ADE9078_PWR_SETTLE_2 Represents a power settle time of 256 ms.
+ * @param ADE9078_PWR_SETTLE_3 Represents a power settle time of 0 ms.
+ ******************************************************************************/
 enum ade9078_pwr_settle_e {
 	/* 64 ms */
 	ADE9078_PWR_SETTLE_0,
@@ -840,12 +926,25 @@ enum ade9078_pwr_settle_e {
 	ADE9078_PWR_SETTLE_3
 };
 
-/**
- * @enum ade9078_cf4_sel_e
- * @brief ADE9078 Type of energy output on the CF4 pin. Configure
-    TERMSEL4 in the COMPMODE register to select
-    which phases are included
- */
+/***************************************************************************//**
+ * @brief The `ade9078_cf4_sel_e` enumeration defines various types of energy
+ * outputs that can be configured on the CF4 pin of the ADE9078 device.
+ * Each enumerator corresponds to a specific type of power measurement,
+ * such as active, reactive, or apparent power, and is used to select the
+ * desired energy output for monitoring and analysis purposes. The
+ * enumeration values are used to configure the TERMSEL4 in the COMPMODE
+ * register, determining which phases are included in the measurement.
+ *
+ * @param ADE9078_CF4_SEL_ACTIV_P Represents the total active power.
+ * @param ADE9078_CF4_SEL_REACTIV_P Represents the total reactive power.
+ * @param ADE9078_CF4_SEL_APPARENT_P Represents the total apparent power.
+ * @param ADE9078_CF4_SEL_FUN_REACTIVE_P Represents the fundamental reactive
+ * power, assigned a value of 4.
+ * @param ADE9078_CF4_SEL_TOTAL_ACTIVE_P Represents the total active power,
+ * assigned a value of 6.
+ * @param ADE9078_CF4_SEL_TOTAL_ACTIVE_P_2 Represents an alternative total
+ * active power.
+ ******************************************************************************/
 enum ade9078_cf4_sel_e {
 	/* Total active power */
 	ADE9078_CF4_SEL_ACTIV_P,
@@ -861,10 +960,16 @@ enum ade9078_cf4_sel_e {
 	ADE9078_CF4_SEL_TOTAL_ACTIVE_P_2,
 };
 
-/**
- * @enum ade9078_freq_sel_e
- * @brief ADE9078 Freq value
- */
+/***************************************************************************//**
+ * @brief The `ade9078_freq_sel_e` is an enumeration that defines the frequency
+ * selection options for the ADE9078 device, specifically allowing the
+ * user to choose between 50 Hz and 60 Hz. This selection is crucial for
+ * configuring the device to operate correctly in regions with different
+ * power line frequencies.
+ *
+ * @param ADE9078_SELFREQ_50 Represents a frequency selection of 50 Hz.
+ * @param ADE9078_SELFREQ_60 Represents a frequency selection of 60 Hz.
+ ******************************************************************************/
 enum ade9078_freq_sel_e {
 	/* 50 Hz */
 	ADE9078_SELFREQ_50,
@@ -872,10 +977,26 @@ enum ade9078_freq_sel_e {
 	ADE9078_SELFREQ_60,
 };
 
-/**
- * @enum ade9078_vconsel_e
- * @brief ADE9078 3-wire and 4-wire hardware configuration selection
- */
+/***************************************************************************//**
+ * @brief The `ade9078_vconsel_e` enumeration defines various hardware
+ * configurations for the ADE9078 device, specifically focusing on
+ * different wiring configurations for electrical systems. These
+ * configurations include both 3-wire and 4-wire setups, with some being
+ * non-Blondel compliant, which affects how voltage measurements are
+ * calculated between phases. This enumeration is crucial for selecting
+ * the appropriate configuration for accurate power and energy
+ * measurements in different electrical systems.
+ *
+ * @param ADE9078_4WIRE_WYE Represents a 4-wire wye configuration.
+ * @param ADE9078_3WIRE_DELTA Represents a 3-wire delta configuration where VB'
+ * = VA − VC.
+ * @param ADE9078_4WIRE_WYE_VA_VC Represents a 4-wire wye configuration, non-
+ * Blondel compliant, where VB' = −VA − VC.
+ * @param ADE9078_4WIRE_WYE_VA Represents a 4-wire delta configuration, non-
+ * Blondel compliant, where VB' = −VA.
+ * @param ADE9078_3WIRE_DELTA_2 Represents a 3-wire delta configuration where
+ * VA' = VA − VB, VB' = VA − VC, and VC' = VC − VB.
+ ******************************************************************************/
 enum ade9078_vconsel_e {
 	/* 4 wire wye */
 	ADE9078_4WIRE_WYE,
@@ -889,11 +1010,24 @@ enum ade9078_vconsel_e {
 	ADE9078_3WIRE_DELTA_2
 };
 
-/**
- * @enum ade9078_var_acc_mode_e
- * @brief ADE9078 Total and fundamental reactive power accumulation
-     mode for energy registers and CFx pulses.
- */
+/***************************************************************************//**
+ * @brief The `ade9078_var_acc_mode_e` is an enumeration that defines the modes
+ * of accumulation for total and fundamental reactive power in the
+ * ADE9078 energy metering IC. It specifies how the reactive power is
+ * accumulated in energy registers and CFx pulses, offering options for
+ * signed, absolute, positive, and negative accumulation modes. This
+ * allows for flexible configuration of the device to suit different
+ * metering requirements.
+ *
+ * @param ADE9078_ACC_SIGNED Represents the signed accumulation mode for
+ * reactive power.
+ * @param ADE9078_ACC_ABSOLUTE Represents the absolute value accumulation mode
+ * for reactive power.
+ * @param ADE9078_ACC_POSITIVE Represents the positive accumulation mode for
+ * reactive power.
+ * @param ADE9078_ACC_NEGATIVE Represents the negative accumulation mode for
+ * reactive power.
+ ******************************************************************************/
 enum ade9078_var_acc_mode_e {
 	/* signed acc mode */
 	ADE9078_ACC_SIGNED,
@@ -905,12 +1039,24 @@ enum ade9078_var_acc_mode_e {
 	ADE9078_ACC_NEGATIVE
 };
 
-/**
- * @enum ade9078_line_period_sel_e
- * @brief Selects line period measurement used for
-    VRMS½ cycle, 10 cycle rms/12 cycle rms, and
-    resampling.
- */
+/***************************************************************************//**
+ * @brief The `ade9078_line_period_sel_e` is an enumeration that defines the
+ * different modes of line period measurement used in the ADE9078 device.
+ * It specifies how the line period is measured for various calculations
+ * such as VRMS half-cycle, 10-cycle RMS, 12-cycle RMS, and resampling.
+ * Each enumerator corresponds to a specific accumulation mode, allowing
+ * the device to measure line periods based on signed, absolute,
+ * positive, or negative accumulation.
+ *
+ * @param ADE9078_APERIOD Represents the signed accumulation mode for line
+ * period measurement.
+ * @param ADE9078_BPERIOD Represents the absolute value accumulation mode for
+ * line period measurement.
+ * @param ADE9078_CPERIOD Represents the positive accumulation mode for line
+ * period measurement.
+ * @param ADE9078_COM_PERIOD Represents the negative accumulation mode for line
+ * period measurement.
+ ******************************************************************************/
 enum ade9078_line_period_sel_e {
 	/* signed acc mode */
 	ADE9078_APERIOD,
@@ -922,12 +1068,24 @@ enum ade9078_line_period_sel_e {
 	ADE9078_COM_PERIOD
 };
 
-/**
- * @enum ade9078_zx_select_e
- * @brief Selects the zero-crossing signal, which can be
-    routed to the CF3/ZX output pin and used for
-    line cycle energy accumulation
- */
+/***************************************************************************//**
+ * @brief The `ade9078_zx_select_e` enumeration defines the possible zero-
+ * crossing signal selections for the ADE9078 device. These selections
+ * determine which phase's voltage zero-crossing signal is routed to the
+ * CF3/ZX output pin, which can be used for line cycle energy
+ * accumulation. The options include zero-crossing signals for individual
+ * phases A, B, and C, as well as a combined signal from all three
+ * phases.
+ *
+ * @param ADE9078_ZXVA_SEL Represents the zero-crossing signal for Phase A
+ * voltage.
+ * @param ADE9078_ZXVB_SEL Represents the zero-crossing signal for Phase B
+ * voltage.
+ * @param ADE9078_ZXVC_SEL Represents the zero-crossing signal for Phase C
+ * voltage.
+ * @param ADE9078_ZXCOMB_SEL Represents the zero-crossing signal for the
+ * combined signal from VA, VB, and VC.
+ ******************************************************************************/
 enum ade9078_zx_select_e {
 	/* Phase A voltage zero-crossing signal */
 	ADE9078_ZXVA_SEL,
@@ -939,11 +1097,18 @@ enum ade9078_zx_select_e {
 	ADE9078_ZXCOMB_SEL
 };
 
-/**
- * @enum ade9078_wf_src_e
- * @brief Waveform buffer source and DREADY (data
-    ready update rate) selection
- */
+/***************************************************************************//**
+ * @brief The `ade9078_wf_src_e` enumeration defines the different sources for
+ * waveform data in the ADE9078 device, specifying the type of data
+ * processing and sampling rate for waveform buffer sources. It includes
+ * options for raw Sinc4 output, Sinc4 with IIR low-pass filtering, and
+ * DSP-processed waveform samples, each with distinct sampling rates.
+ *
+ * @param ADE9078_SRC_SINC4 Represents the Sinc4 output at 32 kSPS.
+ * @param ADE9078_SRC_SINC4_IIR Represents the Sinc4 + IIR LPF output at 8 kSPS.
+ * @param ADE9078_SRC_DSP Represents the current and voltage channel waveform
+ * samples processed by the DSP at 4 kSPS.
+ ******************************************************************************/
 enum ade9078_wf_src_e {
 	/* Sinc4 output at 32 kSPS */
 	ADE9078_SRC_SINC4,
@@ -954,11 +1119,24 @@ enum ade9078_wf_src_e {
 	ADE9078_SRC_DSP
 };
 
-/**
- * @enum ade9078_wf_mode_e
- * @brief Fixed data rate waveforms filling and trigger
-    based modes.
- */
+/***************************************************************************//**
+ * @brief The `ade9078_wf_mode_e` is an enumeration that defines the different
+ * modes for handling waveform data in the ADE9078 device. It specifies
+ * how the waveform buffer should be filled and managed, including
+ * stopping when full, filling continuously with specific trigger
+ * conditions, centering captures around events, or saving event
+ * addresses. This enumeration is crucial for configuring the waveform
+ * data handling behavior in applications using the ADE9078 energy
+ * metering IC.
+ *
+ * @param ADE9078_MODE_STOP_FULL Stops when the waveform buffer is full.
+ * @param ADE9078_MODE_TRIG_EN_EVENTS Continuously fills and stops only on
+ * enabled trigger events.
+ * @param ADE9078_MODE_CENTER_CAPTURE Continuously fills and centers capture
+ * around enabled trigger events.
+ * @param ADE9078_MODE_SAVE_EVENT_ADDR Continuously fills and saves the event
+ * address of enabled trigger events.
+ ******************************************************************************/
 enum ade9078_wf_mode_e {
 	/* Stop when waveform buffer is full */
 	ADE9078_MODE_STOP_FULL,
@@ -973,11 +1151,31 @@ enum ade9078_wf_mode_e {
 	ADE9078_MODE_SAVE_EVENT_ADDR
 };
 
-/**
- * @enum ade9078_burst_ch_e
- * @brief Selects which data to read out of the waveform
-    buffer through SPI
- */
+/***************************************************************************//**
+ * @brief The `ade9078_burst_ch_e` enumeration defines the different channel
+ * configurations available for burst reading from the ADE9078 waveform
+ * buffer through SPI. It includes options for reading all channels,
+ * specific pairs of current and voltage channels, individual channels,
+ * and a disabled state for single address reading. This enumeration is
+ * used to configure the data output from the waveform buffer,
+ * facilitating efficient data acquisition in various application
+ * scenarios.
+ *
+ * @param ADE9078_BURST_ALL_CH Represents all channels for burst reading.
+ * @param ADE9078_BURST_IA_VA Represents IA and VA channels for burst reading.
+ * @param ADE9078_BURST_IB_VB Represents IB and VB channels for burst reading.
+ * @param ADE9078_BURST_IC_VC Represents IC and VC channels for burst reading.
+ * @param ADE9078_BURST_IA Represents the IA channel for burst reading.
+ * @param ADE9078_BURST_VA Represents the VA channel for burst reading.
+ * @param ADE9078_BURST_IB Represents the IB channel for burst reading.
+ * @param ADE9078_BURST_VB Represents the VB channel for burst reading.
+ * @param ADE9078_BURST_IC Represents the IC channel for burst reading.
+ * @param ADE9078_BURST_VC Represents the VC channel for burst reading.
+ * @param ADE9078_BURST_IN Represents the IN channel for burst reading if
+ * WF_IN_EN is enabled.
+ * @param ADE9078_BURST_DISABLED Disables burst reading, allowing single address
+ * read.
+ ******************************************************************************/
 enum ade9078_burst_ch_e {
 	/* All channels */
 	ADE9078_BURST_ALL_CH,
@@ -1005,11 +1203,32 @@ enum ade9078_burst_ch_e {
 	ADE9078_BURST_DISABLED
 };
 
-/**
- * @enum ade9078_hpf_freq_e
- * @brief High-pass filter corner (f3dB) enabled when the
-    HPFDIS bit in the CONFIG0 register is equal to zero
- */
+/***************************************************************************//**
+ * @brief The `ade9078_hpf_freq_e` is an enumeration that defines various high-
+ * pass filter corner frequencies (f3dB) for the ADE9078 device. These
+ * frequencies are used to configure the high-pass filter when the HPFDIS
+ * bit in the CONFIG0 register is set to zero, allowing the user to
+ * select the desired cutoff frequency for filtering purposes. Each
+ * enumerator corresponds to a specific frequency value, providing
+ * flexibility in signal processing applications.
+ *
+ * @param ADE9078_HPF_36_695 Represents a high-pass filter corner frequency of
+ * 39.695 Hz.
+ * @param ADE9078_HPF_19_6375 Represents a high-pass filter corner frequency of
+ * 19.6375 Hz.
+ * @param ADE9078_HPF_9_895 Represents a high-pass filter corner frequency of
+ * 9.895 Hz.
+ * @param ADE9078_HPF_4_9675 Represents a high-pass filter corner frequency of
+ * 4.9675 Hz.
+ * @param ADE9078_HPF_2_49 Represents a high-pass filter corner frequency of
+ * 2.49 Hz.
+ * @param ADE9078_HPF_1_2475 Represents a high-pass filter corner frequency of
+ * 1.2475 Hz.
+ * @param ADE9078_HPF_0_625 Represents a high-pass filter corner frequency of
+ * 0.625 Hz.
+ * @param ADE9078_HPF_0_3125 Represents a high-pass filter corner frequency of
+ * 0.3125 Hz.
+ ******************************************************************************/
 enum ade9078_hpf_freq_e {
 	/* 39.695 Hz. */
 	ADE9078_HPF_36_695,
@@ -1029,11 +1248,32 @@ enum ade9078_hpf_freq_e {
 	ADE9078_HPF_0_3125
 };
 
-/**
- * @enum ade9078_no_load_tmr_e
- * @brief This register configures how many 4 kSPS
-    samples to evaluate the no load condition over
- */
+/***************************************************************************//**
+ * @brief The `ade9078_no_load_tmr_e` is an enumeration that defines various
+ * configurations for evaluating the no load condition in the ADE9078
+ * device. Each enumerator specifies the number of 4 kSPS samples over
+ * which the no load condition is assessed, ranging from 64 to 4096
+ * samples, with an option to disable the no load threshold evaluation
+ * entirely. This configuration is crucial for determining the presence
+ * of a load based on the number of samples analyzed.
+ *
+ * @param ADE9078_NOLOAD_SAMPLES_64 Represents a configuration for evaluating no
+ * load condition over 64 samples.
+ * @param ADE9078_NOLOAD_SAMPLES_128 Represents a configuration for evaluating
+ * no load condition over 128 samples.
+ * @param ADE9078_NOLOAD_SAMPLES_256 Represents a configuration for evaluating
+ * no load condition over 256 samples.
+ * @param ADE9078_NOLOAD_SAMPLES_512 Represents a configuration for evaluating
+ * no load condition over 512 samples.
+ * @param ADE9078_NOLOAD_SAMPLES_1024 Represents a configuration for evaluating
+ * no load condition over 1024 samples.
+ * @param ADE9078_NOLOAD_SAMPLES_2048 Represents a configuration for evaluating
+ * no load condition over 2048 samples.
+ * @param ADE9078_NOLOAD_SAMPLES_4096 Represents a configuration for evaluating
+ * no load condition over 4096 samples.
+ * @param ADE9078_NOLOAD_SAMPLES_DISABLE Disables the no load threshold
+ * evaluation.
+ ******************************************************************************/
 enum ade9078_no_load_tmr_e {
 	/* 64 samples */
 	ADE9078_NOLOAD_SAMPLES_64,
@@ -1053,12 +1293,31 @@ enum ade9078_no_load_tmr_e {
 	ADE9078_NOLOAD_SAMPLES_DISABLE
 };
 
-/**
- * @enum ade9078_pkdet_lvl_e
- * @brief ADE9078 These bits configure the PSM2 low power
-comparator peak current detection Level, listed as
-the input signal level with respect to full scale.
- */
+/***************************************************************************//**
+ * @brief The `ade9078_pkdet_lvl_e` is an enumeration that defines various peak
+ * detection levels for the ADE9078 device, expressed as ratios of the
+ * input signal level to the full scale. Each enumerator represents a
+ * specific peak detection threshold, ranging from 100:1 to 1600:1, which
+ * can be used to configure the PSM2 low power comparator for peak
+ * current detection.
+ *
+ * @param ADE9078_PKDET_LVL_100 Represents a peak detection level of 100:1.
+ * @param ADE9078_PKDET_LVL_200 Represents a peak detection level of 200:1.
+ * @param ADE9078_PKDET_LVL_300 Represents a peak detection level of 300:1.
+ * @param ADE9078_PKDET_LVL_400 Represents a peak detection level of 400:1.
+ * @param ADE9078_PKDET_LVL_500 Represents a peak detection level of 500:1.
+ * @param ADE9078_PKDET_LVL_600 Represents a peak detection level of 600:1.
+ * @param ADE9078_PKDET_LVL_700 Represents a peak detection level of 700:1.
+ * @param ADE9078_PKDET_LVL_800 Represents a peak detection level of 800:1.
+ * @param ADE9078_PKDET_LVL_900 Represents a peak detection level of 900:1.
+ * @param ADE9078_PKDET_LVL_1000 Represents a peak detection level of 1000:1.
+ * @param ADE9078_PKDET_LVL_1100 Represents a peak detection level of 1100:1.
+ * @param ADE9078_PKDET_LVL_1200 Represents a peak detection level of 1200:1.
+ * @param ADE9078_PKDET_LVL_1300 Represents a peak detection level of 1300:1.
+ * @param ADE9078_PKDET_LVL_1400 Represents a peak detection level of 1400:1.
+ * @param ADE9078_PKDET_LVL_1500 Represents a peak detection level of 1500:1.
+ * @param ADE9078_PKDET_LVL_1600 Represents a peak detection level of 1600:1.
+ ******************************************************************************/
 enum ade9078_pkdet_lvl_e {
 	/* 100:1 */
 	ADE9078_PKDET_LVL_100,
@@ -1094,10 +1353,23 @@ enum ade9078_pkdet_lvl_e {
 	ADE9078_PKDET_LVL_1600
 };
 
-/**
- * @enum ade9078_vc_gain_e
- * @brief ADE9078 PGA gain for Voltage Channel C ADC
- */
+/***************************************************************************//**
+ * @brief The `ade9078_vc_gain_e` enumeration defines the programmable gain
+ * amplifier (PGA) gain settings for the Voltage Channel C ADC in the
+ * ADE9078 device. It provides four discrete gain levels, allowing the
+ * user to select the appropriate gain for their application, thereby
+ * optimizing the signal-to-noise ratio and dynamic range of the voltage
+ * measurements.
+ *
+ * @param ADE9078_VC_GAIN_1 Represents a gain setting of 1 for Voltage Channel
+ * C.
+ * @param ADE9078_VC_GAIN_2 Represents a gain setting of 2 for Voltage Channel
+ * C.
+ * @param ADE9078_VC_GAIN_3 Represents a gain setting of 3 for Voltage Channel
+ * C.
+ * @param ADE9078_VC_GAIN_4 Represents a gain setting of 4 for Voltage Channel
+ * C.
+ ******************************************************************************/
 enum ade9078_vc_gain_e {
 	/* Gain = 1 */
 	ADE9078_VC_GAIN_1,
@@ -1109,30 +1381,61 @@ enum ade9078_vc_gain_e {
 	ADE9078_VC_GAIN_4
 };
 
-/**
- * @enum ade9078_phase
- * @brief ADE9078 available phases.
- */
+/***************************************************************************//**
+ * @brief The `ade9078_phase` enumeration defines the available phases (A, B,
+ * and C) for the ADE9078 device, which is used in power measurement and
+ * monitoring applications. Each enumerator corresponds to a specific
+ * phase, allowing the software to reference and manipulate data related
+ * to that phase in the device.
+ *
+ * @param ADE9078_PHASE_A Represents phase A in the ADE9078 device.
+ * @param ADE9078_PHASE_B Represents phase B in the ADE9078 device.
+ * @param ADE9078_PHASE_C Represents phase C in the ADE9078 device.
+ ******************************************************************************/
 enum ade9078_phase {
 	ADE9078_PHASE_A,
 	ADE9078_PHASE_B,
 	ADE9078_PHASE_C
 };
 
-/**
- * @enum ade9078_egy_model
- * @brief ADE9078 available user energy use models.
- */
+/***************************************************************************//**
+ * @brief The `ade9078_egy_model` is an enumeration that defines the available
+ * user energy use models for the ADE9078 device. It provides three
+ * distinct models: one that includes a reset functionality, another that
+ * calculates energy based on half line cycles, and a third that uses a
+ * specified number of samples for energy calculation. This enumeration
+ * is used to configure the energy measurement behavior of the ADE9078
+ * device.
+ *
+ * @param ADE9078_EGY_WITH_RESET Represents an energy model with reset
+ * functionality.
+ * @param ADE9078_EGY_HALF_LINE_CYCLES Represents an energy model based on half
+ * line cycles.
+ * @param ADE9078_EGY_NR_SAMPLES Represents an energy model based on a number of
+ * samples.
+ ******************************************************************************/
 enum ade9078_egy_model {
 	ADE9078_EGY_WITH_RESET,
 	ADE9078_EGY_HALF_LINE_CYCLES,
 	ADE9078_EGY_NR_SAMPLES
 };
 
-/**
- * @enum ade9078_power_mode_e
- * @brief ADE9078 Power mode selection
- */
+/***************************************************************************//**
+ * @brief The `ade9078_power_mode_e` is an enumeration that defines the
+ * different power modes available for the ADE9078 device. These modes
+ * include NORMAL_MODE for standard operation, TAMPER_MODE for tamper
+ * detection, CURRENT_PEAK_DETECT_MODE for detecting current peaks, and
+ * IDLE_MODE for low-power idle state. The enumeration is used to
+ * configure the power mode of the ADE9078, which affects the device's
+ * operation and power consumption characteristics.
+ *
+ * @param NORMAL_MODE Represents the normal power mode (PSM0) of the ADE9078.
+ * @param TAMPER_MODE Represents the tamper measurement power mode (PSM1) of the
+ * ADE9078.
+ * @param CURRENT_PEAK_DETECT_MODE Represents the current peak detect power mode
+ * (PSM2) of the ADE9078.
+ * @param IDLE_MODE Represents the idle power mode (PSM3) of the ADE9078.
+ ******************************************************************************/
 enum ade9078_power_mode_e {
 	/* SPI is not available in PSM2 & PSM3*/
 	/* PSM0 normal mode */
@@ -1145,10 +1448,21 @@ enum ade9078_power_mode_e {
 	IDLE_MODE
 };
 
-/**
- * @struct ade9078_init_param
- * @brief ADE9078 Device initialization parameters.
- */
+/***************************************************************************//**
+ * @brief The `ade9078_init_param` structure is used to define the
+ * initialization parameters for the ADE9078 device. It includes pointers
+ * to SPI and GPIO descriptors necessary for device communication and
+ * control, as well as a variable to select the power mode of the device.
+ * This structure is essential for setting up the device with the correct
+ * communication interfaces and operational mode.
+ *
+ * @param spi_init Pointer to the SPI initialization parameters for device
+ * communication.
+ * @param psm0_desc Pointer to the GPIO descriptor for PSM0.
+ * @param psm1_desc Pointer to the GPIO descriptor for PSM1.
+ * @param reset_desc Pointer to the GPIO descriptor for the reset functionality.
+ * @param power_mode 8-bit unsigned integer for selecting the power mode.
+ ******************************************************************************/
 struct ade9078_init_param {
 	/** Device communication descriptor */
 	struct no_os_spi_init_param 	*spi_init;
@@ -1162,10 +1476,25 @@ struct ade9078_init_param {
 	uint8_t             		power_mode;
 };
 
-/**
- * @struct ade9078_dev
- * @brief ADE9078 Device structure.
- */
+/***************************************************************************//**
+ * @brief The `ade9078_dev` structure is a comprehensive representation of the
+ * ADE9078 device, encapsulating all necessary descriptors and variables
+ * for its operation. It includes pointers to SPI and GPIO descriptors
+ * for communication and control, as well as variables to store key
+ * electrical measurements such as WATT, IRMS, and VRMS values.
+ * Additionally, it holds a power mode variable to manage the device's
+ * operational state, making it integral for interfacing with and
+ * controlling the ADE9078 energy metering IC.
+ *
+ * @param spi_desc Pointer to the SPI communication descriptor for the device.
+ * @param psm0_desc Pointer to the GPIO descriptor for the PSM0 mode.
+ * @param psm1_desc Pointer to the GPIO descriptor for the PSM1 mode.
+ * @param reset_desc Pointer to the GPIO descriptor for the reset functionality.
+ * @param watt_val Stores the WATT value measured by the device.
+ * @param irms_val Stores the IRMS (current RMS) value measured by the device.
+ * @param vrms_val Stores the VRMS (voltage RMS) value measured by the device.
+ * @param power_mode Indicates the current power mode of the device.
+ ******************************************************************************/
 struct ade9078_dev {
 	/** Device communication descriptor */
 	struct no_os_spi_desc		*spi_desc;
@@ -1190,38 +1519,235 @@ struct ade9078_dev {
 /******************************************************************************/
 
 /* Read device register. */
+/***************************************************************************//**
+ * @brief Use this function to read the value of a specified register from the
+ * ADE9078 device. It requires a valid device structure and a register
+ * address to read from. The function will store the read value in the
+ * provided output parameter. Ensure that the device has been properly
+ * initialized before calling this function. The function handles both
+ * 16-bit and 32-bit registers, depending on the address range. It
+ * returns an error code if the device structure or output parameter is
+ * null, or if the SPI communication fails.
+ *
+ * @param dev A pointer to an initialized ade9078_dev structure representing the
+ * device. Must not be null.
+ * @param reg_addr The address of the register to read from. It is a 16-bit
+ * unsigned integer.
+ * @param reg_data A pointer to a 32-bit unsigned integer where the read
+ * register value will be stored. Must not be null.
+ * @return Returns 0 on success, a negative error code on failure (e.g., -ENODEV
+ * if the device is null, -EINVAL if reg_data is null, or an error code
+ * from SPI communication).
+ ******************************************************************************/
 int ade9078_read(struct ade9078_dev *dev, uint16_t reg_addr,
 		 uint32_t *reg_data);
 
 /* Write device register. */
+/***************************************************************************//**
+ * @brief This function is used to write a 16-bit or 32-bit value to a specified
+ * register of the ADE9078 device. It is essential to ensure that the
+ * device structure is properly initialized and that the device is ready
+ * for communication before calling this function. The function handles
+ * both 16-bit and 32-bit registers, automatically determining the
+ * register size based on the address range. It returns an error code if
+ * the device is not available or if the SPI communication fails.
+ *
+ * @param dev A pointer to an initialized ade9078_dev structure representing the
+ * device. Must not be null. If null, the function returns -ENODEV.
+ * @param reg_addr The address of the register to write to. It is a 16-bit
+ * unsigned integer, and the function determines the register
+ * size based on this address.
+ * @param reg_data The data to write to the register. It is a 32-bit unsigned
+ * integer, but only the relevant bits are used depending on the
+ * register size.
+ * @return Returns 0 on success, or a negative error code on failure, such as
+ * -ENODEV if the device is not available.
+ ******************************************************************************/
 int ade9078_write(struct ade9078_dev *dev, uint16_t reg_addr,
 		  uint32_t reg_data);
 
 /* Set power mode */
+/***************************************************************************//**
+ * @brief This function configures the power mode of the ADE9078 device based on
+ * the current power mode setting in the device structure. It must be
+ * called with a valid device structure that has been properly
+ * initialized. The function checks for null pointers and invalid power
+ * mode settings, returning appropriate error codes if these conditions
+ * are not met. It manipulates GPIO pins to set the device into the
+ * desired power mode, which can be one of several predefined modes such
+ * as IDLE_MODE, CURRENT_PEAK_DETECT_MODE, TAMPER_MODE, or NORMAL_MODE.
+ *
+ * @param dev A pointer to an ade9078_dev structure representing the device.
+ * This must not be null and should be properly initialized with
+ * valid GPIO descriptors for psm0_desc and psm1_desc. The power_mode
+ * field must be set to a valid mode; otherwise, the function returns
+ * an error.
+ * @return Returns 0 on success, or a negative error code on failure, such as
+ * -ENODEV if the device pointer is null, or -EINVAL if the power mode
+ * is invalid or GPIO descriptors are missing.
+ ******************************************************************************/
 int ade9078_set_power_mode(struct ade9078_dev *dev);
 
 /* Update specific register bits. */
+/***************************************************************************//**
+ * @brief Use this function to modify specific bits in a register of the ADE9078
+ * device. It is useful when only certain bits need to be changed without
+ * affecting the rest of the register. The function reads the current
+ * value of the register, applies the mask to clear the bits to be
+ * updated, and then sets the new bits according to the provided data.
+ * This function must be called with a valid device structure pointer,
+ * and it will return an error if the device pointer is null or if the
+ * read/write operations fail.
+ *
+ * @param dev A pointer to an ade9078_dev structure representing the device.
+ * Must not be null. The function will return -ENODEV if this
+ * parameter is null.
+ * @param reg_addr The address of the register to be updated. It is a 16-bit
+ * unsigned integer representing a valid register address in the
+ * ADE9078 device.
+ * @param mask A 32-bit unsigned integer where bits set to 1 indicate which bits
+ * in the register should be updated. The mask is used to clear the
+ * bits in the register before setting new values.
+ * @param reg_data A 32-bit unsigned integer containing the new data to be
+ * written to the register. Only the bits specified by the mask
+ * will be updated with this data.
+ * @return Returns 0 on success, or a negative error code if the device is not
+ * available or if the read/write operations fail.
+ ******************************************************************************/
 int ade9078_update_bits(struct ade9078_dev *dev, uint16_t reg_addr,
 			uint32_t mask, uint32_t reg_data);
 
 /* Read Energy/Power for specific phase */
+/***************************************************************************//**
+ * @brief This function retrieves the instantaneous RMS current, RMS voltage,
+ * and active power values for a specified phase of the ADE9078 device.
+ * It should be called when accurate phase-specific energy measurements
+ * are required. The function updates the device structure with the
+ * measured values in milliamps, millivolts, and milliwatts,
+ * respectively. It is essential to ensure that the device is properly
+ * initialized before calling this function. The function handles invalid
+ * phase inputs by returning an error code, and it also checks for a
+ * valid device pointer, returning an error if the device is not
+ * available.
+ *
+ * @param dev A pointer to an ade9078_dev structure representing the device.
+ * Must not be null. The function returns -ENODEV if this parameter
+ * is null.
+ * @param phase An enum ade9078_phase value specifying the phase (A, B, or C)
+ * for which data is to be read. If an invalid phase is provided,
+ * the function returns -EINVAL.
+ * @return Returns 0 on success, or a negative error code on failure. Updates
+ * the irms_val, vrms_val, and watt_val fields of the ade9078_dev
+ * structure with the measured values for the specified phase.
+ ******************************************************************************/
 int ade9078_read_data_ph(struct ade9078_dev *dev, enum ade9078_phase phase);
 
 /* Set User Energy use model */
+/***************************************************************************//**
+ * @brief This function sets the energy accumulation model for the ADE9078
+ * device, allowing the user to specify how energy data is accumulated
+ * and reset. It must be called with a valid device structure and a
+ * supported energy model. The function handles different energy models,
+ * each requiring specific configurations, and writes these settings to
+ * the device. It is essential to ensure the device is properly
+ * initialized before calling this function. Invalid model or value
+ * combinations will result in an error.
+ *
+ * @param dev A pointer to an initialized ade9078_dev structure representing the
+ * device. Must not be null.
+ * @param model An enum value of type ade9078_egy_model specifying the energy
+ * model to set. Must be a valid model defined in the enum.
+ * @param value A uint16_t value used for specific model configurations. For
+ * ADE9078_EGY_WITH_RESET, this must be 1; other models may use
+ * different values.
+ * @return Returns 0 on success, or a negative error code on failure, such as
+ * -ENODEV if the device is null or -EINVAL for invalid parameters.
+ ******************************************************************************/
 int ade9078_set_egy_model(struct ade9078_dev *dev, enum ade9078_egy_model model,
 			  uint16_t value);
 
 /* Initialize the device. */
+/***************************************************************************//**
+ * @brief This function initializes the ADE9078 device by setting up the
+ * necessary SPI communication and configuring the power mode and reset
+ * GPIOs. It must be called before any other operations on the device.
+ * The function performs a hardware reset and verifies the device ID to
+ * ensure proper initialization. If initialization fails at any step, it
+ * cleans up allocated resources and returns an error code.
+ *
+ * @param device A pointer to a pointer of ade9078_dev structure where the
+ * initialized device instance will be stored. Must not be null.
+ * The caller takes ownership of the allocated device structure
+ * upon successful initialization.
+ * @param init_param A structure containing initialization parameters such as
+ * SPI and GPIO descriptors and the desired power mode. All
+ * fields must be properly initialized, and the GPIO
+ * descriptors must not be null.
+ * @return Returns 0 on successful initialization. On failure, returns a
+ * negative error code and ensures no resources are leaked.
+ ******************************************************************************/
 int ade9078_init(struct ade9078_dev **device,
 		 struct ade9078_init_param init_param);
 
 /* Setup the device */
+/***************************************************************************//**
+ * @brief This function is used to configure the ADE9078 device with a set of
+ * predefined settings necessary for its operation. It must be called
+ * after the device has been initialized and before any data operations
+ * are performed. The function writes a series of configuration values to
+ * the device's registers, enabling features such as channel gains, DSP
+ * operation, and energy accumulation settings. If the device pointer is
+ * null, the function returns an error. It also returns an error if any
+ * of the register writes fail, ensuring that the device is only
+ * considered set up if all configurations are successfully applied.
+ *
+ * @param dev A pointer to an initialized ade9078_dev structure. Must not be
+ * null. The function returns an error if this parameter is null.
+ * @return Returns 0 on success, or a negative error code if the device pointer
+ * is null or if any register write operation fails.
+ ******************************************************************************/
 int ade9078_setup(struct ade9078_dev *dev);
 
 /* Remove the device and release resources. */
+/***************************************************************************//**
+ * @brief Use this function to properly remove an ADE9078 device instance and
+ * free associated resources. It should be called when the device is no
+ * longer needed, ensuring that any allocated resources are released.
+ * This function must be called after the device has been initialized and
+ * used, to prevent resource leaks. It handles the removal of the SPI
+ * descriptor and frees the device structure. Ensure that the `dev`
+ * parameter is valid and initialized before calling this function.
+ *
+ * @param dev A pointer to an `ade9078_dev` structure representing the device to
+ * be removed. Must not be null and should be a valid, initialized
+ * device instance. The function will handle invalid or null pointers
+ * by not performing any operations.
+ * @return Returns 0 on successful removal and resource release, or a negative
+ * error code if the SPI removal fails.
+ ******************************************************************************/
 int ade9078_remove(struct ade9078_dev *dev);
 
 /* Get interrupt indicator from STATUS0 register. */
+/***************************************************************************//**
+ * @brief Use this function to check the status of specific interrupts in the
+ * ADE9078 device by reading the STATUS0 register. This function is
+ * useful for determining if certain events have occurred, as indicated
+ * by the interrupt mask provided. It must be called with a valid device
+ * structure and a non-null status pointer. The function will return an
+ * error if the device is not initialized or if the status pointer is
+ * null.
+ *
+ * @param dev A pointer to an initialized ade9078_dev structure representing the
+ * device. Must not be null.
+ * @param msk A 32-bit mask indicating which interrupt status bits to check.
+ * Each bit corresponds to a specific interrupt in the STATUS0
+ * register.
+ * @param status A pointer to a uint8_t where the function will store the result
+ * of the interrupt status check. Must not be null.
+ * @return Returns 0 on success, a negative error code if the device is not
+ * initialized or if the status pointer is null, or if there is an error
+ * reading the register.
+ ******************************************************************************/
 int ade9078_get_int_status0(struct ade9078_dev *dev, uint32_t msk,
 			    uint8_t *status);
 

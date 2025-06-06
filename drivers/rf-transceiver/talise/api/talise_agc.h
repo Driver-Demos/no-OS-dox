@@ -18,204 +18,196 @@ extern "C" {
 #include "talise_types.h"
 #include "talise_agc_types.h"
 
-/**
- * \brief Sets up the device Rx Automatic Gain Control (AGC) registers
+/***************************************************************************//**
+ * @brief This function is used to set up the Rx AGC registers of the device
+ * using the provided configuration structure. It must be called after
+ * the device has been initialized and only if AGC is to be used. The
+ * function checks the validity of the configuration parameters and
+ * writes them to the device registers. It handles various parameter
+ * constraints and ensures that the AGC settings are within valid ranges.
+ * The function also performs necessary error handling and returns
+ * appropriate recovery actions if any parameter is invalid or if there
+ * is an issue with the SPI communication.
  *
- * The instantiated AGC setting structure (taliseAgcCfg_t) must be initialized with
- * valid settings before this function may be used due to the dependencies
- *
- * \pre This function is called only if AGC will be used, and only after the
- * initialization process (TALISE_initialize)
- *
- * NOTE : AGC IIP3 feature cannot be enabled on C0 or lower version of silicon.
- *
- * The agcSlowLoopSettlingDelay member in the taliseAgcCfg_t is range checked
- * in this function.  The minimum value allowed is based on the ratio of the
- * (ADC_CLK / AGG_CLK).  Min agcSlowLoopSettlingDelay = 65 / (ADC_CLK/ AGC_CLK).
- * This minimum range check is a sanity check to ensure AGC stability.
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep{rxAgcCtrl}
- * \dep{rxAgcCtrl->agcPeak}
- * \dep{rxAgcCtrl->agcPower}
- * \dep_end
- *
- * \param device Pointer to the Talise data structure containing settings
- * \param rxAgcCtrl Pointer to AGC data structure containing settings
- *
- * \retval TALACT_WARN_RESET_LOG recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI recovery action for SPI reset required
- * \retval TALACT_NO_ACTION function completed successfully, no action required
- */
+ * @param device Pointer to the Talise device data structure containing
+ * settings. Must not be null.
+ * @param rxAgcCtrl Pointer to the AGC configuration structure containing
+ * settings. Must be initialized with valid settings and must
+ * not be null.
+ * @return Returns a uint32_t value indicating the recovery action required:
+ * TALACT_WARN_RESET_LOG, TALACT_ERR_CHECK_PARAM, TALACT_ERR_RESET_SPI,
+ * or TALACT_NO_ACTION if successful.
+ ******************************************************************************/
 uint32_t TALISE_setupRxAgc(taliseDevice_t *device, taliseAgcCfg_t *rxAgcCtrl);
 
-/**
- * \brief Gets the value of the AGC related registers from the Talise.
+/***************************************************************************//**
+ * @brief Use this function to obtain the current settings of the Automatic Gain
+ * Control (AGC) registers from a Talise device. This function should be
+ * called only when AGC is active. It updates the provided `agcCtrl`
+ * structure with the current AGC configuration, including gain indices,
+ * attack delays, and other AGC parameters. Ensure that the `agcCtrl`
+ * structure is properly initialized before calling this function. The
+ * function returns a status code indicating success or the type of error
+ * encountered, such as parameter errors or SPI communication issues.
  *
- * This function is used to get value of the AGC registers. Reads back main AGC structure and
- * if included in the project sub structures for peak to peak and power measurements
- *
- * \pre This function may be used only if AGC is active
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep{rxAgcCtrl (most members)}
- * \dep_end
- *
- * \param device Pointer to the Talise data structure
- * \param agcCtrl Pointer to the agcCtrl structure. Function will update values in the structure to return the current setup.
- *
- * \retval TALACT_WARN_RESET_LOG recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI recovery action for SPI reset required
- * \retval TALACT_NO_ACTION function completed successfully, no action required
- */
+ * @param device Pointer to a `taliseDevice_t` structure representing the Talise
+ * device. Must not be null.
+ * @param agcCtrl Pointer to a `taliseAgcCfg_t` structure where the AGC control
+ * register values will be stored. Must not be null. The
+ * structure should be initialized before calling this function.
+ * @return Returns a `uint32_t` status code indicating the result of the
+ * operation: `TALACT_NO_ACTION` for success, or other codes for
+ * specific errors or required recovery actions.
+ ******************************************************************************/
 uint32_t TALISE_getAgcCtrlRegisters(taliseDevice_t *device,
 				    taliseAgcCfg_t *agcCtrl);
 
-/**
- * \brief Gets the value of the AGC Peak related registers from the Talise.
+/***************************************************************************//**
+ * @brief This function is used to obtain the current values of the AGC peak-
+ * related registers from a Talise device. It should be called only when
+ * the AGC is active. The function updates the provided `agcPeak`
+ * structure with the retrieved register values. It is important to
+ * ensure that the `agcPeak` pointer is not null before calling this
+ * function, as a null pointer will result in an error. The function
+ * returns a status code indicating the success of the operation or any
+ * required recovery actions.
  *
- * This function is used to get value of the AGC peak registers
- *
- * \pre This function may be used only if AGC is active
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep{agcPeak-> (most members)}
- * \dep_end
- *
- * \param device Pointer to the Talise device data structure
- * \param agcPeak Pointer to the Talise AGC peak settings data structure
- *
- * \retval TALACT_WARN_RESET_LOG recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI recovery action for SPI reset required
- * \retval TALACT_NO_ACTION function completed successfully, no action required
- */
+ * @param device Pointer to the Talise device data structure. Must not be null.
+ * The caller retains ownership.
+ * @param agcPeak Pointer to the Talise AGC peak settings data structure. Must
+ * not be null. The function updates this structure with the
+ * current AGC peak register values.
+ * @return Returns a status code indicating the success of the operation or any
+ * required recovery actions, such as TALACT_WARN_RESET_LOG,
+ * TALACT_ERR_CHECK_PARAM, TALACT_ERR_RESET_SPI, or TALACT_NO_ACTION.
+ ******************************************************************************/
 uint32_t TALISE_getAgcPeakRegisters(taliseDevice_t *device,
 				    taliseAgcPeak_t *agcPeak);
 
-/**
- * \brief Gets the value of the AGC Power measurement related registers from the Talise.
+/***************************************************************************//**
+ * @brief This function is used to obtain the current values of the AGC power
+ * measurement registers from a Talise device. It should be called only
+ * when the AGC is active. The function updates the provided `agcPower`
+ * structure with the register values, which include various power
+ * measurement settings and thresholds. It is important to ensure that
+ * the `agcPower` pointer is not null before calling this function, as a
+ * null pointer will result in an error. The function returns a status
+ * code indicating the success of the operation or any required recovery
+ * actions.
  *
- * This function is used to get value of the AGC Power registers
- *
- * \pre This function may be used only if AGC is active
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \param device Pointer to the Talise device data structure
- * \param agcPower Pointer to the Talise AGC power settings data structure
- *
- * \retval TALACT_WARN_RESET_LOG recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI recovery action for SPI reset required
- * \retval TALACT_NO_ACTION function completed successfully, no action required
- */
+ * @param device Pointer to the Talise device data structure. Must not be null.
+ * The caller retains ownership.
+ * @param agcPower Pointer to a `taliseAgcPower_t` structure where the AGC power
+ * register values will be stored. Must not be null. The
+ * function will update this structure with the current register
+ * values.
+ * @return Returns a `uint32_t` status code indicating the result of the
+ * operation. Possible values include `TALACT_NO_ACTION` for success,
+ * `TALACT_WARN_RESET_LOG` for a log reset warning,
+ * `TALACT_ERR_CHECK_PARAM` for a parameter error, and
+ * `TALACT_ERR_RESET_SPI` for an SPI reset requirement.
+ ******************************************************************************/
 uint32_t TALISE_getAgcPowerRegisters(taliseDevice_t *device,
 				     taliseAgcPower_t *agcPower);
 
-/**
- * \brief This function will setup the AGC for the dualband mode.
+/***************************************************************************//**
+ * @brief This function sets up the dual-band mode for the Rx AGC on a Talise
+ * device, allowing for control over external LNAs through GPIOs. It
+ * should be called only when AGC is active and the device is initialized
+ * in dual-band mode. The function can be used in a radio-off state and
+ * requires valid configuration settings in the provided data structure.
+ * It performs parameter validation and returns specific recovery actions
+ * based on the success or failure of the operation.
  *
- * This function compliments the TALISE_setupRxAgc() function to set up the
- * AGC for the dualband mode. The function also sets up the 3.3V GPIO's 7-0,
- * to enable the device to control external LNA's.
- *
- * \pre This function may be used only if AGC is active. This function can be
- * used in radio off state.  Device must be initialized to dual band mode as
- * a part of TALISE_initialize()
- *
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \param device Pointer to the Talise device data structure
- * \param rxChannel taliseRxChannels_t enum type to select either Rx1, Rx2,
- * Rx1 + Rx2 for programming the dualband AGC.
- * \param rxAgcCtrlDualBand Pointer to the Talise AGC dualband settings data
- * structure
- *
- * \retval TALACT_WARN_RESET_LOG recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI recovery action for SPI reset required
- * \retval TALACT_NO_ACTION function completed successfully, no action required
- */
+ * @param device Pointer to the Talise device data structure containing
+ * settings. Must not be null.
+ * @param rxChannel Enum of type taliseRxChannels_t to select either Rx1, Rx2,
+ * or both Rx1 and Rx2 for programming the dual-band AGC. Must
+ * not be TAL_RXOFF.
+ * @param rxAgcCtrlDualBand Pointer to the Talise AGC dual-band settings data
+ * structure. Must not be null. The structure must have
+ * valid settings, including power margin and gain
+ * table indices.
+ * @return Returns a uint32_t indicating the recovery action required:
+ * TALACT_WARN_RESET_LOG, TALACT_ERR_CHECK_PARAM, TALACT_ERR_RESET_SPI,
+ * or TALACT_NO_ACTION.
+ ******************************************************************************/
 uint32_t TALISE_setupDualBandRxAgc(taliseDevice_t *device,
 				   taliseRxChannels_t rxChannel, taliseAgcDualBandCfg_t *rxAgcCtrlDualBand);
 
-/**
- * \brief This function returns the current values of the LNA controls for the
- * dualband mode.
+/***************************************************************************//**
+ * @brief Use this function to obtain the current LNA control settings for a
+ * specified receive channel in dualband mode. It is applicable when
+ * external LNAs are not controlled via the device's GPIO pins. The
+ * function requires a valid device structure and a specified receive
+ * channel, either Rx1 or Rx2. Ensure that the rxDualBandLnaControls
+ * pointer is not null, as the function will populate this structure with
+ * the LNA control values. The function returns a status code indicating
+ * success or the type of error encountered.
  *
- * This function can be used if the user is not controlling the external LNA's
- * through the 3.3V GPIO pins of the device. The LNA controls are programmed by
- * the user in the dualband LNA gain table. The AGC then indexes to one of the
- * entries in the table based on its algorithm.
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \param device Pointer to the Talise device data structure
- * \param rxChannel taliseRxChannels_t enum type to select either Rx1 or Rx2
- * \param rxDualBandLnaControls Pointer to the AGC dualband LNA settings data
- * structure
- *
- * \retval TALACT_WARN_RESET_LOG recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI recovery action for SPI reset required
- * \retval TALACT_NO_ACTION function completed successfully, no action required
- */
+ * @param device Pointer to the Talise device data structure. Must not be null.
+ * The caller retains ownership.
+ * @param rxChannel An enum of type taliseRxChannels_t specifying the receive
+ * channel (Rx1 or Rx2). Invalid values result in an error.
+ * @param rxDualBandLnaControls Pointer to a taliseDualBandLnaControls_t
+ * structure where the LNA control values will be
+ * stored. Must not be null.
+ * @return Returns a uint32_t status code indicating the result of the
+ * operation: success or specific error codes.
+ ******************************************************************************/
 uint32_t TALISE_getDualBandLnaControls(taliseDevice_t *device,
 				       taliseRxChannels_t rxChannel,
 				       taliseDualBandLnaControls_t *rxDualBandLnaControls);
 
-/**
- * \brief This function sets the min/max gain indexes for AGC in the MAIN RX channel.
+/***************************************************************************//**
+ * @brief Use this function to configure the minimum and maximum gain indices
+ * for the RX Automatic Gain Control (AGC) on specified channels. It is
+ * essential to ensure that the maximum gain index is greater than the
+ * minimum gain index before calling this function. The function should
+ * be called after the device has been initialized and when AGC is
+ * active. It supports setting gain indices for either RX1, RX2, or both
+ * channels. The function performs parameter validation and returns an
+ * error if the indices are out of range or incorrectly ordered.
  *
- * This function can be used to set the min/max gains of RX channel in runtime.
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \param device Pointer to the Talise device data structure
- * \param rxChannel taliseRxChannels_t enum type to select either Rx1 or Rx2 or both Rx1 and Rx2
- * \param maxGainIndex AGC Max gain index setting
- * \param minGainIndex AGC Min gain index setting
- *
- * \retval TALACT_WARN_RESET_LOG recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI recovery action for SPI reset required
- * \retval TALACT_NO_ACTION function completed successfully, no action required
- */
+ * @param device Pointer to the Talise device data structure. Must not be null,
+ * and the device should be properly initialized before calling
+ * this function.
+ * @param rxChannel Specifies the RX channel(s) to configure. It can be TAL_RX1,
+ * TAL_RX2, or TAL_RX1RX2 to configure both channels.
+ * @param maxGainIndex The maximum gain index for the AGC. It must be greater
+ * than minGainIndex and within the range supported by the
+ * device configuration.
+ * @param minGainIndex The minimum gain index for the AGC. It must be less than
+ * maxGainIndex and within the range supported by the device
+ * configuration.
+ * @return Returns a uint32_t value indicating the success or failure of the
+ * operation. Possible return values include TALACT_NO_ACTION for
+ * success, or error codes indicating specific issues such as invalid
+ * parameters.
+ ******************************************************************************/
 uint32_t TALISE_setRxAgcMinMaxGainIndex(taliseDevice_t *device,
 					taliseRxChannels_t rxChannel, uint8_t maxGainIndex, uint8_t minGainIndex);
 
-/**
- * \brief This function resets all the state machines in the Gain Control Block.
+/***************************************************************************//**
+ * @brief This function is used to reset all state machines within the gain
+ * control block of the device to their initial state, ensuring that the
+ * AGC (Automatic Gain Control) loops are reset to state 0 and maximum
+ * gain. It should be called when a reset of the AGC state is required,
+ * typically after initialization or when reconfiguring the AGC settings.
+ * The function requires a valid device structure and handles any errors
+ * that occur during the SPI communication process, returning a status
+ * code indicating the result of the operation.
  *
- * resets all state machines within the gain control block to state 0
- * and maximum gain (for slow, fast attack, and hybrid AGC loops)
- *
- * \dep_begin
- * \dep{device->devHalInfo}
- * \dep_end
- *
- * \param device Pointer to the Talise device data structure
- *
- * \retval TALACT_WARN_RESET_LOG recovery action for log reset
- * \retval TALACT_ERR_CHECK_PARAM recovery action for bad parameter check
- * \retval TALACT_ERR_RESET_SPI recovery action for SPI reset required
- * \retval TALACT_NO_ACTION function completed successfully, no action required
- */
+ * @param device Pointer to the Talise device data structure. Must not be null
+ * and should be properly initialized before calling this
+ * function. The function will handle errors related to SPI
+ * communication and log them if necessary.
+ * @return Returns a uint32_t value indicating the recovery action required.
+ * Possible values include TALACT_WARN_RESET_LOG,
+ * TALACT_ERR_CHECK_PARAM, TALACT_ERR_RESET_SPI, and TALACT_NO_ACTION,
+ * which indicate different levels of error handling or successful
+ * completion.
+ ******************************************************************************/
 uint32_t TALISE_resetRxAgc(taliseDevice_t *device);
 
 #ifdef __cplusplus

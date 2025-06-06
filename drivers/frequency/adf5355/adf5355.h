@@ -175,10 +175,20 @@
 /*************************** Types Declarations *******************************/
 /******************************************************************************/
 
-/**
- * @enum adf5355_device_id
- * @brief Devices supported by the drivers.
- */
+/***************************************************************************//**
+ * @brief The `adf5355_device_id` enumeration defines a set of constants
+ * representing different devices supported by the ADF5355 driver. Each
+ * enumerator corresponds to a specific device model, allowing the
+ * software to identify and handle different devices appropriately within
+ * the driver code.
+ *
+ * @param ADF5355 Represents the ADF5355 device.
+ * @param ADF4355 Represents the ADF4355 device.
+ * @param ADF4355_2 Represents the ADF4355-2 device.
+ * @param ADF4355_3 Represents the ADF4355-3 device.
+ * @param ADF4356 Represents the ADF4356 device.
+ * @param ADF5356 Represents the ADF5356 device.
+ ******************************************************************************/
 enum adf5355_device_id {
 	ADF5355,
 	ADF4355,
@@ -188,10 +198,28 @@ enum adf5355_device_id {
 	ADF5356,
 };
 
-/**
- * @enum adf5355_mux_out_sel
- * @brief Muxout selection.
- */
+/***************************************************************************//**
+ * @brief The `adf5355_mux_out_sel` enumeration defines the possible output
+ * selections for the MUXOUT pin of the ADF5355 device. This pin can be
+ * configured to output various signals such as three-state, DVDD,
+ * ground, R divider output, N divider output, analog lock detect, or
+ * digital lock detect. These options allow for flexible configuration of
+ * the MUXOUT pin to suit different application needs.
+ *
+ * @param ADF5355_MUXOUT_THREESTATE Represents a three-state output for the
+ * MUXOUT pin.
+ * @param ADF5355_MUXOUT_DVDD Selects the DVDD voltage as the output for the
+ * MUXOUT pin.
+ * @param ADF5355_MUXOUT_GND Connects the MUXOUT pin to ground.
+ * @param ADF5355_MUXOUT_R_DIV_OUT Outputs the R divider output on the MUXOUT
+ * pin.
+ * @param ADF5355_MUXOUT_N_DIV_OUT Outputs the N divider output on the MUXOUT
+ * pin.
+ * @param ADF5355_MUXOUT_ANALOG_LOCK_DETECT Outputs an analog lock detect signal
+ * on the MUXOUT pin.
+ * @param ADF5355_MUXOUT_DIGITAL_LOCK_DETECT Outputs a digital lock detect
+ * signal on the MUXOUT pin.
+ ******************************************************************************/
 enum adf5355_mux_out_sel {
 	ADF5355_MUXOUT_THREESTATE,
 	ADF5355_MUXOUT_DVDD,
@@ -202,10 +230,57 @@ enum adf5355_mux_out_sel {
 	ADF5355_MUXOUT_DIGITAL_LOCK_DETECT,
 };
 
-/**
- * @struct adf5355_dev
- * @brief  Device descriptor.
- */
+/***************************************************************************//**
+ * @brief The `adf5355_dev` structure is a comprehensive descriptor for the
+ * ADF5355 device, encapsulating all necessary parameters and settings
+ * required to configure and operate the device. It includes pointers for
+ * SPI communication, device identification, frequency settings, and
+ * various configuration flags for outputs and charge pump settings. This
+ * structure is essential for managing the device's operation, including
+ * setting frequencies, enabling outputs, and configuring the phase
+ * detector and reference inputs. It is designed to support multiple
+ * channels and handle complex frequency synthesis tasks, making it
+ * suitable for applications requiring precise frequency control.
+ *
+ * @param spi_desc Pointer to the SPI descriptor for communication.
+ * @param dev_id Identifier for the specific ADF5355 device variant.
+ * @param all_synced Boolean indicating if all channels are synchronized.
+ * @param regs Array holding register values for the device.
+ * @param freq_req Requested frequency for the device output.
+ * @param freq_req_chan Channel number for the requested frequency.
+ * @param num_channels Number of channels available on the device.
+ * @param clkin_freq Frequency of the input clock.
+ * @param max_out_freq Maximum output frequency supported by the device.
+ * @param min_out_freq Minimum output frequency supported by the device.
+ * @param min_vco_freq Minimum frequency for the VCO.
+ * @param fpfd Frequency of the phase frequency detector.
+ * @param integer Integer part of the frequency division.
+ * @param fract1 First fractional part of the frequency division.
+ * @param fract2 Second fractional part of the frequency division.
+ * @param mod2 Modulus for the second fractional part.
+ * @param cp_ua Charge pump current in microamperes.
+ * @param cp_neg_bleed_en Boolean to enable negative bleed current in charge
+ * pump.
+ * @param cp_gated_bleed_en Boolean to enable gated bleed current in charge
+ * pump.
+ * @param cp_bleed_current_polarity_en Boolean to set bleed current polarity in
+ * charge pump.
+ * @param mute_till_lock_en Boolean to mute output until lock is achieved.
+ * @param outa_en Boolean to enable output A.
+ * @param outb_en Boolean to enable output B.
+ * @param outa_power Power level for output A.
+ * @param outb_power Power level for output B.
+ * @param phase_detector_polarity_neg Polarity setting for the phase detector.
+ * @param ref_diff_en Boolean to enable differential reference input.
+ * @param mux_out_3v3_en Boolean to enable 3.3V on MUXOUT.
+ * @param outb_sel_fund Boolean to select fundamental frequency for output B.
+ * @param ref_doubler_en Boolean to enable reference frequency doubler.
+ * @param ref_div2_en Boolean to enable reference frequency division by 2.
+ * @param rf_div_sel RF divider selection value.
+ * @param ref_div_factor Reference division factor.
+ * @param mux_out_sel Selection for MUXOUT functionality.
+ * @param delay_us Delay in microseconds for certain operations.
+ ******************************************************************************/
 struct adf5355_dev {
 	struct no_os_spi_desc	*spi_desc;
 	enum adf5355_device_id      dev_id;
@@ -244,10 +319,38 @@ struct adf5355_dev {
 	uint32_t                    delay_us;
 };
 
-/**
- * @struct ad5355_init_param
- * @brief  Structure containing the initialization parameters.
- */
+/***************************************************************************//**
+ * @brief The `adf5355_init_param` structure is used to initialize the ADF5355
+ * device, a wideband synthesizer with integrated VCO. It contains
+ * various configuration parameters such as SPI initialization, device
+ * ID, requested frequency, input clock frequency, charge pump settings,
+ * output enable flags, power levels, and MUXOUT settings. This structure
+ * allows for detailed customization of the device's operation to suit
+ * specific application requirements.
+ *
+ * @param spi_init Pointer to SPI initialization parameters.
+ * @param dev_id Identifier for the specific ADF5355 device variant.
+ * @param freq_req Requested frequency in Hz.
+ * @param freq_req_chan Channel number for the requested frequency.
+ * @param clkin_freq Frequency of the input clock in Hz.
+ * @param cp_ua Charge pump current in microamperes.
+ * @param cp_neg_bleed_en Enable negative bleed current in charge pump.
+ * @param cp_gated_bleed_en Enable gated bleed current in charge pump.
+ * @param cp_bleed_current_polarity_en Enable bleed current polarity in charge
+ * pump.
+ * @param mute_till_lock_en Mute output until PLL lock is achieved.
+ * @param outa_en Enable output A.
+ * @param outb_en Enable output B.
+ * @param outa_power Power level for output A.
+ * @param outb_power Power level for output B.
+ * @param phase_detector_polarity_neg Set phase detector polarity to negative.
+ * @param ref_diff_en Enable differential reference input.
+ * @param mux_out_3v3_en Enable 3.3V on MUXOUT pin.
+ * @param ref_doubler_en Enable reference frequency doubler.
+ * @param ref_div2_en Enable reference frequency divide by 2.
+ * @param mux_out_sel Selection for MUXOUT pin function.
+ * @param outb_sel_fund Select fundamental frequency for output B.
+ ******************************************************************************/
 struct adf5355_init_param {
 	struct no_os_spi_init_param	*spi_init;
 	enum adf5355_device_id      dev_id;
@@ -277,20 +380,121 @@ struct adf5355_init_param {
 /******************************************************************************/
 
 /* Recalculate rate corresponding to a channel. */
+/***************************************************************************//**
+ * @brief Use this function to obtain the current frequency rate of a specified
+ * channel on the ADF5355 device. It is essential to ensure that the
+ * channel number provided is within the valid range of channels
+ * supported by the device. This function should be called when you need
+ * to verify or utilize the current frequency setting of a channel. It
+ * does not modify the device state but provides the current rate through
+ * the output parameter.
+ *
+ * @param dev A pointer to an adf5355_dev structure representing the device.
+ * Must not be null, and the device should be properly initialized
+ * before calling this function.
+ * @param chan The channel number for which the rate is to be recalculated. Must
+ * be within the range of available channels (0 to dev->num_channels
+ * - 1). If the channel number is invalid, the function returns an
+ * error.
+ * @param rate A pointer to a uint64_t where the recalculated rate will be
+ * stored. Must not be null. The function writes the current rate of
+ * the specified channel to this location.
+ * @return Returns 0 on success, and -1 if the channel number is invalid.
+ ******************************************************************************/
 int32_t adf5355_clk_recalc_rate(struct adf5355_dev *dev, uint32_t chan,
 				uint64_t *rate);
 
 /* Set channel rate. */
+/***************************************************************************//**
+ * @brief This function sets the output frequency for a specified channel on the
+ * ADF5355 device. It should be called when you need to change the
+ * frequency output of a particular channel. The function requires that
+ * the channel index is within the valid range of available channels for
+ * the device. If the channel index is invalid, the function returns an
+ * error code. This function is typically used after the device has been
+ * initialized and when a frequency change is needed.
+ *
+ * @param dev A pointer to an initialized adf5355_dev structure representing the
+ * device. Must not be null.
+ * @param chan The channel index for which the frequency is to be set. Must be
+ * less than the number of channels available on the device. If
+ * invalid, the function returns an error.
+ * @param rate The desired frequency rate to set for the specified channel, in
+ * Hertz. Must be within the valid frequency range supported by the
+ * device.
+ * @return Returns 0 on success, or -1 if the channel index is invalid.
+ ******************************************************************************/
 int32_t adf5355_clk_set_rate(struct adf5355_dev *dev, uint32_t chan,
 			     uint64_t rate);
 
 /* Calculate closest possible rate */
+/***************************************************************************//**
+ * @brief This function is used to determine the closest achievable frequency
+ * rate for a given desired rate on an ADF5355 device. It is typically
+ * called when a user needs to find the nearest valid frequency that the
+ * device can output, based on its internal constraints and settings. The
+ * function does not modify the device state or configuration, and it
+ * should be called with a valid device structure. The result is returned
+ * through a pointer to a variable where the rounded rate will be stored.
+ *
+ * @param dev A pointer to an adf5355_dev structure representing the device.
+ * Must not be null.
+ * @param rate The desired frequency rate in Hz. There are no specific
+ * constraints on this value, but it should be within the
+ * operational range of the device for meaningful results.
+ * @param rounded_rate A pointer to a uint64_t where the function will store the
+ * closest possible rate. Must not be null.
+ * @return Returns 0 on success, indicating that the rounded rate has been
+ * calculated and stored in the provided location.
+ ******************************************************************************/
 int32_t adf5355_clk_round_rate(struct adf5355_dev *dev, uint64_t rate,
 			       uint64_t *rounded_rate);
 
 /* Initializes the ADF5355. */
+/***************************************************************************//**
+ * @brief This function sets up and initializes an ADF5355 device using the
+ * provided initialization parameters. It must be called before any other
+ * operations on the device to ensure proper configuration. The function
+ * allocates memory for the device structure and initializes the SPI
+ * interface based on the parameters provided. It also configures various
+ * device settings such as frequency, power, and output channels. If
+ * initialization fails at any step, the function will clean up and
+ * return an error code. Ensure that the `init_param` structure is
+ * correctly populated with valid values before calling this function.
+ *
+ * @param device A pointer to a pointer of type `struct adf5355_dev`. This will
+ * be allocated and initialized by the function. The caller must
+ * ensure this pointer is valid and will receive ownership of the
+ * allocated device structure.
+ * @param init_param A pointer to a `struct adf5355_init_param` containing the
+ * initialization parameters. This structure must be fully
+ * populated with valid configuration values before calling
+ * the function. The caller retains ownership of this
+ * structure.
+ * @return Returns 0 on successful initialization. On failure, returns a
+ * negative error code indicating the type of error encountered, such as
+ * memory allocation failure or SPI initialization failure.
+ ******************************************************************************/
 int32_t adf5355_init(struct adf5355_dev **device,
 		     const struct adf5355_init_param *init_param);
 
 /* Remove the device. */
+/***************************************************************************//**
+ * @brief Use this function to properly deinitialize and free resources
+ * associated with an ADF5355 device when it is no longer needed. This
+ * function should be called to clean up after the device has been
+ * initialized and used, ensuring that any allocated resources are
+ * released. It is important to call this function to prevent memory
+ * leaks and to ensure that the SPI descriptor associated with the device
+ * is also removed if it exists.
+ *
+ * @param device A pointer to an adf5355_dev structure representing the device
+ * to be removed. This pointer must not be null, and the function
+ * assumes ownership of the memory, which will be freed. If the
+ * device's spi_desc is non-null, it will be removed as part of
+ * the cleanup process.
+ * @return Returns an int32_t indicating the success of the operation. A return
+ * value of 0 indicates success, while a non-zero value indicates an
+ * error occurred during the removal of the SPI descriptor.
+ ******************************************************************************/
 int32_t adf5355_remove(struct adf5355_dev *device);

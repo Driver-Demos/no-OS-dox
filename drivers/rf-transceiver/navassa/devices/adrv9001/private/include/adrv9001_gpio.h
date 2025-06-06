@@ -32,71 +32,90 @@ extern "C" {
 *********************************************************************************************************
 */
 
-/**
-* \brief Private function called by API's adi_adrv9001_gpio_GpIntHandler.  This
-* function performs all possible recover actions for any GP_INT(General Purpose Interrupt) source as well
-* as returning the required BBIC(Baseband IC) recovery action.
-*
-* \pre This function can only be called by the adi_adrv9001_gpio_GpIntHandler.
-*
-* \param device Pointer to the ADRV9001 data structure
-* \param gpIntStatus Pointer containing all information for the GP interrupt.
-*
-* \retval ADI_COMMON_ACT_WARN_RESET_LOG Recovery action for log reset
-* \retval ADI_COMMON_ACT_ERR_CHECK_PARAM Recovery action for bad parameter check
-* \retval ADI_COMMON_ACT_ERR_RESET_INTERFACE Recovery action for ARM/WATCHDOG errors
-* \retval ADI_COMMON_ACT_ERR_RERUN_INIT_CALS Recovery actions for INIT CALIBRATION errors
-* \retval ADI_COMMON_ACT_NO_ACTION Function completed successfully, no action required
-*/
+/***************************************************************************//**
+ * @brief This function processes general purpose interrupts (GP_INT) for the
+ * ADRV9001 device, determining the appropriate recovery action based on
+ * the active interrupt sources. It should be called when a GP_INT is
+ * detected to identify the source of the interrupt and to execute
+ * necessary recovery actions. The function requires a valid device
+ * structure and a status structure containing interrupt information. It
+ * reports errors and recovery actions through the device's error
+ * handling mechanism.
+ *
+ * @param device Pointer to the ADRV9001 device data structure. Must not be
+ * null. The caller retains ownership.
+ * @param gpIntStatus Pointer to a structure containing information about the
+ * active GP interrupts. Must not be null. The caller retains
+ * ownership.
+ * @return Returns an integer indicating the recovery action to be taken, which
+ * can be one of several predefined constants representing different
+ * actions or errors.
+ ******************************************************************************/
 int32_t adrv9001_GpIntHandler(adi_adrv9001_Device_t *device, adi_adrv9001_gpIntStatus_t *gpIntStatus);
 
-/**
- * \brief general purpose interrupt status word readback
+/***************************************************************************//**
+ * @brief This function is used to obtain the current mask settings for general
+ * purpose interrupts on pin B of the ADRV9001 device. It should be
+ * called when the user needs to read the interrupt mask configuration.
+ * The function requires a valid device pointer and a pointer to a
+ * uint32_t variable where the mask value will be stored. It is important
+ * to ensure that the device has been properly initialized before calling
+ * this function. The function will return an error code if the device
+ * pointer is null or if there is an issue reading the register values.
  *
- * \param device   Pointer to the ADRV9001 device data structure.
- * \param baseAddr Base Address of instance to be configured.
- *                 The parameter is of type 'adrv9001_BfNvsRegmapCore1ChanAddr_e'
- * \param bfValue  Data to be configured. Parameter is of type uint32_t.
- *
- * \retval ADI_COMMON_ACT_WARN_RESET_LOG      Recovery action for log reset.
- * \retval ADI_COMMON_ACT_ERR_CHECK_PARAM     Recovery action for bad parameter check.
- * \retval ADI_COMMON_ACT_ERR_RESET_INTERFACE Recovery action for SPI reset required.
- * \retval ADI_COMMON_ACT_NO_ACTION           Function completed successfully, no action required.
- *
- */
+ * @param device Pointer to the ADRV9001 device data structure. Must not be
+ * null. The caller retains ownership and is responsible for
+ * ensuring the device is initialized.
+ * @param bfValue Pointer to a uint32_t variable where the mask value will be
+ * stored. Must not be null if ADRV9001_BITFIELD_NULL_CHECK is
+ * defined. The function writes the mask value to this location.
+ * @return Returns an int32_t status code indicating success or the type of
+ * error encountered. Possible return values include
+ * ADI_COMMON_ACT_WARN_RESET_LOG, ADI_COMMON_ACT_ERR_CHECK_PARAM,
+ * ADI_COMMON_ACT_ERR_RESET_INTERFACE, and ADI_COMMON_ACT_NO_ACTION.
+ ******************************************************************************/
 int32_t adrv9001_GpInterruptsMaskPinBfGet(adi_adrv9001_Device_t *device, uint32_t *bfValue);
 
-/**
-* \brief Logic 1 masks the specific interrupt, per bit position, for output on gp_interrupt[0]
-*
-* \param device   Pointer to the ADRV9001 device data structure.
-* \param baseAddr Base Address of instance to be configured.
-*                 The parameter is of type 'adrv9001_BfNvsRegmapCore1ChanAddr_e'
-* \param bfValue  Data to be configured. Parameter is of type uint32_t.
-*
-* \retval ADI_COMMON_ACT_WARN_RESET_LOG      Recovery action for log reset.
-* \retval ADI_COMMON_ACT_ERR_CHECK_PARAM     Recovery action for bad parameter check.
-* \retval ADI_COMMON_ACT_ERR_RESET_INTERFACE Recovery action for SPI reset required.
-* \retval ADI_COMMON_ACT_NO_ACTION Function  Completed successfully, no action required.
-*
-*/
+/***************************************************************************//**
+ * @brief This function is used to configure the interrupt mask for the ADRV9001
+ * device, allowing specific interrupts to be masked based on the bit
+ * positions in the provided value. It should be called when you need to
+ * control which interrupts are output on gp_interrupt[0]. The function
+ * requires a valid device pointer and a 32-bit value representing the
+ * mask configuration. It returns an integer status code indicating
+ * success or the type of error encountered.
+ *
+ * @param device Pointer to the ADRV9001 device data structure. Must not be
+ * null. The caller retains ownership.
+ * @param bfValue A 32-bit unsigned integer representing the interrupt mask
+ * configuration. Each bit position corresponds to a specific
+ * interrupt to be masked.
+ * @return Returns an integer status code: 0 for success, or a non-zero error
+ * code indicating the type of failure.
+ ******************************************************************************/
 int32_t adrv9001_GpInterruptsMaskPinBfSet(adi_adrv9001_Device_t *device, uint32_t bfValue);
 
 
-/**
- * \brief general purpose interrupt status word readback
+/***************************************************************************//**
+ * @brief This function reads the general purpose interrupt status word from the
+ * ADRV9001 device and stores it in the provided buffer. It should be
+ * called when the status of the general purpose interrupts needs to be
+ * checked. The function requires a valid device pointer and a non-null
+ * pointer to a uint32_t variable where the status word will be stored.
+ * It returns a status code indicating the success or failure of the
+ * operation, with specific codes for different types of errors or
+ * required actions.
  *
- * \param device   Pointer to the ADRV9001 device data structure.
- * \param baseAddr Base Address of instance to be configured.
- *                 The parameter is of type 'adrv9001_BfNvsRegmapCore1ChanAddr_e'
- * \param bfValue  Data to be configured. Parameter is of type uint64_t.
- *
- * \retval ADI_COMMON_ACT_WARN_RESET_LOG      Recovery action for log reset.
- * \retval ADI_COMMON_ACT_ERR_CHECK_PARAM     Recovery action for bad parameter check.
- * \retval ADI_COMMON_ACT_ERR_RESET_INTERFACE Recovery action for SPI reset required.
- * \retval ADI_COMMON_ACT_NO_ACTION           Function completed successfully, no action required.
- *
- */
+ * @param device Pointer to the ADRV9001 device data structure. Must not be
+ * null. The caller retains ownership.
+ * @param bfValue Pointer to a uint32_t variable where the status word will be
+ * stored. Must not be null. The function writes the status word
+ * to this location.
+ * @return Returns an int32_t status code indicating the result of the
+ * operation. Possible values include ADI_COMMON_ACT_NO_ACTION for
+ * success, and other codes indicating specific errors or required
+ * recovery actions.
+ ******************************************************************************/
 int32_t adrv9001_GpInterruptsStatusWordBfGet(adi_adrv9001_Device_t *device, uint32_t *bfValue);
 
 #ifdef __cplusplus

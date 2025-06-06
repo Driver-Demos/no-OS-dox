@@ -296,6 +296,40 @@
 #define CHIP_ID1_AD6676			0x03
 #define CHIP_ID0_AD6676			0xBB
 
+/***************************************************************************//**
+ * @brief The `ad6676_init_param` structure is used to initialize and configure
+ * the AD6676 device, a wideband IF receiver. It contains various
+ * parameters such as clock rates, bandwidth settings, decimation
+ * factors, and JESD204B interface configurations. This structure allows
+ * for detailed customization of the device's operation, including
+ * enabling or disabling features like external clock usage, SPI
+ * interface configuration, and shuffler control. Additionally, it
+ * includes SPI initialization parameters to facilitate communication
+ * with the device.
+ *
+ * @param ref_clk Reference clock rate in Hz.
+ * @param f_adc_hz ADC frequency in Hz.
+ * @param f_if_hz Intermediate frequency in Hz.
+ * @param bw_hz Bandwidth in Hz.
+ * @param bw_margin_low_mhz Lower bandwidth margin in MHz.
+ * @param bw_margin_high_mhz Higher bandwidth margin in MHz.
+ * @param bw_margin_if_mhz Intermediate frequency bandwidth margin in MHz.
+ * @param decimation Decimation factor.
+ * @param ext_l External inductance in nH.
+ * @param attenuation Attenuation level.
+ * @param scale Fullscale adjustment.
+ * @param use_extclk Flag to enable external clock.
+ * @param spi3wire Flag to set SPI interface to 3 or 4 wires.
+ * @param shuffle_ctrl Shuffler control setting.
+ * @param shuffle_thresh Shuffler threshold setting.
+ * @param scrambling_en Flag to enable JESD scrambling.
+ * @param lvds_syncb Flag to enable JESD LVDS SYNCB.
+ * @param sysref_pd Flag to enable JESD powerdown SYSREF.
+ * @param n_lanes Number of JESD lanes.
+ * @param frames_per_multiframe Number of frames per multiframe.
+ * @param m JESD parameter M.
+ * @param spi_init SPI initialization parameters.
+ ******************************************************************************/
 struct ad6676_init_param {
 	uint32_t 	ref_clk; // reference_clk rate Hz
 	uint32_t	f_adc_hz; // adc frequency Hz
@@ -324,6 +358,20 @@ struct ad6676_init_param {
 	struct no_os_spi_init_param	spi_init;
 };
 
+/***************************************************************************//**
+ * @brief The `ad6676_dev` structure is a simple data structure designed to
+ * encapsulate the SPI communication descriptor for the AD6676 device. It
+ * contains a single member, `spi_desc`, which is a pointer to a
+ * `no_os_spi_desc` structure. This structure is essential for managing
+ * the SPI interface, which is crucial for configuring and controlling
+ * the AD6676 device, a high-speed analog-to-digital converter. The
+ * `ad6676_dev` structure is used in various functions to perform
+ * operations such as reading from and writing to the device, setting up
+ * the device, and updating its configuration.
+ *
+ * @param spi_desc A pointer to a no_os_spi_desc structure, representing the SPI
+ * descriptor for communication.
+ ******************************************************************************/
 struct ad6676_dev {
 	/* SPI */
 	struct no_os_spi_desc *spi_desc;
@@ -333,37 +381,197 @@ struct ad6676_dev {
 /************************ Functions Declarations ******************************/
 /******************************************************************************/
 /* SPI read from device. */
+/***************************************************************************//**
+ * @brief This function is used to read a value from a specified register of the
+ * AD6676 device using SPI communication. It is essential to ensure that
+ * the device has been properly initialized and configured before calling
+ * this function. The function requires a valid device structure and a
+ * register address to read from. The read value is stored in the
+ * provided memory location pointed to by reg_data. This function is
+ * typically used when there is a need to retrieve configuration or
+ * status information from the device.
+ *
+ * @param dev A pointer to an ad6676_dev structure representing the device. Must
+ * not be null, and the device must be properly initialized.
+ * @param reg_addr The 16-bit address of the register to read from. Must be a
+ * valid register address for the AD6676 device.
+ * @param reg_data A pointer to a uint8_t where the read register value will be
+ * stored. Must not be null.
+ * @return Returns an int32_t indicating the success or failure of the SPI read
+ * operation. A non-zero value indicates an error.
+ ******************************************************************************/
 int32_t ad6676_spi_read(struct ad6676_dev *dev,
 			uint16_t reg_addr,
 			uint8_t *reg_data);
 
 /* SPI write to device. */
+/***************************************************************************//**
+ * @brief This function is used to write a single byte of data to a specified
+ * register on the AD6676 device using the SPI interface. It is typically
+ * called when there is a need to configure or modify the settings of the
+ * device by writing to its registers. The function requires a valid
+ * device structure that has been properly initialized and configured for
+ * SPI communication. It is important to ensure that the register address
+ * is within the valid range for the device. The function returns an
+ * integer status code indicating the success or failure of the write
+ * operation.
+ *
+ * @param dev A pointer to an ad6676_dev structure representing the device. This
+ * must be a valid, initialized device structure with an SPI
+ * descriptor. Must not be null.
+ * @param reg_addr The 16-bit address of the register to which data will be
+ * written. The address should be within the valid range of the
+ * device's register map.
+ * @param reg_data The 8-bit data to be written to the specified register. This
+ * is the value that will be stored in the register.
+ * @return Returns an int32_t status code from the SPI write operation, where 0
+ * typically indicates success and a negative value indicates an error.
+ ******************************************************************************/
 int32_t ad6676_spi_write(struct ad6676_dev *dev,
 			 uint16_t reg_addr,
 			 uint8_t reg_data);
 
 /* Initialize the device. */
+/***************************************************************************//**
+ * @brief This function sets up the AD6676 device by initializing it with the
+ * provided configuration parameters. It must be called before any other
+ * operations on the device to ensure proper setup. The function
+ * configures the device's SPI interface, checks the device ID, and sets
+ * various operational parameters such as clock source, frequency,
+ * bandwidth, and decimation. It also performs necessary calibrations and
+ * checks for PLL lock status. If the setup is successful, the function
+ * returns a non-negative value and provides a pointer to the initialized
+ * device structure. If any step fails, it returns a negative error code.
+ *
+ * @param device A pointer to a pointer of type `struct ad6676_dev`. This will
+ * be allocated and initialized by the function. The caller must
+ * ensure this pointer is valid and will receive ownership of the
+ * allocated device structure.
+ * @param init_param A structure of type `struct ad6676_init_param` containing
+ * initialization parameters such as reference clock rate, ADC
+ * frequency, bandwidth, and other configuration settings. The
+ * values must be within valid ranges as specified in the
+ * structure definition.
+ * @return Returns 0 on success or a negative error code on failure. On success,
+ * the `device` pointer is set to point to the initialized device
+ * structure.
+ ******************************************************************************/
 int32_t ad6676_setup(struct ad6676_dev **device,
 		     struct ad6676_init_param init_param);
 
 /* Reconfigure device for other target frequency and bandwidth and
  * recalibrate. */
+/***************************************************************************//**
+ * @brief This function is used to update the configuration of an AD6676 device
+ * with new target frequency and bandwidth parameters, followed by a
+ * recalibration process. It should be called whenever there is a need to
+ * change the operational parameters of the device after it has been
+ * initialized. The function ensures that the input parameters are within
+ * valid ranges by clamping them to acceptable values. It is important to
+ * ensure that the device has been properly initialized before calling
+ * this function. The function returns an error code if any of the
+ * operations fail, allowing the caller to handle such cases
+ * appropriately.
+ *
+ * @param dev A pointer to an ad6676_dev structure representing the device to be
+ * updated. Must not be null, and the device must be initialized
+ * prior to calling this function.
+ * @param init_param A pointer to an ad6676_init_param structure containing the
+ * new configuration parameters. The structure's fields will
+ * be clamped to valid ranges where necessary. Must not be
+ * null.
+ * @return Returns an int32_t error code, where 0 indicates success and a
+ * negative value indicates an error occurred during the update or
+ * calibration process.
+ ******************************************************************************/
 int32_t ad6676_update(struct ad6676_dev *dev,
 		      struct ad6676_init_param *init_param);
 
 /* Set attenuation in decibels or disable attenuator. */
+/***************************************************************************//**
+ * @brief This function configures the attenuation level of the AD6676 device by
+ * writing the specified attenuation value to the device's registers. It
+ * should be called when you need to adjust the signal attenuation for
+ * the device. The function ensures that the attenuation value is clamped
+ * within the valid range of 0 to 27 dB before applying it. This function
+ * must be called with a valid device structure and initialization
+ * parameters that have been properly set up. It does not handle invalid
+ * device pointers or uninitialized parameters.
+ *
+ * @param dev A pointer to an ad6676_dev structure representing the device. Must
+ * not be null. The caller retains ownership.
+ * @param init_param A pointer to an ad6676_init_param structure containing the
+ * initialization parameters, including the desired
+ * attenuation level. The attenuation value will be clamped
+ * between 0 and 27 dB. Must not be null. The caller retains
+ * ownership.
+ * @return Returns 0 on success. The attenuation value in init_param is clamped
+ * and written to the device.
+ ******************************************************************************/
 int32_t ad6676_set_attenuation(struct ad6676_dev *dev,
 			       struct ad6676_init_param *init_param);
 
 /* Set the target IF frequency. */
+/***************************************************************************//**
+ * @brief This function configures the target intermediate frequency (IF) for
+ * the AD6676 device using the specified initialization parameters. It
+ * should be called when you need to set or update the IF frequency of
+ * the device. The function ensures that the provided IF frequency is
+ * clamped within the valid range before applying it. It is important to
+ * ensure that the device has been properly initialized before calling
+ * this function to avoid undefined behavior.
+ *
+ * @param dev A pointer to an ad6676_dev structure representing the device. Must
+ * not be null, and the device should be initialized before use.
+ * @param init_param A pointer to an ad6676_init_param structure containing the
+ * desired IF frequency in the f_if_hz field. The frequency is
+ * clamped between MIN_FIF and MAX_FIF before being set. Must
+ * not be null.
+ * @return Returns an int32_t indicating success or failure of the operation. A
+ * non-zero value indicates an error.
+ ******************************************************************************/
 int32_t ad6676_set_fif(struct ad6676_dev *dev,
 		       struct ad6676_init_param *init_param);
 
 /* Get the target IF frequency. */
+/***************************************************************************//**
+ * @brief This function retrieves the current target intermediate frequency (IF)
+ * for the AD6676 device by reading specific tuning registers and
+ * performing calculations based on the provided initialization
+ * parameters. It is typically used to verify or obtain the current IF
+ * setting after the device has been configured. The function requires a
+ * valid device structure and initialization parameters to perform the
+ * calculation correctly.
+ *
+ * @param dev A pointer to an ad6676_dev structure representing the device. Must
+ * not be null. The caller retains ownership.
+ * @param init_param A pointer to an ad6676_init_param structure containing
+ * initialization parameters, including the ADC frequency and
+ * a divisor. Must not be null. The caller retains ownership.
+ * @return Returns the calculated target IF frequency as a 64-bit unsigned
+ * integer.
+ ******************************************************************************/
 uint64_t ad6676_get_fif(struct ad6676_dev *dev,
 			struct ad6676_init_param *init_param);
 
 /* Perform an interface test. */
+/***************************************************************************//**
+ * @brief This function is used to perform an interface test on the AD6676
+ * device by setting it to a specified test mode. It is typically used to
+ * verify the communication and functionality of the device during
+ * development or troubleshooting. The function requires a valid device
+ * structure and a test mode value, which determines the type of test to
+ * be performed. It is important to ensure that the device has been
+ * properly initialized before calling this function.
+ *
+ * @param dev A pointer to an ad6676_dev structure representing the device. Must
+ * not be null, and the device should be properly initialized before
+ * use.
+ * @param test_mode A 32-bit unsigned integer specifying the test mode to set on
+ * the device. Valid values are defined by the device's test
+ * mode specifications.
+ * @return Returns 0 on success, indicating the test mode was set successfully.
+ ******************************************************************************/
 int32_t ad6676_test(struct ad6676_dev *dev,
 		    uint32_t test_mode);
 #endif

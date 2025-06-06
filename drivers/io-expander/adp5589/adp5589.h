@@ -325,11 +325,32 @@
 /*************************** Types Declarations *******************************/
 /******************************************************************************/
 
+/***************************************************************************//**
+ * @brief The `adp5589_dev` structure is a simple data structure used to
+ * represent a device instance for the ADP5589 driver, specifically
+ * managing the I2C communication interface. It contains a single member,
+ * `i2c_desc`, which is a pointer to a `no_os_i2c_desc` structure,
+ * encapsulating the details necessary for I2C communication with the
+ * ADP5589 device.
+ *
+ * @param i2c_desc Pointer to a structure describing the I2C interface.
+ ******************************************************************************/
 struct adp5589_dev {
 	/* I2C */
 	struct no_os_i2c_desc	*i2c_desc;
 };
 
+/***************************************************************************//**
+ * @brief The `adp5589_init_param` structure is designed to encapsulate the
+ * initialization parameters required for setting up the ADP5589 device,
+ * specifically focusing on the I2C communication interface. It contains
+ * a single member, `i2c_init`, which is a structure that holds the
+ * necessary parameters for initializing the I2C interface, ensuring that
+ * the device can communicate effectively over the I2C bus.
+ *
+ * @param i2c_init This member is a structure of type no_os_i2c_init_param, used
+ * to initialize I2C communication parameters.
+ ******************************************************************************/
 struct adp5589_init_param {
 	/* I2C */
 	struct no_os_i2c_init_param	i2c_init;
@@ -340,55 +361,261 @@ struct adp5589_init_param {
 /************************ Functions Declarations ******************************/
 /******************************************************************************/
 
-/*! Writes data into a register. */
+/***************************************************************************//**
+ * @brief Use this function to set a specific register on the ADP5589 device to
+ * a desired value. This function is typically called when configuring
+ * the device or updating its settings. Ensure that the device has been
+ * properly initialized before calling this function. The function
+ * communicates with the device over I2C, so the I2C interface must be
+ * correctly set up and operational. It does not return any value, and
+ * any errors in communication are not reported through this function.
+ *
+ * @param dev A pointer to an adp5589_dev structure representing the device.
+ * Must not be null and should be properly initialized before use.
+ * @param register_address The address of the register to be written to. It is
+ * an 8-bit unsigned integer, and valid addresses are
+ * defined by the device's register map.
+ * @param register_value The value to write to the specified register. It is an
+ * 8-bit unsigned integer.
+ * @return None
+ ******************************************************************************/
 void adp5589_set_register_value(struct adp5589_dev *dev,
 				uint8_t register_address,
 				uint8_t register_value);
 
-/*! Reads the value of a register. */
+/***************************************************************************//**
+ * @brief This function retrieves the value stored in a specific register of the
+ * ADP5589 device using I2C communication. It is typically used when you
+ * need to read the current configuration or status from the device.
+ * Ensure that the device has been properly initialized before calling
+ * this function. The function requires a valid device descriptor and a
+ * register address to operate correctly. If the register address is
+ * invalid, the behavior is undefined.
+ *
+ * @param dev A pointer to an adp5589_dev structure representing the device.
+ * Must not be null. The caller retains ownership.
+ * @param register_address The address of the register to read from. Must be a
+ * valid register address as defined by the ADP5589
+ * device specifications.
+ * @return Returns the 8-bit value read from the specified register.
+ ******************************************************************************/
 uint8_t adp5589_get_register_value(struct adp5589_dev *dev,
 				   uint8_t register_address);
 
-/*! Initializes the communication peripheral and checks if the ADP5589
-	part is present. */
+/***************************************************************************//**
+ * @brief This function sets up the ADP5589 device by initializing the I2C
+ * communication interface and verifying the presence of the device. It
+ * should be called before any other operations on the ADP5589 to ensure
+ * the device is properly configured and ready for use. The function
+ * allocates memory for the device structure and configures the internal
+ * oscillator and clock frequency. It is important to check the return
+ * value to ensure successful initialization, as a negative return value
+ * indicates an error, such as memory allocation failure or device not
+ * being detected.
+ *
+ * @param device A pointer to a pointer of type `struct adp5589_dev`. This will
+ * be allocated and initialized by the function. The caller must
+ * ensure this pointer is valid and will receive ownership of the
+ * allocated memory.
+ * @param init_param A structure of type `struct adp5589_init_param` containing
+ * initialization parameters for the I2C interface. This must
+ * be properly configured before calling the function.
+ * @return Returns 0 on success, or a negative value if an error occurs, such as
+ * memory allocation failure or device detection failure.
+ ******************************************************************************/
 int8_t adp5589_init(struct adp5589_dev **device,
 		    struct adp5589_init_param init_param);
 
-/*! Free the resources allocated by adp5589_init(). */
+/***************************************************************************//**
+ * @brief This function is used to release all resources allocated for an
+ * ADP5589 device, typically after the device is no longer needed. It
+ * should be called to clean up after a successful initialization with
+ * `adp5589_init`. The function ensures that the I2C descriptor
+ * associated with the device is properly removed and the memory
+ * allocated for the device structure is freed. This function must be
+ * called to prevent memory leaks in applications that use the ADP5589
+ * driver.
+ *
+ * @param dev A pointer to an `adp5589_dev` structure representing the device to
+ * be removed. This pointer must not be null, and it must point to a
+ * valid device structure that was previously initialized. If the
+ * pointer is invalid, the behavior is undefined.
+ * @return Returns an `int32_t` indicating the result of the I2C removal
+ * operation. A return value of 0 typically indicates success, while a
+ * negative value indicates an error occurred during the I2C removal
+ * process.
+ ******************************************************************************/
 int32_t adp5589_remove(struct adp5589_dev *dev);
 
-/*! Initializes the PWM generator in continuous mode. */
+/***************************************************************************//**
+ * @brief This function is used to configure the ADP5589 device to enable its
+ * PWM generator in continuous mode. It should be called after the device
+ * has been properly initialized using the appropriate initialization
+ * function. This function sets specific register values to enable the
+ * PWM functionality, ensuring that the device is ready to generate PWM
+ * signals. It is important to ensure that the device structure provided
+ * is valid and properly initialized before calling this function.
+ *
+ * @param dev A pointer to an adp5589_dev structure representing the device.
+ * This must be a valid, non-null pointer to a device that has been
+ * initialized. The caller retains ownership of this structure.
+ * @return None
+ ******************************************************************************/
 void adp5589_init_pwm(struct adp5589_dev *dev);
 
-/*! Sets the PWM On and Off times. */
+/***************************************************************************//**
+ * @brief Use this function to configure the PWM (Pulse Width Modulation) on and
+ * off times for an ADP5589 device. This function should be called after
+ * the device has been properly initialized and the PWM generator has
+ * been set up. It allows you to specify the duration for which the PWM
+ * signal is high (on time) and low (off time). Ensure that the device
+ * pointer is valid and that the PWM times are within the acceptable
+ * range for your application.
+ *
+ * @param dev A pointer to an initialized adp5589_dev structure representing the
+ * device. Must not be null.
+ * @param pwm_off_time The duration for which the PWM signal is low, specified
+ * as a 16-bit unsigned integer. The valid range depends on
+ * the specific application requirements.
+ * @param pwm_on_time The duration for which the PWM signal is high, specified
+ * as a 16-bit unsigned integer. The valid range depends on
+ * the specific application requirements.
+ * @return None
+ ******************************************************************************/
 void adp5589_set_pwm(struct adp5589_dev *dev,
 		     uint16_t pwm_off_time,
 		     uint16_t pwm_on_time);
 
-/*! Sets the direction of the pins. */
+/***************************************************************************//**
+ * @brief This function configures the direction of GPIO pins on the ADP5589
+ * device by writing a specified value to a given register. It is
+ * typically used to set pins as either inputs or outputs, depending on
+ * the application requirements. The function must be called with a valid
+ * device structure that has been properly initialized. It is important
+ * to ensure that the register address and value provided are appropriate
+ * for the desired configuration.
+ *
+ * @param dev A pointer to an initialized adp5589_dev structure representing the
+ * device. Must not be null.
+ * @param reg The register address where the direction configuration will be
+ * written. Must be a valid register address for GPIO direction.
+ * @param val The value to be written to the specified register, determining the
+ * direction of the GPIO pins. Valid values depend on the specific
+ * register and desired configuration.
+ * @return None
+ ******************************************************************************/
 void adp5589_gpio_direction(struct adp5589_dev *dev,
 			    uint8_t reg,
 			    uint8_t val);
 
-/*! Reads the state of the pins. */
+/***************************************************************************//**
+ * @brief Use this function to retrieve the current state of a pin or group of
+ * pins from the ADP5589 device. It is essential to ensure that the
+ * device has been properly initialized before calling this function. The
+ * function reads the value from the specified register and returns it,
+ * allowing the caller to determine the pin states. This function is
+ * useful for monitoring pin status in applications where pin state
+ * changes need to be detected or logged.
+ *
+ * @param dev A pointer to an initialized adp5589_dev structure representing the
+ * device. Must not be null, and the device must be properly
+ * initialized before use.
+ * @param reg The register address from which to read the pin state. Must be a
+ * valid register address as defined by the ADP5589 device
+ * specifications.
+ * @return Returns an 8-bit unsigned integer representing the state of the pins
+ * in the specified register.
+ ******************************************************************************/
 uint8_t adp5589_get_pin_state(struct adp5589_dev *dev,
 			      uint8_t reg);
 
-/*! Sets the state of the pins.*/
+/***************************************************************************//**
+ * @brief Use this function to change the state of a specific pin on the ADP5589
+ * device. This function is typically called when you need to control the
+ * output state of a pin, such as setting it high or low. Ensure that the
+ * device has been properly initialized before calling this function. The
+ * function does not perform any validation on the input parameters, so
+ * it is the caller's responsibility to ensure that the provided register
+ * address and state are valid for the intended operation.
+ *
+ * @param dev A pointer to an initialized adp5589_dev structure representing the
+ * device. Must not be null.
+ * @param reg The register address of the pin whose state is to be set. It
+ * should be a valid register address for the ADP5589 device.
+ * @param state The desired state to set for the specified pin. Typically, this
+ * would be a value representing high or low state.
+ * @return None
+ ******************************************************************************/
 void adp5589_set_pin_state(struct adp5589_dev *dev,
 			   uint8_t reg,
 			   uint8_t state);
 
-/*! Initializes keyboard decoder. */
+/***************************************************************************//**
+ * @brief This function configures the ADP5589 device to initialize the keyboard
+ * decoder for a specified Pmod port. It should be called after the
+ * device has been properly initialized and is ready for configuration.
+ * The function sets up the row and column configurations based on the
+ * provided Pmod port, either configuring rows and columns 0-3 or 4-7.
+ * This setup is necessary for the device to correctly interpret key
+ * presses from the connected keypad.
+ *
+ * @param dev A pointer to an adp5589_dev structure representing the device.
+ * Must not be null, and the device should be initialized before
+ * calling this function.
+ * @param pmod_port A uint8_t value indicating the Pmod port to configure. Valid
+ * values are 0 or 1, corresponding to different row and column
+ * configurations. If an invalid value is provided, the
+ * behavior is undefined.
+ * @return None
+ ******************************************************************************/
 void adp5589_init_key(struct adp5589_dev *dev,
 		      uint8_t pmod_port);
 
-/*! Decodes the key on the Pmod-KYPD. */
+/***************************************************************************//**
+ * @brief This function is used to decode a key event from the Pmod-KYPD based
+ * on the provided register value, event type, and Pmod port. It is
+ * typically called when a key event is detected to determine which key
+ * was pressed or released. The function requires the register value to
+ * be adjusted according to the Pmod port and event type before decoding.
+ * It returns a character representing the key, or 'x' if the key cannot
+ * be decoded.
+ *
+ * @param reg The register value associated with the key event. It must be
+ * adjusted according to the Pmod port and event type before
+ * decoding.
+ * @param event_type Specifies the type of key event, such as key pressed or
+ * released. Valid values are ADP5589_EVENT_KEY_PRESSED and
+ * ADP5589_EVENT_KEY_RELEASED.
+ * @param pmod_port Indicates the Pmod port being used, either PMOD_IOXP_J1 or
+ * PMOD_IOXP_J2. This affects the adjustment of the register
+ * value.
+ * @return Returns a uint8_t character representing the decoded key, or 'x' if
+ * the key cannot be decoded.
+ ******************************************************************************/
 uint8_t adp5589_key_decode(uint8_t reg,
 			   uint8_t event_type,
 			   uint8_t pmod_port);
 
-/*! Locks the ADP5589 and requests Password for unlock. */
+/***************************************************************************//**
+ * @brief This function is used to lock the ADP5589 device, requiring a password
+ * to unlock it. It should be called when you want to secure the device
+ * from unauthorized access. The function configures the device to
+ * require a specific sequence of events as a password for unlocking. It
+ * must be called with valid event codes and a valid Pmod port
+ * identifier. The function will block until the lock status is
+ * confirmed.
+ *
+ * @param dev A pointer to an initialized adp5589_dev structure. Must not be
+ * null. The caller retains ownership.
+ * @param first_event An 8-bit unsigned integer representing the first event in
+ * the unlock sequence. Must be a valid event code.
+ * @param second_event An 8-bit unsigned integer representing the second event
+ * in the unlock sequence. Must be a valid event code.
+ * @param pmod_port An 8-bit unsigned integer indicating the Pmod port (e.g.,
+ * PMOD_IOXP_J1 or PMOD_IOXP_J2). Must be a valid port
+ * identifier.
+ * @return None
+ ******************************************************************************/
 void adp5589_key_lock(struct adp5589_dev *dev,
 		      uint8_t first_event,
 		      uint8_t second_event,

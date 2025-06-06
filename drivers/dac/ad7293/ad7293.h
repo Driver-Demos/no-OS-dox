@@ -323,10 +323,18 @@
 #define AD7293_SOFT_RESET_CLR_VAL		0x0000
 #define AD7293_CONV_CMD_VAL			0x82
 
-/**
- * @enum ad7293_ch_type
- * @brief AD7293 Channel Type
- */
+/***************************************************************************//**
+ * @brief The `ad7293_ch_type` enumeration defines the different types of
+ * channels available in the AD7293 device, including ADC channels for
+ * voltage, temperature, and current sensing, as well as a DAC channel.
+ * This enumeration is used to specify the type of channel being
+ * configured or accessed in the AD7293 device.
+ *
+ * @param AD7293_ADC_VINX Represents an ADC channel for voltage input.
+ * @param AD7293_ADC_TSENSE Represents an ADC channel for temperature sensing.
+ * @param AD7293_ADC_ISENSE Represents an ADC channel for current sensing.
+ * @param AD7293_DAC Represents a DAC channel.
+ ******************************************************************************/
 enum ad7293_ch_type {
 	AD7293_ADC_VINX,
 	AD7293_ADC_TSENSE,
@@ -334,10 +342,19 @@ enum ad7293_ch_type {
 	AD7293_DAC,
 };
 
-/**
- * @struct ad7293_dev
- * @brief AD7293 Device Descriptor.
- */
+/***************************************************************************//**
+ * @brief The `ad7293_dev` structure is a device descriptor for the AD7293, a
+ * multi-channel ADC/DAC device. It encapsulates the necessary components
+ * for interfacing with the device, including SPI communication and GPIO
+ * control for resetting the device. The `page_select` member is used to
+ * manage the page addressing of the device's register map, allowing
+ * access to different sets of registers.
+ *
+ * @param spi_desc Pointer to the SPI descriptor for communication.
+ * @param gpio_reset Pointer to the GPIO descriptor for reset control.
+ * @param page_select 8-bit value to select the current page for register
+ * access.
+ ******************************************************************************/
 struct ad7293_dev {
 	/** SPI Descriptor */
 	struct no_os_spi_desc		*spi_desc;
@@ -345,10 +362,18 @@ struct ad7293_dev {
 	uint8_t				page_select;
 };
 
-/**
- * @struct ad7293_init_param
- * @brief AD7293 Initialization Parameters structure.
- */
+/***************************************************************************//**
+ * @brief The `ad7293_init_param` structure is used to encapsulate the
+ * initialization parameters required for setting up the AD7293 device.
+ * It includes pointers to SPI and GPIO initialization parameters, which
+ * are essential for configuring the communication interface and reset
+ * functionality of the device, respectively. This structure is typically
+ * used during the device initialization process to ensure that all
+ * necessary hardware interfaces are properly configured.
+ *
+ * @param spi_init Pointer to SPI initialization parameters.
+ * @param gpio_reset Pointer to GPIO initialization parameters for reset.
+ ******************************************************************************/
 struct ad7293_init_param {
 	/** SPI Initialization parameters */
 	struct no_os_spi_init_param	*spi_init;
@@ -359,59 +384,336 @@ struct ad7293_init_param {
 /************************ Functions Declarations ******************************/
 /******************************************************************************/
 
-/** AD7293 SPI read */
+/***************************************************************************//**
+ * @brief This function is used to read data from a specified register of the
+ * AD7293 device using SPI communication. It requires a valid device
+ * descriptor and a register address to read from. The function will
+ * store the read value in the provided memory location pointed to by the
+ * `val` parameter. It is essential that the device has been properly
+ * initialized before calling this function. The function handles
+ * different register lengths and adjusts the read operation accordingly.
+ * It returns an error code if the read operation fails, allowing the
+ * caller to handle such cases appropriately.
+ *
+ * @param dev A pointer to an `ad7293_dev` structure representing the device.
+ * Must not be null and should be properly initialized before use.
+ * @param reg An unsigned integer representing the register address to read
+ * from. Must be a valid register address for the AD7293 device.
+ * @param val A pointer to a `uint16_t` where the read value will be stored.
+ * Must not be null, and the caller is responsible for ensuring it
+ * points to a valid memory location.
+ * @return Returns 0 on success, or a negative error code on failure.
+ ******************************************************************************/
 int ad7293_spi_read(struct ad7293_dev *dev, unsigned int reg, uint16_t *val);
 
-/** AD7293 SPI write */
+/***************************************************************************//**
+ * @brief This function is used to write a 16-bit value to a specific register
+ * on the AD7293 device using SPI communication. It should be called when
+ * a register needs to be updated with a new value. The function requires
+ * a valid device descriptor and a register address, and it handles the
+ * necessary page selection and data formatting for the SPI transaction.
+ * Ensure that the device is properly initialized before calling this
+ * function. The function returns an error code if the operation fails,
+ * which can be used for error handling.
+ *
+ * @param dev A pointer to an ad7293_dev structure representing the device. Must
+ * not be null. The caller retains ownership.
+ * @param reg An unsigned integer representing the register address to write to.
+ * Must be a valid register address for the AD7293 device.
+ * @param val A 16-bit unsigned integer value to be written to the specified
+ * register.
+ * @return Returns an integer status code: 0 for success, or a negative error
+ * code if the operation fails.
+ ******************************************************************************/
 int ad7293_spi_write(struct ad7293_dev *dev, unsigned int reg, uint16_t val);
 
-/** AD7293 SPI update bits */
+/***************************************************************************//**
+ * @brief Use this function to modify specific bits in a register of the AD7293
+ * device without affecting other bits. This is useful when only certain
+ * bits need to be changed, preserving the rest of the register's current
+ * state. The function reads the current value of the register, applies
+ * the mask to clear the bits to be updated, and then sets them to the
+ * desired value. It must be called with a valid device descriptor and
+ * register address. Ensure that the device is properly initialized
+ * before calling this function.
+ *
+ * @param dev A pointer to an ad7293_dev structure representing the device. Must
+ * not be null. The caller retains ownership.
+ * @param reg The register address within the AD7293 device to be updated. Must
+ * be a valid register address.
+ * @param mask A 16-bit mask indicating which bits in the register should be
+ * updated. Bits set to 1 in the mask will be affected.
+ * @param val A 16-bit value containing the new bit values to be written to the
+ * register. Only bits corresponding to the mask will be used.
+ * @return Returns 0 on success, or a negative error code if the read or write
+ * operation fails.
+ ******************************************************************************/
 int ad7293_spi_update_bits(struct ad7293_dev *dev, unsigned int reg,
 			   uint16_t mask, uint16_t val);
 
-/** AD7293 get ADC range */
+/***************************************************************************//**
+ * @brief Use this function to obtain the current ADC range setting for a
+ * specific channel on the AD7293 device. This function should be called
+ * when you need to verify or utilize the ADC range configuration for a
+ * channel. Ensure that the device has been properly initialized before
+ * calling this function. The function reads from the device's registers
+ * to determine the range and stores the result in the provided pointer.
+ * It returns an error code if the read operation fails.
+ *
+ * @param dev A pointer to an initialized ad7293_dev structure representing the
+ * device. Must not be null.
+ * @param ch The channel number for which the ADC range is being queried. Valid
+ * channel numbers depend on the device configuration.
+ * @param range A pointer to a uint16_t where the function will store the
+ * retrieved ADC range. Must not be null.
+ * @return Returns 0 on success, or a negative error code if the read operation
+ * fails.
+ ******************************************************************************/
 int ad7293_adc_get_range(struct ad7293_dev *dev, unsigned int ch,
 			 uint16_t *range);
 
-/** AD7293 set ADC range */
+/***************************************************************************//**
+ * @brief This function configures the input range of a specified ADC channel on
+ * the AD7293 device. It should be called when you need to adjust the
+ * input range for accurate measurements on a particular channel. Ensure
+ * that the device is properly initialized before calling this function.
+ * The function updates the range settings in two registers, and any
+ * error during these updates will result in a non-zero return value. It
+ * is important to handle these errors to ensure the range is set
+ * correctly.
+ *
+ * @param dev A pointer to an initialized ad7293_dev structure representing the
+ * device. Must not be null.
+ * @param ch The channel number for which the range is being set. It should be a
+ * valid channel index for the AD7293 device.
+ * @param range A 16-bit value representing the desired range setting for the
+ * specified channel. The exact valid values depend on the device's
+ * range configuration capabilities.
+ * @return Returns 0 on success, or a negative error code if the range setting
+ * fails.
+ ******************************************************************************/
 int ad7293_adc_set_range(struct ad7293_dev *dev, unsigned int ch,
 			 uint16_t range);
 
-/** AD7293 set ISENSE gain */
+/***************************************************************************//**
+ * @brief This function configures the gain for a specific ISENSE channel on the
+ * AD7293 device. It should be used when you need to adjust the gain
+ * settings for current sensing applications. The function requires a
+ * valid device descriptor and channel index. Ensure that the device is
+ * properly initialized before calling this function. The gain value is
+ * applied to the specified channel, and the function returns an integer
+ * status code indicating success or failure.
+ *
+ * @param dev A pointer to an ad7293_dev structure representing the device. Must
+ * not be null, and the device should be initialized before use.
+ * @param ch An unsigned integer representing the ISENSE channel index. Valid
+ * range depends on the device's channel configuration.
+ * @param gain A 16-bit unsigned integer specifying the gain value to set for
+ * the channel. The valid range is determined by the device's
+ * specifications.
+ * @return Returns an integer status code: 0 for success, or a negative error
+ * code for failure.
+ ******************************************************************************/
 int ad7293_isense_set_gain(struct ad7293_dev *dev, unsigned int ch,
 			   uint16_t gain);
 
-/** AD7293 get ISENSE gain */
+/***************************************************************************//**
+ * @brief Use this function to obtain the gain setting for a specific ISENSE
+ * channel on the AD7293 device. It is essential to ensure that the
+ * device is properly initialized before calling this function. The
+ * function reads the gain value from the device and extracts the
+ * relevant bits corresponding to the specified channel. This function is
+ * useful for applications that need to verify or log the current gain
+ * settings of the ISENSE channels. It is important to handle the return
+ * value to check for any errors during the SPI read operation.
+ *
+ * @param dev A pointer to an initialized ad7293_dev structure representing the
+ * device. Must not be null.
+ * @param ch The channel number for which the gain is to be retrieved. Valid
+ * range is typically 0 to 3, corresponding to the available ISENSE
+ * channels.
+ * @param gain A pointer to a uint16_t variable where the gain value will be
+ * stored. Must not be null. The function will write the gain value
+ * for the specified channel to this location.
+ * @return Returns 0 on success, or a negative error code if the SPI read
+ * operation fails.
+ ******************************************************************************/
 int ad7293_isense_get_gain(struct ad7293_dev *dev, unsigned int ch,
 			   uint16_t *gain);
 
-/** AD7293 get offset */
+/***************************************************************************//**
+ * @brief This function is used to obtain the offset value for a specific
+ * channel type and channel number on the AD7293 device. It is essential
+ * to call this function when you need to read the offset calibration
+ * value for ADC, DAC, or other channel types supported by the device.
+ * The function requires a valid device descriptor and channel type, and
+ * it will return an error if an unsupported channel type is provided.
+ * The offset value is returned through a pointer, which must not be
+ * null.
+ *
+ * @param dev A pointer to an ad7293_dev structure representing the device. Must
+ * not be null.
+ * @param type An enum ad7293_ch_type value indicating the type of channel
+ * (e.g., AD7293_ADC_VINX, AD7293_ADC_TSENSE, etc.). Must be a valid
+ * channel type.
+ * @param ch An unsigned integer representing the channel number. The valid
+ * range depends on the channel type.
+ * @param offset A pointer to a uint16_t where the offset value will be stored.
+ * Must not be null.
+ * @return Returns 0 on success, or a negative error code if the channel type is
+ * invalid or if there is a communication error.
+ ******************************************************************************/
 int ad7293_get_offset(struct ad7293_dev *dev,  enum ad7293_ch_type type,
 		      unsigned int ch, uint16_t *offset);
 
-/** AD7293 set offset */
+/***************************************************************************//**
+ * @brief This function is used to configure the offset for a specific channel
+ * type on the AD7293 device. It should be called when you need to adjust
+ * the offset for ADC, DAC, or sensor channels. The function requires a
+ * valid device descriptor and channel type, and it returns an error if
+ * the channel type is not recognized. Ensure that the device is properly
+ * initialized before calling this function.
+ *
+ * @param dev A pointer to an ad7293_dev structure representing the device. Must
+ * not be null, and the device should be initialized before use.
+ * @param type An enum value of type ad7293_ch_type indicating the channel type
+ * for which the offset is being set. Valid values are
+ * AD7293_ADC_VINX, AD7293_ADC_TSENSE, AD7293_ADC_ISENSE, and
+ * AD7293_DAC. If an invalid type is provided, the function returns
+ * an error.
+ * @param ch An unsigned integer representing the channel number. The valid
+ * range depends on the channel type and should correspond to a valid
+ * channel on the device.
+ * @param offset A 16-bit unsigned integer specifying the offset value to be set
+ * for the specified channel.
+ * @return Returns 0 on success or a negative error code if the channel type is
+ * invalid or if there is a failure in writing the offset.
+ ******************************************************************************/
 int ad7293_set_offset(struct ad7293_dev *dev,  enum ad7293_ch_type type,
 		      unsigned int ch, uint16_t offset);
 
-/** AD7293 write DAC value */
+/***************************************************************************//**
+ * @brief Use this function to set a raw digital-to-analog converter (DAC) value
+ * for a specific channel on the AD7293 device. This function should be
+ * called when you need to update the DAC output for a given channel.
+ * Ensure that the device is properly initialized before calling this
+ * function. The function enables the DAC for the specified channel and
+ * writes the raw value to it. It returns an error code if the operation
+ * fails, which can occur if the channel number is invalid or if there is
+ * a communication error with the device.
+ *
+ * @param dev A pointer to an initialized ad7293_dev structure representing the
+ * device. Must not be null.
+ * @param ch The channel number to which the raw DAC value will be written.
+ * Valid channel numbers depend on the device configuration.
+ * @param raw The raw DAC value to be written to the specified channel. It is a
+ * 16-bit unsigned integer.
+ * @return Returns 0 on success or a negative error code on failure.
+ ******************************************************************************/
 int ad7293_dac_write_raw(struct ad7293_dev *dev, unsigned int ch,
 			 uint16_t raw);
 
-/** AD7293 read raw value */
+/***************************************************************************//**
+ * @brief Use this function to read a raw data value from a specified channel of
+ * the AD7293 device. The function supports reading from ADC voltage
+ * input channels, temperature sensor channels, current sensor channels,
+ * and DAC channels. It requires a valid device descriptor and channel
+ * type, and the channel index must be within the valid range for the
+ * specified type. The function will return an error if the channel type
+ * is invalid or if any SPI communication fails. Ensure the device is
+ * properly initialized before calling this function.
+ *
+ * @param dev A pointer to an ad7293_dev structure representing the device. Must
+ * not be null.
+ * @param type An enum ad7293_ch_type value indicating the type of channel to
+ * read from. Valid values are AD7293_ADC_VINX, AD7293_ADC_TSENSE,
+ * AD7293_ADC_ISENSE, and AD7293_DAC.
+ * @param ch An unsigned integer representing the channel index to read from.
+ * Must be within the valid range for the specified channel type.
+ * @param raw A pointer to a uint16_t where the raw data will be stored. Must
+ * not be null.
+ * @return Returns 0 on success, or a negative error code on failure. The raw
+ * data is stored in the location pointed to by the raw parameter.
+ ******************************************************************************/
 int ad7293_ch_read_raw(struct ad7293_dev *dev, enum ad7293_ch_type type,
 		       unsigned int ch, uint16_t *raw);
 
-/** AD7293 Software Reset */
+/***************************************************************************//**
+ * @brief Use this function to reset the AD7293 device to its default state via
+ * a software command. This function is typically called when the device
+ * needs to be reinitialized or after a configuration change that
+ * requires a reset. It must be called with a valid device descriptor
+ * that has been properly initialized. The function attempts to write
+ * specific reset values to the device's reset register and returns an
+ * error code if the operation fails.
+ *
+ * @param dev A pointer to an initialized ad7293_dev structure representing the
+ * device. Must not be null. The function will return an error if the
+ * device is not properly initialized or if communication with the
+ * device fails.
+ * @return Returns 0 on success, or a negative error code if the reset operation
+ * fails.
+ ******************************************************************************/
 int ad7293_soft_reset(struct ad7293_dev *dev);
 
-/** AD7293 Reset */
+/***************************************************************************//**
+ * @brief This function resets the AD7293 device by either toggling the reset
+ * GPIO pin if available or performing a software reset if the GPIO pin
+ * is not configured. It should be used to ensure the device is in a
+ * known state before starting operations. The function must be called
+ * with a valid device descriptor that has been properly initialized. If
+ * the GPIO reset pin is configured, it will be used to perform a
+ * hardware reset; otherwise, a software reset will be executed.
+ *
+ * @param dev A pointer to an ad7293_dev structure representing the device. This
+ * must be a valid, initialized device descriptor. If the gpio_reset
+ * member is non-null, it will be used for a hardware reset;
+ * otherwise, a software reset will be performed.
+ * @return Returns 0 on success, or a negative error code if the reset operation
+ * fails.
+ ******************************************************************************/
 int ad7293_reset(struct ad7293_dev *dev);
 
-/** AD7293 Initialization */
+/***************************************************************************//**
+ * @brief This function initializes the AD7293 device by setting up the
+ * necessary SPI and GPIO configurations as specified in the
+ * initialization parameters. It must be called before any other
+ * operations on the AD7293 device. The function allocates memory for the
+ * device structure, initializes the SPI interface, and optionally
+ * configures a GPIO for reset. It also performs a device reset and
+ * verifies the chip ID to ensure the device is correctly connected and
+ * operational. If any step fails, the function cleans up allocated
+ * resources and returns an error code.
+ *
+ * @param device A pointer to a pointer of type struct ad7293_dev. This will be
+ * allocated and initialized by the function. Must not be null.
+ * The caller is responsible for deallocating this memory using
+ * ad7293_remove.
+ * @param init_param A pointer to a struct ad7293_init_param containing the
+ * initialization parameters for the SPI and optional GPIO
+ * reset. Must not be null. The structure should be properly
+ * initialized before calling this function.
+ * @return Returns 0 on success. On failure, returns a negative error code
+ * indicating the type of error (e.g., -ENOMEM for memory allocation
+ * failure, -EINVAL for invalid chip ID).
+ ******************************************************************************/
 int ad7293_init(struct ad7293_dev **device,
 		struct ad7293_init_param *init_param);
 
-/** AD7293 Resources Deallocation */
+/***************************************************************************//**
+ * @brief Use this function to properly release all resources associated with an
+ * AD7293 device when it is no longer needed. This function should be
+ * called to clean up after the device has been initialized and used,
+ * ensuring that any allocated memory and hardware resources are freed.
+ * It is important to call this function to prevent resource leaks in
+ * your application.
+ *
+ * @param dev A pointer to an ad7293_dev structure representing the device to be
+ * removed. Must not be null. The function will handle invalid input
+ * by returning an error code if the SPI removal fails.
+ * @return Returns 0 on success, or a negative error code if the SPI removal
+ * fails.
+ ******************************************************************************/
 int ad7293_remove(struct ad7293_dev *dev);
 
 #endif /* AD7293_H_ */

@@ -37,7 +37,15 @@
 #include "iio_types.h"
 #include "ad9144.h"
 
-/** IIO Descriptor */
+/***************************************************************************//**
+ * @brief The `ad9144_iio_descriptor` is a constant global variable of type
+ * `struct iio_device`. It is used to describe the IIO (Industrial
+ * Input/Output) device interface for the AD9144, a high-speed digital-
+ * to-analog converter (DAC) from Analog Devices.
+ *
+ * @details This variable is used to provide a structured interface for
+ * interacting with the AD9144 DAC through the IIO framework.
+ ******************************************************************************/
 extern const struct iio_device ad9144_iio_descriptor;
 
 #endif //IIO_AD9144_H

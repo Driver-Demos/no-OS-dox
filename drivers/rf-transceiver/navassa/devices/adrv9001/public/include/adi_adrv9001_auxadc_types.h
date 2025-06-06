@@ -18,9 +18,18 @@
 extern "C" {
 #endif
 
-/**
-*  \brief Enum to select AuxADC
-*/
+/***************************************************************************//**
+ * @brief The `adi_adrv9001_AuxAdc_e` is an enumeration that defines constants
+ * for selecting one of the four auxiliary ADC channels available on the
+ * ADRV9001 device. Each enumerator corresponds to a specific auxiliary
+ * ADC channel, allowing for easy configuration and selection within the
+ * device's API.
+ *
+ * @param ADI_ADRV9001_AUXADC0 Represents the first auxiliary ADC channel.
+ * @param ADI_ADRV9001_AUXADC1 Represents the second auxiliary ADC channel.
+ * @param ADI_ADRV9001_AUXADC2 Represents the third auxiliary ADC channel.
+ * @param ADI_ADRV9001_AUXADC3 Represents the fourth auxiliary ADC channel.
+ ******************************************************************************/
 typedef enum adi_adrv9001_AuxAdc
 {
     ADI_ADRV9001_AUXADC0, /*!< AuxADC0 */

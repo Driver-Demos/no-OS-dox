@@ -21,44 +21,47 @@
 extern "C" {
 #endif
 
-/**
- * \brief Sets the Manual Gain Index for the given ORx channel
+/***************************************************************************//**
+ * @brief Use this function to set the manual gain index for a specified ORx
+ * channel on the ADRV9001 device. This function should be called after
+ * the ARM is initialized. The gain index must be within the range of 2
+ * to 10, inclusive. If the gain index is outside this range, the
+ * function will return an error. This function directly accesses the
+ * device registers to set the gain index.
  *
- * The maximum index is 10 and the minimum index is 2.
- *
- * If the value passed in the gainIndex parameter is within range of the gain
- * table minimum and maximum indices, the ORx channel gain index will be written
- * to the transceiver.
- * Else, an error will be returned.
- *
- * \note Message type: \ref timing_direct "Direct register access"
- *
- * \pre ARM is initialized
- *
- * \param[in] adrv9001      Context variable - Pointer to the ADRV9001 device data structure
- * \param[in] channel       The ORx Channel for which to set the gain
- * \param[in] gainIndex     The gain table index to set the channel to
- *
- * \returns A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required action to recover
- */
+ * @param adrv9001 Pointer to the ADRV9001 device data structure. Must not be
+ * null. The caller retains ownership.
+ * @param channel The ORx channel for which to set the gain. Must be a valid
+ * channel number as defined by adi_common_ChannelNumber_e.
+ * @param gainIndex The gain table index to set the channel to. Must be between
+ * 2 and 10, inclusive. If outside this range, an error is
+ * returned.
+ * @return Returns an integer code indicating success (ADI_COMMON_ACT_NO_ACTION)
+ * or the required action to recover in case of an error.
+ ******************************************************************************/
 int32_t adi_adrv9001_ORx_Gain_Set(adi_adrv9001_Device_t *adrv9001,
                                   adi_common_ChannelNumber_e channel,
                                   uint8_t gainIndex);
 
-/**
- * \brief Reads the ORx AGC Gain Index for the requested ORx channel.
+/***************************************************************************//**
+ * @brief Use this function to retrieve the current gain index of a specified
+ * ORx channel on the ADRV9001 device. It should be called after the
+ * device has been initialized and is in a Receiver mode, as gain indices
+ * are only tracked in this state. This function provides direct register
+ * access to obtain the gain index, which is returned through the
+ * gainIndex parameter. Ensure that the device pointer and channel are
+ * valid before calling this function.
  *
- * \note Message type: \ref timing_direct "Direct register access"
- *
- * \pre This function may be called any time after device initialization.
- *      However, gain indices are tracked only after the device goes into a Receiver mode.
- *
- * \param[in]  adrv9001     Context variable - Pointer to the ADRV9001 device data structure
- * \param[in]  channel      The ORx Channel from which to read the gain
- * \param[out] gainIndex    The current gain table index the channel is set to
- *
- * \returns A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required action to recover
- */
+ * @param adrv9001 Context variable - Pointer to the ADRV9001 device data
+ * structure. Must not be null and should point to a properly
+ * initialized device.
+ * @param channel The ORx Channel from which to read the gain. Must be a valid
+ * channel number as defined by adi_common_ChannelNumber_e.
+ * @param gainIndex Pointer to a uint8_t where the current gain table index will
+ * be stored. Must not be null.
+ * @return Returns an int32_t code indicating success (ADI_COMMON_ACT_NO_ACTION)
+ * or the required action to recover if an error occurs.
+ ******************************************************************************/
 int32_t adi_adrv9001_ORx_Gain_Get(adi_adrv9001_Device_t *adrv9001,
                                   adi_common_ChannelNumber_e channel,
                                   uint8_t *gainIndex);

@@ -40,13 +40,43 @@
 
 /******************************************************************************/
 /*************************** Types Declarations *******************************/
-/******************************************************************************/
+/***************************************************************************//**
+ * @brief The `axi_clkgen` structure is used to represent an Analog Devices AXI
+ * clock generator, encapsulating its name, base address, and parent
+ * clock rate. This structure is essential for managing and configuring
+ * the clock generator's settings, allowing for operations such as
+ * setting and retrieving the clock rate. It serves as a fundamental
+ * component in the driver for the AXI CLKGEN, facilitating interaction
+ * with the hardware.
+ *
+ * @param name A pointer to a constant character string representing the name of
+ * the clock generator.
+ * @param base A 32-bit unsigned integer representing the base address of the
+ * clock generator.
+ * @param parent_rate A 32-bit unsigned integer representing the parent clock
+ * rate of the clock generator.
+ ******************************************************************************/
 struct axi_clkgen {
 	const char	*name;
 	uint32_t	base;
 	uint32_t	parent_rate;
 };
 
+/***************************************************************************//**
+ * @brief The `axi_clkgen_init` structure is used to initialize an AXI clock
+ * generator in the Analog Devices driver. It contains the necessary
+ * parameters such as the name, base address, and parent clock rate
+ * required to configure the clock generator hardware. This structure is
+ * typically used in conjunction with the `axi_clkgen_init` function to
+ * set up the clock generator for operation.
+ *
+ * @param name A pointer to a constant character string representing the name of
+ * the clock generator.
+ * @param base A 32-bit unsigned integer representing the base address of the
+ * clock generator.
+ * @param parent_rate A 32-bit unsigned integer representing the parent clock
+ * rate.
+ ******************************************************************************/
 struct axi_clkgen_init {
 	const char	*name;
 	uint32_t	base;

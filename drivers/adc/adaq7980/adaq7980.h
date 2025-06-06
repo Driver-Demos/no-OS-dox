@@ -43,10 +43,20 @@
 /******************************************************************************/
 /*************************** Types Declarations *******************************/
 /******************************************************************************/
-/**
- * @struct adaq7980_init_param
- * @brief Structure containing the init parameters needed by the adaq7980 device
- */
+/***************************************************************************//**
+ * @brief The `adaq7980_init_param` structure is used to encapsulate all the
+ * necessary initialization parameters required to set up the ADAQ7980
+ * device. It includes pointers to initialization structures for SPI
+ * communication, SPI offload module, PWM generator for triggering, and
+ * GPIO for power down control. This structure is essential for
+ * configuring the device's hardware interfaces before operation.
+ *
+ * @param spi_init Pointer to SPI initialization parameters.
+ * @param offload_init_param Pointer to SPI module offload initialization
+ * parameters.
+ * @param trigger_pwm_init Pointer to PWM generator initialization parameters.
+ * @param gpio_pd_ldo Pointer to power down GPIO initialization parameters.
+ ******************************************************************************/
 struct adaq7980_init_param {
 	/* SPI */
 	struct no_os_spi_init_param		*spi_init;
@@ -58,10 +68,23 @@ struct adaq7980_init_param {
 	struct no_os_gpio_init_param	*gpio_pd_ldo;
 };
 
-/**
- * @struct adaq7980_dev
- * @brief  Structure representing an adaq7980 device
- */
+/***************************************************************************//**
+ * @brief The `adaq7980_dev` structure represents a device instance for the
+ * ADAQ7980, an analog-to-digital converter. It encapsulates the
+ * necessary descriptors and parameters for managing SPI communication,
+ * PWM-based conversion triggering, SPI offloading, and GPIO-based power
+ * management. This structure is essential for initializing and operating
+ * the ADAQ7980 device within a system, providing a cohesive interface
+ * for hardware interaction.
+ *
+ * @param spi_desc A pointer to the SPI descriptor used for SPI communication.
+ * @param trigger_pwm_desc A pointer to the PWM descriptor used for triggering
+ * conversions.
+ * @param offload_init_param A pointer to the SPI engine offload initialization
+ * parameters.
+ * @param gpio_pd_ldo A pointer to the GPIO descriptor for handling power down
+ * operations.
+ ******************************************************************************/
 struct adaq7980_dev {
 	/* SPI descriptor */
 	struct no_os_spi_desc		*spi_desc;
@@ -77,10 +100,50 @@ struct adaq7980_dev {
 /************************ Functions Declarations ******************************/
 /******************************************************************************/
 /* Initialize the device. */
+/***************************************************************************//**
+ * @brief This function sets up the ADAQ7980 device by allocating necessary
+ * resources and initializing its components, such as SPI, GPIO, and PWM.
+ * It must be called before any other operations on the device. The
+ * function configures the power-down GPIO if provided, and initializes
+ * the SPI and PWM interfaces based on the parameters supplied. If any
+ * initialization step fails, the function will clean up and return an
+ * error code. Ensure that the `init_param` structure is properly
+ * populated before calling this function.
+ *
+ * @param device A pointer to a pointer of type `struct adaq7980_dev`. This will
+ * be allocated and initialized by the function. Must not be null.
+ * The caller is responsible for freeing the allocated memory.
+ * @param init_param A pointer to a `struct adaq7980_init_param` containing
+ * initialization parameters for the device. Must not be null.
+ * The structure should be fully populated with valid SPI,
+ * GPIO, and PWM initialization parameters before calling this
+ * function.
+ * @return Returns 0 on successful initialization, or -1 if an error occurs
+ * during setup.
+ ******************************************************************************/
 int32_t adaq7980_setup(struct adaq7980_dev **device,
 		       struct adaq7980_init_param *init_param);
 
 /* Read data from device */
+/***************************************************************************//**
+ * @brief This function reads a specified number of samples from the ADAQ7980
+ * device and stores them in the provided buffer. It should be called
+ * after the device has been properly initialized using the appropriate
+ * setup function. The function handles the SPI communication required to
+ * retrieve the data. If the SPI engine offload initialization or
+ * transfer fails, the function returns an error code. Ensure that the
+ * buffer provided is large enough to hold the requested number of
+ * samples.
+ *
+ * @param dev A pointer to an initialized adaq7980_dev structure representing
+ * the device. Must not be null.
+ * @param buf A pointer to a buffer where the read data will be stored. Must not
+ * be null and should be large enough to hold 'samples' number of
+ * 16-bit values.
+ * @param samples The number of 16-bit samples to read from the device. Must be
+ * a positive integer.
+ * @return Returns 0 on success or a negative error code if the operation fails.
+ ******************************************************************************/
 int32_t ad7980_read_data(struct adaq7980_dev *dev,
 			 uint16_t *buf,
 			 uint16_t samples);

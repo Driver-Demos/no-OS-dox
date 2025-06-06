@@ -119,14 +119,31 @@ extern "C" {
 
 #ifndef CLIENT_IGNORE
 
-/**
-* \brief Function to write to log with a selected comment
-*
-* \param commonDev pointer to adi_common_Device_t
-* \param logLevel   Level at which to log the message
-* \param comment const char pointer that represents the message to be logged
-* \param ... variable argument passed to adi_common_Logwrite
-*/
+/***************************************************************************//**
+ * @brief Use this function to log messages at a specified log level, providing
+ * a formatted comment string and additional arguments as needed. It is
+ * essential to ensure that the `commonDev` parameter is properly
+ * initialized and not null before calling this function. If the logging
+ * operation fails, logging will be disabled, but error reporting will
+ * continue. This function is typically used for debugging and monitoring
+ * purposes in applications that utilize the ADI hardware abstraction
+ * layer.
+ *
+ * @param commonDev A pointer to an `adi_common_Device_t` structure. This must
+ * not be null and should be properly initialized before
+ * calling the function. The function will handle null pointers
+ * by disabling logging and reporting an error.
+ * @param logLevel An unsigned 32-bit integer representing the log level. Valid
+ * log levels are defined by the ADI logging system and should
+ * correspond to predefined constants.
+ * @param comment A constant character pointer representing the format string
+ * for the log message. This must not be null and should be a
+ * valid format string.
+ * @param ... A variable number of arguments that correspond to the format
+ * specifiers in the `comment` string. These arguments are optional
+ * and should match the expected types in the format string.
+ * @return None
+ ******************************************************************************/
 void adi_common_LogWrite(adi_common_Device_t *commonDev, uint32_t logLevel, const char *comment, ...);
 
 #endif

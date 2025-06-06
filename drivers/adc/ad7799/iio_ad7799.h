@@ -36,7 +36,18 @@
 
 #include "iio_types.h"
 
-/** IIO Descriptor */
+/***************************************************************************//**
+ * @brief The `ad7799_iio_descriptor` is a global constant structure of type
+ * `iio_device` that is used to describe the AD7799 device in the context
+ * of the Industrial I/O (IIO) framework. This structure likely contains
+ * information and function pointers necessary for interfacing with the
+ * AD7799 device, which is an analog-to-digital converter (ADC) from
+ * Analog Devices.
+ *
+ * @details This variable is used to provide a standardized interface for the
+ * AD7799 device within the IIO framework, facilitating its integration
+ * and operation in software applications.
+ ******************************************************************************/
 extern struct iio_device const ad7799_iio_descriptor;
 
 #endif //IIO_AD7799_H

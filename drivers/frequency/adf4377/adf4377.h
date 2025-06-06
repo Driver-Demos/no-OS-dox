@@ -597,19 +597,44 @@
 /*************************** Types Declarations *******************************/
 /******************************************************************************/
 
-/**
- * @enum adf4377_dev_id
- * @brief ID of Devices supported by the driver.
- */
+/***************************************************************************//**
+ * @brief The `adf4377_dev_id` enumeration defines identifiers for devices
+ * supported by the ADF4377 driver, specifically the ADF4377 and ADF4378
+ * devices. Each enumerator is associated with a unique hexadecimal value
+ * that serves as an identifier for the respective device, facilitating
+ * device-specific operations within the driver.
+ *
+ * @param ADF4377 Represents the device ID for the ADF4377 device, with a value
+ * of 0x05.
+ * @param ADF4378 Represents the device ID for the ADF4378 device, with a value
+ * of 0x06.
+ ******************************************************************************/
 enum adf4377_dev_id {
 	ADF4377 = 0x05,
 	ADF4378 = 0x06
 };
 
-/**
- * @struct adf4377_init_param
- * @brief ADF4377 Initialization Parameters structure.
- */
+/***************************************************************************//**
+ * @brief The `adf4377_init_param` structure is used to initialize the ADF4377
+ * device, containing various configuration parameters such as SPI and
+ * GPIO initialization settings, device ID, and frequency settings. It
+ * includes fields for setting the input reference clock frequency,
+ * output frequency, charge pump current, and other operational
+ * parameters necessary for configuring the ADF4377 synthesizer.
+ *
+ * @param spi_init Pointer to SPI initialization parameters.
+ * @param gpio_ce_param Pointer to GPIO Chip Enable parameters.
+ * @param gpio_enclk1_param Pointer to GPIO ENCLK1 parameters.
+ * @param gpio_enclk2_param Pointer to GPIO ENCLK2 parameters.
+ * @param dev_id Device ID of the ADF4377.
+ * @param spi4wire Boolean indicating if SPI 3-wire mode is used.
+ * @param clkin_freq Frequency of the input reference clock in Hz.
+ * @param f_clk Output frequency in Hz.
+ * @param cp_i Charge pump current setting.
+ * @param muxout_select MUXOUT select setting.
+ * @param ref_doubler_en Reference doubler enable flag.
+ * @param clkout_op Output amplitude setting.
+ ******************************************************************************/
 struct adf4377_init_param {
 	/** SPI Initialization parameters */
 	struct no_os_spi_init_param	*spi_init;
@@ -637,10 +662,34 @@ struct adf4377_init_param {
 	uint8_t	clkout_op;
 };
 
-/**
- * @struct adf4377_dev
- * @brief ADF4377 Device Descriptor.
- */
+/***************************************************************************//**
+ * @brief The `adf4377_dev` structure is a comprehensive descriptor for the
+ * ADF4377 device, encapsulating all necessary parameters and
+ * configurations required for its operation. It includes pointers to SPI
+ * and GPIO descriptors for communication and control, as well as various
+ * configuration settings such as device ID, SPI mode, frequency
+ * settings, and output configurations. This structure is essential for
+ * initializing and managing the ADF4377 device, allowing for precise
+ * control over its frequency synthesis capabilities.
+ *
+ * @param spi_desc Pointer to the SPI descriptor for communication.
+ * @param gpio_enclk1 Pointer to the GPIO descriptor for ENCLK1 control.
+ * @param gpio_enclk2 Pointer to the GPIO descriptor for ENCLK2 control.
+ * @param gpio_ce Pointer to the GPIO descriptor for chip enable control.
+ * @param dev_id Enum representing the device ID.
+ * @param spi4wire Boolean indicating if SPI is in 4-wire mode.
+ * @param f_pfd Phase Frequency Detector frequency in Hz.
+ * @param f_clk Output frequency in Hz.
+ * @param f_vco Output frequency of the VCO in Hz.
+ * @param clkin_freq Input reference clock frequency in Hz.
+ * @param cp_i Charge pump current setting.
+ * @param muxout_default Default MUXOUT setting.
+ * @param ref_doubler_en Flag to enable reference doubler.
+ * @param ref_div_factor Reference divider factor.
+ * @param clkout_div_sel CLKOUT divider selection.
+ * @param n_int Feedback divider integer value.
+ * @param clkout_op Output amplitude setting.
+ ******************************************************************************/
 struct adf4377_dev {
 	/** SPI Descriptor */
 	struct no_os_spi_desc		*spi_desc;
@@ -682,32 +731,171 @@ struct adf4377_dev {
 /************************ Functions Declarations ******************************/
 /******************************************************************************/
 
-/** ADF4377 SPI write */
+/***************************************************************************//**
+ * @brief Use this function to write a byte of data to a specific register of
+ * the ADF4377 device. It requires a valid device descriptor and the
+ * register address to which the data should be written. This function is
+ * typically used to configure the device by setting various control
+ * registers. Ensure that the device has been properly initialized before
+ * calling this function. The function handles the bit order based on the
+ * device's SPI configuration and returns an error code if the SPI
+ * communication fails.
+ *
+ * @param dev A pointer to an adf4377_dev structure representing the device.
+ * Must not be null and should be properly initialized before use.
+ * @param reg_addr The address of the register to write to. It is an 8-bit value
+ * representing the register address within the device.
+ * @param data The data byte to be written to the specified register. It is an
+ * 8-bit value.
+ * @return Returns an int32_t value indicating the success or failure of the SPI
+ * write operation. A non-zero value indicates an error.
+ ******************************************************************************/
 int32_t adf4377_spi_write(struct adf4377_dev *dev, uint8_t reg_addr,
 			  uint8_t data);
 
 /* ADF4377 Register Update */
+/***************************************************************************//**
+ * @brief Use this function to update specific bits in a register of the ADF4377
+ * device by applying a mask and writing the modified data via SPI. This
+ * function is useful when only certain bits of a register need to be
+ * changed without affecting the other bits. It reads the current value
+ * of the register, applies the mask to clear the bits, and then sets the
+ * new data before writing it back. Ensure that the device is properly
+ * initialized and the SPI interface is configured before calling this
+ * function.
+ *
+ * @param dev Pointer to an initialized adf4377_dev structure representing the
+ * device. Must not be null.
+ * @param reg_addr The address of the register to be written to. Must be a valid
+ * register address for the ADF4377 device.
+ * @param mask A bitmask indicating which bits in the register should be
+ * modified. Bits set to 1 in the mask will be affected.
+ * @param data The new data to be written to the register, after applying the
+ * mask. Only the bits corresponding to the mask will be updated.
+ * @return Returns 0 on success or a negative error code on failure, indicating
+ * the type of error encountered during the SPI read or write
+ * operations.
+ ******************************************************************************/
 int32_t adf4377_spi_write_mask(struct adf4377_dev *dev, uint8_t reg_addr,
 			       uint8_t mask, uint8_t data);
 
-/** ADF4377 SPI Read */
+/***************************************************************************//**
+ * @brief Use this function to read a specific register from the ADF4377 device
+ * using SPI communication. It requires a valid device descriptor and a
+ * register address to read from. The function will store the read value
+ * in the provided data pointer. Ensure that the device has been properly
+ * initialized and the SPI interface is correctly configured before
+ * calling this function. The function returns an error code if the SPI
+ * communication fails.
+ *
+ * @param dev A pointer to an adf4377_dev structure representing the device.
+ * Must not be null and should be properly initialized.
+ * @param reg_addr The address of the register to read from. It is an 8-bit
+ * unsigned integer.
+ * @param data A pointer to an 8-bit unsigned integer where the read data will
+ * be stored. Must not be null.
+ * @return Returns an int32_t value indicating success (0) or a negative error
+ * code if the SPI read operation fails.
+ ******************************************************************************/
 int32_t adf4377_spi_read(struct adf4377_dev *dev, uint8_t reg_addr,
 			 uint8_t *data);
 
 /* Software Reset */
+/***************************************************************************//**
+ * @brief This function is used to perform a software reset on the ADF4377
+ * device, which is necessary to restore the device to its default state.
+ * It should be called when a reset of the device is required, such as
+ * after initialization or when the device is not functioning as
+ * expected. The function attempts to reset the device by writing to the
+ * appropriate register and then verifies the reset by reading back the
+ * register value. If the reset is successful, the device is set to its
+ * default configuration. The function returns an error code if the reset
+ * fails or if there is a communication error with the device.
+ *
+ * @param dev A pointer to an adf4377_dev structure representing the device.
+ * Must not be null. The caller retains ownership of the memory.
+ * @return Returns 0 on success, a negative error code on failure, or -1 if the
+ * reset operation times out.
+ ******************************************************************************/
 int32_t adf4377_soft_reset(struct adf4377_dev *dev);
 
 /* ADF4377 Scratchpad check */
+/***************************************************************************//**
+ * @brief This function is used to verify the communication with the ADF4377
+ * device by performing a scratchpad test. It writes a test value to a
+ * specific register and reads it back to ensure the device is responding
+ * correctly. This function should be called to confirm device
+ * functionality after initialization. It returns an error code if the
+ * test fails, indicating a potential communication issue.
+ *
+ * @param dev A pointer to an adf4377_dev structure representing the device.
+ * Must not be null. The caller retains ownership and is responsible
+ * for ensuring the device is properly initialized before calling
+ * this function.
+ * @return Returns 0 on success, a negative error code if a SPI communication
+ * error occurs, or -1 if the scratchpad test fails.
+ ******************************************************************************/
 int32_t adf4377_check_scratchpad(struct adf4377_dev *dev);
 
 /* Set Output frequency */
+/***************************************************************************//**
+ * @brief This function configures the ADF4377 device to output a specified
+ * frequency. It should be called after the device has been properly
+ * initialized. The function adjusts internal dividers to achieve the
+ * desired frequency and waits for the VCO calibration to complete. If
+ * the specified frequency is outside the allowable range, the function
+ * will return an error. The function also updates the device's internal
+ * state to reflect the new frequency setting.
+ *
+ * @param dev A pointer to an initialized adf4377_dev structure representing the
+ * device. Must not be null.
+ * @param freq The desired output frequency in Hz. Must be within the device's
+ * supported frequency range.
+ * @return Returns 0 on success, a negative error code on failure, or -ETIMEDOUT
+ * if the VCO calibration times out.
+ ******************************************************************************/
 int32_t adf4377_set_freq(struct adf4377_dev *dev, uint64_t freq);
 
-/** ADF4377 Initialization */
+/***************************************************************************//**
+ * @brief This function initializes an ADF4377 device using the provided
+ * initialization parameters. It sets up the necessary SPI and GPIO
+ * configurations, performs a software reset, and verifies the device
+ * identity. This function must be called before any other operations on
+ * the ADF4377 device. If initialization fails at any step, it cleans up
+ * allocated resources and returns an error code. The caller must ensure
+ * that the `init_param` structure is properly populated and that the
+ * `device` pointer is valid.
+ *
+ * @param device A pointer to a pointer of type `struct adf4377_dev`. This will
+ * be allocated and initialized by the function. The caller must
+ * provide a valid pointer to a pointer, and the function will set
+ * it to point to the initialized device structure.
+ * @param init_param A pointer to a `struct adf4377_init_param` containing the
+ * initialization parameters. This structure must be fully
+ * populated with valid data before calling the function. The
+ * caller retains ownership of this structure, and it must not
+ * be null.
+ * @return Returns 0 on successful initialization. On failure, returns a
+ * negative error code indicating the type of error, such as memory
+ * allocation failure or device mismatch.
+ ******************************************************************************/
 int32_t adf4377_init(struct adf4377_dev **device,
 		     struct adf4377_init_param *init_param);
 
-/** ADF4377 Resources Deallocation */
+/***************************************************************************//**
+ * @brief Use this function to safely release all resources allocated for an
+ * ADF4377 device when it is no longer needed. This function should be
+ * called to clean up after the device has been initialized and used,
+ * ensuring that all associated SPI and GPIO resources are properly
+ * freed. It is important to call this function to prevent resource leaks
+ * in the system.
+ *
+ * @param dev A pointer to an adf4377_dev structure representing the device to
+ * be removed. Must not be null. The function will handle invalid
+ * pointers by returning an error code.
+ * @return Returns 0 on success or a negative error code if any of the resource
+ * deallocation steps fail.
+ ******************************************************************************/
 int32_t adf4377_remove(struct adf4377_dev *dev);
 
 #endif /* ADF4377_H_ */

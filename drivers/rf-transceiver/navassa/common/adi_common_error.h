@@ -307,31 +307,37 @@ extern "C" {
 
 #ifndef CLIENT_IGNORE
 
-/**
- * \brief Common API error reporting facility
- *  
- * Error handling to assign actions:
- * If actionToRecover is ADI_COMMON_ACT_NO_ACTION then nothing gets logged or reported, if the previous new action in the error structure
- * is different to ADI_COMMON_ACT_NO_ACTION the error struct will be cleared and then the previous action will be stored in the lastAction 
- * member.
- * 
- * If not ADI_COMMON_ACT_NO_ACTION then check latest action previously logged in the error structure and verify if the new found action 
- * is of a higher priority level than the last error in the structure, 
- * If it is then we need to demote the error.newAction and log the previous action again
- * demoting is done by assign it to error.lastAction.
- * If action is a warning then it gets logged and assigned to the error structure the same way as the error action, if an error 
- * action occurs after a warning the warning will be demoted and could be accessed through  error.lastAction
+/***************************************************************************//**
+ * @brief Use this function to report an error encountered during the operation
+ * of a device, providing detailed context such as the source of the
+ * error, the file and function where it occurred, and any custom error
+ * message. This function is typically called when an error is detected
+ * that requires logging or further action. It updates the error state of
+ * the device and logs the error if logging is enabled. Ensure that the
+ * device pointer is valid before calling this function.
  *
- * \param commonDev pointer to adi_common_Device_t
- * \param errSrc Error source of error code of type enum adi_common_ErrSources_e
- * \param detErr Detected error
- * \param actionToRecover Action to recover from
- * \param fileName file name of the file where the error was detected
- * \param funcName function name of the function where the error was detected
- * \param lineNum line number of where the error was detected
- * \param varName variable name that had the error, this can be NULL and it will mean that there is an error not depending on a variable only
- * \param customError error message to be written to the struct
- */
+ * @param commonDev Pointer to the device structure where the error will be
+ * reported. Must not be null.
+ * @param errSrc The source of the error, specified as an enumeration value of
+ * type adi_common_ErrSources_e.
+ * @param detErr The detected error code, which should be greater than
+ * ADI_COMMON_ERR_OK to be considered an error.
+ * @param actionToRecover The action to recover from the error, specified as an
+ * integer. If it is ADI_COMMON_ACT_NO_ACTION, no logging
+ * or reporting is performed.
+ * @param fileName The name of the file where the error was detected. This is
+ * used for logging purposes.
+ * @param funcName The name of the function where the error was detected. This
+ * is used for logging purposes.
+ * @param lineNum The line number in the file where the error was detected. This
+ * is used for logging purposes.
+ * @param varName The name of the variable associated with the error, if
+ * applicable. Can be null if the error is not related to a
+ * specific variable.
+ * @param customError A custom error message to be logged. This message is
+ * copied into the error structure.
+ * @return None
+ ******************************************************************************/
 void adi_common_ErrorReport(adi_common_Device_t *commonDev,
                             adi_common_ErrSources_e errSrc,
                             int32_t detErr, 
@@ -343,13 +349,20 @@ void adi_common_ErrorReport(adi_common_Device_t *commonDev,
                             const char* customError);
 
 
-/**
- * \brief Function to clear existing error
- * 
- * \param commonDev pointer to adi_common_Device_t
- * 
- * \retval ADI_COMMON_ACT_NO_ACTION Function completed successfully, no action required
- */
+/***************************************************************************//**
+ * @brief Use this function to reset the error state of a device to its default,
+ * non-error condition. This is typically called after handling an error
+ * to ensure the device is ready for further operations. The function
+ * must be called with a valid device pointer and will return an error if
+ * the pointer is null.
+ *
+ * @param commonDev A pointer to an adi_common_Device_t structure representing
+ * the device whose error state is to be cleared. Must not be
+ * null. If null, the function returns an error code indicating
+ * a parameter check failure.
+ * @return Returns ADI_COMMON_ACT_NO_ACTION to indicate successful completion
+ * with no further action required.
+ ******************************************************************************/
 int32_t adi_common_ErrorClear(adi_common_Device_t *commonDev);
 
 #endif

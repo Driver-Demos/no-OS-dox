@@ -135,57 +135,82 @@ ADI_ERROR_RETURN(devicePtr->common.error.newAction); \
 ADRV9001_SPI_FIELD_INFO("MESSAGE: READ: %30s: addr=0x%04x, data=0x%02x \n", (text), (addr), (fieldVal), (startBit)); \
 }
 
-/**
-* \brief Set various Analog registers in the device
-*
-* \pre This function is private and is not called directly by the user.
-*
-* \param[in] device                        Structure pointer to ADRV9001 device data structure
-* \param[in] init                          Structure pointer to ADRV9001 init data structure
-* \param[in] adrv9001DeviceClockOutDivisor ADRV9001 device clock output divisor. An enum type ranging from 0 to 6,
-*                                          the divisor value will be 2^N (1, 2, 4, 8, 16, 32, 64)
-*
-* \retval ADI_COMMON_ACT_ERR_CHECK_PARAM Recovery action for bad parameter check
-* \retval ADI_COMMON_ACT_NO_ACTION Function completed successfully, no action required
-*/
+/***************************************************************************//**
+ * @brief This function configures the analog registers of the ADRV9001 device
+ * based on the provided initialization settings. It should be used as
+ * part of the device initialization process to ensure that the device's
+ * analog components are correctly configured. The function requires
+ * valid device and initialization structures and a clock output divisor.
+ * It performs validation and configuration tasks, including setting
+ * master bias, enabling reference clocks, and verifying profiles. The
+ * function handles errors related to invalid clock divisors and ensures
+ * that the internal reference clock and device clock outputs do not
+ * exceed specified maximum frequencies.
+ *
+ * @param device A pointer to an adi_adrv9001_Device_t structure representing
+ * the ADRV9001 device. Must not be null. The caller retains
+ * ownership.
+ * @param init A pointer to an adi_adrv9001_Init_t structure containing
+ * initialization settings for the ADRV9001 device. Must not be
+ * null. The caller retains ownership.
+ * @param adrv9001DeviceClockOutDivisor An enum value of type
+ * adi_adrv9001_DeviceClockDivisor_e,
+ * representing the device clock output
+ * divisor. Valid values range from 0 to 6,
+ * corresponding to divisors of 1, 2, 4, 8,
+ * 16, 32, and 64.
+ * @return Returns an int32_t indicating the success or failure of the
+ * operation. Possible return values include
+ * ADI_COMMON_ACT_ERR_CHECK_PARAM for parameter errors and
+ * ADI_COMMON_ACT_NO_ACTION for successful completion.
+ ******************************************************************************/
 int32_t adrv9001_InitAnalog(adi_adrv9001_Device_t *device,
                             adi_adrv9001_Init_t *init,
                             adi_adrv9001_DeviceClockDivisor_e adrv9001DeviceClockOutDivisor);
     
-/**
-* \brief Verifies whether the init structure profiles are valid.
-*
-* This function checks that the Rx/Tx/ORx profiles have valid clock rates in
-* order to operate together.  Rx/Tx and ORx share a common high speed digital
-* clock. If an invalid combination of profiles is detected, an error will be
-* returned. If a profile in the init structure is unused, the user should zero
-* out all members of that particular profile structure.  If a Rx/Tx/ORx profile
-* has an IQ rate = 0, it is assumed that the profile is disabled.
-*
-* \pre This function is private and is not called directly by the user.
-*
-* This function uses Adrv9001_TxProfileVerify(), Adrv9001_RxProfileVerify(), and
-* Adrv9001_OrxProfileVerify() as helper functions.
-*
-* \param device Structure pointer to ADRV9001 device data structure
-* \param init Pointer to ADRV9001 initialization settings structures
-*
-* \retval ADI_COMMON_ACT_ERR_CHECK_PARAM Recovery action for bad parameter check
-* \retval ADI_COMMON_ACT_NO_ACTION Function completed successfully, no action required
-*/
+/***************************************************************************//**
+ * @brief This function checks the validity of the Rx, Tx, and ORx profiles
+ * within the provided initialization structure to ensure they have
+ * compatible clock rates for operation. It verifies that the profiles
+ * can share a common high-speed digital clock and returns an error if
+ * any invalid profile combinations are detected. Profiles with an IQ
+ * rate of zero are considered disabled. This function should be called
+ * with a properly initialized device and initialization structure, and
+ * it will update the device state information based on the verification
+ * results.
+ *
+ * @param device A pointer to the ADRV9001 device data structure. Must not be
+ * null. The function updates the device's state information based
+ * on the profile verification.
+ * @param init A pointer to the ADRV9001 initialization settings structure. Must
+ * not be null. The function checks the profiles within this
+ * structure for validity.
+ * @return Returns an integer status code. A return value of
+ * ADI_COMMON_ACT_NO_ACTION indicates success, while
+ * ADI_COMMON_ACT_ERR_CHECK_PARAM indicates a parameter error.
+ ******************************************************************************/
 int32_t adrv9001_ProfilesVerify(adi_adrv9001_Device_t *device, adi_adrv9001_Init_t *init);
 
-/**
-* \brief Set various Analog clock registers in the device
-*
-* \pre This function is private and is not called directly by the user.
-*
-* \param device Structure pointer to ADRV9001 device data structure
-* \param init   Structure pointer to ADRV9001 init data structure
-*
-* \retval ADI_COMMON_ACT_ERR_CHECK_PARAM Recovery action for bad parameter check
-* \retval ADI_COMMON_ACT_NO_ACTION Function completed successfully, no action required
-*/
+/***************************************************************************//**
+ * @brief This function configures the analog clock settings for the ADRV9001
+ * device based on the initialization parameters provided. It should be
+ * used during the device initialization process to ensure that the clock
+ * settings are correctly applied. The function requires valid clock PLL
+ * mode and high-speed divider settings in the initialization structure.
+ * If invalid parameters are provided, the function will report an error
+ * and return a recovery action. This function is intended for internal
+ * use and is not called directly by the user.
+ *
+ * @param device Structure pointer to ADRV9001 device data structure. Must not
+ * be null. Caller retains ownership.
+ * @param init Structure pointer to ADRV9001 initialization settings. Must
+ * contain valid clock PLL mode and high-speed divider settings.
+ * Caller retains ownership.
+ * @return Returns an integer indicating the success or failure of the
+ * operation. Possible return values include
+ * ADI_COMMON_ACT_ERR_CHECK_PARAM for parameter errors and
+ * ADI_COMMON_ACT_NO_ACTION for successful completion.
+ ******************************************************************************/
 int32_t adrv9001_AnalogClockSet(adi_adrv9001_Device_t *device, adi_adrv9001_Init_t *init);
 
 #ifdef __cplusplus

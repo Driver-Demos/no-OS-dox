@@ -22,20 +22,29 @@ extern "C" {
 
 #ifndef CLIENT_IGNORE
 
-/**
- * \brief This utility function parses the device profile available in JSON buffer, loading the contents into an init struct.
+/***************************************************************************//**
+ * @brief Use this function to parse a JSON-formatted device profile and load
+ * its contents into an initialization structure. This function is
+ * essential when setting up the ADRV9001 device with a specific
+ * configuration defined in a JSON buffer. Ensure that the `init`
+ * structure has been fully allocated before calling this function. The
+ * function will report errors if the JSON is invalid or if memory
+ * allocation fails during parsing.
  *
- * \note Message type: \ref timing_direct "Direct register acccess"
- *
- * \pre The parameter init must have memory fully allocated.
- *
- * \param[in]  adrv9001              Context variable - Pointer to the ADRV9001 device data structure
- * \param[out] init                  is an init struct where the contents of the profile will be written
- * \param[in]  jsonBuffer            Buffer from which the device profile is parsed
- * \param[in]  length                Length of the buffer
- *
- * \returns A code indicating success (ADI_COMMON_ACT_NO_ACTION) or the required action to recover
- */
+ * @param adrv9001 Pointer to the ADRV9001 device data structure. Must not be
+ * null and should be properly initialized before calling this
+ * function.
+ * @param init Pointer to an initialization structure where the parsed profile
+ * contents will be stored. Must be fully allocated and is modified
+ * by the function.
+ * @param jsonBuffer Pointer to a buffer containing the JSON-formatted device
+ * profile. Must not be null and should contain valid JSON
+ * data.
+ * @param length The length of the JSON buffer. Must accurately reflect the size
+ * of the data in `jsonBuffer`.
+ * @return Returns an integer code indicating success or the required action to
+ * recover from an error.
+ ******************************************************************************/
 int32_t adi_adrv9001_profileutil_Parse(adi_adrv9001_Device_t *adrv9001,
                                        adi_adrv9001_Init_t *init,
                                        char *jsonBuffer,

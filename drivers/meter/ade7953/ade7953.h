@@ -275,10 +275,16 @@
 #define ADE7953_16_BITS_PROTECT                 		NO_OS_BIT(1)
 #define ADE7953_8_BITS_PROTECT                			NO_OS_BIT(0)
 
-/**
- * @enum ade7953_i_ch_e
- * @brief ADE7953 current channel.
- */
+/***************************************************************************//**
+ * @brief The `ade7953_i_ch_e` enumeration defines the current channel selection
+ * for the ADE7953 device, allowing the user to specify which current
+ * channel (A or B) is being referenced or utilized in operations. This
+ * is useful for distinguishing between the two current channels
+ * available in the ADE7953 energy metering IC.
+ *
+ * @param ADE7953_I_CH1 Represents the current channel A.
+ * @param ADE7953_I_CH2 Represents the current channel B.
+ ******************************************************************************/
 enum ade7953_i_ch_e {
 	/* Current channel selection */
 	/* current ch A */
@@ -287,10 +293,18 @@ enum ade7953_i_ch_e {
 	ADE7953_I_CH2
 };
 
-/**
- * @enum ade7953_cf_pin_e
- * @brief ADE7953 cf pin selection.
- */
+/***************************************************************************//**
+ * @brief The `ade7953_cf_pin_e` is an enumeration that defines the selection of
+ * CF (Calibration Frequency) pins for the ADE7953 energy metering IC. It
+ * provides two options, CF1 and CF2, which are used to select the
+ * current channel for calibration frequency output. This enumeration is
+ * part of the configuration settings for the ADE7953 device, allowing
+ * users to specify which pin is used for outputting calibration
+ * frequency signals.
+ *
+ * @param ADE7953_CF1_PIN Represents the CF1 pin for current channel selection.
+ * @param ADE7953_CF2_PIN Represents the CF2 pin for current channel selection.
+ ******************************************************************************/
 enum ade7953_cf_pin_e {
 	/* Current channel selection */
 	/* CF 1 pin */
@@ -299,10 +313,19 @@ enum ade7953_cf_pin_e {
 	ADE7953_CF2_PIN
 };
 
-/**
- * @enum ade7953_write_protect_e
- * @brief ADE7953 write protect select.
- */
+/***************************************************************************//**
+ * @brief The `ade7953_write_protect_e` is an enumeration that defines the
+ * different levels of write protection available for the ADE7953
+ * registers. It categorizes the registers into three groups based on
+ * their bit-width: 8 bits, 16 bits, and 24/32 bits, allowing for
+ * selective enabling of write protection on these registers to prevent
+ * unauthorized modifications.
+ *
+ * @param ADE7953_8BITS_REGS Represents registers with 8-bit write protection.
+ * @param ADE7953_16BITS_REGS Represents registers with 16-bit write protection.
+ * @param ADE7953_24_32BITS_REGS Represents registers with 24/32-bit write
+ * protection.
+ ******************************************************************************/
 enum ade7953_write_protect_e {
 	/* Select the registers that have write protect enabled */
 	/* 8 bits regs */
@@ -313,10 +336,22 @@ enum ade7953_write_protect_e {
 	ADE7953_24_32BITS_REGS
 };
 
-/**
- * @enum ade7953_zx_edge_e
- * @brief ADE7953 zero-crossing interrupt edge selection.
- */
+/***************************************************************************//**
+ * @brief The `ade7953_zx_edge_e` is an enumeration that defines the different
+ * edge selections for zero-crossing interrupts in the ADE7953 device. It
+ * specifies the conditions under which an interrupt is triggered based
+ * on the zero-crossing of the input signal, allowing for configuration
+ * of interrupts on positive-going, negative-going, or both types of zero
+ * crossings. This is useful for applications that need to detect and
+ * respond to changes in the direction of current or voltage waveforms.
+ *
+ * @param ADE7953_ZX_BOTH_1 Interrupt is issued on both positive-going and
+ * negative-going zero crossing.
+ * @param ADE7953_ZX_NEG Interrupt is issued on negative-going zero crossing.
+ * @param ADE7953_ZX_POS Interrupt is issued on positive-going zero crossing.
+ * @param ADE7953_ZX_BOTH_2 Interrupt is issued on both positive-going and
+ * negative-going zero crossing.
+ ******************************************************************************/
 enum ade7953_zx_edge_e {
 	/* Zero-crossing interrupt edge selection */
 	/* Interrupt is issued on both positive-going and
@@ -331,10 +366,29 @@ enum ade7953_zx_edge_e {
 	ADE7953_ZX_BOTH_2
 };
 
-/**
- * @enum ade7953_cfsel_e
- * @brief ADE7953 configuration of output signal on CF1/CF2 pin
- */
+/***************************************************************************//**
+ * @brief The `ade7953_cfsel_e` enumeration defines the configuration options
+ * for the output signal on the CF1/CF2 pins of the ADE7953 device. Each
+ * enumerator represents a different proportional relationship between
+ * the CF signal and various power or current measurements for either
+ * Current Channel A or B, such as active power, reactive power, apparent
+ * power, or IRMS. This allows for flexible configuration of the CF
+ * output to match specific measurement needs in power monitoring
+ * applications.
+ *
+ * @param CF_APA CF is proportional to active power (Current Channel A).
+ * @param CF_RPA CF is proportional to reactive power (Current Channel A).
+ * @param CF_APPA CF is proportional to apparent power (Current Channel A).
+ * @param CF_IRMSA CF is proportional to IRMS (Current Channel A).
+ * @param CF_BPB CF is proportional to active power (Current Channel B).
+ * @param CF_RPB CF is proportional to reactive power (Current Channel B).
+ * @param CF_APPB CF is proportional to apparent power (Current Channel B).
+ * @param CF_IRMSB CF is proportional to IRMS (Current Channel B).
+ * @param CF_IRMSA_IRMSB CF is proportional to IRMS (Current Channel A) + IRMS
+ * (Current Channel B).
+ * @param CF_APA_APB CF is proportional to active power (Current Channel A) +
+ * active power (Current Channel B).
+ ******************************************************************************/
 enum ade7953_cfsel_e {
 	/* CF is proportional to active power (Current Channel A). */
 	CF_APA,
@@ -360,10 +414,31 @@ enum ade7953_cfsel_e {
 	CF_APA_APB
 };
 
-/**
- * @enum ade7953_zx_alt_e
- * @brief ADE7953 configuration of ZX pin (Pin 1)
- */
+/***************************************************************************//**
+ * @brief The `ade7953_zx_alt_e` enumeration defines the configuration options
+ * for the ZX pin (Pin 1) on the ADE7953 device. Each enumerator
+ * represents a different signal or detection type that can be output on
+ * Pin 1, such as zero-crossing detection, sag detection, active and
+ * reactive power no-load detection for different current channels,
+ * waveform sampling, IRQ signals, and reverse power detection. This
+ * enumeration allows for flexible configuration of the pin's output
+ * based on the specific application requirements.
+ *
+ * @param ZX_ALT_ZX ZX detection is output on Pin 1 (default).
+ * @param ZX_ALT_SAG Sag detection is output on Pin 1.
+ * @param ZX_ALT_APNLOAD_A Active power no-load detection (Current Channel A) is
+ * output on Pin 1.
+ * @param ZX_ALT_APNLOAD_B Active power no-load detection (Current Channel B) is
+ * output on Pin 1.
+ * @param ZX_ALT_VARNLOAD_A Reactive power no-load detection (Current Channel A)
+ * is output on Pin 1.
+ * @param ZX_ALT_VARNLOAD_B Reactive power no-load detection (Current Channel B)
+ * is output on Pin 1.
+ * @param ZX_ALT_WSMP Unlatched waveform sampling signal is output on Pin 1.
+ * @param ZX_ALT_IRQ IRQ signal is output on Pin 1.
+ * @param ZX_ALT_ZX_I ZX_I detection is output on Pin 1.
+ * @param ZX_ALT_REVP REVP detection is output on Pin 1.
+ ******************************************************************************/
 enum ade7953_zx_alt_e {
 	/* ZX detection is output on Pin 1 (default) */
 	ZX_ALT_ZX,
@@ -391,10 +466,31 @@ enum ade7953_zx_alt_e {
 	ZX_ALT_REVP
 };
 
-/**
- * @enum ade7953_zxi_alt_e
- * @brief ADE7953 configuration of ZX_I pin (Pin 21)
- */
+/***************************************************************************//**
+ * @brief The `ade7953_zxi_alt_e` is an enumeration that defines the
+ * configuration options for the ZX_I pin (Pin 21) on the ADE7953 device.
+ * Each enumerator specifies a different signal or detection type that
+ * can be output on Pin 21, such as ZXI detection, sag detection, active
+ * or reactive power no-load detection for different current channels,
+ * waveform sampling, IRQ signal, ZX detection, and REVP detection. This
+ * allows for flexible configuration of the pin's functionality based on
+ * the application's requirements.
+ *
+ * @param ZXI_ALT_ZX_I ZXI detection is output on Pin 21 (default).
+ * @param ZXI_ALT_SAG Sag detection is output on Pin 21.
+ * @param ZXI_ALT_APNLOAD_A Active power no-load detection (Current Channel A)
+ * is output on Pin 21.
+ * @param ZXI_ALT_APNLOAD_B Active power no-load detection (Current Channel B)
+ * is output on Pin 21.
+ * @param ZXI_ALT_VARNLOAD_A Reactive power no-load detection (Current Channel
+ * A) is output on Pin 21.
+ * @param ZXI_ALT_VARNLOAD_B Reactive power no-load detection (Current Channel
+ * B) is output on Pin 21.
+ * @param ZXI_ALT_WSMP Unlatched waveform sampling signal is output on Pin 21.
+ * @param ZXI_ALT_IRQ IRQ signal is output on Pin 21.
+ * @param ZXI_ALT_ZX ZX detection is output on Pin 21.
+ * @param ZXI_ALT_REVP REVP detection is output on Pin 21.
+ ******************************************************************************/
 enum ade7953_zxi_alt_e {
 	/* ZXI detection is output on Pin 21 (default) */
 	ZXI_ALT_ZX_I,
@@ -422,10 +518,31 @@ enum ade7953_zxi_alt_e {
 	ZXI_ALT_REVP
 };
 
-/**
- * @enum ade7953_revp_alt_e
- * @brief ADE7953 configuration of REVP pin (Pin 20)
- */
+/***************************************************************************//**
+ * @brief The `ade7953_revp_alt_e` is an enumeration that defines the
+ * configuration options for the REVP pin (Pin 20) on the ADE7953 device.
+ * Each enumerator specifies a different signal or detection type that
+ * can be output on this pin, such as REVP detection, sag detection,
+ * active or reactive power no-load detection for different current
+ * channels, waveform sampling, IRQ signals, and zero-crossing
+ * detections. This allows for flexible configuration of the pin's
+ * functionality based on the application's requirements.
+ *
+ * @param REVP_ALT_REVP REVP detection is output on Pin 20 (default).
+ * @param REVP_ALT_SAG Sag detection is output on Pin 20.
+ * @param REVP_ALT_APNLOAD_A Active power no-load detection (Current Channel A)
+ * is output on Pin 20.
+ * @param REVP_ALT_APNLOAD_B Active power no-load detection (Current Channel B)
+ * is output on Pin 20.
+ * @param REVP_ALT_VARNLOAD_A Reactive power no-load detection (Current Channel
+ * A) is output on Pin 20.
+ * @param REVP_ALT_VARNLOAD_B Reactive power no-load detection (Current Channel
+ * B) is output on Pin 20.
+ * @param REVP_ALT_WSMP Unlatched waveform sampling signal is output on Pin 20.
+ * @param REVP_ALT_IRQ IRQ signal is output on Pin 20.
+ * @param REVP_ALT_ZX ZX detection is output on Pin 20.
+ * @param REVP_ALT_ZX_I ZX_I detection is output on Pin 20.
+ ******************************************************************************/
 enum ade7953_revp_alt_e {
 	/* REVP detection is output on Pin 20 (default) */
 	REVP_ALT_REVP,
@@ -453,10 +570,21 @@ enum ade7953_revp_alt_e {
 	REVP_ALT_ZX_I
 };
 
-/**
- * @enum ade7953_awattacc_e
- * @brief ADE7953 Current Channel A and B active energy accumulation mode
- */
+/***************************************************************************//**
+ * @brief The `ade7953_awattacc_e` enumeration defines the different modes of
+ * active energy accumulation for the ADE7953 device, specifically for
+ * Current Channels A and B. It includes modes for normal accumulation,
+ * positive-only accumulation, and absolute accumulation, allowing for
+ * flexible energy measurement configurations based on the specific
+ * requirements of the application.
+ *
+ * @param ADE7953_NORMAL_ACC_MODE_AWATT Represents the normal accumulation mode
+ * for active energy.
+ * @param ADE7953_POSITIVE_ACC_MODE Represents the positive-only accumulation
+ * mode for active energy.
+ * @param ADE7953_ABSOLUTE_ACC_MODE_AWATT Represents the absolute accumulation
+ * mode for active energy.
+ ******************************************************************************/
 enum ade7953_awattacc_e {
 	/* Normal mode. */
 	ADE7953_NORMAL_ACC_MODE_AWATT,
@@ -466,10 +594,20 @@ enum ade7953_awattacc_e {
 	ADE7953_ABSOLUTE_ACC_MODE_AWATT
 };
 
-/**
- * @enum ade7953_avaracc_e
- * @brief ADE7953 Current Channel A and B reactive energy accumulation mode
- */
+/***************************************************************************//**
+ * @brief The `ade7953_avaracc_e` enumeration defines the different modes of
+ * reactive energy accumulation for the ADE7953 device, which is used for
+ * energy metering. It includes modes for normal accumulation, antitamper
+ * accumulation, and absolute accumulation, allowing for flexible energy
+ * measurement configurations depending on the application requirements.
+ *
+ * @param ADE7953_NORMAL_ACC_MODE_AVAR Represents the normal accumulation mode
+ * for reactive energy.
+ * @param ADE7953_ANTITAMP_ACC_MODE Represents the antitamper accumulation mode
+ * for reactive energy.
+ * @param ADE7953_ABSOLUTE_ACC_MODE_AVAR Represents the absolute accumulation
+ * mode for reactive energy.
+ ******************************************************************************/
 enum ade7953_avaracc_e {
 	/* Normal mode. */
 	ADE7953_NORMAL_ACC_MODE_AVAR,
@@ -479,10 +617,23 @@ enum ade7953_avaracc_e {
 	ADE7953_ABSOLUTE_ACC_MODE_AVAR
 };
 
-/**
- * @enum ade7953_pga_gain_e
- * @brief ADE7953 PGA gain for Current Channel A, B and Voltage Channel
- */
+/***************************************************************************//**
+ * @brief The `ade7953_pga_gain_e` is an enumeration that defines the possible
+ * programmable gain amplifier (PGA) gain settings for the ADE7953
+ * device. These gain settings are used to adjust the amplification level
+ * for the current and voltage channels, allowing for different levels of
+ * signal amplification based on the application requirements. The gain
+ * values range from 1 to 22, with the gain of 22 being specific to
+ * Current Channel A.
+ *
+ * @param ADE7953_GAIN_1 Represents a gain of 1.
+ * @param ADE7953_GAIN_2 Represents a gain of 2.
+ * @param ADE7953_GAIN_4 Represents a gain of 4.
+ * @param ADE7953_GAIN_8 Represents a gain of 8.
+ * @param ADE7953_GAIN_16 Represents a gain of 16.
+ * @param ADE7953_GAIN_22 Represents a gain of 22, applicable only for Current
+ * Channel A.
+ ******************************************************************************/
 enum ade7953_pga_gain_e {
 	/* Gain = 1 */
 	ADE7953_GAIN_1,
@@ -498,10 +649,22 @@ enum ade7953_pga_gain_e {
 	/* applicable only for Current Channel A */
 	ADE7953_GAIN_22
 };
-/**
-* @struct ade7953_init_param
-* @brief ADE7953 Device initialization parameters.
-*/
+/***************************************************************************//**
+ * @brief The `ade7953_init_param` structure is used to define the
+ * initialization parameters for the ADE7953 device. It includes
+ * descriptors for SPI communication, GPIO reset, and IRQ control, as
+ * well as a flag to enable 24-bit register access. This structure is
+ * essential for setting up the device's communication and control
+ * interfaces during initialization.
+ *
+ * @param spi_init Pointer to the SPI initialization parameters for device
+ * communication.
+ * @param gpio_reset Pointer to the GPIO initialization parameters for hardware
+ * reset.
+ * @param en_24_bit Flag to enable 24-bit register access.
+ * @param irq_ctrl Pointer to the IRQ control descriptor for handling GPIO RDY
+ * interrupts.
+ ******************************************************************************/
 struct ade7953_init_param {
 	/** Device communication descriptor */
 	struct no_os_spi_init_param 	*spi_init;
@@ -513,10 +676,24 @@ struct ade7953_init_param {
 	struct no_os_irq_ctrl_desc 	*irq_ctrl;
 };
 
-/**
-* @struct ade7953_dev
-* @brief ADE7953 Device structure.
-*/
+/***************************************************************************//**
+ * @brief The `ade7953_dev` structure is designed to encapsulate the necessary
+ * descriptors and configurations for interfacing with the ADE7953 energy
+ * metering IC. It includes pointers to SPI and GPIO descriptors for
+ * communication and hardware reset, as well as IRQ controller
+ * descriptors for managing interrupt routines. Additionally, it contains
+ * a flag to enable access to 24-bit registers, facilitating advanced
+ * configuration and data retrieval from the device.
+ *
+ * @param spi_desc Pointer to the SPI communication descriptor for the device.
+ * @param gpio_reset Pointer to the GPIO descriptor used for hardware reset of
+ * the device.
+ * @param irq_ctrl Pointer to the IRQ controller descriptor for handling IRQN
+ * interrupts.
+ * @param zx_ctrl Pointer to the IRQ controller descriptor for handling ZX
+ * interrupts.
+ * @param en_24_bit Flag to enable 24-bit register access.
+ ******************************************************************************/
 struct ade7953_dev {
 	/** Device communication descriptor */
 	struct no_os_spi_desc		*spi_desc;
@@ -530,10 +707,23 @@ struct ade7953_dev {
 	uint8_t				en_24_bit;
 };
 
-/**
-* @struct ade7953_energy_values
-* @brief ADE7953 energy registers values
-*/
+/***************************************************************************//**
+ * @brief The `ade7953_energy_values` structure is designed to hold energy
+ * register values for the ADE7953 energy metering IC. It contains three
+ * 32-bit integer fields that store the active, fundamental reactive, and
+ * apparent energy values, respectively. This structure is used to
+ * encapsulate energy data read from the device, facilitating the
+ * management and processing of energy measurements in applications
+ * utilizing the ADE7953.
+ *
+ * @param active_energy_reg_val Stores the active energy register value as a
+ * 32-bit integer.
+ * @param fundamental_reactive_energy_reg_val Stores the fundamental reactive
+ * energy register value as a 32-bit
+ * integer.
+ * @param apparent_energy_reg_val Stores the apparent energy register value as a
+ * 32-bit integer.
+ ******************************************************************************/
 struct ade7953_energy_values {
 	/** Active energy register value */
 	int32_t active_energy_reg_val;
@@ -543,10 +733,22 @@ struct ade7953_energy_values {
 	int32_t apparent_energy_reg_val;
 };
 
-/**
- * @struct ade7953_power_values
- * @brief ADE7953 power registers values
- */
+/***************************************************************************//**
+ * @brief The `ade7953_power_values` structure is designed to hold power
+ * measurement values from the ADE7953 energy metering IC. It contains
+ * three 32-bit integer fields that store the active, reactive, and
+ * apparent power register values, respectively. This structure is used
+ * to encapsulate the power data retrieved from the device, allowing for
+ * easy access and manipulation of these values in applications that
+ * require energy monitoring and analysis.
+ *
+ * @param active_power_reg_val Stores the active power register value as a
+ * 32-bit integer.
+ * @param reactive_power_reg_val Stores the fundamental reactive power register
+ * value as a 32-bit integer.
+ * @param apparent_power_reg_val Stores the apparent power register value as a
+ * 32-bit integer.
+ ******************************************************************************/
 struct ade7953_power_values {
 	/** Active power register value */
 	int32_t active_power_reg_val;
@@ -556,10 +758,20 @@ struct ade7953_power_values {
 	int32_t apparent_power_reg_val;
 };
 
-/**
- * @struct ade7953_rms_values
- * @brief ADE7953 rms registers values
- */
+/***************************************************************************//**
+ * @brief The `ade7953_rms_values` structure is designed to hold the root mean
+ * square (RMS) values for the ADE7953 energy metering IC. It contains
+ * three integer fields that store the RMS register values for two
+ * current channels (A and B) and one voltage channel. This structure is
+ * essential for applications that require monitoring and processing of
+ * RMS values for accurate energy measurement and analysis.
+ *
+ * @param current_chA_rms_reg_val Stores the RMS register value for current
+ * channel A.
+ * @param current_chB_rms_reg_val Stores the RMS register value for current
+ * channel B.
+ * @param voltage_rms_reg_val Stores the RMS register value for voltage.
+ ******************************************************************************/
 struct ade7953_rms_values {
 	/** Current chA rms register value */
 	int32_t current_chA_rms_reg_val;
@@ -569,10 +781,19 @@ struct ade7953_rms_values {
 	int32_t voltage_rms_reg_val;
 };
 
-/**
- * @struct ade7953_pq_values
- * @brief ADE7953 power quality registers values
- */
+/***************************************************************************//**
+ * @brief The `ade7953_pq_values` structure is designed to hold power quality
+ * register values for the ADE7953 energy metering IC. It contains two
+ * 32-bit integer fields: `power_factor_reg_val` for storing the power
+ * factor register value, and `period_reg_val` for storing the period
+ * register value. This structure is used to encapsulate power quality
+ * data, facilitating the management and retrieval of these specific
+ * register values in applications utilizing the ADE7953 device.
+ *
+ * @param power_factor_reg_val Stores the power factor register value as a
+ * 32-bit integer.
+ * @param period_reg_val Stores the period register value as a 32-bit integer.
+ ******************************************************************************/
 struct ade7953_pq_values {
 	/** Power factor register value */
 	int32_t power_factor_reg_val;
@@ -581,107 +802,643 @@ struct ade7953_pq_values {
 };
 
 /* Initialize the device. */
+/***************************************************************************//**
+ * @brief This function sets up the ADE7953 device for operation by initializing
+ * its communication interfaces and configuring it according to the
+ * provided initialization parameters. It must be called before any other
+ * operations on the device. The function allocates memory for the device
+ * structure and initializes the SPI interface. It also configures the
+ * device for optimal operation and verifies the product version. If
+ * initialization fails at any step, resources are cleaned up and an
+ * error code is returned.
+ *
+ * @param device A pointer to a pointer of type `struct ade7953_dev`. This will
+ * be allocated and initialized by the function. The caller must
+ * ensure this pointer is valid and will receive ownership of the
+ * allocated memory upon successful initialization.
+ * @param init_param A structure of type `struct ade7953_init_param` containing
+ * initialization parameters such as SPI and GPIO
+ * configurations. The structure must be properly populated
+ * before calling the function.
+ * @return Returns 0 on successful initialization. On failure, a negative error
+ * code is returned, and no device is allocated.
+ ******************************************************************************/
 int ade7953_init(struct ade7953_dev **device,
 		 struct ade7953_init_param init_param);
 
 /* Read device register. */
+/***************************************************************************//**
+ * @brief Use this function to read the value of a specified register from an
+ * ADE7953 device. It requires a valid device structure and a register
+ * address to read from. The function supports reading from 8-bit,
+ * 16-bit, 24-bit, and 32-bit registers, depending on the register
+ * address provided. Ensure that the device has been properly initialized
+ * before calling this function. The function will return an error code
+ * if the device structure or the output parameter is null, or if the
+ * read operation fails.
+ *
+ * @param dev A pointer to an initialized `ade7953_dev` structure representing
+ * the device. Must not be null.
+ * @param reg_addr The address of the register to read from. It is a 16-bit
+ * unsigned integer.
+ * @param reg_data A pointer to an integer where the read register value will be
+ * stored. Must not be null.
+ * @return Returns 0 on success, or a negative error code on failure. The read
+ * register value is stored in the location pointed to by `reg_data`.
+ ******************************************************************************/
 int ade7953_read(struct ade7953_dev *dev, uint16_t reg_addr,
 		 int32_t *reg_data);
 
 /* Write device register. */
+/***************************************************************************//**
+ * @brief Use this function to write a 32-bit data value to a specified register
+ * address on the ADE7953 device. The function supports writing to 8-bit,
+ * 16-bit, 24-bit, and 32-bit registers, automatically determining the
+ * register size based on the address. It must be called with a valid
+ * device structure that has been initialized. If the device pointer is
+ * null, the function returns an error. This function is typically used
+ * to configure the device or update its settings.
+ *
+ * @param dev A pointer to an initialized ade7953_dev structure representing the
+ * device. Must not be null. The function returns -ENODEV if this
+ * parameter is null.
+ * @param reg_addr The address of the register to write to. The function
+ * determines the register size based on this address.
+ * @param reg_data The 32-bit data to be written to the register. The function
+ * handles the data appropriately based on the register size.
+ * @return Returns 0 on success or a negative error code on failure, such as
+ * -ENODEV if the device pointer is null.
+ ******************************************************************************/
 int ade7953_write(struct ade7953_dev *dev, uint16_t reg_addr,
 		  uint32_t reg_data);
 
 /* Update specific register bits. */
+/***************************************************************************//**
+ * @brief Use this function to modify specific bits of a register in the ADE7953
+ * device. It reads the current value of the register, applies a mask to
+ * clear the bits to be updated, and then sets them according to the
+ * provided data. This function should be called when you need to change
+ * only certain bits of a register without affecting the others. Ensure
+ * that the device is properly initialized before calling this function.
+ *
+ * @param dev A pointer to an initialized ade7953_dev structure representing the
+ * device. Must not be null.
+ * @param reg_addr The address of the register to be updated. Must be a valid
+ * register address for the ADE7953 device.
+ * @param mask A bitmask indicating which bits in the register should be
+ * updated. Bits set to 1 in the mask will be affected.
+ * @param reg_data The new data to be written to the register, masked by the
+ * provided mask. Only the bits corresponding to the mask will
+ * be updated.
+ * @return Returns 0 on success or a negative error code if the operation fails.
+ ******************************************************************************/
 static int ade7953_update_bits(struct ade7953_dev *dev, uint16_t reg_addr,
 			       uint32_t mask, uint32_t reg_data);
 
 /* Remove the device and release resources. */
+/***************************************************************************//**
+ * @brief Use this function to properly release all resources associated with an
+ * ADE7953 device when it is no longer needed. This function should be
+ * called to clean up after a device has been initialized and used,
+ * ensuring that all allocated resources are freed and any associated
+ * hardware interfaces are properly closed. It is important to pass a
+ * valid device structure that was previously initialized; otherwise, the
+ * function will return an error. This function handles the removal of
+ * SPI, GPIO, and IRQ resources associated with the device.
+ *
+ * @param dev A pointer to an `ade7953_dev` structure representing the device to
+ * be removed. Must not be null. If null, the function returns
+ * `-ENODEV`. The caller retains ownership of the pointer, but the
+ * resources it points to will be freed.
+ * @return Returns 0 on success, or a negative error code if any of the resource
+ * removals fail.
+ ******************************************************************************/
 int ade7953_remove(struct ade7953_dev *dev);
 
 /* Reset the device using SW reset. */
+/***************************************************************************//**
+ * @brief Use this function to reset the ADE7953 device via software, which is
+ * useful for reinitializing the device without requiring a hardware
+ * reset. This function should be called when a reset of the device's
+ * internal state is necessary, such as after configuration changes or
+ * error recovery. Ensure that the device is properly initialized before
+ * calling this function. The function will block for a short period to
+ * allow the device to complete its reset process.
+ *
+ * @param dev A pointer to an initialized `ade7953_dev` structure representing
+ * the device. Must not be null. The function will return an error
+ * code if the device is not properly initialized or if the reset
+ * operation fails.
+ * @return Returns 0 on success, or a negative error code if the reset operation
+ * fails.
+ ******************************************************************************/
 int ade7953_sw_reset(struct ade7953_dev *dev);
 
 /* Reset the device using HW reset. */
+/***************************************************************************//**
+ * @brief This function is used to perform a hardware reset on the ADE7953
+ * device, which is necessary to reinitialize the device to its default
+ * state. It should be called when a reset is required, such as after a
+ * configuration change or to recover from an error state. The function
+ * requires a valid device structure and will return an error if the
+ * device is not properly initialized. It manipulates the GPIO reset line
+ * if available, ensuring the device is reset correctly.
+ *
+ * @param dev A pointer to an initialized ade7953_dev structure. This must not
+ * be null, and the structure should be properly set up with a valid
+ * GPIO reset descriptor if hardware reset is to be performed. If the
+ * pointer is null, the function returns -ENODEV.
+ * @return Returns 0 on success, or a negative error code if the reset operation
+ * fails or if the device structure is invalid.
+ ******************************************************************************/
 int ade7953_hw_reset(struct ade7953_dev *dev);
 
 /* Lock write to registers. */
+/***************************************************************************//**
+ * @brief Use this function to enable write protection on a specific set of
+ * ADE7953 registers, preventing any modifications to them. This is
+ * useful for ensuring the integrity of critical register values during
+ * operation. The function must be called with a valid device structure
+ * and a valid register selection enumeration. If an invalid register
+ * selection is provided, the function will return an error code.
+ *
+ * @param dev A pointer to an initialized ade7953_dev structure representing the
+ * device. Must not be null.
+ * @param regs_select An enumeration value of type ade7953_write_protect_e
+ * indicating which set of registers to lock. Valid values
+ * are ADE7953_8BITS_REGS, ADE7953_16BITS_REGS, and
+ * ADE7953_24_32BITS_REGS. If an invalid value is provided,
+ * the function returns an error.
+ * @return Returns 0 on success or a negative error code on failure, such as
+ * -EINVAL for invalid input.
+ ******************************************************************************/
 int ade7953_wr_lock_8bit(struct ade7953_dev *dev,
 			 enum ade7953_write_protect_e regs_select);
 
 /* Version product */
+/***************************************************************************//**
+ * @brief Use this function to obtain the version product information from an
+ * ADE7953 device. It is essential to ensure that the device has been
+ * properly initialized before calling this function. The function
+ * requires a valid pointer to store the retrieved version data. If the
+ * pointer is null, the function will return an error. This function is
+ * useful for verifying the version of the device in use.
+ *
+ * @param dev A pointer to an initialized ade7953_dev structure representing the
+ * device. The device must be properly initialized before use.
+ * @param data_read A pointer to a uint32_t variable where the version product
+ * information will be stored. Must not be null, or the
+ * function will return an error.
+ * @return Returns 0 on success, or a negative error code if the operation
+ * fails. The version product information is stored in the location
+ * pointed to by data_read on success.
+ ******************************************************************************/
 int ade7953_version_product(struct ade7953_dev *dev, uint32_t *data_read);
 
 /* reseat IApeak val */
+/***************************************************************************//**
+ * @brief This function is used to read the current value of the IAPEAK register
+ * from the ADE7953 device and reset it. It should be called when you
+ * need to obtain the peak current value and simultaneously reset the
+ * register for future measurements. Ensure that the device is properly
+ * initialized before calling this function. The function requires a
+ * valid pointer to store the read value and will return an error if the
+ * pointer is null.
+ *
+ * @param dev A pointer to an initialized ade7953_dev structure representing the
+ * device. The device must be properly initialized before use.
+ * @param val A pointer to a uint32_t variable where the read IAPEAK value will
+ * be stored. Must not be null, as the function will return an error
+ * if it is.
+ * @return Returns 0 on success, or a negative error code if the operation fails
+ * or if the input pointer is null.
+ ******************************************************************************/
 int ade7953_reset_iapk_val(struct ade7953_dev *dev, uint32_t *val);
 
 /* reseat IBpeak val */
+/***************************************************************************//**
+ * @brief This function is used to read the current peak value of the IB channel
+ * from the ADE7953 device and reset it. It should be called when the
+ * user needs to obtain the current peak value for monitoring or logging
+ * purposes. The function requires a valid device structure and a non-
+ * null pointer to store the retrieved value. It returns an error code if
+ * the operation fails, such as when the provided pointer is null.
+ *
+ * @param dev A pointer to an initialized ade7953_dev structure representing the
+ * device. The device must be properly initialized before calling
+ * this function.
+ * @param val A pointer to a uint32_t variable where the retrieved IB peak value
+ * will be stored. Must not be null, otherwise the function will
+ * return an error.
+ * @return Returns 0 on success, or a negative error code if the operation
+ * fails, such as -EINVAL if the val parameter is null.
+ ******************************************************************************/
 int ade7953_reset_ibpk_val(struct ade7953_dev *dev, uint32_t *val);
 
 /* reseat Vpeak val */
+/***************************************************************************//**
+ * @brief This function reads the current value of the Vpeak register from the
+ * ADE7953 device and stores it in the provided memory location. It is
+ * typically used to obtain the peak voltage measurement from the device.
+ * The function must be called with a valid device structure and a non-
+ * null pointer for storing the result. If the pointer is null, the
+ * function returns an error. This function should be used after the
+ * device has been properly initialized.
+ *
+ * @param dev A pointer to an initialized ade7953_dev structure representing the
+ * device. The device must be properly initialized before calling
+ * this function.
+ * @param val A pointer to a uint32_t variable where the Vpeak register value
+ * will be stored. Must not be null. If null, the function returns an
+ * error.
+ * @return Returns 0 on success, or a negative error code if the operation
+ * fails. The Vpeak register value is stored in the location pointed to
+ * by val on success.
+ ******************************************************************************/
 int ade7953_reset_vpk_val(struct ade7953_dev *dev, uint32_t *val);
 
 /* Get interrupt indicator from STATA register. */
+/***************************************************************************//**
+ * @brief Use this function to check the interrupt status of the ADE7953 device
+ * by reading the STATA register. It is essential to ensure that the
+ * `status` pointer is not null before calling this function, as it will
+ * store the result of the interrupt status check. The function should be
+ * called when you need to determine if specific interrupts, as indicated
+ * by the mask, are active. This function returns an error code if the
+ * read operation fails or if the `status` pointer is null.
+ *
+ * @param dev A pointer to an initialized `ade7953_dev` structure representing
+ * the device. The device must be properly initialized before calling
+ * this function.
+ * @param msk A 32-bit mask indicating which interrupt bits to check in the
+ * STATA register. The mask should be set according to the specific
+ * interrupts of interest.
+ * @param status A pointer to a uint8_t where the function will store the
+ * interrupt status. Must not be null. The caller is responsible
+ * for providing a valid memory location.
+ * @return Returns 0 on success, or a negative error code on failure. The
+ * `status` pointer is updated with the interrupt status if the function
+ * succeeds.
+ ******************************************************************************/
 int ade7953_get_int_stata(struct ade7953_dev *dev, uint32_t msk,
 			  uint8_t *status);
 
 /* Get interrupt indicator from STATB register. */
+/***************************************************************************//**
+ * @brief This function is used to check the interrupt status of the ADE7953
+ * device by reading the STATB register. It is typically called when you
+ * need to determine if specific interrupts have been triggered. The
+ * function requires a valid device structure and a non-null pointer for
+ * the status output. It should be used after the device has been
+ * properly initialized. If the status pointer is null, the function will
+ * return an error.
+ *
+ * @param dev A pointer to an initialized ade7953_dev structure representing the
+ * device. The device must be properly initialized before calling
+ * this function.
+ * @param msk A 32-bit mask used to specify which bits in the STATB register
+ * should be checked. The mask determines which interrupt status bits
+ * are of interest.
+ * @param status A pointer to a uint8_t where the function will store the result
+ * of the interrupt status check. Must not be null. The caller is
+ * responsible for providing a valid memory location.
+ * @return Returns 0 on success, or a negative error code if an error occurs
+ * (e.g., if the status pointer is null).
+ ******************************************************************************/
 int ade7953_get_int_statb(struct ade7953_dev *dev, uint32_t msk,
 			  uint8_t *status);
 
 /* Clear irq STATA flags. */
+/***************************************************************************//**
+ * @brief Use this function to clear the interrupt status flags in the STATA
+ * register of the ADE7953 device. This is typically done after handling
+ * the interrupts to reset the status and prepare for future interrupts.
+ * It is important to ensure that the device is properly initialized
+ * before calling this function to avoid undefined behavior.
+ *
+ * @param dev A pointer to an initialized `ade7953_dev` structure representing
+ * the device. This parameter must not be null, and the device must
+ * be properly initialized before use.
+ * @return Returns 0 on success or a negative error code on failure, indicating
+ * that the interrupt status flags were not cleared.
+ ******************************************************************************/
 int ade7953_clear_irq_stata(struct ade7953_dev *dev);
 
 /* Clear irq STATB flags. */
+/***************************************************************************//**
+ * @brief Use this function to clear the interrupt status flags associated with
+ * the STATB register of the ADE7953 device. This is typically necessary
+ * after handling an interrupt to reset the status flags and prepare for
+ * future interrupts. Ensure that the device is properly initialized
+ * before calling this function. This function does not modify any other
+ * state or configuration of the device.
+ *
+ * @param dev A pointer to an initialized `ade7953_dev` structure representing
+ * the device. Must not be null. The function will not perform any
+ * operation if this parameter is invalid.
+ * @return Returns 0 on success or a negative error code if the operation fails.
+ ******************************************************************************/
 int ade7953_clear_irq_statb(struct ade7953_dev *dev);
 
 /* Enable interrupt voltage ch and current ch A. */
+/***************************************************************************//**
+ * @brief Use this function to enable or disable specific interrupts for the
+ * voltage and current channel A on the ADE7953 device. This function is
+ * typically called when configuring the device to respond to certain
+ * events or conditions. Ensure that the device is properly initialized
+ * before calling this function. The function modifies the interrupt
+ * enable register based on the provided mask and enable parameters.
+ *
+ * @param dev A pointer to an initialized ade7953_dev structure representing the
+ * device. Must not be null.
+ * @param msk A 32-bit mask specifying which interrupts to modify. Each bit
+ * corresponds to a specific interrupt.
+ * @param en A 8-bit value indicating whether to enable (1) or disable (0) the
+ * specified interrupts. Values outside this range may lead to
+ * undefined behavior.
+ * @return Returns 0 on success or a negative error code on failure, indicating
+ * the operation's result.
+ ******************************************************************************/
 int ade7953_enable_int_a(struct ade7953_dev *dev, uint32_t msk, uint8_t en);
 
 /* Enable/disable interrupt voltage ch and current ch B. */
+/***************************************************************************//**
+ * @brief This function is used to enable or disable specific interrupts for the
+ * voltage and current channel B on the ADE7953 device. It should be
+ * called when you need to configure the interrupt settings for channel
+ * B, typically after initializing the device. The function modifies the
+ * interrupt enable register based on the provided mask and enable
+ * parameters. Ensure that the device is properly initialized before
+ * calling this function to avoid undefined behavior.
+ *
+ * @param dev A pointer to an initialized ade7953_dev structure representing the
+ * device. Must not be null.
+ * @param msk A 32-bit mask specifying which interrupts to modify. Each bit
+ * corresponds to a specific interrupt.
+ * @param en A 8-bit value indicating whether to enable (1) or disable (0) the
+ * specified interrupts. Values other than 0 or 1 may lead to
+ * unexpected behavior.
+ * @return Returns an integer status code. A non-zero value indicates an error
+ * occurred during the operation.
+ ******************************************************************************/
 int ade7953_enable_int_b(struct ade7953_dev *dev, uint32_t msk, uint8_t en);
 
 /* Zero-crossing interrupt edge selection */
+/***************************************************************************//**
+ * @brief Use this function to configure the zero-crossing interrupt edge
+ * detection for an ADE7953 device. This function should be called when
+ * you need to specify which edge (positive, negative, or both) should
+ * trigger an interrupt. It is essential to ensure that the device is
+ * properly initialized before calling this function. The function
+ * modifies the device's configuration register to reflect the selected
+ * edge. If an invalid selection is provided, the function defaults to a
+ * predefined setting.
+ *
+ * @param dev A pointer to an initialized `ade7953_dev` structure representing
+ * the device. Must not be null.
+ * @param sel An `enum ade7953_zx_edge_e` value specifying the desired zero-
+ * crossing edge for interrupt generation. Valid values are
+ * `ADE7953_ZX_BOTH_1`, `ADE7953_ZX_NEG`, `ADE7953_ZX_POS`, and
+ * `ADE7953_ZX_BOTH_2`. If an invalid value is provided, a default
+ * setting is applied.
+ * @return Returns an integer status code. A non-negative value indicates
+ * success, while a negative value indicates an error.
+ ******************************************************************************/
 int ade7953_zx_int_edge_set(struct ade7953_dev *dev,
 			    enum ade7953_zx_edge_e sel);
 
 /* Configure output signal on CF1/CF2 pin */
+/***************************************************************************//**
+ * @brief Use this function to set the output signal configuration for a
+ * specified CF pin on the ADE7953 device. This function is typically
+ * called after initializing the device and when you need to change the
+ * output signal characteristics of the CF1 or CF2 pin. Ensure that the
+ * device structure is properly initialized and that the selected CF pin
+ * is valid. The function will return an error if an invalid CF pin is
+ * specified.
+ *
+ * @param dev A pointer to an initialized ade7953_dev structure representing the
+ * device. Must not be null.
+ * @param sel An enum value of type ade7953_cfsel_e specifying the desired
+ * configuration for the CF pin. Valid values are defined in the
+ * enum.
+ * @param cf_pin An enum value of type ade7953_cf_pin_e indicating which CF pin
+ * to configure (ADE7953_CF1_PIN or ADE7953_CF2_PIN). If an
+ * invalid value is provided, the function returns -EINVAL.
+ * @return Returns 0 on success or a negative error code on failure, such as
+ * -EINVAL for invalid input.
+ ******************************************************************************/
 int ade7953_cf_output_set(struct ade7953_dev *dev,
 			  enum ade7953_cfsel_e sel, enum ade7953_cf_pin_e cf_pin);
 
 /* Configure of ZX pin (Pin1) */
+/***************************************************************************//**
+ * @brief This function configures the output signal on the ZX pin of the
+ * ADE7953 device based on the specified selection. It should be used
+ * when you need to change the signal output on the ZX pin to match
+ * specific application requirements. The function must be called with a
+ * valid device structure and a valid selection from the
+ * `ade7953_zx_alt_e` enumeration. It returns an integer status code
+ * indicating success or failure of the operation.
+ *
+ * @param dev A pointer to an `ade7953_dev` structure representing the device.
+ * Must not be null. The caller retains ownership.
+ * @param sel An enumeration value of type `ade7953_zx_alt_e` specifying the
+ * desired configuration for the ZX pin. Must be a valid enumeration
+ * value.
+ * @return Returns an integer status code: 0 for success, or a negative error
+ * code for failure.
+ ******************************************************************************/
 int ade7953_zx_config_pin(struct ade7953_dev *dev,
 			  enum ade7953_zx_alt_e sel);
 
 /* Configure of ZXI pin (Pin21) */
+/***************************************************************************//**
+ * @brief This function configures the output signal on the ZXI pin (Pin 21) of
+ * the ADE7953 device. It should be called when you need to change the
+ * signal output configuration of the ZXI pin to one of the predefined
+ * modes. Ensure that the device is properly initialized before calling
+ * this function. The function returns an integer status code indicating
+ * success or failure of the operation.
+ *
+ * @param dev A pointer to an initialized `ade7953_dev` structure representing
+ * the device. Must not be null.
+ * @param sel An enumeration value of type `ade7953_zxi_alt_e` specifying the
+ * desired output configuration for the ZXI pin. Valid values are
+ * defined in the `ade7953_zxi_alt_e` enum.
+ * @return Returns an integer status code: 0 for success, or a negative error
+ * code for failure.
+ ******************************************************************************/
 int ade7953_zxi_config_pin(struct ade7953_dev *dev,
 			   enum ade7953_zxi_alt_e sel);
 
 /* Configure of REVP pin (Pin20) */
+/***************************************************************************//**
+ * @brief Use this function to set the output signal configuration for the REVP
+ * pin on the ADE7953 device. This function should be called when you
+ * need to change the behavior of the REVP pin to match specific
+ * application requirements. Ensure that the device is properly
+ * initialized before calling this function. The function modifies the
+ * device's register settings based on the selected configuration.
+ *
+ * @param dev A pointer to an initialized `ade7953_dev` structure representing
+ * the device. Must not be null. The caller retains ownership.
+ * @param sel An enumeration value of type `ade7953_revp_alt_e` specifying the
+ * desired configuration for the REVP pin. Valid values are defined
+ * in the `ade7953_revp_alt_e` enum.
+ * @return Returns 0 on success or a negative error code on failure, indicating
+ * the operation's result.
+ ******************************************************************************/
 int ade7953_revp_pin_config(struct ade7953_dev *dev,
 			    enum ade7953_revp_alt_e sel);
 
 /* ACC mode selection for active energy */
+/***************************************************************************//**
+ * @brief This function configures the active energy accumulation mode for a
+ * specified current channel on the ADE7953 device. It should be used
+ * when you need to change the accumulation mode to either normal,
+ * positive-only, or absolute mode for a specific current channel. The
+ * function must be called with a valid device structure and appropriate
+ * enumeration values for the mode and channel. If an invalid channel is
+ * provided, the function returns an error. Ensure the device is properly
+ * initialized before calling this function.
+ *
+ * @param dev A pointer to an initialized ade7953_dev structure representing the
+ * device. Must not be null.
+ * @param mode An enumeration value of type ade7953_awattacc_e specifying the
+ * desired accumulation mode. Valid values are
+ * ADE7953_NORMAL_ACC_MODE_AWATT, ADE7953_POSITIVE_ACC_MODE, and
+ * ADE7953_ABSOLUTE_ACC_MODE_AWATT.
+ * @param channel An enumeration value of type ade7953_i_ch_e specifying the
+ * current channel to configure. Valid values are ADE7953_I_CH1
+ * and ADE7953_I_CH2. If an invalid value is provided, the
+ * function returns -EINVAL.
+ * @return Returns 0 on success or a negative error code on failure, such as
+ * -EINVAL for invalid channel input.
+ ******************************************************************************/
 int ade7953_acc_active_engy_mode(struct ade7953_dev *dev,
 				 enum ade7953_awattacc_e mode, enum ade7953_i_ch_e channel);
 
 /* ACC mode selection for reactive energy */
+/***************************************************************************//**
+ * @brief This function configures the reactive energy accumulation mode for a
+ * specified current channel on the ADE7953 device. It should be called
+ * when you need to change the accumulation mode for reactive energy
+ * measurements. The function requires a valid device structure and
+ * specific enumeration values for the mode and channel. If an invalid
+ * channel is provided, the function returns an error. Ensure the device
+ * is properly initialized before calling this function.
+ *
+ * @param dev A pointer to an initialized ade7953_dev structure representing the
+ * device. Must not be null.
+ * @param mode An enumeration value of type ade7953_avaracc_e specifying the
+ * desired reactive energy accumulation mode. Valid values are
+ * defined in the enum.
+ * @param channel An enumeration value of type ade7953_i_ch_e specifying the
+ * current channel (ADE7953_I_CH1 or ADE7953_I_CH2). If an
+ * invalid channel is provided, the function returns -EINVAL.
+ * @return Returns 0 on success or a negative error code on failure, such as
+ * -EINVAL for an invalid channel.
+ ******************************************************************************/
 int ade7953_acc_reactive_engy_mode(struct ade7953_dev *dev,
 				   enum ade7953_avaracc_e mode, enum ade7953_i_ch_e channel);
 
 /* Read energy values */
+/***************************************************************************//**
+ * @brief Use this function to obtain the active, reactive, and apparent energy
+ * values from a specified current channel of the ADE7953 device. It is
+ * essential to ensure that the `data` parameter is not null before
+ * calling this function, as it will store the retrieved energy values.
+ * The function requires a valid `channel` parameter, which must be
+ * either `ADE7953_I_CH1` or `ADE7953_I_CH2`, corresponding to the two
+ * current channels available on the device. If the `channel` is invalid
+ * or the `data` parameter is null, the function will return an error
+ * code. This function should be called after the device has been
+ * properly initialized and configured.
+ *
+ * @param dev A pointer to an `ade7953_dev` structure representing the device.
+ * The device must be initialized before use. The caller retains
+ * ownership.
+ * @param data A pointer to an `ade7953_energy_values` structure where the
+ * energy values will be stored. Must not be null.
+ * @param channel An `ade7953_i_ch_e` enum value specifying the current channel
+ * to read from. Must be either `ADE7953_I_CH1` or
+ * `ADE7953_I_CH2`. Invalid values result in an error.
+ * @return Returns 0 on success, or a negative error code on failure. On
+ * success, the `data` structure is populated with the energy values.
+ ******************************************************************************/
 int ade7953_energy_vals(struct ade7953_dev *dev,
 			struct ade7953_energy_values *data, enum ade7953_i_ch_e channel);
 
 /* Read power values */
+/***************************************************************************//**
+ * @brief Use this function to obtain the active, reactive, and apparent power
+ * values from the ADE7953 device for a specified current channel. It is
+ * essential to ensure that the `data` parameter is not null before
+ * calling this function. The function requires a valid `channel`
+ * parameter, which must be either `ADE7953_I_CH1` or `ADE7953_I_CH2`. If
+ * the `channel` is invalid or if `data` is null, the function will
+ * return an error. This function should be called after the device has
+ * been properly initialized and configured.
+ *
+ * @param dev A pointer to an `ade7953_dev` structure representing the device.
+ * The device must be initialized before use. The caller retains
+ * ownership.
+ * @param data A pointer to an `ade7953_power_values` structure where the power
+ * values will be stored. Must not be null. The function will
+ * populate this structure with the retrieved power values.
+ * @param channel An `ade7953_i_ch_e` enum value specifying the current channel
+ * to read from. Must be either `ADE7953_I_CH1` or
+ * `ADE7953_I_CH2`. Invalid values will result in an error.
+ * @return Returns 0 on success, or a negative error code on failure. On
+ * success, the `data` structure is populated with the power values.
+ ******************************************************************************/
 int ade7953_power_vals(struct ade7953_dev *dev,
 		       struct ade7953_power_values *data, enum ade7953_i_ch_e channel);
 
 /* Read rms values */
+/***************************************************************************//**
+ * @brief Use this function to obtain the root mean square (RMS) values for
+ * voltage and current from an ADE7953 device. It requires a valid device
+ * structure and a data structure to store the results. The function
+ * reads the voltage RMS value and the current RMS value for the
+ * specified channel. Ensure that the data parameter is not null before
+ * calling this function. The function will return an error code if the
+ * data parameter is null or if an invalid channel is specified.
+ *
+ * @param dev A pointer to an initialized ade7953_dev structure representing the
+ * device. Must not be null.
+ * @param data A pointer to an ade7953_rms_values structure where the RMS values
+ * will be stored. Must not be null.
+ * @param channel An enum ade7953_i_ch_e value specifying the current channel to
+ * read (ADE7953_I_CH1 or ADE7953_I_CH2). Invalid values will
+ * result in an error.
+ * @return Returns 0 on success. On failure, returns a negative error code
+ * indicating the type of error (e.g., -EINVAL for invalid parameters).
+ ******************************************************************************/
 int ade7953_rms_vals(struct ade7953_dev *dev,
 		     struct ade7953_rms_values *data, enum ade7953_i_ch_e channel);
 
 /* Read power quaility values */
+/***************************************************************************//**
+ * @brief Use this function to obtain power quality metrics, specifically the
+ * power factor and period values, from an ADE7953 device. This function
+ * should be called when you need to access these specific power quality
+ * parameters. Ensure that the device has been properly initialized
+ * before calling this function. The function requires a valid pointer to
+ * a `struct ade7953_pq_values` where the results will be stored. If the
+ * provided pointer is null, the function will return an error code.
+ *
+ * @param dev A pointer to an `ade7953_dev` structure representing the device.
+ * This must be a valid, initialized device structure. The caller
+ * retains ownership.
+ * @param data A pointer to an `ade7953_pq_values` structure where the power
+ * quality values will be stored. Must not be null. If null, the
+ * function returns -EINVAL.
+ * @return Returns 0 on success, or a negative error code if the operation
+ * fails. The `data` structure is populated with the power factor and
+ * period values on success.
+ ******************************************************************************/
 int ade7953_power_quality_vals(struct ade7953_dev *dev,
 			       struct ade7953_pq_values *data);
 

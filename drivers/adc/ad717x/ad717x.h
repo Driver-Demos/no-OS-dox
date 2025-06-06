@@ -52,10 +52,24 @@
 /* Maximum number of channels in the AD717x-AD411x family */
 #define AD717x_MAX_CHANNELS			16
 
-/*
- *@enum	ad717x_mode
- *@details ADC Modes of Operation
-**/
+/***************************************************************************//**
+ * @brief The `ad717x_mode` enumeration defines the various modes of operation
+ * for the AD717x family of analog-to-digital converters. These modes
+ * include continuous and single conversion modes, as well as power
+ * management modes like standby and power down. Additionally, it
+ * includes modes for performing internal and system-level offset and
+ * gain calibrations, allowing for precise adjustments and optimizations
+ * of the ADC's performance.
+ *
+ * @param CONTINUOUS Continuous Mode - Default mode of operation.
+ * @param SINGLE Single Mode for one-time conversion.
+ * @param STANDBY Stand-by Mode to reduce power consumption.
+ * @param POWER_DOWN Power Down Mode to minimize power usage.
+ * @param INTERNAL_OFFSET_CALIB Internal Offset Calibration mode.
+ * @param INTERNAL_GAIN_CALIB Internal Gain Calibration mode.
+ * @param SYS_OFFSET_CALIB System Offset Calibration mode.
+ * @param SYS_GAIN_CALIB System Gain Calibration mode.
+ ******************************************************************************/
 enum ad717x_mode {
 	CONTINUOUS, 			/* Continuous Mode- Default */
 	SINGLE, 				/* Single Mode */
@@ -67,20 +81,80 @@ enum ad717x_mode {
 	SYS_GAIN_CALIB			/* System Gain Calibration */
 };
 
-/*
- *@enum	ad717x_reference_source
- *@details Type of ADC Reference
-**/
+/***************************************************************************//**
+ * @brief The `ad717x_reference_source` enumeration defines the types of
+ * reference sources that can be used with the AD717x family of ADCs. It
+ * includes options for using an external reference, an internal 2.5V
+ * reference, or the AVDD - AVSS as the reference source. This
+ * enumeration is used to configure the reference source for the ADC,
+ * which is crucial for accurate analog-to-digital conversion.
+ *
+ * @param EXTERNAL_REF Represents an external reference source with a value of
+ * 0x0.
+ * @param INTERNAL_REF Represents an internal 2.5V reference source with a value
+ * of 0x2.
+ * @param AVDD_AVSS Represents the AVDD - AVSS reference source with a value of
+ * 0x3.
+ ******************************************************************************/
 enum ad717x_reference_source {
 	EXTERNAL_REF = 0x0, /* External Reference REF+/-*/
 	INTERNAL_REF = 0x2,	/* Internal 2.5V Reference */
 	AVDD_AVSS = 0x3		/* AVDD - AVSS */
 };
 
-/*
- *@enum	ad717x_analog_input_pairs
- *@details Analog Input Pairs to channels for the AD411X Family
-**/
+/***************************************************************************//**
+ * @brief The `ad717x_analog_input_pairs` enumeration defines a set of constants
+ * representing various analog input pair configurations for the AD411X
+ * family of devices. Each constant corresponds to a specific pair of
+ * input channels or special inputs like temperature sensor and
+ * reference, with unique hexadecimal values assigned to each pair. This
+ * enumeration is used to configure the input channels of the ADCs in the
+ * AD411X family, allowing for flexible selection of input sources.
+ *
+ * @param VIN0_VIN1 Represents the analog input pair VIN0 and VIN1 with a value
+ * of 0x1.
+ * @param VIN0_VINCOM Represents the analog input pair VIN0 and VINCOM with a
+ * value of 0x10.
+ * @param VIN1_VIN0 Represents the analog input pair VIN1 and VIN0 with a value
+ * of 0x20.
+ * @param VIN1_VINCOM Represents the analog input pair VIN1 and VINCOM with a
+ * value of 0x30.
+ * @param VIN2_VIN3 Represents the analog input pair VIN2 and VIN3 with a value
+ * of 0x43.
+ * @param VIN2_VINCOM Represents the analog input pair VIN2 and VINCOM with a
+ * value of 0x50.
+ * @param VIN3_VIN2 Represents the analog input pair VIN3 and VIN2 with a value
+ * of 0x62.
+ * @param VIN3_VINCOM Represents the analog input pair VIN3 and VINCOM with a
+ * value of 0x70.
+ * @param VIN4_VIN5 Represents the analog input pair VIN4 and VIN5 with a value
+ * of 0x85.
+ * @param VIN4_VINCOM Represents the analog input pair VIN4 and VINCOM with a
+ * value of 0x90.
+ * @param VIN5_VIN4 Represents the analog input pair VIN5 and VIN4 with a value
+ * of 0xA4.
+ * @param VIN5_VINCOM Represents the analog input pair VIN5 and VINCOM with a
+ * value of 0xB0.
+ * @param VIN6_VIN7 Represents the analog input pair VIN6 and VIN7 with a value
+ * of 0xC7.
+ * @param VIN6_VINCOM Represents the analog input pair VIN6 and VINCOM with a
+ * value of 0xD0.
+ * @param VIN7_VIN6 Represents the analog input pair VIN7 and VIN6 with a value
+ * of 0xE6.
+ * @param VIN7_VINCOM Represents the analog input pair VIN7 and VINCOM with a
+ * value of 0xF0.
+ * @param IIN3P_IIN3M Represents the analog input pair IIN3P and IIN3M with a
+ * value of 0x18B.
+ * @param IIN2P_IIN2M Represents the analog input pair IIN2P and IIN2M with a
+ * value of 0x1AA.
+ * @param IIN1P_IIN1M Represents the analog input pair IIN1P and IIN1M with a
+ * value of 0x1C9.
+ * @param IIN0P_IIN0M Represents the analog input pair IIN0P and IIN0M with a
+ * value of 0x1E8.
+ * @param TEMPERATURE_SENSOR Represents the temperature sensor input with a
+ * value of 0x232.
+ * @param REFERENCE Represents the reference input with a value of 0x2B6.
+ ******************************************************************************/
 enum ad717x_analog_input_pairs {
 	VIN0_VIN1 = 0x1,
 	VIN0_VINCOM = 0x10,
@@ -106,10 +180,32 @@ enum ad717x_analog_input_pairs {
 	REFERENCE = 0x2B6
 };
 
-/*
- *@enum	ad717x_analog_input
- *@details Positive/Negative Analog Input to channels for the AD717x Family
-**/
+/***************************************************************************//**
+ * @brief The `ad717x_analog_input` enum defines a set of constants representing
+ * various analog input channels and special measurement points for the
+ * AD717x family of devices. These constants are used to specify which
+ * input or measurement point is being referenced in the context of
+ * configuring or reading from the device. The enum includes standard
+ * analog input channels (AIN0 to AIN4), as well as special inputs for
+ * temperature sensors, AVDD to AVSS measurements, and reference
+ * voltages.
+ *
+ * @param AIN0 Represents the analog input channel 0.
+ * @param AIN1 Represents the analog input channel 1.
+ * @param AIN2 Represents the analog input channel 2.
+ * @param AIN3 Represents the analog input channel 3.
+ * @param AIN4 Represents the analog input channel 4.
+ * @param TEMP_SENSOR_P Represents the positive terminal of the temperature
+ * sensor.
+ * @param TEMP_SENSOR_M Represents the negative terminal of the temperature
+ * sensor.
+ * @param AVDD_AVSS_P Represents the positive terminal of the AVDD to AVSS
+ * measurement.
+ * @param AVDD_AVSS_M Represents the negative terminal of the AVDD to AVSS
+ * measurement.
+ * @param REF_P Represents the positive terminal of the reference voltage.
+ * @param REF_M Represents the negative terminal of the reference voltage.
+ ******************************************************************************/
 enum ad717x_analog_input {
 	AIN0 = 0x0,
 	AIN1 = 0x1,
@@ -124,10 +220,19 @@ enum ad717x_analog_input {
 	REF_M = 0x16
 };
 
-/*
- *@union ad717x_analog_inputs
- *@details Types of Analog Inputs
-**/
+/***************************************************************************//**
+ * @brief The `ad717x_analog_inputs` union is designed to represent different
+ * types of analog inputs for the AD717x family of devices. It provides
+ * two ways to define analog inputs: as a pair of inputs using the
+ * `analog_input_pairs` enumeration, or as individual positive and
+ * negative inputs using the `ainp` structure. This flexibility allows
+ * for easy configuration of input channels depending on the specific
+ * requirements of the application.
+ *
+ * @param analog_input_pairs An enumeration representing pairs of analog inputs.
+ * @param ainp A structure containing positive and negative analog input
+ * enumerations.
+ ******************************************************************************/
 union ad717x_analog_inputs {
 	enum ad717x_analog_input_pairs analog_input_pairs;
 	struct {
@@ -136,10 +241,27 @@ union ad717x_analog_inputs {
 	} ainp;
 };
 
-/*
- *@enum	ad717x_device_type
- *@details AD717x-AD411x Device definitions
-**/
+/***************************************************************************//**
+ * @brief The `ad717x_device_type` enumeration defines a set of constants
+ * representing different device types within the AD717x and AD411x
+ * family of analog-to-digital converters. Each enumerator corresponds to
+ * a specific model of ADC, allowing the software to identify and handle
+ * different devices appropriately. This enumeration is used in the
+ * context of configuring and managing ADC devices in the AD717x driver.
+ *
+ * @param ID_AD4111 Represents the AD4111 device type.
+ * @param ID_AD4112 Represents the AD4112 device type.
+ * @param ID_AD4114 Represents the AD4114 device type.
+ * @param ID_AD4115 Represents the AD4115 device type.
+ * @param ID_AD4116 Represents the AD4116 device type.
+ * @param ID_AD7172_2 Represents the AD7172-2 device type.
+ * @param ID_AD7172_4 Represents the AD7172-4 device type.
+ * @param ID_AD7173_8 Represents the AD7173-8 device type.
+ * @param ID_AD7175_2 Represents the AD7175-2 device type.
+ * @param ID_AD7175_8 Represents the AD7175-8 device type.
+ * @param ID_AD7176_2 Represents the AD7176-2 device type.
+ * @param ID_AD7177_2 Represents the AD7177-2 device type.
+ ******************************************************************************/
 enum ad717x_device_type {
 	ID_AD4111,
 	ID_AD4112,
@@ -155,10 +277,23 @@ enum ad717x_device_type {
 	ID_AD7177_2
 };
 
-/*
- *@struct ad717x_channel_setup
- *@details Channel setup
-**/
+/***************************************************************************//**
+ * @brief The `ad717x_channel_setup` structure is used to configure individual
+ * channels in the AD717x family of ADCs. It allows the user to specify
+ * whether the channel operates in bipolar or unipolar mode, and whether
+ * input and reference buffers are enabled. Additionally, it defines the
+ * reference voltage source for the channel, which can be external,
+ * internal, or derived from the supply voltage. This setup is crucial
+ * for ensuring accurate and reliable ADC conversions by tailoring the
+ * channel configuration to the specific requirements of the application.
+ *
+ * @param bi_unipolar Indicates if the channel is set to bipolar or unipolar
+ * mode.
+ * @param ref_buff Specifies if the reference buffer is enabled.
+ * @param input_buff Specifies if the input buffer is enabled.
+ * @param ref_source Defines the source of the reference voltage for the
+ * channel.
+ ******************************************************************************/
 struct ad717x_channel_setup {
 	bool bi_unipolar;
 	bool ref_buff;
@@ -166,10 +301,23 @@ struct ad717x_channel_setup {
 	enum ad717x_reference_source ref_source;
 };
 
-/*
- *@enum ad717x_enhfilt
- *@details Post filter for enhanced rejection
-**/
+/***************************************************************************//**
+ * @brief The `ad717x_enhfilt` enumeration defines various enhanced filter
+ * settings for the AD717x family of devices, each with specific sample
+ * rates, decibel rejection levels, and settling times. These settings
+ * are used to configure the post-filtering characteristics of the
+ * analog-to-digital conversion process, allowing for enhanced rejection
+ * of unwanted signals and noise in the measurement data.
+ *
+ * @param sps27_db47_ms36p7 Represents a filter setting with 27 samples per
+ * second, 47 dB rejection, and 36.7 ms settling time.
+ * @param sps25_db62_ms40 Represents a filter setting with 25 samples per
+ * second, 62 dB rejection, and 40 ms settling time.
+ * @param sps20_db86_ms50 Represents a filter setting with 20 samples per
+ * second, 86 dB rejection, and 50 ms settling time.
+ * @param sps16p6_db82_ms60 Represents a filter setting with 16.6 samples per
+ * second, 82 dB rejection, and 60 ms settling time.
+ ******************************************************************************/
 enum ad717x_enhfilt {
 	sps27_db47_ms36p7 = 0x2,
 	sps25_db62_ms40 = 0x3,
@@ -177,19 +325,62 @@ enum ad717x_enhfilt {
 	sps16p6_db82_ms60 = 0x6
 };
 
-/*
- *@enum ad717x_order
- *@details Order of digital filter
-**/
+/***************************************************************************//**
+ * @brief The `ad717x_order` enumeration defines the order of digital filters
+ * used in the AD717x family of devices. It provides two options:
+ * `sinc5_sinc1` and `sinc3`, which correspond to different filter
+ * configurations that can be applied to the analog-to-digital conversion
+ * process. This enumeration is used to configure the digital filter
+ * order in the device's filter settings.
+ *
+ * @param sinc5_sinc1 Represents the sinc5-sinc1 filter order with a value of
+ * 0x0.
+ * @param sinc3 Represents the sinc3 filter order with a value of 0x3.
+ ******************************************************************************/
 enum ad717x_order {
 	sinc5_sinc1 = 0x0,
 	sinc3 = 0x3
 };
 
-/*
- *@enum ad717x_odr
- *@details Output data rate
-**/
+/***************************************************************************//**
+ * @brief The `ad717x_odr` enumeration defines various output data rates for the
+ * AD717x family of devices, each represented by a unique identifier.
+ * These identifiers correspond to specific sample rates, allowing the
+ * user to configure the device to operate at different speeds depending
+ * on the application requirements. The enumeration provides a range of
+ * data rates from 1.25 samples per second to 31250 samples per second,
+ * accommodating a wide variety of use cases.
+ *
+ * @param sps_31250_a Represents an output data rate of 31250 samples per second
+ * with a specific configuration.
+ * @param sps31250_b Represents an output data rate of 31250 samples per second
+ * with a different configuration.
+ * @param sps_31250_c Represents an output data rate of 31250 samples per second
+ * with another configuration.
+ * @param sps_31250_d Represents an output data rate of 31250 samples per second
+ * with yet another configuration.
+ * @param sps31250_e Represents an output data rate of 31250 samples per second
+ * with a further configuration.
+ * @param sps_31250_f Represents an output data rate of 31250 samples per second
+ * with an additional configuration.
+ * @param sps_15625 Represents an output data rate of 15625 samples per second.
+ * @param sps_10417 Represents an output data rate of 10417 samples per second.
+ * @param sps_5208 Represents an output data rate of 5208 samples per second.
+ * @param sps_2957 Represents an output data rate of 2957 samples per second.
+ * @param sps_1007 Represents an output data rate of 1007 samples per second.
+ * @param sps_503 Represents an output data rate of 503 samples per second.
+ * @param sps_381 Represents an output data rate of 381 samples per second.
+ * @param sps_200 Represents an output data rate of 200 samples per second.
+ * @param sps_100 Represents an output data rate of 100 samples per second.
+ * @param sps_59 Represents an output data rate of 59 samples per second.
+ * @param sps_49 Represents an output data rate of 49 samples per second.
+ * @param sps_20 Represents an output data rate of 20 samples per second.
+ * @param sps_16 Represents an output data rate of 16 samples per second.
+ * @param sps_10 Represents an output data rate of 10 samples per second.
+ * @param sps_5 Represents an output data rate of 5 samples per second.
+ * @param sps_2p5 Represents an output data rate of 2.5 samples per second.
+ * @param sps_1p25 Represents an output data rate of 1.25 samples per second.
+ ******************************************************************************/
 enum ad717x_odr {
 	sps_31250_a = 0x0,
 	sps31250_b = 0x1,
@@ -216,10 +407,22 @@ enum ad717x_odr {
 	sps_1p25 = 0x16
 };
 
-/*
- *@struct ad717x_filtcon
- *@details Filter configuration
-**/
+/***************************************************************************//**
+ * @brief The `ad717x_filtcon` structure is used to configure the filter
+ * settings for the AD717x family of devices. It includes options for
+ * enabling Sinc3 filter mapping and enhanced filtering, as well as
+ * specifying the type of enhanced filter, the order of the digital
+ * filter, and the output data rate. This structure is crucial for
+ * setting up the desired filtering characteristics in the ADC's signal
+ * processing chain.
+ *
+ * @param sinc3_map A boolean flag indicating if the Sinc3 filter mapping is
+ * enabled.
+ * @param enhfilten A boolean flag indicating if the enhanced filter is enabled.
+ * @param enhfilt An enumeration specifying the type of enhanced filter used.
+ * @param oder An enumeration specifying the order of the digital filter.
+ * @param odr An enumeration specifying the output data rate.
+ ******************************************************************************/
 struct ad717x_filtcon {
 	bool sinc3_map;
 	bool enhfilten;
@@ -228,37 +431,85 @@ struct ad717x_filtcon {
 	enum ad717x_odr odr;
 };
 
-/*
- *@struct ad717x_channel_map
- *@details Channel mapping
-**/
+/***************************************************************************//**
+ * @brief The `ad717x_channel_map` structure is used to define the configuration
+ * of a channel in the AD717x family of devices. It includes a boolean to
+ * enable or disable the channel, a setup selection to choose the
+ * configuration for the channel, and a union to specify the analog
+ * inputs, which can be either a pair of inputs or individual positive
+ * and negative inputs. This structure is essential for mapping and
+ * configuring the channels in the AD717x series of analog-to-digital
+ * converters.
+ *
+ * @param channel_enable Indicates whether the channel is enabled or not.
+ * @param setup_sel Selects the setup configuration for the channel.
+ * @param analog_inputs Specifies the analog inputs for the channel, using a
+ * union of input pairs or individual inputs.
+ ******************************************************************************/
 struct ad717x_channel_map {
 	bool channel_enable;
 	uint8_t setup_sel;
 	union ad717x_analog_inputs analog_inputs;
 };
 
+/***************************************************************************//**
+ * @brief The `ad717x_crc_mode` is an enumeration that defines the error-
+ * checking modes available for SPI communication in the AD717x family of
+ * devices. It allows the user to select between disabling error
+ * checking, using CRC (Cyclic Redundancy Check), or using XOR (exclusive
+ * OR) for error detection during data transfers.
+ *
+ * @param AD717X_DISABLE Represents the mode where CRC or XOR error checking is
+ * disabled.
+ * @param AD717X_USE_CRC Represents the mode where CRC error checking is used.
+ * @param AD717X_USE_XOR Represents the mode where XOR error checking is used.
+ ******************************************************************************/
 typedef enum {
 	AD717X_DISABLE,
 	AD717X_USE_CRC,
 	AD717X_USE_XOR,
 } ad717x_crc_mode;
 
-/*! AD717X register info */
+/***************************************************************************//**
+ * @brief The `ad717x_st_reg` structure is used to represent a register in the
+ * AD717x family of devices. It contains fields for the register's
+ * address, the value to be stored in the register, and the size of the
+ * register. This structure is essential for managing the configuration
+ * and operation of the AD717x devices by allowing the software to
+ * interact with the device's registers efficiently.
+ *
+ * @param addr Stores the address of the register.
+ * @param value Holds the value to be written to or read from the register.
+ * @param size Indicates the size of the register in bytes.
+ ******************************************************************************/
 typedef struct {
 	int32_t addr;
 	int32_t value;
 	int32_t size;
 } ad717x_st_reg;
 
-/*
- * The structure describes the device and is used with the ad717x driver.
- * @slave_select_id: The ID of the Slave Select to be passed to the SPI calls.
- * @regs: A reference to the register list of the device that the user must
- *       provide when calling the Setup() function.
- * @num_regs: The length of the register list.
- * @userCRC: Error check type to use on SPI transfers.
- */
+/***************************************************************************//**
+ * @brief The `ad717x_dev` structure is a comprehensive representation of an
+ * AD717x device, encapsulating all necessary configurations and settings
+ * for its operation. It includes SPI communication details, device-
+ * specific register settings, and configurations for channels, setups,
+ * and filters. The structure also manages the device's operational mode
+ * and error-checking mechanisms, making it integral to the AD717x driver
+ * for managing and interfacing with the device.
+ *
+ * @param spi_desc Pointer to the SPI descriptor for communication.
+ * @param regs Pointer to the device's register list.
+ * @param num_regs Number of registers in the device.
+ * @param useCRC Specifies the CRC mode for error checking in SPI transfers.
+ * @param active_device Indicates the type of active AD717x device.
+ * @param ref_en Boolean flag to enable or disable the reference.
+ * @param num_channels Number of channels available on the device.
+ * @param setups Array of channel setup configurations.
+ * @param chan_map Array mapping channels to their configurations.
+ * @param pga Array of programmable gain amplifier settings for setups.
+ * @param filter_configuration Array of filter configurations for setups.
+ * @param mode Specifies the ADC mode of operation.
+ ******************************************************************************/
 typedef struct {
 	/* SPI */
 	struct no_os_spi_desc		*spi_desc;
@@ -284,6 +535,28 @@ typedef struct {
 	enum ad717x_mode mode;
 } ad717x_dev;
 
+/***************************************************************************//**
+ * @brief The `ad717x_init_param` structure is used to initialize and configure
+ * the AD717x family of analog-to-digital converters. It includes
+ * parameters for SPI communication, device settings such as the number
+ * of channels and setups, and configurations for channel mapping, gain,
+ * and filtering. This structure is essential for setting up the device's
+ * operational parameters and ensuring proper communication and data
+ * acquisition from the AD717x series devices.
+ *
+ * @param spi_init Initializes the SPI communication parameters.
+ * @param regs Pointer to the device's register list.
+ * @param num_regs Number of registers in the device's register list.
+ * @param active_device Specifies the type of active AD717x device.
+ * @param ref_en Indicates if the reference is enabled.
+ * @param num_channels Number of channels available on the device.
+ * @param num_setups Number of setups configured for the device.
+ * @param chan_map Array mapping channels to their configurations.
+ * @param setups Array of channel setup configurations.
+ * @param pga Array of programmable gain amplifier settings for each setup.
+ * @param filter_configuration Array of filter configurations for each setup.
+ * @param mode Specifies the ADC mode of operation.
+ ******************************************************************************/
 typedef struct {
 	/* SPI */
 	struct no_os_spi_init_param		spi_init;
@@ -526,70 +799,413 @@ typedef struct {
 /************************ Functions Declarations *****************************/
 /*****************************************************************************/
 
-/*! Retrieves a pointer to the register that matches the given address */
+/***************************************************************************//**
+ * @brief This function is used to obtain a pointer to a specific register
+ * within the AD717X device based on the provided register address. It is
+ * essential to ensure that the device and its register list are properly
+ * initialized before calling this function. The function will return a
+ * null pointer if the device or its register list is not initialized, or
+ * if the specified register address does not exist within the device's
+ * register list. This function is useful for accessing and manipulating
+ * specific registers of the device.
+ *
+ * @param device A pointer to an ad717x_dev structure representing the device.
+ * Must not be null and must have a valid register list
+ * initialized.
+ * @param reg_address The address of the register to retrieve. It should be a
+ * valid register address within the device's register list.
+ * @return Returns a pointer to the ad717x_st_reg structure corresponding to the
+ * specified register address, or null if the register is not found or
+ * the device is not properly initialized.
+ ******************************************************************************/
+/***************************************************************************//**
+ * @brief The `AD717X_GetReg` function retrieves a pointer to a register
+ * structure that corresponds to a specified register address for a given
+ * AD717x device. It is used to access the register information, such as
+ * address, value, and size, for the specified register address within
+ * the device's register map.
+ *
+ * @details This function is used to obtain a reference to a specific register's
+ * data structure within an AD717x device, facilitating register read
+ * or write operations.
+ ******************************************************************************/
 ad717x_st_reg *AD717X_GetReg(ad717x_dev *device,
 			     uint8_t reg_address);
 
-/*! Reads the value of the specified register. */
+/***************************************************************************//**
+ * @brief This function is used to read the value of a specific register from an
+ * AD717X device. It requires a valid device structure and a register
+ * address to function correctly. The function checks for the validity of
+ * the device and the register address before attempting to read. It
+ * supports error checking through CRC or XOR if enabled in the device
+ * configuration. The function should be called when the user needs to
+ * retrieve the current value of a register, and it returns an error code
+ * if the operation fails.
+ *
+ * @param device A pointer to an ad717x_dev structure representing the device.
+ * Must not be null. The function returns INVALID_VAL if this
+ * parameter is null.
+ * @param addr The address of the register to be read. It must correspond to a
+ * valid register address within the device's register map. If the
+ * address does not match a valid register, the function returns
+ * INVALID_VAL.
+ * @return Returns an int32_t value indicating the success or failure of the
+ * operation. A non-negative value indicates success, while a negative
+ * value indicates an error, such as INVALID_VAL for invalid parameters
+ * or COMM_ERR for communication errors.
+ ******************************************************************************/
 int32_t AD717X_ReadRegister(ad717x_dev *device,
 			    uint8_t addr);
 
-/*! Writes the value of the specified register. */
+/***************************************************************************//**
+ * @brief This function is used to write a value to a specific register on an
+ * AD717X device. It requires a valid device structure and a register
+ * address. The function constructs a command word and fills a buffer
+ * with the register value to be written. If CRC is enabled on the
+ * device, a CRC checksum is computed and appended to the buffer. The
+ * function then performs an SPI write operation to send the data to the
+ * device. It is important to ensure that the device structure is
+ * properly initialized and that the register address corresponds to a
+ * valid register on the device. The function returns an error code if
+ * the device structure is null or if the register address is invalid.
+ *
+ * @param device A pointer to an ad717x_dev structure representing the device.
+ * Must not be null. The caller retains ownership.
+ * @param addr The address of the register to write to. Must correspond to a
+ * valid register on the device.
+ * @return Returns an integer status code: 0 for success, or a negative error
+ * code if the operation fails.
+ ******************************************************************************/
 int32_t AD717X_WriteRegister(ad717x_dev *device,
 			     uint8_t);
 
-/*! Resets the device. */
+/***************************************************************************//**
+ * @brief Use this function to reset the AD717X device to its default state.
+ * This is typically done to ensure the device is in a known state before
+ * starting configuration or data acquisition. The function must be
+ * called with a valid device structure that has been properly
+ * initialized. If the device parameter is null, the function will return
+ * an error code indicating invalid input.
+ *
+ * @param device A pointer to an ad717x_dev structure representing the device to
+ * be reset. Must not be null. The caller retains ownership of the
+ * memory.
+ * @return Returns an integer status code. A non-zero value indicates an error
+ * occurred during the reset operation.
+ ******************************************************************************/
 int32_t AD717X_Reset(ad717x_dev *device);
 
-/*! Waits until a new conversion result is available. */
+/***************************************************************************//**
+ * @brief This function is used to wait until the ADC device is ready to provide
+ * a new conversion result, which is indicated by the RDY bit in the
+ * status register. It should be called when a new conversion result is
+ * expected, and the caller must specify a timeout to prevent indefinite
+ * waiting. The function will return immediately if the device is already
+ * ready, or it will wait until the device becomes ready or the timeout
+ * expires. It is important to ensure that the device and its registers
+ * are properly initialized before calling this function.
+ *
+ * @param device A pointer to an ad717x_dev structure representing the ADC
+ * device. Must not be null, and the device's registers must be
+ * initialized. If invalid, the function returns an error.
+ * @param timeout The maximum number of iterations to wait for the device to
+ * become ready. Must be a positive integer. If the timeout is
+ * reached without the device becoming ready, the function
+ * returns a timeout error.
+ * @return Returns 0 if the device becomes ready before the timeout expires, or
+ * a negative error code if an error occurs or the timeout is reached.
+ ******************************************************************************/
 int32_t AD717X_WaitForReady(ad717x_dev *device,
 			    uint32_t timeout);
 
-/*! Reads the conversion result from the device. */
+/***************************************************************************//**
+ * @brief This function retrieves the latest conversion result from the
+ * specified AD717X device and stores it in the provided memory location.
+ * It should be called when a new conversion result is expected,
+ * typically after ensuring the device is ready for data retrieval. The
+ * function requires a valid device structure with initialized registers.
+ * If the device or its registers are not properly initialized, the
+ * function will return an error. The function also updates the data
+ * register length based on the device configuration and options.
+ *
+ * @param device A pointer to an ad717x_dev structure representing the device.
+ * Must not be null and must have initialized registers. The
+ * caller retains ownership.
+ * @param pData A pointer to an int32_t where the conversion result will be
+ * stored. Must not be null. The function writes the conversion
+ * result to this location.
+ * @return Returns an int32_t indicating the success or failure of the
+ * operation. A non-zero value indicates an error, such as invalid input
+ * or device communication failure.
+ ******************************************************************************/
 int32_t AD717X_ReadData(ad717x_dev *device,
 			int32_t* pData);
 
-/*! Computes data register read size to account for bit number and status
- *  read. */
+/***************************************************************************//**
+ * @brief This function calculates the size of the data register that needs to
+ * be read from the AD717X device, taking into account the current
+ * interface mode and device ID. It should be called when configuring the
+ * device to ensure the correct number of bytes are read during data
+ * acquisition. The function assumes that the device has been properly
+ * initialized and configured with the correct register settings. It does
+ * not handle invalid device pointers and expects the device structure to
+ * be correctly populated.
+ *
+ * @param device A pointer to an ad717x_dev structure representing the device.
+ * Must not be null and should be properly initialized with the
+ * device's register settings.
+ * @return Returns 0 on successful computation of the data register size. The
+ * size is updated in the device's data register structure.
+ ******************************************************************************/
 int32_t AD717X_ComputeDataregSize(ad717x_dev *device);
 
-/*! Computes the CRC checksum for a data buffer. */
+/***************************************************************************//**
+ * @brief Use this function to calculate the CRC-8 checksum for a given data
+ * buffer, which is useful for error-checking purposes in data
+ * communication. The function processes each byte of the buffer and
+ * applies a polynomial representation to compute the checksum. It is
+ * important to ensure that the buffer pointer is valid and that the
+ * buffer size accurately reflects the number of bytes to be processed.
+ * This function does not modify the input buffer and returns the
+ * computed CRC-8 value.
+ *
+ * @param pBuf A pointer to the data buffer for which the CRC-8 checksum is to
+ * be computed. Must not be null, and the caller retains ownership
+ * of the buffer.
+ * @param bufSize The size of the data buffer in bytes. Must be a non-zero
+ * value, as a zero size would result in no computation.
+ * @return Returns the computed CRC-8 checksum as an 8-bit unsigned integer.
+ ******************************************************************************/
 uint8_t AD717X_ComputeCRC8(uint8_t* pBuf,
 			   uint8_t bufSize);
 
-/*! Computes the XOR checksum for a data buffer. */
+/***************************************************************************//**
+ * @brief This function calculates the XOR checksum of a given data buffer,
+ * which can be used for error detection in data transmission or storage.
+ * It processes each byte in the buffer, applying the XOR operation
+ * cumulatively. This function is useful when a simple checksum is needed
+ * to verify data integrity. Ensure that the buffer pointer is valid and
+ * that the buffer size accurately reflects the number of bytes to
+ * process.
+ *
+ * @param pBuf A pointer to the buffer containing the data to be processed. Must
+ * not be null, and the caller retains ownership of the buffer.
+ * @param bufSize The number of bytes in the buffer to process. Must be a non-
+ * negative integer. If zero, the function returns zero as the
+ * checksum.
+ * @return Returns an 8-bit unsigned integer representing the computed XOR
+ * checksum of the buffer.
+ ******************************************************************************/
 uint8_t AD717X_ComputeXOR8(uint8_t * pBuf,
 			   uint8_t bufSize);
 
-/*! Updates the CRC settings. */
+/***************************************************************************//**
+ * @brief This function updates the CRC setting of the specified AD717X device
+ * based on the current configuration of the interface mode register. It
+ * should be called to ensure the device's CRC setting is correctly
+ * configured after initialization or any configuration changes. The
+ * function requires a valid device structure with initialized registers.
+ * If the device or its registers are not properly initialized, the
+ * function will return an error.
+ *
+ * @param device A pointer to an ad717x_dev structure representing the device.
+ * This must not be null and must have its 'regs' field properly
+ * initialized. If these conditions are not met, the function
+ * returns an error.
+ * @return Returns 0 on success, or INVALID_VAL if the input is invalid or the
+ * required register cannot be accessed.
+ ******************************************************************************/
 int32_t AD717X_UpdateCRCSetting(ad717x_dev *device);
 
-/*! Initializes the AD717X. */
+/***************************************************************************//**
+ * @brief This function sets up the AD717X device by allocating necessary
+ * resources, initializing SPI communication, and configuring the device
+ * registers according to the provided initialization parameters. It must
+ * be called before any other operations on the device to ensure proper
+ * setup. The function handles various configurations such as ADC mode,
+ * channel mapping, and filter settings. It returns an error code if
+ * initialization fails at any step, ensuring that the device is not left
+ * in an inconsistent state.
+ *
+ * @param device A pointer to a pointer of type ad717x_dev. This will be
+ * allocated and initialized by the function. The caller must
+ * ensure this pointer is valid and will receive ownership of the
+ * allocated memory.
+ * @param init_param A structure of type ad717x_init_param containing
+ * initialization parameters such as SPI settings, register
+ * configurations, and device-specific settings. All fields
+ * must be correctly populated before calling the function.
+ * @return Returns an int32_t value indicating success (0) or an error code (<0)
+ * if initialization fails at any step.
+ ******************************************************************************/
 int32_t AD717X_Init(ad717x_dev **device,
 		    ad717x_init_param init_param);
 
-/*! Free the resources allocated by AD717X_Init(). */
+/***************************************************************************//**
+ * @brief This function is used to release the resources associated with an
+ * AD717X device that were previously allocated during initialization. It
+ * should be called when the device is no longer needed to ensure proper
+ * cleanup and to prevent memory leaks. The function handles the
+ * deallocation of the SPI descriptor and the device structure itself. It
+ * is important to ensure that the device pointer is valid and was
+ * successfully initialized before calling this function.
+ *
+ * @param dev A pointer to an ad717x_dev structure representing the device to be
+ * removed. Must not be null and should point to a valid, initialized
+ * device structure. The function will handle invalid pointers by
+ * potentially causing undefined behavior.
+ * @return Returns an int32_t indicating the success or failure of the SPI
+ * resource removal. A non-zero return value indicates an error occurred
+ * during the SPI removal process.
+ ******************************************************************************/
 int32_t AD717X_remove(ad717x_dev *dev);
 
 /* Enable/Disable Channels */
+/***************************************************************************//**
+ * @brief This function is used to enable or disable a specific channel on an
+ * AD717x device. It should be called when you need to change the status
+ * of a channel, either to activate it for data acquisition or to
+ * deactivate it to save power or resources. The function requires a
+ * valid device pointer and a channel ID within the supported range. It
+ * modifies the channel's status based on the provided boolean flag.
+ * Ensure the device is properly initialized before calling this
+ * function.
+ *
+ * @param device A pointer to an ad717x_dev structure representing the device.
+ * Must not be null. The function returns -EINVAL if this
+ * parameter is null.
+ * @param channel_id An unsigned 8-bit integer representing the channel ID to be
+ * modified. It should be within the valid range of channels
+ * supported by the device.
+ * @param channel_status A boolean value indicating the desired status of the
+ * channel. 'true' to enable the channel, 'false' to
+ * disable it.
+ * @return Returns 0 on success. Returns a negative error code if the device
+ * pointer is null or if there is an error writing to the register.
+ ******************************************************************************/
 int ad717x_set_channel_status(ad717x_dev *device, uint8_t channel_id,
 			      bool channel_status);
 /* Set ADC Mode */
+/***************************************************************************//**
+ * @brief This function configures the ADC mode of the specified AD717x device
+ * to the desired mode. It should be called when you need to change the
+ * operational mode of the ADC, such as switching between continuous and
+ * single conversion modes, or entering calibration modes. The function
+ * requires a valid device pointer and a mode from the predefined
+ * `ad717x_mode` enumeration. It returns an error code if the device
+ * pointer is null or if the mode cannot be set, ensuring that the device
+ * is in a valid state before proceeding.
+ *
+ * @param device A pointer to an `ad717x_dev` structure representing the device
+ * to configure. Must not be null. The function returns an error
+ * if this parameter is invalid.
+ * @param adc_mode An `enum ad717x_mode` value specifying the desired ADC mode.
+ * Valid modes include continuous, single, standby, power down,
+ * and various calibration modes.
+ * @return Returns 0 on success, or a negative error code if the device pointer
+ * is null or if the mode cannot be set.
+ ******************************************************************************/
 int ad717x_set_adc_mode(ad717x_dev *device, enum ad717x_mode mode);
 
 /* Configure Analog inputs to channel */
+/***************************************************************************//**
+ * @brief This function is used to configure a specific channel on an AD717x
+ * device to connect to a given analog input. It must be called with a
+ * valid device pointer and a channel ID within the range of available
+ * channels for the device. The function supports different device types,
+ * and the behavior varies slightly depending on the active device type.
+ * It is essential to ensure that the device is properly initialized
+ * before calling this function. The function returns an error code if
+ * the device pointer is null, the channel ID is invalid, or if there is
+ * a failure in writing to the device register.
+ *
+ * @param device A pointer to an ad717x_dev structure representing the device.
+ * Must not be null. The caller retains ownership.
+ * @param channel_id An unsigned 8-bit integer representing the channel ID to
+ * configure. Must be within the valid range of channels for
+ * the device.
+ * @param analog_input A union ad717x_analog_inputs specifying the analog input
+ * configuration. The specific fields used depend on the
+ * active device type.
+ * @return Returns 0 on success or a negative error code on failure, such as
+ * -EINVAL for invalid parameters or operation failure.
+ ******************************************************************************/
 int ad717x_connect_analog_input(ad717x_dev *device, uint8_t channel_id,
 				union ad717x_analog_inputs analog_input);
 
 /* Assign setup to channel */
+/***************************************************************************//**
+ * @brief This function is used to assign a specific setup configuration to a
+ * designated channel on an AD717x device. It is essential to ensure that
+ * the `device` parameter is a valid, initialized pointer to an
+ * `ad717x_dev` structure before calling this function. The function
+ * modifies the channel's register to reflect the new setup configuration
+ * and updates the device's internal channel map. It should be called
+ * when you need to change the setup configuration for a channel, such as
+ * when configuring different measurement parameters for different
+ * channels. The function returns an error code if the device pointer is
+ * null or if the channel register cannot be accessed or written to.
+ *
+ * @param device A pointer to an `ad717x_dev` structure representing the device.
+ * Must not be null. The caller retains ownership.
+ * @param channel_id An unsigned 8-bit integer representing the channel ID.
+ * Valid range is from 0 to AD717x_MAX_CHANNELS - 1.
+ * @param setup An unsigned 8-bit integer representing the setup configuration
+ * to assign. Valid range is from 0 to AD717x_MAX_SETUPS - 1.
+ * @return Returns 0 on success, or a negative error code on failure (e.g.,
+ * -EINVAL for invalid parameters).
+ ******************************************************************************/
 int ad717x_assign_setup(ad717x_dev *device, uint8_t channel_id,
 			uint8_t setup);
 
 /* Assign polarity to setup*/
+/***************************************************************************//**
+ * @brief This function configures the polarity setting for a given setup on an
+ * AD717x device, allowing the user to choose between bipolar and
+ * unipolar operation. It should be called when the device is initialized
+ * and before starting any data acquisition that depends on the setup's
+ * polarity. The function requires a valid device pointer and a setup ID
+ * within the allowed range. If the device pointer is null or the setup
+ * ID is invalid, the function returns an error code. The function
+ * modifies the device's internal setup configuration to reflect the new
+ * polarity setting.
+ *
+ * @param device A pointer to an ad717x_dev structure representing the device.
+ * Must not be null. The function returns -EINVAL if this
+ * parameter is null.
+ * @param bipolar A boolean value indicating the desired polarity mode. True for
+ * bipolar mode, false for unipolar mode.
+ * @param setup_id An unsigned 8-bit integer representing the setup ID to
+ * configure. Must be within the valid range of setup IDs for
+ * the device. If the setup ID is invalid, the function returns
+ * -EINVAL.
+ * @return Returns 0 on success, or -EINVAL on error (e.g., invalid device
+ * pointer or setup ID).
+ ******************************************************************************/
 int ad717x_set_polarity(ad717x_dev* device, bool bipolar,
 			uint8_t setup_id);
 
 /* Assign reference source to setup */
+/***************************************************************************//**
+ * @brief This function configures the reference source for a specific setup in
+ * an AD717x device. It should be called when you need to change the
+ * reference source for a particular setup, which is identified by the
+ * setup_id. The function requires a valid device pointer and a valid
+ * setup_id within the range of available setups. If the reference source
+ * is set to INTERNAL_REF, the function also enables the internal
+ * reference. The function returns an error code if the device pointer is
+ * null or if any register operations fail.
+ *
+ * @param device A pointer to an ad717x_dev structure representing the device.
+ * Must not be null. The caller retains ownership.
+ * @param ref_source An enum value of type ad717x_reference_source indicating
+ * the desired reference source. Valid values are
+ * EXTERNAL_REF, INTERNAL_REF, and AVDD_AVSS.
+ * @param setup_id An unsigned 8-bit integer representing the setup identifier.
+ * Must be within the range of available setups for the device.
+ * @return Returns 0 on success or a negative error code on failure, such as
+ * -EINVAL for invalid input or register operation failure.
+ ******************************************************************************/
 int ad717x_set_reference_source(ad717x_dev* device,
 				enum ad717x_reference_source ref_source, uint8_t setup_id);
 
@@ -598,10 +1214,54 @@ int ad717x_enable_buffers(ad717x_dev* device, bool inbuf_en,
 			  bool refbuf_en, uint8_t setup_id);
 
 /* Perform single conversion and read sample */
+/***************************************************************************//**
+ * @brief This function is used to perform a single analog-to-digital conversion
+ * on a specified channel of an AD717x device and retrieve the raw
+ * conversion data. It is suitable for applications where single-shot
+ * measurements are required. The function must be called with a valid
+ * device structure and a channel ID that is within the range of
+ * available channels for the device. The function will enable the
+ * specified channel, set the ADC to single conversion mode, wait for the
+ * conversion to complete, and then read the conversion result. After
+ * reading, the channel is disabled. The function returns an error code
+ * if any step fails, ensuring that the caller can handle errors
+ * appropriately.
+ *
+ * @param device A pointer to an ad717x_dev structure representing the device.
+ * Must not be null. The caller retains ownership.
+ * @param id The ID of the channel to perform the conversion on. Must be a valid
+ * channel ID within the range supported by the device.
+ * @param adc_raw_data A pointer to an int32_t where the raw ADC conversion
+ * result will be stored. Must not be null. The function
+ * writes the conversion result to this location.
+ * @return Returns an integer status code: 0 on success, or a negative error
+ * code on failure.
+ ******************************************************************************/
 int ad717x_single_read(ad717x_dev* device, uint8_t id,
 		       int32_t *adc_raw_data);
 
 /* Configure device ODR */
+/***************************************************************************//**
+ * @brief This function sets the output data rate (ODR) for a specific filter
+ * configuration register on an AD717x device. It should be used when you
+ * need to adjust the data sampling rate for a particular setup. The
+ * function requires a valid device structure and a filter configuration
+ * register identifier. It modifies the ODR bits in the specified
+ * register and writes the updated configuration back to the device.
+ * Ensure that the device is properly initialized before calling this
+ * function. If the specified filter configuration register is invalid,
+ * the function returns an error code.
+ *
+ * @param dev A pointer to an ad717x_dev structure representing the device. Must
+ * not be null. The caller retains ownership.
+ * @param filtcon_id An identifier for the filter configuration register to be
+ * modified. Valid values depend on the device's supported
+ * filter configuration registers.
+ * @param odr_sel The desired output data rate selection. Must be a valid ODR
+ * value as defined by the device's specifications.
+ * @return Returns 0 on success, or a negative error code if the operation
+ * fails.
+ ******************************************************************************/
 int32_t ad717x_configure_device_odr(ad717x_dev *dev, uint8_t filtcon_id,
 				    uint8_t odr_sel);
 

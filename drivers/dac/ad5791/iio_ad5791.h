@@ -40,19 +40,40 @@
 
 #define AD5791_CH_NO 1
 
-/**
- * @enum ad5791_iio_powerdown_modes
- * @brief AD5791 channel power down modes.
- */
+/***************************************************************************//**
+ * @brief The `ad5791_iio_powerdown_modes` enumeration defines the power-down
+ * modes available for the AD5791 device, which include connecting the
+ * output to ground through a resistor or setting the output to a high-
+ * impedance state. These modes are used to manage the power consumption
+ * and output behavior of the AD5791 device when it is not actively
+ * driving a signal.
+ *
+ * @param AD5791_6kOHMS_TO_GND Represents a power-down mode where the output is
+ * connected to ground through a 6k ohm resistor.
+ * @param AD5791_THREE_STATE Represents a power-down mode where the output is in
+ * a high-impedance state.
+ ******************************************************************************/
 enum ad5791_iio_powerdown_modes {
 	AD5791_6kOHMS_TO_GND,
 	AD5791_THREE_STATE
 };
 
-/**
- * @struct ad5791_iio_desc
- * @brief D5791 IIO driver handler.
- */
+/***************************************************************************//**
+ * @brief The `ad5791_iio_desc` structure is a descriptor for the AD5791 IIO
+ * driver, encapsulating the necessary components to manage and interface
+ * with an AD5791 device through the IIO framework. It includes pointers
+ * to the device and IIO structures, the current power-down mode, and
+ * reference voltage values, both positive and negative, in millivolts.
+ *
+ * @param ad5791_handle A pointer to an AD5791 device structure.
+ * @param ad5791_iio_dev A pointer to an IIO device structure.
+ * @param curr_mode An enumeration indicating the current power-down mode of the
+ * AD5791.
+ * @param vref_mv A 32-bit unsigned integer representing the positive reference
+ * voltage in millivolts.
+ * @param vref_neg_mv A 32-bit unsigned integer representing the negative
+ * reference voltage in millivolts.
+ ******************************************************************************/
 struct ad5791_iio_desc {
 	struct ad5791_dev *ad5791_handle;
 	struct iio_device *ad5791_iio_dev;
@@ -61,10 +82,19 @@ struct ad5791_iio_desc {
 	uint32_t vref_neg_mv;
 };
 
-/**
- * @struct ad5791_iio_init_param
- * @brief AD5791 IIO driver initialization structure.
- */
+/***************************************************************************//**
+ * @brief The `ad5791_iio_init_param` structure is used to initialize the AD5791
+ * IIO driver, containing parameters for the initial setup of the AD5791
+ * device, including pointers to initial configuration data and reference
+ * voltage settings.
+ *
+ * @param ad5791_initial A pointer to an ad5791_init_param structure for initial
+ * configuration.
+ * @param vref_mv A 32-bit unsigned integer representing the positive reference
+ * voltage in millivolts.
+ * @param vref_neg_mv A 32-bit unsigned integer representing the negative
+ * reference voltage in millivolts.
+ ******************************************************************************/
 struct ad5791_iio_init_param {
 	struct ad5791_init_param *ad5791_initial;
 	uint32_t vref_mv;
@@ -72,15 +102,62 @@ struct ad5791_iio_init_param {
 };
 
 /* Initialize the AD5791 IIO driver. */
+/***************************************************************************//**
+ * @brief This function initializes the AD5791 IIO driver by allocating and
+ * setting up the necessary resources for the driver to operate. It must
+ * be called before any other operations are performed on the AD5791
+ * device through the IIO interface. The function requires a valid
+ * initialization parameter structure and will return an error if memory
+ * allocation fails or if the underlying AD5791 initialization encounters
+ * an issue. Upon successful initialization, the function provides a
+ * descriptor for the initialized driver.
+ *
+ * @param iio_dev A pointer to a pointer of type struct ad5791_iio_desc. This
+ * will be set to point to the newly allocated and initialized
+ * descriptor. Must not be null.
+ * @param init_param A pointer to a struct ad5791_iio_init_param containing
+ * initialization parameters such as reference voltages and
+ * initial AD5791 settings. Must not be null and should be
+ * properly initialized before calling this function.
+ * @return Returns 0 on successful initialization. On failure, returns a
+ * negative error code, and the iio_dev pointer is not set.
+ ******************************************************************************/
 int32_t ad5791_iio_init(struct ad5791_iio_desc **iio_dev,
 			struct ad5791_iio_init_param *init_param);
 
 /* Free memory allocated by ad5791_iio_init(). */
+/***************************************************************************//**
+ * @brief Use this function to release resources associated with an AD5791 IIO
+ * driver instance when it is no longer needed. It should be called to
+ * clean up after a successful initialization with `ad5791_iio_init`.
+ * This function ensures that any memory allocated for the driver is
+ * properly freed, preventing memory leaks. It is important to ensure
+ * that the `desc` parameter is valid and was previously initialized;
+ * otherwise, the behavior is undefined.
+ *
+ * @param desc A pointer to an `ad5791_iio_desc` structure representing the
+ * driver instance to be removed. This must not be null and should
+ * point to a valid, initialized descriptor. The caller retains
+ * ownership of the pointer, but the memory it points to will be
+ * freed.
+ * @return Returns 0 on success, or a negative error code if the removal process
+ * fails.
+ ******************************************************************************/
 int32_t ad5791_iio_remove(struct ad5791_iio_desc *desc);
 
 /*****************************************************************************/
 /***************************** Constant definition ***************************/
-/*****************************************************************************/
+/***************************************************************************//**
+ * @brief The `iio_ad5791_device` is a constant global variable of type `struct
+ * iio_device` that represents the IIO (Industrial I/O) device interface
+ * for the AD5791 digital-to-analog converter (DAC). This structure is
+ * used to define the interface and operations for interacting with the
+ * AD5791 device through the IIO subsystem.
+ *
+ * @details This variable is used to provide a standardized interface for the
+ * AD5791 DAC within the IIO framework, facilitating communication and
+ * control of the device.
+ ******************************************************************************/
 extern struct iio_device const iio_ad5791_device;
 
 #endif /* IIO_AD5791_H_ */

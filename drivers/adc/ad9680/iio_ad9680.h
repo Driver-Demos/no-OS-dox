@@ -37,7 +37,18 @@
 #include "iio_types.h"
 #include "ad9680.h"
 
-/** IIO Descriptor */
+/***************************************************************************//**
+ * @brief The `ad9680_iio_descriptor` is a constant external structure of type
+ * `iio_device` that is used to describe the IIO (Industrial I/O)
+ * interface for the AD9680 device. This descriptor is likely used to
+ * define the properties and capabilities of the AD9680 within the IIO
+ * framework, which is a subsystem in the Linux kernel used for
+ * interfacing with various sensors and data converters.
+ *
+ * @details This variable is used to provide a structured description of the
+ * AD9680 device's IIO interface for integration with the IIO
+ * subsystem.
+ ******************************************************************************/
 extern struct iio_device const ad9680_iio_descriptor;
 
 #endif //IIO_AD9680_H
